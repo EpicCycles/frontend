@@ -5,15 +5,14 @@ import PartViewRow from '../../../components/part/PartViewRow';
 
 const brands = [
   { id: 1, brand_name: 'brand 1' },
-  { id: 2, brand_name: 'brand 2', supplier: [], supplier_names: [] },
-  { id: 3, brand_name: 'brand 3', supplier: [1], supplier_names: ['supplier 1'] },
+  { id: 2, brand_name: 'brand 2', supplier: [] },
+  { id: 3, brand_name: 'brand 3', supplier: [1] },
   { id: 4, brand_name: 'brand 4', delete: true },
   {
     id: 5,
     brand_name: 'brand 5',
     changed: true,
     supplier: [1, 3],
-    supplier_names: ['supplier 1', 'supplier 3'],
   },
   { dummyKey: '123ABC', brand_name: 'brand new', changed: true },
   { dummyKey: NEW_ELEMENT_ID, brand_name: 'brand new 2', changed: true },
@@ -289,81 +288,82 @@ const sections = [
     ],
   },
 ];
-
-test('should display when no part and no supplier products exist', () => {
-  const part = {};
-  const supplierProducts = [];
-  const component = shallow(
-    <PartViewRow
-      part={part}
-      supplierProducts={supplierProducts}
-      lockFirstColumn={false}
-      sections={sections}
-      brands={brands}
-    />,
-  );
-  expect(toJson(component)).toMatchSnapshot();
-});
-test('should display when no supplier products exist', () => {
-  const part = {
-    id: 1,
-    brand: 2,
-    part_name: 'Part Name string',
-    trade_in_price: 12,
-    standard: true,
-    stocked: false,
-  };
-  const supplierProducts = [];
-  const component = shallow(
-    <PartViewRow
-      part={part}
-      supplierProducts={supplierProducts}
-      lockFirstColumn={false}
-      sections={sections}
-      brands={brands}
-    />,
-  );
-  expect(toJson(component)).toMatchSnapshot();
-});
-test('should display when one supplier products exist', () => {
-  const part = {
-    id: 1,
-    brand: 2,
-    part_name: 'Part Name string',
-    trade_in_price: 12,
-    standard: true,
-    stocked: false,
-  };
-  const supplierProducts = [{ id: 121 }];
-  const component = shallow(
-    <PartViewRow
-      part={part}
-      supplierProducts={supplierProducts}
-      lockFirstColumn={false}
-      sections={sections}
-      brands={brands}
-    />,
-  );
-  expect(toJson(component)).toMatchSnapshot();
-});
-test('should display when multiple supplier products exist', () => {
-  const part = {
-    id: 1,
-    brand: 2,
-    part_name: 'Part Name string',
-    trade_in_price: 12,
-    standard: true,
-    stocked: false,
-  };
-  const supplierProducts = [{ id: 121 }, { id: 41 }];
-  const component = shallow(
-    <PartViewRow
-      part={part}
-      supplierProducts={supplierProducts}
-      lockFirstColumn={false}
-      sections={sections}
-      brands={brands}
-    />,
-  );
-  expect(toJson(component)).toMatchSnapshot();
+describe('PartViewRow', () => {
+  it('should display when no part and no supplier products exist', () => {
+    const part = {};
+    const supplierProducts = [];
+    const component = shallow(
+      <PartViewRow
+        part={part}
+        supplierProducts={supplierProducts}
+        lockFirstColumn={false}
+        sections={sections}
+        brands={brands}
+      />,
+    );
+    expect(toJson(component)).toMatchSnapshot();
+  });
+  it('should display when no supplier products exist', () => {
+    const part = {
+      id: 1,
+      brand: 2,
+      part_name: 'Part Name string',
+      trade_in_price: 12,
+      standard: true,
+      stocked: false,
+    };
+    const supplierProducts = [];
+    const component = shallow(
+      <PartViewRow
+        part={part}
+        supplierProducts={supplierProducts}
+        lockFirstColumn={false}
+        sections={sections}
+        brands={brands}
+      />,
+    );
+    expect(toJson(component)).toMatchSnapshot();
+  });
+  it('should display when one supplier products exist', () => {
+    const part = {
+      id: 1,
+      brand: 2,
+      part_name: 'Part Name string',
+      trade_in_price: 12,
+      standard: true,
+      stocked: false,
+    };
+    const supplierProducts = [{ id: 121 }];
+    const component = shallow(
+      <PartViewRow
+        part={part}
+        supplierProducts={supplierProducts}
+        lockFirstColumn={false}
+        sections={sections}
+        brands={brands}
+      />,
+    );
+    expect(toJson(component)).toMatchSnapshot();
+  });
+  it('should display when multiple supplier products exist', () => {
+    const part = {
+      id: 1,
+      brand: 2,
+      part_name: 'Part Name string',
+      trade_in_price: 12,
+      standard: true,
+      stocked: false,
+    };
+    const supplierProducts = [{ id: 121 }, { id: 41 }];
+    const component = shallow(
+      <PartViewRow
+        part={part}
+        supplierProducts={supplierProducts}
+        lockFirstColumn={false}
+        sections={sections}
+        brands={brands}
+      />,
+    );
+    expect(toJson(component)).toMatchSnapshot();
+  });
 });

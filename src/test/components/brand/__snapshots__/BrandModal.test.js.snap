@@ -43,13 +43,6 @@ exports[`BrandModal BrandModal displays correctly for a brand 1`] = `
             45,
             16,
           ],
-          "supplier_names": Array [
-            "name 23",
-            "name 1",
-            "name 2",
-            "name 45",
-            "name 16",
-          ],
         }
       }
       modelFields={
@@ -99,13 +92,6 @@ exports[`BrandModal BrandModal displays correctly for a brand 1`] = `
             45,
             16,
           ],
-          "supplier_names": Array [
-            "name 23",
-            "name 1",
-            "name 2",
-            "name 45",
-            "name 16",
-          ],
         }
       }
       suppliers={
@@ -131,19 +117,27 @@ exports[`BrandModal BrandModal displays correctly for a brand 1`] = `
     />
   </div>
   <div
-    style={
-      Object {
-        "textAlign": "right",
-        "width": "100%",
-      }
-    }
+    className="align_right"
   >
-    <Icon
-      as="i"
-      id="delete-brand"
-      name="trash"
-      onClick={[Function]}
-      title="Delete Brand"
+    <ModelEditIcons
+      componentKey={8}
+      model={
+        Object {
+          "brand_name": "e brand 8",
+          "id": 8,
+          "link": "https://bianchi.co.uk",
+          "supplier": Array [
+            23,
+            1,
+            2,
+            45,
+            16,
+          ],
+        }
+      }
+      modelDelete={[Function]}
+      modelReset={[Function]}
+      modelSave={[Function]}
     />
   </div>
 </div>
@@ -240,12 +234,15 @@ exports[`BrandModal BrandModal displays correctly for a new brand 1`] = `
     />
   </div>
   <div
-    style={
-      Object {
-        "textAlign": "right",
-        "width": "100%",
-      }
-    }
-  />
+    className="align_right"
+  >
+    <ModelEditIcons
+      componentKey="new"
+      model={Object {}}
+      modelDelete={[Function]}
+      modelReset={[Function]}
+      modelSave={[Function]}
+    />
+  </div>
 </div>
 `;

@@ -32,7 +32,6 @@ describe('BrandModal', () => {
       link: 'https://bianchi.co.uk',
       id: 8,
       supplier: [23, 1, 2, 45, 16],
-      supplier_names: ['name 23', 'name 1', 'name 2', 'name 45', 'name 16'],
     };
     const componentKey = brand.id;
     const component = shallow(
@@ -54,7 +53,6 @@ describe('BrandModal', () => {
       link: 'https://bianchi.co.uk',
       id: 8,
       supplier: [23, 1, 2, 45, 16],
-      supplier_names: ['name 23', 'name 1', 'name 2', 'name 45', 'name 16'],
     };
     const componentKey = brand.id;
     const component = shallow(
@@ -84,7 +82,6 @@ describe('BrandModal', () => {
       link: 'https://bianchi.co.uk',
       id: 8,
       supplier: [23, 1, 2, 45, 16],
-      supplier_names: ['name 23', 'name 1', 'name 2', 'name 45', 'name 16'],
     };
     const componentKey = brand.id;
     const component = shallow(
@@ -114,7 +111,6 @@ describe('BrandModal', () => {
       link: 'https://bianchi.co.uk',
       id: 8,
       supplier: [23, 1, 2, 45, 16],
-      supplier_names: ['name 23', 'name 1', 'name 2', 'name 45', 'name 16'],
     };
     const componentKey = brand.id;
     const component = shallow(
@@ -139,7 +135,6 @@ describe('BrandModal', () => {
       link: 'https://bianchi.co.uk',
       id: 8,
       supplier: [23, 1, 2, 45, 16],
-      supplier_names: ['name 23', 'name 1', 'name 2', 'name 45', 'name 16'],
     };
     const componentKey = brand.id;
     const component = shallow(
@@ -169,7 +164,6 @@ describe('BrandModal', () => {
       link: 'https://bianchi.co.uk',
       id: 8,
       supplier: [23, 1, 2, 45, 16],
-      supplier_names: ['name 23', 'name 1', 'name 2', 'name 45', 'name 16'],
     };
     const componentKey = brand.id;
     const component = shallow(
@@ -188,7 +182,6 @@ describe('BrandModal', () => {
     component.instance().handleBrandValueChange('supplier', [suppliers[1].id]);
     const expectedData = Object.assign({}, brand, {
       supplier: [suppliers[1].id],
-      supplier_names: [suppliers[1].supplier_name],
       changed: true,
       error_detail: {},
     });

@@ -71,10 +71,6 @@ class Brands extends React.Component {
         brandsWithUpdates[brandToUpdateIndex].supplier,
         suppliers[supplierIndex].id,
       );
-      brandsWithUpdates[brandToUpdateIndex].supplier_names = addToUniqueArray(
-        brandsWithUpdates[brandToUpdateIndex].supplier_names,
-        suppliers[supplierIndex].supplier_name,
-      );
       brandsWithUpdates[brandToUpdateIndex].changed = true;
       this.props.updateBrands(brandsWithUpdates);
     }

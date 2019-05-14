@@ -1,3 +1,5 @@
+import { findSupplierNameforId } from '../../supplier/helpers/supplier';
+
 export const buildBrandNameArray = brands => {
   const brandsLower = brands.map(brand => {
     return {
@@ -21,4 +23,10 @@ export const getBrandName = (brandId, brands) => {
     return false;
   });
   return brandName;
+};
+
+export const getSupplierNamesForBrand = (brand, suppliers) => {
+  if (brand && brand.supplier)
+    return brand.supplier.map(supplierId => findSupplierNameforId(supplierId, suppliers));
+  return [];
 };

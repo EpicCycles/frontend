@@ -1,4 +1,6 @@
 import React from 'react';
+import * as PropTypes from 'prop-types';
+
 import FormTextInput from '../../common/FormTextInput';
 import { generateRandomCode, removeObjectWithIndex, updateObject } from '../../helpers/utils';
 import { Icon } from 'semantic-ui-react';
@@ -8,11 +10,9 @@ import { brandFields } from '../app/model/helpers/fields';
 import { updateModel } from '../app/model/helpers/model';
 
 class BrandEdit extends React.Component {
-  handleBrandValueChange = (fieldName, input, updatedSupplierNames) => {
+  handleBrandValueChange = (fieldName, input) => {
     const updatedBrand = updateModel(this.props.brand, brandFields, fieldName, input);
-    if (updatedSupplierNames) {
-      updatedBrand.supplier_names = updatedSupplierNames;
-    }
+
     if (this.props.componentKey === NEW_ELEMENT_ID) updatedBrand.dummyKey = NEW_ELEMENT_ID;
     this.props.handleBrandChange(this.props.componentKey, updatedBrand);
   };
@@ -21,12 +21,8 @@ class BrandEdit extends React.Component {
     const supplierIndex = currentSuppliers.indexOf(supplierKey);
     if (supplierIndex > -1) {
       const updatedSupplier = removeObjectWithIndex(currentSuppliers, supplierIndex);
-      const updatedSupplierNames = removeObjectWithIndex(
-        this.props.brand.supplier_names,
-        supplierIndex,
-      );
 
-      this.handleBrandValueChange('supplier', updatedSupplier, updatedSupplierNames);
+      this.handleBrandValueChange('supplier', updatedSupplier);
     }
   };
 
@@ -37,9 +33,7 @@ class BrandEdit extends React.Component {
       this.props.handleBrandChange(this.props.componentKey, updatedBrand);
     }
   };
-  changeBikeBrand = () => {
-    this.handleBrandValueChange('bike_brand', !this.props.brand.bike_brand);
-  };
+
   addAnother = () => {
     const updatedBrand = updateObject(this.props.brand);
     updatedBrand.dummyKey = generateRandomCode();
@@ -47,16 +41,10 @@ class BrandEdit extends React.Component {
   };
 
   render() {
-    const { brand, componentKey, pickUpBrand } = this.props;
-    const suppliers = [];
-    if (brand.supplier_names) {
-      for (let i = 0; i < brand.supplier_names.length; i++) {
-        suppliers.push({
-          id: brand.supplier[i],
-          supplier_name: brand.supplier_names[i],
-        });
-      }
-    }
+    const { brand, componentKey, pickUpBrand, suppliers } = this.props;
+    const supplierForBrand = suppliers.filter(
+      supplier => brand.supplier && brand.supplier.includes(supplier.id),
+    );
     return (
       <div
         key={`brand${componentKey}`}
@@ -76,14 +64,14 @@ class BrandEdit extends React.Component {
           <input
             type="checkbox"
             name={`bike_brand_${componentKey}`}
-            onChange={this.changeBikeBrand}
-            checked={brand.bike_brand ? brand.bike_brand : false}
+            onChange={() => this.handleBrandValueChange('bike_brand', !brand.bike_brand)}
+            checked={brand.bike_brand}
           />
           <label>Bike Brand</label>
         </div>
         Supplier(s):{' '}
-        {suppliers.length > 0
-          ? suppliers.map(supplier => (
+        {supplierForBrand.length > 0
+          ? supplierForBrand.map(supplier => (
               <SupplierBlob
                 key={`supplier${componentKey}${supplier.id}`}
                 supplier={supplier}
@@ -97,5 +85,16 @@ class BrandEdit extends React.Component {
     );
   }
 }
-
+BrandEdit.defaultProps = {
+  brand: {},
+  suppliers: [],
+};
+BrandEdit.propTypes = {
+  suppliers: PropTypes.array,
+  brand: PropTypes.object,
+  componentKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  deleteBrand: PropTypes.func,
+  saveBrand: PropTypes.func,
+  closeBrandModal: PropTypes.func,
+};
 export default BrandEdit;

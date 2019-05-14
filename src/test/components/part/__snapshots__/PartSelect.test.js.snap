@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render the component with default props 1`] = `
+exports[`PartSelect should render the component with default props 1`] = `
 <SelectInput
   className=""
   error=""

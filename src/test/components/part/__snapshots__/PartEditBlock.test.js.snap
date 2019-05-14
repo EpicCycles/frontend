@@ -17,16 +17,12 @@ exports[`should display all icons when a part is changed 1`] = `
           "brand_name": "brand 2",
           "id": 2,
           "supplier": Array [],
-          "supplier_names": Array [],
         },
         Object {
           "brand_name": "brand 3",
           "id": 3,
           "supplier": Array [
             1,
-          ],
-          "supplier_names": Array [
-            "supplier 1",
           ],
         },
         Object {
@@ -41,10 +37,6 @@ exports[`should display all icons when a part is changed 1`] = `
           "supplier": Array [
             1,
             3,
-          ],
-          "supplier_names": Array [
-            "supplier 1",
-            "supplier 3",
           ],
         },
         Object {
@@ -229,16 +221,12 @@ exports[`should display delete and reset when a part is changed but has errors 1
           "brand_name": "brand 2",
           "id": 2,
           "supplier": Array [],
-          "supplier_names": Array [],
         },
         Object {
           "brand_name": "brand 3",
           "id": 3,
           "supplier": Array [
             1,
-          ],
-          "supplier_names": Array [
-            "supplier 1",
           ],
         },
         Object {
@@ -253,10 +241,6 @@ exports[`should display delete and reset when a part is changed but has errors 1
           "supplier": Array [
             1,
             3,
-          ],
-          "supplier_names": Array [
-            "supplier 1",
-            "supplier 3",
           ],
         },
         Object {
@@ -435,16 +419,12 @@ exports[`should display just delete when a part is unchanged 1`] = `
           "brand_name": "brand 2",
           "id": 2,
           "supplier": Array [],
-          "supplier_names": Array [],
         },
         Object {
           "brand_name": "brand 3",
           "id": 3,
           "supplier": Array [
             1,
-          ],
-          "supplier_names": Array [
-            "supplier 1",
           ],
         },
         Object {
@@ -459,10 +439,6 @@ exports[`should display just delete when a part is unchanged 1`] = `
           "supplier": Array [
             1,
             3,
-          ],
-          "supplier_names": Array [
-            "supplier 1",
-            "supplier 3",
           ],
         },
         Object {

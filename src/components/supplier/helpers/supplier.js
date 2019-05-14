@@ -1,3 +1,5 @@
+import {doWeHaveObjects} from "../../../helpers/utils";
+
 export const getSupplierName = (supplier, suppliers) => {
     if (! supplier) return undefined;
     if (Array.isArray(supplier)) {
@@ -22,3 +24,11 @@ export const findSupplierNameforId = (supplierId, suppliers) => {
     }
     return supplierName;
 };
+export const getBrandsForSupplier = (supplierId, brands) => {
+    const brandNames = [];
+    if (doWeHaveObjects(brands))
+      brands.forEach(brand => {
+        if (brand.supplier && brand.supplier.includes(supplierId)) brandNames.push(brand.brand_name);
+      });
+    return brandNames;
+}

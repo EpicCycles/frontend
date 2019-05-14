@@ -20,8 +20,9 @@ import {
     BRANDS_SAVE
 } from "../actions/core";
 import {call, put, select, takeLatest} from "redux-saga/effects";
-import {logError} from "../../helpers/api_error";
+import {errorAsMessage, logError} from "../../helpers/api_error";
 import {updateObject} from "../../helpers/utils";
+import {archiveQuoteError} from "../actions/quote";
 
 export function* getBrandsAndSuppliers(action) {
     try {
@@ -92,7 +93,7 @@ export function* saveSupplier(action) {
     } catch (error) {
         // yield put(getBrandsAndSuppliersSuccess(sampleBrands, sampleSuppliers));
         logError(error);
-        yield put(saveSupplierFailure("Save Supplier Failed"));
+        yield put(saveSupplierFailure(errorAsMessage(error, "Save Supplier Failed")));
     }
 }
 

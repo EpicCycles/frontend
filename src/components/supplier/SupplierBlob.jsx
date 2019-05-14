@@ -1,9 +1,9 @@
 import React from 'react';
 import { buildColourAttributesForId } from '../../helpers/utils';
 import { Icon } from 'semantic-ui-react';
-import Brands from '../brand/Brands';
 import * as PropTypes from 'prop-types';
 import { getModelKey } from '../app/model/helpers/model';
+import {getBrandsForSupplier} from "./helpers/supplier";
 
 class SupplierBlob extends React.Component {
   render() {
@@ -20,11 +20,8 @@ class SupplierBlob extends React.Component {
     const componentKey = getModelKey(supplier);
     const colourAttributes = buildColourAttributesForId(componentKey);
     const dest = allowEdit ? 'E' : '';
-    const brandNames = [];
-    if (showBrands && brands)
-      brands.forEach(brand => {
-        if (brand.supplier.includes(supplier.id)) brandNames.push(brand.brand_name);
-      });
+    const brandNames = (showBrands && brands) ? getBrandsForSupplier(componentKey, brands) : [];
+
     return (
       <div
         key={`supplierBlob${dest}${componentKey}`}

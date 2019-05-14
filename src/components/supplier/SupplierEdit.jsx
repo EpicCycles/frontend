@@ -6,7 +6,7 @@ import { supplierFields } from '../app/model/helpers/fields';
 import EditModelPage from '../app/model/EditModelPage';
 import ModelEditIcons from '../app/model/ModelEditIcons';
 import * as PropTypes from 'prop-types';
-import SupplierBlob from './SupplierBlob';
+import {getBrandsForSupplier} from "./helpers/supplier";
 
 class SupplierEdit extends React.Component {
   state = {
@@ -61,10 +61,7 @@ class SupplierEdit extends React.Component {
     const { supplier, persistedSupplier } = this.state;
     const { closeModal, brands } = this.props;
     const componentKey = getModelKey(supplier);
-    const brandNames = [];
-    brands.forEach(brand => {
-      if (brand.supplier.includes(supplier.id)) brandNames.push(brand.brand_name);
-    });
+    const brandNames = getBrandsForSupplier(componentKey, brands);
     return (
       <Fragment>
         {closeModal && (

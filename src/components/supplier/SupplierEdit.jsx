@@ -6,7 +6,7 @@ import { supplierFields } from '../app/model/helpers/fields';
 import EditModelPage from '../app/model/EditModelPage';
 import ModelEditIcons from '../app/model/ModelEditIcons';
 import * as PropTypes from 'prop-types';
-import {getBrandsForSupplier} from "./helpers/supplier";
+import { getBrandsForSupplier } from './helpers/supplier';
 
 class SupplierEdit extends React.Component {
   state = {

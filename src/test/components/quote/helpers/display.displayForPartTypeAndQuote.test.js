@@ -11,10 +11,10 @@ describe('displayForPartTypeAndQuote', () => {
     { dummyKey: 'adummy', quote: 17, partType: 34, error_detail: { part: 'part is required' } },
   ];
   const bikeParts = [
-    { id: 11, partType: 231, bike: 45 },
-    { id: 31, partType: 331, bike: 45 },
-    { id: 131, partType: 631, bike: 45 },
-    { id: 331, partType: 631, bike: 47 },
+    { part: 11, bike: 45 },
+    { part: 31, bike: 45 },
+    { part: 131, bike: 45 },
+    { part: 331, bike: 47 },
   ];
   const parts = [
     { id: 1, partType: 231 },
@@ -22,11 +22,14 @@ describe('displayForPartTypeAndQuote', () => {
     { id: 331, partType: 331 },
     { id: 192, partType: 91 },
     { id: 19331, partType: 91 },
-  ];
+    { id: 11, partType: 231 },
+    { id: 31, partType: 331 },
+    { id: 131, partType: 631 },
+    { id: 331, partType: 631 },  ];
   it('should return all a replacement part', () => {
     const partTypeId = 231;
     const expectedResult = {
-      bikePart: { id: 11, partType: 231, bike: 45 },
+      bikePart: { id: 11, partType: 231 },
       quotePart: { id: 11, quote: 17, partType: 231, part: 1, not_required: true },
       replacementPart: { id: 1, partType: 231 },
       additionalParts: [{ id: 12, quote: 17, partType: 231 }],
@@ -64,7 +67,7 @@ describe('displayForPartTypeAndQuote', () => {
   it('should return just a bike part when there are no matching quote parts', () => {
     const partTypeId = 631;
     const expectedResult = {
-      bikePart: { id: 131, partType: 631, bike: 45 },
+      bikePart: { id: 131, partType: 631 },
       quotePart: undefined,
       replacementPart: undefined,
       additionalParts: [],

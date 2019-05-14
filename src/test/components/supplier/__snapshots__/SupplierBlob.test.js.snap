@@ -23,8 +23,8 @@ exports[`supplier blob with everything 1`] = `
   <div
     key="supplierBlobBrandsE1"
   >
-     Brands: 
-    brands 1, brand 2, brand 3
+     
+    Brands: 
   </div>
   <a
     href="supplier.co.uk"

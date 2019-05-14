@@ -39,7 +39,8 @@ exports[`BrandEdit shows new brand without supplier correctly 1`] = `
       Bike Brand
     </label>
   </div>
-  Supplier(s): 
+  Supplier(s):
+   
   Unknown
 </div>
 `;

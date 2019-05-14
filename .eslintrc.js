@@ -1,12 +1,13 @@
-const path = require('path');
-
 module.exports = {
 	env: {
 		es6: true,
 		browser: true,
 		node: true,
 	},
-  extends: ["plugin:jest/recommended", 'jest-enzyme'],
+  extends: [
+  	'plugin:jest/recommended',
+		"jest-enzyme",
+	],
 	plugins: [
 		'babel',
 		'import',

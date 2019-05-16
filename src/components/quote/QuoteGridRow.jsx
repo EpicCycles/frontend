@@ -37,7 +37,7 @@ const QuoteGridRow = props => {
         users={users}
       />
       <div
-        className={gridItemClass('align_center', 1, true)}
+        className={gridItemClass('align_center grid-col--fixed-right', 1, true)}
         data-test="actions"
         key={`action-cell${modelKey}`}
       >

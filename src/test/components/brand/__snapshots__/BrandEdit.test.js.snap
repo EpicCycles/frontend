@@ -12,31 +12,54 @@ exports[`BrandEdit should shows new brand without supplier correctly 1`] = `
     name="add"
     onClick={[Function]}
   />
-  <FormTextInput
-    className=""
-    dataType="text"
-    error=""
-    fieldName="brand_name_new"
-    label=""
-    list=""
+  <EditModelInput
+    componentKey="new"
+    field={
+      Object {
+        "error": "A name is required for the brand",
+        "fieldName": "brand_name",
+        "header": "Brand Name",
+        "length": 50,
+        "required": false,
+        "size": 20,
+        "synonyms": Array [],
+      }
+    }
+    model={
+      Object {
+        "brand_name": "e brand 8",
+        "id": 8,
+        "link": "https://bianchi.co.uk",
+      }
+    }
     onChange={[Function]}
-    onClick={[Function]}
-    placeholder="add new"
-    size={30}
-    title=""
-    value="e brand 8"
   />
   <div
-    className="ui toggle checkbox"
+    className="row"
   >
-    <input
-      name="bike_brand_new"
-      onChange={[Function]}
-      type="checkbox"
-    />
-    <label>
+    <div
+      className="field-label"
+    >
       Bike Brand
-    </label>
+    </div>
+    <EditModelInput
+      componentKey="new"
+      field={
+        Object {
+          "fieldName": "bike_brand",
+          "header": "Bike Brand",
+          "type": "checkbox",
+        }
+      }
+      model={
+        Object {
+          "brand_name": "e brand 8",
+          "id": 8,
+          "link": "https://bianchi.co.uk",
+        }
+      }
+      onChange={[Function]}
+    />
   </div>
   Supplier(s):
    

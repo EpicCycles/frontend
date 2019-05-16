@@ -120,6 +120,7 @@ class Brands extends React.Component {
                 <BrandEdit
                   key={`brandEdit${componentKey}`}
                   brand={brand}
+                  suppliers={suppliers}
                   componentKey={componentKey}
                   handleBrandChange={this.handleBrandChange}
                   pickUpBrand={this.pickUpBrand}

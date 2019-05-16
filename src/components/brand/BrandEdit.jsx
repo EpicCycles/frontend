@@ -1,18 +1,19 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import FormTextInput from '../../common/FormTextInput';
 import { generateRandomCode, removeObjectWithIndex, updateObject } from '../../helpers/utils';
 import { Icon } from 'semantic-ui-react';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 import SupplierBlob from '../supplier/SupplierBlob';
-import { brandFields } from '../app/model/helpers/fields';
+import { BIKE_BRAND_FIELD, BRAND_NAME_FIELD, brandFields } from '../app/model/helpers/fields';
 import { updateModel } from '../app/model/helpers/model';
+import EditModelInput from '../app/model/EditModelInput';
 
+const BRAND_NAME_FIELD_BLANK = updateObject(BRAND_NAME_FIELD, { required: false });
 class BrandEdit extends React.Component {
   handleBrandValueChange = (fieldName, input) => {
     const updatedBrand = updateModel(this.props.brand, brandFields, fieldName, input);
-
+    if (!updatedBrand.brand_name) updatedBrand.delete = true;
     if (this.props.componentKey === NEW_ELEMENT_ID) updatedBrand.dummyKey = NEW_ELEMENT_ID;
     this.props.handleBrandChange(this.props.componentKey, updatedBrand);
   };
@@ -49,25 +50,26 @@ class BrandEdit extends React.Component {
       <div
         key={`brand${componentKey}`}
         className="rounded"
-        draggable={pickUpBrand && componentKey !== NEW_ELEMENT_ID}
+        draggable={pickUpBrand && componentKey.toString() !== NEW_ELEMENT_ID}
         onDragStart={event => pickUpBrand(event, componentKey)}
       >
-        {componentKey === NEW_ELEMENT_ID && <Icon name="add" onClick={this.addAnother} />}
-        <FormTextInput
-          placeholder="add new"
-          fieldName={`brand_name_${componentKey}`}
-          value={brand.brand_name}
+        {componentKey.toString() === NEW_ELEMENT_ID && (
+          <Icon name="add" onClick={this.addAnother} />
+        )}
+        <EditModelInput
+          field={BRAND_NAME_FIELD_BLANK}
+          model={brand}
+          componentKey={componentKey}
           onChange={this.handleBrandValueChange}
-          onClick={this.handleInputClear}
         />
-        <div className="ui toggle checkbox">
-          <input
-            type="checkbox"
-            name={`bike_brand_${componentKey}`}
-            onChange={() => this.handleBrandValueChange('bike_brand', !brand.bike_brand)}
-            checked={brand.bike_brand}
+        <div className="row">
+          <div className="field-label">{BIKE_BRAND_FIELD.header}</div>
+          <EditModelInput
+            field={BIKE_BRAND_FIELD}
+            model={brand}
+            componentKey={componentKey}
+            onChange={this.handleBrandValueChange}
           />
-          <label>Bike Brand</label>
         </div>
         Supplier(s):{' '}
         {supplierForBrand.length > 0

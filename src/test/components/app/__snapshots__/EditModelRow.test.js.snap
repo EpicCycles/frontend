@@ -3,13 +3,8 @@
 exports[`EditModelRow it renders 1`] = `
 <Fragment>
   <div
-    className="grid-item"
+    className="undefined  grid-item "
     key="modelRowaddress1new"
-    style={
-      Object {
-        "gridRow": "span 1",
-      }
-    }
   >
     <EditModelInput
       componentKey="new"
@@ -30,13 +25,8 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="grid-item"
+    className="undefined  grid-item "
     key="modelRowaddress2new"
-    style={
-      Object {
-        "gridRow": "span 1",
-      }
-    }
   >
     <EditModelInput
       componentKey="new"
@@ -55,13 +45,8 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="grid-item"
+    className="undefined  grid-item "
     key="modelRowaddress3new"
-    style={
-      Object {
-        "gridRow": "span 1",
-      }
-    }
   >
     <EditModelInput
       componentKey="new"
@@ -80,13 +65,8 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="grid-item"
+    className="undefined  grid-item "
     key="modelRowaddress4new"
-    style={
-      Object {
-        "gridRow": "span 1",
-      }
-    }
   >
     <EditModelInput
       componentKey="new"
@@ -105,13 +85,8 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="grid-item"
+    className="undefined  grid-item "
     key="modelRowcountrynew"
-    style={
-      Object {
-        "gridRow": "span 1",
-      }
-    }
   >
     <EditModelInput
       componentKey="new"
@@ -1129,13 +1104,8 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="grid-item"
+    className="undefined  grid-item "
     key="modelRowpostcodenew"
-    style={
-      Object {
-        "gridRow": "span 1",
-      }
-    }
   >
     <EditModelInput
       componentKey="new"
@@ -1158,13 +1128,8 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="grid-item"
+    className="undefined align_center grid-item "
     key="modelRowbillingnew"
-    style={
-      Object {
-        "gridRow": "span 1",
-      }
-    }
   >
     <EditModelInput
       componentKey="new"
@@ -1186,13 +1151,8 @@ exports[`EditModelRow it renders 1`] = `
 exports[`EditModelRow it renders with data 1`] = `
 <Fragment>
   <div
-    className="grid-item grid-item--fixed-leftred"
+    className="red  grid-item grid-item--fixed-left"
     key="modelRowaddress1123"
-    style={
-      Object {
-        "gridRow": "span 2",
-      }
-    }
   >
     <EditModelInput
       brands={
@@ -1296,13 +1256,8 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="grid-item grid-item--fixed-leftred"
+    className="red  grid-item "
     key="modelRowaddress2123"
-    style={
-      Object {
-        "gridRow": "span 2",
-      }
-    }
   >
     <EditModelInput
       brands={
@@ -1404,13 +1359,8 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="grid-item grid-item--fixed-leftred"
+    className="red  grid-item "
     key="modelRowaddress3123"
-    style={
-      Object {
-        "gridRow": "span 2",
-      }
-    }
   >
     <EditModelInput
       brands={
@@ -1512,13 +1462,8 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="grid-item grid-item--fixed-leftred"
+    className="red  grid-item "
     key="modelRowaddress4123"
-    style={
-      Object {
-        "gridRow": "span 2",
-      }
-    }
   >
     <EditModelInput
       brands={
@@ -1620,13 +1565,8 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="grid-item grid-item--fixed-leftred"
+    className="red  grid-item "
     key="modelRowcountry123"
-    style={
-      Object {
-        "gridRow": "span 2",
-      }
-    }
   >
     <EditModelInput
       brands={
@@ -2727,13 +2667,8 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="grid-item grid-item--fixed-leftred"
+    className="red  grid-item "
     key="modelRowpostcode123"
-    style={
-      Object {
-        "gridRow": "span 2",
-      }
-    }
   >
     <EditModelInput
       brands={
@@ -2839,13 +2774,8 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="grid-item grid-item--fixed-leftred"
+    className="red align_center grid-item "
     key="modelRowbilling123"
-    style={
-      Object {
-        "gridRow": "span 2",
-      }
-    }
   >
     <EditModelInput
       brands={

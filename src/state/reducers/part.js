@@ -18,8 +18,7 @@ const initialState = {
   isLoading: false,
 };
 const part = (state = initialState, action) => {
-  let parts,
-    supplierProducts;
+  let parts, supplierProducts;
   switch (action.type) {
     case PART_CLEAR:
     case USER_LOGOUT:
@@ -55,7 +54,7 @@ const part = (state = initialState, action) => {
       supplierProducts = addItemsToArray(state.supplierProducts, action.payload.supplierProducts);
 
       setLocalStorage(STORAGE_PARTS, parts);
-      setLocalStorage(STORAGE_SUPPLIER_PRODUCTS, parts);
+      setLocalStorage(STORAGE_SUPPLIER_PRODUCTS, supplierProducts);
 
       return {
         ...state,

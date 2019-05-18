@@ -51,6 +51,7 @@ class EditModelInput extends Component {
     const fieldValue = model && model[field.fieldName];
     const emptyAllowed = !(field.required && fieldValue);
     const error = model.error_detail ? model.error_detail[field.fieldName] : '';
+    const disabled = model.deleted || field.disabled;
 
     switch (field.type) {
       case SELECT_ONE:
@@ -62,7 +63,7 @@ class EditModelInput extends Component {
             onChange={this.validateOnChange}
             options={field.selectList}
             error={error}
-            disabled={field.disabled}
+            disabled={disabled}
           />
         );
         break;
@@ -77,7 +78,7 @@ class EditModelInput extends Component {
             cols={Math.ceil(field.size / 4)}
             onClick={this.resetField}
             error={error}
-            disabled={field.disabled}
+            disabled={disabled}
           />
         );
         break;
@@ -88,6 +89,7 @@ class EditModelInput extends Component {
             countrySelected={fieldValue}
             onChange={this.validateOnChange}
             isEmptyAllowed={emptyAllowed}
+            disabled={disabled}
           />
         );
         break;
@@ -105,7 +107,7 @@ class EditModelInput extends Component {
             size={field.size}
             onClick={this.validateOnChange}
             maxLength={field.length}
-            disabled={field.disabled}
+            disabled={disabled}
           />
         );
         break;
@@ -118,7 +120,7 @@ class EditModelInput extends Component {
               name={fieldName}
               onChange={() => this.validateOnChange(fieldName, !checked)}
               checked={checked}
-              disabled={field.disabled}
+              disabled={disabled}
               className={error ? 'red' : ''}
               title={error ? `${field.title} red` : field.title}
               data-test="model-checkbox"
@@ -135,7 +137,7 @@ class EditModelInput extends Component {
             partTypeSelected={fieldValue}
             isEmptyAllowed={emptyAllowed}
             error={error}
-            disabled={field.disabled}
+            disabled={disabled}
           />
         );
         break;
@@ -148,7 +150,7 @@ class EditModelInput extends Component {
             brandSelected={fieldValue}
             isEmptyAllowed={emptyAllowed}
             error={error}
-            disabled={field.disabled}
+            disabled={disabled}
             bikeOnly={field.bikeOnly}
           />
         );
@@ -162,7 +164,7 @@ class EditModelInput extends Component {
             supplierSelected={fieldValue}
             isEmptyAllowed={emptyAllowed}
             error={error}
-            disabled={field.disabled}
+            disabled={disabled}
           />
         );
         break;
@@ -180,7 +182,7 @@ class EditModelInput extends Component {
             maxLength={field.length}
             title={field.title}
             list={field.listId}
-            disabled={field.disabled}
+            disabled={disabled}
           />
         );
     }

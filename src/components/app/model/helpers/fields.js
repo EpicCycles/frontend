@@ -538,7 +538,6 @@ export const PART_FIELD = {
   fieldName: PART,
   header: 'Part',
   synonyms: [PART],
-  required: true,
   error: PART_MISSING,
   maxWidth: '100px',
   type: PART,
@@ -769,7 +768,6 @@ export const partTypeSynonymFields = [NAME_FIELD];
 export const supplierFields = [SUPPLIER_NAME_FIELD, PREFERRED_SUPPLIER_FIELD, LINK_FIELD];
 export const supplierProductFields = [
   SUPPLIER_FIELD,
-  PART_FIELD,
   PRODUCT_CODE_FIELD,
   FITTED_PRICE_FIELD,
   TICKET_PRICE_FIELD,

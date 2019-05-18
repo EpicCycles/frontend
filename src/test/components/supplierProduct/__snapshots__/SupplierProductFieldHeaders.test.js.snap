@@ -18,16 +18,6 @@ exports[`should display headers 1`] = `
           "type": "supplier",
         },
         Object {
-          "error": "A part must be selected",
-          "fieldName": "part",
-          "header": "Part",
-          "required": true,
-          "synonyms": Array [
-            "part",
-          ],
-          "type": "part",
-        },
-        Object {
           "fieldName": "product_code",
           "header": "Product Code",
           "length": 30,
@@ -110,16 +100,6 @@ exports[`should display headers with locking, error and an extra class 1`] = `
             "supplier",
           ],
           "type": "supplier",
-        },
-        Object {
-          "error": "A part must be selected",
-          "fieldName": "part",
-          "header": "Part",
-          "required": true,
-          "synonyms": Array [
-            "part",
-          ],
-          "type": "part",
         },
         Object {
           "fieldName": "product_code",

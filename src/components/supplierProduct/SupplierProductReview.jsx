@@ -11,14 +11,35 @@ import { Button, Dimmer, Loader } from 'semantic-ui-react';
 import SupplierProductReviewListSelection from './SupplierProductReviewListSelection';
 import SupplierProductHeaders from './SupplierProductHeaders';
 import SupplierProductReviewPart from './SupplierProductReviewPart';
+import { filterPartsAndProducts } from './helpers/filterPartsAndProducts';
+import { savePartsAndProducts } from '../../state/actions/part';
 
 const initialState = {
   parts: [],
   supplierProducts: [],
+  saveCompleted: false,
 };
 
 class SupplierProductReviewList extends React.Component {
   state = updateObject(initialState);
+  static getDerivedStateFromProps(props, state) {
+    // Any time the current part changes,
+    // Reset any parts of state that are tied to that part.
+    // In this simple example, that's just the email.
+    if (state.saveCompleted && !props.isLoading) {
+      let { parts, supplierProducts } = props;
+
+      const filteredLists = filterPartsAndProducts(state, parts, supplierProducts);
+
+      return {
+        parts: filteredLists.parts,
+        supplierProducts: filteredLists.supplierProducts,
+        saveComplete: false,
+      };
+    }
+    return null;
+  }
+
   handleInputChange = (fieldName, input) => {
     let newState = updateObject(this.state);
     newState[fieldName] = input;
@@ -42,25 +63,11 @@ class SupplierProductReviewList extends React.Component {
       supplierProducts.some(sp => sp.changed || sp.deleted)
     );
   };
+
   listParts = () => {
     let { parts, supplierProducts } = this.props;
-    const { brand, supplier, partName, standard, stocked } = this.state;
-
-    if (supplier) {
-      supplierProducts = supplierProducts.filter(
-        sp => sp.supplier && sp.supplier.toString() === supplier,
-      );
-      parts = parts.filter(p => supplierProducts.some(sp => sp.part === p.id));
-    }
-
-    if (brand) parts = parts.filter(part => part.brand.toString() === brand);
-    if (standard) parts = parts.filter(part => part.standard);
-    if (stocked) parts = parts.filter(part => part.stocked);
-    if (partName)
-      parts = parts.filter(part => part.part_name.toLowerCase().includes(partName.toLowerCase()));
-    const partIds = parts.map(part => part.id);
-    supplierProducts = supplierProducts.filter(sp => partIds.includes(sp.part));
-    this.setState({ supplierProducts, parts });
+    const filteredLists = filterPartsAndProducts(this.state, parts, supplierProducts);
+    this.setState(filteredLists);
   };
 
   showSearch = () => {
@@ -68,17 +75,16 @@ class SupplierProductReviewList extends React.Component {
       // eslint-disable-next-line no-alert
       if (!window.confirm('Are You Sure?')) return;
     }
-    let newState = updateObject(initialState);
-    this.setState(newState);
+    console.log('resetting');
+    this.setState(initialState);
   };
   saveChanges = () => {
     const { parts, supplierProducts } = this.state;
-    let changedParts = parts.filter(part => part.changed || part.deleted);
-    let changedSupplierProducts = supplierProducts.filter(
-      supplierProduct => supplierProduct.changed || supplierProduct.deleted,
-    );
-
-    this.props.saveSupplierParts(changedParts, changedSupplierProducts);
+    const { savePart, deletePart, saveSupplierProduct, deleteSupplierProduct } = this.props;
+    const partsToSave = parts.filter(part => part.deleted || part.changed);
+    const supplierproductsToSave = supplierProducts.filter(sp => sp.changed || sp.deleted);
+    this.props.savePartsAndProducts(partsToSave, supplierproductsToSave);
+    this.setState({ saveCompleted: true });
   };
   savePart = part => {
     const parts = updateObjectInArray(this.state.parts, part);

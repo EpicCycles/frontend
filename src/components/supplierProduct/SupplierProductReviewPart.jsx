@@ -8,7 +8,6 @@ import SupplierProductEditRow from './SupplierProductEditRow';
 import EditModelRow from '../app/model/EditModelRow';
 import { getRelevantSupplierProducts, newSupplierProduct } from '../part/helpers/supplierProduct';
 
-const dummyPart = { deleted: true };
 class SupplierProductReviewPart extends React.Component {
   static getDerivedStateFromProps(props, state) {
     // Any time the current part changes,

@@ -164,7 +164,7 @@ export function* deleteSupplierProduct(action) {
     if (token) {
       const completePayload = updateObject(action.payload, { token });
       yield call(part.deleteSupplierProduct, completePayload);
-      yield put(deleteSupplierProductOK(action.payload.partId));
+      yield put(deleteSupplierProductOK(action.payload.supplierProductId));
     } else {
       yield call(history.push, '/login');
     }

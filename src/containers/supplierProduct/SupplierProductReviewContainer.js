@@ -1,6 +1,12 @@
 import { connect } from 'react-redux';
-import { savePartsAndProducts } from '../../state/actions/part';
+import {
+  deletePart,
+  deleteSupplierProduct,
+  savePart,
+  saveSupplierProduct,
+} from '../../state/actions/part';
 import SupplierProductReview from '../../components/supplierProduct/SupplierProductReview';
+import { addMessage } from '../../state/actions/application';
 
 const mapStateToProps = ({ core, framework, part }) => {
   return {
@@ -13,7 +19,11 @@ const mapStateToProps = ({ core, framework, part }) => {
   };
 };
 const mapDispatchToProps = {
-  savePartsAndProducts,
+  savePart,
+  deletePart,
+  saveSupplierProduct,
+  deleteSupplierProduct,
+  addMessage,
 };
 export default connect(
   mapStateToProps,

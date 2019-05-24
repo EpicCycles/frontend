@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import { supplierProductFields } from '../app/model/helpers/fields';
 import { checkForChangesAllFields, updateModel } from '../app/model/helpers/model';
 import { updateObject } from '../../helpers/utils';
-import EditModelRow from "../app/model/EditModelRow";
+import EditModelRow from '../app/model/EditModelRow';
 
 class SupplierProductEditRow extends React.Component {
   state = {
@@ -19,8 +19,7 @@ class SupplierProductEditRow extends React.Component {
         supplierProductFields,
         props.supplierProduct,
         state.persistedSupplierProduct,
-      ) ||
-      props.supplierProduct.deleted
+      )
     ) {
       return {
         supplierProduct: updateObject(props.supplierProduct),
@@ -35,11 +34,10 @@ class SupplierProductEditRow extends React.Component {
     this.setState({ supplierProduct });
   };
   resetSupplierProduct = () => {
-    let { persistedSupplierProduct } = this.state;
+    const { persistedSupplierProduct } = this.state;
     const supplierProduct = updateObject(persistedSupplierProduct);
     this.setState({ supplierProduct });
   };
-
   render() {
     const { supplierProduct, persistedSupplierProduct } = this.state;
     const { suppliers, lockFirstColumn, saveSupplierProduct, deleteSupplierProduct } = this.props;

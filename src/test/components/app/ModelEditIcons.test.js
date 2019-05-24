@@ -142,14 +142,12 @@ describe('ModelEditIcons tests', () => {
   });
   it('shows the buttons when model no id and changes are present', () => {
     const modelSave = jest.fn();
-    const modelDelete = jest.fn();
     const modelReset = jest.fn();
 
     const input = shallow(
       <ModelEditIcons
         modelSave={modelSave}
         model={modelNoId}
-        modelDelete={modelDelete}
         modelReset={modelReset}
       />,
     );

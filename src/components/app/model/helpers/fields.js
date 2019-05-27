@@ -29,6 +29,7 @@ export const CHECKBOX = 'checkbox';
 export const RADIO = 'radio';
 export const DATE_TIME = 'date_time';
 export const SELECT_ONE = 'select_one';
+export const SELECT_MULTIPLE = 'select_multiple';
 export const CURRENCY = 'currency';
 export const NUMBER = 'number';
 export const TEXT = 'text';

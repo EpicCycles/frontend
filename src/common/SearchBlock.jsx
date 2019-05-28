@@ -12,23 +12,27 @@ const SearchBlock = props => {
     searchFnc,
     searchCriteriaValid,
     searchTitle,
+    className,
   } = props;
-  const blockClassName = displayRow ? 'row' : 'flex-vertical';
-  return searchFields.map(field => (
-    <div className={blockClassName}>
+  const blockClassName = displayRow ? 'row  vertical-middle' : 'flex-vertical';
+  return (
+    <div className={`blockClassName ${className}`}>
       <Search searchFields={searchFields} searchCriteria={searchCriteria} onChange={onChange} />
       <SearchButton onClick={searchFnc} disabled={!searchCriteriaValid} title={searchTitle} />
     </div>
-  ));
+  );
 };
 SearchBlock.defaultProps = {
   searchCriteria: {},
   searchTitle: 'Search',
+  className: '',
 };
 SearchBlock.propTypes = {
   searchFields: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   searchFnc: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
   searchTitle: PropTypes.string.isRequired,
   searchCriteria: PropTypes.object,
   displayRow: PropTypes.bool,

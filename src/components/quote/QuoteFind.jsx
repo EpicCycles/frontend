@@ -65,7 +65,7 @@ class QuoteFind extends React.Component {
       next,
     } = this.props;
     const searchFields = [
-      { displayName: 'Quote Description includes:', fieldName: 'quoteDesc', type: TEXT },
+      { displayName: 'Quote Description includes:', fieldName: 'quoteDesc', type: TEXT, placeholder: 'partial description' },
       { displayName: 'Include archived quotes:', fieldName: 'archived', type: CHECKBOX },
     ];
     return (
@@ -76,6 +76,7 @@ class QuoteFind extends React.Component {
             searchFields={searchFields}
             onChange={this.handleInputChange}
             searchCriteria={{ quoteDesc, archived }}
+            handleKeyPress={this.handleKeyPress}
           />
         </div>
         <CustomerListAndSelect

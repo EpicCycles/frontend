@@ -118,16 +118,17 @@ export const findIndexOfObjectWithKey = (arrayOfObjects, componentKey) => {
   }
 };
 export const findObjectWithId = (arrayOfObjects, objectId) => {
+  if (isNaN(objectId)) return;
   if (Array.isArray(arrayOfObjects)) {
     // eslint-disable-next-line
-        return arrayOfObjects.find(object => object.id == objectId);
+        return arrayOfObjects.find(object => object.id === Number.parseInt(objectId));
   } else {
     return;
   }
 };
 export const findIndexOfObjectWithId = (arrayOfObjects, objectId) => {
   if (Array.isArray(arrayOfObjects)) {
-    return arrayOfObjects.findIndex(object => object.id == objectId);
+    return arrayOfObjects.findIndex(object => object.id === Number.parseInt(objectId));
   } else {
     return -1;
   }

@@ -10,17 +10,17 @@ import { doesObjectMatchCriteria } from '../../helpers/search';
 describe('doesObjectMatchCriteria', () => {
   const multipleValue = {
     modelFieldName: 'mMultiple',
-    fieldType: SELECT_MULTIPLE,
+    type: SELECT_MULTIPLE,
     searchValue: ['2', '3', '4'],
   };
   const stringValue = {
     modelFieldName: 'mText',
-    fieldType: TEXT,
+    type: TEXT,
     searchValue: 'mostly mixed case',
   };
-  const booleanValue = { modelFieldName: 'mBool', fieldType: CHECKBOX, searchValue: true };
-  const selectValue = { modelFieldName: 'm_select', fieldType: SELECT_ONE, searchValue: '23' };
-  const numberValue = { modelFieldName: 'm_num', fieldType: NUMBER, searchValue: '23' };
+  const booleanValue = { modelFieldName: 'mBool', type: CHECKBOX, searchValue: true };
+  const selectValue = { modelFieldName: 'm_select', type: SELECT_ONE, searchValue: '23' };
+  const numberValue = { modelFieldName: 'm_num', type: NUMBER, searchValue: '23' };
   it('should return true when a single checkbox field matches the model value', () => {
     const model = {
       mMultiple: 'anything',

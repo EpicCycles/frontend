@@ -163,10 +163,12 @@ section, .row {
     display: inline-grid;
 }
 
-div.fit-content {
+div.fit-content, .fit-block {
     width: fit-content;
 }
-
+.fit-block {
+   display: inline-table;
+}
 section.flex-vertical, div.flex-vertical {
     display: flex;
     flex-direction: column;

@@ -6,6 +6,11 @@ import {
   TEXT,
 } from '../components/app/model/helpers/fields';
 
+export const findMatchingObjects = (arrayOfObjects, searchFieldArray, searchCriteria) => {
+  // first convert all search criteria to strings
+  const fieldsToCheck = buildValueArray(searchFieldArray, searchCriteria);
+  return arrayOfObjects.filter(o => doesObjectMatchCriteria(o, fieldsToCheck));
+};
 export const doesArrayContainMatches = (arrayOfObjects, searchFieldArray, searchCriteria) => {
   // first convert all search criteria to strings
   const fieldsToCheck = buildValueArray(searchFieldArray, searchCriteria);
@@ -14,10 +19,11 @@ export const doesArrayContainMatches = (arrayOfObjects, searchFieldArray, search
 
 export const buildValueArray = (searchFieldArray, searchCriteria) => {
   const fieldsWithValues = searchFieldArray.map(field => {
-    const { searchFieldName, modelFieldName, fieldType } = field;
+    const { fieldName, modelFieldName, type } = field;
+    const searchFieldName = fieldName;
     if (searchCriteria[searchFieldName]) {
       let searchValue = searchCriteria[searchFieldName];
-      switch (fieldType) {
+      switch (type) {
         case NUMBER:
         case SELECT_ONE:
           searchValue = searchValue.toString();
@@ -31,7 +37,7 @@ export const buildValueArray = (searchFieldArray, searchCriteria) => {
         default:
           break;
       }
-      return { modelFieldName, fieldType, searchValue };
+      return { modelFieldName, type, searchValue };
     } else {
       return field;
     }
@@ -41,9 +47,9 @@ export const buildValueArray = (searchFieldArray, searchCriteria) => {
 
 export const doesObjectMatchCriteria = (model, fieldsToCheck) => {
   return fieldsToCheck.every(field => {
-    const { modelFieldName, fieldType, searchValue } = field;
+    const { modelFieldName, type, searchValue } = field;
     const modelValue = model[modelFieldName];
-    switch (fieldType) {
+    switch (type) {
       case CHECKBOX:
         return searchValue === model[modelFieldName];
       case TEXT:

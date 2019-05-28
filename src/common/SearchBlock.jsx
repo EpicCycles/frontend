@@ -13,10 +13,11 @@ const SearchBlock = props => {
     searchCriteriaValid,
     searchTitle,
     className,
+    onKeyPress,
   } = props;
-  const blockClassName = displayRow ? 'row  vertical-middle' : 'flex-vertical';
+  const blockClassName = displayRow ? 'row  vertical-middle' : 'fit-block';
   return (
-    <div className={`blockClassName ${className}`}>
+    <div className={`${blockClassName} ${className}`} onKeyPress={onKeyPress}>
       <Search searchFields={searchFields} searchCriteria={searchCriteria} onChange={onChange} />
       <SearchButton onClick={searchFnc} disabled={!searchCriteriaValid} title={searchTitle} />
     </div>

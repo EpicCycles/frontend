@@ -63,6 +63,7 @@ class EditModelInput extends Component {
             options={field.selectList}
             error={error}
             disabled={disabled}
+            isEmptyAllowed={emptyAllowed}
           />
         );
         break;
@@ -77,6 +78,7 @@ class EditModelInput extends Component {
             error={error}
             disabled={disabled}
             isMultiple={true}
+            isEmptyAllowed={emptyAllowed}
           />
         );
         break;

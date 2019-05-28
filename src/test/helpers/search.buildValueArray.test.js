@@ -36,9 +36,7 @@ describe('buildValueArray', () => {
   });
   it('should return a string for a SELECT_ONE field', () => {
     const searchCriteria = { f_select: 23 };
-    const expectedResult = [
-      { modelFieldName: 'm_select', type: SELECT_ONE, searchValue: '23' },
-    ];
+    const expectedResult = [{ modelFieldName: 'm_select', type: SELECT_ONE, searchValue: '23' }];
     expect(buildValueArray([selectOneField], searchCriteria)).toEqual(expectedResult);
   });
   it('should return the lower case version for a TEXT field', () => {

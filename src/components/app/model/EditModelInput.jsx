@@ -7,6 +7,7 @@ import {
   CURRENCY,
   NUMBER,
   PART_TYPE,
+  SELECT_MULTIPLE,
   SELECT_ONE,
   SUPPLIER,
   TEXT_AREA,
@@ -29,9 +30,7 @@ class EditModelInput extends Component {
     }
   };
   resetField = fieldName => {
-    const originalValue = this.props.persistedModel
-      ? this.props.persistedModel[this.props.field.fieldName]
-      : undefined;
+    const originalValue = this.props.persistedModel[this.props.field.fieldName];
     this.validateOnChange(fieldName, originalValue);
   };
 
@@ -48,7 +47,7 @@ class EditModelInput extends Component {
     } = this.props;
     let editComponent;
     const fieldName = `${field.fieldName}_${componentKey}${index}`;
-    const fieldValue = model && model[field.fieldName];
+    const fieldValue = model[field.fieldName];
     const emptyAllowed = !(field.required && fieldValue);
     const error = model.error_detail ? model.error_detail[field.fieldName] : '';
     const disabled = model.deleted || field.disabled;
@@ -64,6 +63,20 @@ class EditModelInput extends Component {
             options={field.selectList}
             error={error}
             disabled={disabled}
+          />
+        );
+        break;
+      case SELECT_MULTIPLE:
+        editComponent = (
+          <SelectInput
+            className={className}
+            fieldName={fieldName}
+            value={fieldValue}
+            onChange={this.validateOnChange}
+            options={field.selectList}
+            error={error}
+            disabled={disabled}
+            isMultiple={true}
           />
         );
         break;
@@ -191,6 +204,8 @@ class EditModelInput extends Component {
 }
 EditModelInput.defaultProps = {
   index: 1,
+  model: {},
+  persistedModel: {},
 };
 EditModelInput.propTypes = {
   field: PropTypes.object.isRequired,

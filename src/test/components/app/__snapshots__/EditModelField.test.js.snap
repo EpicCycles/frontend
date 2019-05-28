@@ -28,6 +28,7 @@ exports[`it renders a field 1`] = `
         }
       }
       onChange={[MockFunction]}
+      persistedModel={Object {}}
     />
   </div>
 </div>

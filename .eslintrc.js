@@ -1,13 +1,9 @@
 module.exports = {
-	env: {
+  env: {
 		es6: true,
 		browser: true,
 		node: true,
 	},
-  extends: [
-  	'plugin:jest/recommended',
-		"jest-enzyme",
-	],
 	plugins: [
 		'babel',
 		'import',
@@ -15,6 +11,7 @@ module.exports = {
 		'react',
 		'prettier',
 	],
+	extends: ['plugin:jest/recommended', 'jest-enzyme'],
 	parser: 'babel-eslint',
 	parserOptions: {
 		ecmaVersion: 6,
@@ -59,11 +56,12 @@ module.exports = {
 		}], // for nested label htmlFor error
 
 		'prettier/prettier': ['error'],
-
-    "jest/no-disabled-tests": "warn",
-    "jest/no-focused-tests": "error",
-    "jest/no-identical-title": "error",
-    "jest/prefer-to-have-length": "warn",
-    "jest/valid-expect": "error"
 	},
+  overrides: [
+    {
+      files: [ '**/*.test.js' ],
+      env: { jest: true },
+      plugins: [ 'jest' ],
+    },
+  ]
 };

@@ -31,6 +31,7 @@ exports[`EditModelPageRow it renders 1`] = `
       index={12}
       model={Object {}}
       onChange={[MockFunction]}
+      persistedModel={Object {}}
     />
   </div>
 </div>

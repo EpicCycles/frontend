@@ -155,16 +155,12 @@ body h4 {
     font-style: italic;
 }
 
-section {
+section, .row {
     display: flex;
     flex-direction: row;
 }
 .page-content {
     display: inline-grid;
-}
-.row {
-    display: flex;
-    flex-direction: row;
 }
 
 div.fit-content {

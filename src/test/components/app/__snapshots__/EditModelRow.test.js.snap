@@ -22,6 +22,7 @@ exports[`EditModelRow it renders 1`] = `
       index={0}
       model={Object {}}
       onChange={[MockFunction]}
+      persistedModel={Object {}}
     />
   </div>
   <div
@@ -42,6 +43,7 @@ exports[`EditModelRow it renders 1`] = `
       index={1}
       model={Object {}}
       onChange={[MockFunction]}
+      persistedModel={Object {}}
     />
   </div>
   <div
@@ -62,6 +64,7 @@ exports[`EditModelRow it renders 1`] = `
       index={2}
       model={Object {}}
       onChange={[MockFunction]}
+      persistedModel={Object {}}
     />
   </div>
   <div
@@ -82,6 +85,7 @@ exports[`EditModelRow it renders 1`] = `
       index={3}
       model={Object {}}
       onChange={[MockFunction]}
+      persistedModel={Object {}}
     />
   </div>
   <div
@@ -1101,6 +1105,7 @@ exports[`EditModelRow it renders 1`] = `
       index={4}
       model={Object {}}
       onChange={[MockFunction]}
+      persistedModel={Object {}}
     />
   </div>
   <div
@@ -1125,6 +1130,7 @@ exports[`EditModelRow it renders 1`] = `
       index={5}
       model={Object {}}
       onChange={[MockFunction]}
+      persistedModel={Object {}}
     />
   </div>
   <div
@@ -1143,6 +1149,7 @@ exports[`EditModelRow it renders 1`] = `
       index={6}
       model={Object {}}
       onChange={[MockFunction]}
+      persistedModel={Object {}}
     />
   </div>
 </Fragment>

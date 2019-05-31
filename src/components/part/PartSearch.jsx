@@ -10,7 +10,7 @@ class PartSearch extends React.Component {
     }
   };
   render() {
-    const { brands, sections, onChange, findParts, searchCriteria, searchFields } = this.props;
+    const { onChange, findParts, searchCriteria, searchFields } = this.props;
 
     const searchCriteriaValid =
       searchCriteria.partTypeSelected ||
@@ -34,8 +34,6 @@ PartSearch.defaultProps = {
   searchCriteria: {},
 };
 PartSearch.propTypes = {
-  brands: PropTypes.array.isRequired,
-  sections: PropTypes.array.isRequired,
   searchFields: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   findParts: PropTypes.func.isRequired,

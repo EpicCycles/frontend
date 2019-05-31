@@ -1,13 +1,20 @@
 import React, { Fragment } from 'react';
-import { removeKey, updateObject } from '../../helpers/utils';
+import {doWeHaveObjects, removeKey, updateObject} from '../../helpers/utils';
 import { Button, Dimmer, Loader } from 'semantic-ui-react';
 import SupplierProductReviewListSelection from './SupplierProductReviewListSelection';
 import { filterPartsAndProducts } from './helpers/filterPartsAndProducts';
-import SupplierProductReviewList from "./SupplierProductReviewList";
+import SupplierProductReviewList from './SupplierProductReviewList';
+import { supplierProductSearchFields } from './helpers/search';
 
 const initialState = { listParts: false };
 class SupplierProductReview extends React.Component {
-  state = initialState;
+  state = updateObject(initialState, {
+    searchFields: supplierProductSearchFields(
+      this.props.sections,
+      this.props.brands,
+      this.props.suppliers,
+    ),
+  });
   handleInputChange = (fieldName, input) => {
     let newState = updateObject(this.state);
     newState[fieldName] = input;
@@ -21,18 +28,44 @@ class SupplierProductReview extends React.Component {
     return { brand, supplier, partName, standard, stocked };
   };
   hasSelectionCriteria = () => {
-    const { brand, supplier, partName } = this.state;
-    return !!(brand || supplier || partName);
+    const { brand, supplier, partName, partType } = this.state;
+    return !!(brand || supplier || partName || doWeHaveObjects(partType));
   };
 
   listParts = () => {
+    const { searchFields } = this.state;
     let { parts, supplierProducts } = this.props;
-    const filteredLists = filterPartsAndProducts(this.state, parts, supplierProducts);
+    const searchCriteria = this.getSearchCriteria();
+    const filteredLists = filterPartsAndProducts(
+      searchFields,
+      searchCriteria,
+      parts,
+      supplierProducts,
+    );
     if (filteredLists.parts.length === 0) {
       this.props.addMessage('No matching parts', 'W');
     } else {
       this.setState({ listParts: true });
     }
+  };
+  getSearchCriteria = () => {
+    const {
+      partTypeSelected,
+      brandSelected,
+      searchPartName,
+      searchStandard,
+      searchStocked,
+      supplierSelected,
+    } = this.state;
+    const searchCriteria = {
+      partTypeSelected,
+      brandSelected,
+      searchPartName,
+      searchStandard,
+      searchStocked,
+      supplierSelected,
+    };
+    return searchCriteria;
   };
 
   showSearch = () => {
@@ -40,7 +73,7 @@ class SupplierProductReview extends React.Component {
   };
 
   render() {
-    const { brand, supplier, partName, standard, stocked, listParts } = this.state;
+    const { searchFields, listParts } = this.state;
     const {
       isLoading,
       parts,
@@ -55,7 +88,12 @@ class SupplierProductReview extends React.Component {
     } = this.props;
     let partsToUse, supplierProductsToUse;
     if (listParts) {
-      const filteredLists = filterPartsAndProducts(this.state, parts, supplierProducts);
+      const filteredLists = filterPartsAndProducts(
+        searchFields,
+        this.getSearchCriteria(),
+        parts,
+        supplierProducts,
+      );
       partsToUse = filteredLists.parts;
       supplierProductsToUse = filteredLists.supplierProducts;
     }
@@ -84,15 +122,9 @@ class SupplierProductReview extends React.Component {
           </Fragment>
         ) : (
           <SupplierProductReviewListSelection
-            brands={brands}
-            suppliers={suppliers}
+            searchFields={searchFields}
+            searchCriteria={this.getSearchCriteria()}
             onChange={this.handleInputChange}
-            brandSelected={brand}
-            supplierSelected={supplier}
-            onClick={this.handleInputClear}
-            partName={partName}
-            standard={standard}
-            stocked={stocked}
             listParts={this.listParts}
             hasSelectionCriteria={this.hasSelectionCriteria()}
           />

@@ -1,6 +1,6 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import {ARCHIVED, CHECKBOX, SELECT_ONE, TEXT} from '../app/model/helpers/fields';
+import { ARCHIVED, CHECKBOX, SELECT_ONE, TEXT } from '../app/model/helpers/fields';
 import { buildBrandOptions } from '../brand/helpers/brand';
 import SearchBlock from '../../common/SearchBlock';
 

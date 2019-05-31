@@ -1,29 +1,29 @@
-export const filterPartsAndProducts = (searchCriteria, partsComplete, supplierProductsComplete) => {
-  const { brand, supplier, partName, standard, stocked, partType } = searchCriteria;
+import { buildValueArray, findMatchingObjects } from '../../../helpers/search';
+import { SUPPLIER } from '../../app/model/helpers/fields';
 
-  let brandToCheck;
-  let supplierToCheck;
-  let partTypeToCheck;
-  let partNameToCheck;
-  if (brand) brandToCheck = brand.toString();
-  if (supplier) supplierToCheck = supplier.toString();
-  if (partType) partTypeToCheck = partType.toString();
-  if (brand) brandToCheck = brand.toString();
-  if (partName) partNameToCheck = partName.toLowerCase();
-  let parts = partsComplete.filter(part => {
-    if (brand && !(part.brand.toString() === brandToCheck)) return false;
-    if (partType && !(part.partType.toString() === partTypeToCheck)) return false;
-    if (standard && !part.standard) return false;
-    if (stocked && !part.stocked) return false;
-    if (partName && !part.part_name.toLowerCase().includes(partNameToCheck)) return false;
-    if (supplier) {
-      const supplierProductsForSupplier = supplierProductsComplete.find(sp => {
-        return sp.part === part.id && (sp.supplier && sp.supplier.toString() === supplierToCheck);
-      });
-      if (!supplierProductsForSupplier) return false;
-    }
-    return true;
-  });
+export const filterPartsAndProducts = (
+  searchFields,
+  searchCriteria,
+  partsComplete,
+  supplierProductsComplete,
+) => {
+  const fieldsToCheck = buildValueArray(searchFields, searchCriteria);
+
+  // first filter product
+  const partFieldsToCheck = fieldsToCheck.filter(field => field.modelFieldName !== SUPPLIER);
+  const supplierProductFieldsToCheck = fieldsToCheck.filter(
+    field => field.modelFieldName === SUPPLIER,
+  );
+  let parts = findMatchingObjects(partsComplete, partFieldsToCheck);
+
+  if (supplierProductFieldsToCheck.length > 0) {
+    const supplierProductsForSupplier = findMatchingObjects(
+      supplierProductsComplete,
+      supplierProductFieldsToCheck,
+    );
+    const partIdToInclude = supplierProductsForSupplier.map(sp => sp.part);
+    parts = parts.filter(part => partIdToInclude.includes(part.id));
+  }
   const partIds = parts.map(part => part.id);
   const supplierProducts = supplierProductsComplete.filter(sp => partIds.includes(sp.part));
   return { parts, supplierProducts };

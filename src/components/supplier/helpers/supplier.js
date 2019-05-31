@@ -1,4 +1,5 @@
 import { doWeHaveObjects } from '../../../helpers/utils';
+import { getModelKey } from '../../app/model/helpers/model';
 
 export const getSupplierName = (supplier, suppliers) => {
   if (!supplier) return undefined;
@@ -31,4 +32,16 @@ export const getBrandsForSupplier = (supplierId, brands) => {
       if (brand.supplier && brand.supplier.includes(supplierId)) brandNames.push(brand.brand_name);
     });
   return brandNames;
+};
+
+export const buildSupplierOptions = suppliers => {
+  const supplierOptions = suppliers
+    ? suppliers.map(supplier => {
+        return {
+          value: getModelKey(supplier).toString(),
+          name: supplier.supplier_name,
+        };
+      })
+    : [];
+  return supplierOptions;
 };

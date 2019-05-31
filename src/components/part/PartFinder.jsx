@@ -71,7 +71,7 @@ class PartFinder extends React.Component {
   };
   changePartViewed = (fieldName, partId) => {
     const part = findObjectWithKey(this.props.parts, partId);
-    this.setState({ part: updateObject(part), persistsedPart: part });
+    this.setState({ part: updateObject(part), persistedPart: part });
   };
   getSearchCriteria = () => {
     const {

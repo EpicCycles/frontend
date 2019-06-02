@@ -12,7 +12,7 @@ import EditModelInput from '../components/app/model/EditModelInput';
 const Search = props => {
   const { searchFields, searchCriteria, onChange } = props;
   return searchFields.map(field => (
-    <div className="grid-row">
+    <div className="grid-row" key={`searchRow_${field.fieldName}`}>
       <div className="grid-item--borderless field-label align_right">{field.displayName}</div>
       <div className="grid-item--borderless">
         <EditModelInput

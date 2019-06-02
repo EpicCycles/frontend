@@ -1,4 +1,4 @@
-import { buildValueArray, findMatchingObjects } from '../../../helpers/search';
+import { findMatchingObjects } from '../../../helpers/search';
 import { SUPPLIER } from '../../app/model/helpers/fields';
 
 export const filterPartsAndProducts = (
@@ -7,19 +7,17 @@ export const filterPartsAndProducts = (
   partsComplete,
   supplierProductsComplete,
 ) => {
-  const fieldsToCheck = buildValueArray(searchFields, searchCriteria);
-
   // first filter product
-  const partFieldsToCheck = fieldsToCheck.filter(field => field.modelFieldName !== SUPPLIER);
-  const supplierProductFieldsToCheck = fieldsToCheck.filter(
+  const partFieldsToCheck = searchFields.filter(field => field.modelFieldName !== SUPPLIER);
+  const supplierProductFieldsToCheck = searchFields.filter(
     field => field.modelFieldName === SUPPLIER,
   );
-  let parts = findMatchingObjects(partsComplete, partFieldsToCheck);
-
-  if (supplierProductFieldsToCheck.length > 0) {
+  let parts = findMatchingObjects(partsComplete, partFieldsToCheck, searchCriteria);
+  if (!!searchCriteria.selectedSupplier) {
     const supplierProductsForSupplier = findMatchingObjects(
       supplierProductsComplete,
       supplierProductFieldsToCheck,
+      searchCriteria,
     );
     const partIdToInclude = supplierProductsForSupplier.map(sp => sp.part);
     parts = parts.filter(part => partIdToInclude.includes(part.id));

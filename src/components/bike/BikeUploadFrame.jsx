@@ -5,22 +5,17 @@ import BrandModal from '../brand/BrandModal';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 
 class BikeUploadFrame extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      showModal: false,
-    };
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-  }
+  state = {
+    showModal: false,
+  };
 
-  handleOpenModal() {
+  handleOpenModal = () => {
     this.setState({ showModal: true });
-  }
+  };
 
-  handleCloseModal() {
+  handleCloseModal = () => {
     this.setState({ showModal: false });
-  }
+  };
 
   saveBrand = brand => {
     const brandsWithUpdates = this.props.brands.slice();
@@ -43,7 +38,6 @@ class BikeUploadFrame extends React.Component {
       <section className="row">
         {showModal && (
           <BrandModal
-            brandModalOpen={showModal}
             componentKey={NEW_ELEMENT_ID}
             saveBrand={this.saveBrand}
             closeBrandModal={this.handleCloseModal}

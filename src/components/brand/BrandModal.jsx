@@ -90,9 +90,10 @@ class BrandModal extends React.Component {
     );
   }
 }
-
+BrandModal.defaultProps = {
+  brand: {},
+}
 BrandModal.propTypes = {
-  brandModalOpen: PropTypes.bool.isRequired,
   brand: PropTypes.object.isRequired,
   componentKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   suppliers: PropTypes.array.isRequired,

@@ -9,8 +9,6 @@ class BikeUploadParts extends React.Component {
   constructor(props) {
     super();
     this.state = this.deriveStateFromProps(props);
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   deriveStateFromProps = props => {
@@ -112,13 +110,13 @@ class BikeUploadParts extends React.Component {
     this.setState({ displayData: updatedDisplayData });
   };
 
-  handleOpenModal() {
+  handleOpenModal = () => {
     this.setState({ showModal: true });
-  }
+  };
 
-  handleCloseModal() {
+  handleCloseModal = () => {
     this.setState({ showModal: false });
-  }
+  };
 
   saveBrand = brand => {
     const brandsWithUpdates = this.props.brands.slice();
@@ -137,21 +135,22 @@ class BikeUploadParts extends React.Component {
           <Button key="bikeFileUploadCont" onClick={this.goToNextStep}>
             Upload data and Continue
           </Button>
-          <Button key="addNewBrand" onClick={this.handleOpenModal}>
-            Add Brand
-          </Button>
+          {!showModal && (
+            <Button key="addNewBrand" onClick={this.handleOpenModal}>
+              Add Brand
+            </Button>
+          )}
+        </div>
+        <section key="partData" className="row" id="partData">
           {showModal && (
             <BrandModal
               key="brandModalInPartList"
-              brandModalOpen={showModal}
               componentKey={NEW_ELEMENT_ID}
               saveBrand={this.saveBrand}
               closeBrandModal={this.handleCloseModal}
               brands={brands}
             />
           )}
-        </div>
-        <section key="partData" className="row" id="partData">
           <div
             key="partList"
             className="grid"

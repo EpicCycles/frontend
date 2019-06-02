@@ -4,11 +4,7 @@ import BrandModal from '../brand/BrandModal';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 
 class BrandPrompt extends React.Component {
-  constructor() {
-    super();
-    this.state = { showModal: false };
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-  }
+  state = { showModal: false };
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):

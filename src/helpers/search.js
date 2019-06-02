@@ -9,6 +9,7 @@ import {
 export const findMatchingObjects = (arrayOfObjects, searchFieldArray, searchCriteria) => {
   // first convert all search criteria to strings
   const fieldsToCheck = buildValueArray(searchFieldArray, searchCriteria);
+  if (fieldsToCheck.length === 0) return arrayOfObjects;
   return arrayOfObjects.filter(o => doesObjectMatchCriteria(o, fieldsToCheck));
 };
 export const doesArrayContainMatches = (arrayOfObjects, searchFieldArray, searchCriteria) => {

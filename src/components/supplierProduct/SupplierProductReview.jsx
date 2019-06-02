@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import {doWeHaveObjects, removeKey, updateObject} from '../../helpers/utils';
+import { doWeHaveObjects, removeKey, updateObject } from '../../helpers/utils';
 import { Button, Dimmer, Loader } from 'semantic-ui-react';
 import SupplierProductReviewListSelection from './SupplierProductReviewListSelection';
 import { filterPartsAndProducts } from './helpers/filterPartsAndProducts';
@@ -28,8 +28,10 @@ class SupplierProductReview extends React.Component {
     return { brand, supplier, partName, standard, stocked };
   };
   hasSelectionCriteria = () => {
-    const { brand, supplier, partName, partType } = this.state;
-    return !!(brand || supplier || partName || doWeHaveObjects(partType));
+    const { partTypeSelected, brandSelected, searchPartName, supplierSelected } = this.state;
+    return (
+      !!brandSelected || !!supplierSelected || !!searchPartName || doWeHaveObjects(partTypeSelected)
+    );
   };
 
   listParts = () => {

@@ -43,7 +43,7 @@ const deleteFrame = async payload => {
 
 const uploadFrame = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  return await api.instance.post('rest-epic/frame/upload/', payload.frame);
+  return await api.instance.post('rest-epic/frame/upload', payload.frame);
 };
 
 const getFrames = async payload => {

@@ -65,29 +65,27 @@ class PartTypeModal extends React.Component {
         <div style={{ width: '100%', textAlign: 'right' }}>
           <Icon name="remove" circular link onClick={closePartTypeModal} />
         </div>
-        {partTypeModalOpen && (
-          <div style={{ width: '100%', textAlign: 'left' }}>
-            <h2>{mode} Part Type</h2>
-            {partType.error && <div className="red">{partType.error_detail}</div>}
-            <div>
-              <SelectInput
-                className=""
-                title="Select Section"
-                label="Section"
-                fieldName="includeInSection"
-                onChange={this.handlePartTypeValueChange}
-                value={partType.includeInSection && partType.includeInSection.toString()}
-                options={sectionOptions}
-                isEmptyAllowed
-              />
-            </div>
-            <PartTypeData
-              partType={partType}
-              componentKey={componentKey}
-              handlePartTypeValueChange={this.handlePartTypeValueChange}
+        <div style={{ width: '100%', textAlign: 'left' }}>
+          <h2>{mode} Part Type</h2>
+          {partType.error && <div className="red">{partType.error_detail}</div>}
+          <div>
+            <SelectInput
+              className=""
+              title="Select Section"
+              label="Section"
+              fieldName="includeInSection"
+              onChange={this.handlePartTypeValueChange}
+              value={partType.includeInSection && partType.includeInSection.toString()}
+              options={sectionOptions}
+              isEmptyAllowed
             />
           </div>
-        )}
+          <PartTypeData
+            partType={partType}
+            componentKey={componentKey}
+            handlePartTypeValueChange={this.handlePartTypeValueChange}
+          />
+        </div>
         <div style={{ width: '100%', textAlign: 'right' }}>
           {partType.changed && (
             <Icon
@@ -118,7 +116,9 @@ class PartTypeModal extends React.Component {
     );
   }
 }
-
+PartTypeModal.defaultProps = {
+  partType: {},
+};
 PartTypeModal.propTypes = {
   partTypeModalOpen: PropTypes.any,
   partType: PropTypes.any,

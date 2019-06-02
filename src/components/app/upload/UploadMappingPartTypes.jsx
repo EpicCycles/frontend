@@ -18,9 +18,7 @@ class UploadMappingPartTypes extends React.Component {
   constructor(props) {
     super();
     this.state = this.deriveStateFromProps(props);
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-  }
+   }
 
   deriveStateFromProps = props => {
     const { rowMappings } = props;
@@ -127,13 +125,9 @@ class UploadMappingPartTypes extends React.Component {
     });
   };
 
-  handleOpenModal() {
-    // this.setState({ showModal: true, partType: {} });
-  }
-
-  handleCloseModal() {
+  handleCloseModal = () => {
     this.setState({ showModal: false, partType: {} });
-  }
+  };
 
   savePartType = partType => {
     const updatedSections = this.props.sections.map(section => {

@@ -36,7 +36,6 @@ exports[`PartTypeModal displays correctly with a new part 1`] = `
         fieldName="includeInSection"
         isEmptyAllowed={true}
         label="Section"
-        multipleSize={1}
         onChange={[Function]}
         options={
           Array [
@@ -105,7 +104,6 @@ exports[`PartTypeModal displays correctly with a partial new part 1`] = `
         fieldName="includeInSection"
         isEmptyAllowed={true}
         label="Section"
-        multipleSize={1}
         onChange={[Function]}
         options={
           Array [
@@ -179,7 +177,6 @@ exports[`PartTypeModal error when no includeInSection 1`] = `
         fieldName="includeInSection"
         isEmptyAllowed={true}
         label="Section"
-        multipleSize={1}
         onChange={[Function]}
         options={
           Array [
@@ -256,7 +253,6 @@ exports[`PartTypeModal error when no short name 1`] = `
         fieldName="includeInSection"
         isEmptyAllowed={true}
         label="Section"
-        multipleSize={1}
         onChange={[Function]}
         options={
           Array [

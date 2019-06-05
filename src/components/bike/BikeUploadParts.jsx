@@ -4,6 +4,7 @@ import BrandModal from '../brand/BrandModal';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 import BikeUploadPartsEditPart from './BikeUploadPartsEditPart';
 import { updateObject } from '../../helpers/utils';
+import { findPart } from '../part/helpers/part';
 
 class BikeUploadParts extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class BikeUploadParts extends React.Component {
         const added = partTypeParts[partTypesPresent.indexOf(bikePart.partType)].parts.some(
           addedPart => {
             if (
-              addedPart.part.partName === bikePart.partName &&
+              addedPart.part.part_name === bikePart.part_name &&
               addedPart.part.brand === bikePart.brand
             ) {
               addedPart.uses.push({ bikeIndex, partIndex });
@@ -57,6 +58,7 @@ class BikeUploadParts extends React.Component {
         if (partTypesPresentIndex > -1) {
           partTypesWithParts.push({
             name: partType.name,
+            id: partType.id,
             uploadParts: partTypeParts[partTypesPresentIndex].parts,
           });
         }
@@ -74,15 +76,26 @@ class BikeUploadParts extends React.Component {
     };
   };
   goToNextStep = () => {
-    let { apiData } = this.props;
+    let { apiData, parts } = this.props;
     const { displayData } = this.state;
     displayData.forEach(section => {
       section.partTypes.forEach(partType => {
         partType.uploadParts.forEach(uploadPart => {
-          if (uploadPart.part.changed) {
+          const part = findPart(
+            parts,
+            partType.id,
+            uploadPart.part.brand,
+            uploadPart.part.part_name,
+          );
+          if (part) {
+            uploadPart.uses.forEach(use => {
+              apiData.bikes[use.bikeIndex].parts[use.partIndex] = part;
+            });
+          } else {
             uploadPart.uses.forEach(use => {
               apiData.bikes[use.bikeIndex].parts[use.partIndex].brand = uploadPart.part.brand;
-              apiData.bikes[use.bikeIndex].parts[use.partIndex].partName = uploadPart.part.partName;
+              apiData.bikes[use.bikeIndex].parts[use.partIndex].part_name =
+                uploadPart.part.part_name;
             });
           }
         });

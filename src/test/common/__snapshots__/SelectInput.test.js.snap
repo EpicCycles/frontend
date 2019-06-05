@@ -12,7 +12,6 @@ exports[`SelectInput it renders a multiple select array if one is passed 1`] = `
     multiple={true}
     name="myField"
     onChange={[Function]}
-    size={1}
     value={Array []}
   >
     <option
@@ -98,7 +97,6 @@ exports[`SelectInput it renders an empty option if one is allowed 1`] = `
     key="myField"
     name="myField"
     onChange={[Function]}
-    size={1}
   >
     <option
       id="myField_"
@@ -130,7 +128,6 @@ exports[`SelectInput it renders an error, title and a passed class 1`] = `
     multiple={false}
     name="myField"
     onChange={[Function]}
-    size={1}
     title="show a title"
     value="A"
   >
@@ -171,7 +168,6 @@ exports[`SelectInput it renders the default value as selected if no value is pas
     multiple={false}
     name="myField"
     onChange={[Function]}
-    size={1}
     value="A"
   >
     <option
@@ -210,7 +206,6 @@ exports[`SelectInput it renders with minimum data 1`] = `
     key="myField"
     name="myField"
     onChange={[Function]}
-    size={1}
   >
     <option
       id="myField_H"
@@ -235,7 +230,6 @@ exports[`SelectInput it sets a value to selected when multiple select and values
     multiple={true}
     name="myField"
     onChange={[Function]}
-    size={1}
     value={
       Array [
         "1",
@@ -280,7 +274,6 @@ exports[`SelectInput it sets a value to selected when single value 1`] = `
     multiple={true}
     name="myField"
     onChange={[Function]}
-    size={1}
     value={
       Array [
         "A",

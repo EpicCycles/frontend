@@ -109,10 +109,11 @@ class BikeUpload extends React.Component {
       brands,
       suppliers,
       sections,
+      parts,
       saveBrands,
       saveFramework,
       uploadFrame,
-      frame
+      frame,
     } = this.props;
     const {
       brand,
@@ -178,6 +179,7 @@ class BikeUpload extends React.Component {
             apiData={apiData}
             brands={brands}
             sections={sections}
+            parts={parts}
             addDataAndProceed={this.addDataAndProceed}
             saveBrands={saveBrands}
             recheckBrands={() => this.goToStep(3)}

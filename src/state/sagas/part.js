@@ -40,7 +40,7 @@ export function* savePart(action) {
       } else {
         response = yield call(part.createPart, completePayload);
       }
-      yield put(savePartOK(response.data, getModelKey(part)));
+      yield put(savePartOK(response.data, getModelKey(partToSave)));
     } else {
       yield call(history.push, '/login');
     }

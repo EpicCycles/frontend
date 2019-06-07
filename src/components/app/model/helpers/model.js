@@ -246,8 +246,12 @@ export const addErrorDetail = (error_detail = {}, field, error) => {
   return updated_error_detail;
 };
 
-export const createNewModelInstance = () => {
-  return { dummyKey: generateRandomCode() };
+export const createNewModelInstance = fields => {
+  const basicModel = { dummyKey: generateRandomCode() };
+  if (isItAnObject(fields)) {
+    return updateObject(fields, basicModel, { changed: true });
+  }
+  return basicModel;
 };
 export const matchesModel = (persistedModel, modelFields, modelToCheck) => {
   return !checkForChanges(modelFields, persistedModel, modelToCheck);

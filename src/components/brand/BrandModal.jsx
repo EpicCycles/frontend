@@ -3,12 +3,10 @@ import React from 'react';
 
 import * as PropTypes from 'prop-types';
 import { Icon } from 'semantic-ui-react';
-import { NEW_ELEMENT_ID } from '../../helpers/constants';
 import { brandFields, supplierFields } from '../app/model/helpers/fields';
 import EditModelPage from '../app/model/EditModelPage';
 import { checkForChangesAllFields, getModelKey, updateModel } from '../app/model/helpers/model';
 import { updateObject } from '../../helpers/utils';
-import { getSupplierNamesForBrand } from './helpers/brand';
 import ModelEditIcons from '../app/model/ModelEditIcons';
 
 class BrandModal extends React.Component {
@@ -92,7 +90,7 @@ class BrandModal extends React.Component {
 }
 BrandModal.defaultProps = {
   brand: {},
-}
+};
 BrandModal.propTypes = {
   brand: PropTypes.object.isRequired,
   componentKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

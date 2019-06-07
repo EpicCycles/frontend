@@ -3,6 +3,16 @@ import { PART_TYPE_NAME_MISSING } from '../../app/model/helpers/error';
 import { NEW_ELEMENT_ID } from '../../../helpers/constants';
 import { getModelKey } from '../../app/model/helpers/model';
 
+export const getPartTypeForName = (sections, partTypeName) => {
+  let foundPartType;
+  sections.some(section => {
+    foundPartType = section.partTypes.find(partType =>
+      doesFieldMatchPartType(partType, partTypeName),
+    );
+    return !!foundPartType;
+  });
+  return foundPartType;
+};
 export const getPartTypeOptions = sections => {
   const partTypeOptions = [];
   sections &&

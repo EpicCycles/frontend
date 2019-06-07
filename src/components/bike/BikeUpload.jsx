@@ -1,33 +1,33 @@
-import React, { Fragment } from "react";
-import { Button } from "semantic-ui-react";
-import BikeUploadFile from "./BikeUploadFile";
-import BikeUploadMapping from "./BikeUploadMapping";
-import BikeUploadParts from "./BikeUploadParts";
-import BikeUploadReview from "./BikeUploadReview";
-import BikeUploadFrame from "./BikeUploadFrame";
-import UploadMappingPartTypes from "../app/upload/UploadMappingPartTypes";
-import { doesFieldMatchPartType } from "../partType/helpers/partType";
-import { findObjectWithId, updateObject } from "../../helpers/utils";
-import BikeUploadMappingReview from "./BikeUploadMappingReview";
-import { colourStyles } from "../../helpers/constants";
-import { bikeFields } from "../app/model/helpers/fields";
+import React, { Fragment } from 'react';
+import { Button } from 'semantic-ui-react';
+import BikeUploadFile from './BikeUploadFile';
+import BikeUploadMapping from './BikeUploadMapping';
+import BikeUploadParts from './BikeUploadParts';
+import BikeUploadReview from './BikeUploadReview';
+import BikeUploadFrame from './BikeUploadFrame';
+import UploadMappingPartTypes from '../app/upload/UploadMappingPartTypes';
+import { getPartTypeForName } from '../partType/helpers/partType';
+import { findObjectWithId, updateObject } from '../../helpers/utils';
+import BikeUploadMappingReview from './BikeUploadMappingReview';
+import { colourStyles } from '../../helpers/constants';
+import { bikeFields } from '../app/model/helpers/fields';
 
 const uploadSteps = [
   {
     stepNumber: 1,
-    description: "Upload File"
+    description: 'Upload File',
   },
-  { stepNumber: 2, description: "Assign Part Types for upload data" },
-  { stepNumber: 3, description: "Assign Bike level fields" },
-  { stepNumber: 4, description: "Review mapping for all data" },
+  { stepNumber: 2, description: 'Assign Part Types for upload data' },
+  { stepNumber: 3, description: 'Assign Bike level fields' },
+  { stepNumber: 4, description: 'Review mapping for all data' },
   {
     stepNumber: 5,
-    description: "Review brands for parts to be created during upload"
+    description: 'Review brands for parts to be created during upload',
   },
-  { stepNumber: 6, description: "List Bikes created during upload" }
+  { stepNumber: 6, description: 'List Bikes created during upload' },
 ];
 const initialState = {
-  step: 0
+  step: 0,
 };
 
 class BikeUpload extends React.Component {
@@ -36,7 +36,7 @@ class BikeUpload extends React.Component {
   onChangeField = (fieldName, fieldValue) => {
     const newState = this.state;
     newState[fieldName] = fieldValue;
-    if (fieldName === "brand") {
+    if (fieldName === 'brand') {
       const selectedBrand = findObjectWithId(this.props.brands, fieldValue);
       if (selectedBrand) newState.brandName = selectedBrand.brand_name;
     }
@@ -49,12 +49,7 @@ class BikeUpload extends React.Component {
     const newState = updateObject(this.state, dataForState, { step: nextStep });
     if (nextStep < 3 && newState.rowMappings) {
       const unmappedFields = newState.rowMappings.filter(
-        rowMapping =>
-          !(
-            rowMapping.ignore ||
-            rowMapping.partType ||
-            rowMapping.bikeAttribute
-          )
+        rowMapping => !(rowMapping.ignore || rowMapping.partType || rowMapping.bikeAttribute),
       );
       if (unmappedFields.length === 0) {
         newState.step = 3;
@@ -79,7 +74,7 @@ class BikeUpload extends React.Component {
     const { sections } = this.props;
     const rowMappings = uploadedData.map((row, rowIndex) => {
       const partTypeName = row[0].trim();
-      const partTypeNameLower = partTypeName.toLowerCase();
+      const partTypeNameLower = row[0].toLowerCase();
       const rowData = { rowIndex, partTypeName };
       const matchingField = bikeFields.some(field => {
         if (field.synonyms && field.synonyms.includes(partTypeNameLower)) {
@@ -89,15 +84,10 @@ class BikeUpload extends React.Component {
         return false;
       });
       if (!matchingField) {
-        sections.some(section => {
-          return section.partTypes.some(partType => {
-            if (doesFieldMatchPartType(partType, partTypeNameLower)) {
-              rowData.partType = partType.id;
-              return true;
-            }
-            return false;
-          });
-        });
+        const partType = getPartTypeForName(sections, partTypeName);
+        if (partType) {
+          rowData.partType = partType.id;
+        }
       }
       return rowData;
     });
@@ -123,7 +113,7 @@ class BikeUpload extends React.Component {
       rowMappings,
       uploadedHeaders,
       uploadedData,
-      apiData
+      apiData,
     } = this.state;
     return (
       <Fragment key="bikeUpload">
@@ -158,10 +148,7 @@ class BikeUpload extends React.Component {
           />
         )}
         {step === 2 && (
-          <BikeUploadMapping
-            rowMappings={rowMappings}
-            addDataAndProceed={this.addDataAndProceed}
-          />
+          <BikeUploadMapping rowMappings={rowMappings} addDataAndProceed={this.addDataAndProceed} />
         )}
         {step === 3 && (
           <BikeUploadMappingReview
@@ -186,9 +173,7 @@ class BikeUpload extends React.Component {
             uploadFrame={uploadFrame}
           />
         )}
-        {step === 5 && (
-          <BikeUploadReview sections={sections} brands={brands} frame={frame} />
-        )}
+        {step === 5 && <BikeUploadReview sections={sections} brands={brands} frame={frame} />}
         <div className="full align_center">
           {this.state.step < uploadSteps.length - 1 ? (
             uploadSteps.map((stepDetails, stepIndex) => {
@@ -203,12 +188,10 @@ class BikeUpload extends React.Component {
                   <div
                     key={`step${stepDetails.stepNumber}`}
                     className={`circle ${
-                      stepIndex === step
-                        ? " selected-circle"
-                        : " unselected-circle"
-                    } ${colourStyles[stepIndex].colour} ${
-                      colourStyles[stepIndex].background
-                    } ${colourStyles[stepIndex].border}`}
+                      stepIndex === step ? ' selected-circle' : ' unselected-circle'
+                    } ${colourStyles[stepIndex].colour} ${colourStyles[stepIndex].background} ${
+                      colourStyles[stepIndex].border
+                    }`}
                     onClick={() => this.goToStep(stepIndex)}
                     disabled={!(stepIndex < this.state.step)}
                     title={stepDetails.description}

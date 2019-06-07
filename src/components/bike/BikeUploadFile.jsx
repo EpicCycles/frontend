@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import FormTextInput from '../../common/FormTextInput';
 import { Button } from 'semantic-ui-react';
 import FormTextAreaInput from '../../common/FormTextAreaInput';
+import { handleFileUpload } from '../../helpers/upload';
 
 class BikeUploadFile extends React.Component {
   state = {};
@@ -15,22 +16,8 @@ class BikeUploadFile extends React.Component {
   handleFileChosen = bikeUploadFile => {
     let fileReader = new FileReader();
     fileReader.onloadend = () => {
-      const fileContent = fileReader.result;
-      let fileLines = fileContent.split('\n');
-      let uploadedData = [];
-      fileLines.forEach(fileLine => {
-        const fieldsUnAtered = fileLine.split(',');
-        const fieldsCleaned = fieldsUnAtered.map(fieldData => fieldData.replace(/\s+/g, ' ').trim());
-        uploadedData.push(fieldsCleaned);
-      });
-      if (uploadedData.length > 0) {
-        const uploadedHeaders = uploadedData.shift();
-        const usableData = uploadedData.filter(uploadRow => {
-          const joinedData = uploadRow.join('');
-          return joinedData.length > uploadRow[0].length + 1;
-        });
-        this.setState({ uploadedHeaders, uploadedData: usableData });
-      }
+      const uploadResults = handleFileUpload(fileReader);
+      if (uploadResults) this.setState(uploadResults);
     };
     fileReader.readAsText(bikeUploadFile);
   };

@@ -2,14 +2,13 @@ import React, { Fragment } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 import * as PropTypes from 'prop-types';
 import { removeKey } from '../../../helpers/utils';
-import { getModelKey } from '../model/helpers/model';
+import {createNewModelInstance, getModelKey} from '../model/helpers/model';
 import SupplierEdit from '../../supplier/SupplierEdit';
 
 class UploadMappingSuppliers extends React.Component {
   constructor(props) {
     super();
     this.state = this.deriveStateFromProps(props);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -42,9 +41,9 @@ class UploadMappingSuppliers extends React.Component {
     this.props.addDataAndProceed({ rowMappings });
   };
 
-  discardData = rowIndex => {
+  discardData = supplierName => {
     const updatedRowMappings = this.state.rowMappings.map(rowMap => {
-      if (rowMap.rowIndex === rowIndex) {
+      if (rowMap.supplierName === supplierName) {
         let updatedRowMap = removeKey(rowMap, 'supplier');
         updatedRowMap.ignore = true;
         return updatedRowMap;
@@ -54,9 +53,9 @@ class UploadMappingSuppliers extends React.Component {
     this.setState({ rowMappings: updatedRowMappings });
   };
 
-  undoDiscardData = rowIndex => {
+  undoDiscardData = supplierName => {
     const updatedRowMappings = this.state.rowMappings.map(rowMap => {
-      if (rowMap.rowIndex === rowIndex) {
+      if (rowMap.supplierName === supplierName) {
         rowMap.ignore = false;
       }
       return rowMap;
@@ -64,19 +63,19 @@ class UploadMappingSuppliers extends React.Component {
     this.setState({ rowMappings: updatedRowMappings });
   };
 
-  setUpSupplierModalForNewField = rowMap => {
-    const supplier = {
-      supplier_name: rowMap.supplierName,
-    };
+  setUpSupplierModalForNewField = supplierName => {
+    const supplier = createNewModelInstance({
+      supplier_name: supplierName,
+    });
     this.setState({
       supplier,
       showModal: true,
     });
   };
 
-  handleCloseModal() {
+  handleCloseModal = () => {
     this.setState({ showModal: false, supplier: {} });
-  }
+  };
 
   render() {
     const { saveSupplier, deleteSupplier } = this.props;
@@ -84,9 +83,17 @@ class UploadMappingSuppliers extends React.Component {
     const unResolvedRowMappings = rowMappings.filter(
       rowMapping => !(rowMapping.supplier || rowMapping.ignore),
     );
+    const suppliersUnmatched = [];
+    const suppliersDiscarded = [];
+    unResolvedRowMappings.forEach(row => {
+      if (!suppliersUnmatched.includes(row.supplierName)) suppliersUnmatched.push(row.supplierName);
+    });
     const discardedRowMappings = rowMappings.filter(rowMapping => rowMapping.ignore);
+    discardedRowMappings.forEach(row => {
+      if (!suppliersDiscarded.includes(row.supplierName)) suppliersDiscarded.push(row.supplierName);
+    });
     return (
-      <Fragment key="supplierProductUploadMapping">
+      <Fragment key="supplierUploadMapping">
         <section key="mappingData" className="row" id="mappingData">
           {showModal && (
             <SupplierEdit
@@ -94,33 +101,33 @@ class UploadMappingSuppliers extends React.Component {
               componentKey={getModelKey(supplier)}
               saveSupplier={saveSupplier}
               deleteSupplier={deleteSupplier}
-              closeModal={this.handleCloseModal()}
+              closeModal={this.handleCloseModal}
             />
           )}
-          {unResolvedRowMappings.map((mapping, index) => (
+          {suppliersUnmatched.map((supplierName, index) => (
             <div key={`mapping${index}`} className="rounded">
-              {mapping.supplierName}
+              {supplierName}
               <Icon
                 id={`delete-field${index}`}
                 name="trash"
-                onClick={() => this.discardData(mapping.rowIndex)}
+                onClick={() => this.discardData(supplierName)}
                 title="Discard data"
               />
               <Icon
                 id={`create{index}`}
                 name="add circle"
-                onClick={() => this.setUpSupplierModalForNewField(mapping)}
+                onClick={() => this.setUpSupplierModalForNewField(supplierName)}
                 title="Create Supplier to store data"
               />
             </div>
           ))}
-          {discardedRowMappings.map((mapping, index) => (
+          {suppliersDiscarded.map((supplierName, index) => (
             <div key={`discard${index}`} className="rounded discarded">
-              {mapping.supplierName}
+              {supplierName}
               <Icon
                 id={`restore-field${index}`}
                 name="remove circle"
-                onClick={() => this.undoDiscardData(mapping.rowIndex)}
+                onClick={() => this.undoDiscardData(supplierName)}
                 title="Do not Discard data"
               />
             </div>
@@ -144,7 +151,7 @@ UploadMappingSuppliers.propTypes = {
   rowMappings: PropTypes.array.isRequired,
   suppliers: PropTypes.array.isRequired,
   saveSupplier: PropTypes.func.isRequired,
-  deleteSupplier: PropTypes.func.isRequired,
+  deleteSupplier: PropTypes.func,
   addDataAndProceed: PropTypes.func.isRequired,
 };
 export default UploadMappingSuppliers;

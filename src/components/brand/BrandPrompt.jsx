@@ -19,7 +19,7 @@ class BrandPrompt extends React.Component {
     });
   };
 
-  handleCloseModal() {
+  handleCloseModal = () => {
     this.setState({ showModal: false });
   }
 

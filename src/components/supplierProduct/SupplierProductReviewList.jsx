@@ -25,7 +25,7 @@ const SupplierProductReviewList = props => {
         overflow: 'scroll',
       }}
     >
-      <SupplierProductHeaders />
+      <SupplierProductHeaders withActions={true} />
       {parts.map(part => {
         return (
           <SupplierProductReviewPart

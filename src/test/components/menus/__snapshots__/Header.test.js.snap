@@ -160,6 +160,11 @@ exports[`is displays correctly 1`] = `
         name="log out"
         onClick={[Function]}
       />
+      <Icon
+        as="i"
+        name="sync"
+        onClick={[Function]}
+      />
     </span>
   </div>
   <ErrorDismissibleBlock

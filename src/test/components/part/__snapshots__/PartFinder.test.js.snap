@@ -302,7 +302,9 @@ exports[`should render with maximum information 1`] = `
           "error": "A name is required for the part",
           "fieldName": "part_name",
           "header": "Part Name",
+          "length": 200,
           "required": true,
+          "size": 40,
         },
         Object {
           "fieldName": "trade_in_price",
@@ -717,7 +719,9 @@ exports[`should render with minimum information 1`] = `
           "error": "A name is required for the part",
           "fieldName": "part_name",
           "header": "Part Name",
+          "length": 200,
           "required": true,
+          "size": 40,
         },
         Object {
           "fieldName": "trade_in_price",

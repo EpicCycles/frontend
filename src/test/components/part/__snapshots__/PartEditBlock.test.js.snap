@@ -81,7 +81,9 @@ exports[`should display all icons when a part is changed 1`] = `
           "error": "A name is required for the part",
           "fieldName": "part_name",
           "header": "Part Name",
+          "length": 200,
           "required": true,
+          "size": 40,
         },
         Object {
           "fieldName": "trade_in_price",
@@ -286,7 +288,9 @@ exports[`should display delete and reset when a part is changed but has errors 1
           "error": "A name is required for the part",
           "fieldName": "part_name",
           "header": "Part Name",
+          "length": 200,
           "required": true,
+          "size": 40,
         },
         Object {
           "fieldName": "trade_in_price",
@@ -482,7 +486,9 @@ exports[`should display just delete when a part is unchanged 1`] = `
           "error": "A name is required for the part",
           "fieldName": "part_name",
           "header": "Part Name",
+          "length": 200,
           "required": true,
+          "size": 40,
         },
         Object {
           "fieldName": "trade_in_price",

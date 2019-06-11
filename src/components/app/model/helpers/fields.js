@@ -629,6 +629,8 @@ export const PART_NAME_FIELD = {
   header: 'Part Name',
   required: true,
   error: PART_NAME_MISSING,
+  size: 40,
+  length: 200,
 };
 export const TRADE_IN_PRICE_FIELD = {
   fieldName: TRADE_IN_PRICE,

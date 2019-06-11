@@ -3,7 +3,7 @@ import React from 'react';
 
 import * as PropTypes from 'prop-types';
 import { Icon } from 'semantic-ui-react';
-import { brandFields, supplierFields } from '../app/model/helpers/fields';
+import { brandFields } from '../app/model/helpers/fields';
 import EditModelPage from '../app/model/EditModelPage';
 import { checkForChangesAllFields, getModelKey, updateModel } from '../app/model/helpers/model';
 import { updateObject } from '../../helpers/utils';

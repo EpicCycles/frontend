@@ -2,7 +2,7 @@
 
 exports[`UploadMappingSuppliers it renders 1`] = `
 <Fragment
-  key="supplierProductUploadMapping"
+  key="supplierUploadMapping"
 >
   <section
     className="row"

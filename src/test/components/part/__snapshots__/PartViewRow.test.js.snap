@@ -761,7 +761,9 @@ exports[`PartViewRow should display when multiple supplier products exist 1`] = 
           "error": "A name is required for the part",
           "fieldName": "part_name",
           "header": "Part Name",
+          "length": 200,
           "required": true,
+          "size": 40,
         }
       }
       model={
@@ -2835,7 +2837,9 @@ exports[`PartViewRow should display when no part and no supplier products exist 
           "error": "A name is required for the part",
           "fieldName": "part_name",
           "header": "Part Name",
+          "length": 200,
           "required": true,
+          "size": 40,
         }
       }
       model={Object {}}
@@ -4891,7 +4895,9 @@ exports[`PartViewRow should display when no supplier products exist 1`] = `
           "error": "A name is required for the part",
           "fieldName": "part_name",
           "header": "Part Name",
+          "length": 200,
           "required": true,
+          "size": 40,
         }
       }
       model={
@@ -6983,7 +6989,9 @@ exports[`PartViewRow should display when one supplier products exist 1`] = `
           "error": "A name is required for the part",
           "fieldName": "part_name",
           "header": "Part Name",
+          "length": 200,
           "required": true,
+          "size": 40,
         }
       }
       model={

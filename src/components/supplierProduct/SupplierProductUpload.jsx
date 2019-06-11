@@ -8,6 +8,7 @@ import { buildSupplierProductForApi } from './helpers/supplierProduct';
 import BrandPrompt from '../brand/BrandPrompt';
 import SupplierProductUploadReview from './SupplierProductUploadReview';
 import { doWeHaveObjects, removeKey, updateObject } from '../../helpers/utils';
+import { Button } from 'semantic-ui-react';
 
 const uploadSteps = [
   {
@@ -65,15 +66,10 @@ class SupplierProductUpload extends React.Component {
   };
 
   goToStep = step => {
-    if (step < this.state.step) {
-      let newState = updateObject(this.state, { step: step });
-      this.setState(newState);
-    }
+    let newState = updateObject(this.state, { step: step });
+    this.setState(newState);
   };
-  startAgain = () => {
-    this.props.clearParts();
-    this.setState(initialState);
-  };
+
   buildInitialRowMappings = uploadedData => {
     const { sections, suppliers } = this.props;
     return uploadedData.map((row, rowIndex) => {
@@ -113,6 +109,27 @@ class SupplierProductUpload extends React.Component {
     }
   };
 
+  addBrandToPart = (partDesc, brandName) => {
+    const { uploadedData } = this.state;
+    const finalName = `${brandName} ${partDesc}`;
+    const updatedData = uploadedData.map(dataRow => {
+      if (dataRow[3] === partDesc) {
+        const updatedRowData = dataRow.slice();
+        updatedRowData[3] = finalName;
+        return updatedRowData;
+      }
+      return dataRow;
+    });
+    let newState = updateObject(this.state, { uploadedData: updatedData });
+
+    newState.apiData = buildSupplierProductForApi(
+      newState.rowMappings,
+      newState.uploadedData,
+      this.props.brands,
+    );
+    if (!doWeHaveObjects(newState.apiData.partsMissingBrands)) newState.step = 4;
+    this.setState(newState);
+  };
   render() {
     const {
       sections,
@@ -126,7 +143,16 @@ class SupplierProductUpload extends React.Component {
     const { step, rowMappings, apiData } = this.state;
     return (
       <Fragment key="supplierProductUpload">
-        <h2>Supplier Product Upload - {uploadSteps[step].description}</h2>
+        <div className="row full">
+          <h2 className="half">Supplier Product Upload - {uploadSteps[step].description}</h2>
+          <div className="align_right half">
+            {apiData && step < 4 && (
+              <Button key="goToUpload" onClick={() => this.goToStep(4)}>
+                Ignore unmatched data
+              </Button>
+            )}
+          </div>
+        </div>
         {step === 0 && (
           <SupplierProductUploadFile
             buildInitialRowMappings={this.buildInitialRowMappings}
@@ -156,6 +182,7 @@ class SupplierProductUpload extends React.Component {
             productDescriptions={apiData.partsMissingBrands}
             saveBrands={saveBrands}
             actionOnBrandsChange={this.actionOnBrandsChange}
+            addBrandToPart={this.addBrandToPart}
           />
         )}
         {step === 4 && (

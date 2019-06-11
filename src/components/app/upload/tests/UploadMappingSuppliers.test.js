@@ -41,9 +41,9 @@ describe('UploadMappingSuppliers', () => {
         addDataAndProceed={addDataAndProceed}
       />,
     );
-    component.instance().setUpSupplierModalForNewField({ rowIndex: 4, supplierName: 'id 111' });
+    component.instance().setUpSupplierModalForNewField('id 111');
     expect(component.state('showModal')).toBeTruthy();
-    expect(component.state('supplier')).toEqual({ supplier_name: 'id 111' });
+    expect(component.state('supplier')).toHaveProperty("supplier_name", 'id 111');
   });
   test('it marks a discarded row as ignore', () => {
     const component = shallow(
@@ -55,14 +55,14 @@ describe('UploadMappingSuppliers', () => {
       />,
     );
     const rowMappingsExpected = [
-      { rowIndex: 1, supplier: 2, supplierName: foundName },
+      { rowIndex: 1, supplierName: foundName, ignore: true },
       { rowIndex: 2, supplierName: 'id 11', ignore: true },
       { rowIndex: 3, supplierName: 'id 11' },
       { rowIndex: 4, supplierName: 'id 111' },
       { rowIndex: 5, supplierName: 'id 234' },
       { rowIndex: 11, supplierName: foundName, ignore: true },
     ];
-    component.instance().discardData(11);
+    component.instance().discardData(foundName);
     expect(component.state('rowMappings')).toEqual(rowMappingsExpected);
   });
   test('it removes ignore when a row is removed from discard pile', () => {
@@ -77,13 +77,13 @@ describe('UploadMappingSuppliers', () => {
     const rowMappingsExpected = [
       { rowIndex: 1, supplier: 2, supplierName: foundName },
       { rowIndex: 2, supplierName: 'id 11', ignore: false },
-      { rowIndex: 3, supplierName: 'id 11' },
+      { rowIndex: 3, supplierName: 'id 11', ignore: false },
       { rowIndex: 4, supplierName: 'id 111' },
       { rowIndex: 5, supplierName: 'id 234' },
       { rowIndex: 11, supplier: 2, supplierName: foundName },
     ];
 
-    component.instance().undoDiscardData(2);
+    component.instance().undoDiscardData('id 11');
     expect(component.state('rowMappings')).toEqual(rowMappingsExpected);
   });
   test('it calls passed method to save updated row mappings', () => {
@@ -98,13 +98,13 @@ describe('UploadMappingSuppliers', () => {
     const rowMappingsExpected = [
       { rowIndex: 1, supplier: 2, supplierName: foundName },
       { rowIndex: 2, supplierName: 'id 11', ignore: false },
-      { rowIndex: 3, supplierName: 'id 11' },
+      { rowIndex: 3, supplierName: 'id 11', ignore: false },
       { rowIndex: 4, supplierName: 'id 111' },
       { rowIndex: 5, supplierName: 'id 234' },
       { rowIndex: 11, supplier: 2, supplierName: foundName },
     ];
 
-    component.instance().undoDiscardData(2);
+    component.instance().undoDiscardData('id 11');
     component.instance().goToNextStep();
     expect(addDataAndProceed.mock.calls).toHaveLength(1);
     expect(addDataAndProceed.mock.calls[0][0].rowMappings).toEqual(rowMappingsExpected);

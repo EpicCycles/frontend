@@ -1,43 +1,32 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
+import { Switch, Route } from 'react-router';
+
 import HeaderContainer from './HeaderContainer';
 import NotFound from '../404';
 import Home from '../home';
 
 import { CUSTOMER_SEARCH_URL, CUSTOMER_URL } from '../../components/menus/helpers/menu';
-import { Switch, Route } from 'react-router';
-import asyncComponent from '../../components/AsyncComponent';
 
-const AsyncLoginContainer = asyncComponent(() => import('../user/LoginContainer'));
-const AsyncQuoteCopyContainer = asyncComponent(() => import('../quote/QuoteCopyContainer'));
-const AsyncQuoteListContainer = asyncComponent(() => import('../quote/QuoteListContainer'));
-const AsyncQuoteCreateContainer = asyncComponent(() => import('../quote/QuoteCreateContainer'));
-const AsyncQuoteManagerContainer = asyncComponent(() => import('../quote/QuoteManagerContainer'));
-const AsyncSupplierProductReviewContainer = asyncComponent(() =>
+const LazyLoginContainer = lazy(() => import('../user/LoginContainer'));
+const LazyQuoteCopyContainer = lazy(() => import('../quote/QuoteCopyContainer'));
+const LazyQuoteListContainer = lazy(() => import('../quote/QuoteListContainer'));
+const LazyQuoteCreateContainer = lazy(() => import('../quote/QuoteCreateContainer'));
+const LazyQuoteManagerContainer = lazy(() => import('../quote/QuoteManagerContainer'));
+const LazySupplierProductReviewContainer = lazy(() =>
   import('../supplierProduct/SupplierProductReviewContainer'),
 );
-const AsyncSupplierProductUploadContainer = asyncComponent(() =>
+const LazySupplierProductUploadContainer = lazy(() =>
   import('../supplierProduct/SupplierProductUploadContainer'),
 );
-const AsyncBikeReviewContainer = asyncComponent(() => import('../bike/BikeReviewContainer'));
-const AsyncBikeReviewListContainer = asyncComponent(() =>
-  import('../bike/BikeReviewListContainer'),
-);
-const AsyncBikeUploadContainer = asyncComponent(() => import('../bike/BikeUploadContainer'));
-const AsyncBrandsContainer = asyncComponent(() => import('../brand/BrandsContainer'));
-const AsyncCustomerEditContainer = asyncComponent(() =>
-  import('../customer/CustomerEditContainer'),
-);
-const AsyncPasswordChangeContainer = asyncComponent(() =>
-  import('../user/PasswordChangeContainer'),
-);
-const AsyncUserDetailChangeContainer = asyncComponent(() =>
-  import('../user/UserDetailChangeContainer'),
-);
-const AsyncFrameworkContainer = asyncComponent(() => import('../framework/FrameworkContainer'));
-const AsyncCustomerListContainer = asyncComponent(() =>
-  import('../customer/CustomerListContainer'),
-);
-const AsyncNotFound = asyncComponent(() => import('../404'));
+const LazyBikeReviewContainer = lazy(() => import('../bike/BikeReviewContainer'));
+const LazyBikeReviewListContainer = lazy(() => import('../bike/BikeReviewListContainer'));
+const LazyBikeUploadContainer = lazy(() => import('../bike/BikeUploadContainer'));
+const LazyBrandsContainer = lazy(() => import('../brand/BrandsContainer'));
+const LazyCustomerEditContainer = lazy(() => import('../customer/CustomerEditContainer'));
+const LazyPasswordChangeContainer = lazy(() => import('../user/PasswordChangeContainer'));
+const LazyUserDetailChangeContainer = lazy(() => import('../user/UserDetailChangeContainer'));
+const LazyFrameworkContainer = lazy(() => import('../framework/FrameworkContainer'));
+const LazyCustomerListContainer = lazy(() => import('../customer/CustomerListContainer'));
 const App = () => (
   <div>
     <HeaderContainer />
@@ -45,29 +34,31 @@ const App = () => (
       className="grid-container"
       style={{ height: `${window.innerHeight - 50}px`, width: `${window.innerWidth}px` }}
     >
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/sales" component={Home} />
-        <Route exact path="/404" component={NotFound} />
-        <Route exact path="/login" component={AsyncLoginContainer} />
-        <Route exact path="/change-user-detail" component={AsyncUserDetailChangeContainer} />
-        <Route exact path="/change-password" component={AsyncPasswordChangeContainer} />
-        <Route exact path={CUSTOMER_URL} component={AsyncCustomerEditContainer} />
-        <Route exact path={CUSTOMER_SEARCH_URL} component={AsyncCustomerListContainer} />
-        <Route exact path="/framework" component={AsyncFrameworkContainer} />
-        <Route exact path="/brands" component={AsyncBrandsContainer} />
-        <Route exact path="/bike-upload" component={AsyncBikeUploadContainer} />
-        <Route exact path="/bike-review-list" component={AsyncBikeReviewListContainer} />
-        <Route exact path="/bike-review" component={AsyncBikeReviewContainer} />
-        <Route exact path="/product-upload" component={AsyncSupplierProductUploadContainer} />
-        <Route exact path="/product-review" component={AsyncSupplierProductReviewContainer} />
-        <Route exact path="/quote-create" component={AsyncQuoteCreateContainer} />
-        <Route exact path="/quote-list" component={AsyncQuoteListContainer} />
-        <Route exact path="/quote" component={AsyncQuoteManagerContainer} />
-        <Route exact path="/quote-copy" component={AsyncQuoteCopyContainer} />
-        {/* Finally, catch all unmatched routes */}
-        <Route component={AsyncNotFound} />
-      </Switch>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/sales" component={Home} />
+          <Route exact path="/404" component={NotFound} />
+          <Route exact path="/login" component={LazyLoginContainer} />
+          <Route exact path="/change-user-detail" component={LazyUserDetailChangeContainer} />
+          <Route exact path="/change-password" component={LazyPasswordChangeContainer} />
+          <Route exact path={CUSTOMER_URL} component={LazyCustomerEditContainer} />
+          <Route exact path={CUSTOMER_SEARCH_URL} component={LazyCustomerListContainer} />
+          <Route exact path="/framework" component={LazyFrameworkContainer} />
+          <Route exact path="/brands" component={LazyBrandsContainer} />
+          <Route exact path="/bike-upload" component={LazyBikeUploadContainer} />
+          <Route exact path="/bike-review-list" component={LazyBikeReviewListContainer} />
+          <Route exact path="/bike-review" component={LazyBikeReviewContainer} />
+          <Route exact path="/product-upload" component={LazySupplierProductUploadContainer} />
+          <Route exact path="/product-review" component={LazySupplierProductReviewContainer} />
+          <Route exact path="/quote-create" component={LazyQuoteCreateContainer} />
+          <Route exact path="/quote-list" component={LazyQuoteListContainer} />
+          <Route exact path="/quote" component={LazyQuoteManagerContainer} />
+          <Route exact path="/quote-copy" component={LazyQuoteCopyContainer} />
+          {/* Finally, catch all unmatched routes */}
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
     </main>
   </div>
 );

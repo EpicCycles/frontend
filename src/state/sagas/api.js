@@ -1,12 +1,15 @@
 import axios from 'axios';
-let baseUrl = '';
-if (process.env.NODE_ENV === "production") {
-  baseURL = 'https://epicsales.herokuapp.com';
-} else {
-  baseURL = 'http://localhost:8000';
+
+function findBaseUrl() {
+  if (process.env.NODE_ENV === 'production') {
+    return 'https://epicsales.herokuapp.com';
+  } else {
+    return 'http://localhost:8000';
+  }
 }
+
 const instance = axios.create({
-  baseURL: baseUrl,
+  baseURL: findBaseUrl(),
   timeout: 100000,
   headers: { 'Content-Type': 'application/json' },
 });

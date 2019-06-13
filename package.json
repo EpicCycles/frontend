@@ -11,7 +11,7 @@
     "build": "react-scripts build",
     "test": "jest test --watch",
     "eject": "react-scripts eject",
-    "lint": "eslint",
+    "lint": "eslint"
   },
   "jest": {
     "snapshotSerializers": [

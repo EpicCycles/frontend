@@ -3,5 +3,10 @@
   "routes": {
     "/**": "index.html"
   },
+  "proxies": {
+    "/": {
+      "origin": "${API_URL}"
+    }
+  },
   "https_only": true
 }

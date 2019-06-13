@@ -7,14 +7,6 @@ class Login extends React.Component {
     password: '',
   };
 
-  componentWillMount() {
-    if (this.props.user) {
-      this.setState({
-        username: this.props.user.username,
-      });
-    }
-  }
-
   loginUser = () => {
     const { username, password } = this.state;
     this.props.loginUser(username, password);
@@ -28,7 +20,7 @@ class Login extends React.Component {
 
   render() {
     const { username, password } = this.state;
-    const { isLoading, user } = this.props;
+    const { isLoading } = this.props;
 
     return (
       <Fragment>

@@ -121,9 +121,6 @@ venv.bak/
 # NPM packages folder.
 node_modules
 
-# development folder for index.html
-public
-
 # Build files
 dist/
 

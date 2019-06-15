@@ -97,7 +97,7 @@ class QuoteCopy extends React.Component {
                         brands={brands}
                         bikes={fullBikes}
                         frames={frames}
-                        brandSelected={brand}
+                        brand={brand}
                         frameName={frameName}
                         canSelectArchived={true}
                         archived={archived}

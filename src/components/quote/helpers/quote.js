@@ -1,5 +1,5 @@
 import { getNameForValue } from '../../app/model/helpers/model';
-import { findObjectWithId, updateObject } from '../../../helpers/utils';
+import { findObjectWithId } from '../../../helpers/utils';
 import { formattedDate } from '../../app/model/helpers/display';
 import { bikeFullName } from '../../bike/helpers/bike';
 

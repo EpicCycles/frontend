@@ -23,6 +23,11 @@ class BikeReviewList extends React.Component {
     handleInputClear = (fieldName) => {
         removeKey(this.state, fieldName);
     };
+     handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      this.getFrameList();
+    }
+  };
     buildSearchCriteria = () => {
         const { brand, frameName, archived } = this.state;
         return { brand, frameName, archived };
@@ -165,11 +170,12 @@ class BikeReviewList extends React.Component {
             {!haveFrames ? <BikeReviewListSelection
                     brands={brands}
                     onChange={this.handleInputChange}
-                    brandSelected={brand}
-                    onClick={this.handleInputClear}
+                    brand={brand}
                     frameName={frameName}
                     archived={archived}
-                    getFrameList={this.getFrameList}/>
+                    getFrameList={this.getFrameList}
+                    onKeyPress={this.handleKeyPress}
+              />
                 :
                 <Fragment>
                     <h2>Review Frames</h2>

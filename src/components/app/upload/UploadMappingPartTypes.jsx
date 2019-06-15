@@ -211,7 +211,6 @@ class UploadMappingPartTypes extends React.Component {
                 <Icon
                   id={`delete-field${index}`}
                   name="trash"
-                  name="trash"
                   onClick={() => this.discardData(mapping.rowIndex)}
                   title="Discard data"
                 />

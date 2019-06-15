@@ -8,7 +8,7 @@ class BrandPromptPart extends React.Component {
   state = { showModal: false };
 
   selectBrand = (fieldName,  brandId) => {
-    const { brands, partDescription, addBrandToPart } = this.props;
+    const { brands, partDescription } = this.props;
     const brand = findObjectWithId(brands, brandId);
 
     this.props.addBrandToPart(partDescription, brand.brand_name);

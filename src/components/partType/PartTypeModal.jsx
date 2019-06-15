@@ -58,7 +58,7 @@ class PartTypeModal extends React.Component {
   };
 
   render() {
-    const { partTypeModalOpen, componentKey, deletePartType, closePartTypeModal } = this.props;
+    const { componentKey, deletePartType, closePartTypeModal } = this.props;
     const { partType, mode, sectionOptions } = this.state;
     return (
       <div>

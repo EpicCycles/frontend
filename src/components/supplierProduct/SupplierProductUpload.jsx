@@ -7,7 +7,7 @@ import UploadMappingSuppliers from '../app/upload/UploadMappingSuppliers';
 import { buildSupplierProductForApi } from './helpers/supplierProduct';
 import BrandPrompt from '../brand/BrandPrompt';
 import SupplierProductUploadReview from './SupplierProductUploadReview';
-import { doWeHaveObjects, removeKey, updateObject } from '../../helpers/utils';
+import { doWeHaveObjects, updateObject } from '../../helpers/utils';
 import { Button } from 'semantic-ui-react';
 
 const uploadSteps = [

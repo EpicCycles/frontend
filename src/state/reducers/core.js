@@ -1,4 +1,3 @@
-import { CLEAR_ALL_STATE } from '../actions/application';
 import {
   BRAND_DELETE,
   BRAND_SAVE,
@@ -19,7 +18,6 @@ import {
 const initialState = {
   isLoading: false,
 };
-// this seemd to be the bit that is in reducers in loyalty code
 const core = (state = initialState, action) => {
   switch (action.type) {
     case `${USER_LOGIN}_REQUESTED`:

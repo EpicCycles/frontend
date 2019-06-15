@@ -3,7 +3,7 @@ import {CLEAR_ALL_STATE} from "../actions/application";
 import {USER_LOGOUT, USER_NOT_VALIDATED} from "../actions/user";
 import {CUSTOMER} from "../actions/customer";
 import {addItemsToArrayAtStart, removeItemFromArray} from "../../helpers/utils";
-import {COPY_QUOTE, CREATE_QUOTE, FIND_QUOTES, GET_QUOTE, UPDATE_QUOTE} from "../actions/quote";
+import {COPY_QUOTE, CREATE_QUOTE, GET_QUOTE, UPDATE_QUOTE} from "../actions/quote";
 
 const initialState = {
     count: 0,

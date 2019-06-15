@@ -1,4 +1,3 @@
-import { partSearchFields } from '../../part/helpers/search';
 import {
   BRAND,
   CHECKBOX,

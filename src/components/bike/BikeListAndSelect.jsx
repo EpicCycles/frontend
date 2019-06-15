@@ -11,16 +11,22 @@ class BikeListAndSelect extends React.Component {
     const { brand, frameName, archived, getFrameList } = this.props;
     getFrameList({ brand, frameName, archived });
   };
-
+  handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      if (this.props.onKeyPress) {
+        this.props.onKeyPress(e);
+      } else {
+        this.props.getFrameList();
+      }
+    }
+  };
   render() {
     const {
-      onKeyPress,
       className,
       brands,
       onChange,
-      brandSelected,
+      brand,
       frameName,
-      getFrameList,
       canSelectArchived,
       archived,
       bikes,
@@ -42,13 +48,13 @@ class BikeListAndSelect extends React.Component {
             onChange={onChange}
             getFrameList={this.findFrames}
             brands={brands}
-            brandSelected={brandSelected}
+            brand={brand}
             frameName={frameName}
             archived={archived}
             canSelectArchived={canSelectArchived}
             data-test="bikes-search"
             className={className}
-            onKeyPress={onKeyPress}
+            onKeyPress={this.handleKeyPress}
           />
           {bikeOptions.length > 0 ? (
             <SelectInput
@@ -84,6 +90,7 @@ BikeListAndSelect.propTypes = {
   bikes: PropTypes.array,
   frames: PropTypes.array,
   onChange: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func,
   brand: PropTypes.string,
   frameName: PropTypes.string,
   canSelectArchived: PropTypes.bool,

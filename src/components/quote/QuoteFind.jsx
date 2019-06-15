@@ -96,7 +96,7 @@ class QuoteFind extends React.Component {
           bikes={bikes}
           frames={frames}
           frameName={frameName}
-          brandSelected={brand}
+          brand={brand}
           onChange={this.handleInputChange}
           getFrameList={getFrameList}
           selectedBike={bike}

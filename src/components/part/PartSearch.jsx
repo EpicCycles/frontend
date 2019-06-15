@@ -1,6 +1,5 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import { partSearchFields } from './helpers/search';
 import SearchBlock from '../../common/SearchBlock';
 
 class PartSearch extends React.Component {

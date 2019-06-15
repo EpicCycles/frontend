@@ -7,10 +7,10 @@ const BikeReviewListSelection = props => {
     <Fragment>
       <h2 data-test="bike-review-heading">Get Frames to Review</h2>
       <BikeSearch
-        brandSelected={props.brandSelected}
+        brand={props.brand}
         brands={props.brands}
         onChange={props.onChange}
-        onClick={props.onClick}
+        onKeyPress={props.onKeyPress}
         getFrameList={props.getFrameList}
         frameName={props.frameName}
         archived={props.archived}
@@ -24,8 +24,9 @@ const BikeReviewListSelection = props => {
 BikeReviewListSelection.propTypes = {
   brands: PropTypes.any,
   onChange: PropTypes.func,
-  brandSelected: PropTypes.string,
+  brand: PropTypes.string,
   onClick: PropTypes.func,
+  onKeyPress: PropTypes.func,
   frameName: PropTypes.string,
   archived: PropTypes.bool,
   getFrameList: PropTypes.func,

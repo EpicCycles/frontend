@@ -105,14 +105,6 @@ exports[`Login displays login fields when user in session 1`] = `
           onKeyPress={[Function]}
           type="text"
         />
-        <Icon
-          as="i"
-          circular={true}
-          link={true}
-          name="remove"
-          onClick={[Function]}
-          size="small"
-        />
       </div>
     </div>
     <div

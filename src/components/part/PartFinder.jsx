@@ -8,7 +8,7 @@ import {
 } from '../../helpers/utils';
 import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon/Icon';
 import PartSelect from './PartSelect';
-import { partFieldsComplete, supplierProductFields } from '../app/model/helpers/fields';
+import { partFieldsComplete } from '../app/model/helpers/fields';
 import { addFieldToState, checkForChangesAllFields } from '../app/model/helpers/model';
 import { getModelFields, partReadyToUse } from './helpers/part';
 import EditModelPage from '../app/model/EditModelPage';
@@ -97,7 +97,6 @@ class PartFinder extends React.Component {
       closeAction,
       sections,
       brands,
-      parts,
       partActionPrimary,
       partActionPrimaryIcon,
       partActionPrimaryTitle,

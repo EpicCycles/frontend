@@ -22,7 +22,6 @@ import {
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { errorAsMessage, logError } from '../../helpers/api_error';
 import { sortObjectsByAttribute, updateObject, updateObjectInArray } from '../../helpers/utils';
-import { archiveQuoteError } from '../actions/quote';
 
 export function* getBrandsAndSuppliers(action) {
   try {

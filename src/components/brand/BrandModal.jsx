@@ -59,7 +59,7 @@ class BrandModal extends React.Component {
   render() {
     const { brand, persistedBrand, mode } = this.state;
     const componentKey = getModelKey(brand);
-    const { closeBrandModal, suppliers, deleteBrand } = this.props;
+    const { closeBrandModal, suppliers } = this.props;
     return (
       <div>
         <div style={{ width: '100%', textAlign: 'right' }}>

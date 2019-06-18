@@ -631,6 +631,7 @@ export const PART_NAME_FIELD = {
   error: PART_NAME_MISSING,
   size: 40,
   length: 200,
+  maxWidth: '250px',
 };
 export const TRADE_IN_PRICE_FIELD = {
   fieldName: TRADE_IN_PRICE,

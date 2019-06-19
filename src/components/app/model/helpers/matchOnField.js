@@ -1,4 +1,4 @@
-import {stringToAlphanumeric} from "../../../../helpers/stringToAlphanumerics";
+import { stringToAlphanumeric } from '../../../../helpers/stringToAlphanumerics';
 
 export const matchOnField = (modelArray, fieldName, value) => {
   const valueToCheck = value.trim().toLowerCase();
@@ -10,7 +10,7 @@ export const matchOnField = (modelArray, fieldName, value) => {
 
   //strip out all except numbers and letters and check
   const refinedValue = stringToAlphanumeric(valueToCheck);
-  return = modelArray.find(
+  return modelArray.find(
     part => part[fieldName] && stringToAlphanumeric(part[fieldName]).toLowerCase() === refinedValue,
   );
 };

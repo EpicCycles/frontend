@@ -1,10 +1,11 @@
-import { isModelValid } from './model';
-import {doWeHaveObjects} from "../../../../helpers/utils";
+import { getModelKey, isModelValid } from './model';
+import { doWeHaveObjects } from '../../../../helpers/utils';
 
 export const modelActions = (model, actionFunctions, otherActions) => {
-   const { modelSave, modelDelete, modelReset } = actionFunctions;
- const isValid = isModelValid(model);
-  const canReset = model.changed || model.deleted;
+  const { modelSave, modelDelete, modelReset } = actionFunctions;
+  const componentKey = getModelKey(model);
+  const isValid = isModelValid(model);
+  const canReset = model.changed;
   const canDelete = model.id && !model.deleted;
   const canSave = isValid && model.changed;
 
@@ -21,16 +22,16 @@ export const modelActions = (model, actionFunctions, otherActions) => {
       iconName: 'check',
       iconTitle: 'save changes',
       iconAction: () => canSave && modelSave(model),
-      iconDisabled: !canReset,
+      iconDisabled: !canSave,
     });
   if (modelDelete)
     actionArray.push({
       iconName: 'delete',
       iconTitle: 'delete',
       iconAction: () => canDelete && modelDelete(componentKey),
-      iconDisabled: !canReset,
+      iconDisabled: !canDelete,
     });
 
-  if (doWeHaveObjects(otherActions)) actionArray.concat(otherActions);
+  if (doWeHaveObjects(otherActions)) return actionArray.concat(otherActions);
   return actionArray;
 };

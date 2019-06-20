@@ -1,50 +1,14 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { Icon } from 'semantic-ui-react';
 import { NEW_ELEMENT_ID } from '../../../helpers/constants';
-import { isModelValid } from './helpers/model';
+import { modelActions } from './helpers/modelActions';
+import IconArray from '../../../common/IconArray';
 
 const ModelEditIcons = props => {
   const { model, componentKey, modelSave, modelDelete, modelReset } = props;
-  const isValid = isModelValid(model);
-  const canReset = model.changed || model.deleted;
-  const canDelete = model.id && !model.deleted;
-  const canSave = isValid && model.changed;
-  return (
-    <Fragment>
-      {modelReset && (
-        <Icon
-          id={`reset-model`}
-          name="undo"
-          disabled={!canReset}
-          onClick={() => canReset && modelReset()}
-          title="Reset"
-          key={`resetIcon${componentKey}`}
-        />
-      )}
-      {modelSave && (
-        <Icon
-          id={`save-model`}
-          name="check"
-          disabled={!canSave}
-          onClick={() => canSave && modelSave(model)}
-          title="Save changes"
-          key={`saveIcon${componentKey}`}
-        />
-      )}
-      {modelDelete && (
-        <Icon
-          id={`delete-model`}
-          name="delete"
-          disabled={!canDelete}
-          onClick={() => canDelete && modelDelete(componentKey)}
-          title="Delete"
-          key={`deleteIcon${componentKey}`}
-        />
-      )}
-    </Fragment>
-  );
+  const modelEditActions = modelActions(model, { modelSave, modelDelete, modelReset });
+  return <IconArray componentKey={componentKey} actionArray={modelEditActions} />;
 };
 
 ModelEditIcons.defaultProps = {

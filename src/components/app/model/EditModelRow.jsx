@@ -3,9 +3,9 @@ import * as PropTypes from 'prop-types';
 import { eliminateReadOnlyFields, getModelKey } from './helpers/model';
 import EditModelInput from './EditModelInput';
 import { fieldAlignment, gridItemClass } from './helpers/display';
-import ModelEditIcons from './ModelEditIcons';
 import IconArray from '../../../common/IconArray';
 import ModelViewRowField from './ModelViewRowField';
+import { modelActions } from './helpers/modelActions';
 
 const EditModelRow = props => {
   const {
@@ -32,6 +32,7 @@ const EditModelRow = props => {
   } = props;
   const componentKey = getModelKey(model);
   const fieldsToShow = showReadOnlyFields ? modelFields : eliminateReadOnlyFields(modelFields);
+  const allActions = modelActions(model, { modelSave, modelDelete, modelReset }, additionalActions);
   return (
     <Fragment>
       {fieldsToShow.map((field, index) => {
@@ -75,23 +76,17 @@ const EditModelRow = props => {
       })}
       {actionsRequired && (
         <div
-          className={gridItemClass(className, 1, lockFirstColumn)}
+          className={gridItemClass(`${className} align_center`, 1, lockFirstColumn)}
           key={`modelRowActions${componentKey}`}
         >
-          {!dummyRow && (
-            <ModelEditIcons
-              componentKey={componentKey}
-              model={model}
-              modelReset={modelReset}
-              modelDelete={modelDelete}
-              modelSave={modelSave}
-            />
-          )}
-          {!dummyRow && <IconArray componentKey={componentKey} actionArray={additionalActions} />}
+          {!dummyRow && <IconArray componentKey={componentKey} actionArray={allActions} />}
         </div>
       )}
     </Fragment>
   );
+};
+EditModelRow.defaultProps = {
+  className: '',
 };
 EditModelRow.propTypes = {
   model: PropTypes.object.isRequired,

@@ -3,7 +3,7 @@
 exports[`EditModelRow it renders 1`] = `
 <Fragment>
   <div
-    className="undefined  grid-item "
+    className="  grid-item "
     key="modelRowaddress1new"
   >
     <EditModelInput
@@ -26,7 +26,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="undefined  grid-item "
+    className="  grid-item "
     key="modelRowaddress2new"
   >
     <EditModelInput
@@ -47,7 +47,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="undefined  grid-item "
+    className="  grid-item "
     key="modelRowaddress3new"
   >
     <EditModelInput
@@ -68,7 +68,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="undefined  grid-item "
+    className="  grid-item "
     key="modelRowaddress4new"
   >
     <EditModelInput
@@ -89,7 +89,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="undefined  grid-item "
+    className="  grid-item "
     key="modelRowcountrynew"
   >
     <EditModelInput
@@ -1109,7 +1109,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="undefined  grid-item "
+    className="  grid-item "
     key="modelRowpostcodenew"
   >
     <EditModelInput
@@ -1134,7 +1134,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="undefined align_center grid-item "
+    className=" align_center grid-item "
     key="modelRowbillingnew"
   >
     <EditModelInput

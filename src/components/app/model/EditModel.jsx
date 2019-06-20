@@ -84,7 +84,7 @@ class EditModel extends Component {
           {actionsRequired && (
             <div className="full align_right">
               {allActions && allActions.length > 0 && (
-                <IconArray componentKey={componentKey} actionArray={additionalActions} />
+                <IconArray componentKey={componentKey} actionArray={allActions} />
               )}
             </div>
           )}

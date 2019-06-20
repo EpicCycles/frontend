@@ -6,6 +6,7 @@ exports[`CustomerPhoneEdit displays a passed customerPhone object correctly 1`] 
   key="row12"
 >
   <EditModelRow
+    className=""
     model={
       Object {
         "id": 12,
@@ -100,6 +101,7 @@ exports[`CustomerPhoneEdit displays a passed customerPhone object correctly when
   key="row12"
 >
   <EditModelRow
+    className=""
     model={
       Object {
         "error": true,

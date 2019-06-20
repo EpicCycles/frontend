@@ -16,8 +16,12 @@ const EditModelRow = props => {
     onChange,
     lockFirstColumn,
     brands,
+    bikes,
     sections,
     suppliers,
+    users,
+    customers,
+    frames,
     actionsRequired,
     modelSave,
     modelDelete,
@@ -44,9 +48,13 @@ const EditModelRow = props => {
               <ModelViewRowField
                 field={field}
                 model={model}
+                frames={frames}
+                bikes={bikes}
                 brands={brands}
                 sections={sections}
                 suppliers={suppliers}
+                users={users}
+                customers={customers}
               />
             )}
             {!dummyRow && !field.readOnly && (
@@ -92,7 +100,10 @@ EditModelRow.propTypes = {
   className: PropTypes.string,
   sections: PropTypes.array,
   brands: PropTypes.array,
+  bikes: PropTypes.array,
+  frames: PropTypes.array,
   suppliers: PropTypes.array,
+  users: PropTypes.array,
   onChange: PropTypes.func.isRequired,
   lockFirstColumn: PropTypes.bool,
   actionsRequired: PropTypes.bool,

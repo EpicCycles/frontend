@@ -10,9 +10,7 @@ const IconArray = props => {
         <Icon
           name={action.iconName}
           title={action.iconTitle}
-          onClick={() =>
-            !(actionsDisabled || action.iconDisabled) && action.iconAction(componentKey)
-          }
+          onClick={!(actionsDisabled || action.iconDisabled) && action.iconAction}
           key={`${action.iconName}-${componentKey}`}
           data-test="model-action"
           disabled={actionsDisabled || action.iconDisabled}

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
 import EditModelRow from './EditModelRow';
 import { updateObject } from '../../../helpers/utils';
-import {checkForChangesAllFields, getModelKey, updateModel} from './helpers/model';
-import ModelEditIcons from './ModelEditIcons';
+import { checkForChangesAllFields, getModelKey, updateModel } from './helpers/model';
 import EditModelPage from './EditModelPage';
 import IconArray from '../../../common/IconArray';
+import { modelActions } from './helpers/modelActions';
 class EditModel extends Component {
   state = {
     model: updateObject(this.props.model),
@@ -24,6 +24,7 @@ class EditModel extends Component {
   }
   handleModelValueChange = (fieldName, input) => {
     let { model } = this.state;
+    let { modelFields } = this.props;
 
     model = updateModel(model, modelFields, fieldName, input);
     this.setState({ model });
@@ -57,6 +58,11 @@ class EditModel extends Component {
       modelSave,
       modelDelete,
     } = this.props;
+    const allActions = modelActions(
+      model,
+      { modelSave, modelDelete, modelReset: this.onClickReset },
+      additionalActions,
+    );
     if (pageMode)
       return (
         <div>
@@ -77,14 +83,7 @@ class EditModel extends Component {
           />
           {actionsRequired && (
             <div className="full align_right">
-              <ModelEditIcons
-                componentKey={componentKey}
-                model={model}
-                modelSave={modelSave}
-                modelDelete={modelDelete}
-                modelReset={this.onClickReset}
-              />
-              {additionalActions && additionalActions.length > 0 && (
+              {allActions && allActions.length > 0 && (
                 <IconArray componentKey={componentKey} actionArray={additionalActions} />
               )}
             </div>

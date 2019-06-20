@@ -1,4 +1,4 @@
-import { getNameForValue } from '../../app/model/helpers/model';
+import { getModelKey, getNameForValue } from '../../app/model/helpers/model';
 import { findObjectWithId } from '../../../helpers/utils';
 import { formattedDate } from '../../app/model/helpers/display';
 import { bikeFullName } from '../../bike/helpers/bike';
@@ -59,44 +59,45 @@ export const quoteDescription = (customer, bike, customers, frames, bikes, brand
 
 export const quoteActions = (quote, availableActions) => {
   const actionArray = [];
+  const componentKey = getModelKey(quote);
   if (availableActions.cloneQuote)
     actionArray.push({
       iconName: 'clone',
       iconTitle: 'copy quote',
-      iconAction: availableActions.cloneQuote,
+      iconAction: () => availableActions.cloneQuote(componentKey),
     });
   if (availableActions.issueQuote)
     actionArray.push({
       iconName: 'mail',
       iconTitle: 'issue quote',
-      iconAction: availableActions.issueQuote,
+      iconAction: () => availableActions.issueQuote(componentKey),
       iconDisabled: quote.quote_status !== QUOTE_INITIAL,
     });
   if (availableActions.changeQuote)
     actionArray.push({
       iconName: 'eye',
       iconTitle: 'view quote',
-      iconAction: availableActions.changeQuote,
+      iconAction: () => availableActions.changeQuote(componentKey),
       iconDisabled: quote.quote_status === QUOTE_ARCHIVED,
     });
   if (availableActions.getQuote)
     actionArray.push({
       iconName: 'edit',
       iconTitle: 'edit quote',
-      iconAction: availableActions.getQuote,
+      iconAction: () => availableActions.getQuote(componentKey),
     });
   if (availableActions.archiveQuote)
     actionArray.push({
       iconName: 'remove',
       iconTitle: 'archive quote',
-      iconAction: availableActions.archiveQuote,
+      iconAction: () => availableActions.archiveQuote(componentKey),
       iconDisabled: quote.quote_status === QUOTE_ARCHIVED,
     });
   if (availableActions.unarchiveQuote)
     actionArray.push({
       iconName: 'undo',
       iconTitle: 'un-archive quote',
-      iconAction: availableActions.unarchiveQuote,
+      iconAction: () => availableActions.unarchiveQuote(componentKey),
       iconDisabled: quote.quote_status !== QUOTE_ARCHIVED,
     });
   return actionArray;

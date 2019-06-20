@@ -14,7 +14,6 @@ describe('EditModel', () => {
   it('should render a page view when in page mode', () => {
     const component = shallow(<EditModel model={model} modelFields={[]} pageMode={true} />);
     expect(component.find('EditModelPage')).toHaveLength(1);
-    expect(component.find('ModelEditIcons')).toHaveLength(0);
     expect(component.find('IconArray')).toHaveLength(0);
     expect(component.find('EditModelRow')).toHaveLength(0);
   });
@@ -29,8 +28,7 @@ describe('EditModel', () => {
       />,
     );
     expect(component.find('EditModelPage')).toHaveLength(1);
-    expect(component.find('ModelEditIcons')).toHaveLength(1);
-    expect(component.find('IconArray')).toHaveLength(0);
+    expect(component.find('IconArray')).toHaveLength(1);
     expect(component.find('EditModelRow')).toHaveLength(0);
   });
   it('should render actions and additional actions when page mode and actions required', () => {
@@ -45,7 +43,6 @@ describe('EditModel', () => {
       />,
     );
     expect(component.find('EditModelPage')).toHaveLength(1);
-    expect(component.find('ModelEditIcons')).toHaveLength(1);
     expect(component.find('IconArray')).toHaveLength(1);
     expect(component.find('EditModelRow')).toHaveLength(0);
   });
@@ -61,7 +58,6 @@ describe('EditModel', () => {
       />,
     );
     expect(component.find('EditModelPage')).toHaveLength(0);
-    expect(component.find('ModelEditIcons')).toHaveLength(0);
     expect(component.find('IconArray')).toHaveLength(0);
     expect(component.find('EditModelRow')).toHaveLength(1);
     assertComponentHasExpectedProps(component.find('EditModelRow'), {

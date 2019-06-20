@@ -1,8 +1,8 @@
 import React from 'react';
 import { quoteActions } from './helpers/quote';
 import * as PropTypes from 'prop-types';
-import { Icon } from 'semantic-ui-react';
 import { getModelKey } from '../app/model/helpers/model';
+import IconArray from '../../common/IconArray';
 
 const QuoteActionCell = props => {
   const {
@@ -27,18 +27,11 @@ const QuoteActionCell = props => {
   const actionArray = quoteActions(quote, availableActions);
   return (
     <div className="align_center fit-content">
-      {actionArray.map(action => (
-        <Icon
-          name={action.iconName}
-          title={action.iconTitle}
-          onClick={() =>
-            !(actionsDisabled || action.iconDisabled) && action.iconAction(componentKey)
-          }
-          key={`${action.iconName}-${componentKey}`}
-          data-test="model-action"
-          disabled={actionsDisabled || action.iconDisabled}
-        />
-      ))}
+      <IconArray
+        componentKey={componentKey}
+        actionsDisabled={actionsDisabled}
+        actionArray={actionArray}
+      />
     </div>
   );
 };

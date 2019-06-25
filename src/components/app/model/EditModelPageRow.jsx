@@ -34,7 +34,6 @@ const EditModelPageRow = (props) => {
     </div>
 };
 
-
 EditModelPageRow.propTypes = {
     model: PropTypes.object.isRequired,
     field: PropTypes.object.isRequired,
@@ -42,7 +41,7 @@ EditModelPageRow.propTypes = {
         PropTypes.string,
         PropTypes.number,
     ]).isRequired,
-    index: PropTypes.number.isRequired,
+    index: PropTypes.number,
     persistedModel: PropTypes.object,
     className: PropTypes.string,
     sections: PropTypes.array,

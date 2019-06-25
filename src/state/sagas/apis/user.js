@@ -16,7 +16,7 @@ export const getUsers = async payload => {
 
 export const logoutUser = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  const logoutApi = '/rest-auth/logout ';
+  const logoutApi = '/rest-auth/logout/';
   return await api.instance.post(logoutApi);
 };
 

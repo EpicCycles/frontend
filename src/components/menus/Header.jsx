@@ -18,7 +18,6 @@ import {
   STORAGE_SUPPLIERS,
 } from '../../helpers/constants';
 import { userName } from '../user/helpers/user';
-import checkCookie from '../user/helpers/checkCookie';
 
 class Header extends React.Component {
   componentDidMount() {
@@ -40,8 +39,8 @@ class Header extends React.Component {
     const userDetails = getCookieObject(COOKIE_USER);
     const token = getCookieObject(COOKIE_TOKEN);
 
-    if (token && userDetails && checkCookie(userDetails)) {
-      this.props.setStateFromLocalStorage(userDetails.user, token);
+    if (token && userDetails) {
+      this.props.setStateFromLocalStorage(userDetails, token);
       this.props.getUsers();
 
       const brands = getLocalStorage(STORAGE_BRANDS);
@@ -77,8 +76,7 @@ class Header extends React.Component {
   saveStateToLocalStorage = () => {
     const { user, token, parts, supplierProducts, sections, suppliers, brands } = this.props;
     if (user) {
-      const setUpDate = new Date();
-      createCookie(COOKIE_USER, { user, setUpDate });
+      createCookie(COOKIE_USER, user);
       createCookie(COOKIE_TOKEN, token);
 
       setLocalStorage(STORAGE_PARTS, parts);

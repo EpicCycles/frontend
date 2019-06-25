@@ -7,7 +7,6 @@ import {
   updateObject,
   updateObjectInArray,
 } from '../../../../helpers/utils';
-import { NEW_ELEMENT_ID } from '../../../../helpers/constants';
 import { CHECKBOX, CURRENCY } from './fields';
 
 export const modelIsAlreadyInArray = (modelArray, modelToCheck, modelFields) => {

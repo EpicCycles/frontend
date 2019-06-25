@@ -3,17 +3,17 @@
 exports[`EditModelPageRow it renders 1`] = `
 <div
   className="grid-row"
-  key="field-row12"
+  key="field-rowaddress1"
 >
   <div
     className="grid-item--borderless field-label align_right"
-    key="modelField12"
+    key="headeraddress1"
   >
     Address
   </div>
   <div
     className="grid-item--borderless field-label "
-    key="fieldDiv12"
+    key="fieldValueDivaddress1"
   >
     <EditModelInput
       componentKey="new"
@@ -28,7 +28,7 @@ exports[`EditModelPageRow it renders 1`] = `
           "type": "text",
         }
       }
-      index={12}
+      index=""
       model={Object {}}
       onChange={[MockFunction]}
       persistedModel={Object {}}
@@ -40,17 +40,17 @@ exports[`EditModelPageRow it renders 1`] = `
 exports[`EditModelPageRow it renders with data 1`] = `
 <div
   className="grid-row"
-  key="field-row2"
+  key="field-rowaddress1"
 >
   <div
     className="grid-item--borderless field-label align_right"
-    key="modelField2"
+    key="headeraddress1"
   >
     Address
   </div>
   <div
     className="grid-item--borderless field-label "
-    key="fieldDiv2"
+    key="fieldValueDivaddress1"
   >
     <EditModelInput
       brands={
@@ -81,7 +81,7 @@ exports[`EditModelPageRow it renders with data 1`] = `
           "type": "text",
         }
       }
-      index={2}
+      index=""
       model={
         Object {
           "address1": "line one",

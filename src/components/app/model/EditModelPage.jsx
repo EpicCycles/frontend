@@ -29,7 +29,7 @@ const EditModelPage = props => {
       {model.error && <div className="red">{model.error}</div>}
 
       <div key="modelFields" className={`grid ${className}`}>
-        {eliminateReadOnlyFields(modelFields).map((field, index) => (
+        {eliminateReadOnlyFields(modelFields).map(field => (
           <EditModelPageRow
             key={`EditModelPageRow${field.fieldName}`}
             field={field}
@@ -44,7 +44,7 @@ const EditModelPage = props => {
           />
         ))}
         {showReadOnlyFields &&
-          justReadOnlyFields(modelFields).map((field, index) => (
+          justReadOnlyFields(modelFields).map(field => (
             <ViewModelFieldRow
               key={`EditModelPageRow${field.fieldName}`}
               field={field}

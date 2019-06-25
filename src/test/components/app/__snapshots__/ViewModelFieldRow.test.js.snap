@@ -3,17 +3,17 @@
 exports[`ViewModelFieldRow should show a field when it is there 1`] = `
 <div
   className="grid-row"
-  key="field-row2"
+  key="field-rowaddress1"
 >
   <div
     className="grid-item--borderless field-label align_right"
-    key="modelField2"
+    key="headeraddress1"
   >
     Address
   </div>
   <div
     className="grid-item--borderless field-label "
-    key="fieldDiv2"
+    key="fieldDivaddress1"
   >
     <ModelViewRowField
       brands={

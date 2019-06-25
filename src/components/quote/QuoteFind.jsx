@@ -65,13 +65,22 @@ class QuoteFind extends React.Component {
       next,
     } = this.props;
     const searchFields = [
-      { displayName: 'Quote Description includes:', fieldName: 'quoteDesc', type: TEXT, placeholder: 'partial description' },
+      {
+        displayName: 'Quote Description includes:',
+        fieldName: 'quoteDesc',
+        type: TEXT,
+        placeholder: 'partial description',
+      },
       { displayName: 'Include archived quotes:', fieldName: 'archived', type: CHECKBOX },
     ];
     return (
       <Fragment>
         <h1>Find Quotes</h1>
-        <div className="row vertical-middle" data-test="quoteDescription">
+        <div
+          className="row vertical-middle"
+          data-test="quoteDescription"
+          onKeyPress={this.handleKeyPress}
+        >
           <Search
             searchFields={searchFields}
             onChange={this.handleInputChange}

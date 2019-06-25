@@ -111,6 +111,7 @@ class EditModelInput extends Component {
         break;
       case NUMBER:
       case CURRENCY:
+        const displayValue = fieldValue ? fieldValue.toString() : '';
         editComponent = (
           <FormTextInput
             dataType="number"
@@ -118,7 +119,7 @@ class EditModelInput extends Component {
             placeholder={field.header}
             error={error}
             fieldName={fieldName}
-            value={fieldValue}
+            value={displayValue}
             onChange={this.validateOnChange}
             size={field.size}
             onClick={this.validateOnChange}
@@ -233,7 +234,7 @@ EditModelInput.propTypes = {
   persistedModel: PropTypes.object,
   className: PropTypes.string,
   componentKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  index: PropTypes.number,
+  index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   sections: PropTypes.array,
   brands: PropTypes.array,
   suppliers: PropTypes.array,

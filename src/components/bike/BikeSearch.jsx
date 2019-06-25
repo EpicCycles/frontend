@@ -21,7 +21,7 @@ const BikeSearch = props => {
       displayName: 'Brand:',
       fieldName: 'brand',
       type: SELECT_ONE,
-      selectList: buildBrandOptions(brands),
+      selectList: buildBrandOptions(brands.filter(brand => brand.bike_brand)),
     },
     { displayName: 'Frame Name like:', fieldName: 'frameName', type: TEXT },
   ];

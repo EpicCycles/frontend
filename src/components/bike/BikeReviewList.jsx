@@ -7,12 +7,18 @@ import ModelTableActionHeader from '../app/model/ModelTableActionHeader';
 import {
   CLUB_PRICE_FIELD,
   EPIC_PRICE_FIELD,
+  FRAME_NAME_FIELD,
   MODEL_NAME_FIELD,
   SELL_PRICE_FIELD,
 } from '../app/model/helpers/fields';
 import ModelTableHeaders from '../app/model/ModelTableHeaders';
 import ModelViewRow from '../app/model/ModelViewRow';
+import EditModel from '../app/model/EditModel';
+import { frameActions } from './helpers/frameActions';
+import { saveFrame } from '../../state/actions/bike';
+import { bikeActions } from './helpers/bikeActions';
 
+const frameFields = [FRAME_NAME_FIELD];
 const bikeFields = [MODEL_NAME_FIELD, SELL_PRICE_FIELD, EPIC_PRICE_FIELD, CLUB_PRICE_FIELD];
 class BikeReviewList extends React.Component {
   state = {
@@ -167,7 +173,7 @@ class BikeReviewList extends React.Component {
       bikeDeleteList,
       frameDeleteList,
     } = this.state;
-    const { isLoading, brands, frames, bikes } = this.props;
+    const { isLoading, brands, frames, bikes, saveFrame, saveBike } = this.props;
     const archivedFrames = frames ? frames.filter(frame => frame.archived) : [];
     const nonArchivedFrames = frames ? frames.filter(frame => !frame.archived) : [];
     let framesWidth = archived ? window.innerWidth * 0.75 : window.innerWidth;
@@ -237,7 +243,7 @@ class BikeReviewList extends React.Component {
                   }}
                 >
                   <div key="bikeReviewHeaders" className="grid-row grid-row--header">
-                    <div className="grid-item--header grid-header--fixed-left">Frame</div>
+                    <ModelTableHeaders modelFields={frameFields} lockFirstColumn={true} />
                     <div className="grid-item--header" />
                     <ModelTableHeaders modelFields={bikeFields} />
                     <ModelTableActionHeader />
@@ -247,75 +253,38 @@ class BikeReviewList extends React.Component {
                       .filter(bike => bike.frame === frame.id)
                       .map((bike, bikeIndex) => (
                         <div key={`detailRow${frameIndex}${bikeIndex}`} className="grid-row">
-                          <div
-                            className="grid-item grid-item--fixed-left"
-                            key={`bikeRowFrame${frameIndex}${bikeIndex}`}
-                          >
-                            {bikeIndex === 0 && frame.frame_name}
-                          </div>
-                          <div
-                            className="grid-item align_center"
-                            key={`bikeRowActions${frameIndex}${bikeIndex}`}
-                          >
-                            {bikeIndex === 0 && (
-                              <Fragment>
-                                <Icon
-                                  key={`archive${frameIndex}`}
-                                  name="archive"
-                                  className={this.classWhenOnList(frameArchiveList, frame.id)}
-                                  onClick={() =>
-                                    !frameDeleteList.includes(frame.id) &&
-                                    this.changeFrameArchiveList(frame.id)
-                                  }
-                                  disabled={frameDeleteList.includes(frame.id)}
-                                  title="Archive this frame and all related bikes"
-                                />
-                                <Icon
-                                  key={`delete${frameIndex}`}
-                                  name="delete"
-                                  className={this.classWhenOnList(frameDeleteList, frame.id)}
-                                  onClick={() =>
-                                    !frameArchiveList.includes(frame.id) &&
-                                    this.changeFrameDeleteList(frame.id)
-                                  }
-                                  disabled={frameArchiveList.includes(frame.id)}
-                                  title="Delete this frame and all related bikes"
-                                />
-                              </Fragment>
-                            )}
-                          </div>
-                          <ModelViewRow
-                            modelFields={bikeFields}
-                            model={bike}
-                            key={`bike${bike.id}`}
+                          <EditModel
+                            model={frame}
+                            modelFields={frameFields}
+                            lockFirstColumn={true}
+                            actionsRequired={true}
+                            additionalActions={
+                              bikeIndex === 0
+                                ? frameActions(
+                                    frame.id,
+                                    frameArchiveList,
+                                    frameDeleteList,
+                                    this.changeFrameArchiveList,
+                                    this.changeFrameDeleteList,
+                                  )
+                                : []
+                            }
+                            modelSave={saveFrame}
+                            dummyRow={bikeIndex > 0}
                           />
-                          <div
-                            className="grid-item align_center"
-                            key={`bikeActions${frameIndex}${bikeIndex}`}
-                          >
-                            <Icon
-                              key={`delete${frameIndex}${bikeIndex}`}
-                              name="trash"
-                              className={this.classWhenOnList(bikeDeleteList, bike.id)}
-                              onClick={() =>
-                                !bikeReviewList.includes(bike.id) &&
-                                this.changeBikeDeleteList(bike.id)
-                              }
-                              disabled={bikeReviewList.includes(bike.id)}
-                              title="Delete this bike"
-                            />
-                            <Icon
-                              key={`review${frameIndex}${bikeIndex}`}
-                              name="edit outline"
-                              className={this.classWhenOnList(bikeReviewList, bike.id)}
-                              onClick={() =>
-                                !bikeDeleteList.includes(bike.id) &&
-                                this.changeBikeReviewList(bike.id)
-                              }
-                              disabled={bikeDeleteList.includes(bike.id)}
-                              title="Review this bike"
-                            />
-                          </div>
+                          <EditModel
+                            model={bike}
+                            modelFields={bikeFields}
+                            actionsRequired={true}
+                            additionalActions={bikeActions(
+                              bike.id,
+                              bikeReviewList,
+                              bikeDeleteList,
+                              this.changeBikeReviewList,
+                              this.changeBikeDeleteList,
+                            )}
+                            modelSave={saveBike}
+                          />
                         </div>
                       )),
                   )}

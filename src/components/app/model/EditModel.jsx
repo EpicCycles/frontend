@@ -111,6 +111,7 @@ class EditModel extends Component {
         modelReset={this.onClickReset}
         additionalActions={additionalActions}
         dummyRow={dummyRow}
+        actionsRequired={actionsRequired}
       />
     );
   }

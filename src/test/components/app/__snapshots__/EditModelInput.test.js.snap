@@ -176,7 +176,7 @@ exports[`EditModelInput it renders a currency field that has data 1`] = `
     placeholder=""
     size={30}
     title=""
-    value={23.9}
+    value="23.9"
   />
 </Fragment>
 `;

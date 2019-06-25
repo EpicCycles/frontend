@@ -237,7 +237,7 @@ exports[`BrandModal BrandModal displays correctly for a new brand 1`] = `
     className="align_right"
   >
     <ModelEditIcons
-      componentKey="new"
+      componentKey=""
       model={Object {}}
       modelDelete={[Function]}
       modelReset={[Function]}

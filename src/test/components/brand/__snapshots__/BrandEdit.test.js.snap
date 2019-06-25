@@ -25,7 +25,7 @@ exports[`BrandEdit should shows new brand without supplier correctly 1`] = `
         "synonyms": Array [],
       }
     }
-    index={1}
+    index=""
     model={
       Object {
         "brand_name": "e brand 8",
@@ -53,7 +53,7 @@ exports[`BrandEdit should shows new brand without supplier correctly 1`] = `
           "type": "checkbox",
         }
       }
-      index={1}
+      index=""
       model={
         Object {
           "brand_name": "e brand 8",

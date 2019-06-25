@@ -25,6 +25,6 @@ exports[`PartSelect should render the component with default props 1`] = `
       },
     ]
   }
-  value="new"
+  value=""
 />
 `;

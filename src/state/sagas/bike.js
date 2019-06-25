@@ -54,6 +54,7 @@ import { doWeHaveObjects, updateObject } from '../../helpers/utils';
 import { findPart } from '../../components/part/helpers/part';
 import partApi from './apis/part';
 import { savePartOK } from '../actions/part';
+import { LOGIN_URL } from '../../components/menus/helpers/menu';
 
 export function* getBike(action) {
   try {
@@ -63,7 +64,7 @@ export function* getBike(action) {
       const response = yield call(bikeApi.getBike, completePayload);
       yield put(getBikeOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -83,7 +84,7 @@ export function* saveBike(action) {
       const response = yield call(bikeApi.saveBike, completePayload);
       yield put(saveBikeOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -103,7 +104,7 @@ export function* getBikeParts(action) {
       const response = yield call(bikeApi.getBikeParts, completePayload);
       yield put(getBikePartsOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -123,7 +124,7 @@ export function* addBikePart(action) {
       const response = yield call(bikeApi.addBikePart, completePayload);
       yield put(addBikePartOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -144,7 +145,7 @@ export function* saveBikePart(action) {
       // const response = yield call(bike.getBikeParts, completePayload);
       yield put(saveBikePartOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -165,7 +166,7 @@ export function* deleteBikePart(action) {
       const response = yield call(bikeApi.getBikeParts, completePayload);
       yield put(deleteBikePartOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -208,7 +209,7 @@ export function* deleteBikesAndGetList(action) {
         yield put(deleteBikesSuccess());
       }
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -250,7 +251,7 @@ export function* deleteFramesAndGetList(action) {
         yield put(deleteFramesSuccess());
       }
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -292,7 +293,7 @@ export function* archiveFramesAndGetList(action) {
         yield put(archiveFramesSuccess());
       }
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(archiveFramesError('Archive Frames failed'));
@@ -317,7 +318,7 @@ export function* saveFrame(action) {
         yield put(saveFrameSuccess(response.data));
       }
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -384,7 +385,7 @@ export function* uploadFrame(action) {
       yield put(getFrameList(searchCriteria));
       yield call(history.push, '/bike-review');
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -406,7 +407,7 @@ export function* getFrames(action) {
         yield put(addMessage('No matches found', 'I'));
       yield put(getFrameListOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(getFrameListError('Get Frames failed'));

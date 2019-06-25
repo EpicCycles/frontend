@@ -7,6 +7,7 @@ import {
   CURRENCY,
   NUMBER,
   PART_TYPE,
+  PASSWORD,
   SELECT_MULTIPLE,
   SELECT_ONE,
   SUPPLIER,
@@ -46,7 +47,7 @@ class EditModelInput extends Component {
       suppliers,
     } = this.props;
     let editComponent;
-    const fieldName = `${field.fieldName}_${componentKey}${index}`;
+    const fieldName = `${field.fieldName}${componentKey}${index}`;
     const fieldValue = model[field.fieldName];
     const emptyAllowed = !(field.required && fieldValue);
     const error = model.error_detail ? model.error_detail[field.fieldName] : '';
@@ -112,7 +113,24 @@ class EditModelInput extends Component {
       case CURRENCY:
         editComponent = (
           <FormTextInput
-            type="number"
+            dataType="number"
+            className={className}
+            placeholder={field.header}
+            error={error}
+            fieldName={fieldName}
+            value={fieldValue}
+            onChange={this.validateOnChange}
+            size={field.size}
+            onClick={this.validateOnChange}
+            maxLength={field.length}
+            disabled={disabled}
+          />
+        );
+        break;
+      case PASSWORD:
+        editComponent = (
+          <FormTextInput
+            dataType={PASSWORD}
             className={className}
             placeholder={field.header}
             error={error}
@@ -205,7 +223,7 @@ class EditModelInput extends Component {
   }
 }
 EditModelInput.defaultProps = {
-  index: 1,
+  index: '',
   model: {},
   persistedModel: {},
 };

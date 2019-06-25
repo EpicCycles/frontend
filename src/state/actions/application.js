@@ -1,22 +1,27 @@
+export const CHANGE_ROUTE = 'application/CHANGE_ROUTE';
 export const REMOVE_MESSAGE = 'application/REMOVE_MESSAGE';
 export const ADD_MESSAGE = 'application/ADD_MESSAGE';
 export const CLEAR_ALL_STATE = 'application/CLEAR_ALL_STATE';
 export const SAVE_STATE_LOCALLY = 'application/SAVE_STATE_LOCALLY';
 export const GET_LOCAL_STATE = 'application/GET_LOCAL_STATE';
+export const changeRoute = newRoute => ({
+  type: CHANGE_ROUTE,
+  payload: { newRoute },
+});
 export const removeMessage = () => ({
-    type: REMOVE_MESSAGE
+  type: REMOVE_MESSAGE,
 });
 export const addMessage = (messageText, messageType) => ({
-    type: ADD_MESSAGE,
-    payload: { messageText, messageType }
+  type: ADD_MESSAGE,
+  payload: { messageText, messageType },
 });
 export const clearAllState = () => ({
-    type: CLEAR_ALL_STATE
+  type: CLEAR_ALL_STATE,
 });
 export const saveStateToLocalStorage = () => ({
-    type: SAVE_STATE_LOCALLY
+  type: SAVE_STATE_LOCALLY,
 });
 export const setStateFromLocalStorage = (user, token) => ({
-    type: GET_LOCAL_STATE,
-    payload: {user, token}
+  type: GET_LOCAL_STATE,
+  payload: { user, token },
 });

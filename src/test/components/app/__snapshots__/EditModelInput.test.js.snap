@@ -23,7 +23,7 @@ exports[`EditModelInput it renders a brand field that has data that is found 1`]
     }
     disabled={false}
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     isEmptyAllowed={true}
     onChange={[Function]}
   />
@@ -53,7 +53,7 @@ exports[`EditModelInput it renders a brand field that has data that is not found
     }
     disabled={false}
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     isEmptyAllowed={true}
     onChange={[Function]}
   />
@@ -82,7 +82,7 @@ exports[`EditModelInput it renders a brand field that has no data 1`] = `
     }
     disabled={false}
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     isEmptyAllowed={true}
     onChange={[Function]}
   />
@@ -98,7 +98,7 @@ exports[`EditModelInput it renders a checkbox field that has no data 1`] = `
       checked={false}
       className=""
       data-test="model-checkbox"
-      name="data_field_120"
+      name="data_field120"
       onChange={[Function]}
       type="checkbox"
     />
@@ -115,7 +115,7 @@ exports[`EditModelInput it renders a checkbox field that is false 1`] = `
       checked={false}
       className=""
       data-test="model-checkbox"
-      name="data_field_120"
+      name="data_field120"
       onChange={[Function]}
       type="checkbox"
     />
@@ -132,7 +132,7 @@ exports[`EditModelInput it renders a checkbox field that is true 1`] = `
       checked={true}
       className=""
       data-test="model-checkbox"
-      name="data_field_120"
+      name="data_field120"
       onChange={[Function]}
       type="checkbox"
     />
@@ -144,7 +144,7 @@ exports[`EditModelInput it renders a country field that has data 1`] = `
 <Fragment>
   <CountrySelect
     countrySelected="NZ"
-    fieldName="data_field_120"
+    fieldName="data_field120"
     isEmptyAllowed={true}
     onChange={[Function]}
   />
@@ -154,7 +154,7 @@ exports[`EditModelInput it renders a country field that has data 1`] = `
 exports[`EditModelInput it renders a country field that has no data 1`] = `
 <Fragment>
   <CountrySelect
-    fieldName="data_field_120"
+    fieldName="data_field120"
     isEmptyAllowed={true}
     onChange={[Function]}
   />
@@ -165,9 +165,9 @@ exports[`EditModelInput it renders a currency field that has data 1`] = `
 <Fragment>
   <FormTextInput
     className=""
-    dataType="text"
+    dataType="number"
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     label=""
     list=""
     maxLength={10}
@@ -176,7 +176,6 @@ exports[`EditModelInput it renders a currency field that has data 1`] = `
     placeholder=""
     size={30}
     title=""
-    type="number"
     value={23.9}
   />
 </Fragment>
@@ -186,9 +185,9 @@ exports[`EditModelInput it renders a currency field that has no data 1`] = `
 <Fragment>
   <FormTextInput
     className=""
-    dataType="text"
+    dataType="number"
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     label=""
     list=""
     maxLength={10}
@@ -197,7 +196,6 @@ exports[`EditModelInput it renders a currency field that has no data 1`] = `
     placeholder=""
     size={30}
     title=""
-    type="number"
     value=""
   />
 </Fragment>
@@ -208,7 +206,7 @@ exports[`EditModelInput it renders a part Type field that has no data 1`] = `
   <PartTypeSelect
     disabled={false}
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     isEmptyAllowed={true}
     onChange={[Function]}
     sections={
@@ -250,7 +248,7 @@ exports[`EditModelInput it renders a part type field that has data that is found
   <PartTypeSelect
     disabled={false}
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     isEmptyAllowed={true}
     onChange={[Function]}
     partTypeSelected={2}
@@ -293,7 +291,7 @@ exports[`EditModelInput it renders a part type field that has data that is not f
   <PartTypeSelect
     disabled={false}
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     isEmptyAllowed={true}
     onChange={[Function]}
     partTypeSelected={202}
@@ -336,7 +334,7 @@ exports[`EditModelInput it renders a supplier field that has data that is found 
   <SupplierSelect
     disabled={false}
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     isEmptyAllowed={true}
     onChange={[Function]}
     supplierSelected={2}
@@ -365,7 +363,7 @@ exports[`EditModelInput it renders a supplier field that has data that is not fo
   <SupplierSelect
     disabled={false}
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     isEmptyAllowed={true}
     onChange={[Function]}
     supplierSelected={202}
@@ -394,7 +392,7 @@ exports[`EditModelInput it renders a supplier field that has no data 1`] = `
   <SupplierSelect
     disabled={false}
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     isEmptyAllowed={true}
     onChange={[Function]}
     suppliers={
@@ -423,7 +421,7 @@ exports[`EditModelInput it renders a text field that has data 1`] = `
     className=""
     dataType="text"
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     label=""
     list=""
     maxLength={10}
@@ -443,7 +441,7 @@ exports[`EditModelInput it renders a text field that has no data 1`] = `
     className=""
     dataType="text"
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     label=""
     list=""
     maxLength={10}
@@ -462,7 +460,7 @@ exports[`EditModelInput it renders a textarea field that has data 1`] = `
   <FormTextAreaInput
     cols={100}
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     onChange={[Function]}
     onClick={[Function]}
     value="SHow text"
@@ -475,7 +473,7 @@ exports[`EditModelInput it renders a textarea field that has no data 1`] = `
   <FormTextAreaInput
     cols={100}
     error=""
-    fieldName="data_field_120"
+    fieldName="data_field120"
     onChange={[Function]}
     onClick={[Function]}
     placeholder="put text here"

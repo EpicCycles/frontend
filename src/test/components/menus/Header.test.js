@@ -1,7 +1,6 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import Header from '../../../components/menus/Header';
-// user, application, removeMessage
 test('is displays correctly', () => {
   const user = {
     first_name: 'anna',
@@ -11,6 +10,8 @@ test('is displays correctly', () => {
   const application = {
     message: 'Message to be displayed',
   };
-  const component = shallow(<Header user={user} application={application} />);
+  const component = shallow(
+    <Header user={user} application={application} changeRoute={jest.fn()} />,
+  );
   expect(toJson(component)).toMatchSnapshot();
 });

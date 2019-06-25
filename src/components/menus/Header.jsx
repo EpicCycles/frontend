@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
 
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router';
 
 import ErrorDismissibleBlock from '../../common/ErrorDismissibleBlock';
 import HeaderSection from './HeaderSection';
-import { menuStructure } from './helpers/menu';
+import { LOGIN_URL, menuStructure } from './helpers/menu';
 import { Icon } from 'semantic-ui-react';
 import { getLocalStorage, setLocalStorage } from '../../state/helpers/localStorage';
 import { createCookie, deleteCookie, getCookieObject } from '../../state/helpers/cookies';
@@ -19,6 +18,7 @@ import {
   STORAGE_SUPPLIERS,
 } from '../../helpers/constants';
 import { userName } from '../user/helpers/user';
+import checkCookie from '../user/helpers/checkCookie';
 
 class Header extends React.Component {
   componentDidMount() {
@@ -37,11 +37,11 @@ class Header extends React.Component {
   }
 
   hydrateStateWithLocalStorage = () => {
-    const user = getCookieObject(COOKIE_USER);
+    const userDetails = getCookieObject(COOKIE_USER);
     const token = getCookieObject(COOKIE_TOKEN);
 
-    if (token && user) {
-      this.props.setStateFromLocalStorage(user, token);
+    if (token && userDetails && checkCookie(userDetails)) {
+      this.props.setStateFromLocalStorage(userDetails.user, token);
       this.props.getUsers();
 
       const brands = getLocalStorage(STORAGE_BRANDS);
@@ -65,6 +65,8 @@ class Header extends React.Component {
       } else {
         this.props.listParts({});
       }
+    } else {
+      this.props.changeRoute(LOGIN_URL);
     }
   };
   refreshData = () => {
@@ -73,15 +75,17 @@ class Header extends React.Component {
     this.props.listParts({});
   };
   saveStateToLocalStorage = () => {
-    if (this.props.user) {
-      createCookie(COOKIE_USER, this.props.user);
-      createCookie(COOKIE_TOKEN, this.props.token);
+    const { user, token, parts, supplierProducts, sections, suppliers, brands } = this.props;
+    if (user) {
+      const setUpDate = new Date();
+      createCookie(COOKIE_USER, { user, setUpDate });
+      createCookie(COOKIE_TOKEN, token);
 
-      setLocalStorage(STORAGE_PARTS, this.props.parts);
-      setLocalStorage(STORAGE_SUPPLIER_PRODUCTS, this.props.supplierProducts);
-      setLocalStorage(STORAGE_SECTIONS, this.props.sections);
-      setLocalStorage(STORAGE_SUPPLIERS, this.props.suppliers);
-      setLocalStorage(STORAGE_BRANDS, this.props.brands);
+      setLocalStorage(STORAGE_PARTS, parts);
+      setLocalStorage(STORAGE_SUPPLIER_PRODUCTS, supplierProducts);
+      setLocalStorage(STORAGE_SECTIONS, sections);
+      setLocalStorage(STORAGE_SUPPLIERS, suppliers);
+      setLocalStorage(STORAGE_BRANDS, brands);
     }
   };
 
@@ -93,13 +97,9 @@ class Header extends React.Component {
 
   render() {
     const { user, application, removeMessage } = this.props;
-    const okToBeHere =
-      user || window.location.pathname.startsWith('/login') || getCookieObject(COOKIE_USER);
 
     return (
       <Fragment key="header">
-        {!okToBeHere && <Redirect to="/login" push />}
-
         <div className="row full nav">
           <Fragment key="nav">
             <ul className="nav">

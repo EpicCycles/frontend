@@ -27,6 +27,7 @@ import {
 import { logError } from '../../helpers/api_error';
 import { updateObject, updateObjectWithApiErrors } from '../../helpers/utils';
 import { getModelKey } from '../../components/app/model/helpers/model';
+import { LOGIN_URL } from '../../components/menus/helpers/menu';
 
 export function* savePart(action) {
   const partToSave = action.payload.part;
@@ -42,7 +43,7 @@ export function* savePart(action) {
       }
       yield put(savePartOK(response.data, getModelKey(partToSave)));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (apiError) {
     const error = 'Part save failed';
@@ -74,7 +75,7 @@ export function* deletePart(action) {
         yield put(listPartsOK(response.data));
       }
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -95,7 +96,7 @@ export function* uploadParts(action) {
       yield put(uploadPartsOK(response.data));
       yield call(history.push, '/product-review');
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -115,7 +116,7 @@ export function* getParts(action) {
       const response = yield call(part.getParts, completePayload);
       yield put(listPartsOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -140,7 +141,7 @@ export function* saveSupplierProduct(action) {
       }
       yield put(saveSupplierProductOK(response.data, getModelKey(supplierProduct)));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (apiError) {
     const error = 'Supplier product save failed';
@@ -166,7 +167,7 @@ export function* deleteSupplierProduct(action) {
       yield call(part.deleteSupplierProduct, completePayload);
       yield put(deleteSupplierProductOK(action.payload.supplierProductId));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -261,7 +262,7 @@ export function* savePartsAndSupplierProducts(action) {
       }),
     );
   } else {
-    yield call(history.push, '/login');
+    yield call(history.push, LOGIN_URL);
   }
 }
 export function* watchForSavePartsAndSupplierProducts() {

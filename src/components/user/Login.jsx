@@ -1,84 +1,90 @@
-import React, { Fragment } from 'react';
-import { Dimmer, Icon, Loader } from 'semantic-ui-react';
-
+import React from 'react';
+import { Dimmer, Loader } from 'semantic-ui-react';
+import { PASSWORD, TEXT } from '../app/model/helpers/fields';
+import { VALUE_MISSING } from '../app/model/helpers/error';
+import { updateModel } from '../app/model/helpers/model';
+import { updateObject } from '../../helpers/utils';
+import EditModelPage from '../app/model/EditModelPage';
+import IconArray from '../../common/IconArray';
+const loginFields = [
+  {
+    fieldName: 'username',
+    type: TEXT,
+    size: 20,
+    length: 60,
+    header: 'User Name',
+    synonyms: [],
+    required: true,
+    error: VALUE_MISSING,
+  },
+  {
+    fieldName: PASSWORD,
+    type: PASSWORD,
+    size: 20,
+    length: 60,
+    header: 'Password',
+    synonyms: [],
+    required: true,
+    error: VALUE_MISSING,
+  },
+];
+const initialUser = { username: '', password: '' };
 class Login extends React.Component {
   state = {
-    username: '',
-    password: '',
+    userDetail: updateObject(initialUser),
+  };
+  handleModelValueChange = (fieldName, input) => {
+    let { userDetail } = this.state;
+
+    userDetail = updateModel(userDetail, loginFields, fieldName, input);
+    this.setState({ userDetail });
   };
 
+  onClickReset = () => {
+    const userDetail = updateObject(initialUser);
+    this.setState({ userDetail });
+  };
   loginUser = () => {
-    const { username, password } = this.state;
-    this.props.loginUser(username, password);
+    const { userDetail } = this.state;
+    this.props.loginUser(userDetail.username, userDetail.password);
   };
   handleKeyPress = e => {
     if (e.key === 'Enter') {
-      const { username, password } = this.state;
-      if (username && password) this.loginUser();
+      const { userDetail } = this.state;
+      if (userDetail.username && userDetail.password) this.loginUser();
     }
   };
 
   render() {
-    const { username, password } = this.state;
+    const { userDetail } = this.state;
     const { isLoading } = this.props;
-
+    const additionalActions = [
+      {
+        iconName: 'sign in',
+        iconTitle: 'Sign In',
+        iconAction: () => this.loginUser(),
+        iconDisabled: !(userDetail.username && userDetail.password),
+      },
+    ];
     return (
-      <Fragment>
-        <h1>Login</h1>
-        <div id="loginUser" className="grid" style={{ height: '400px' }}>
-          <div className="grid-row">
-            <div className="grid-item--borderless field-label align_right">Username</div>
-            <div className="grid-item--borderless">
-              <input
-                type="text"
-                id="username"
-                onKeyPress={this.handleKeyPress}
-                onChange={e => this.setState({ username: e.target.value })}
-              />
-              {username && (
-                <Icon
-                  name="remove"
-                  size="small"
-                  circular
-                  link
-                  onClick={e => this.setState({ username: '', password: '' })}
-                />
-              )}
-            </div>
+      <form onKeyPress={this.handleKeyPress}>
+        <div className="fit-content">
+          <h1>Login</h1>
+          <EditModelPage
+            model={userDetail}
+            modelFields={loginFields}
+            onChange={this.handleModelValueChange}
+          />
+          <div className="full align_right">
+            <IconArray componentKey={''} actionArray={additionalActions} />
           </div>
-          <div className="grid-row">
-            <div className="grid-item--borderless field-label align_right">Password</div>
-            <div className="grid-item--borderless">
-              <input
-                type="password"
-                id="password"
-                onChange={e => this.setState({ password: e.target.value })}
-                onKeyPress={this.handleKeyPress}
-              />
-              {password && (
-                <Icon
-                  name="remove"
-                  size="small"
-                  circular
-                  link
-                  onClick={e => this.setState({ password: '' })}
-                />
-              )}
-            </div>
-          </div>
-          <div className="grid-row">
-            <div className="grid-item--borderless field-label align_right">sign in</div>
-            <div className="grid-item--borderless">
-              <Icon name="sign in" onClick={() => this.loginUser()} />
-            </div>
-          </div>
+          {isLoading && (
+            <Dimmer active inverted>
+              <Loader content="Loading" />
+            </Dimmer>
+          )}
         </div>
-        {isLoading && (
-          <Dimmer active inverted>
-            <Loader content="Loading" />
-          </Dimmer>
-        )}
-      </Fragment>
+      </form>
     );
   }
 }

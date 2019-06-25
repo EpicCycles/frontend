@@ -33,6 +33,7 @@ export const SELECT_MULTIPLE = 'select_multiple';
 export const CURRENCY = 'currency';
 export const NUMBER = 'number';
 export const TEXT = 'text';
+export const PASSWORD = 'password';
 export const USER = 'user';
 export const TEXT_AREA = 'textArea';
 

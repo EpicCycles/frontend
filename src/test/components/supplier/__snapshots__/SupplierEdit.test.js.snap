@@ -264,7 +264,7 @@ exports[`SupplierEdit displays correctly for new supplier 1`] = `
       showReadOnlyFields={true}
     />
     <div
-      key="supplierBrandsnew"
+      key="supplierBrands"
     >
       Brands: 
     </div>
@@ -272,7 +272,7 @@ exports[`SupplierEdit displays correctly for new supplier 1`] = `
       className="align_right"
     >
       <ModelEditIcons
-        componentKey="new"
+        componentKey=""
         model={Object {}}
         modelDelete={[Function]}
         modelReset={[Function]}

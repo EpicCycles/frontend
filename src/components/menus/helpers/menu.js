@@ -1,5 +1,6 @@
 export const CUSTOMER_SEARCH_URL = '/customer-search';
 export const CUSTOMER_URL = '/customer';
+export const LOGIN_URL = '/login';
 export const menuStructure = [
   {
     sectionPos: 1,
@@ -65,7 +66,7 @@ export const menuStructure = [
         groupLinks: [
           { displayText: 'Edit User', linkRoute: '/change-user-detail', linkNumber: 401 },
           { displayText: 'Change Password', linkRoute: '/change-password', linkNumber: 402 },
-          { displayText: 'Login', linkRoute: '/login', linkNumber: 403 },
+          { displayText: 'Login', linkRoute: LOGIN_URL, linkNumber: 403 },
         ],
       },
     ],

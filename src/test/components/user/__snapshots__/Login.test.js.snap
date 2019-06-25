@@ -1,149 +1,129 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Login displays login fields when no user in session 1`] = `
-<Fragment>
-  <h1>
-    Login
-  </h1>
+<form
+  onKeyPress={[Function]}
+>
   <div
-    className="grid"
-    id="loginUser"
-    style={
-      Object {
-        "height": "400px",
-      }
-    }
+    className="fit-content"
   >
+    <h1>
+      Login
+    </h1>
+    <EditModelPage
+      model={
+        Object {
+          "password": "",
+          "username": "",
+        }
+      }
+      modelFields={
+        Array [
+          Object {
+            "error": "A value is required.",
+            "fieldName": "username",
+            "header": "User Name",
+            "length": 60,
+            "required": true,
+            "size": 20,
+            "synonyms": Array [],
+            "type": "text",
+          },
+          Object {
+            "error": "A value is required.",
+            "fieldName": "password",
+            "header": "Password",
+            "length": 60,
+            "required": true,
+            "size": 20,
+            "synonyms": Array [],
+            "type": "password",
+          },
+        ]
+      }
+      onChange={[Function]}
+    />
     <div
-      className="grid-row"
+      className="full align_right"
     >
-      <div
-        className="grid-item--borderless field-label align_right"
-      >
-        Username
-      </div>
-      <div
-        className="grid-item--borderless"
-      >
-        <input
-          id="username"
-          onChange={[Function]}
-          onKeyPress={[Function]}
-          type="text"
-        />
-      </div>
-    </div>
-    <div
-      className="grid-row"
-    >
-      <div
-        className="grid-item--borderless field-label align_right"
-      >
-        Password
-      </div>
-      <div
-        className="grid-item--borderless"
-      >
-        <input
-          id="password"
-          onChange={[Function]}
-          onKeyPress={[Function]}
-          type="password"
-        />
-      </div>
-    </div>
-    <div
-      className="grid-row"
-    >
-      <div
-        className="grid-item--borderless field-label align_right"
-      >
-        sign in
-      </div>
-      <div
-        className="grid-item--borderless"
-      >
-        <Icon
-          as="i"
-          name="sign in"
-          onClick={[Function]}
-        />
-      </div>
+      <IconArray
+        actionArray={
+          Array [
+            Object {
+              "iconAction": [Function],
+              "iconDisabled": true,
+              "iconName": "sign in",
+              "iconTitle": "Sign In",
+            },
+          ]
+        }
+        componentKey=""
+      />
     </div>
   </div>
-</Fragment>
+</form>
 `;
 
 exports[`Login displays login fields when user in session 1`] = `
-<Fragment>
-  <h1>
-    Login
-  </h1>
+<form
+  onKeyPress={[Function]}
+>
   <div
-    className="grid"
-    id="loginUser"
-    style={
-      Object {
-        "height": "400px",
-      }
-    }
+    className="fit-content"
   >
+    <h1>
+      Login
+    </h1>
+    <EditModelPage
+      model={
+        Object {
+          "password": "",
+          "username": "",
+        }
+      }
+      modelFields={
+        Array [
+          Object {
+            "error": "A value is required.",
+            "fieldName": "username",
+            "header": "User Name",
+            "length": 60,
+            "required": true,
+            "size": 20,
+            "synonyms": Array [],
+            "type": "text",
+          },
+          Object {
+            "error": "A value is required.",
+            "fieldName": "password",
+            "header": "Password",
+            "length": 60,
+            "required": true,
+            "size": 20,
+            "synonyms": Array [],
+            "type": "password",
+          },
+        ]
+      }
+      onChange={[Function]}
+    />
     <div
-      className="grid-row"
+      className="full align_right"
     >
-      <div
-        className="grid-item--borderless field-label align_right"
-      >
-        Username
-      </div>
-      <div
-        className="grid-item--borderless"
-      >
-        <input
-          id="username"
-          onChange={[Function]}
-          onKeyPress={[Function]}
-          type="text"
-        />
-      </div>
-    </div>
-    <div
-      className="grid-row"
-    >
-      <div
-        className="grid-item--borderless field-label align_right"
-      >
-        Password
-      </div>
-      <div
-        className="grid-item--borderless"
-      >
-        <input
-          id="password"
-          onChange={[Function]}
-          onKeyPress={[Function]}
-          type="password"
-        />
-      </div>
-    </div>
-    <div
-      className="grid-row"
-    >
-      <div
-        className="grid-item--borderless field-label align_right"
-      >
-        sign in
-      </div>
-      <div
-        className="grid-item--borderless"
-      >
-        <Icon
-          as="i"
-          name="sign in"
-          onClick={[Function]}
-        />
-      </div>
+      <IconArray
+        actionArray={
+          Array [
+            Object {
+              "iconAction": [Function],
+              "iconDisabled": true,
+              "iconName": "sign in",
+              "iconTitle": "Sign In",
+            },
+          ]
+        }
+        componentKey=""
+      />
     </div>
   </div>
-</Fragment>
+</form>
 `;

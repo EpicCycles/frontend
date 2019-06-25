@@ -4,10 +4,10 @@ exports[`EditModelRow it renders 1`] = `
 <Fragment>
   <div
     className="  grid-item "
-    key="modelRowaddress1new"
+    key="modelRowaddress1"
   >
     <EditModelInput
-      componentKey="new"
+      componentKey=""
       field={
         Object {
           "error": "At least one line of address must be entered",
@@ -27,10 +27,10 @@ exports[`EditModelRow it renders 1`] = `
   </div>
   <div
     className="  grid-item "
-    key="modelRowaddress2new"
+    key="modelRowaddress2"
   >
     <EditModelInput
-      componentKey="new"
+      componentKey=""
       field={
         Object {
           "fieldName": "address2",
@@ -48,10 +48,10 @@ exports[`EditModelRow it renders 1`] = `
   </div>
   <div
     className="  grid-item "
-    key="modelRowaddress3new"
+    key="modelRowaddress3"
   >
     <EditModelInput
-      componentKey="new"
+      componentKey=""
       field={
         Object {
           "fieldName": "address3",
@@ -69,10 +69,10 @@ exports[`EditModelRow it renders 1`] = `
   </div>
   <div
     className="  grid-item "
-    key="modelRowaddress4new"
+    key="modelRowaddress4"
   >
     <EditModelInput
-      componentKey="new"
+      componentKey=""
       field={
         Object {
           "fieldName": "address4",
@@ -90,10 +90,10 @@ exports[`EditModelRow it renders 1`] = `
   </div>
   <div
     className="  grid-item "
-    key="modelRowcountrynew"
+    key="modelRowcountry"
   >
     <EditModelInput
-      componentKey="new"
+      componentKey=""
       field={
         Object {
           "error": "A country must be selected",
@@ -1110,10 +1110,10 @@ exports[`EditModelRow it renders 1`] = `
   </div>
   <div
     className="  grid-item "
-    key="modelRowpostcodenew"
+    key="modelRowpostcode"
   >
     <EditModelInput
-      componentKey="new"
+      componentKey=""
       field={
         Object {
           "fieldName": "postcode",
@@ -1135,10 +1135,10 @@ exports[`EditModelRow it renders 1`] = `
   </div>
   <div
     className=" align_center grid-item "
-    key="modelRowbillingnew"
+    key="modelRowbilling"
   >
     <EditModelInput
-      componentKey="new"
+      componentKey=""
       field={
         Object {
           "fieldName": "billing",

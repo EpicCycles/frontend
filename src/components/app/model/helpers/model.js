@@ -57,10 +57,10 @@ export const addFieldToState = (initialState, fieldList, fieldName, input) => {
 };
 
 export const getModelKey = modelInstance => {
-  if (!modelInstance) return NEW_ELEMENT_ID;
+  if (!modelInstance) return '';
   if (modelInstance.id) return modelInstance.id;
   if (modelInstance.dummyKey) return modelInstance.dummyKey;
-  return NEW_ELEMENT_ID;
+  return '';
 };
 
 export const isModelValid = modelInstance => {
@@ -164,6 +164,7 @@ export const updateModelWithChanges = (modelInstance, modelFields, fieldName, fi
   if (attribute) {
     return updateModelChanges(modelInstance, attribute, fieldValue);
   } else {
+    // eslint-disable-next-line no-console
     console.error('attribute not found for', modelFields, fieldName);
   }
   return modelInstance;
@@ -187,6 +188,7 @@ export const updateModelArrayWithChanges = (
     modelInstance.changes = currentChanges;
     return updateObjectInArray(modelArray, modelInstance, componentKey);
   } else {
+    // eslint-disable-next-line no-console
     console.error('attribute not found for', modelFields, fieldName);
   }
   return modelArray;

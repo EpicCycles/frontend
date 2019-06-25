@@ -22,6 +22,7 @@ import {
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { errorAsMessage, logError } from '../../helpers/api_error';
 import { sortObjectsByAttribute, updateObject, updateObjectInArray } from '../../helpers/utils';
+import { LOGIN_URL } from '../../components/menus/helpers/menu';
 
 export function* getBrandsAndSuppliers(action) {
   try {
@@ -32,7 +33,7 @@ export function* getBrandsAndSuppliers(action) {
       const suppliersResponse = yield call(supplier.getSuppliers, completePayload);
       yield put(getBrandsAndSuppliersSuccess(brandsResponse.data, suppliersResponse.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     // yield put(getBrandsAndSuppliersSuccess(sampleBrands, sampleSuppliers));
@@ -48,7 +49,7 @@ export function* getBrands(action) {
       const brandsResponse = yield call(brand.getBrands, completePayload);
       yield put(getBrandsSuccess(brandsResponse.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     // yield put(getBrandsAndSuppliersSuccess(sampleBrands, sampleSuppliers));
@@ -74,7 +75,7 @@ export function* saveBrands(action) {
       completeBrandsPostSave = sortObjectsByAttribute(completeBrandsPostSave, 'brand_name');
       yield put(saveBrandsSuccess(completeBrandsPostSave));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -95,7 +96,7 @@ export function* saveSupplier(action) {
       }
       yield put(saveSupplierSuccess(saveSupplierResponse.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     // yield put(getBrandsAndSuppliersSuccess(sampleBrands, sampleSuppliers));
@@ -112,7 +113,7 @@ export function* deleteSupplier(action) {
       const response = yield call(supplier.deleteSupplier, completePayload);
       yield put(deleteSupplierSuccess(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     // yield put(getBrandsAndSuppliersSuccess(sampleBrands, sampleSuppliers));

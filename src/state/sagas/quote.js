@@ -45,6 +45,7 @@ import { errorAsMessage, logError } from '../../helpers/api_error';
 import { getCustomer } from '../actions/customer';
 import { savePartOK } from '../actions/part';
 import { getModelKey } from '../../components/app/model/helpers/model';
+import { LOGIN_URL } from '../../components/menus/helpers/menu';
 
 export function* saveQuoteProcess(action) {
   const quoteToSave = action.payload.quote;
@@ -55,7 +56,7 @@ export function* saveQuoteProcess(action) {
       const response = yield call(quote.saveQuote, completePayload);
       yield put(saveQuoteOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (apiError) {
     const error = 'Save Quote failed';
@@ -80,7 +81,7 @@ export function* archiveQuote(action) {
       const response = yield call(quote.archiveQuote, completePayload);
       yield put(archiveQuoteOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(archiveQuoteError(errorAsMessage(error, 'Archive Quote failed')));
@@ -99,7 +100,7 @@ export function* unarchiveQuote(action) {
       const response = yield call(quote.unarchiveQuote, completePayload);
       yield put(unarchiveQuoteOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(unarchiveQuoteError(errorAsMessage(error, 'Quote restore failed')));
@@ -120,7 +121,7 @@ export function* copyQuote(action) {
       yield put(getCustomer(response.data.customerId));
       yield call(history.push, '/quote');
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(copyQuoteError(errorAsMessage(error, 'Copy Quote failed')));
@@ -141,7 +142,7 @@ export function* getQuote(action) {
       yield put(getCustomer(response.data.customerId));
       yield call(history.push, '/quote');
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(getQuoteError(errorAsMessage(error, 'Failed to get quote')));
@@ -160,7 +161,7 @@ export function* getQuoteToCopy(action) {
       yield put(getQuoteToCopyOK(response.data));
       yield call(history.push, '/quote-copy');
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(getQuoteToCopyError(errorAsMessage(error, 'Failed to get quote')));
@@ -179,7 +180,7 @@ export function* getQuoteList(action) {
       const response = yield call(quote.getQuoteList, completePayload);
       yield put(getQuoteListOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(getQuoteListError(errorAsMessage(error, 'Failed to get quotes')));
@@ -200,7 +201,7 @@ export function* createQuote(action) {
       yield put(getCustomer(response.data.customerId));
       yield call(history.push, '/quote');
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(createQuoteError(errorAsMessage(error, 'Create Quote failed')));
@@ -242,7 +243,7 @@ export function* saveQuotePart(action) {
       const quoteResponse = yield call(quote.recalculateQuote, { quoteId, token });
       yield put(getQuoteOK(quoteResponse.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (apiError) {
     const error = 'Quote Part save failed';
@@ -272,7 +273,7 @@ export function* deleteQuotePart(action) {
       const quoteResponse = yield call(quote.recalculateQuote, { quoteId, token });
       yield put(getQuoteOK(quoteResponse.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -292,7 +293,7 @@ export function* issueQuote(action) {
       const response = yield call(quote.issueQuote, completePayload);
       yield put(issueQuoteOK(response.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(issueQuoteError(errorAsMessage(error, 'Issue Quote failed')));

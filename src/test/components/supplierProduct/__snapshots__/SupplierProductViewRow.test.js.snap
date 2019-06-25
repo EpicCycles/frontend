@@ -4,7 +4,7 @@ exports[`should display when passed an empty supplier product 1`] = `
 <Fragment>
   <div
     className="grid-item "
-    key="SupplierProductRowsuppliernew"
+    key="SupplierProductRowsupplier"
   >
     <ModelViewRowField
       field={
@@ -36,7 +36,7 @@ exports[`should display when passed an empty supplier product 1`] = `
   </div>
   <div
     className="grid-item "
-    key="SupplierProductRowproduct_codenew"
+    key="SupplierProductRowproduct_code"
   >
     <ModelViewRowField
       field={
@@ -68,7 +68,7 @@ exports[`should display when passed an empty supplier product 1`] = `
   </div>
   <div
     className="grid-item "
-    key="SupplierProductRowfitted_pricenew"
+    key="SupplierProductRowfitted_price"
   >
     <ModelViewRowField
       field={
@@ -98,7 +98,7 @@ exports[`should display when passed an empty supplier product 1`] = `
   </div>
   <div
     className="grid-item "
-    key="SupplierProductRowticket_pricenew"
+    key="SupplierProductRowticket_price"
   >
     <ModelViewRowField
       field={
@@ -128,7 +128,7 @@ exports[`should display when passed an empty supplier product 1`] = `
   </div>
   <div
     className="grid-item "
-    key="SupplierProductRowrrpnew"
+    key="SupplierProductRowrrp"
   >
     <ModelViewRowField
       field={
@@ -165,7 +165,7 @@ exports[`should display when passed an empty supplier product 1`] = `
   </div>
   <div
     className="grid-item "
-    key="SupplierProductRowtrade_pricenew"
+    key="SupplierProductRowtrade_price"
   >
     <ModelViewRowField
       field={
@@ -194,7 +194,7 @@ exports[`should display when passed an empty supplier product 1`] = `
   </div>
   <div
     className="grid-item "
-    key="SupplierProductRowclub_pricenew"
+    key="SupplierProductRowclub_price"
   >
     <ModelViewRowField
       field={
@@ -223,7 +223,7 @@ exports[`should display when passed an empty supplier product 1`] = `
   </div>
   <div
     className="grid-item "
-    key="SupplierProductRowcheck_datenew"
+    key="SupplierProductRowcheck_date"
   >
     <ModelViewRowField
       field={

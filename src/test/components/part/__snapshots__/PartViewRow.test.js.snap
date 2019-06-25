@@ -2099,7 +2099,7 @@ exports[`PartViewRow should display when no part and no supplier products exist 
 <Fragment>
   <div
     className="grid-item "
-    key="partRowpartTypenew"
+    key="partRowpartType"
     style={
       Object {
         "gridRow": " span 0",
@@ -2438,7 +2438,7 @@ exports[`PartViewRow should display when no part and no supplier products exist 
   </div>
   <div
     className="grid-item "
-    key="partRowbrandnew"
+    key="partRowbrand"
     style={
       Object {
         "gridRow": " span 0",
@@ -2781,7 +2781,7 @@ exports[`PartViewRow should display when no part and no supplier products exist 
   </div>
   <div
     className="grid-item "
-    key="partRowpart_namenew"
+    key="partRowpart_name"
     style={
       Object {
         "gridRow": " span 0",
@@ -3122,7 +3122,7 @@ exports[`PartViewRow should display when no part and no supplier products exist 
   </div>
   <div
     className="grid-item "
-    key="partRowtrade_in_pricenew"
+    key="partRowtrade_in_price"
     style={
       Object {
         "gridRow": " span 0",
@@ -3461,7 +3461,7 @@ exports[`PartViewRow should display when no part and no supplier products exist 
   </div>
   <div
     className="grid-item "
-    key="partRowstandardnew"
+    key="partRowstandard"
     style={
       Object {
         "gridRow": " span 0",
@@ -3798,7 +3798,7 @@ exports[`PartViewRow should display when no part and no supplier products exist 
   </div>
   <div
     className="grid-item "
-    key="partRowstockednew"
+    key="partRowstocked"
     style={
       Object {
         "gridRow": " span 0",

@@ -28,6 +28,7 @@ import { clearAllState } from '../actions/application';
 import { getBrandsAndSuppliers } from '../actions/core';
 import { getFramework } from '../actions/framework';
 import { listParts } from '../actions/part';
+import { LOGIN_URL } from '../../components/menus/helpers/menu';
 
 export function* loginUser(action) {
   try {
@@ -62,7 +63,7 @@ export function* logoutUser(action) {
       yield put(logoutUserSuccess());
       yield put(clearAllState());
     }
-    yield call(history.push, '/login');
+    yield call(history.push, LOGIN_URL);
   } catch (error) {
     yield put(logoutUserFailure(errorAsMessage(error, 'Logout was not successful')));
   }
@@ -80,7 +81,7 @@ export function* changePassword(action) {
       yield call(userApis.changePassword, completePayload);
       yield put(changePasswordOK());
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(changePasswordError(errorAsMessage(error, 'Password change was not successful')));
@@ -99,7 +100,7 @@ export function* changeUserData(action) {
       const changeUserResponse = yield call(userApis.changeUserData, completePayload);
       yield put(changeUserDataOK(changeUserResponse.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
@@ -119,12 +120,12 @@ export function* getUserList(action) {
       const getUsersResponse = yield call(userApis.getUsers, completePayload);
       yield put(getUsersSuccess(getUsersResponse.data));
     } else {
-      yield call(history.push, '/login');
+      yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
     yield put(getUsersFailure('Get Users was not successful'));
-    yield call(history.push, '/login');
+    yield call(history.push, LOGIN_URL);
   }
 }
 

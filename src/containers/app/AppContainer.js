@@ -5,7 +5,7 @@ import HeaderContainer from './HeaderContainer';
 import NotFound from '../404';
 import Home from '../home';
 
-import { CUSTOMER_SEARCH_URL, CUSTOMER_URL } from '../../components/menus/helpers/menu';
+import {CUSTOMER_SEARCH_URL, CUSTOMER_URL, LOGIN_URL} from '../../components/menus/helpers/menu';
 
 const LazyLoginContainer = lazy(() => import('../user/LoginContainer'));
 const LazyQuoteCopyContainer = lazy(() => import('../quote/QuoteCopyContainer'));
@@ -39,7 +39,7 @@ const App = () => (
           <Route exact path="/" component={Home} />
           <Route exact path="/sales" component={Home} />
           <Route exact path="/404" component={NotFound} />
-          <Route exact path="/login" component={LazyLoginContainer} />
+          <Route exact path={LOGIN_URL} component={LazyLoginContainer} />
           <Route exact path="/change-user-detail" component={LazyUserDetailChangeContainer} />
           <Route exact path="/change-password" component={LazyPasswordChangeContainer} />
           <Route exact path={CUSTOMER_URL} component={LazyCustomerEditContainer} />

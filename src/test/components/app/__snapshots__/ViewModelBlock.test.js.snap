@@ -11,7 +11,7 @@ exports[`ViewModelBlock it renders 1`] = `
     <ViewModelFieldRow
       bikes={Array []}
       brands={Array []}
-      componentKey="new"
+      componentKey=""
       customers={Array []}
       field={
         Object {
@@ -35,7 +35,7 @@ exports[`ViewModelBlock it renders 1`] = `
     <ViewModelFieldRow
       bikes={Array []}
       brands={Array []}
-      componentKey="new"
+      componentKey=""
       customers={Array []}
       field={
         Object {
@@ -57,7 +57,7 @@ exports[`ViewModelBlock it renders 1`] = `
     <ViewModelFieldRow
       bikes={Array []}
       brands={Array []}
-      componentKey="new"
+      componentKey=""
       customers={Array []}
       field={
         Object {
@@ -79,7 +79,7 @@ exports[`ViewModelBlock it renders 1`] = `
     <ViewModelFieldRow
       bikes={Array []}
       brands={Array []}
-      componentKey="new"
+      componentKey=""
       customers={Array []}
       field={
         Object {
@@ -101,7 +101,7 @@ exports[`ViewModelBlock it renders 1`] = `
     <ViewModelFieldRow
       bikes={Array []}
       brands={Array []}
-      componentKey="new"
+      componentKey=""
       customers={Array []}
       field={
         Object {
@@ -1122,7 +1122,7 @@ exports[`ViewModelBlock it renders 1`] = `
     <ViewModelFieldRow
       bikes={Array []}
       brands={Array []}
-      componentKey="new"
+      componentKey=""
       customers={Array []}
       field={
         Object {
@@ -1148,7 +1148,7 @@ exports[`ViewModelBlock it renders 1`] = `
     <ViewModelFieldRow
       bikes={Array []}
       brands={Array []}
-      componentKey="new"
+      componentKey=""
       customers={Array []}
       field={
         Object {
@@ -1168,7 +1168,7 @@ exports[`ViewModelBlock it renders 1`] = `
     <ViewModelFieldRow
       bikes={Array []}
       brands={Array []}
-      componentKey="new"
+      componentKey=""
       customers={Array []}
       field={
         Object {
@@ -1189,7 +1189,7 @@ exports[`ViewModelBlock it renders 1`] = `
     <ViewModelFieldRow
       bikes={Array []}
       brands={Array []}
-      componentKey="new"
+      componentKey=""
       customers={Array []}
       field={
         Object {

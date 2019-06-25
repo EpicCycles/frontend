@@ -68,9 +68,11 @@ import {
   watchForGetQuoteToCopy,
   watchForIssueQuote,
 } from './quote';
+import { watchForChangeRoute } from './application';
 
 export default function* rootSaga() {
   yield all([
+    watchForChangeRoute(),
     watchForLoginUser(),
     watchForLogoutUser(),
     watchForChangePassword(),

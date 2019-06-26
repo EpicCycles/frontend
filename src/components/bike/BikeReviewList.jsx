@@ -12,10 +12,8 @@ import {
   SELL_PRICE_FIELD,
 } from '../app/model/helpers/fields';
 import ModelTableHeaders from '../app/model/ModelTableHeaders';
-import ModelViewRow from '../app/model/ModelViewRow';
 import EditModel from '../app/model/EditModel';
 import { frameActions } from './helpers/frameActions';
-import { saveFrame } from '../../state/actions/bike';
 import { bikeActions } from './helpers/bikeActions';
 
 const frameFields = [FRAME_NAME_FIELD];

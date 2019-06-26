@@ -34,7 +34,9 @@ class Header extends React.Component {
     // saves if component has a chance to unmount
     this.saveStateToLocalStorage();
   }
-
+  componentDidUpdate(prevProps, prevState) {
+    setTimeout(() => this.props.removeMessage(), 5000);
+  }
   hydrateStateWithLocalStorage = () => {
     const userDetails = getCookieObject(COOKIE_USER);
     const token = getCookieObject(COOKIE_TOKEN);

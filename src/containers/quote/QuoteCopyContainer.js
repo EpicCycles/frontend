@@ -12,7 +12,7 @@ const mapStateToProps = ({ bike, core, customer, framework, part, quote, user })
     suppliers: core.suppliers,
     sections: framework.sections,
     parts: part.parts,
-    supplierParts: part.supplierParts,
+    supplierProducts: part.supplierProducts,
     frames: bike.frames,
     count: customer.count,
     customers: customer.customers,

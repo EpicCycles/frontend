@@ -13,7 +13,7 @@ import { getFramework, getFrameworkSuccess } from '../../state/actions/framework
 
 const mapStateToProps = ({ user, application, core, part, framework }) => {
   const { brands, suppliers } = core;
-  const { parts, supplierParts } = part;
+  const { parts, supplierProducts } = part;
   const { sections } = framework;
   return {
     user: user.user,
@@ -22,7 +22,7 @@ const mapStateToProps = ({ user, application, core, part, framework }) => {
     brands,
     suppliers,
     parts,
-    supplierParts,
+    supplierProducts,
     sections,
   };
 };

@@ -131,7 +131,6 @@ EditModel.propTypes = {
   lockFirstColumn: PropTypes.bool,
   actionsRequired: PropTypes.bool,
   modelSave: PropTypes.func,
-  modelReset: PropTypes.func,
   modelDelete: PropTypes.func,
   additionalActions: PropTypes.array,
   dummyRow: PropTypes.bool,

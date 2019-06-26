@@ -86,6 +86,7 @@ class SupplierProductReview extends React.Component {
       savePart,
       deletePart,
       saveSupplierProduct,
+      saveSupplierProductOK,
       deleteSupplierProduct,
     } = this.props;
     let partsToUse, supplierProductsToUse;
@@ -120,6 +121,7 @@ class SupplierProductReview extends React.Component {
               deletePart={deletePart}
               saveSupplierProduct={saveSupplierProduct}
               deleteSupplierProduct={deleteSupplierProduct}
+              saveSupplierProductOK={saveSupplierProductOK}
             />
           </Fragment>
         ) : (

@@ -13,6 +13,7 @@ const SupplierProductReviewList = props => {
     deletePart,
     saveSupplierProduct,
     deleteSupplierProduct,
+    saveSupplierProductOK,
   } = props;
 
   return (
@@ -39,6 +40,7 @@ const SupplierProductReviewList = props => {
             deletePart={deletePart}
             saveSupplierProduct={saveSupplierProduct}
             deleteSupplierProduct={deleteSupplierProduct}
+            saveSupplierProductOK={saveSupplierProductOK}
           />
         );
       })}

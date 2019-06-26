@@ -1,45 +1,19 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { updateObject } from '../../helpers/utils';
-import { partFieldsComplete } from '../app/model/helpers/fields';
-import { checkForChangesAllFields, getModelKey, updateModel } from '../app/model/helpers/model';
-import SupplierProductEditRow from './SupplierProductEditRow';
-import EditModelRow from '../app/model/EditModelRow';
-import { getRelevantSupplierProducts, newSupplierProduct } from '../part/helpers/supplierProduct';
+import { partFieldsComplete, supplierProductFields } from '../app/model/helpers/fields';
+import { getModelKey } from '../app/model/helpers/model';
+import { newSupplierProduct } from '../part/helpers/supplierProduct';
+import EditModel from '../app/model/EditModel';
 
 class SupplierProductReviewPart extends React.Component {
-  static getDerivedStateFromProps(props, state) {
-    if (checkForChangesAllFields(partFieldsComplete, props.part, state.persistedPart)) {
-      return {
-        part: updateObject(props.part),
-        persistedPart: updateObject(props.part),
-      };
-    }
-    return null;
-  }
-
-  state = {
-    part: updateObject(this.props.part),
-    persistedPart: updateObject(this.props.part),
-    supplierProducts: getRelevantSupplierProducts(this.props.part, this.props.supplierProducts),
+  addSupplierProduct = partId => {
+    const supplierProduct = newSupplierProduct(partId);
+    this.props.saveSupplierProductOK(supplierProduct);
   };
-
-  handleInputChange = (fieldName, input) => {
-    let { part } = this.state;
-    part = updateModel(part, partFieldsComplete, fieldName, input);
-    this.setState({ part });
-  };
-
-  resetPart = () => {
-    const { persistedPart } = this.state;
-    const part = updateObject(persistedPart);
-    this.setState({ part });
-  };
-
   render() {
-    const { part, persistedPart } = this.state;
     const {
+      part,
       brands,
       suppliers,
       sections,
@@ -50,31 +24,42 @@ class SupplierProductReviewPart extends React.Component {
       deleteSupplierProduct,
     } = this.props;
     const supplierProductsForPart = supplierProducts.filter(sp => sp.part === part.id);
-    supplierProductsForPart.push(newSupplierProduct(part.id));
+    const noSupplierProduct = supplierProductsForPart.length === 0;
+    if (noSupplierProduct) supplierProductsForPart.push(newSupplierProduct(part.id));
+    const additionalActions = [
+      {
+        iconName: 'add',
+        iconTitle: 'Add Supplier Product',
+        iconAction: () => this.addSupplierProduct(part.id),
+        iconDisabled: noSupplierProduct,
+      },
+    ];
     return supplierProductsForPart.map((supplierProduct, supplierProductIndex) => {
       const rowKey = getModelKey(supplierProduct);
       return (
         <div className="grid-row" key={`partRow${rowKey}`}>
-          <EditModelRow
+          <EditModel
             model={part}
             modelFields={partFieldsComplete}
-            persistedModel={persistedPart}
             sections={sections}
             brands={brands}
-            onChange={this.handleInputChange}
             childModels={supplierProducts}
             lockFirstColumn
             actionsRequired
+            showReadOnlyFields
+            additionalActions={additionalActions}
             modelSave={savePart}
             modelDelete={deletePart}
-            modelReset={this.resetPart}
             dummyRow={supplierProductIndex > 0}
           />
-          <SupplierProductEditRow
-            supplierProduct={supplierProduct}
+          <EditModel
+            model={supplierProduct}
+            modelFields={supplierProductFields}
             suppliers={suppliers}
-            saveSupplierProduct={saveSupplierProduct}
-            deleteSupplierProduct={deleteSupplierProduct}
+            modelSave={saveSupplierProduct}
+            modelDelete={deleteSupplierProduct}
+            actionsRequired
+            showReadOnlyFields
           />
         </div>
       );
@@ -90,6 +75,7 @@ SupplierProductReviewPart.propTypes = {
   savePart: PropTypes.func,
   deletePart: PropTypes.func,
   saveSupplierProduct: PropTypes.func,
+  saveSupplierProductOK: PropTypes.func,
   deleteSupplierProduct: PropTypes.func,
 };
 export default SupplierProductReviewPart;

@@ -3,7 +3,7 @@ import {
   deletePart,
   deleteSupplierProduct,
   savePart,
-  saveSupplierProduct,
+  saveSupplierProduct, saveSupplierProductOK,
 } from '../../state/actions/part';
 import SupplierProductReview from '../../components/supplierProduct/SupplierProductReview';
 import { addMessage } from '../../state/actions/application';
@@ -22,6 +22,7 @@ const mapDispatchToProps = {
   savePart,
   deletePart,
   saveSupplierProduct,
+  saveSupplierProductOK,
   deleteSupplierProduct,
   addMessage,
 };

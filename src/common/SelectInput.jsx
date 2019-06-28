@@ -19,20 +19,18 @@ class SelectInput extends Component {
     }
   };
 
-  buildOptions = value => {
+  buildOptions = () => {
     const { options, isEmptyAllowed } = this.props;
 
     let displayOptions = [];
-    let selectedValues = value ? value : [];
-    isEmptyAllowed && displayOptions.push({ value: '', name: 'None', selected: !value });
+    if (isEmptyAllowed) {
+      displayOptions.push({ value: 0, name: 'None' });
+    }
     options.forEach(option => {
       const displayName = option.name ? option.name : option.value;
-      const displaySelected =
-        selectedValues.length > 0 ? selectedValues.includes(option.value) : option.isDefault;
       displayOptions.push({
         value: option.value.toString(),
         name: displayName,
-        selected: displaySelected,
       });
     });
     return displayOptions;
@@ -43,11 +41,13 @@ class SelectInput extends Component {
     this.props.options.forEach(option => {
       if (option.isDefault) defaultValue.push(option.value.toString());
     });
-    if (this.props.isMultiple) {
-      return defaultValue;
-    } else {
-      return defaultValue[0];
-    }
+    if (defaultValue.length > 0)
+      if (this.props.isMultiple) {
+        return defaultValue;
+      } else {
+        return defaultValue[0];
+      }
+    return 0;
   };
 
   handleChange = event => {

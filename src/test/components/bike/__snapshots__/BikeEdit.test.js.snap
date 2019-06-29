@@ -6,6 +6,7 @@ exports[`basic render should show the bike name and bike edit page when rendered
     Haibike: Trekking 4
   </h3>
   <EditModelPage
+    data-test="edit-bike"
     model={
       Object {
         "changed": false,
@@ -118,19 +119,30 @@ exports[`basic render should show the bike name and bike edit page when rendered
     }
   />
   <div
-    style={
-      Object {
-        "textAlign": "right",
-      }
-    }
+    className="grid-col--fixed-right align_center"
   >
-    <Icon
-      as="i"
-      data-test="delete-bike"
-      id="delete-bike"
-      name="trash"
-      onClick={[Function]}
-      title="Delete Bike"
+    <ModelEditIcons
+      componentKey={58}
+      data-test="edit-icons"
+      model={
+        Object {
+          "changed": false,
+          "club_price": "2249.00",
+          "colours": "anthracite/black/lime",
+          "description": null,
+          "epic_price": null,
+          "error": "",
+          "error_detail": Object {},
+          "frame": 14,
+          "id": 58,
+          "model_name": "4",
+          "rrp": null,
+          "sizes": null,
+        }
+      }
+      modelDelete={[Function]}
+      modelReset={[Function]}
+      modelSave={[Function]}
     />
   </div>
 </div>

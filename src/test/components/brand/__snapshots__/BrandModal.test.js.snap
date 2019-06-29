@@ -30,7 +30,8 @@ exports[`BrandModal BrandModal displays correctly for a brand 1`] = `
       Edit
        Brand
     </h2>
-    <EditModelPage
+    <EditModel
+      actionsRequired={true}
       model={
         Object {
           "brand_name": "e brand 8",
@@ -45,6 +46,7 @@ exports[`BrandModal BrandModal displays correctly for a brand 1`] = `
           ],
         }
       }
+      modelDelete={[Function]}
       modelFields={
         Array [
           Object {
@@ -79,21 +81,9 @@ exports[`BrandModal BrandModal displays correctly for a brand 1`] = `
           },
         ]
       }
-      onChange={[Function]}
-      persistedModel={
-        Object {
-          "brand_name": "e brand 8",
-          "id": 8,
-          "link": "https://bianchi.co.uk",
-          "supplier": Array [
-            23,
-            1,
-            2,
-            45,
-            16,
-          ],
-        }
-      }
+      modelSave={[Function]}
+      pageMode={true}
+      showReadOnlyFields={true}
       suppliers={
         Array [
           Object {
@@ -114,30 +104,6 @@ exports[`BrandModal BrandModal displays correctly for a brand 1`] = `
           },
         ]
       }
-    />
-  </div>
-  <div
-    className="align_right"
-  >
-    <ModelEditIcons
-      componentKey={8}
-      model={
-        Object {
-          "brand_name": "e brand 8",
-          "id": 8,
-          "link": "https://bianchi.co.uk",
-          "supplier": Array [
-            23,
-            1,
-            2,
-            45,
-            16,
-          ],
-        }
-      }
-      modelDelete={[Function]}
-      modelReset={[Function]}
-      modelSave={[Function]}
     />
   </div>
 </div>
@@ -173,8 +139,10 @@ exports[`BrandModal BrandModal displays correctly for a new brand 1`] = `
       New
        Brand
     </h2>
-    <EditModelPage
+    <EditModel
+      actionsRequired={true}
       model={Object {}}
+      modelDelete={[Function]}
       modelFields={
         Array [
           Object {
@@ -209,8 +177,9 @@ exports[`BrandModal BrandModal displays correctly for a new brand 1`] = `
           },
         ]
       }
-      onChange={[Function]}
-      persistedModel={Object {}}
+      modelSave={[Function]}
+      pageMode={true}
+      showReadOnlyFields={true}
       suppliers={
         Array [
           Object {
@@ -231,17 +200,6 @@ exports[`BrandModal BrandModal displays correctly for a new brand 1`] = `
           },
         ]
       }
-    />
-  </div>
-  <div
-    className="align_right"
-  >
-    <ModelEditIcons
-      componentKey=""
-      model={Object {}}
-      modelDelete={[Function]}
-      modelReset={[Function]}
-      modelSave={[Function]}
     />
   </div>
 </div>

@@ -2,11 +2,12 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 
 import { updateObject } from '../../helpers/utils';
-import { addFieldToState, isModelValid } from '../app/model/helpers/model';
+import { addFieldToState, getModelKey } from '../app/model/helpers/model';
 import { bikeFields } from '../app/model/helpers/fields';
 import { Icon } from 'semantic-ui-react';
 import EditModelPage from '../app/model/EditModelPage';
 import { bikeFullName } from './helpers/bike';
+import ModelEditIcons from '../app/model/ModelEditIcons';
 
 class BikeEdit extends React.Component {
   state = {};
@@ -53,8 +54,6 @@ class BikeEdit extends React.Component {
 
   render() {
     const { bike, brands, frames, addPart } = this.props;
-    const { changed } = this.state;
-    const isValid = isModelValid(this.state);
 
     return (
       <div>
@@ -64,33 +63,17 @@ class BikeEdit extends React.Component {
           modelFields={bikeFields}
           onChange={this.handleInputChange}
           persistedModel={bike}
+                data-test="edit-bike"
+      />
+        <div className="grid-col--fixed-right align_center">
+          <ModelEditIcons
+            componentKey={getModelKey(bike)}
+            model={this.state}
+            modelSave={this.saveOrCreateBike}
+            modelDelete={this.deleteOrRemoveBike}
+            modelReset={this.onClickReset}
+                data-test="edit-icons"
         />
-        <div style={{ textAlign: 'right' }}>
-          {changed && (
-            <Icon
-              id={`reset-bike`}
-              name="undo"
-              onClick={this.onClickReset}
-              title="Reset Bike details"
-              data-test="reset-bike"
-            />
-          )}
-          {changed && isValid && (
-            <Icon
-              id={`accept-bike`}
-              name="check"
-              onClick={this.saveOrCreateBike}
-              title="Confirm Bike Change"
-              data-test="save-bike"
-            />
-          )}
-          <Icon
-            id={`delete-bike`}
-            name="trash"
-            onClick={this.deleteOrRemoveBike}
-            title="Delete Bike"
-            data-test="delete-bike"
-          />
           {addPart && (
             <Icon
               id={`add-part`}

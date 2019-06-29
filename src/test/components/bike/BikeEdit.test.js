@@ -1,10 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import BikeEdit from '../../../components/bike/BikeEdit';
-import {
-  assertComponentHasExpectedProps,
-  findDataTest,
-} from '../../jest_helpers/assert';
+import { assertComponentHasExpectedProps, findDataTest } from '../../jest_helpers/assert';
 import { bikeFields } from '../../../components/app/model/helpers/fields';
 
 const frames = [
@@ -72,70 +69,8 @@ describe('basic render', () => {
       persistedModel: props.bike,
       modelFields: bikeFields,
     });
-    expect(findDataTest(component, 'reset-bike')).toHaveLength(0);
-    expect(findDataTest(component, 'save-bike')).toHaveLength(0);
-    expect(findDataTest(component, 'delete-bike')).toHaveLength(1);
+    expect(findDataTest(component, 'edit-icons')).toHaveLength(1);
     expect(findDataTest(component, 'add-bike-part')).toHaveLength(0);
-  });
-
-  test('should not show save if field changed but invalid', () => {
-    component.instance().handleInputChange('model_name', '');
-    component.update();
-
-    expect(findDataTest(component, 'reset-bike')).toHaveLength(1);
-    expect(findDataTest(component, 'save-bike')).toHaveLength(0);
-    expect(findDataTest(component, 'delete-bike')).toHaveLength(1);
-    expect(findDataTest(component, 'add-bike-part')).toHaveLength(0);
-  });
-  test('should reset display when invalid changes reset', () => {
-    component.instance().handleInputChange('model_name', '');
-    component.update();
-
-    expect(findDataTest(component, 'reset-bike')).toHaveLength(1);
-    expect(findDataTest(component, 'save-bike')).toHaveLength(0);
-    expect(findDataTest(component, 'delete-bike')).toHaveLength(1);
-    expect(findDataTest(component, 'add-bike-part')).toHaveLength(0);
-
-    expect(component.state('changed')).toBeTruthy();
-
-    findDataTest(component, 'reset-bike').simulate('click');
-    component.update();
-    expect(component.state('changed')).toBeFalsy();
-
-    expect(findDataTest(component, 'reset-bike')).toHaveLength(0);
-    expect(findDataTest(component, 'save-bike')).toHaveLength(0);
-    expect(findDataTest(component, 'delete-bike')).toHaveLength(1);
-    expect(findDataTest(component, 'add-bike-part')).toHaveLength(0);
-  });
-  test('should call save function passed', () => {
-    component.instance().handleInputChange('rrp', '1000');
-    component.update();
-    expect(findDataTest(component, 'reset-bike')).toHaveLength(1);
-    expect(findDataTest(component, 'save-bike')).toHaveLength(1);
-    expect(findDataTest(component, 'delete-bike')).toHaveLength(1);
-    expect(findDataTest(component, 'add-bike-part')).toHaveLength(0);
-
-    expect(component.state('changed')).toBeTruthy();
-    findDataTest(component, 'save-bike').simulate('click');
-    expect(saveBike).toHaveBeenCalledTimes(1);
-    expect(saveBike).toHaveBeenCalledWith(
-      expect.objectContaining({
-        id: 58,
-        model_name: '4',
-        description: null,
-        colours: 'anthracite/black/lime',
-        epic_price: null,
-        club_price: '2249.00',
-        sizes: null,
-        frame: 14,
-        rrp: '1000',
-      }),
-    );
-  });
-  test('should call delete function passed', () => {
-    findDataTest(component, 'delete-bike').simulate('click');
-    expect(deleteBikes).toHaveBeenCalledTimes(1);
-    expect(deleteBikes).toHaveBeenCalledWith([58]);
   });
 });
 
@@ -154,13 +89,8 @@ describe('With add part', () => {
     component = shallow(<BikeEdit {...props} addPart={addPart} />);
   });
   test('should display add part when function is passed', () => {
-    expect(findDataTest(component, 'reset-bike')).toHaveLength(0);
-    expect(findDataTest(component, 'save-bike')).toHaveLength(0);
-    expect(findDataTest(component, 'delete-bike')).toHaveLength(1);
+    expect(findDataTest(component, 'edit-icons')).toHaveLength(1);
+
     expect(findDataTest(component, 'add-bike-part')).toHaveLength(1);
-  });
-  test('should call the add function when the icon is clicked', () => {
-    findDataTest(component, 'add-bike-part').simulate('click');
-    expect(addPart).toHaveBeenCalledTimes(1);
   });
 });

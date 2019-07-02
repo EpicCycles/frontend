@@ -2,12 +2,12 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 
 import { generateRandomCode, removeObjectWithIndex, updateObject } from '../../helpers/utils';
-import { Icon } from 'semantic-ui-react';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 import SupplierBlob from '../supplier/SupplierBlob';
 import { BIKE_BRAND_FIELD, BRAND_NAME_FIELD, brandFields } from '../app/model/helpers/fields';
 import { updateModel } from '../app/model/helpers/model';
 import EditModelInput from '../app/model/EditModelInput';
+import AddLink from '../app/model/AddLink';
 
 const BRAND_NAME_FIELD_BLANK = updateObject(BRAND_NAME_FIELD, { required: false });
 class BrandEdit extends React.Component {
@@ -54,7 +54,7 @@ class BrandEdit extends React.Component {
         onDragStart={event => pickUpBrand(event, componentKey)}
       >
         {componentKey.toString() === NEW_ELEMENT_ID && (
-          <Icon name="add" onClick={this.addAnother} />
+          <AddLink addFunction={this.addAnother} addObjectName={'Brand'} />
         )}
         <EditModelInput
           field={BRAND_NAME_FIELD_BLANK}

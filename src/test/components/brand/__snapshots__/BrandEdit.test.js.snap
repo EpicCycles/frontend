@@ -7,10 +7,9 @@ exports[`BrandEdit should shows new brand without supplier correctly 1`] = `
   key="brandnew"
   onDragStart={[Function]}
 >
-  <Icon
-    as="i"
-    name="add"
-    onClick={[Function]}
+  <AddLink
+    addFunction={[Function]}
+    addObjectName="Brand"
   />
   <EditModelInput
     componentKey="new"

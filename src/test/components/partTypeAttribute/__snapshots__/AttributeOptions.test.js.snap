@@ -23,11 +23,9 @@ exports[`AttributeOptions tests renders the form correctly when all options dele
         />
       </td>
       <td>
-        <Icon
-          as="i"
-          name="add"
-          onClick={[Function]}
-          title="confirm new Attribute"
+        <AddLink
+          addFunction={[Function]}
+          addObjectName="Option"
         />
       </td>
     </tr>
@@ -58,11 +56,9 @@ exports[`AttributeOptions tests renders the form correctly with no options 1`] =
         />
       </td>
       <td>
-        <Icon
-          as="i"
-          name="add"
-          onClick={[Function]}
-          title="confirm new Attribute"
+        <AddLink
+          addFunction={[Function]}
+          addObjectName="Option"
         />
       </td>
     </tr>
@@ -186,11 +182,9 @@ exports[`AttributeOptions tests renders the form correctly with options 1`] = `
         />
       </td>
       <td>
-        <Icon
-          as="i"
-          name="add"
-          onClick={[Function]}
-          title="confirm new Attribute"
+        <AddLink
+          addFunction={[Function]}
+          addObjectName="Option"
         />
       </td>
     </tr>

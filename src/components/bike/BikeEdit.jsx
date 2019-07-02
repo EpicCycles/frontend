@@ -4,10 +4,10 @@ import * as PropTypes from 'prop-types';
 import { updateObject } from '../../helpers/utils';
 import { addFieldToState, getModelKey } from '../app/model/helpers/model';
 import { bikeFields } from '../app/model/helpers/fields';
-import { Icon } from 'semantic-ui-react';
 import EditModelPage from '../app/model/EditModelPage';
 import { bikeFullName } from './helpers/bike';
 import ModelEditIcons from '../app/model/ModelEditIcons';
+import AddLink from '../app/model/AddLink';
 
 class BikeEdit extends React.Component {
   state = {};
@@ -63,8 +63,8 @@ class BikeEdit extends React.Component {
           modelFields={bikeFields}
           onChange={this.handleInputChange}
           persistedModel={bike}
-                data-test="edit-bike"
-      />
+          data-test="edit-bike"
+        />
         <div className="grid-col--fixed-right align_center">
           <ModelEditIcons
             componentKey={getModelKey(bike)}
@@ -72,16 +72,10 @@ class BikeEdit extends React.Component {
             modelSave={this.saveOrCreateBike}
             modelDelete={this.deleteOrRemoveBike}
             modelReset={this.onClickReset}
-                data-test="edit-icons"
-        />
+            data-test="edit-icons"
+          />
           {addPart && (
-            <Icon
-              id={`add-part`}
-              name="add"
-              onClick={() => addPart()}
-              title="Add part to bike"
-              data-test="add-bike-part"
-            />
+            <AddLink addFunction={addPart} addObjectName={'part'} data-test="add-bike-part" />
           )}
         </div>
       </div>

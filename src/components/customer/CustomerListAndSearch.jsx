@@ -4,7 +4,7 @@ import CustomerSearch from "./CustomerSearch";
 import CustomerListGridHeaders from "./CustomerListGridHeaders";
 import CustomerListGridRow from "./CustomerListGridRow";
 import Pagination from "../../common/pagination";
-import CustomerAddLink from "./CustomerAddLink";
+import AddLink from "../app/model/AddLink";
 
 const CustomerListAndSearch = (props) => {
     const { addNewCustomer, getCustomerList, getCustomerListPage, getCustomer, isLoading, customers, count, next, previous, searchParams } = props;
@@ -40,7 +40,7 @@ const CustomerListAndSearch = (props) => {
                     No Customer to show, set new criteria and search, or
                 </div>
             }
-            <CustomerAddLink addNewCustomer={addNewCustomer}/>
+            <AddLink addNewCustomer={addNewCustomer}/>
         </div>
     </Fragment>;
 };

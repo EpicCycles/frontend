@@ -5,10 +5,9 @@ exports[`SectionEdit shows a NEW section correctly 1`] = `
   <div
     className="grid-item grid-item--fixed-left"
   >
-    <Icon
-      as="i"
-      name="add"
-      onClick={[Function]}
+    <AddLink
+      addFunction={[Function]}
+      addObjectName="Section"
     />
   </div>
   <div

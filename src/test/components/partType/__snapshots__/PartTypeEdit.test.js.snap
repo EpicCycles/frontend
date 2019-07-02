@@ -3,10 +3,9 @@
 exports[`displays the PartTypeEdit component for a new part type with no attributes 1`] = `
 <Fragment>
   <td>
-    <Icon
-      as="i"
-      name="add"
-      onClick={[Function]}
+    <AddLink
+      addFunction={[Function]}
+      addObjectName="Type"
     />
   </td>
   <td>

@@ -1,12 +1,12 @@
 /* eslint-disable camelcase,jsx-a11y/label-has-associated-control,react/prop-types,react/prop-types,react/destructuring-assignment */
 import React, { Fragment } from 'react';
-import { Icon } from 'semantic-ui-react';
 import FormTextInput from '../../common/FormTextInput';
 import AttributeOptions from './AttributeOptions';
 import SelectInput from '../../common/SelectInput';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 import { generateRandomCode, updateObject } from '../../helpers/utils';
 import { ATTRIBUTE_OPTION_TYPES } from './helpers/partTypeAttribute';
+import AddLink from '../app/model/AddLink';
 
 class PartTypeAttributeEdit extends React.Component {
   handleInputChange = (fieldName, input) => {
@@ -62,7 +62,7 @@ class PartTypeAttributeEdit extends React.Component {
             onClick={this.handleInputClear}
           />
           {componentKey === NEW_ELEMENT_ID && (
-            <Icon name="add" onClick={this.addAnother} title="confirm new Attribute" />
+            <AddLink addFunction={this.addAnother} addObjectName={'Attribute'} />
           )}
           <label htmlFor={inUseId}>&nbsp;In Use?&nbsp;</label>
           <input

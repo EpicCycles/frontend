@@ -22,8 +22,9 @@ exports[`CustomerListAndSearch.index tests renders the CustomerListAndSearch cor
     <div>
       No Customer to show, set new criteria and search, or
     </div>
-    <CustomerAddLink
+    <AddLink
       addNewCustomer={[MockFunction]}
+      addObjectName=""
     />
   </div>
 </Fragment>
@@ -88,8 +89,9 @@ exports[`CustomerListAndSearch.index tests renders the CustomerListAndSearch cor
       count={6}
       id="customer-pagination"
     />
-    <CustomerAddLink
+    <AddLink
       addNewCustomer={[MockFunction]}
+      addObjectName=""
     />
   </div>
 </Fragment>

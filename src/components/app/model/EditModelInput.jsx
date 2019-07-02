@@ -91,7 +91,7 @@ class EditModelInput extends Component {
             fieldName={fieldName}
             value={fieldValue}
             onChange={this.validateOnChange}
-            cols={Math.ceil(field.size / 4)}
+            cols={Math.min(50, Math.ceil(field.size / 4))}
             onClick={this.resetField}
             error={error}
             disabled={disabled}
@@ -148,18 +148,16 @@ class EditModelInput extends Component {
       case CHECKBOX:
         const checked = !!fieldValue;
         editComponent = (
-          <div className="align_center">
-            <input
-              type="checkbox"
-              name={fieldName}
-              onChange={() => this.validateOnChange(fieldName, !checked)}
-              checked={checked}
-              disabled={disabled}
-              className={error ? 'red' : ''}
-              title={error ? `${field.title} red` : field.title}
-              data-test="model-checkbox"
-            />
-          </div>
+          <input
+            type="checkbox"
+            name={fieldName}
+            onChange={() => this.validateOnChange(fieldName, !checked)}
+            checked={checked}
+            disabled={disabled}
+            className={error ? 'red' : ''}
+            title={error ? `${field.title} red` : field.title}
+            data-test="model-checkbox"
+          />
         );
         break;
       case PART_TYPE:

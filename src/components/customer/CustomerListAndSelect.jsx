@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import * as PropTypes from "prop-types";
 import CustomerSearch from "./CustomerSearch";
-import CustomerAddLink from "./CustomerAddLink";
+import AddLink from "../app/model/AddLink";
 import {getModelKey} from "../app/model/helpers/model";
 import {buildCustomerString} from "./helpers/customer";
 import SelectInput from "../../common/SelectInput";
@@ -47,7 +47,7 @@ const CustomerListAndSelect = (props) => {
                 Not all customers matching are shown, refine criteria and search, or
             </div>
             }
-            <CustomerAddLink addNewCustomer={addNewCustomer}/>
+            <AddLink addNewCustomer={addNewCustomer}/>
         </div>
     </Fragment>;
 };

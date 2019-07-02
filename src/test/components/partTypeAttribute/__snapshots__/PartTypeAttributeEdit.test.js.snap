@@ -17,11 +17,9 @@ exports[`PartTypeAttributeEdit tests renders the component correctly with a new 
       title=""
       value=""
     />
-    <Icon
-      as="i"
-      name="add"
-      onClick={[Function]}
-      title="confirm new Attribute"
+    <AddLink
+      addFunction={[Function]}
+      addObjectName="Attribute"
     />
     <label
       htmlFor="in_use_new"
@@ -100,11 +98,9 @@ exports[`PartTypeAttributeEdit tests renders the component correctly with an att
       title=""
       value=""
     />
-    <Icon
-      as="i"
-      name="add"
-      onClick={[Function]}
-      title="confirm new Attribute"
+    <AddLink
+      addFunction={[Function]}
+      addObjectName="Attribute"
     />
     <label
       htmlFor="in_use_new"

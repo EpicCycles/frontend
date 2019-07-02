@@ -91,52 +91,40 @@ exports[`EditModelInput it renders a brand field that has no data 1`] = `
 
 exports[`EditModelInput it renders a checkbox field that has no data 1`] = `
 <Fragment>
-  <div
-    className="align_center"
-  >
-    <input
-      checked={false}
-      className=""
-      data-test="model-checkbox"
-      name="data_field120"
-      onChange={[Function]}
-      type="checkbox"
-    />
-  </div>
+  <input
+    checked={false}
+    className=""
+    data-test="model-checkbox"
+    name="data_field120"
+    onChange={[Function]}
+    type="checkbox"
+  />
 </Fragment>
 `;
 
 exports[`EditModelInput it renders a checkbox field that is false 1`] = `
 <Fragment>
-  <div
-    className="align_center"
-  >
-    <input
-      checked={false}
-      className=""
-      data-test="model-checkbox"
-      name="data_field120"
-      onChange={[Function]}
-      type="checkbox"
-    />
-  </div>
+  <input
+    checked={false}
+    className=""
+    data-test="model-checkbox"
+    name="data_field120"
+    onChange={[Function]}
+    type="checkbox"
+  />
 </Fragment>
 `;
 
 exports[`EditModelInput it renders a checkbox field that is true 1`] = `
 <Fragment>
-  <div
-    className="align_center"
-  >
-    <input
-      checked={true}
-      className=""
-      data-test="model-checkbox"
-      name="data_field120"
-      onChange={[Function]}
-      type="checkbox"
-    />
-  </div>
+  <input
+    checked={true}
+    className=""
+    data-test="model-checkbox"
+    name="data_field120"
+    onChange={[Function]}
+    type="checkbox"
+  />
 </Fragment>
 `;
 
@@ -458,7 +446,7 @@ exports[`EditModelInput it renders a text field that has no data 1`] = `
 exports[`EditModelInput it renders a textarea field that has data 1`] = `
 <Fragment>
   <FormTextAreaInput
-    cols={100}
+    cols={50}
     error=""
     fieldName="data_field120"
     onChange={[Function]}
@@ -471,7 +459,7 @@ exports[`EditModelInput it renders a textarea field that has data 1`] = `
 exports[`EditModelInput it renders a textarea field that has no data 1`] = `
 <Fragment>
   <FormTextAreaInput
-    cols={100}
+    cols={50}
     error=""
     fieldName="data_field120"
     onChange={[Function]}

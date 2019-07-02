@@ -48,12 +48,9 @@ exports[`it displays synonyms 1`] = `
       title=""
       value="new one"
     />
-    <Icon
-      as="i"
-      key="synonym_add"
-      name="add"
-      onClick={[Function]}
-      title="confirm new Synonym"
+    <AddLink
+      addFunction={[Function]}
+      addObjectName="Synonym"
     />
   </div>
 </Fragment>

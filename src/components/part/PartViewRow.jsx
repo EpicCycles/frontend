@@ -1,29 +1,20 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import * as PropTypes from 'prop-types';
-import { getModelKey } from '../app/model/helpers/model';
 import { partFieldsComplete } from '../app/model/helpers/fields';
-import ModelViewRowField from '../app/model/ModelViewRowField';
+import ModelViewRow from '../app/model/ModelViewRow';
 
 const PartViewRow = props => {
   const { part, supplierProducts, lockFirstColumn, brands, sections } = props;
   const rowSpan = supplierProducts ? supplierProducts.length : 1;
-  const componentKey = getModelKey(part);
   return (
-    <Fragment>
-      {partFieldsComplete.map((field, index) => {
-        const fixed = index === 0 && lockFirstColumn ? 'grid-item--fixed-left' : '';
-
-        return (
-          <div
-            className={`grid-item ${fixed}`}
-            key={`partRow${field.fieldName}${componentKey}`}
-            style={{ gridRow: ` span ${rowSpan}` }}
-          >
-            <ModelViewRowField field={field} model={part} brands={brands} sections={sections} />
-          </div>
-        );
-      })}
-    </Fragment>
+    <ModelViewRow
+      modelFields={partFieldsComplete}
+      model={part}
+      brands={brands}
+      sections={sections}
+      lockFirstColumn={lockFirstColumn}
+      rowSpan={rowSpan}
+    />
   );
 };
 PartViewRow.propTypes = {

@@ -11,6 +11,7 @@ exports[`should display just parts when supplier products not required 1`] = `
   >
     <PartDisplayGridHeaders
       className=""
+      includeActions={false}
       key="partBlockHeaders"
       lockFirstColumn={false}
       showSupplierProducts={false}
@@ -60,6 +61,8 @@ exports[`should display just parts when supplier products not required 1`] = `
           },
         ]
       }
+      includeActions={false}
+      key="partsRow11"
       lockFirstColumn={false}
       part={
         Object {
@@ -173,6 +176,8 @@ exports[`should display just parts when supplier products not required 1`] = `
           },
         ]
       }
+      includeActions={false}
+      key="partsRow13"
       lockFirstColumn={false}
       part={
         Object {
@@ -286,6 +291,8 @@ exports[`should display just parts when supplier products not required 1`] = `
           },
         ]
       }
+      includeActions={false}
+      key="partsRow29"
       lockFirstColumn={false}
       part={
         Object {
@@ -403,6 +410,8 @@ exports[`should display just parts when supplier products not required 1`] = `
           },
         ]
       }
+      includeActions={false}
+      key="partsRow212"
       lockFirstColumn={false}
       part={
         Object {
@@ -520,6 +529,8 @@ exports[`should display just parts when supplier products not required 1`] = `
           },
         ]
       }
+      includeActions={false}
+      key="partsRow214"
       lockFirstColumn={false}
       part={
         Object {
@@ -637,6 +648,8 @@ exports[`should display just parts when supplier products not required 1`] = `
           },
         ]
       }
+      includeActions={false}
+      key="partsRow3171"
       lockFirstColumn={false}
       part={
         Object {
@@ -716,6 +729,7 @@ exports[`should display parts and supplier parts when supplier products are requ
   >
     <PartDisplayGridHeaders
       className=""
+      includeActions={false}
       key="partBlockHeaders"
       lockFirstColumn={true}
       showSupplierProducts={true}
@@ -765,6 +779,8 @@ exports[`should display parts and supplier parts when supplier products are requ
           },
         ]
       }
+      includeActions={false}
+      key="partsRow11"
       lockFirstColumn={true}
       part={
         Object {
@@ -928,6 +944,8 @@ exports[`should display parts and supplier parts when supplier products are requ
           },
         ]
       }
+      includeActions={false}
+      key="partsRow13"
       lockFirstColumn={true}
       part={
         Object {
@@ -1091,6 +1109,8 @@ exports[`should display parts and supplier parts when supplier products are requ
           },
         ]
       }
+      includeActions={false}
+      key="partsRow29"
       lockFirstColumn={true}
       part={
         Object {
@@ -1258,6 +1278,8 @@ exports[`should display parts and supplier parts when supplier products are requ
           },
         ]
       }
+      includeActions={false}
+      key="partsRow212"
       lockFirstColumn={true}
       part={
         Object {
@@ -1425,6 +1447,8 @@ exports[`should display parts and supplier parts when supplier products are requ
           },
         ]
       }
+      includeActions={false}
+      key="partsRow214"
       lockFirstColumn={true}
       part={
         Object {
@@ -1592,6 +1616,8 @@ exports[`should display parts and supplier parts when supplier products are requ
           },
         ]
       }
+      includeActions={false}
+      key="partsRow3171"
       lockFirstColumn={true}
       part={
         Object {

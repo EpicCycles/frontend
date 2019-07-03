@@ -5,7 +5,8 @@ import { partCanBeOmitted, partCanBeSubstituted } from './helpers/part';
 import { fixedDetailsClassname } from '../app/model/helpers/display';
 import { getModelKey } from '../app/model/helpers/model';
 import PartViewRow from './PartViewRow';
-import SupplierProductViewRow from '../supplierProduct/SupplierProductViewRow';
+import { supplierProductFields } from '../app/model/helpers/fields';
+import ModelViewRow from '../app/model/ModelViewRow';
 
 const PartDisplayGridRow = props => {
   const {
@@ -46,15 +47,16 @@ const PartDisplayGridRow = props => {
           key={`partViewRow${part.id}`}
         />
         {showSupplierProducts && (
-          <SupplierProductViewRow
-            supplierProduct={firstSupplierProduct}
-            suppliers={suppliers}
+          <ModelViewRow
             key={`supplierProduct${getModelKey(firstSupplierProduct)}`}
+            modelFields={supplierProductFields}
+            model={firstSupplierProduct}
+            suppliers={suppliers}
           />
         )}
         {includeActions && (
           <div
-            className="grid-item"
+            className="grid-item align_center"
             style={{ gridRow: `span ${rowSpan}` }}
             key={`partActions${part.id}`}
             data-test="part-actions"
@@ -81,9 +83,10 @@ const PartDisplayGridRow = props => {
       {showSupplierProducts &&
         supplierProductsForPart.map(supplierProduct => (
           <div className="grid-row" key={`supplierProductRow${supplierProduct.id}`}>
-            <SupplierProductViewRow
+            <ModelViewRow
               key={`supplierProduct${supplierProduct.id}`}
-              supplierProduct={supplierProduct}
+              modelFields={supplierProductFields}
+              model={supplierProduct}
               suppliers={suppliers}
             />
           </div>

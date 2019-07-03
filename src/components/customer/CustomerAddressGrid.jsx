@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import * as PropTypes from 'prop-types';
 import { createEmptyModelWithDefaultFields, getModelKey } from '../app/model/helpers/model';
 import { customerAddressFields } from '../app/model/helpers/fields';
-import { updateObject } from '../../helpers/utils';
 import AddLink from '../app/model/AddLink';
 import EditModel from '../app/model/EditModel';
 

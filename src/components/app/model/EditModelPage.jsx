@@ -7,7 +7,6 @@ import ViewModelFieldRow from './ViewModelFieldRow';
 import NonFieldErrors from './NonFieldErrors';
 import { isItAnObject } from '../../../helpers/utils';
 import { modelActions } from './helpers/modelActions';
-import { gridItemClass } from './helpers/display';
 import IconArray from '../../../common/IconArray';
 
 const EditModelPage = props => {

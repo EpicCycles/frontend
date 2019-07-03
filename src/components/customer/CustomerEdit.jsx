@@ -105,8 +105,10 @@ class CustomerEdit extends React.Component {
                 <CustomerPhoneGrid
                   deleteCustomerPhone={deleteCustomerPhone}
                   saveCustomerPhone={saveCustomerPhone}
+                  addCustomerPhone={addCustomerPhone}
                   customerId={customerId}
                   phones={phones}
+                  users={users}
                   data-test="edit-customer-phones"
                 />
               </div>

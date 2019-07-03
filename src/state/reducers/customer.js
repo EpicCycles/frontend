@@ -116,7 +116,7 @@ const customer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        phones: updateObjectInArray(state.addresses, action.payload.customerPhone),
+        phones: updateObjectInArray(state.phones, action.payload.customerPhone),
       };
     case CUSTOMER_ADDRESS_ADD:
       return {
@@ -135,10 +135,14 @@ const customer = (state = initialState, action) => {
         addresses: updateObjectInArray(state.addresses, addressWithError),
       };
     case `${CUSTOMER_PHONE_SAVE}_ERROR`:
+      const phoneWithError = updateObjectWithApiErrors(
+        action.payload.customerPhone,
+        action.payload,
+      );
       return {
         ...state,
         isLoading: false,
-        phones: updateObjectInArray(state.phones, action.payload.customerPhone),
+        phones: updateObjectInArray(state.phones, phoneWithError),
       };
     case CUSTOMER_LIST:
       return {

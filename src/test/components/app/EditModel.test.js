@@ -28,7 +28,6 @@ describe('EditModel', () => {
       />,
     );
     expect(component.find('EditModelPage')).toHaveLength(1);
-    expect(component.find('IconArray')).toHaveLength(1);
     expect(component.find('EditModelRow')).toHaveLength(0);
   });
   it('should render actions and additional actions when page mode and actions required', () => {
@@ -43,7 +42,6 @@ describe('EditModel', () => {
       />,
     );
     expect(component.find('EditModelPage')).toHaveLength(1);
-    expect(component.find('IconArray')).toHaveLength(1);
     expect(component.find('EditModelRow')).toHaveLength(0);
   });
   it('should render page row when not page mode and pass data for additional actions', () => {
@@ -58,7 +56,6 @@ describe('EditModel', () => {
       />,
     );
     expect(component.find('EditModelPage')).toHaveLength(0);
-    expect(component.find('IconArray')).toHaveLength(0);
     expect(component.find('EditModelRow')).toHaveLength(1);
     assertComponentHasExpectedProps(component.find('EditModelRow'), {
       additionalActions: actions,

@@ -6,6 +6,9 @@ import EditModelPageRow from './EditModelPageRow';
 import ViewModelFieldRow from './ViewModelFieldRow';
 import NonFieldErrors from './NonFieldErrors';
 import { isItAnObject } from '../../../helpers/utils';
+import { modelActions } from './helpers/modelActions';
+import { gridItemClass } from './helpers/display';
+import IconArray from '../../../common/IconArray';
 
 const EditModelPage = props => {
   const {
@@ -22,8 +25,14 @@ const EditModelPage = props => {
     customers,
     onChange,
     showReadOnlyFields,
+    actionsRequired,
+    modelSave,
+    modelDelete,
+    modelReset,
+    additionalActions,
   } = props;
   const componentKey = getModelKey(model);
+  const allActions = modelActions(model, { modelSave, modelDelete, modelReset }, additionalActions);
   return (
     <div className="grid-container">
       {model.error && <div className="red">{model.error}</div>}
@@ -67,6 +76,11 @@ const EditModelPage = props => {
             data-test="show-error-detail"
           />
         )}
+        {actionsRequired && (
+          <div className="full align_right">
+            <IconArray componentKey={componentKey} actionArray={allActions} />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -90,5 +104,10 @@ EditModelPage.propTypes = {
   users: PropTypes.array,
   onChange: PropTypes.func.isRequired,
   showReadOnlyFields: PropTypes.bool,
+  actionsRequired: PropTypes.bool,
+  modelSave: PropTypes.func,
+  modelReset: PropTypes.func,
+  modelDelete: PropTypes.func,
+  additionalActions: PropTypes.array,
 };
 export default EditModelPage;

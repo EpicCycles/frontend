@@ -59,8 +59,10 @@ class CustomerEdit extends React.Component {
       isLoading,
       customerId,
       deleteNote,
+      addCustomerPhone,
       deleteCustomerPhone,
       saveCustomerPhone,
+      addCustomerAddress,
       saveCustomerAddress,
       deleteCustomerAddress,
       getQuote,
@@ -87,13 +89,16 @@ class CustomerEdit extends React.Component {
               users={users}
               key="customerEdit"
               data-test="edit-customer"
+              className="fit-content"
             />
             {customerId && (
               <div className="grid-container">
                 <CustomerAddressGrid
                   deleteCustomerAddress={deleteCustomerAddress}
                   saveCustomerAddress={saveCustomerAddress}
+                  addCustomerAddress={addCustomerAddress}
                   addresses={addresses}
+                  users={users}
                   customerId={customerId}
                   data-test="edit-customer-addresses"
                 />

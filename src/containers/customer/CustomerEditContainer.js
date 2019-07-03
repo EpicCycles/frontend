@@ -1,15 +1,21 @@
 import {
-    createCustomer,
-    saveCustomer,
-    deleteCustomer,
-    saveCustomerPhone, deleteCustomerPhone, saveCustomerAddress, deleteCustomerAddress
-} from "../../state/actions/customer";
-import {connect} from "react-redux";
-import CustomerEdit from "../../components/customer/CustomerEdit";
-import {createNote, deleteNote, saveNote} from "../../state/actions/note";
-import {archiveQuote, getQuote, getQuoteToCopy, unarchiveQuote} from "../../state/actions/quote";
+  createCustomer,
+  saveCustomer,
+  deleteCustomer,
+  saveCustomerPhone,
+  deleteCustomerPhone,
+  saveCustomerAddress,
+  deleteCustomerAddress,
+  addCustomerPhone,
+  addCustomerAddress,
+} from '../../state/actions/customer';
+import { connect } from 'react-redux';
+import CustomerEdit from '../../components/customer/CustomerEdit';
+import { createNote, deleteNote, saveNote } from '../../state/actions/note';
+import { archiveQuote, getQuote, getQuoteToCopy, unarchiveQuote } from '../../state/actions/quote';
 
-export default connect(({ customer, note, quote, bike, core, user }) => ({
+export default connect(
+  ({ customer, note, quote, bike, core, user }) => ({
     customers: customer.customers,
     addresses: customer.addresses,
     phones: customer.phones,
@@ -22,11 +28,24 @@ export default connect(({ customer, note, quote, bike, core, user }) => ({
     frames: bike.frames,
     brands: core.brands,
     users: user.users,
-    isLoading: customer.isLoading || note.isLoading
-}), {
-    createCustomer, saveCustomer, deleteCustomer,
-    createNote, saveNote,  deleteNote,
-    saveCustomerPhone, deleteCustomerPhone,
-    saveCustomerAddress, deleteCustomerAddress,
-    getQuote, archiveQuote, unarchiveQuote, getQuoteToCopy
-}) (CustomerEdit)
+    isLoading: customer.isLoading || note.isLoading,
+  }),
+  {
+    createCustomer,
+    saveCustomer,
+    deleteCustomer,
+    createNote,
+    saveNote,
+    deleteNote,
+    saveCustomerPhone,
+    deleteCustomerPhone,
+    addCustomerPhone,
+    saveCustomerAddress,
+    deleteCustomerAddress,
+    addCustomerAddress,
+    getQuote,
+    archiveQuote,
+    unarchiveQuote,
+    getQuoteToCopy,
+  },
+)(CustomerEdit);

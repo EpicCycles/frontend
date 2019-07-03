@@ -54,11 +54,14 @@ describe('EditModelPage', () => {
         sections={sections}
         brands={brands}
         persistedModel={model}
+        actionsRequired={true}
+        modelSave={jest.fn()}
         showReadOnlyFields
       />,
     );
     expect(findDataTest(component, 'field-to-edit')).toHaveLength(7);
     expect(findDataTest(component, 'field-to-view')).toHaveLength(2);
+    expect(component.find('IconArray')).toHaveLength(1);
     expect(findDataTest(component, 'show-error-detail')).toHaveLength(0);
   });
   it('should show edit, view and errors when all are present', () => {

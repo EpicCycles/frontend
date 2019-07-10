@@ -20,22 +20,22 @@ exports[`Login displays login fields when no user in session 1`] = `
       modelFields={
         Array [
           Object {
+            "displaySize": 20,
             "error": "A value is required.",
             "fieldName": "username",
             "header": "User Name",
-            "length": 60,
+            "maxLength": 60,
             "required": true,
-            "size": 20,
             "synonyms": Array [],
             "type": "text",
           },
           Object {
+            "displaySize": 20,
             "error": "A value is required.",
             "fieldName": "password",
             "header": "Password",
-            "length": 60,
+            "maxLength": 60,
             "required": true,
-            "size": 20,
             "synonyms": Array [],
             "type": "password",
           },
@@ -84,22 +84,22 @@ exports[`Login displays login fields when user in session 1`] = `
       modelFields={
         Array [
           Object {
+            "displaySize": 20,
             "error": "A value is required.",
             "fieldName": "username",
             "header": "User Name",
-            "length": 60,
+            "maxLength": 60,
             "required": true,
-            "size": 20,
             "synonyms": Array [],
             "type": "text",
           },
           Object {
+            "displaySize": 20,
             "error": "A value is required.",
             "fieldName": "password",
             "header": "Password",
-            "length": 60,
+            "maxLength": 60,
             "required": true,
-            "size": 20,
             "synonyms": Array [],
             "type": "password",
           },

@@ -26,19 +26,19 @@ exports[`basic render should show the bike name and bike edit page when rendered
     modelFields={
       Array [
         Object {
+          "displaySize": 40,
           "error": "A name is required for the model",
           "fieldName": "model_name",
           "header": "Model Name",
-          "length": 100,
+          "maxLength": 100,
           "required": true,
-          "size": 40,
           "synonyms": Array [],
           "type": "text",
         },
         Object {
+          "displaySize": 400,
           "fieldName": "description",
           "header": "Description",
-          "size": 400,
           "synonyms": Array [
             "description",
             "desc",
@@ -46,10 +46,10 @@ exports[`basic render should show the bike name and bike edit page when rendered
           "type": "textArea",
         },
         Object {
+          "displaySize": 30,
           "fieldName": "colours",
           "header": "Colours",
-          "length": 100,
-          "size": 30,
+          "maxLength": 100,
           "synonyms": Array [
             "colours",
             "colour",
@@ -59,10 +59,10 @@ exports[`basic render should show the bike name and bike edit page when rendered
           "type": "text",
         },
         Object {
+          "displaySize": 6,
           "fieldName": "rrp",
           "header": "RRP",
-          "length": 10,
-          "size": 10,
+          "maxLength": 10,
           "synonyms": Array [
             "price",
             "selling price",
@@ -74,25 +74,25 @@ exports[`basic render should show the bike name and bike edit page when rendered
           "type": "currency",
         },
         Object {
+          "displaySize": 6,
           "fieldName": "epic_price",
           "header": "Epic Price",
-          "length": 10,
-          "size": 10,
+          "maxLength": 10,
           "synonyms": Array [],
           "type": "currency",
         },
         Object {
+          "displaySize": 10,
           "fieldName": "club_price",
           "header": "Club Price",
-          "length": 10,
-          "size": 10,
+          "maxLength": 6,
           "type": "currency",
         },
         Object {
+          "displaySize": 50,
           "fieldName": "sizes",
           "header": "Sizes",
-          "length": 100,
-          "size": 50,
+          "maxLength": 100,
           "synonyms": Array [
             "sizes",
             "size",

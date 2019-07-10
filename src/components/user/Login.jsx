@@ -10,8 +10,8 @@ const loginFields = [
   {
     fieldName: 'username',
     type: TEXT,
-    size: 20,
-    length: 60,
+    displaySize: 20,
+    maxLength: 60,
     header: 'User Name',
     synonyms: [],
     required: true,
@@ -20,8 +20,8 @@ const loginFields = [
   {
     fieldName: PASSWORD,
     type: PASSWORD,
-    size: 20,
-    length: 60,
+    displaySize: 20,
+    maxLength: 60,
     header: 'Password',
     synonyms: [],
     required: true,

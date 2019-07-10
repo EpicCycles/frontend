@@ -8,6 +8,7 @@ exports[`PartTypeAttributeEdit tests renders the component correctly with a new 
       dataType="text"
       error=""
       fieldName="attribute_name_new"
+      inputClass=""
       label=""
       list=""
       onChange={[Function]}
@@ -89,6 +90,7 @@ exports[`PartTypeAttributeEdit tests renders the component correctly with an att
       dataType="text"
       error=""
       fieldName="attribute_name_new"
+      inputClass=""
       label=""
       list=""
       onChange={[Function]}

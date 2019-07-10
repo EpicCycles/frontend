@@ -445,7 +445,7 @@ fieldset {
     position: sticky;
     top: 0;
     padding: 5px;
-    min-width: 100px;
+    min-width: 50px;
     font-size: 1.1rem;
     font-weight: bold;
     background-color: var(--col-epic-red);

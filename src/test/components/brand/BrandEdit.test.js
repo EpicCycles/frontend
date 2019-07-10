@@ -32,7 +32,7 @@ describe('BrandEdit', () => {
     expect(handleBrandChange.mock.calls).toHaveLength(1);
     expect(handleBrandChange.mock.calls[0][0]).toBe(componentKey);
     expect(handleBrandChange.mock.calls[0][1].id).toBe(brand.id);
-    expect(handleBrandChange.mock.calls[0][1].brand_name).toBe(null);
+    expect(handleBrandChange.mock.calls[0][1].brand_name).toBe('');
     expect(handleBrandChange.mock.calls[0][1].error_detail).toEqual({
       brand_name: BRAND_NAME_MISSING,
     });
@@ -78,7 +78,7 @@ describe('BrandEdit', () => {
     expect(handleBrandChange.mock.calls[0][0]).toBe(componentKey);
     expect(handleBrandChange.mock.calls[0][1].id).toBe(undefined);
     expect(handleBrandChange.mock.calls[0][1].dummyKey).not.toBe(undefined);
-    expect(handleBrandChange.mock.calls[0][1].brand_name).toBe(null);
+    expect(handleBrandChange.mock.calls[0][1].brand_name).toBe('');
     expect(handleBrandChange.mock.calls[0][1].link).toBe(brand.link);
     expect(handleBrandChange.mock.calls[0][1].error_detail).toEqual({
       brand_name: 'A name is required for the brand',

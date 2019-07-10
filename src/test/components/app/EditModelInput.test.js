@@ -41,7 +41,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 23.9 };
     expect(
@@ -62,7 +62,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
-      length: 10,
+      maxLength: 10,
     };
     expect(
       toJson(
@@ -121,7 +121,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: TEXT,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 'SHow text' };
     expect(
@@ -142,7 +142,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: TEXT,
-      length: 10,
+      maxLength: 10,
     };
     expect(
       toJson(
@@ -162,7 +162,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: TEXT_AREA,
-      size: 400,
+      displaySize: 400,
     };
     const model = { data_field: 'SHow text' };
     expect(
@@ -183,7 +183,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: TEXT_AREA,
-      size: 400,
+      displaySize: 400,
       header: 'put text here',
     };
     expect(
@@ -245,7 +245,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: CHECKBOX,
-      length: 10,
+      maxLength: 10,
     };
     const onChange = jest.fn();
     const component = shallow(
@@ -266,7 +266,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: PART_TYPE,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 2 };
     expect(
@@ -288,7 +288,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: PART_TYPE,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 202 };
 
@@ -311,7 +311,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: PART_TYPE,
-      length: 10,
+      maxLength: 10,
     };
     expect(
       toJson(
@@ -332,7 +332,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: BRAND,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 2 };
     expect(
@@ -396,7 +396,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: SUPPLIER,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 2 };
     expect(
@@ -460,7 +460,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 23.9 };
     const persistedModel = { data_field: 123.99 };
@@ -485,7 +485,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 23.9 };
     const persistedModel = { data_field: 123.99 };
@@ -510,7 +510,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
-      length: 10,
+      maxLength: 10,
       required: true,
       error: 'My data is missing',
     };
@@ -536,7 +536,7 @@ describe('EditModelInput', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
-      length: 10,
+      maxLength: 10,
       required: true,
       error: 'My data is missing',
     };

@@ -42,7 +42,7 @@ describe('SupplierEdit', () => {
     const component = shallow(<SupplierEdit supplier={supplier} />);
     const supplierUpdated = {
       id: 1,
-      supplier_name: null,
+      supplier_name: '',
       brand_names: ['brands 1', 'brand 2', 'brand 3'],
       link: 'supplier.co.uk',
       preferred_supplier: false,

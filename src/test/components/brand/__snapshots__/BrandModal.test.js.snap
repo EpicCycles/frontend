@@ -50,12 +50,12 @@ exports[`BrandModal BrandModal displays correctly for a brand 1`] = `
       modelFields={
         Array [
           Object {
+            "displaySize": 20,
             "error": "A name is required for the brand",
             "fieldName": "brand_name",
             "header": "Brand Name",
-            "length": 50,
+            "maxLength": 50,
             "required": true,
-            "size": 20,
             "synonyms": Array [],
           },
           Object {
@@ -64,10 +64,10 @@ exports[`BrandModal BrandModal displays correctly for a brand 1`] = `
             "type": "checkbox",
           },
           Object {
+            "displaySize": 40,
             "fieldName": "link",
             "header": "URL",
-            "length": 100,
-            "size": 40,
+            "maxLength": 100,
             "type": "text",
             "validator": [Function],
           },
@@ -146,12 +146,12 @@ exports[`BrandModal BrandModal displays correctly for a new brand 1`] = `
       modelFields={
         Array [
           Object {
+            "displaySize": 20,
             "error": "A name is required for the brand",
             "fieldName": "brand_name",
             "header": "Brand Name",
-            "length": 50,
+            "maxLength": 50,
             "required": true,
-            "size": 20,
             "synonyms": Array [],
           },
           Object {
@@ -160,10 +160,10 @@ exports[`BrandModal BrandModal displays correctly for a new brand 1`] = `
             "type": "checkbox",
           },
           Object {
+            "displaySize": 40,
             "fieldName": "link",
             "header": "URL",
-            "length": 100,
-            "size": 40,
+            "maxLength": 100,
             "type": "text",
             "validator": [Function],
           },

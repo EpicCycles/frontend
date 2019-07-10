@@ -91,7 +91,7 @@ class EditModelInput extends Component {
             fieldName={fieldName}
             value={fieldValue}
             onChange={this.validateOnChange}
-            cols={Math.min(50, Math.ceil(field.size / 4))}
+            cols={Math.min(50, Math.ceil(field.displaySize / 4))}
             onClick={this.resetField}
             error={error}
             disabled={disabled}
@@ -114,17 +114,17 @@ class EditModelInput extends Component {
         const displayValue = fieldValue ? fieldValue.toString() : '';
         editComponent = (
           <FormTextInput
-            dataType="number"
             className={className}
             placeholder={field.header}
             error={error}
             fieldName={fieldName}
             value={displayValue}
             onChange={this.validateOnChange}
-            size={field.size}
+            size={field.displaySize}
             onClick={this.validateOnChange}
-            maxLength={field.length}
+            maxLength={field.maxLength}
             disabled={disabled}
+            inputClass={'align_right'}
           />
         );
         break;
@@ -138,9 +138,9 @@ class EditModelInput extends Component {
             fieldName={fieldName}
             value={fieldValue}
             onChange={this.validateOnChange}
-            size={field.size}
+            size={field.displaySize}
             onClick={this.validateOnChange}
-            maxLength={field.length}
+            maxLength={field.maxLength}
             disabled={disabled}
           />
         );
@@ -209,9 +209,9 @@ class EditModelInput extends Component {
             onChange={this.validateOnChange}
             fieldName={fieldName}
             value={fieldValue}
-            size={field.size}
+            size={field.displaySize}
             onClick={this.validateOnChange}
-            maxLength={field.length}
+            maxLength={field.maxLength}
             title={field.title}
             list={field.listId}
             disabled={disabled}

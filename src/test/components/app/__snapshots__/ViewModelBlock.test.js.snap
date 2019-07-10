@@ -15,12 +15,12 @@ exports[`ViewModelBlock it renders 1`] = `
       customers={Array []}
       field={
         Object {
+          "displaySize": 30,
           "error": "At least one line of address must be entered",
           "fieldName": "address1",
           "header": "Address",
-          "length": 100,
+          "maxLength": 100,
           "required": true,
-          "size": 30,
           "type": "text",
         }
       }
@@ -38,10 +38,10 @@ exports[`ViewModelBlock it renders 1`] = `
       customers={Array []}
       field={
         Object {
+          "displaySize": 30,
           "fieldName": "address2",
           "header": "Line 2",
-          "length": 100,
-          "size": 30,
+          "maxLength": 100,
           "type": "text",
         }
       }
@@ -59,10 +59,10 @@ exports[`ViewModelBlock it renders 1`] = `
       customers={Array []}
       field={
         Object {
+          "displaySize": 30,
           "fieldName": "address3",
           "header": "Line 3",
-          "length": 100,
-          "size": 30,
+          "maxLength": 100,
           "type": "text",
         }
       }
@@ -80,10 +80,10 @@ exports[`ViewModelBlock it renders 1`] = `
       customers={Array []}
       field={
         Object {
+          "displaySize": 30,
           "fieldName": "address4",
           "header": "Line 4",
-          "length": 100,
-          "size": 30,
+          "maxLength": 100,
           "type": "text",
         }
       }
@@ -1121,10 +1121,10 @@ exports[`ViewModelBlock it renders 1`] = `
       customers={Array []}
       field={
         Object {
+          "displaySize": 10,
           "fieldName": "postcode",
           "header": "Postcode",
-          "length": 20,
-          "size": 10,
+          "maxLength": 20,
           "type": "text",
           "validator": [Function],
           "validatorAdditionalFields": Array [
@@ -1166,7 +1166,7 @@ exports[`ViewModelBlock it renders 1`] = `
       field={
         Object {
           "fieldName": "add_date",
-          "header": "Date Added",
+          "header": "Added",
           "readOnly": true,
           "type": "date_time",
         }
@@ -1186,7 +1186,7 @@ exports[`ViewModelBlock it renders 1`] = `
       field={
         Object {
           "fieldName": "upd_date",
-          "header": "Date Updated",
+          "header": "Updated",
           "readOnly": true,
           "type": "date_time",
         }
@@ -1232,12 +1232,12 @@ exports[`ViewModelBlock it renders with data 1`] = `
       customers={Array []}
       field={
         Object {
+          "displaySize": 30,
           "error": "At least one line of address must be entered",
           "fieldName": "address1",
           "header": "Address",
-          "length": 100,
+          "maxLength": 100,
           "required": true,
-          "size": 30,
           "type": "text",
         }
       }
@@ -1324,10 +1324,10 @@ exports[`ViewModelBlock it renders with data 1`] = `
       customers={Array []}
       field={
         Object {
+          "displaySize": 30,
           "fieldName": "address2",
           "header": "Line 2",
-          "length": 100,
-          "size": 30,
+          "maxLength": 100,
           "type": "text",
         }
       }
@@ -1414,10 +1414,10 @@ exports[`ViewModelBlock it renders with data 1`] = `
       customers={Array []}
       field={
         Object {
+          "displaySize": 30,
           "fieldName": "address3",
           "header": "Line 3",
-          "length": 100,
-          "size": 30,
+          "maxLength": 100,
           "type": "text",
         }
       }
@@ -1504,10 +1504,10 @@ exports[`ViewModelBlock it renders with data 1`] = `
       customers={Array []}
       field={
         Object {
+          "displaySize": 30,
           "fieldName": "address4",
           "header": "Line 4",
-          "length": 100,
-          "size": 30,
+          "maxLength": 100,
           "type": "text",
         }
       }
@@ -2683,10 +2683,10 @@ exports[`ViewModelBlock it renders with data 1`] = `
       customers={Array []}
       field={
         Object {
+          "displaySize": 10,
           "fieldName": "postcode",
           "header": "Postcode",
-          "length": 20,
-          "size": 10,
+          "maxLength": 20,
           "type": "text",
           "validator": [Function],
           "validatorAdditionalFields": Array [
@@ -2866,7 +2866,7 @@ exports[`ViewModelBlock it renders with data 1`] = `
       field={
         Object {
           "fieldName": "add_date",
-          "header": "Date Added",
+          "header": "Added",
           "readOnly": true,
           "type": "date_time",
         }
@@ -2955,7 +2955,7 @@ exports[`ViewModelBlock it renders with data 1`] = `
       field={
         Object {
           "fieldName": "upd_date",
-          "header": "Date Updated",
+          "header": "Updated",
           "readOnly": true,
           "type": "date_time",
         }

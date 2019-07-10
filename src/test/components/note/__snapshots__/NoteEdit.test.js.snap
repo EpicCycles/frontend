@@ -7,9 +7,9 @@ exports[`NoteEdit tests renders the form text correctly with no note 1`] = `
     modelFields={
       Array [
         Object {
+          "displaySize": 400,
           "fieldName": "note_text",
           "header": "Note",
-          "size": 400,
           "type": "textArea",
         },
         Object {
@@ -62,9 +62,9 @@ exports[`NoteEdit tests renders the form text correctly with note 1`] = `
     modelFields={
       Array [
         Object {
+          "displaySize": 400,
           "fieldName": "note_text",
           "header": "Note",
-          "size": 400,
           "type": "textArea",
         },
         Object {

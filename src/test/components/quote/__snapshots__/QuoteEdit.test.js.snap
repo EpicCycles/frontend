@@ -9,12 +9,12 @@ exports[`QuoteEdit tests renders the form text correctly with no quote 1`] = `
     modelFields={
       Array [
         Object {
+          "displaySize": 40,
           "fieldName": "quote_desc",
           "header": "Description",
-          "length": 60,
+          "maxLength": 60,
           "maxWidth": "250px",
           "required": true,
-          "size": 40,
           "type": "text",
         },
         Object {
@@ -72,7 +72,7 @@ exports[`QuoteEdit tests renders the form text correctly with no quote 1`] = `
         },
         Object {
           "fieldName": "upd_date",
-          "header": "Date Updated",
+          "header": "Updated",
           "readOnly": true,
           "type": "date_time",
         },
@@ -83,19 +83,19 @@ exports[`QuoteEdit tests renders the form text correctly with no quote 1`] = `
           "type": "date_time",
         },
         Object {
+          "displaySize": 7,
           "fieldName": "quote_price",
-          "header": "Quote Price",
-          "length": 10,
-          "size": 10,
+          "header": "Quote £",
+          "maxLength": 10,
           "synonyms": Array [],
           "type": "currency",
         },
         Object {
+          "displaySize": 6,
           "fieldName": "calculated_price",
-          "header": "Total Price",
-          "length": 10,
+          "header": "Total £",
+          "maxLength": 10,
           "readOnly": true,
-          "size": 10,
           "type": "currency",
         },
       ]
@@ -131,12 +131,12 @@ exports[`QuoteEdit tests renders the form text correctly with quote 1`] = `
     modelFields={
       Array [
         Object {
+          "displaySize": 40,
           "fieldName": "quote_desc",
           "header": "Description",
-          "length": 60,
+          "maxLength": 60,
           "maxWidth": "250px",
           "required": true,
-          "size": 40,
           "type": "text",
         },
         Object {
@@ -194,7 +194,7 @@ exports[`QuoteEdit tests renders the form text correctly with quote 1`] = `
         },
         Object {
           "fieldName": "upd_date",
-          "header": "Date Updated",
+          "header": "Updated",
           "readOnly": true,
           "type": "date_time",
         },
@@ -205,19 +205,19 @@ exports[`QuoteEdit tests renders the form text correctly with quote 1`] = `
           "type": "date_time",
         },
         Object {
+          "displaySize": 7,
           "fieldName": "quote_price",
-          "header": "Quote Price",
-          "length": 10,
-          "size": 10,
+          "header": "Quote £",
+          "maxLength": 10,
           "synonyms": Array [],
           "type": "currency",
         },
         Object {
+          "displaySize": 6,
           "fieldName": "calculated_price",
-          "header": "Total Price",
-          "length": 10,
+          "header": "Total £",
+          "maxLength": 10,
           "readOnly": true,
-          "size": 10,
           "type": "currency",
         },
       ]

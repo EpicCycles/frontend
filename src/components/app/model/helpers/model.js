@@ -1,13 +1,12 @@
 import {
   doWeHaveObjects,
-  findObjectWithKey,
   generateRandomCode,
   isItAnObject,
   removeKey,
   updateObject,
-  updateObjectInArray,
 } from '../../../../helpers/utils';
-import { CHECKBOX, CURRENCY } from './fields';
+import { CHECKBOX, CURRENCY, NUMBER } from './fields';
+import { INVALID_CURRENCY, INVALID_INTEGER, INVALID_NUMBER, VALUE_MISSING } from './error';
 
 export const modelIsAlreadyInArray = (modelArray, modelToCheck, modelFields) => {
   if (!doWeHaveObjects(modelArray)) return false;
@@ -66,18 +65,39 @@ export const isModelValid = modelInstance => {
   return !(modelInstance.error || isItAnObject(modelInstance.error_detail));
 };
 
+const financial = x => {
+  return Number.parseFloat(x).toFixed(2);
+};
+export const validateField = (field, value, fullModelData) => {
+  if (field.required && !value) {
+    if (field.error) return field.error;
+    return VALUE_MISSING;
+  }
+  if (value && field.type === NUMBER) {
+    const numberValue = Number(String(value).trim());
+    if (!Number.isInteger(numberValue)) return INVALID_NUMBER;
+    if (numberValue < 1) return INVALID_INTEGER;
+  }
+  if (value && field.type === CURRENCY) {
+    const numberValue = Number(String(value).trim());
+    if (Number.isNaN(numberValue)) return INVALID_CURRENCY;
+    const displayNumber = financial(numberValue);
+    if (Number(displayNumber) !== numberValue) return INVALID_CURRENCY;
+  }
+  if (field.validator) {
+    const error = field.validator(value, fullModelData);
+    if (error) {
+      return error;
+    }
+  }
+};
 export const applyFieldValueToModel = (modelInstance, field, value) => {
   let updatedModelInstance = applyFieldValueToModelOnly(modelInstance, field, value);
   if (!updatedModelInstance.error_detail) updatedModelInstance.error_detail = {};
-  if (field.required && !value) {
-    updatedModelInstance.error_detail[field.fieldName] = field.error;
+  const fieldError = validateField(field, value, updatedModelInstance);
+  if (fieldError) {
+    updatedModelInstance.error_detail[field.fieldName] = fieldError;
     return updatedModelInstance;
-  } else if (field.validator) {
-    const error = field.validator(value, modelInstance);
-    if (error) {
-      updatedModelInstance.error_detail[field.fieldName] = error;
-      return updatedModelInstance;
-    }
   }
   updatedModelInstance.error_detail = removeKey(updatedModelInstance.error_detail, field.fieldName);
   return updatedModelInstance;
@@ -91,30 +111,24 @@ export const applyFieldValueToModelOnly = (modelInstance, field, value) => {
 };
 const defaultFieldValue = field => {
   if (field.default) return field.default;
-  let defaultValue = null;
+  let defaultValue;
   switch (field.type) {
     case CURRENCY:
-      defaultValue = 'GBP';
+      defaultValue = '';
       break;
     case CHECKBOX:
       defaultValue = false;
       break;
     default:
-      defaultValue = null;
+      defaultValue = '';
   }
   return defaultValue;
 };
 export const validateModelAndSetErrors = (modelInstance, modelFields) => {
   let error_detail = {};
   modelFields.forEach(field => {
-    if (field.required && !modelInstance[field.fieldName]) {
-      error_detail[field.fieldName] = field.error;
-    } else if (field.validator) {
-      const error = field.validator(modelInstance[field.fieldName], modelInstance);
-      if (error) {
-        error_detail[field.fieldName] = error;
-      }
-    }
+    const error = validateField(field, modelInstance[field.fieldName], modelInstance);
+    if (error) error_detail[field.fieldName] = error;
   });
   return error_detail;
 };
@@ -149,49 +163,6 @@ export const getField = (modelFields, fieldName) => {
   return modelField;
 };
 
-export const updateModelChanges = (modelInstance, attribute, fieldValue) => {
-  let changes = updateObject(modelInstance.changes);
-  if (fieldValue && modelInstance[attribute] !== fieldValue) {
-    changes[attribute] = fieldValue;
-  } else {
-    changes = removeKey(changes, attribute);
-  }
-  return updateObject(modelInstance, { changes });
-};
-export const updateModelWithChanges = (modelInstance, modelFields, fieldName, fieldValue) => {
-  const attribute = getAttribute(modelFields, fieldName);
-  if (attribute) {
-    return updateModelChanges(modelInstance, attribute, fieldValue);
-  } else {
-    // eslint-disable-next-line no-console
-    console.error('attribute not found for', modelFields, fieldName);
-  }
-  return modelInstance;
-};
-export const updateModelArrayWithChanges = (
-  modelArray,
-  modelFields,
-  fieldName,
-  fieldValue,
-  componentKey,
-) => {
-  const attribute = getAttribute(modelFields, fieldName);
-  if (attribute) {
-    let modelInstance = findObjectWithKey(modelArray, componentKey);
-    let currentChanges = modelInstance.changes || {};
-    if (fieldValue && modelInstance[attribute] !== fieldValue) {
-      currentChanges[attribute] = fieldValue;
-    } else {
-      currentChanges = removeKey(currentChanges, attribute);
-    }
-    modelInstance.changes = currentChanges;
-    return updateObjectInArray(modelArray, modelInstance, componentKey);
-  } else {
-    // eslint-disable-next-line no-console
-    console.error('attribute not found for', modelFields, fieldName);
-  }
-  return modelArray;
-};
 export const updateModel = (model, modelFields, fieldName, fieldValue) => {
   const modelField = getField(modelFields, fieldName);
   if (modelField) {
@@ -205,7 +176,7 @@ export const updateModel = (model, modelFields, fieldName, fieldValue) => {
 export const displayModelErrorSummary = (model, modelFields) => {
   let displayErrors = model.error;
   const fieldErrors = isItAnObject(model.error_detail) ? model.error_detail : {};
-  for (var property in fieldErrors) {
+  for (const property in fieldErrors) {
     const field = getField(modelFields, property);
     if (!displayErrors) {
       displayErrors = '';
@@ -234,17 +205,7 @@ export const getNameForValue = (value, sourceArray) => {
 
 export const hasErrors = model => {
   if (model.error && model.error.length > 0) return true;
-  if (isItAnObject(model.error_detail)) return true;
-  return false;
-};
-
-export const addErrorDetail = (error_detail = {}, field, error) => {
-  let updated_error_detail = updateObject(error_detail);
-  if (!Array.isArray(updated_error_detail[field])) {
-    updated_error_detail[field] = [];
-  }
-  updated_error_detail[field].push(error);
-  return updated_error_detail;
+  return !!isItAnObject(model.error_detail);
 };
 
 export const createNewModelInstance = fields => {

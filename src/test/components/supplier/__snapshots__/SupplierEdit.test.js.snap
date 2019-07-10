@@ -30,12 +30,12 @@ exports[`SupplierEdit displays correctly for existing supplier 1`] = `
       modelFields={
         Array [
           Object {
+            "displaySize": 20,
             "error": "A value is required.",
             "fieldName": "supplier_name",
             "header": "Supplier",
-            "length": 100,
+            "maxLength": 100,
             "required": true,
-            "size": 20,
             "type": "text",
           },
           Object {
@@ -44,10 +44,10 @@ exports[`SupplierEdit displays correctly for existing supplier 1`] = `
             "type": "checkbox",
           },
           Object {
+            "displaySize": 40,
             "fieldName": "link",
             "header": "URL",
-            "length": 100,
-            "size": 40,
+            "maxLength": 100,
             "type": "text",
             "validator": [Function],
           },
@@ -147,12 +147,12 @@ exports[`SupplierEdit displays correctly for existing supplier as a modal dialog
       modelFields={
         Array [
           Object {
+            "displaySize": 20,
             "error": "A value is required.",
             "fieldName": "supplier_name",
             "header": "Supplier",
-            "length": 100,
+            "maxLength": 100,
             "required": true,
-            "size": 20,
             "type": "text",
           },
           Object {
@@ -161,10 +161,10 @@ exports[`SupplierEdit displays correctly for existing supplier as a modal dialog
             "type": "checkbox",
           },
           Object {
+            "displaySize": 40,
             "fieldName": "link",
             "header": "URL",
-            "length": 100,
-            "size": 40,
+            "maxLength": 100,
             "type": "text",
             "validator": [Function],
           },
@@ -236,12 +236,12 @@ exports[`SupplierEdit displays correctly for new supplier 1`] = `
       modelFields={
         Array [
           Object {
+            "displaySize": 20,
             "error": "A value is required.",
             "fieldName": "supplier_name",
             "header": "Supplier",
-            "length": 100,
+            "maxLength": 100,
             "required": true,
-            "size": 20,
             "type": "text",
           },
           Object {
@@ -250,10 +250,10 @@ exports[`SupplierEdit displays correctly for new supplier 1`] = `
             "type": "checkbox",
           },
           Object {
+            "displaySize": 40,
             "fieldName": "link",
             "header": "URL",
-            "length": 100,
-            "size": 40,
+            "maxLength": 100,
             "type": "text",
             "validator": [Function],
           },

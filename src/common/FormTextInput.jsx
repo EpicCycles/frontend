@@ -11,6 +11,7 @@ const FormTextInput = props => {
     disabled,
     error,
     fieldName,
+    inputClass,
     label,
     list,
     maxLength,
@@ -25,7 +26,7 @@ const FormTextInput = props => {
     <div className={`row ${className}${error ? ' error' : ''}`}>
       {label && <label>{label}</label>}
       <input
-        className={error ? ' error' : ''}
+        className={`${inputClass} ${error ? ' error' : ''}`}
         type={dataType}
         autoComplete="off"
         placeholder={placeholder}
@@ -59,6 +60,7 @@ const FormTextInput = props => {
 FormTextInput.defaultProps = {
   className: '',
   error: '',
+  inputClass: '',
   label: '',
   dataType: 'text',
   placeholder: '',
@@ -77,6 +79,7 @@ FormTextInput.propTypes = {
   value: PropTypes.string,
   list: PropTypes.string,
   fieldName: PropTypes.string.isRequired,
+  inputClass: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func,
   onKeyPress: PropTypes.func,

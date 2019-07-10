@@ -16,7 +16,7 @@ describe('ModelViewRowField', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
-      length: 10,
+      maxLength: 10,
     };
     expect(toJson(shallow(<ModelViewRowField field={field} />))).toMatchSnapshot();
   });
@@ -24,7 +24,7 @@ describe('ModelViewRowField', () => {
     const field = {
       fieldName: 'data_field',
       type: TEXT,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: ['one', 'two', 'three'] };
     expect(toJson(shallow(<ModelViewRowField field={field} />))).toMatchSnapshot();

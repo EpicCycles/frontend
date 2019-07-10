@@ -9,7 +9,7 @@ exports[`FormTextInput renders an error when present 1`] = `
   </label>
   <input
     autoComplete="off"
-    className=" error"
+    className="  error"
     list=""
     maxLength={30}
     onChange={[Function]}
@@ -31,7 +31,7 @@ exports[`FormTextInput renders the form numeric input correctly 1`] = `
   </label>
   <input
     autoComplete="off"
-    className=""
+    className=" "
     list=""
     maxLength={30}
     onChange={[Function]}
@@ -53,7 +53,7 @@ exports[`FormTextInput renders the form text input correctly 1`] = `
   </label>
   <input
     autoComplete="off"
-    className=""
+    className=" "
     list=""
     maxLength={30}
     onChange={[Function]}
@@ -72,7 +72,7 @@ exports[`FormTextInput should call onChange when an input is entered 1`] = `
 >
   <input
     autoComplete="off"
-    className=""
+    className=" "
     key="email"
     list=""
     maxLength={30}

@@ -50,7 +50,7 @@ describe('buildViewString', () => {
     const field = {
       fieldName: 'data_field',
       type: DATE_TIME,
-      length: 10,
+      maxLength: 10,
     };
     expect(buildViewString(undefined, field)).toBe('');
   });
@@ -58,7 +58,7 @@ describe('buildViewString', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 23.9 };
     expect(buildViewString(model, field)).toBe('£23.90');
@@ -67,7 +67,7 @@ describe('buildViewString', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
-      length: 10,
+      maxLength: 10,
     };
     expect(buildViewString(undefined, field)).toBe('');
   });
@@ -92,7 +92,7 @@ describe('buildViewString', () => {
     const field = {
       fieldName: 'data_field',
       type: TEXT,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 'Show text' };
     expect(buildViewString(model, field)).toBe('Show text');
@@ -101,7 +101,7 @@ describe('buildViewString', () => {
     const field = {
       fieldName: 'data_field',
       type: TEXT,
-      length: 10,
+      maxLength: 10,
     };
     expect(buildViewString(undefined, field)).toBe('');
   });
@@ -125,7 +125,7 @@ describe('buildViewString', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
-      length: 10,
+      maxLength: 10,
     };
     expect(buildViewString(undefined, field)).toBe('');
   });
@@ -133,7 +133,7 @@ describe('buildViewString', () => {
     const field = {
       fieldName: 'data_field',
       type: PART_TYPE,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 2 };
     expect(buildViewString(model, field, sections)).toBe('find me');
@@ -142,7 +142,7 @@ describe('buildViewString', () => {
     const field = {
       fieldName: 'data_field',
       type: PART_TYPE,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 202 };
     expect(buildViewString(model, field, sections)).toBe('Unknown Part Type');
@@ -151,7 +151,7 @@ describe('buildViewString', () => {
     const field = {
       fieldName: 'data_field',
       type: PART_TYPE,
-      length: 10,
+      maxLength: 10,
     };
     expect(buildViewString(undefined, field, sections)).toBe('');
   });
@@ -159,7 +159,7 @@ describe('buildViewString', () => {
     const field = {
       fieldName: 'data_field',
       type: BRAND,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 2 };
     expect(buildViewString(model, field, sections, brands)).toBe('find me');
@@ -183,7 +183,7 @@ describe('buildViewString', () => {
     const field = {
       fieldName: 'data_field',
       type: SUPPLIER,
-      length: 10,
+      maxLength: 10,
     };
     const model = { data_field: 2 };
     expect(buildViewString(model, field, sections, brands, suppliers)).toBe('find me');

@@ -1,4 +1,8 @@
-import { ADDRESS1_FIELD, ADDRESS2_FIELD, POSTCODE_FIELD } from '../../../../components/app/model/helpers/fields';
+import {
+  ADDRESS1_FIELD,
+  ADDRESS2_FIELD,
+  POSTCODE_FIELD,
+} from '../../../../components/app/model/helpers/fields';
 import { ADDRESS_MISSING } from '../../../../components/app/model/helpers/error';
 import { applyFieldValueToModel } from '../../../../components/app/model/helpers/model';
 
@@ -16,7 +20,7 @@ describe('applyFieldValueToMOdel', () => {
     const updatedModel = {
       id: 123,
       address1: 'line one',
-      address2: null,
+      address2: '',
       address3: 'line Three',
       address4: 'line Four',
       postcode: 'xxxyyy',
@@ -65,7 +69,7 @@ describe('applyFieldValueToMOdel', () => {
     const updatedModel = {
       id: 123,
       address1: 'line one',
-      address2: null,
+      address2: '',
       address3: 'line Three',
       address4: 'line Four',
       postcode: 'xxxyyy',
@@ -88,7 +92,7 @@ describe('applyFieldValueToMOdel', () => {
     };
     const updatedModel = {
       id: 123,
-      address1: null,
+      address1: '',
       address2: 'line Ywo',
       address3: 'line Three',
       address4: 'line Four',
@@ -112,7 +116,7 @@ describe('applyFieldValueToMOdel', () => {
     };
     const updatedModel = {
       id: 123,
-      address1: null,
+      address1: '',
       address2: 'line Ywo',
       address3: 'line Three',
       address4: 'line Four',

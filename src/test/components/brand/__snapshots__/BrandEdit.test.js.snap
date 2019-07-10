@@ -15,12 +15,12 @@ exports[`BrandEdit should shows new brand without supplier correctly 1`] = `
     componentKey="new"
     field={
       Object {
+        "displaySize": 20,
         "error": "A name is required for the brand",
         "fieldName": "brand_name",
         "header": "Brand Name",
-        "length": 50,
+        "maxLength": 50,
         "required": false,
-        "size": 20,
         "synonyms": Array [],
       }
     }

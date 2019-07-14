@@ -1,7 +1,7 @@
-import {BRAND_FIELD, customerAddressFields, DESCRIPTION_FIELD, FRAME_NAME_FIELD, SELL_PRICE_FIELD} from "../../../../components/app/model/helpers/fields";
+import {BRAND_FIELD, customerAddressFields, DESCRIPTION_FIELD, FRAME_NAME_FIELD, RRP_FIELD} from "../../../../components/app/model/helpers/fields";
 import {checkForChanges} from "../../../../components/app/model/helpers/model";
 
-const fieldListForTest = [BRAND_FIELD, SELL_PRICE_FIELD, DESCRIPTION_FIELD, FRAME_NAME_FIELD];
+const fieldListForTest = [BRAND_FIELD, RRP_FIELD, DESCRIPTION_FIELD, FRAME_NAME_FIELD];
 describe('model.checkForChanges', () => {
 
     it("no field values returns false", () => {
@@ -20,18 +20,18 @@ describe('model.checkForChanges', () => {
         const existingObject = {};
         const newValues = {};
         existingObject[BRAND_FIELD.fieldName] = "Brand 1;";
-        existingObject[SELL_PRICE_FIELD.fieldName] = "27.99";
+        existingObject[RRP_FIELD.fieldName] = "27.99";
         newValues[BRAND_FIELD.fieldName] = "Brand 1;";
-        newValues[SELL_PRICE_FIELD.fieldName] = "26.99";
+        newValues[RRP_FIELD.fieldName] = "26.99";
         expect(checkForChanges(fieldListForTest, existingObject, newValues)).toBeTruthy();
     });
     it("a single field not present on the original object returns true", () => {
         const existingObject = {};
         const newValues = {};
         existingObject[BRAND_FIELD.fieldName] = "Brand 1;";
-        existingObject[SELL_PRICE_FIELD.fieldName] = "27.99";
+        existingObject[RRP_FIELD.fieldName] = "27.99";
         newValues[BRAND_FIELD.fieldName] = "Brand 1;";
-        newValues[SELL_PRICE_FIELD.fieldName] = "27.99";
+        newValues[RRP_FIELD.fieldName] = "27.99";
         newValues[DESCRIPTION_FIELD.fieldName] = "Added description";
         expect(checkForChanges(fieldListForTest, existingObject, newValues)).toBeTruthy();
     });
@@ -40,10 +40,10 @@ describe('model.checkForChanges', () => {
         const newValues = {};
         existingObject["not on new"] = "ignore old";
         existingObject[BRAND_FIELD.fieldName] = "Brand 1;";
-        existingObject[SELL_PRICE_FIELD.fieldName] = "27.99";
+        existingObject[RRP_FIELD.fieldName] = "27.99";
         existingObject[DESCRIPTION_FIELD.fieldName] = "My description";
         newValues[BRAND_FIELD.fieldName] = "Brand 1;";
-        newValues[SELL_PRICE_FIELD.fieldName] = "27.99";
+        newValues[RRP_FIELD.fieldName] = "27.99";
         newValues[DESCRIPTION_FIELD.fieldName] = "My description";
         newValues["not on old"] = "ignore new";
         expect(checkForChanges(fieldListForTest, existingObject, newValues)).toBeFalsy();

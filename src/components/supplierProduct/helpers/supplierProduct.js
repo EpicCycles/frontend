@@ -44,6 +44,7 @@ export const buildSupplierProductForApi = (rowMappings, uploadedData, brands) =>
           partsMissingBrands.push(dataToUse[3]);
         } else {
           part.trade_in_price = textToNumber(dataToUse[8]);
+          part.rrp = textToNumber(dataToUse[7]);
           part.stocked = dataToUse[9].toUpperCase() === 'Y';
           part.standard = true;
           if (rowMapping.supplier) {
@@ -59,7 +60,7 @@ export const buildSupplierProductForApi = (rowMappings, uploadedData, brands) =>
               fitted_price: textToNumber(dataToUse[4]),
               ticket_price: textToNumber(dataToUse[5]),
               rrp: textToNumber(dataToUse[7]),
-              trade_price: textToNumber(dataToUse[10]),
+              trade_price: textToNumber(dataToUse[11]),
               club_price: textToNumber(dataToUse[6]),
             };
           }

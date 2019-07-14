@@ -9,7 +9,7 @@ import {
   EPIC_PRICE_FIELD,
   FRAME_NAME_FIELD,
   MODEL_NAME_FIELD,
-  SELL_PRICE_FIELD,
+  RRP_FIELD,
 } from '../app/model/helpers/fields';
 import ModelTableHeaders from '../app/model/ModelTableHeaders';
 import EditModel from '../app/model/EditModel';
@@ -17,7 +17,7 @@ import { frameActions } from './helpers/frameActions';
 import { bikeActions } from './helpers/bikeActions';
 
 const frameFields = [FRAME_NAME_FIELD];
-const bikeFields = [MODEL_NAME_FIELD, SELL_PRICE_FIELD, EPIC_PRICE_FIELD, CLUB_PRICE_FIELD];
+const bikeFields = [MODEL_NAME_FIELD, RRP_FIELD, EPIC_PRICE_FIELD, CLUB_PRICE_FIELD];
 class BikeReviewList extends React.Component {
   state = {
     brand: '',

@@ -177,13 +177,22 @@ export const displayModelErrorSummary = (model, modelFields) => {
   let displayErrors = model.error;
   const fieldErrors = isItAnObject(model.error_detail) ? model.error_detail : {};
   for (const property in fieldErrors) {
-    const field = getField(modelFields, property);
+    const displayErrorText = fieldErrors[property].join(' ');
     if (!displayErrors) {
       displayErrors = '';
     } else {
       displayErrors += '<br>';
     }
-    displayErrors += field.header + ': ' + fieldErrors[property].join(' ');
+    if (property === 'non_field_errors') {
+      displayErrors += displayErrorText;
+    } else {
+      const field = getField(modelFields, property);
+      if (field) {
+        displayErrors += field.header + ': ' + displayErrorText;
+      } else {
+        displayErrors += property + ': ' + displayErrorText;
+      }
+    }
   }
 
   return displayErrors;

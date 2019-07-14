@@ -1,14 +1,14 @@
 import React from 'react';
 import { findObjectWithId } from '../../helpers/utils';
-import QuoteEdit from './QuoteEdit';
 import * as PropTypes from 'prop-types';
 import { findPartsForBike } from '../bike/helpers/bike';
 import QuoteSummaryParts from './QuoteSummaryParts';
 import QuotePartGrid from './QuotePartGrid';
 import { QUOTE_INITIAL } from './helpers/quote';
-import { quoteFields } from './helpers/display';
+import { quoteFields, quoteFieldsNoBike } from './helpers/display';
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteActionCell from './QuoteActionCell';
+import EditModel from '../app/model/EditModel';
 
 const QuoteDetail = props => {
   const {
@@ -48,20 +48,23 @@ const QuoteDetail = props => {
           issueQuote={issueQuote}
         />
         {quote.quote_status === QUOTE_INITIAL ? (
-          <QuoteEdit
-            quote={quote}
+          <EditModel
+            pageMode
+            actionsRequired
+            model={quote}
+            modelFields={quote.bike ? quoteFields : quoteFieldsNoBike}
             brands={brands}
             bikes={bikes}
             frames={frames}
             users={users}
             customers={customers}
-            saveQuote={saveQuote}
-            archiveQuote={archiveQuote}
+            modelSave={saveQuote}
+            modelDelete={archiveQuote}
             key={`editQuote${quote.id}`}
           />
         ) : (
           <ViewModelBlock
-            modelFields={quoteFields}
+            modelFields={quote.bike ? quoteFields : quoteFieldsNoBike}
             model={quote}
             bikes={bikes}
             customers={customers}

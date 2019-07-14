@@ -81,7 +81,7 @@ export const QUOTE_DESC = 'quote_desc';
 export const QUOTE_PRICE = 'quote_price';
 export const CALCULATED_PRICE = 'calculated_price';
 export const QUOTE_STATUS = 'quote_status';
-export const SELL_PRICE = 'rrp';
+export const RRP = 'rrp';
 export const SIZES = 'sizes';
 export const STANDARD = 'standard';
 export const STOCKED = 'stocked';
@@ -91,6 +91,7 @@ export const TELEPHONE = 'telephone';
 export const TICKET_PRICE = 'ticket_price';
 export const TRADE_IN_PRICE = 'trade_in_price';
 export const TRADE_PRICE = 'trade_price';
+export const UPD_BY = 'upd_by';
 export const UPD_DATE = 'upd_date';
 export const VERSION = 'version';
 
@@ -224,13 +225,13 @@ export const COUNTRY_FIELD = {
 export const CREATED_BY_FIELD = {
   fieldName: CREATED_BY,
   type: USER,
-  header: 'Created By',
+  header: 'Creator',
   readOnly: true,
 };
 export const CREATED_DATE_FIELD = {
   fieldName: CREATED_DATE,
   type: DATE_TIME,
-  header: 'Date Created',
+  header: 'Created',
   readOnly: true,
 };
 export const CUSTOMER_FIELD = {
@@ -436,8 +437,8 @@ export const PRODUCT_CODE_FIELD = {
   displaySize: 10,
   maxLength: 30,
 };
-export const SELL_PRICE_FIELD = {
-  fieldName: SELL_PRICE,
+export const RRP_FIELD = {
+  fieldName: RRP,
   header: 'RRP',
   synonyms: ['price', 'selling price', 'srp', 'rrp', 'sell price', 'retail price'],
   type: CURRENCY,
@@ -526,6 +527,12 @@ export const UPD_DATE_FIELD = {
   header: 'Updated',
   readOnly: true,
 };
+export const UPD_BY_FIELD = {
+  fieldName: UPD_BY,
+  type: USER,
+  header: 'Updater',
+  readOnly: true,
+};
 export const VERSION_FIELD = {
   fieldName: VERSION,
   type: NUMBER,
@@ -537,8 +544,9 @@ export const VERSION_FIELD = {
 export const bikeFields = [
   MODEL_NAME_FIELD,
   DESCRIPTION_FIELD,
+  PRODUCT_CODE_FIELD,
   COLOURS_FIELD,
-  SELL_PRICE_FIELD,
+  RRP_FIELD,
   EPIC_PRICE_FIELD,
   CLUB_PRICE_FIELD,
   SIZES_FIELD,
@@ -596,6 +604,7 @@ export const partFields = [
   PART_TYPE_FIELD,
   BRAND_FIELD,
   PART_NAME_FIELD,
+  RRP_FIELD,
   TRADE_IN_PRICE_FIELD,
   STANDARD_FIELD,
 ];
@@ -612,10 +621,9 @@ export const supplierProductFields = [
   PRODUCT_CODE_FIELD,
   FITTED_PRICE_FIELD,
   TICKET_PRICE_FIELD,
-  SELL_PRICE_FIELD,
   TRADE_PRICE_FIELD,
-  CLUB_PRICE_FIELD,
   CHECK_DATE_FIELD,
+  UPD_BY_FIELD,
 ];
 
 export const userFields = [FIRST_NAME_FIELD, LAST_NAME_FIELD, EMAIL_FIELD];

@@ -46,6 +46,16 @@ exports[`basic render should show the bike name and bike edit page when rendered
           "type": "textArea",
         },
         Object {
+          "displaySize": 10,
+          "fieldName": "product_code",
+          "header": "Product Code",
+          "maxLength": 30,
+          "synonyms": Array [
+            "product_code",
+          ],
+          "type": "text",
+        },
+        Object {
           "displaySize": 30,
           "fieldName": "colours",
           "header": "Colours",

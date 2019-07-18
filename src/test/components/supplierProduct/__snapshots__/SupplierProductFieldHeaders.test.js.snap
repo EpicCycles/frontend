@@ -44,21 +44,6 @@ exports[`should display headers 1`] = `
           "type": "currency",
         },
         Object {
-          "displaySize": 6,
-          "fieldName": "rrp",
-          "header": "RRP",
-          "maxLength": 10,
-          "synonyms": Array [
-            "price",
-            "selling price",
-            "srp",
-            "rrp",
-            "sell price",
-            "retail price",
-          ],
-          "type": "currency",
-        },
-        Object {
           "displaySize": 5,
           "fieldName": "trade_price",
           "header": "Trade Price £",
@@ -66,17 +51,16 @@ exports[`should display headers 1`] = `
           "type": "currency",
         },
         Object {
-          "displaySize": 10,
-          "fieldName": "club_price",
-          "header": "Club Price",
-          "maxLength": 6,
-          "type": "currency",
-        },
-        Object {
           "fieldName": "check_date",
           "header": "Date Checked",
           "readOnly": true,
           "type": "date_time",
+        },
+        Object {
+          "fieldName": "upd_by",
+          "header": "Updater",
+          "readOnly": true,
+          "type": "user",
         },
       ]
     }
@@ -128,21 +112,6 @@ exports[`should display headers with locking, error and an extra class 1`] = `
           "type": "currency",
         },
         Object {
-          "displaySize": 6,
-          "fieldName": "rrp",
-          "header": "RRP",
-          "maxLength": 10,
-          "synonyms": Array [
-            "price",
-            "selling price",
-            "srp",
-            "rrp",
-            "sell price",
-            "retail price",
-          ],
-          "type": "currency",
-        },
-        Object {
           "displaySize": 5,
           "fieldName": "trade_price",
           "header": "Trade Price £",
@@ -150,17 +119,16 @@ exports[`should display headers with locking, error and an extra class 1`] = `
           "type": "currency",
         },
         Object {
-          "displaySize": 10,
-          "fieldName": "club_price",
-          "header": "Club Price",
-          "maxLength": 6,
-          "type": "currency",
-        },
-        Object {
           "fieldName": "check_date",
           "header": "Date Checked",
           "readOnly": true,
           "type": "date_time",
+        },
+        Object {
+          "fieldName": "upd_by",
+          "header": "Updater",
+          "readOnly": true,
+          "type": "user",
         },
       ]
     }

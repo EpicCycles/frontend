@@ -2,12 +2,11 @@ import React, { Fragment } from 'react';
 import { Icon } from 'semantic-ui-react';
 import BrandSelect from '../brand/BrandSelect';
 import FormTextInput from '../../common/FormTextInput';
-
+import { BRAND_FIELD, PART_NAME_FIELD } from '../app/model/helpers/fields';
+import { validateModelAndSetErrors } from '../app/model/helpers/model';
+const partFields = [BRAND_FIELD, PART_NAME_FIELD];
 class BikeUploadPartsEditPart extends React.Component {
   changePart = (fieldName, input) => {
-    if (!input) {
-      window.alert('Fields cannot be blank for new parts');
-    }
     this.props.applyPartChange(
       this.props.sectionIndex,
       this.props.partTypeIndex,
@@ -27,6 +26,8 @@ class BikeUploadPartsEditPart extends React.Component {
       handleOpenModal,
     } = this.props;
     const componentKey = `_${sectionIndex}_${partTypeIndex}_${partIndex}`;
+    const part = uploadPart.part;
+    const error_detail = validateModelAndSetErrors(part, partFields);
     return (
       <Fragment>
         <div className="grid-item--borderless row">
@@ -36,7 +37,8 @@ class BikeUploadPartsEditPart extends React.Component {
               brands={brands}
               fieldName="brand"
               onChange={this.changePart}
-              brandSelected={uploadPart.part.brand}
+              brandSelected={part.brand}
+              error={error_detail.brand}
             />
             <Icon
               key={`addBrand${componentKey}`}
@@ -50,9 +52,9 @@ class BikeUploadPartsEditPart extends React.Component {
           <FormTextInput
             key={`partName${componentKey}`}
             fieldName="part_name"
-            value={uploadPart.part.part_name}
+            value={part.part_name}
             onChange={this.changePart}
-            error={uploadPart.part.error}
+            error={error_detail.part_name}
             size={100}
           />
         </div>

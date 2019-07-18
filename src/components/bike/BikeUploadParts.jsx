@@ -167,7 +167,7 @@ class BikeUploadParts extends React.Component {
           <div
             key="partList"
             className="grid"
-            style={{ height: window.innerHeight * 0.8 + 'px', overflow: 'scroll' }}
+            style={{ height: window.innerHeight * 0.6 + 'px', overflow: 'scroll' }}
           >
             <div className="grid-row grid-row--header ">
               <div className="grid-item--header">Section</div>

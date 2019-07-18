@@ -14,7 +14,7 @@ exports[`it renders 1`] = `
       key="partTypes"
       style={
         Object {
-          "height": "614.4000000000001px",
+          "height": "614.4px",
           "overflow": "scroll",
           "width": "512px",
         }
@@ -189,7 +189,15 @@ exports[`it renders 1`] = `
         undoMapping={[Function]}
       />
     </div>
-    <div>
+    <div
+      style={
+        Object {
+          "height": "614.4px",
+          "overflow": "auto",
+          "width": "307.2px",
+        }
+      }
+    >
       <div
         className="rounded"
         draggable={true}
@@ -256,6 +264,17 @@ exports[`it renders 1`] = `
           title="Create Part Type to store data"
         />
       </div>
+    </div>
+    <div
+      style={
+        Object {
+          "height": "614.4px",
+          "overflow": "auto",
+          "width": "204.8px",
+        }
+      }
+    >
+        
       <div
         className="rounded discarded"
         key="discard0"

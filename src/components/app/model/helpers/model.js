@@ -84,6 +84,9 @@ export const validateField = (field, value, fullModelData) => {
     const displayNumber = financial(numberValue);
     if (Number(displayNumber) !== numberValue) return INVALID_CURRENCY;
   }
+  if (value && field.maxLength) {
+    if (value.length > field.maxLength) return `Maximum size is ${field.maxLength}`;
+  }
   if (field.validator) {
     const error = field.validator(value, fullModelData);
     if (error) {

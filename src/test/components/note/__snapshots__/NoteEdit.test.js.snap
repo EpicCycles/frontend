@@ -20,13 +20,13 @@ exports[`NoteEdit tests renders the form text correctly with no note 1`] = `
         },
         Object {
           "fieldName": "created_date",
-          "header": "Date Created",
+          "header": "Created",
           "readOnly": true,
           "type": "date_time",
         },
         Object {
           "fieldName": "created_by",
-          "header": "Created By",
+          "header": "Creator",
           "readOnly": true,
           "type": "user",
         },
@@ -75,13 +75,13 @@ exports[`NoteEdit tests renders the form text correctly with note 1`] = `
         },
         Object {
           "fieldName": "created_date",
-          "header": "Date Created",
+          "header": "Created",
           "readOnly": true,
           "type": "date_time",
         },
         Object {
           "fieldName": "created_by",
-          "header": "Created By",
+          "header": "Creator",
           "readOnly": true,
           "type": "user",
         },

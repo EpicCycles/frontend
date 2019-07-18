@@ -726,6 +726,21 @@ exports[`should render with minimum information 1`] = `
           "required": true,
         },
         Object {
+          "displaySize": 6,
+          "fieldName": "rrp",
+          "header": "RRP",
+          "maxLength": 10,
+          "synonyms": Array [
+            "price",
+            "selling price",
+            "srp",
+            "rrp",
+            "sell price",
+            "retail price",
+          ],
+          "type": "currency",
+        },
+        Object {
           "displaySize": 5,
           "fieldName": "trade_in_price",
           "header": "Trade In £",

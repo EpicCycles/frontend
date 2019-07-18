@@ -60,13 +60,13 @@ exports[`QuoteEdit tests renders the form text correctly with no quote 1`] = `
         },
         Object {
           "fieldName": "created_by",
-          "header": "Created By",
+          "header": "Creator",
           "readOnly": true,
           "type": "user",
         },
         Object {
           "fieldName": "created_date",
-          "header": "Date Created",
+          "header": "Created",
           "readOnly": true,
           "type": "date_time",
         },
@@ -182,13 +182,13 @@ exports[`QuoteEdit tests renders the form text correctly with quote 1`] = `
         },
         Object {
           "fieldName": "created_by",
-          "header": "Created By",
+          "header": "Creator",
           "readOnly": true,
           "type": "user",
         },
         Object {
           "fieldName": "created_date",
-          "header": "Date Created",
+          "header": "Created",
           "readOnly": true,
           "type": "date_time",
         },

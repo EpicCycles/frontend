@@ -119,11 +119,7 @@ class BikeUploadFile extends React.Component {
             <div
               key="bikeUploadGrid"
               className="grid"
-              style={{
-                height: window.innerHeight - 100 + 'px',
-                width: window.innerWidth - 50 + 'px',
-                overflow: 'scroll',
-              }}
+              style={{ height: window.innerHeight * 0.6 + 'px', overflow: 'scroll' }}
             >
               <div key="bikeUploadHeaders" className="grid-row grid-row--header">
                 {uploadedHeaders.map((cell, index) => (

@@ -27,7 +27,7 @@ describe('QuoteDetail', () => {
         bikes={[]}
       />,
     );
-    expect(component.find('QuoteEdit')).toHaveLength(1);
+    expect(component.find('EditModel')).toHaveLength(1);
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);
     assertComponentHasExpectedProps(partData, {
@@ -48,7 +48,7 @@ describe('QuoteDetail', () => {
         bikes={[]}
       />,
     );
-    expect(component.find('QuoteEdit')).toHaveLength(1);
+    expect(component.find('EditModel')).toHaveLength(1);
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);
     assertComponentHasExpectedProps(partData, {
@@ -69,7 +69,7 @@ describe('QuoteDetail', () => {
         bikes={[]}
       />,
     );
-    expect(component.find('QuoteEdit')).toHaveLength(1);
+    expect(component.find('EditModel')).toHaveLength(1);
     expect(component.find('QuotePartGrid')).toHaveLength(1);
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);
@@ -91,7 +91,7 @@ describe('QuoteDetail', () => {
         frames={sampleFrames}
       />,
     );
-    expect(component.find('QuoteEdit')).toHaveLength(1);
+    expect(component.find('EditModel')).toHaveLength(1);
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);
     assertComponentHasExpectedProps(partData, {
@@ -113,7 +113,7 @@ describe('QuoteDetail', () => {
       />,
     );
     expect(component.find('ViewModelBlock')).toHaveLength(1);
-    expect(component.find('QuoteEdit')).toHaveLength(0);
+    expect(component.find('EditModel')).toHaveLength(0);
     expect(component.find('QuotePartGrid')).toHaveLength(0);
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);

@@ -2,6 +2,7 @@ import {
   BRAND_FIELD,
   PART_NAME_FIELD,
   PART_TYPE_FIELD,
+  RRP_FIELD,
   STANDARD_FIELD,
   STOCKED_FIELD,
   TRADE_IN_PRICE_FIELD,
@@ -35,6 +36,7 @@ test('should return fields without stocked and with part type when part is not p
     PART_TYPE_FIELD,
     BRAND_FIELD,
     PART_NAME_FIELD,
+    RRP_FIELD,
     TRADE_IN_PRICE_FIELD,
     STANDARD_FIELD,
   ];
@@ -54,6 +56,7 @@ test('should return fields with part type when part type is editable', () => {
     PART_TYPE_FIELD,
     BRAND_FIELD,
     PART_NAME_FIELD,
+    RRP_FIELD,
     TRADE_IN_PRICE_FIELD,
     STANDARD_FIELD,
   ];
@@ -73,6 +76,7 @@ test('should return fields with stocked when part type is standard', () => {
     PART_TYPE_FIELD,
     BRAND_FIELD,
     PART_NAME_FIELD,
+    RRP_FIELD,
     TRADE_IN_PRICE_FIELD,
     STANDARD_FIELD,
     STOCKED_FIELD,

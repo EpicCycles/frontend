@@ -18,7 +18,7 @@ class UploadMappingPartTypes extends React.Component {
   constructor(props) {
     super();
     this.state = this.deriveStateFromProps(props);
-   }
+  }
 
   deriveStateFromProps = props => {
     const { rowMappings } = props;
@@ -143,7 +143,7 @@ class UploadMappingPartTypes extends React.Component {
   };
 
   render() {
-    const { sections, multiplesAllowed } = this.props;
+    const { sections, multiplesAllowed, displayPercent } = this.props;
     const { rowMappings, showModal, partType } = this.state;
     const unResolvedRowMappings = rowMappings.filter(
       rowMapping => !(rowMapping.partType || rowMapping.ignore),
@@ -167,7 +167,7 @@ class UploadMappingPartTypes extends React.Component {
             key="partTypes"
             className="grid"
             style={{
-              height: `${window.innerHeight * 0.8}px`,
+              height: `${(window.innerHeight * displayPercent) / 100}px`,
               width: `${window.innerWidth * 0.5}px`,
               overflow: 'scroll',
             }}
@@ -199,7 +199,13 @@ class UploadMappingPartTypes extends React.Component {
               })}
             </Fragment>
           </div>
-          <div>
+          <div
+          style={{
+              height: `${(window.innerHeight * displayPercent) / 100}px`,
+              width: `${window.innerWidth * 0.3}px`,
+              overflow: 'auto',
+            }}
+          >
             {unResolvedRowMappings.map((mapping, index) => (
               <div
                 key={`mapping${index}`}
@@ -222,7 +228,14 @@ class UploadMappingPartTypes extends React.Component {
                 />
               </div>
             ))}
-            {discardedRowMappings.map((mapping, index) => (
+          </div>
+          <div
+          style={{
+              height: `${(window.innerHeight * displayPercent) / 100}px`,
+              width: `${window.innerWidth * 0.2}px`,
+              overflow: 'auto',
+            }}
+          >  {discardedRowMappings.map((mapping, index) => (
               <div key={`discard${index}`} className="rounded discarded">
                 {mapping.partTypeName}
                 <Icon
@@ -244,12 +257,16 @@ class UploadMappingPartTypes extends React.Component {
     );
   }
 }
+UploadMappingPartTypes.defaultProps = {
+  displayPercent: 80,
+};
 UploadMappingPartTypes.propTypes = {
   rowMappings: PropTypes.array.isRequired,
   sections: PropTypes.array.isRequired,
   multiplesAllowed: PropTypes.bool,
   saveFramework: PropTypes.any.isRequired,
   addDataAndProceed: PropTypes.func.isRequired,
+  displayPercent: PropTypes.number,
 };
 
 export default UploadMappingPartTypes;

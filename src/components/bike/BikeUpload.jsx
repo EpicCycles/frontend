@@ -145,6 +145,7 @@ class BikeUpload extends React.Component {
             sections={sections}
             saveFramework={saveFramework}
             addDataAndProceed={this.addDataAndProceed}
+            displayPercent={65}
           />
         )}
         {step === 2 && (

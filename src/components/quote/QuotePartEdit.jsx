@@ -2,7 +2,6 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import { updateObject } from '../../helpers/utils';
 import { checkForChangesAllFields, updateModel } from '../app/model/helpers/model';
-import ModelEditIcons from '../app/model/ModelEditIcons';
 import { addDescToQuotePart, buildModelFields, modelFields } from './helpers/quotePart';
 import EditModelRow from '../app/model/EditModelRow';
 import { getPartType } from '../partType/helpers/partType';

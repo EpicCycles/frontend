@@ -11,6 +11,7 @@ exports[`Login displays login fields when no user in session 1`] = `
       Login
     </h1>
     <EditModelPage
+      className="fit-content"
       model={
         Object {
           "password": "",
@@ -75,6 +76,7 @@ exports[`Login displays login fields when user in session 1`] = `
       Login
     </h1>
     <EditModelPage
+      className="fit-content"
       model={
         Object {
           "password": "",

@@ -8,6 +8,7 @@ exports[`basic render should show the bike name and bike edit page when rendered
   <EditModelPage
     actionsRequired={true}
     additionalActions={Array []}
+    className="fit-content"
     data-test="edit-bike"
     model={
       Object {

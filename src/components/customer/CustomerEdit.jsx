@@ -5,7 +5,7 @@ import CustomerAddressGrid from './CustomerAddressGrid';
 import {
   createEmptyModelWithDefaultFields,
   getModelKey,
-  matchesModel,
+  modelIsAlreadyInArray,
 } from '../app/model/helpers/model';
 import CustomerPhoneGrid from './CustomerPhoneGrid';
 import { customerFields, customerNoteFields } from '../app/model/helpers/fields';
@@ -19,15 +19,13 @@ class CustomerEdit extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.notes !== prevProps.notes) {
-      const newNoteIsOnList = this.props.notes.some(note =>
-        matchesModel(note, customerNoteFields, this.state.note),
-      );
-      if (newNoteIsOnList)
+      if (modelIsAlreadyInArray(this.props.notes, this.state.note, customerNoteFields))
         this.setState({ note: createEmptyModelWithDefaultFields(customerNoteFields) });
     }
   }
 
   saveOrCreateCustomerNote = note => {
+    this.setState({ note });
     if (note.id) {
       this.props.saveNote(note);
     } else {
@@ -152,6 +150,7 @@ class CustomerEdit extends React.Component {
                         modelFields={customerNoteFields}
                         model={oldNote}
                         key={`note_${getModelKey(oldNote)}`}
+                        users={users}
                       />
                     ))}
               </Fragment>

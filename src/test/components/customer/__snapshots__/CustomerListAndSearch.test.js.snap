@@ -23,7 +23,7 @@ exports[`CustomerListAndSearch.index tests renders the CustomerListAndSearch cor
       No Customer to show, set new criteria and search, or
     </div>
     <AddLink
-      addNewCustomer={[MockFunction]}
+      addFunction={[MockFunction]}
       addObjectName=""
     />
   </div>
@@ -90,7 +90,7 @@ exports[`CustomerListAndSearch.index tests renders the CustomerListAndSearch cor
       id="customer-pagination"
     />
     <AddLink
-      addNewCustomer={[MockFunction]}
+      addFunction={[MockFunction]}
       addObjectName=""
     />
   </div>

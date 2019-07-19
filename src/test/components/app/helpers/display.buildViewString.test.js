@@ -111,7 +111,7 @@ describe('buildViewString', () => {
       type: CHECKBOX,
     };
     const model = { data_field: true };
-    expect(buildViewString(model, field)).toBe('Y');
+    expect(buildViewString(model, field)).toBe('Yes');
   });
   it('it renders a checkbox field that is false', () => {
     const field = {
@@ -119,15 +119,15 @@ describe('buildViewString', () => {
       type: CHECKBOX,
     };
     const model = { data_field: false };
-    expect(buildViewString(model, field)).toBe('N');
+    expect(buildViewString(model, field)).toBe('No');
   });
   it('it renders a checkbox field that has no data', () => {
     const field = {
       fieldName: 'data_field',
-      type: CURRENCY,
+      type: CHECKBOX,
       maxLength: 10,
     };
-    expect(buildViewString(undefined, field)).toBe('');
+    expect(buildViewString(undefined, field)).toBe('No');
   });
   it('it renders a part type field that has data that is found', () => {
     const field = {

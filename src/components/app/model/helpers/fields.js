@@ -244,7 +244,6 @@ export const CUSTOMER_VISIBLE_FIELD = {
   fieldName: CUSTOMER_VISIBLE,
   type: CHECKBOX,
   header: 'Customer View',
-  readOnly: true,
 };
 export const DESCRIPTION_FIELD = {
   fieldName: DESCRIPTION,
@@ -484,6 +483,7 @@ export const PART_NAME_FIELD = {
   header: 'Part Name',
   required: true,
   error: PART_NAME_MISSING,
+  type: TEXT,
   displaySize: 40,
   maxLength: 200,
   maxWidth: '250px',
@@ -625,5 +625,3 @@ export const supplierProductFields = [
   CHECK_DATE_FIELD,
   UPD_BY_FIELD,
 ];
-
-export const userFields = [FIRST_NAME_FIELD, LAST_NAME_FIELD, EMAIL_FIELD];

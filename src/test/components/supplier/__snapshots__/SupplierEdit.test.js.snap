@@ -14,6 +14,7 @@ exports[`SupplierEdit displays correctly for existing supplier 1`] = `
       Edit Supplier
     </h2>
     <EditModelPage
+      className="fit-content"
       model={
         Object {
           "brand_names": Array [
@@ -131,6 +132,7 @@ exports[`SupplierEdit displays correctly for existing supplier as a modal dialog
       Edit Supplier
     </h2>
     <EditModelPage
+      className="fit-content"
       model={
         Object {
           "brand_names": Array [
@@ -232,6 +234,7 @@ exports[`SupplierEdit displays correctly for new supplier 1`] = `
       Edit Supplier
     </h2>
     <EditModelPage
+      className="fit-content"
       model={Object {}}
       modelFields={
         Array [

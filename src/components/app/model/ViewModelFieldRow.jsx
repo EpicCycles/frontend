@@ -2,6 +2,7 @@ import React from 'react';
 
 import * as PropTypes from 'prop-types';
 import ModelViewRowField from './ModelViewRowField';
+import {CHECKBOX} from "./helpers/fields";
 
 const ViewModelFieldRow = props => {
   const {
@@ -16,7 +17,7 @@ const ViewModelFieldRow = props => {
     users,
     componentKey,
   } = props;
-  if (model[field.fieldName]) {
+  if (field.type === CHECKBOX || model[field.fieldName]) {
     return (
       <div className="grid-row" key={`field-row${field.fieldName}`}>
         <div

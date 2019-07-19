@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import * as PropTypes from 'prop-types';
-import { userFields } from '../app/model/helpers/fields';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import EditModel from '../app/model/EditModel';
+import { userFields } from './helpers/userFields';
 
 class UserDetailChange extends React.Component {
   render() {
@@ -17,6 +17,7 @@ class UserDetailChange extends React.Component {
           actionsRequired
           modelSave={changeUserData}
           pageMode
+          showReadOnlyFields
         />
         {isLoading && (
           <Dimmer active inverted>

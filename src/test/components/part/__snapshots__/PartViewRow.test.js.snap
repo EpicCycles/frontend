@@ -89,6 +89,7 @@ exports[`PartViewRow should display when multiple supplier products exist 1`] = 
         "maxLength": 200,
         "maxWidth": "250px",
         "required": true,
+        "type": "text",
       },
       Object {
         "displaySize": 5,
@@ -468,6 +469,7 @@ exports[`PartViewRow should display when no part and no supplier products exist 
         "maxLength": 200,
         "maxWidth": "250px",
         "required": true,
+        "type": "text",
       },
       Object {
         "displaySize": 5,
@@ -856,6 +858,7 @@ exports[`PartViewRow should display when no supplier products exist 1`] = `
         "maxLength": 200,
         "maxWidth": "250px",
         "required": true,
+        "type": "text",
       },
       Object {
         "displaySize": 5,
@@ -1244,6 +1247,7 @@ exports[`PartViewRow should display when one supplier products exist 1`] = `
         "maxLength": 200,
         "maxWidth": "250px",
         "required": true,
+        "type": "text",
       },
       Object {
         "displaySize": 5,

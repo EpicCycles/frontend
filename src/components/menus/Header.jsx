@@ -35,7 +35,10 @@ class Header extends React.Component {
     this.saveStateToLocalStorage();
   }
   componentDidUpdate(prevProps, prevState) {
-    setTimeout(() => this.props.removeMessage(), 5000);
+    const { application, removeMessage } = this.props;
+
+    if (application && application.message && application.messageType !== 'E')
+      setTimeout(() => removeMessage(), 5000);
   }
   hydrateStateWithLocalStorage = () => {
     const userDetails = getCookieObject(COOKIE_USER);

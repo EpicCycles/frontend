@@ -87,6 +87,7 @@ const EditModelPage = props => {
 
 EditModelPage.defaultProps = {
   model: {},
+  className: 'fit-content',
 };
 
 EditModelPage.propTypes = {

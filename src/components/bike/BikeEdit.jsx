@@ -2,12 +2,10 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 
 import { updateObject } from '../../helpers/utils';
-import { addFieldToState, getModelKey } from '../app/model/helpers/model';
+import { addFieldToState } from '../app/model/helpers/model';
 import { bikeFields } from '../app/model/helpers/fields';
 import EditModelPage from '../app/model/EditModelPage';
 import { bikeFullName } from './helpers/bike';
-import ModelEditIcons from '../app/model/ModelEditIcons';
-import AddLink from '../app/model/AddLink';
 
 class BikeEdit extends React.Component {
   state = {};
@@ -54,7 +52,9 @@ class BikeEdit extends React.Component {
 
   render() {
     const { bike, brands, frames, addPart } = this.props;
-
+    const additionalActions = [];
+    if (addPart)
+      additionalActions.push({ iconName: 'add', iconTitle: 'add part', iconAction: addPart });
     return (
       <div>
         <h3>{bikeFullName(bike, frames, brands)}</h3>
@@ -64,20 +64,13 @@ class BikeEdit extends React.Component {
           onChange={this.handleInputChange}
           persistedModel={bike}
           data-test="edit-bike"
+          actionsRequired
+          showReadOnlyFields
+          modelSave={this.saveOrCreateBike}
+          modelDelete={this.deleteOrRemoveBike}
+          modelReset={this.onClickReset}
+          additionalActions={additionalActions}
         />
-        <div className="grid-col--fixed-right align_center">
-          <ModelEditIcons
-            componentKey={getModelKey(bike)}
-            model={this.state}
-            modelSave={this.saveOrCreateBike}
-            modelDelete={this.deleteOrRemoveBike}
-            modelReset={this.onClickReset}
-            data-test="edit-icons"
-          />
-          {addPart && (
-            <AddLink addFunction={addPart} addObjectName={'part'} data-test="add-bike-part" />
-          )}
-        </div>
       </div>
     );
   }

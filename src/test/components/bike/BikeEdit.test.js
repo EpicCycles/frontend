@@ -1,7 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import BikeEdit from '../../../components/bike/BikeEdit';
-import { assertComponentHasExpectedProps, findDataTest } from '../../jest_helpers/assert';
+import { assertComponentHasExpectedProps } from '../../jest_helpers/assert';
 import { bikeFields } from '../../../components/app/model/helpers/fields';
 
 const frames = [
@@ -68,9 +68,11 @@ describe('basic render', () => {
       model: props.bike,
       persistedModel: props.bike,
       modelFields: bikeFields,
+      additionalActions: [],
+      modelSave: saveBike,
+      modelDelete: deleteBikes,
+      actionsRequired: true,
     });
-    expect(findDataTest(component, 'edit-icons')).toHaveLength(1);
-    expect(findDataTest(component, 'add-bike-part')).toHaveLength(0);
   });
 });
 
@@ -79,18 +81,29 @@ describe('With add part', () => {
     bike,
     brands,
     frames,
-    saveBike: jest.fn(),
-    deleteBikes: jest.fn(),
   };
   let component;
   let addPart;
+  let saveBike;
+  let deleteBikes;
   beforeEach(() => {
+    saveBike = jest.fn();
+    deleteBikes = jest.fn();
     addPart = jest.fn();
-    component = shallow(<BikeEdit {...props} addPart={addPart} />);
+    component = shallow(
+      <BikeEdit {...props} saveBike={saveBike} deleteBikes={deleteBikes} addPart={addPart} />,
+    );
   });
   test('should display add part when function is passed', () => {
-    expect(findDataTest(component, 'edit-icons')).toHaveLength(1);
-
-    expect(findDataTest(component, 'add-bike-part')).toHaveLength(1);
+    const modelEdit = component.find('EditModelPage');
+    assertComponentHasExpectedProps(modelEdit, {
+      model: props.bike,
+      persistedModel: props.bike,
+      modelFields: bikeFields,
+      additionalActions: [{ conName: 'add', iconTitle: 'add part', iconAction: addPart }],
+      modelSave: saveBike,
+      modelDelete: deleteBikes,
+      actionsRequired: true,
+    });
   });
 });

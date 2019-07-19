@@ -22,12 +22,12 @@ export const logoutUser = async payload => {
 
 export const changePassword = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  const changePasswordApi = 'rest-auth/password/change';
+  const changePasswordApi = 'rest-auth/password/change/';
   return await api.instance.post(changePasswordApi, payload.passwordData);
 };
 
 export const changeUserData = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  const changeUserDataApi = 'rest-auth/user';
+  const changeUserDataApi = 'rest-auth/user/';
   return await api.instance.patch(changeUserDataApi, payload.user);
 };

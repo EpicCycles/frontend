@@ -5,7 +5,7 @@ import { Icon } from 'semantic-ui-react';
 const IconArray = props => {
   const { actionArray, actionsDisabled, componentKey } = props;
   return (
-    <Fragment>
+    <div className='row'>
       {actionArray.map(action => (
         <Icon
           name={action.iconName}
@@ -17,7 +17,7 @@ const IconArray = props => {
           disabled={actionsDisabled || action.iconDisabled}
         />
       ))}
-    </Fragment>
+    </div>
   );
 };
 IconArray.defaultProps = {

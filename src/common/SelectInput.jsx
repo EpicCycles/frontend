@@ -3,19 +3,21 @@ import * as PropTypes from 'prop-types';
 
 class SelectInput extends Component {
   makeValueStrings = () => {
-    const { value } = this.props;
+    const { value, isMultiple } = this.props;
     if (Array.isArray(value) && value.length > 0) {
-      if (this.props.isMultiple) {
+      if (isMultiple) {
         return value.map(inputValue => inputValue.toString());
       } else {
         return value[0].toString();
       }
     } else if (value && value.length > 0) {
-      if (this.props.isMultiple) {
+      if (isMultiple) {
         return [value.toString()];
       } else {
         return value.toString();
       }
+    } else if (isMultiple) {
+      return [];
     }
   };
 
@@ -128,7 +130,7 @@ SelectInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   isMultiple: PropTypes.bool,
   multipleSize: PropTypes.number,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]),
   isEmptyAllowed: PropTypes.bool,
   disabled: PropTypes.bool,
   options: PropTypes.array.isRequired,

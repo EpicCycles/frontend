@@ -7,6 +7,7 @@ import {
 } from '../../../../helpers/utils';
 import { CHECKBOX, CURRENCY, NUMBER } from './fields';
 import { INVALID_CURRENCY, INVALID_INTEGER, INVALID_NUMBER, VALUE_MISSING } from './error';
+import { getDefaultFieldValue } from './getDefaultFieldValue';
 
 export const modelIsAlreadyInArray = (modelArray, modelToCheck, modelFields) => {
   if (!doWeHaveObjects(modelArray)) return false;
@@ -18,15 +19,14 @@ export const modelIsAlreadyInArray = (modelArray, modelToCheck, modelFields) => 
 export const createEmptyModelWithDefaultFields = fieldList => {
   let emptyModel = { dummyKey: generateRandomCode() };
   fieldList.forEach(field => {
-    if (field.selectList && Array.isArray(field.selectList)) {
-      const defaultValue = field.selectList.filter(listitem => listitem.isDefault);
-      if (defaultValue.length > 0) emptyModel[field.fieldName] = defaultValue[0].value;
-    } else if (field.default) {
-      emptyModel[field.fieldName] = field.default;
+    const defaultValue = getDefaultFieldValue(field);
+    if (defaultValue) {
+      emptyModel[field.fieldName] = defaultValue;
     }
   });
   return emptyModel;
 };
+
 export const eliminateReadOnlyFields = fieldList => {
   return fieldList.filter(field => !field.readOnly);
 };

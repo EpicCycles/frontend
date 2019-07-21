@@ -4,6 +4,7 @@ import EditModelRow from './EditModelRow';
 import { updateObject } from '../../../helpers/utils';
 import { checkForChangesAllFields, updateModel } from './helpers/model';
 import EditModelPage from './EditModelPage';
+import { resetEditableFields } from './helpers/resetEditableFields';
 class EditModel extends Component {
   state = {
     model: updateObject(this.props.model),
@@ -30,7 +31,10 @@ class EditModel extends Component {
 
   onClickReset = () => {
     const { persistedModel } = this.state;
-    const model = updateObject(persistedModel);
+    let { modelFields } = this.props;
+    const model = persistedModel.id
+      ? updateObject(persistedModel)
+      : resetEditableFields(persistedModel, modelFields);
     this.setState({ model });
   };
 

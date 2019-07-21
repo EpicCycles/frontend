@@ -1,12 +1,20 @@
 import React, { Fragment } from 'react';
-import { doWeHaveObjects, removeKey, updateObject } from '../../helpers/utils';
+import {
+  doWeHaveObjects,
+  removeItemFromArray,
+  removeKey,
+  updateObject,
+  updateObjectInArray,
+} from '../../helpers/utils';
 import { Button, Dimmer, Loader } from 'semantic-ui-react';
 import SupplierProductReviewListSelection from './SupplierProductReviewListSelection';
 import { filterPartsAndProducts } from './helpers/filterPartsAndProducts';
 import SupplierProductReviewList from './SupplierProductReviewList';
 import { supplierProductSearchFields } from './helpers/search';
+import { getModelKey, modelIsAlreadyInArray } from '../app/model/helpers/model';
+import { partFieldsComplete, supplierProductFields } from '../app/model/helpers/fields';
 
-const initialState = { listParts: false };
+const initialState = { listParts: false, updatedParts: [], updatedSupplierProducts: [] };
 class SupplierProductReview extends React.Component {
   state = updateObject(initialState, {
     searchFields: supplierProductSearchFields(
@@ -15,6 +23,54 @@ class SupplierProductReview extends React.Component {
       this.props.suppliers,
     ),
   });
+  static getDerivedStateFromProps(props, state) {
+    const { updatedParts, updatedSupplierProducts } = state;
+    const { parts, supplierProducts } = props;
+
+    const checkedUpdatedParts = [];
+    updatedParts.forEach(updatedPart => {
+      if (!modelIsAlreadyInArray(parts, updatedPart, partFieldsComplete))
+        checkedUpdatedParts.push(updatedPart);
+    });
+
+    const checkedUpdatedSupplierProducts = [];
+    updatedSupplierProducts.forEach(updatedSupplierProduct => {
+      if (!modelIsAlreadyInArray(supplierProducts, updatedSupplierProduct, supplierProductFields))
+        checkedUpdatedSupplierProducts.push(updatedSupplierProduct);
+    });
+    return {
+      updatedParts: checkedUpdatedParts,
+      updatedSupplierProducts: checkedUpdatedSupplierProducts,
+    };
+  }
+  raiseStateForPart = updatedPart => {
+    const { parts } = this.props;
+
+    if (modelIsAlreadyInArray(parts, updatedPart, partFieldsComplete)) {
+      const updatedParts = removeItemFromArray(this.state.updatedParts, getModelKey(updatedPart));
+      this.setState({ updatedParts });
+    } else {
+      const updatedParts = updateObjectInArray(this.state.updatedParts, updatedPart);
+      this.setState({ updatedParts });
+    }
+  };
+  raiseStateForSupplierProduct = updatedSupplierProduct => {
+    const { supplierProducts } = this.props;
+
+    if (modelIsAlreadyInArray(supplierProducts, updatedSupplierProduct, supplierProductFields)) {
+      const updatedSupplierProducts = removeItemFromArray(
+        this.state.updatedSupplierProducts,
+        getModelKey(updatedSupplierProduct),
+      );
+      this.setState({ updatedSupplierProducts });
+    } else {
+      const updatedSupplierProducts = updateObjectInArray(
+        this.state.updatedSupplierProducts,
+        updatedSupplierProduct,
+      );
+      this.setState({ updatedSupplierProducts });
+    }
+  };
   handleInputChange = (fieldName, input) => {
     let newState = updateObject(this.state);
     newState[fieldName] = input;
@@ -75,7 +131,7 @@ class SupplierProductReview extends React.Component {
   };
 
   render() {
-    const { searchFields, listParts } = this.state;
+    const { searchFields, listParts, updatedParts, updatedSupplierProducts } = this.state;
     const {
       isLoading,
       parts,
@@ -83,6 +139,7 @@ class SupplierProductReview extends React.Component {
       brands,
       suppliers,
       sections,
+      users,
       savePart,
       deletePart,
       saveSupplierProduct,
@@ -113,15 +170,20 @@ class SupplierProductReview extends React.Component {
             </div>
             <SupplierProductReviewList
               parts={partsToUse}
+              updatedParts={updatedParts}
+              updatedSupplierProducts={updatedSupplierProducts}
               supplierProducts={supplierProductsToUse}
               brands={brands}
               suppliers={suppliers}
               sections={sections}
+              users={users}
               savePart={savePart}
               deletePart={deletePart}
               saveSupplierProduct={saveSupplierProduct}
               deleteSupplierProduct={deleteSupplierProduct}
               saveSupplierProductOK={saveSupplierProductOK}
+              raiseStateForPart={this.raiseStateForPart}
+              raiseStateForSupplierProduct={this.raiseStateForSupplierProduct}
             />
           </Fragment>
         ) : (

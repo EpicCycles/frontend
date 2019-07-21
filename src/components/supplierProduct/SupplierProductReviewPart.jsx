@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
 
 import { partFieldsComplete, supplierProductFields } from '../app/model/helpers/fields';
 import { getModelKey } from '../app/model/helpers/model';
 import { newSupplierProduct } from '../part/helpers/supplierProduct';
-import EditModel from '../app/model/EditModel';
+import { findObjectWithKey } from '../../helpers/utils';
+import EditModelSimple from '../app/model/EditModelSimple';
 
-class SupplierProductReviewPart extends React.Component {
+class SupplierProductReviewPart extends PureComponent {
   addSupplierProduct = partId => {
     const supplierProduct = newSupplierProduct(partId);
     this.props.saveSupplierProductOK(supplierProduct);
@@ -14,35 +15,43 @@ class SupplierProductReviewPart extends React.Component {
   render() {
     const {
       part,
+      updatedPart,
       brands,
       suppliers,
       sections,
       supplierProducts,
+      updatedSupplierProducts,
+      users,
       savePart,
       deletePart,
       saveSupplierProduct,
       deleteSupplierProduct,
+      raiseStateForPart,
+      raiseStateForSupplierProduct,
     } = this.props;
     const supplierProductsForPart = supplierProducts.filter(sp => sp.part === part.id);
     const noSupplierProduct = supplierProductsForPart.length === 0;
-    if (noSupplierProduct) supplierProductsForPart.push(newSupplierProduct(part.id));
+    if (noSupplierProduct) supplierProductsForPart.push({});
     const additionalActions = [
       {
         iconName: 'add',
         iconTitle: 'Add Supplier Product',
         iconAction: () => this.addSupplierProduct(part.id),
-        iconDisabled: noSupplierProduct,
       },
     ];
     return supplierProductsForPart.map((supplierProduct, supplierProductIndex) => {
       const rowKey = getModelKey(supplierProduct);
+      const updatedSupplierProduct = findObjectWithKey(updatedSupplierProducts, rowKey);
       return (
         <div className="grid-row" key={`partRow${rowKey}`}>
-          <EditModel
-            model={part}
+          <EditModelSimple
+            model={updatedPart ? updatedPart : part}
+            persistedModel={part}
+            raiseState={raiseStateForPart}
             modelFields={partFieldsComplete}
             sections={sections}
             brands={brands}
+            users={users}
             childModels={supplierProducts}
             lockFirstColumn
             actionsRequired
@@ -51,31 +60,45 @@ class SupplierProductReviewPart extends React.Component {
             modelSave={savePart}
             modelDelete={deletePart}
             dummyRow={supplierProductIndex > 0}
+            key={supplierProductIndex === 0 ? `edit_part_${part.id}` : `dummy${rowKey}`}
           />
-          <EditModel
-            model={supplierProduct}
+          <EditModelSimple
+            model={updatedSupplierProduct ? updatedSupplierProduct : supplierProduct}
+            persistedModel={supplierProduct}
+            raiseState={raiseStateForSupplierProduct}
             modelFields={supplierProductFields}
             suppliers={suppliers}
+            users={users}
             modelSave={saveSupplierProduct}
             modelDelete={deleteSupplierProduct}
             actionsRequired
             showReadOnlyFields
+            dummyRow={noSupplierProduct}
+            key={`sp_${rowKey}`}
           />
         </div>
       );
     });
   }
 }
+SupplierProductReviewPart.defaultProps = {
+  updatedSupplierProducts: [],
+};
 SupplierProductReviewPart.propTypes = {
   part: PropTypes.object.isRequired,
+  updatedPart: PropTypes.object,
   supplierProducts: PropTypes.array,
+  updatedSupplierProducts: PropTypes.array,
   brands: PropTypes.array,
   sections: PropTypes.array,
   suppliers: PropTypes.array,
+  users: PropTypes.array,
   savePart: PropTypes.func,
   deletePart: PropTypes.func,
   saveSupplierProduct: PropTypes.func,
   saveSupplierProductOK: PropTypes.func,
   deleteSupplierProduct: PropTypes.func,
+  raiseStateForPart: PropTypes.func,
+  raiseStateForSupplierProduct: PropTypes.func,
 };
 export default SupplierProductReviewPart;

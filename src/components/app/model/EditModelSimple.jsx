@@ -2,45 +2,29 @@ import React, { PureComponent } from 'react';
 import * as PropTypes from 'prop-types';
 import EditModelRow from './EditModelRow';
 import { updateObject } from '../../../helpers/utils';
-import { checkForChangesAllFields, updateModel } from './helpers/model';
+import { updateModel } from './helpers/model';
 import EditModelPage from './EditModelPage';
 import { resetEditableFields } from './helpers/resetEditableFields';
-class EditModel extends PureComponent {
-  state = {
-    model: updateObject(this.props.model),
-    persistedModel: this.props.model,
-  };
-  static getDerivedStateFromProps(props, state) {
-    // Any time the current model changes,
-    // Reset any parts of state that are tied to that model.
-    if (checkForChangesAllFields(props.modelFields, props.model, state.persistedModel)) {
-      return {
-        model: updateObject(props.model),
-        persistedModel: props.model,
-      };
-    }
-    return null;
-  }
+class EditModelSimple extends PureComponent {
   handleModelValueChange = (fieldName, input) => {
-    let { model } = this.state;
-    let { modelFields } = this.props;
+    let { model, modelFields, raiseState } = this.props;
 
     model = updateModel(model, modelFields, fieldName, input);
-    this.setState({ model });
+    raiseState(model);
   };
 
   onClickReset = () => {
-    const { persistedModel } = this.state;
-    let { modelFields } = this.props;
+    let { persistedModel, modelFields, raiseState } = this.props;
     const model = persistedModel.id
       ? updateObject(persistedModel)
       : resetEditableFields(persistedModel, modelFields);
-    this.setState({ model });
+    raiseState(model);
   };
 
   render() {
-    const { model, persistedModel } = this.state;
     const {
+      model,
+      persistedModel,
       pageMode,
       modelFields,
       className,
@@ -112,8 +96,9 @@ class EditModel extends PureComponent {
     );
   }
 }
-EditModel.propTypes = {
+EditModelSimple.propTypes = {
   model: PropTypes.object.isRequired,
+  persistedModel: PropTypes.object.isRequired,
   modelFields: PropTypes.array.isRequired,
   pageMode: PropTypes.bool,
   className: PropTypes.string,
@@ -128,9 +113,10 @@ EditModel.propTypes = {
   actionsRequired: PropTypes.bool,
   modelSave: PropTypes.func,
   modelDelete: PropTypes.func,
+  raiseState: PropTypes.func,
   additionalActions: PropTypes.array,
   dummyRow: PropTypes.bool,
   showReadOnlyFields: PropTypes.bool,
 };
 
-export default EditModel;
+export default EditModelSimple;

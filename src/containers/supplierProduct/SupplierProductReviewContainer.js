@@ -8,7 +8,7 @@ import {
 import SupplierProductReview from '../../components/supplierProduct/SupplierProductReview';
 import { addMessage } from '../../state/actions/application';
 
-const mapStateToProps = ({ core, framework, part }) => {
+const mapStateToProps = ({ core, framework, part, user }) => {
   return {
     brands: core.brands,
     suppliers: core.suppliers,
@@ -16,6 +16,7 @@ const mapStateToProps = ({ core, framework, part }) => {
     isLoading: framework.isLoading || core.isLoading || part.isLoading,
     parts: part.parts,
     supplierProducts: part.supplierProducts,
+    users: user.users,
   };
 };
 const mapDispatchToProps = {

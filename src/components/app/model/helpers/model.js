@@ -5,9 +5,10 @@ import {
   removeKey,
   updateObject,
 } from '../../../../helpers/utils';
-import { CHECKBOX, CURRENCY, NUMBER } from './fields';
+import { CHECKBOX, CURRENCY, NUMBER, SELECT_MULTIPLE, SELECT_ONE } from './fields';
 import { INVALID_CURRENCY, INVALID_INTEGER, INVALID_NUMBER, VALUE_MISSING } from './error';
 import { getDefaultFieldValue } from './getDefaultFieldValue';
+import { textToNumber } from '../../../../helpers/textToNumber';
 
 export const modelIsAlreadyInArray = (modelArray, modelToCheck, modelFields) => {
   if (!doWeHaveObjects(modelArray)) return false;
@@ -40,8 +41,28 @@ export const checkForChanges = (fieldList, existingObject, newValues) => {
 };
 export const checkForChangesAllFields = (fieldList, existingObject, newValues) => {
   return fieldList.some(field => {
-    if (existingObject[field.fieldName] || newValues[field.fieldName])
-      return existingObject[field.fieldName] !== newValues[field.fieldName];
+    const existingValue = existingObject[field.fieldName];
+    const newValue = newValues[field.fieldName];
+    if (existingValue && newValue)
+      switch (field.type) {
+        case CURRENCY:
+        case NUMBER:
+        case SELECT_ONE:
+          return textToNumber(String(existingValue)) !== textToNumber(String(newValue));
+        case SELECT_MULTIPLE:
+          if (Array.isArray(existingValue) && Array.isArray(newValue)) {
+            if (existingValue.length !== newValue.length) return true;
+            const existingArrayAsStrings = existingValue.map(eachValue => String(eachValue));
+            const newArrayAsStrings = newValue.map(eachValue => String(eachValue));
+            return newArrayAsStrings.some(
+              stringValue => !existingArrayAsStrings.includes(stringValue),
+            );
+          } else if (Array.isArray(existingValue) || Array.isArray(newValue)) return true;
+          break;
+        default:
+          return existingValue !== newValue;
+      }
+    else if (existingValue || newValue) return true;
     return false;
   });
 };

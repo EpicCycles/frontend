@@ -1,4 +1,4 @@
-import { generateRandomCode, updateObjectInArray } from '../../../helpers/utils';
+import { updateObjectInArray } from '../../../helpers/utils';
 import { buildBrandNameArray } from '../../brand/helpers/brand';
 import { buildPartObject } from '../../part/helpers/part';
 import { textToNumber } from '../../../helpers/textToNumber';
@@ -16,18 +16,7 @@ export const supplierProductHeaders = [
   'Stocked',
   'Trade price',
 ];
-export const findSupplierProducts = (part, supplierProducts) => {
-  let matchingSupplierProducts = supplierProducts.filter(
-    supplierproduct => supplierproduct.part === part.id,
-  );
-  if (matchingSupplierProducts.length === 0)
-    matchingSupplierProducts.push({
-      part: part.id,
-      dummyKey: generateRandomCode(),
-    });
 
-  return matchingSupplierProducts;
-};
 export const buildSupplierProductForApi = (rowMappings, uploadedData, brands) => {
   const brandsLower = buildBrandNameArray(brands);
   let updatedBrands = brands.slice();

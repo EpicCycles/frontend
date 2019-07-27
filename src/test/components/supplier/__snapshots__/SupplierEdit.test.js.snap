@@ -23,7 +23,7 @@ exports[`SupplierEdit displays correctly for existing supplier 1`] = `
             "brand 3",
           ],
           "id": 1,
-          "link": "supplier.co.uk",
+          "link": "http://supplier.co.uk",
           "preferred_supplier": false,
           "supplier_name": "supplier name",
         }
@@ -63,7 +63,7 @@ exports[`SupplierEdit displays correctly for existing supplier 1`] = `
             "brand 3",
           ],
           "id": 1,
-          "link": "supplier.co.uk",
+          "link": "http://supplier.co.uk",
           "preferred_supplier": false,
           "supplier_name": "supplier name",
         }
@@ -88,7 +88,7 @@ exports[`SupplierEdit displays correctly for existing supplier 1`] = `
               "brand 3",
             ],
             "id": 1,
-            "link": "supplier.co.uk",
+            "link": "http://supplier.co.uk",
             "preferred_supplier": false,
             "supplier_name": "supplier name",
           }
@@ -141,7 +141,7 @@ exports[`SupplierEdit displays correctly for existing supplier as a modal dialog
             "brand 3",
           ],
           "id": 1,
-          "link": "supplier.co.uk",
+          "link": "http://supplier.co.uk",
           "preferred_supplier": false,
           "supplier_name": "supplier name",
         }
@@ -181,7 +181,7 @@ exports[`SupplierEdit displays correctly for existing supplier as a modal dialog
             "brand 3",
           ],
           "id": 1,
-          "link": "supplier.co.uk",
+          "link": "http://supplier.co.uk",
           "preferred_supplier": false,
           "supplier_name": "supplier name",
         }
@@ -206,7 +206,7 @@ exports[`SupplierEdit displays correctly for existing supplier as a modal dialog
               "brand 3",
             ],
             "id": 1,
-            "link": "supplier.co.uk",
+            "link": "http://supplier.co.uk",
             "preferred_supplier": false,
             "supplier_name": "supplier name",
           }

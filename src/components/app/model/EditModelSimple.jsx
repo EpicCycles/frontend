@@ -7,10 +7,10 @@ import EditModelPage from './EditModelPage';
 import { resetEditableFields } from './helpers/resetEditableFields';
 class EditModelSimple extends PureComponent {
   handleModelValueChange = (fieldName, input) => {
-    let { model, modelFields, raiseState } = this.props;
+    const { model, modelFields, raiseState } = this.props;
 
-    model = updateModel(model, modelFields, fieldName, input);
-    raiseState(model);
+    const updatedModel = updateModel(model, modelFields, fieldName, input);
+    raiseState(updatedModel);
   };
 
   onClickReset = () => {

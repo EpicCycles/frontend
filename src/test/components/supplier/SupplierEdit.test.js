@@ -1,7 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import SupplierEdit from '../../../components/supplier/SupplierEdit';
-import {VALUE_MISSING} from "../../../components/app/model/helpers/error";
+import { VALUE_MISSING } from '../../../components/app/model/helpers/error';
 
 describe('SupplierEdit', () => {
   it('displays correctly for new supplier', () => {
@@ -13,7 +13,7 @@ describe('SupplierEdit', () => {
       id: 1,
       supplier_name: 'supplier name',
       brand_names: ['brands 1', 'brand 2', 'brand 3'],
-      link: 'supplier.co.uk',
+      link: 'http://supplier.co.uk',
       preferred_supplier: false,
     };
     const component = shallow(<SupplierEdit supplier={supplier} />);
@@ -24,7 +24,7 @@ describe('SupplierEdit', () => {
       id: 1,
       supplier_name: 'supplier name',
       brand_names: ['brands 1', 'brand 2', 'brand 3'],
-      link: 'supplier.co.uk',
+      link: 'http://supplier.co.uk',
       preferred_supplier: false,
     };
     const closeModal = jest.fn();
@@ -36,7 +36,7 @@ describe('SupplierEdit', () => {
       id: 1,
       supplier_name: 'supplier name',
       brand_names: ['brands 1', 'brand 2', 'brand 3'],
-      link: 'supplier.co.uk',
+      link: 'http://supplier.co.uk',
       preferred_supplier: false,
     };
     const component = shallow(<SupplierEdit supplier={supplier} />);
@@ -44,7 +44,7 @@ describe('SupplierEdit', () => {
       id: 1,
       supplier_name: '',
       brand_names: ['brands 1', 'brand 2', 'brand 3'],
-      link: 'supplier.co.uk',
+      link: 'http://supplier.co.uk',
       preferred_supplier: false,
       error_detail: { supplier_name: VALUE_MISSING },
       changed: true,
@@ -62,7 +62,7 @@ describe('SupplierEdit', () => {
       id: 1,
       supplier_name: 'supplier name',
       brand_names: ['brands 1', 'brand 2', 'brand 3'],
-      link: 'supplier.co.uk',
+      link: 'http://supplier.co.uk',
       preferred_supplier: false,
     };
     const component = shallow(
@@ -108,7 +108,7 @@ describe('SupplierEdit', () => {
       id: 1,
       supplier_name: 'supplier name',
       brand_names: ['brands 1', 'brand 2', 'brand 3'],
-      link: 'supplier.co.uk',
+      link: 'http://supplier.co.uk',
       preferred_supplier: false,
     };
     const component = shallow(

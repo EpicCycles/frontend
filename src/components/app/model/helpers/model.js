@@ -190,8 +190,10 @@ export const getField = (modelFields, fieldName) => {
 export const updateModel = (model, modelFields, fieldName, fieldValue) => {
   const modelField = getField(modelFields, fieldName);
   if (modelField) {
-    const updatedModel = applyFieldValueToModelOnly(model, modelField, fieldValue);
+    let updatedModel = applyFieldValueToModelOnly(model, modelField, fieldValue);
     updatedModel.error_detail = validateModelAndSetErrors(updatedModel, modelFields);
+
+    if (modelField.addDataMethod) updatedModel = modelField.addDataMethod(updatedModel);
     return removeKey(updatedModel, 'error');
   }
   return model;

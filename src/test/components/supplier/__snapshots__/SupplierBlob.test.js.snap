@@ -27,7 +27,7 @@ exports[`supplier blob with everything 1`] = `
     Brands: 
   </div>
   <a
-    href="supplier.co.uk"
+    href="http://supplier.co.uk"
     key="supplierBlobLinkE1"
   >
     Website

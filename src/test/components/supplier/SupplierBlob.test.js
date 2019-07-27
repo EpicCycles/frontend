@@ -7,7 +7,7 @@ test('supplier blob with just name', () => {
     id: 1,
     supplier_name: 'supplier name',
     brand_names: ['brands 1', 'brand 2', 'brand 3'],
-    link: 'supplier.co.uk',
+    link: 'http://supplier.co.uk',
   };
   const component = shallow(<SupplierBlob supplier={supplier} componentKey={supplier.id} />);
   expect(toJson(component)).toMatchSnapshot();
@@ -17,7 +17,7 @@ test('supplier blob with everything', () => {
     id: 1,
     supplier_name: 'supplier name',
     brand_names: ['brands 1', 'brand 2', 'brand 3'],
-    link: 'supplier.co.uk',
+    link: 'http://supplier.co.uk',
   };
   const removeFunction = jest.fn();
   const editFunction = jest.fn();

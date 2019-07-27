@@ -44,6 +44,14 @@ export const formattedDateTime = date => {
   if (date) return date.toLocaleString('en-GB');
   return '';
 };
+export const formattedPrice = fieldValue => {
+  if (fieldValue)
+    return Number(fieldValue).toLocaleString('en-GB', {
+      style: 'currency',
+      currency: 'GBP',
+    });
+  return '';
+};
 export const fieldAlignment = field => {
   switch (field.type) {
     case NUMBER:
@@ -74,12 +82,7 @@ export const buildViewString = (
       viewData = fieldValue ? getCustomerName(fieldValue, customers) : '';
       break;
     case CURRENCY:
-      viewData = fieldValue
-        ? Number(fieldValue).toLocaleString('en-GB', {
-            style: 'currency',
-            currency: 'GBP',
-          })
-        : '';
+      viewData = formattedPrice(fieldValue);
       break;
     case CHECKBOX:
       viewData = fieldValue ? 'Yes' : 'No';

@@ -1,101 +1,62 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import { updateObject } from '../../helpers/utils';
-import { checkForChangesAllFields, updateModel } from '../app/model/helpers/model';
-import { addDescToQuotePart, buildModelFields, modelFields } from './helpers/quotePart';
-import EditModelRow from '../app/model/EditModelRow';
-import { getPartType } from '../partType/helpers/partType';
-import { quotePartValidation } from './helpers/validation';
-import { calculatePrice } from '../part/helpers/price';
+import { quotePartChanges } from './helpers/quotePartChanges';
+import { quotePartFields } from './helpers/quotePartFields';
+import EditModelSimple from '../app/model/EditModelSimple';
 
 class QuotePartEdit extends React.Component {
-  static getDerivedStateFromProps(props, state) {
-    // Any time the current user changes,
-    // Reset any parts of state that are tied to that user.
-    // In this simple example, that's just the email.
-    if (checkForChangesAllFields(modelFields, props.quotePart, state.persistedQuotePart)) {
-      return {
-        quotePart: addDescToQuotePart(props),
-        persistedQuotePart: addDescToQuotePart(props),
-      };
-    }
-    return null;
-  }
-
-  state = {
-    quotePart: addDescToQuotePart(this.props),
-    persistedQuotePart: addDescToQuotePart(this.props),
-  };
-
-  handleInputChange = (fieldName, input) => {
-    let { quotePart } = this.state;
-
-    let { partType, bikePart, brands, parts, sections, quote, supplierProducts } = this.props;
-    const fields = buildModelFields(partType, quotePart, bikePart, quote);
-    let updatedQuotePart = updateModel(quotePart, fields, fieldName, input);
-    if (updatedQuotePart.partType) partType = getPartType(updatedQuotePart.partType, sections);
-    updatedQuotePart = quotePartValidation(
-      updatedQuotePart,
-      bikePart,
-      partType,
+  additionalProcessingOnChange = validatedQuotePart => {
+    const { quotePart, sections, brands, parts, supplierProducts } = this.props;
+    return quotePartChanges(
+      quotePart,
+      validatedQuotePart,
+      sections,
       brands,
       parts,
-      quote,
+      supplierProducts,
     );
-    if (
-      updatedQuotePart.part_desc !== quotePart.part_desc ||
-      updatedQuotePart.not_required !== quotePart.not_required
-    ) {
-      updatedQuotePart = updateObject(
-        updatedQuotePart,
-        calculatePrice(!!quote.bike, updatedQuotePart.part, supplierProducts),
-      );
-    }
-    if (updatedQuotePart.not_required && updatedQuotePart.not_required !== quotePart.not_required) {
-      updatedQuotePart.trade_in_price = bikePart.trade_in_price;
-    }
-    this.setState({ quotePart: updatedQuotePart });
   };
 
-  onClickReset = () => {
-    const quotePart = updateObject(this.state.persistedQuotePart);
-    this.setState({ quotePart });
-  };
+  saveQuotePart = quotePartToSave => {
+    let quotePart = updateObject(quotePartToSave);
+    const _completePart = quotePart._completePart;
 
-  saveQuotePart = () => {
-    let quotePart = updateObject(this.state.quotePart);
-    const part = quotePart.part;
-
-    if (part && !part.id) {
-      this.props.saveQuotePart(quotePart, part);
+    if (_completePart && !_completePart.id) {
+      this.props.saveQuotePart(quotePart, _completePart);
     } else {
-      if (part) quotePart.part = part.id;
+      if (_completePart) quotePart.part = _completePart.id;
       this.props.saveQuotePart(quotePart);
     }
   };
   deleteQuotePart = deletionKey => {
-    this.props.deleteQuotePart(deletionKey, this.state.quotePart.quote);
+    const { persistedQuotePart } = this.props;
+    this.props.deleteQuotePart(deletionKey, persistedQuotePart.quote);
   };
   render() {
-    const { quotePart, persistedQuotePart } = this.state;
-
-    const { componentKey, sections, suppliers, partType, quote, bikePart } = this.props;
-    const fields = buildModelFields(partType, quotePart, bikePart, quote);
+    const {
+      quotePart,
+      persistedQuotePart,
+      componentKey,
+      sections,
+      suppliers,
+      raiseStateForQuotePart,
+    } = this.props;
+    const fields = quotePartFields(quotePart, this.additionalProcessingOnChange);
     const rowClass = quotePart && quotePart.error ? 'error' : '';
 
     return (
       <div className={`grid-row ${rowClass}`} key={`row${componentKey}`}>
-        <EditModelRow
+        <EditModelSimple
           model={quotePart}
           persistedModel={persistedQuotePart}
+          raiseState={raiseStateForQuotePart}
           modelFields={fields}
-          onChange={this.handleInputChange}
           sections={sections}
           suppliers={suppliers}
           actionsRequired
           modelSave={this.saveQuotePart}
           modelDelete={this.deleteQuotePart}
-          modelReset={this.onClickReset}
         />
       </div>
     );
@@ -105,17 +66,15 @@ class QuotePartEdit extends React.Component {
 QuotePartEdit.defaultProps = {};
 QuotePartEdit.propTypes = {
   quotePart: PropTypes.object,
-  bikePart: PropTypes.object,
-  replacementPart: PropTypes.object,
-  partType: PropTypes.object,
+  persistedQuotePart: PropTypes.object,
   deleteQuotePart: PropTypes.func.isRequired,
   saveQuotePart: PropTypes.func.isRequired,
   componentKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  quote: PropTypes.object.isRequired,
+  sections: PropTypes.array.isRequired,
   brands: PropTypes.array.isRequired,
   suppliers: PropTypes.array.isRequired,
-  sections: PropTypes.array.isRequired,
   parts: PropTypes.array.isRequired,
   supplierProducts: PropTypes.array.isRequired,
+  raiseStateForQuotePart: PropTypes.func.isRequired,
 };
 export default QuotePartEdit;

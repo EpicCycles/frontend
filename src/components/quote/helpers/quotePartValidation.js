@@ -19,17 +19,21 @@ export const quotePartValidation = (updatedQuotePart, brands, parts) => {
       parts,
       brands,
     );
-    if (!_completePart)
+    if (!_completePart) {
       validatedQuotePart.error_detail.part_desc =
         'Please include a brand in the part name to add this part.';
+    } else {
+      validatedQuotePart.part = _completePart.id;
+    }
     validatedQuotePart._completePart = _completePart;
   } else {
     validatedQuotePart._completePart = undefined;
   }
 
-  if (! validatedQuotePart._completePart) {
+  if (!validatedQuotePart._completePart) {
     validatedQuotePart.quantity = undefined;
     validatedQuotePart.part_price = undefined;
+    validatedQuotePart.part = undefined;
     validatedQuotePart.additional_data = undefined;
   }
 

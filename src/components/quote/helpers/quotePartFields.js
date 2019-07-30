@@ -1,6 +1,7 @@
 import {
   CHECKBOX,
   CURRENCY,
+  NUMBER,
   PART_TYPE_FIELD,
   QUANTITY_FIELD,
   SUPPLIER_FIELD_OPTIONAL,
@@ -38,6 +39,10 @@ export const ADDITIONAL_DATA_FIELD = {
   maxLength: 100,
   displaySize: 20,
 };
+export const PART_FIELD = {
+  fieldName: 'part',
+  type: NUMBER,
+};
 const disabledAttribute = { disabled: true };
 export const NOT_REQUIRED_FIELD_DISABLED = updateObject(NOT_REQUIRED_FIELD, disabledAttribute);
 export const ADDITIONAL_DATA_FIELD_DISABLED = updateObject(
@@ -54,12 +59,22 @@ export const SUPPLIER_FIELD_DISABLED = updateObject(SUPPLIER_FIELD_OPTIONAL, dis
 export const QUOTE_PART_FOR_BIKE = [
   PART_TYPE_FIELD,
   NOT_REQUIRED_FIELD,
-  TRADE_IN_PRICE_FIELD_DISABLED,
+  TRADE_IN_PRICE_FIELD,
   PART_DESC_FIELD,
   QUANTITY_FIELD,
   PART_PRICE_FIELD,
   SUPPLIER_FIELD_DISABLED,
   ADDITIONAL_DATA_FIELD,
+];
+export const QUOTE_PART_DATABASE = [
+  PART_TYPE_FIELD,
+  NOT_REQUIRED_FIELD,
+  TRADE_IN_PRICE_FIELD,
+  QUANTITY_FIELD,
+  PART_PRICE_FIELD,
+  ADDITIONAL_DATA_FIELD,
+  PART_FIELD,
+  SUPPLIER_FIELD_OPTIONAL,
 ];
 
 export const QUOTE_PART_NON_BIKE = [
@@ -67,7 +82,7 @@ export const QUOTE_PART_NON_BIKE = [
   PART_DESC_FIELD,
   QUANTITY_FIELD,
   PART_PRICE_FIELD,
-  SUPPLIER_FIELD_DISABLED,
+  SUPPLIER_FIELD_OPTIONAL,
   ADDITIONAL_DATA_FIELD,
 ];
 export const quotePartFields = (quotePart = {}, additionalProcessing) => {

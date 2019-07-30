@@ -1,0 +1,61 @@
+import { quoteIssueChecks } from '../../../../components/quote/helpers/quoteIssueChecks';
+
+const QUOTE_PART_CHANGES_REQD = 'Save all part changes before quote can be issued';
+const QUOTE_PRICE_REQD = 'A Quote Price should be entered';
+const QUOTE_PART_PRICES_REQD = 'Parts need prices.';
+const TRADE_IN_PRICES_REQD =
+  'All bike parts that are not required must have a trade in price (which can be zero)';
+const QUOTE_PARTS_REQD = 'At least one part must be present';
+
+describe('quoteIssueChecks', () => {
+  it('should return quote price warning when quote is missing quote price', () => {
+    const quote = { id: 'qb', bike: 23 };
+    expect(quoteIssueChecks([], [], quote)).toEqual([QUOTE_PRICE_REQD]);
+  });
+  it('should return quote item warning when parts quote is missing parts', () => {
+    const quote = { id: 'qb', quote_price: 1234 };
+    expect(quoteIssueChecks([], [], quote)).toEqual([QUOTE_PARTS_REQD]);
+  });
+  it('should return quote item warning when parts quote has no parts', () => {
+    const quote = { id: 'qb', quote_price: 1234 };
+    const quoteParts = [{ quote: 'qb', partType: 2 }, { quote: 'qb', partType: 3 }];
+    expect(quoteIssueChecks([], quoteParts, quote)).toEqual([QUOTE_PARTS_REQD]);
+  });
+  it('should return trade in price warning when bike quote missing those', () => {
+    const quote = { id: 'qb', quote_price: 1234, bike: 23 };
+    const quoteParts = [
+      { quote: 'qb', partType: 2, not_required: true },
+      { quote: 'qb', partType: 3 },
+    ];
+    expect(quoteIssueChecks([], quoteParts, quote)).toEqual([TRADE_IN_PRICES_REQD]);
+  });
+  it('should return part price warning when quote missing those', () => {
+    const quote = { id: 'qb', quote_price: 1234 };
+    const quoteParts = [
+      { quote: 'qb', partType: 2, not_required: true, trade_in_price: 10 },
+      { quote: 'qb', partType: 3, part: 234 },
+    ];
+    expect(quoteIssueChecks([], quoteParts, quote)).toEqual([QUOTE_PART_PRICES_REQD]);
+  });
+  it('should message when unsaved changes exist', () => {
+    const quote = { id: 'qb', bike: 23, quote_price: 1234 };
+    const updatedQuoteParts = [{ quote: 'qb', id: '1' }];
+    expect(quoteIssueChecks(updatedQuoteParts, [], quote)).toEqual([QUOTE_PART_CHANGES_REQD]);
+  });
+  it('should return no warning when bike quote all ok', () => {
+    const quote = { id: 'qb', bike: 23, quote_price: 1234 };
+    const quoteParts = [
+      { quote: 'qb', partType: 2, not_required: true, trade_in_price: 10 },
+      { quote: 'qb', partType: 3, part: 234, part_price: 123.45 },
+    ];
+    expect(quoteIssueChecks([], quoteParts, quote)).toBeUndefined();
+  });
+  it('should return no warning when parts quote all ok', () => {
+    const quote = { id: 'qb', quote_price: 1234 };
+    const quoteParts = [
+      { quote: 'qb', partType: 2 },
+      { quote: 'qb', partType: 3, part: 234, part_price: 123.45 },
+    ];
+    expect(quoteIssueChecks([], quoteParts, quote)).toBeUndefined();
+  });
+});

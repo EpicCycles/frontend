@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import {
   findIndexOfObjectWithKey,
   findObjectWithId,
+  findObjectWithKey,
   generateRandomCode,
   removeItemFromArray,
-  updateObject,
   updateObjectInArray,
 } from '../../helpers/utils';
 import * as PropTypes from 'prop-types';
@@ -17,41 +17,46 @@ import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteActionCell from './QuoteActionCell';
 import EditModel from '../app/model/EditModel';
 import { getQuoteParts } from './helpers/getQuoteParts';
-import { getModelKey, modelIsAlreadyInArray } from '../app/model/helpers/model';
+import { checkForChanges, getModelKey } from '../app/model/helpers/model';
 import { QUOTE_PART_FOR_BIKE } from './helpers/quotePartFields';
+import { quoteIssueChecks } from './helpers/quoteIssueChecks';
 
 class QuoteDetail extends PureComponent {
   state = { updatedQuoteParts: [] };
   static getDerivedStateFromProps(props, state) {
     const { updatedQuoteParts } = state;
-    const { quoteParts } = props;
+    const { quote, sections, quoteParts, bikeParts, parts, brands } = props;
 
+    const quotePartsDetail = getQuoteParts(quote, sections, quoteParts, bikeParts, parts, brands);
     const checkedUpdatedParts = [];
     updatedQuoteParts.forEach(updatedPart => {
-      if (!modelIsAlreadyInArray(quoteParts, updatedPart, QUOTE_PART_FOR_BIKE))
-        if (updatedPart.dummyKey || findIndexOfObjectWithKey(quoteParts, updatedPart) > -1)
-          checkedUpdatedParts.push(updatedPart);
+      const persistedDetail = findObjectWithKey(quotePartsDetail, getModelKey(updatedPart));
+      if (persistedDetail && checkForChanges(QUOTE_PART_FOR_BIKE, persistedDetail, updatedPart))
+        checkedUpdatedParts.push(updatedPart);
     });
 
     return {
       updatedQuoteParts: checkedUpdatedParts,
+      quotePartsDetail: quotePartsDetail,
     };
   }
 
+  issueQuote = quoteKey => {
+    const { quoteParts, quote, addMessage, issueQuote } = this.props;
+    const { updatedQuoteParts } = this.state;
+    const problems = quoteIssueChecks(updatedQuoteParts, quoteParts, quote);
+    if (problems) {
+      addMessage(problems.join(' '), 'W');
+    } else {
+      issueQuote(quoteKey);
+    }
+  };
+
   raiseStateForQuotePart = updatedQuotePart => {
-    const { quoteParts } = this.props;
     const { updatedQuoteParts } = this.state;
 
-    if (modelIsAlreadyInArray(quoteParts, updatedQuotePart, QUOTE_PART_FOR_BIKE)) {
-      const newUpdatedQuoteParts = removeItemFromArray(
-        updatedQuoteParts,
-        getModelKey(updatedQuotePart),
-      );
-      this.setState({ updatedQuoteParts: newUpdatedQuoteParts });
-    } else {
-      const newUpdatedQuoteParts = updateObjectInArray(updatedQuoteParts, updatedQuotePart);
-      this.setState({ updatedQuoteParts: newUpdatedQuoteParts });
-    }
+    const newUpdatedQuoteParts = updateObjectInArray(updatedQuoteParts, updatedQuotePart);
+    this.setState({ updatedQuoteParts: newUpdatedQuoteParts });
   };
   addNewQuotePart = () => {
     const { quote, saveQuotePartOK } = this.props;
@@ -59,7 +64,7 @@ class QuoteDetail extends PureComponent {
     saveQuotePartOK(newQuotePart);
   };
   render() {
-    const { updatedQuoteParts } = this.state;
+    const { updatedQuoteParts, quotePartsDetail } = this.state;
     const {
       quoteParts,
       parts,
@@ -78,7 +83,6 @@ class QuoteDetail extends PureComponent {
       deleteQuotePart,
       saveQuotePart,
       cloneQuote,
-      issueQuote,
       unarchiveQuote,
     } = this.props;
 
@@ -91,7 +95,8 @@ class QuoteDetail extends PureComponent {
         iconAction: () => this.addNewQuotePart(),
       },
     ];
-    const quotePartsDetail = getQuoteParts(quote, sections, quoteParts, bikeParts, parts, brands);
+    const quotePartList = quoteParts.filter(qp => qp.quote === quote.id);
+
     return (
       <div className="row">
         <div>
@@ -100,7 +105,7 @@ class QuoteDetail extends PureComponent {
             archiveQuote={archiveQuote}
             unarchiveQuote={unarchiveQuote}
             cloneQuote={cloneQuote}
-            issueQuote={issueQuote}
+            issueQuote={this.issueQuote}
           />
           {quote.quote_status === QUOTE_INITIAL ? (
             <EditModel
@@ -132,7 +137,7 @@ class QuoteDetail extends PureComponent {
             <QuoteSummaryParts
               lockFirstColumn={true}
               showPrices={false}
-              quoteParts={quoteParts}
+              quoteParts={quotePartList}
               brands={brands}
               sections={sections}
               parts={parts}
@@ -141,22 +146,20 @@ class QuoteDetail extends PureComponent {
           </div>
         </div>
         {quote.quote_status === QUOTE_INITIAL && (
-          <div>
-            <QuotePartGrid
-              isBike={!!quote.bike}
-              quoteParts={quotePartsDetail}
-              updatedQuoteParts={updatedQuoteParts}
-              brands={brands}
-              suppliers={suppliers}
-              sections={sections}
-              parts={parts}
-              supplierProducts={supplierProducts}
-              deleteQuotePart={deleteQuotePart}
-              saveQuotePart={saveQuotePart}
-              addQuotePart={this.addNewQuotePart}
-              raiseStateForQuotePart={this.raiseStateForQuotePart}
-            />
-          </div>
+          <QuotePartGrid
+            isBike={!!quote.bike}
+            quoteParts={quotePartsDetail}
+            updatedQuoteParts={updatedQuoteParts}
+            brands={brands}
+            suppliers={suppliers}
+            sections={sections}
+            parts={parts}
+            supplierProducts={supplierProducts}
+            deleteQuotePart={deleteQuotePart}
+            saveQuotePart={saveQuotePart}
+            addQuotePart={this.addNewQuotePart}
+            raiseStateForQuotePart={this.raiseStateForQuotePart}
+          />
         )}
       </div>
     );

@@ -77,6 +77,7 @@ class QuoteManager extends React.Component {
       saveQuotePart,
       saveQuotePartOK,
       deleteQuotePart,
+      addMessage,
     } = this.props;
     if (!doWeHaveObjects(quotes)) return <Redirect to="/quote-list" push />;
 
@@ -149,6 +150,7 @@ class QuoteManager extends React.Component {
             cloneQuote={getQuoteToCopy}
             issueQuote={issueQuote}
             users={users}
+            addMessage={addMessage}
             data-test="quote-detail-tab"
           />
         )}
@@ -237,6 +239,7 @@ QuoteManager.propTypes = {
   saveQuotePart: PropTypes.func.isRequired,
   saveQuote: PropTypes.func.isRequired,
   saveQuotePartOK: PropTypes.func.isRequired,
+  addMessage: PropTypes.func.isRequired,
   deleteQuotePart: PropTypes.func.isRequired,
   getQuoteToCopy: PropTypes.func.isRequired,
   issueQuote: PropTypes.func.isRequired,

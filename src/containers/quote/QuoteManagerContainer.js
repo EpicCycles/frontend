@@ -23,6 +23,7 @@ import {
   saveQuotePartOK,
   unarchiveQuote,
 } from '../../state/actions/quote';
+import { addMessage } from '../../state/actions/application';
 
 const mapStateToProps = ({ bike, core, customer, framework, note, part, quote, user }) => {
   const { customers, customerId, addresses, phones } = customer;
@@ -82,6 +83,7 @@ const mapDispatchToProps = {
   deleteQuotePart,
   getQuoteToCopy,
   issueQuote,
+  addMessage,
 };
 export default connect(
   mapStateToProps,

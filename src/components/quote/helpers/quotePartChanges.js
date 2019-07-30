@@ -17,7 +17,7 @@ export const quotePartChanges = (
   if (
     updatedQuotePart.partType &&
     (!updatedQuotePart._partType ||
-      updatedQuotePart._partType.id !== textToNumber(updatedQuotePart.partType))
+      updatedQuotePart._partType.id !== textToNumber(String(updatedQuotePart.partType)))
   )
     updatedQuotePart._partType = getPartType(updatedQuotePart.partType, sections);
 

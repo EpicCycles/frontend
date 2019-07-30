@@ -60,7 +60,7 @@ export const checkForChangesAllFields = (fieldList, existingObject, newValues) =
           } else if (Array.isArray(existingValue) || Array.isArray(newValue)) return true;
           break;
         default:
-          return existingValue !== newValue;
+          return String(existingValue) !== String(newValue);
       }
     else if (existingValue || newValue) return true;
     return false;

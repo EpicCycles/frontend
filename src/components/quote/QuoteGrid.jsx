@@ -1,7 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { quoteFields } from './helpers/display';
+import { quoteFieldsBikeComplete} from './helpers/display';
 import ModelTableHeaders from '../app/model/ModelTableHeaders';
 import ModelTableActionHeader from '../app/model/ModelTableActionHeader';
 import { QUOTE_ARCHIVED } from './helpers/quote';
@@ -80,7 +80,7 @@ const QuoteGrid = props => {
 };
 
 QuoteGrid.defaultProps = {
-  displayFields: quoteFields,
+  displayFields: quoteFieldsBikeComplete,
   quotes: [],
 };
 

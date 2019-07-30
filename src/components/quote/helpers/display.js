@@ -92,7 +92,7 @@ export const quoteFieldsBike = [
   COLOUR_FIELD,
   COLOUR_PRICE_FIELD,
 ];
-export const quoteFieldsNoBike = [
+export const quoteFieldsNoPrice = [
   QUOTE_DESC_FIELD,
   CUSTOMER_FIELD,
   QUOTE_STATUS_FIELD,
@@ -105,7 +105,21 @@ export const quoteFieldsNoBike = [
   QUOTE_PRICE_FIELD,
   CALCULATED_PRICE_FIELD,
 ];
-export const quoteFields = quoteFieldsNoBike.concat(quoteFieldsBike);
+export const quoteFieldsComplete = [
+  QUOTE_DESC_FIELD,
+  CUSTOMER_FIELD,
+  QUOTE_STATUS_FIELD,
+  CLUB_MEMBER_FIELD,
+  VERSION_FIELD,
+  CREATED_BY_FIELD,
+  CREATED_DATE_FIELD,
+  UPD_DATE_FIELD,
+  ISSUED_DATE_FIELD,
+  QUOTE_PRICE_FIELD,
+  CALCULATED_PRICE_FIELD,
+];
+export const quoteFieldsBikeNoPrice = quoteFieldsNoPrice.concat(quoteFieldsBike);
+export const quoteFieldsBikeComplete = quoteFieldsComplete.concat(quoteFieldsBike);
 export const quoteFieldsNoCustomer = [
   QUOTE_DESC_FIELD,
   QUOTE_STATUS_FIELD,

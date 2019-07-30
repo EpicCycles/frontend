@@ -10,19 +10,24 @@ import { findPartsForBike } from '../bike/helpers/bike';
 import QuoteSummaryParts from './QuoteSummaryParts';
 import QuotePartGrid from './QuotePartGrid';
 import { QUOTE_INITIAL } from './helpers/quote';
-import { quoteFields, quoteFieldsNoBike } from './helpers/display';
+import {
+  quoteFieldsBikeComplete,
+  quoteFieldsBikeNoPrice,
+  quoteFieldsComplete,
+  quoteFieldsNoPrice,
+} from './helpers/display';
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteActionCell from './QuoteActionCell';
-import EditModel from '../app/model/EditModel';
 import { getQuoteParts } from './helpers/getQuoteParts';
 import { checkForChanges, getModelKey } from '../app/model/helpers/model';
 import { QUOTE_PART_FOR_BIKE } from './helpers/quotePartFields';
 import { quoteIssueChecks } from './helpers/quoteIssueChecks';
+import EditModelSimple from '../app/model/EditModelSimple';
 
 class QuoteDetail extends PureComponent {
   state = { updatedQuoteParts: [] };
   static getDerivedStateFromProps(props, state) {
-    const { updatedQuoteParts } = state;
+    const { updatedQuote, updatedQuoteParts } = state;
     const { quote, sections, quoteParts, bikeParts, parts, brands } = props;
 
     const quotePartsDetail = getQuoteParts(quote, sections, quoteParts, bikeParts, parts, brands);
@@ -33,7 +38,12 @@ class QuoteDetail extends PureComponent {
         checkedUpdatedParts.push(updatedPart);
     });
 
+    let checkedUpdatedQuote;
+    if (updatedQuote && checkForChanges(quoteFieldsBikeComplete, quote, updatedQuote))
+      checkedUpdatedQuote = updatedQuote;
+
     return {
+      updatedQuote: checkedUpdatedQuote,
       updatedQuoteParts: checkedUpdatedParts,
       quotePartsDetail: quotePartsDetail,
     };
@@ -50,6 +60,9 @@ class QuoteDetail extends PureComponent {
     }
   };
 
+  raiseStateForQuote = updatedQuote => {
+    this.setState({ updatedQuote: updatedQuote });
+  };
   raiseStateForQuotePart = updatedQuotePart => {
     const { updatedQuoteParts } = this.state;
 
@@ -62,7 +75,7 @@ class QuoteDetail extends PureComponent {
     saveQuotePartOK(newQuotePart);
   };
   render() {
-    const { updatedQuoteParts, quotePartsDetail } = this.state;
+    const { updatedQuote, updatedQuoteParts, quotePartsDetail } = this.state;
     const {
       quoteParts,
       parts,
@@ -106,11 +119,12 @@ class QuoteDetail extends PureComponent {
             issueQuote={this.issueQuote}
           />
           {quote.quote_status === QUOTE_INITIAL ? (
-            <EditModel
+            <EditModelSimple
               pageMode
               actionsRequired
-              model={quote}
-              modelFields={quote.bike ? quoteFields : quoteFieldsNoBike}
+              model={updatedQuote ? updatedQuote : quote}
+              persistedModel={quote}
+              modelFields={quote.bike ? quoteFieldsBikeNoPrice : quoteFieldsNoPrice}
               brands={brands}
               bikes={bikes}
               frames={frames}
@@ -120,10 +134,12 @@ class QuoteDetail extends PureComponent {
               modelDelete={archiveQuote}
               additionalActions={additionalActions}
               key={`editQuote${quote.id}`}
+              showReadOnlyFields
+              raiseState={this.raiseStateForQuote}
             />
           ) : (
             <ViewModelBlock
-              modelFields={quote.bike ? quoteFields : quoteFieldsNoBike}
+              modelFields={quote.bike ? quoteFieldsBikeComplete : quoteFieldsComplete}
               model={quote}
               bikes={bikes}
               customers={customers}

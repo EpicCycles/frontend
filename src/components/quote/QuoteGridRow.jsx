@@ -1,7 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { quoteFields } from './helpers/display';
+import { quoteFieldsBikeComplete } from './helpers/display';
 import { getModelKey } from '../app/model/helpers/model';
 import ModelViewRow from '../app/model/ModelViewRow';
 import { gridItemClass } from '../app/model/helpers/display';
@@ -56,7 +56,7 @@ const QuoteGridRow = props => {
 };
 
 QuoteGridRow.defaultProps = {
-  displayFields: quoteFields,
+  displayFields: quoteFieldsBikeComplete,
 };
 
 QuoteGridRow.propTypes = {

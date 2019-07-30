@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react';
 import {
-  findIndexOfObjectWithKey,
   findObjectWithId,
   findObjectWithKey,
   generateRandomCode,
-  removeItemFromArray,
   updateObjectInArray,
 } from '../../helpers/utils';
 import * as PropTypes from 'prop-types';

@@ -50,13 +50,14 @@ class QuoteDetail extends PureComponent {
   }
 
   issueQuote = quoteKey => {
-    const { quoteParts, quote, addMessage, issueQuote } = this.props;
-    const { updatedQuoteParts } = this.state;
-    const problems = quoteIssueChecks(updatedQuoteParts, quoteParts, quote);
+    const { quoteParts, quote, addMessage } = this.props;
+    const { updatedQuote, updatedQuoteParts } = this.state;
+    const quoteCurrently = updatedQuote ? updatedQuote : quote;
+    const problems = quoteIssueChecks(updatedQuoteParts, quoteParts, quoteCurrently);
     if (problems) {
       addMessage(problems.join(' '), 'W');
     } else {
-      issueQuote(quoteKey);
+      this.props.changeRoute('/quote-issue');
     }
   };
 
@@ -208,7 +209,7 @@ QuoteDetail.propTypes = {
   saveQuotePart: PropTypes.func.isRequired,
   saveQuotePartOK: PropTypes.func.isRequired,
   cloneQuote: PropTypes.func.isRequired,
-  issueQuote: PropTypes.func.isRequired,
+  changeRoute: PropTypes.func.isRequired,
   unarchiveQuote: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
 };

@@ -41,8 +41,9 @@ class QuotePartEdit extends React.Component {
       sections,
       suppliers,
       raiseStateForQuotePart,
+      pricesRequired,
     } = this.props;
-    const fields = quotePartFields(quotePart, this.additionalProcessingOnChange);
+    const fields = quotePartFields(quotePart, this.additionalProcessingOnChange, pricesRequired);
     const rowClass = quotePart && quotePart.error ? 'error' : '';
 
     return (
@@ -76,5 +77,6 @@ QuotePartEdit.propTypes = {
   parts: PropTypes.array.isRequired,
   supplierProducts: PropTypes.array.isRequired,
   raiseStateForQuotePart: PropTypes.func.isRequired,
+  pricesRequired: PropTypes.bool,
 };
 export default QuotePartEdit;

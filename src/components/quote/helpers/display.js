@@ -102,7 +102,6 @@ export const quoteFieldsNoPrice = [
   CREATED_DATE_FIELD,
   UPD_DATE_FIELD,
   ISSUED_DATE_FIELD,
-  QUOTE_PRICE_FIELD,
   CALCULATED_PRICE_FIELD,
 ];
 export const quoteFieldsComplete = [

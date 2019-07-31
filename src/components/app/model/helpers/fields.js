@@ -410,6 +410,8 @@ export const QUOTE_PRICE_FIELD = {
   type: CURRENCY,
   displaySize: 7,
   maxLength: 10,
+  required: true,
+  error: VALUE_MISSING,
 };
 export const CALCULATED_PRICE_FIELD = {
   fieldName: CALCULATED_PRICE,

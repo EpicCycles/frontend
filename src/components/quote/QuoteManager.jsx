@@ -38,6 +38,10 @@ class QuoteManager extends React.Component {
     this.props.changeQuote(quoteId);
     this.changeCurrentTab(2);
   };
+  issueQuote = quoteId => {
+    this.props.changeQuote(quoteId);
+    this.props.changeRoute('/quote-issue');
+  };
 
   render() {
     const { tab } = this.state;
@@ -71,7 +75,7 @@ class QuoteManager extends React.Component {
       users,
       archiveQuote,
       unarchiveQuote,
-      issueQuote,
+      changeRoute,
       getQuoteToCopy,
       saveQuote,
       saveQuotePart,
@@ -112,10 +116,11 @@ class QuoteManager extends React.Component {
               <QuoteGrid
                 displayFields={quoteFieldsNoCustomer}
                 getQuote={this.editQuote}
+                issueQuote={this.issueQuote}
                 archiveQuote={archiveQuote}
                 unarchiveQuote={unarchiveQuote}
                 cloneQuote={getQuoteToCopy}
-                issueQuote={issueQuote}
+                changeRoute={changeRoute}
                 quotes={quotes}
                 customers={customers}
                 brands={brands}
@@ -141,6 +146,7 @@ class QuoteManager extends React.Component {
             brands={brands}
             suppliers={suppliers}
             sections={sections}
+            issueQuote={this.issueQuote}
             saveQuote={saveQuote}
             saveQuotePart={saveQuotePart}
             saveQuotePartOK={saveQuotePartOK}
@@ -148,7 +154,7 @@ class QuoteManager extends React.Component {
             archiveQuote={archiveQuote}
             unarchiveQuote={unarchiveQuote}
             cloneQuote={getQuoteToCopy}
-            issueQuote={issueQuote}
+            changeRoute={changeRoute}
             users={users}
             addMessage={addMessage}
             data-test="quote-detail-tab"
@@ -174,10 +180,11 @@ class QuoteManager extends React.Component {
             sections={sections}
             users={users}
             getQuote={this.editQuote}
+            issueQuote={this.issueQuote}
             archiveQuote={archiveQuote}
             unarchiveQuote={unarchiveQuote}
             cloneQuote={getQuoteToCopy}
-            issueQuote={issueQuote}
+            changeRoute={changeRoute}
             data-test="bike-quotes-tab"
           />
         )}
@@ -242,7 +249,7 @@ QuoteManager.propTypes = {
   addMessage: PropTypes.func.isRequired,
   deleteQuotePart: PropTypes.func.isRequired,
   getQuoteToCopy: PropTypes.func.isRequired,
-  issueQuote: PropTypes.func.isRequired,
+  changeRoute: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
 };
 

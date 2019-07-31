@@ -22,6 +22,7 @@ const QuotePartGrid = props => {
     deleteQuotePart,
     saveQuotePart,
     raiseStateForQuotePart,
+    pricesRequired,
   } = props;
   return (
     <div className="grid-container">
@@ -51,6 +52,7 @@ const QuotePartGrid = props => {
               supplierProducts={supplierProducts}
               key={rowKey}
               raiseStateForQuotePart={raiseStateForQuotePart}
+              pricesRequired={pricesRequired}
             />
           );
         })}
@@ -61,6 +63,7 @@ const QuotePartGrid = props => {
 };
 QuotePartGrid.propTypes = {
   isBike: PropTypes.bool,
+  pricesRequired: PropTypes.bool,
   quoteParts: PropTypes.array.isRequired,
   updatedQuoteParts: PropTypes.array.isRequired,
   brands: PropTypes.array.isRequired,

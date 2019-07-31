@@ -5,10 +5,11 @@ import HeaderContainer from './HeaderContainer';
 import NotFound from '../404';
 import Home from '../home';
 
-import {CUSTOMER_SEARCH_URL, CUSTOMER_URL, LOGIN_URL} from '../../components/menus/helpers/menu';
+import { CUSTOMER_SEARCH_URL, CUSTOMER_URL, LOGIN_URL } from '../../components/menus/helpers/menu';
 
 const LazyLoginContainer = lazy(() => import('../user/LoginContainer'));
 const LazyQuoteCopyContainer = lazy(() => import('../quote/QuoteCopyContainer'));
+const LazyQuoteIssueContainer = lazy(() => import('../quote/QuoteIssueContainer'));
 const LazyQuoteListContainer = lazy(() => import('../quote/QuoteListContainer'));
 const LazyQuoteCreateContainer = lazy(() => import('../quote/QuoteCreateContainer'));
 const LazyQuoteManagerContainer = lazy(() => import('../quote/QuoteManagerContainer'));
@@ -55,6 +56,7 @@ const App = () => (
           <Route exact path="/quote-list" component={LazyQuoteListContainer} />
           <Route exact path="/quote" component={LazyQuoteManagerContainer} />
           <Route exact path="/quote-copy" component={LazyQuoteCopyContainer} />
+          <Route exact path="/quote-issue" component={LazyQuoteIssueContainer} />
           {/* Finally, catch all unmatched routes */}
           <Route component={NotFound} />
         </Switch>

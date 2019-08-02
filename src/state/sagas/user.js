@@ -25,7 +25,7 @@ import { updateObject } from '../../helpers/utils';
 import { errorAsMessage, logError } from '../../helpers/api_error';
 import * as selectors from '../selectors/user';
 import { clearAllState } from '../actions/application';
-import { getBrandsAndSuppliers } from '../actions/core';
+import { getCoreData } from '../actions/core';
 import { getFramework } from '../actions/framework';
 import { listParts } from '../actions/part';
 import { LOGIN_URL } from '../../components/menus/helpers/menu';
@@ -40,7 +40,7 @@ export function* loginUser(action) {
     yield call(history.push, '/');
 
     // start fetch of basic data
-    yield put(getBrandsAndSuppliers());
+    yield put(getCoreData());
     yield put(getFramework());
     yield put(listParts({}));
     yield put(getUsers());

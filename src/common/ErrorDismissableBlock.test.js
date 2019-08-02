@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import ErrorDismissibleBlock from '../../common/ErrorDismissibleBlock';
+import ErrorDismissibleBlock from './ErrorDismissibleBlock';
 
 describe('ErrorDismissibleBlock tests', () => {
   it('renders the errorDismissableBlock correctly', () => {

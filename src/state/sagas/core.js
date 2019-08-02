@@ -1,11 +1,12 @@
 import history from '../../history';
 import * as selectors from '../selectors/user';
 import brand from './apis/brand';
+import charges from './apis/chargeApi';
 import supplier from './apis/supplier';
 import {
-  getBrandsAndSuppliersFailure,
+  getCoreDataFailure,
   getBrandsFailure,
-  getBrandsAndSuppliersSuccess,
+  getCoreDataSuccess,
   getBrandsSuccess,
   saveBrandsFailure,
   saveBrandsSuccess,
@@ -14,31 +15,40 @@ import {
   deleteSupplierSuccess,
   deleteSupplierFailure,
   BRANDS,
-  BRANDS_AND_SUPPLIERS,
+  CORE_DATA,
   SUPPLIER_DELETE,
   SUPPLIER_SAVE,
   BRANDS_SAVE,
+  CHARGE_SAVE,
+  CHARGE_DELETE,
+  saveChargeFailure,
+  saveChargeSuccess,
+  deleteChargeSuccess,
+  deleteChargeFailure,
 } from '../actions/core';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { errorAsMessage, logError } from '../../helpers/api_error';
 import { sortObjectsByAttribute, updateObject, updateObjectInArray } from '../../helpers/utils';
 import { LOGIN_URL } from '../../components/menus/helpers/menu';
 
-export function* getBrandsAndSuppliers(action) {
+export function* getCoreData(action) {
   try {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
       const brandsResponse = yield call(brand.getBrands, completePayload);
+      const chargesResponse = yield call(charges.getCharges, completePayload);
       const suppliersResponse = yield call(supplier.getSuppliers, completePayload);
-      yield put(getBrandsAndSuppliersSuccess(brandsResponse.data, suppliersResponse.data));
+      yield put(
+        getCoreDataSuccess(brandsResponse.data, chargesResponse.data, suppliersResponse.data),
+      );
     } else {
       yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
-    // yield put(getBrandsAndSuppliersSuccess(sampleBrands, sampleSuppliers));
+    // yield put(getCoreDataSuccess(sampleBrands, sampleSuppliers));
     logError(error);
-    yield put(getBrandsAndSuppliersFailure('Get Brands and Suppliers Failed'));
+    yield put(getCoreDataFailure('Get Brands and Suppliers Failed'));
   }
 }
 export function* getBrands(action) {
@@ -52,7 +62,7 @@ export function* getBrands(action) {
       yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
-    // yield put(getBrandsAndSuppliersSuccess(sampleBrands, sampleSuppliers));
+    // yield put(getCoreDataSuccess(sampleBrands, sampleSuppliers));
     logError(error);
     yield put(getBrandsFailure('Get Brands Failed'));
   }
@@ -83,6 +93,43 @@ export function* saveBrands(action) {
   }
 }
 
+export function* saveCharge(action) {
+  try {
+    const token = yield select(selectors.token);
+    if (token) {
+      const completePayload = updateObject(action.payload, { token });
+      let saveChargeResponse;
+      if (action.payload.charge.id) {
+        saveChargeResponse = yield call(charges.saveCharge, completePayload);
+      } else {
+        saveChargeResponse = yield call(charges.createCharge, completePayload);
+      }
+      yield put(saveChargeSuccess(saveChargeResponse.data));
+    } else {
+      yield call(history.push, LOGIN_URL);
+    }
+  } catch (error) {
+    logError(error);
+    yield put(saveChargeFailure(errorAsMessage(error, 'Save Charge Failed')));
+  }
+}
+export function* deleteCharge(action) {
+  try {
+    const token = yield select(selectors.token);
+    if (token) {
+      const completePayload = updateObject(action.payload, { token });
+      yield call(charges.deleteCharge, completePayload);
+      const chargesResponse = yield call(charges.getCharges, completePayload);
+      yield put(deleteChargeSuccess(chargesResponse.data));
+    } else {
+      yield call(history.push, LOGIN_URL);
+    }
+  } catch (error) {
+    logError(error);
+    yield put(deleteChargeFailure('Delete Charge Failed'));
+  }
+}
+
 export function* saveSupplier(action) {
   try {
     const token = yield select(selectors.token);
@@ -99,7 +146,7 @@ export function* saveSupplier(action) {
       yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
-    // yield put(getBrandsAndSuppliersSuccess(sampleBrands, sampleSuppliers));
+    // yield put(getCoreDataSuccess(sampleBrands, sampleSuppliers));
     logError(error);
     yield put(saveSupplierFailure(errorAsMessage(error, 'Save Supplier Failed')));
   }
@@ -116,14 +163,14 @@ export function* deleteSupplier(action) {
       yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
-    // yield put(getBrandsAndSuppliersSuccess(sampleBrands, sampleSuppliers));
+    // yield put(getCoreDataSuccess(sampleBrands, sampleSuppliers));
     logError(error);
     yield put(deleteSupplierFailure('Delete Supplier Failed'));
   }
 }
 
-export function* watchForGetBrandsAndSuppliers() {
-  yield takeLatest(`${BRANDS_AND_SUPPLIERS}_REQUESTED`, getBrandsAndSuppliers);
+export function* watchForGetCoreData() {
+  yield takeLatest(`${CORE_DATA}_REQUESTED`, getCoreData);
 }
 export function* watchForGetBrands() {
   yield takeLatest(`${BRANDS}_REQUESTED`, getBrands);
@@ -131,6 +178,12 @@ export function* watchForGetBrands() {
 
 export function* watchForSaveBrands() {
   yield takeLatest(`${BRANDS_SAVE}_REQUESTED`, saveBrands);
+}
+export function* watchForSaveCharge() {
+  yield takeLatest(`${CHARGE_SAVE}_REQUESTED`, saveCharge);
+}
+export function* watchForDeleteCharge() {
+  yield takeLatest(`${CHARGE_DELETE}_REQUESTED`, deleteCharge);
 }
 
 export function* watchForSaveSupplier() {

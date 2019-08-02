@@ -1,9 +1,11 @@
-export const BRANDS_AND_SUPPLIERS = 'core/BRANDS_AND_SUPPLIERS';
+export const CORE_DATA = 'core/CORE_DATA';
 export const BRANDS = 'core/BRANDS';
 export const BRANDS_SAVE = 'core/BRANDS_SAVE';
 export const BRAND_SAVE = 'core/BRAND_SAVE';
 export const BRAND_DELETE = 'core/BRAND_DELETE';
 export const BRANDS_UPDATE = 'core/BRANDS_UPDATE';
+export const CHARGE_SAVE = 'core/CHARGE_SAVE';
+export const CHARGE_DELETE = 'core/CHARGE_DELETE';
 export const SUPPLIER_SAVE = 'core/SUPPLIER_SAVE';
 export const SUPPLIER_DELETE = 'core/SUPPLIER_DELETE';
 export const saveBrand = brand => ({
@@ -30,18 +32,18 @@ export const deleteBrandError = error => ({
   type: `${BRAND_SAVE}_ERROR`,
   payload: error,
 });
-export const getBrandsAndSuppliers = () => ({
-  type: `${BRANDS_AND_SUPPLIERS}_REQUESTED`,
+export const getCoreData = () => ({
+  type: `${CORE_DATA}_REQUESTED`,
   payload: {},
 });
 
-export const getBrandsAndSuppliersSuccess = (brands, suppliers) => ({
-  type: `${BRANDS_AND_SUPPLIERS}_OK`,
-  payload: { brands, suppliers },
+export const getCoreDataSuccess = (brands, charges, suppliers) => ({
+  type: `${CORE_DATA}_OK`,
+  payload: { brands, charges, suppliers },
 });
 
-export const getBrandsAndSuppliersFailure = error => ({
-  type: `${BRANDS_AND_SUPPLIERS}_ERROR`,
+export const getCoreDataFailure = error => ({
+  type: `${CORE_DATA}_ERROR`,
   payload: error,
 });
 export const getBrands = () => ({
@@ -55,7 +57,7 @@ export const getBrandsSuccess = brands => ({
 });
 
 export const getBrandsFailure = error => ({
-  type: `${BRANDS_AND_SUPPLIERS}_ERROR`,
+  type: `${CORE_DATA}_ERROR`,
   payload: error,
 });
 
@@ -76,6 +78,37 @@ export const saveBrandsSuccess = brands => ({
 
 export const saveBrandsFailure = error => ({
   type: `${BRANDS_SAVE}_ERROR`,
+  payload: error,
+});
+
+export const saveCharge = charge => ({
+  type: `${CHARGE_SAVE}_REQUESTED`,
+  payload: { charge },
+});
+export const addCharge = charge => ({
+  type: `${CHARGE_SAVE}_ADD`,
+  payload: { charge },
+});
+export const saveChargeSuccess = charges => ({
+  type: `${CHARGE_SAVE}_OK`,
+  payload: charges,
+});
+
+export const saveChargeFailure = error => ({
+  type: `${CHARGE_SAVE}_ERROR`,
+  payload: error,
+});
+export const deleteCharge = chargeId => ({
+  type: `${CHARGE_DELETE}_REQUESTED`,
+  payload: { chargeId },
+});
+export const deleteChargeSuccess = charges => ({
+  type: `${CHARGE_DELETE}_OK`,
+  payload: charges,
+});
+
+export const deleteChargeFailure = error => ({
+  type: `${CHARGE_DELETE}_ERROR`,
   payload: error,
 });
 

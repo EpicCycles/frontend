@@ -1,6 +1,6 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import FormTextAreaInput from '../../common/FormTextAreaInput';
+import FormTextAreaInput from './FormTextAreaInput';
 
 describe('FormTextAreaInput tests', () => {
   it('renders the form text input correctly', () => {

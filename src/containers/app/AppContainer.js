@@ -28,6 +28,7 @@ const LazyPasswordChangeContainer = lazy(() => import('../user/PasswordChangeCon
 const LazyUserDetailChangeContainer = lazy(() => import('../user/UserDetailChangeContainer'));
 const LazyFrameworkContainer = lazy(() => import('../framework/FrameworkContainer'));
 const LazyCustomerListContainer = lazy(() => import('../customer/CustomerListContainer'));
+const LazyChargesContainer = lazy(() => import('../charge/ChargesContainer'));
 const App = () => (
   <div>
     <HeaderContainer />
@@ -57,6 +58,7 @@ const App = () => (
           <Route exact path="/quote" component={LazyQuoteManagerContainer} />
           <Route exact path="/quote-copy" component={LazyQuoteCopyContainer} />
           <Route exact path="/quote-issue" component={LazyQuoteIssueContainer} />
+          <Route exact path="/charges" component={LazyChargesContainer} />
           {/* Finally, catch all unmatched routes */}
           <Route component={NotFound} />
         </Switch>

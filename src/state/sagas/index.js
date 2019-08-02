@@ -26,10 +26,12 @@ import {
 } from './note';
 import { watchForGetFramework, watchForSaveFramework } from './framework';
 import {
+  watchForDeleteCharge,
   watchForDeleteSupplier,
   watchForGetBrands,
-  watchForGetBrandsAndSuppliers,
+  watchForGetCoreData,
   watchForSaveBrands,
+  watchForSaveCharge,
   watchForSaveSupplier,
 } from './core';
 import {
@@ -94,7 +96,7 @@ export default function* rootSaga() {
     watchForDeleteNote(),
     watchForSaveNote(),
     watchForGetNoteList(),
-    watchForGetBrandsAndSuppliers(),
+    watchForGetCoreData(),
     watchForGetBrands(),
     watchForSaveBrands(),
     watchForSaveSupplier(),
@@ -129,5 +131,7 @@ export default function* rootSaga() {
     watchForSaveSupplierProduct(),
     watchForDeleteSupplierProduct(),
     watchForSavePartsAndSupplierProducts(),
+    watchForSaveCharge(),
+    watchForDeleteCharge(),
   ]);
 }

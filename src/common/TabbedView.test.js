@@ -1,6 +1,6 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import TabbedView from '../../common/TabbedView';
+import TabbedView from './TabbedView';
 
 const tabs = ['Addresses', 'Phone numbers', 'Fittings', 'History', 'Quotes'];
 describe('TabbedView', () => {

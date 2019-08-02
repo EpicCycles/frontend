@@ -45,6 +45,7 @@ export const menuStructure = [
         groupLinks: [
           { displayText: 'Quote Sections', linkRoute: '/framework', linkNumber: 311 },
           { displayText: 'Brands', linkRoute: '/brands', linkNumber: 312 },
+          { displayText: 'Charges', linkRoute: '/charges', linkNumber: 313 },
         ],
       },
       {

@@ -1,6 +1,6 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import SelectInput from '../../common/SelectInput';
+import SelectInput from './SelectInput';
 
 describe('SelectInput', () => {
   test('it renders with minimum data', () => {

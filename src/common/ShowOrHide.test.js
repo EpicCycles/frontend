@@ -1,6 +1,6 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import ShowOrHide from '../../common/ShowOrHide';
+import ShowOrHide from './ShowOrHide';
 
 describe('ShowOrHide', () => {
   test('it renders without failing', () => {

@@ -99,6 +99,11 @@ exports[`is displays correctly 1`] = `
                   "linkNumber": 312,
                   "linkRoute": "/brands",
                 },
+                Object {
+                  "displayText": "Charges",
+                  "linkNumber": 313,
+                  "linkRoute": "/charges",
+                },
               ],
               "groupPos": 31,
             },

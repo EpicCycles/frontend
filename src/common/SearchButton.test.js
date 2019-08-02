@@ -1,5 +1,5 @@
 import React from "react";
-import SearchButton from "../../common/SearchButton";
+import SearchButton from "./SearchButton";
 
 describe('SearchButton', () => {
    it('should call passed function when not disabled and clicked', () => {

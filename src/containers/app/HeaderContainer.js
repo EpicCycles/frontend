@@ -7,12 +7,12 @@ import {
   setStateFromLocalStorage,
 } from '../../state/actions/application';
 import { getUsers, logoutUser } from '../../state/actions/user';
-import { getBrandsAndSuppliers, getBrandsAndSuppliersSuccess } from '../../state/actions/core';
+import { getCoreData, getCoreDataSuccess } from '../../state/actions/core';
 import { listParts, listPartsOK } from '../../state/actions/part';
 import { getFramework, getFrameworkSuccess } from '../../state/actions/framework';
 
 const mapStateToProps = ({ user, application, core, part, framework }) => {
-  const { brands, suppliers } = core;
+  const { brands, charges, suppliers } = core;
   const { parts, supplierProducts } = part;
   const { sections } = framework;
   return {
@@ -20,6 +20,7 @@ const mapStateToProps = ({ user, application, core, part, framework }) => {
     token: user.token,
     application,
     brands,
+    charges,
     suppliers,
     parts,
     supplierProducts,
@@ -32,8 +33,8 @@ const mapDispatchToProps = {
   logoutUser,
   saveStateToLocalStorage,
   setStateFromLocalStorage,
-  getBrandsAndSuppliers,
-  getBrandsAndSuppliersSuccess,
+  getCoreData,
+  getCoreDataSuccess,
   getFramework,
   getFrameworkSuccess,
   listParts,

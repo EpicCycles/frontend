@@ -18,7 +18,7 @@ import {
   USER_LOGOUT,
 } from '../actions/user';
 import { FRAMEWORK, FRAMEWORK_SAVE } from '../actions/framework';
-import { BRANDS_SAVE, SUPPLIER_SAVE } from '../actions/core';
+import {BRANDS_SAVE, CHARGE_SAVE, SUPPLIER_SAVE} from '../actions/core';
 import {
   BIKE_ADD_PART,
   BIKE_DELETE,
@@ -48,6 +48,8 @@ const application = (state = initialState, action) => {
     case `${BIKE_PART_SAVE}_OK`:
     case `${BIKE_SAVE}_OK`:
     case `${CREATE_QUOTE}_OK`:
+    case `${SUPPLIER_SAVE}_OK`:
+    case `${CHARGE_SAVE}_OK`:
       return {
         ...state,
         message: 'Changes saved',
@@ -161,6 +163,7 @@ const application = (state = initialState, action) => {
     case `${UPDATE_QUOTE}_ERROR`:
     case `${GET_USERS}_FAILURE`:
     case `${SUPPLIER_SAVE}_ERROR`:
+    case `${CHARGE_SAVE}_ERROR`:
       return {
         ...state,
         message: action.payload,

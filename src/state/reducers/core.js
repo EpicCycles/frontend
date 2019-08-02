@@ -2,11 +2,13 @@ import {
   BRAND_DELETE,
   BRAND_SAVE,
   BRANDS,
-  BRANDS_AND_SUPPLIERS,
+  CORE_DATA,
   BRANDS_SAVE,
   BRANDS_UPDATE,
   SUPPLIER_DELETE,
   SUPPLIER_SAVE,
+  CHARGE_DELETE,
+  CHARGE_SAVE,
 } from '../actions/core';
 import { USER_LOGIN, USER_LOGOUT } from '../actions/user';
 import {
@@ -27,6 +29,8 @@ const core = (state = initialState, action) => {
     case `${SUPPLIER_DELETE}_REQUESTED`:
     case `${BRAND_SAVE}_REQUESTED`:
     case `${BRAND_DELETE}_REQUESTED`:
+    case `${CHARGE_SAVE}_REQUESTED`:
+    case `${CHARGE_DELETE}_REQUESTED`:
       return {
         ...state,
         isLoading: true,
@@ -43,11 +47,12 @@ const core = (state = initialState, action) => {
         brands: removeItemFromArray(state.brands, action.payload.brandId),
         isLoading: false,
       };
-    case `${BRANDS_AND_SUPPLIERS}_REQUESTED`:
+    case `${CORE_DATA}_REQUESTED`:
       return {
         ...state,
         isLoading: true,
         brands: [],
+        charges: [],
         suppliers: [],
       };
     case `${BRANDS}_REQUESTED`:
@@ -68,10 +73,12 @@ const core = (state = initialState, action) => {
         isLoading: false,
         brands: updateObjectInArray(state.brands, brandWithErrors),
       };
-    case `${BRANDS_AND_SUPPLIERS}_ERROR`:
+    case `${CORE_DATA}_ERROR`:
     case `${BRANDS}_ERROR`:
     case `${BRANDS_SAVE}_ERROR`:
     case `${BRAND_DELETE}_ERROR`:
+    case `${CHARGE_SAVE}_ERROR`:
+    case `${CHARGE_DELETE}_ERROR`:
     case `${SUPPLIER_SAVE}_ERROR`:
     case `${SUPPLIER_DELETE}_ERROR`:
       return {
@@ -87,10 +94,11 @@ const core = (state = initialState, action) => {
         isLoading: false,
       };
 
-    case `${BRANDS_AND_SUPPLIERS}_OK`:
+    case `${CORE_DATA}_OK`:
       return {
         ...state,
         brands: action.payload.brands,
+        charges: action.payload.charges,
         suppliers: action.payload.suppliers,
         isLoading: false,
       };
@@ -98,6 +106,19 @@ const core = (state = initialState, action) => {
       return {
         ...state,
         brands: action.payload.brands,
+        isLoading: false,
+      };
+    case `${CHARGE_SAVE}_ADD`:
+      return {
+        ...state,
+        charges: updateObjectInArray(state.charges, action.payload.charge),
+        isLoading: false,
+      };
+    case `${CHARGE_SAVE}_OK`:
+    case `${CHARGE_DELETE}_OK`:
+      return {
+        ...state,
+        charges: action.payload,
         isLoading: false,
       };
     case `${SUPPLIER_SAVE}_OK`:

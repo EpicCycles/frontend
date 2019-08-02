@@ -1,6 +1,6 @@
 import React from 'react';
 import DisplayBlock from './DisplayBlock';
-import { findDataTest } from '../test/jest_helpers/assert';
+import { findDataTest } from '../helpers/jest_helpers/assert';
 
 describe('DisplayBlock', () => {
   it('should return null when no arrray is passed', () => {

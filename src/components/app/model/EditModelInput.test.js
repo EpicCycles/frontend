@@ -9,9 +9,10 @@ import {
   SUPPLIER,
   TEXT,
   TEXT_AREA,
-} from './model/helpers/fields';
-import EditModelInput from './model/EditModelInput';
-import {findDataTest} from "../../helpers/jest_helpers/assert";
+} from './helpers/fields';
+import EditModelInput from './EditModelInput';
+import {findDataTest} from "../../../helpers/jest_helpers/assert";
+import {CHARGE} from "../../quote/helpers/quoteChargeFields";
 
 const foundName = 'find me';
 const sections = [
@@ -72,6 +73,43 @@ describe('EditModelInput', () => {
             model={emptyModel}
             componentKey={componentKey}
             index={0}
+            onChange={jest.fn()}
+          />,
+        ),
+      ),
+    ).toMatchSnapshot();
+  });
+  test('it renders a charge field that has data', () => {
+    const field = {
+      fieldName: 'data_field',
+      type: CHARGE,
+    };
+    const model = { data_field: 23.9 };
+    expect(
+      toJson(
+        shallow(
+          <EditModelInput
+            field={field}
+            model={model}
+            componentKey={componentKey}
+            onChange={jest.fn()}
+          />,
+        ),
+      ),
+    ).toMatchSnapshot();
+  });
+  test('it renders a charge field that has no data', () => {
+    const field = {
+      fieldName: 'data_field',
+      type: CHARGE,
+    };
+    expect(
+      toJson(
+        shallow(
+          <EditModelInput
+            field={field}
+            model={emptyModel}
+            componentKey={componentKey}
             onChange={jest.fn()}
           />,
         ),

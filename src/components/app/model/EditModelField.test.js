@@ -1,8 +1,8 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import { CURRENCY } from './model/helpers/fields';
-import EditModelField from './model/EditModelField';
-import { NEW_ELEMENT_ID } from '../../helpers/constants';
+import { CURRENCY } from './helpers/fields';
+import EditModelField from './EditModelField';
+import { NEW_ELEMENT_ID } from '../../../helpers/constants';
 
 const field = {
   fieldName: 'data_field',

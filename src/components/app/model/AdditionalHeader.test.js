@@ -1,6 +1,6 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import AdditionalHeader from "./model/AdditionalHeader";
+import AdditionalHeader from "./AdditionalHeader";
 
 describe('AdditionalHeader', () => {
   test('should display error header', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import AddLink from './model/AddLink';
-import { findDataTest } from '../../helpers/jest_helpers/assert';
+import AddLink from './AddLink';
+import { findDataTest } from '../../../helpers/jest_helpers/assert';
 
 describe('CustomerAddLink', () => {
   test('should render when passed props', () => {

@@ -1,8 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import ViewModelFieldRow from './model/ViewModelFieldRow';
-import { ADD_DATE_FIELD, ADDRESS1_FIELD } from './model/helpers/fields';
-import { NEW_ELEMENT_ID } from '../../helpers/constants';
+import ViewModelBlock from './ViewModelBlock';
+import { customerAddressFields } from './helpers/fields';
 
 const foundName = 'find me';
 const sections = [
@@ -35,25 +34,18 @@ const model = {
   postcode: 'xxxyyy',
   customer: 6,
 };
-describe('ViewModelFieldRow', () => {
-  test('should cope when there is no model', () => {
+describe('ViewModelBlock', () => {
+  it('it renders', () => {
     const component = shallow(
-      <ViewModelFieldRow
-        model={emptyModel}
-        field={ADDRESS1_FIELD}
-        index={12}
-        componentKey={NEW_ELEMENT_ID}
-      />,
+      <ViewModelBlock model={emptyModel} modelFields={customerAddressFields} />,
     );
-    expect(component.type()).toEqual(null);
+    expect(toJson(component)).toMatchSnapshot();
   });
-  test('should show a field when it is there', () => {
+  it('it renders with data', () => {
     const component = shallow(
-      <ViewModelFieldRow
+      <ViewModelBlock
         model={model}
-        field={ADDRESS1_FIELD}
-        componentKey={1}
-        index={2}
+        modelFields={customerAddressFields}
         className="red"
         suppliers={suppliers}
         sections={sections}
@@ -61,20 +53,5 @@ describe('ViewModelFieldRow', () => {
       />,
     );
     expect(toJson(component)).toMatchSnapshot();
-  });
-  test('should show nothing if the field has no data', () => {
-    const component = shallow(
-      <ViewModelFieldRow
-        model={model}
-        field={ADD_DATE_FIELD}
-        componentKey={1}
-        index={2}
-        className="red"
-        suppliers={suppliers}
-        sections={sections}
-        brands={brands}
-      />,
-    );
-    expect(component.type()).toEqual(null);
   });
 });

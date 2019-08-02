@@ -1,10 +1,10 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
-import ModelActions from './model/ModelActions';
+import ModelActions from './ModelActions';
 import {
   assertComponentHasExpectedProps,
   findDataTest,
-} from '../../helpers/jest_helpers/assert';
+} from '../../../helpers/jest_helpers/assert';
 
 describe('ModelActions', () => {
   it('should show Icon when an action is passed', () => {

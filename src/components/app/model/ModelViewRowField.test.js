@@ -1,7 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import { CURRENCY, DATE_TIME, TEXT } from './model/helpers/fields';
-import ModelViewRowField from './model/ModelViewRowField';
+import { CURRENCY, DATE_TIME, TEXT } from './helpers/fields';
+import ModelViewRowField from './ModelViewRowField';
 
 describe('ModelViewRowField', () => {
   test('it should render when passed a field with data', () => {

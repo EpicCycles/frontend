@@ -1,8 +1,8 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import EditModelPageRow from './model/EditModelPageRow';
-import { ADDRESS1_FIELD } from './model/helpers/fields';
-import { NEW_ELEMENT_ID } from '../../helpers/constants';
+import EditModelPageRow from './EditModelPageRow';
+import { ADDRESS1_FIELD } from './helpers/fields';
+import { NEW_ELEMENT_ID } from '../../../helpers/constants';
 
 const foundName = 'find me';
 const sections = [

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import NonFieldErrors from './model/NonFieldErrors';
-import { findDataTest } from '../../helpers/jest_helpers/assert';
+import NonFieldErrors from './NonFieldErrors';
+import { findDataTest } from '../../../helpers/jest_helpers/assert';
 
 describe('NonFieldErrors', () => {
   it('should return null when no non field errors exist', () => {

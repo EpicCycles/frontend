@@ -1,6 +1,6 @@
 import React from 'react';
-import ModelEditIcons from './model/ModelEditIcons';
-import IconArray from '../../common/IconArray';
+import ModelEditIcons from './ModelEditIcons';
+import IconArray from '../../../common/IconArray';
 
 describe('ModelEditIcons tests', () => {
   const model = {

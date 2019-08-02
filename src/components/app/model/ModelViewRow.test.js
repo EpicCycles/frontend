@@ -1,8 +1,8 @@
 import React from 'react';
-import ModelViewRow from './model/ModelViewRow';
-import { frameFields } from './model/helpers/fields';
-import ModelViewRowField from './model/ModelViewRowField';
-import { findDataTest } from '../../helpers/jest_helpers/assert';
+import ModelViewRow from './ModelViewRow';
+import { frameFields } from './helpers/fields';
+import ModelViewRowField from './ModelViewRowField';
+import { findDataTest } from '../../../helpers/jest_helpers/assert';
 
 describe('ModelViewRow', () => {
   const model = {

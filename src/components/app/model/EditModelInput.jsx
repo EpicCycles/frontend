@@ -20,6 +20,8 @@ import BrandSelect from '../../brand/BrandSelect';
 import SupplierSelect from '../../supplier/SupplierSelect';
 import CountrySelect from '../../address/CountrySelect';
 import SelectInput from '../../../common/SelectInput';
+import { CHARGE } from '../../quote/helpers/quoteChargeFields';
+import { chargeOptions } from '../../charge/helpers/chargeOptions';
 
 class EditModelInput extends Component {
   validateOnChange = (fieldName, fieldValue) => {
@@ -44,6 +46,7 @@ class EditModelInput extends Component {
       index,
       sections,
       brands,
+      charges,
       suppliers,
     } = this.props;
     let editComponent;
@@ -187,6 +190,21 @@ class EditModelInput extends Component {
           />
         );
         break;
+      case CHARGE:
+        editComponent = (
+          <SelectInput
+            className={className}
+            fieldName={fieldName}
+            value={fieldValue}
+            onChange={this.validateOnChange}
+            options={chargeOptions(charges)}
+            error={error}
+            disabled={disabled}
+            isMultiple={false}
+            isEmptyAllowed={emptyAllowed}
+          />
+        );
+        break;
       case SUPPLIER:
         editComponent = (
           <SupplierSelect
@@ -235,6 +253,7 @@ EditModelInput.propTypes = {
   index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   sections: PropTypes.array,
   brands: PropTypes.array,
+  charges: PropTypes.array,
   suppliers: PropTypes.array,
   onChange: PropTypes.func.isRequired,
   fittings: PropTypes.array,

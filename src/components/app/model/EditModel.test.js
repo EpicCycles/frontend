@@ -1,6 +1,6 @@
-import EditModel from './model/EditModel';
+import EditModel from './EditModel';
 import React from 'react';
-import { assertComponentHasExpectedProps } from '../../helpers/jest_helpers/assert';
+import { assertComponentHasExpectedProps } from '../../../helpers/jest_helpers/assert';
 
 describe('EditModel', () => {
   const model = { id: 12 };

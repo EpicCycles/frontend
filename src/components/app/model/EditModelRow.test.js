@@ -1,7 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import EditModelRow from './model/EditModelRow';
-import { customerAddressFields } from './model/helpers/fields';
+import EditModelRow from './EditModelRow';
+import { customerAddressFields } from './helpers/fields';
 
 const foundName = 'find me';
 const sections = [

@@ -1,7 +1,7 @@
 import React from 'react';
-import EditModelPage from './model/EditModelPage';
-import { customerAddressFields } from './model/helpers/fields';
-import { findDataTest } from '../../helpers/jest_helpers/assert';
+import EditModelPage from './EditModelPage';
+import { customerAddressFields } from './helpers/fields';
+import { findDataTest } from '../../../helpers/jest_helpers/assert';
 
 const foundName = 'find me';
 const sections = [

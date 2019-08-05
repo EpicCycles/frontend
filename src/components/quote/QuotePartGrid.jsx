@@ -3,11 +3,10 @@ import * as PropTypes from 'prop-types';
 
 import { getModelKey } from '../app/model/helpers/model';
 import QuotePartEdit from './QuotePartEdit';
-import ModelTableHeaders from '../app/model/ModelTableHeaders';
-import ModelTableActionHeader from '../app/model/ModelTableActionHeader';
 import PartDataListComplete from '../part/PartDataListComplete';
 import { QUOTE_PART_FOR_BIKE, QUOTE_PART_NON_BIKE } from './helpers/quotePartFields';
 import { findObjectWithKey } from '../../helpers/utils';
+import ModelTableHeaderRow from '../app/model/ModelTableHeaderRow';
 
 const QuotePartGrid = props => {
   const {
@@ -27,14 +26,12 @@ const QuotePartGrid = props => {
   return (
     <div className="grid-container">
       <div className="grid">
-        <div key="bikeReviewHeaders" className="grid-row grid-row--header">
-          <ModelTableHeaders
-            modelFields={isBike ? QUOTE_PART_FOR_BIKE : QUOTE_PART_NON_BIKE}
-            lockFirstColumn={true}
-          />
+        <ModelTableHeaderRow
+          modelFields={isBike ? QUOTE_PART_FOR_BIKE : QUOTE_PART_NON_BIKE}
+          lockFirstColumn
+          includeActions
+        />
 
-          <ModelTableActionHeader />
-        </div>
         {quoteParts.map(quotePart => {
           const rowKey = getModelKey(quotePart);
           const updatedQuotePart = findObjectWithKey(updatedQuoteParts, rowKey);

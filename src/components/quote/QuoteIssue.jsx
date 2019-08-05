@@ -9,7 +9,6 @@ import * as PropTypes from 'prop-types';
 import { findPartsForBike } from '../bike/helpers/bike';
 import QuoteSummaryParts from './QuoteSummaryParts';
 import QuotePartGrid from './QuotePartGrid';
-import { quoteFieldsBikeComplete, quoteFieldsComplete } from './helpers/display';
 import QuoteActionCell from './QuoteActionCell';
 import { getQuoteParts } from './helpers/getQuoteParts';
 import { checkForChanges, getModelKey } from '../app/model/helpers/model';
@@ -18,6 +17,7 @@ import { quoteIssueChecks } from './helpers/quoteIssueChecks';
 import EditModelSimple from '../app/model/EditModelSimple';
 import { Redirect } from 'react-router';
 import { QUOTE_INITIAL } from './helpers/quote';
+import { quoteFields } from './helpers/quoteFields';
 
 class QuoteIssue extends PureComponent {
   state = { updatedQuoteParts: [] };
@@ -36,7 +36,7 @@ class QuoteIssue extends PureComponent {
       });
 
       let checkedUpdatedQuote;
-      if (updatedQuote && checkForChanges(quoteFieldsBikeComplete, quote, updatedQuote))
+      if (updatedQuote && checkForChanges(quoteFields(quote, true), quote, updatedQuote))
         checkedUpdatedQuote = updatedQuote;
 
       return {
@@ -118,13 +118,20 @@ class QuoteIssue extends PureComponent {
     return (
       <div className="row">
         <div>
-          <QuoteActionCell quote={quote} getQuote={this.cancelIssue} issueQuote={this.issueQuote} />
+          <div className="row">
+            <h2>Issue Quote </h2>
+            <QuoteActionCell
+              quote={quote}
+              getQuote={this.cancelIssue}
+              issueQuote={this.issueQuote}
+            />
+          </div>
           <EditModelSimple
             pageMode
             actionsRequired
             model={updatedQuote ? updatedQuote : quote}
             persistedModel={quote}
-            modelFields={quote.bike ? quoteFieldsBikeComplete : quoteFieldsComplete}
+            modelFields={quoteFields(quote, true)}
             brands={brands}
             bikes={bikes}
             frames={frames}

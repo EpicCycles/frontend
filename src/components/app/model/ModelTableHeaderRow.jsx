@@ -1,8 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
-import React, { Fragment } from 'react';
+import React from 'react';
 import * as PropTypes from 'prop-types';
-import { gridHeaderClass } from './helpers/display';
-import { customerFields } from './helpers/fields';
 import ModelTableHeaders from './ModelTableHeaders';
 import AdditionalHeader from './AdditionalHeader';
 

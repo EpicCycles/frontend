@@ -10,12 +10,7 @@ import { findPartsForBike } from '../bike/helpers/bike';
 import QuoteSummaryParts from './QuoteSummaryParts';
 import QuotePartGrid from './QuotePartGrid';
 import { QUOTE_INITIAL } from './helpers/quote';
-import {
-  quoteFieldsBikeComplete,
-  quoteFieldsBikeNoPrice,
-  quoteFieldsComplete,
-  quoteFieldsNoPrice,
-} from './helpers/display';
+
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteActionCell from './QuoteActionCell';
 import { getQuoteParts } from './helpers/getQuoteParts';
@@ -23,6 +18,7 @@ import { checkForChanges, getModelKey } from '../app/model/helpers/model';
 import { QUOTE_PART_FOR_BIKE } from './helpers/quotePartFields';
 import { quoteIssueChecks } from './helpers/quoteIssueChecks';
 import EditModelSimple from '../app/model/EditModelSimple';
+import {quoteFields} from "./helpers/quoteFields";
 
 class QuoteDetail extends PureComponent {
   state = { updatedQuoteParts: [] };
@@ -39,7 +35,7 @@ class QuoteDetail extends PureComponent {
     });
 
     let checkedUpdatedQuote;
-    if (updatedQuote && checkForChanges(quoteFieldsBikeComplete, quote, updatedQuote))
+    if (updatedQuote && checkForChanges(quoteFields(quote), quote, updatedQuote))
       checkedUpdatedQuote = updatedQuote;
 
     return {
@@ -125,7 +121,7 @@ class QuoteDetail extends PureComponent {
               actionsRequired
               model={updatedQuote ? updatedQuote : quote}
               persistedModel={quote}
-              modelFields={quote.bike ? quoteFieldsBikeNoPrice : quoteFieldsNoPrice}
+              modelFields={quoteFields(quote)}
               brands={brands}
               bikes={bikes}
               frames={frames}
@@ -140,7 +136,7 @@ class QuoteDetail extends PureComponent {
             />
           ) : (
             <ViewModelBlock
-              modelFields={quote.bike ? quoteFieldsBikeComplete : quoteFieldsComplete}
+              modelFields={quoteFields(quote)}
               model={quote}
               bikes={bikes}
               customers={customers}

@@ -16,27 +16,6 @@ export const QUOTE_STATUS_CHOICES = [
 
 export const getQuoteStatus = quote_status => getNameForValue(quote_status, QUOTE_STATUS_CHOICES);
 
-export const canBeIssued = (quote, quote_parts, sections) => {
-  if (quote.quote_status !== QUOTE_INITIAL) return false;
-
-  if (!quote.quote_price) return false;
-  if (
-    quote.bike &&
-    !(
-      quote.bike_price &&
-      quote.colour &&
-      (quote.colour_price || quote.colour_price === 0) &&
-      quote.frame_size
-    )
-  )
-    return false;
-  if (!quote.bike && quote_parts.length === 0) return false;
-  return true;
-};
-
-export const canBeReIssued = quote => quote.quote_status === QUOTE_ISSUED;
-export const canBeEdited = quote => quote.quote_status === QUOTE_INITIAL;
-
 export const quoteDescription = (customer, bike, customers, frames, bikes, brands) => {
   let quote_desc;
   let bikeObject;

@@ -3,8 +3,9 @@ import * as PropTypes from 'prop-types';
 import { doWeHaveObjects } from '../../helpers/utils';
 import { sectionHasDetail } from '../framework/helpers/display';
 import { displayForPartType } from './helpers/display';
-import QuoteSummaryHeaders from './QuoteSummaryHeaders';
 import QuoteSummaryPartType from './QuoteSummaryPartType';
+import ModelTableHeaderRow from '../app/model/ModelTableHeaderRow';
+import { quoteSummaryHeaders } from './helpers/quoteSummaryHeaders';
 
 const QuoteSummaryParts = props => {
   const { showPrices, quoteParts, brands, sections, parts, bikeParts, lockFirstColumn } = props;
@@ -16,7 +17,8 @@ const QuoteSummaryParts = props => {
       {usedSections.length === 0 && <div data-test="no-summary">No Quote details</div>}
       {usedSections.length > 0 && (
         <div className="grid">
-          <QuoteSummaryHeaders
+          <ModelTableHeaderRow
+            modelFields={quoteSummaryHeaders(showPrices)}
             showPrices={showPrices}
             lockFirstColumn={lockFirstColumn}
             data-test="quote-summary-headers"

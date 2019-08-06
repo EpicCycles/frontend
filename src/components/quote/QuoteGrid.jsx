@@ -1,11 +1,10 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { quoteFieldsBikeComplete} from './helpers/display';
-import ModelTableHeaders from '../app/model/ModelTableHeaders';
-import ModelTableActionHeader from '../app/model/ModelTableActionHeader';
-import { QUOTE_ARCHIVED } from './helpers/quote';
-import QuoteGridRow from './QuoteGridRow';
+import { quoteFieldsBikeComplete } from './helpers/display';
+import { QUOTE_ARCHIVED, quoteActions } from './helpers/quote';
+import ModelTableHeaderRow from '../app/model/ModelTableHeaderRow';
+import ViewModel from '../app/model/ViewModel';
 
 const QuoteGrid = props => {
   const {
@@ -25,6 +24,14 @@ const QuoteGrid = props => {
   } = props;
   const unArchivedQuotes = quotes.filter(quote => quote.quote_status !== QUOTE_ARCHIVED);
   const archivedQuotes = quotes.filter(quote => quote.quote_status === QUOTE_ARCHIVED);
+  const availableActions = {
+    archiveQuote,
+    changeQuote,
+    getQuote,
+    cloneQuote,
+    issueQuote,
+    unarchiveQuote,
+  };
   return (
     <div
       key="quotesGrid"
@@ -35,44 +42,40 @@ const QuoteGrid = props => {
         overflow: 'auto',
       }}
     >
-      <div key="bikeReviewHeaders" className="grid-row grid-row--header">
-        <ModelTableHeaders modelFields={displayFields} lockFirstColumn={true} />
-        <ModelTableActionHeader />
-      </div>
+      <ModelTableHeaderRow
+        modelFields={displayFields}
+        key="bikeReviewHeaders"
+        lockFirstColumn
+        includeActions
+      />
       {unArchivedQuotes.map(quote => (
-        <QuoteGridRow
-          displayFields={displayFields}
-          quote={quote}
+        <ViewModel
+          model={quote}
+          modelFields={displayFields}
           customers={customers}
           brands={brands}
           bikes={bikes}
           frames={frames}
           users={users}
-          getQuote={getQuote}
-          changeQuote={changeQuote}
-          archiveQuote={archiveQuote}
-          unarchiveQuote={unarchiveQuote}
-          issueQuote={issueQuote}
-          cloneQuote={cloneQuote}
+          actionsRequired
+          modelActions={quoteActions(quote, availableActions)}
           key={`qgr_${quote.id}`}
+          data-test='quote-row'
         />
       ))}
       {archivedQuotes.map(quote => (
-        <QuoteGridRow
-          displayFields={displayFields}
-          quote={quote}
+        <ViewModel
+          model={quote}
+          modelFields={displayFields}
           customers={customers}
           brands={brands}
           bikes={bikes}
           frames={frames}
           users={users}
-          getQuote={getQuote}
-          changeQuote={changeQuote}
-          archiveQuote={archiveQuote}
-          unarchiveQuote={unarchiveQuote}
-          issueQuote={issueQuote}
-          cloneQuote={cloneQuote}
+          actionsRequired
+          modelActions={quoteActions(quote, availableActions)}
           key={`qgr_${quote.id}`}
+                    data-test='archived-quote-row'
         />
       ))}
     </div>

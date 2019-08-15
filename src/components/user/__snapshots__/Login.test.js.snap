@@ -58,6 +58,7 @@ exports[`Login displays login fields when no user in session 1`] = `
             },
           ]
         }
+        className=""
         componentKey=""
       />
     </div>
@@ -123,6 +124,7 @@ exports[`Login displays login fields when user in session 1`] = `
             },
           ]
         }
+        className=""
         componentKey=""
       />
     </div>

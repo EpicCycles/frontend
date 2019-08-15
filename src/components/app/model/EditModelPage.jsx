@@ -76,8 +76,8 @@ const EditModelPage = props => {
           />
         )}
         {actionsRequired && (
-          <div className="full align_right">
-            <IconArray componentKey={componentKey} actionArray={allActions} />
+          <div className="full">
+            <IconArray componentKey={componentKey} actionArray={allActions} className="align_right"/>
           </div>
         )}
       </div>

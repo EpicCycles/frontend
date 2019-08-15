@@ -3,9 +3,9 @@ import * as PropTypes from 'prop-types';
 import { Icon } from 'semantic-ui-react';
 
 const IconArray = props => {
-  const { actionArray, actionsDisabled, componentKey } = props;
+  const { actionArray, actionsDisabled, componentKey, className } = props;
   return (
-    <div className='row'>
+    <div className={`row ${className}`}>
       {actionArray.map(action => (
         <Icon
           name={action.iconName}
@@ -22,10 +22,12 @@ const IconArray = props => {
 };
 IconArray.defaultProps = {
   actionArray: [],
+  className: '',
 };
 IconArray.propTypes = {
   actionArray: PropTypes.array,
   actionsDisabled: PropTypes.bool,
+  className: PropTypes.string,
   componentKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 export default IconArray;

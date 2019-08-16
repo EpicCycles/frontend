@@ -111,7 +111,7 @@ class CustomerEdit extends React.Component {
                 />
               </div>
             )}
-            {quotes && doWeHaveObjects(quotes) && (
+            {customerId && quotes && doWeHaveObjects(quotes) && (
               <div className="grid-container">
                 <QuoteGrid
                   displayFields={quoteFieldsNoCustomer}
@@ -122,7 +122,7 @@ class CustomerEdit extends React.Component {
                   bikes={bikes}
                   frames={frames}
                   brands={brands}
-                  quotes={quotes}
+                  quotes={quotes.filter(quote => quote.customer === customerId)}
                   users={users}
                 />
               </div>

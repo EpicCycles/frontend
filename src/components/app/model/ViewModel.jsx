@@ -40,7 +40,7 @@ const ViewModel = props => {
           className={className}
         />
         {actionsRequired && (
-          <div className="full align_right">
+          <div className="full float_right">
             <IconArray componentKey={componentKey} actionArray={modelActions} />
           </div>
         )}

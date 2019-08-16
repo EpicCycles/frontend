@@ -14,12 +14,15 @@
     --col-12: #B10DC9;
     --col-13: #85144B;
     --col-epic-red: #c82011;
+    --col-epic-red-background: #ffdada;
     --col-white: #FFFFFF;
     --col-pale-gray: #CCCCCC;
     --col-silver: #DDDDDD;
     --col-gray: #AAAAAA;
     --col-dark-gray: #444444;
     --col-black: #111111;
+    --col-epic-background: #d0e0fd;
+    --col-epic-blue: #042f6c;
 }
 
 body {
@@ -59,7 +62,7 @@ th {
     padding: 5px;
     font-size: 1.1rem;
     font-weight: bold;
-    background-color: var(--col-epic-red);
+    background-color: var(--col-epic-blue);
     color: white;
     vertical-align: bottom;
     text-align: center;
@@ -83,7 +86,7 @@ td {
 }
 
 .page-header {
-    background-color: var(--col-epic-red);
+    background-color: var(--col-epic-blue);
     margin-top: 0;
     padding: 10px 10px 10px 10px;
 }
@@ -133,7 +136,7 @@ a.internal_link, a.internal_link:visited, a.internal_link:active {
 }
 
 h1, h2, h3, h4 {
-    color: var(--col-epic-red);
+    color: var(--col-epic-blue);
     font-family: Lato, Arial, Helvetica, sans-serif;
     margin: 10px 0 5px 0;
 }
@@ -210,7 +213,7 @@ div.field-input {
 }
 
 .top-menu, .top-menu:hover, .top-menu:visited {
-    color: var(--col-epic-red);
+    color: var(--col-epic-blue);
     float: right;
     font-size: 1.1rem;
     margin-right: 20px;
@@ -275,20 +278,22 @@ input:disabled, select:disabled {
 }
 
 .success {
-    color: var(--col-epic-red);
+    color: var(--col-epic-blue);
     font-weight: bold;
 }
 
 .error, input.error {
     color: var(--col-epic-red);
     font-weight: bold;
-    background-color: rgba(200, 32, 17, 0.15);
+    background-color: var(--col-epic-red-background);
 }
 
 div.error, td.error, tr.error {
-    background-color: rgba(200, 32, 17, 0.15);
+    background-color: var(--col-epic-red-background);
 }
-
+.selected {
+    background-color: var(--col-epic-background);
+}
 .errorlist {
     color: var(--col-epic-red);
     font-weight: bold;
@@ -309,7 +314,7 @@ div.error, td.error, tr.error {
 .align_right {
     text-align: right;
 }
-div.align_right {
+div.float_right {
     float: right;
 }
 
@@ -354,7 +359,7 @@ button.disabled, .disabled {
 }
 
 button, .ui.button, .ui.buttons, a.button, input.button {
-    background-color: var(--col-epic-red);
+    background-color: var(--col-epic-blue);
     border: 1px var(--col-black);
     border-radius: 4px;
     color: white;
@@ -380,7 +385,7 @@ button:disabled, .button:disabled {
 .ui.button:hover, .ui.button:focus, .button:hover, .button:focus {
     text-decoration: underline;
     color: white;
-    background-color: var(--col-epic-red);
+    background-color: var(--col-epic-blue);
 }
 
 /* override defaults */
@@ -451,7 +456,7 @@ fieldset {
     min-width: 50px;
     font-size: 1.1rem;
     font-weight: bold;
-    background-color: var(--col-epic-red);
+    background-color: var(--col-epic-blue);
     color: white;
     vertical-align: bottom;
     text-align: center;
@@ -465,7 +470,7 @@ fieldset {
 }
 
 .grid-header--fixed-left, .grid-header--fixed-right {
-    background-color: var(--col-epic-red);
+    background-color: var(--col-epic-blue);
     z-index: 9001;
 }
 
@@ -494,7 +499,7 @@ fieldset {
 
 /* navbar contents */
 .nav, .dropbtn, .dropdown, a.dropbtn:hover, a.dropbtn:visited, a.dropbtn:focus, a.dropbtn:active {
-    background-color: var(--col-epic-red);
+    background-color: var(--col-epic-blue);
     z-index: 9500;
 }
 
@@ -511,7 +516,7 @@ div.nav {
 
 ul.nav {
     list-style-type: none;
-    background-color: var(--col-epic-red);
+    background-color: var(--col-epic-blue);
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -558,7 +563,7 @@ div.dropdown-content {
 .dropdown-section {
     z-index: 1;
     padding: 14px 16px;
-    color: var(--col-epic-red);
+    color: var(--col-epic-blue);
     font-weight: bold;
 }
 
@@ -583,7 +588,7 @@ a.dropbtn {
 }
 
 div.dropdown-content a.dropbtn:hover, a.dropbtn:focus {
-    color: var(--col-epic-red);
+    color: var(--col-epic-blue);
 }
 
 /* dragable boxes */
@@ -723,7 +728,7 @@ div.dropdown-content a.dropbtn:hover, a.dropbtn:focus {
 }
 
 .bg-epic {
-    background-color: var(--col-epic-red);
+    background-color: var(--col-epic-blue);
 }
 
 .bg-white {
@@ -748,7 +753,7 @@ div.dropdown-content a.dropbtn:hover, a.dropbtn:focus {
 }
 
 .epic {
-    color: var(--col-epic-red);
+    color: var(--col-epic-blue);
 }
 
 .white {
@@ -824,7 +829,7 @@ div.dropdown-content a.dropbtn:hover, a.dropbtn:focus {
 }
 
 .border-epic {
-    border-color: var(--col-epic-red);
+    border-color: var(--col-epic-blue);
 }
 
 .border-white {
@@ -846,8 +851,8 @@ div.dropdown-content a.dropbtn:hover, a.dropbtn:focus {
 /*ui toggle checkbox colour  DOES NOT WORK */
 ui.toggle.checkbox input[type="checkbox"]:checked,
 ui.toggle.checkbox input[type="radio"]:checked {
-    color: var(--col-epic-red);
-    background-color: var(--col-epic-red);
+    color: var(--col-epic-blue);
+    background-color: var(--col-epic-blue);
 }
 
 /* tabbing headers */

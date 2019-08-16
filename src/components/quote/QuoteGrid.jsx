@@ -21,6 +21,7 @@ const QuoteGrid = props => {
     brands,
     displayFields,
     users,
+    displayedQuote,
   } = props;
   const unArchivedQuotes = quotes.filter(quote => quote.quote_status !== QUOTE_ARCHIVED);
   const archivedQuotes = quotes.filter(quote => quote.quote_status === QUOTE_ARCHIVED);
@@ -57,10 +58,11 @@ const QuoteGrid = props => {
           bikes={bikes}
           frames={frames}
           users={users}
+          className={displayedQuote === quote.id && 'selected'}
           actionsRequired
           modelActions={quoteActions(quote, availableActions)}
           key={`qgr_${quote.id}`}
-          data-test='quote-row'
+          data-test="quote-row"
         />
       ))}
       {archivedQuotes.map(quote => (
@@ -74,8 +76,9 @@ const QuoteGrid = props => {
           users={users}
           actionsRequired
           modelActions={quoteActions(quote, availableActions)}
+          className={displayedQuote === quote.id ? 'selected' : ''}
           key={`qgr_${quote.id}`}
-                    data-test='archived-quote-row'
+          data-test="archived-quote-row"
         />
       ))}
     </div>
@@ -101,6 +104,7 @@ QuoteGrid.propTypes = {
   unarchiveQuote: PropTypes.func,
   issueQuote: PropTypes.func,
   cloneQuote: PropTypes.func,
+  displayedQuote: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default QuoteGrid;

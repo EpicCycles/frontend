@@ -77,6 +77,7 @@ class QuoteList extends React.Component {
                 bikes={bikes}
                 frames={frames}
                 cloneQuote={getQuoteToCopy}
+                displayedQuote={quoteId}
               />
               {quote && (
                 <QuoteSummary

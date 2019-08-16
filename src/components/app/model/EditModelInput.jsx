@@ -230,7 +230,7 @@ class EditModelInput extends Component {
             size={field.displaySize}
             onClick={this.validateOnChange}
             maxLength={field.maxLength}
-            title={field.title}
+            title={field.title || field.placeholder}
             list={field.listId}
             disabled={disabled}
           />

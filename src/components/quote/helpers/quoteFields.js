@@ -127,8 +127,20 @@ export const quoteFieldsComplete = [
 export const quoteFieldsBike = quoteFieldsNoPrice.concat(bikeRelatedFields);
 export const quoteFieldsBikeComplete = quoteFieldsComplete.concat(bikeRelatedFieldsComplete);
 
-export const quoteFields = (quote, readyToIssue) => {
+export const quoteFields = (quote, readyToIssue, bike) => {
   if (quote.bike) {
+    if (bike) {
+      const basicBikeFields = [BIKE_FIELD];
+      let priceField = BIKE_PRICE_FIELD;
+      let sizeField = FRAME_SIZE_FIELD;
+      let colourField = COLOUR_FIELD;
+      if (readyToIssue) priceField = BIKE_PRICE_FIELD_REQUIRED;
+      if (bike.sizes) sizeField = updateObject(FRAME_SIZE_FIELD, { placeholder: bike.sizes });
+      if (bike.colours) colourField = updateObject(COLOUR_FIELD, { placeholder: bike.colours });
+      const bikeFieldsSpecific = [BIKE_FIELD, priceField, sizeField, colourField];
+      if (readyToIssue) return quoteFieldsComplete.concat(bikeFieldsSpecific);
+      return quoteFieldsNoPrice.concat(bikeFieldsSpecific);
+    }
     if (readyToIssue) return quoteFieldsBikeComplete;
     return quoteFieldsBike;
   }

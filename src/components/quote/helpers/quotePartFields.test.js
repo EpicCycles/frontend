@@ -275,7 +275,7 @@ describe('quotePartFields', () => {
         TRADE_IN_PRICE_FIELD_DISABLED,
         partDescForType,
         FIXED_PRICE_FIELD,
-        updateObject(QUANTITY_FIELD, { required: true }),
+        updateObject(QUANTITY_FIELD, { default: '1', required: true }),
         updateObject(PART_PRICE_FIELD, { required: true }),
         SUPPLIER_FIELD_OPTIONAL,
         attributesField,

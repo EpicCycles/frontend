@@ -131,7 +131,7 @@ class QuoteIssue extends PureComponent {
             actionsRequired
             model={updatedQuote ? updatedQuote : quote}
             persistedModel={quote}
-            modelFields={quoteFields(quote, true)}
+            modelFields={quoteFields(quote, true, bike)}
             brands={brands}
             bikes={bikes}
             frames={frames}

@@ -157,6 +157,7 @@ class QuoteManager extends React.Component {
             changeRoute={changeRoute}
             users={users}
             addMessage={addMessage}
+            createNote={createNote}
             data-test="quote-detail-tab"
           />
         )}

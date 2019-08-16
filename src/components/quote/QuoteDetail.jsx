@@ -80,6 +80,10 @@ class QuoteDetail extends PureComponent {
     const newQuotePart = { dummyKey: generateRandomCode(), quote: quote.id, _isBike: !!quote.bike };
     saveQuotePartOK(newQuotePart);
   };
+  saveNote = note => {
+    this.props.createNote(note);
+    this.setState({ updatedNote: undefined });
+  };
   render() {
     const { updatedQuote, updatedQuoteParts, quotePartsDetail, updatedNote } = this.state;
     const {
@@ -172,7 +176,8 @@ class QuoteDetail extends PureComponent {
               modelFields={customerNoteFields}
               pageMode
               actionsRequired
-              modelSave={this.saveOrCreateCustomerNote}
+              modelSave={this.saveNote}
+              raiseState={this.raiseStateForNote}
               key={`editNote`}
               data-test="add-customer-note"
             />
@@ -231,6 +236,7 @@ QuoteDetail.propTypes = {
   cloneQuote: PropTypes.func.isRequired,
   changeRoute: PropTypes.func.isRequired,
   unarchiveQuote: PropTypes.func.isRequired,
+  createNote: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
 };
 export default QuoteDetail;

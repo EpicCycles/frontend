@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import {
   findObjectWithId,
   findObjectWithKey,
   generateRandomCode,
+  updateObject,
   updateObjectInArray,
 } from '../../helpers/utils';
 import * as PropTypes from 'prop-types';
@@ -18,7 +19,8 @@ import { checkForChanges, getModelKey } from '../app/model/helpers/model';
 import { QUOTE_PART_FOR_BIKE } from './helpers/quotePartFields';
 import { quoteIssueChecks } from './helpers/quoteIssueChecks';
 import EditModelSimple from '../app/model/EditModelSimple';
-import {quoteFields} from "./helpers/quoteFields";
+import { quoteFields } from './helpers/quoteFields';
+import { customerNoteFields } from '../note/helpers/noteFields';
 
 class QuoteDetail extends PureComponent {
   state = { updatedQuoteParts: [] };
@@ -66,13 +68,20 @@ class QuoteDetail extends PureComponent {
     const newUpdatedQuoteParts = updateObjectInArray(updatedQuoteParts, updatedQuotePart);
     this.setState({ updatedQuoteParts: newUpdatedQuoteParts });
   };
+  raiseStateForNote = updatedNote => {
+    if (updatedNote.dummyKey) {
+      this.setState({ updatedNote: updatedNote });
+    } else {
+      this.setState({ updatedNote: updateObject(updatedNote, { dummyKey: generateRandomCode() }) });
+    }
+  };
   addNewQuotePart = () => {
     const { quote, saveQuotePartOK } = this.props;
     const newQuotePart = { dummyKey: generateRandomCode(), quote: quote.id, _isBike: !!quote.bike };
     saveQuotePartOK(newQuotePart);
   };
   render() {
-    const { updatedQuote, updatedQuoteParts, quotePartsDetail } = this.state;
+    const { updatedQuote, updatedQuoteParts, quotePartsDetail, updatedNote } = this.state;
     const {
       quoteParts,
       parts,
@@ -93,6 +102,7 @@ class QuoteDetail extends PureComponent {
       cloneQuote,
       unarchiveQuote,
     } = this.props;
+    const newNote = { quote: quote.id, customer: quote.customer };
 
     const bike = findObjectWithId(bikes, quote.bike);
     const thisBikeParts = findPartsForBike(bike, bikeParts, parts);
@@ -106,73 +116,87 @@ class QuoteDetail extends PureComponent {
     const quotePartList = quoteParts.filter(qp => qp.quote === quote.id);
 
     return (
-      <div className="row">
-        <div>
-          <QuoteActionCell
-            quote={quote}
-            archiveQuote={archiveQuote}
-            unarchiveQuote={unarchiveQuote}
-            cloneQuote={cloneQuote}
-            issueQuote={this.issueQuote}
+      <Fragment>
+        <div className="row">
+          <div>
+            <QuoteActionCell
+              quote={quote}
+              archiveQuote={archiveQuote}
+              unarchiveQuote={unarchiveQuote}
+              cloneQuote={cloneQuote}
+              issueQuote={this.issueQuote}
+            />
+            {quote.quote_status === QUOTE_INITIAL ? (
+              <EditModelSimple
+                pageMode
+                actionsRequired
+                model={updatedQuote ? updatedQuote : quote}
+                persistedModel={quote}
+                modelFields={quoteFields(quote)}
+                brands={brands}
+                bikes={bikes}
+                frames={frames}
+                users={users}
+                customers={customers}
+                modelSave={saveQuote}
+                modelDelete={archiveQuote}
+                additionalActions={additionalActions}
+                key={`editQuote${quote.id}`}
+                showReadOnlyFields
+                raiseState={this.raiseStateForQuote}
+              />
+            ) : (
+              <ViewModelBlock
+                modelFields={quoteFields(quote)}
+                model={quote}
+                bikes={bikes}
+                customers={customers}
+                frames={frames}
+                users={users}
+              />
+            )}
+          </div>
+          <QuoteSummaryParts
+            lockFirstColumn={true}
+            showPrices={false}
+            quoteParts={quotePartList}
+            brands={brands}
+            sections={sections}
+            parts={parts}
+            bikeParts={thisBikeParts}
           />
-          {quote.quote_status === QUOTE_INITIAL ? (
+          <div>
             <EditModelSimple
+              model={updatedNote ? updatedNote : newNote}
+              persistedModel={newNote}
+              modelFields={customerNoteFields}
               pageMode
               actionsRequired
-              model={updatedQuote ? updatedQuote : quote}
-              persistedModel={quote}
-              modelFields={quoteFields(quote)}
-              brands={brands}
-              bikes={bikes}
-              frames={frames}
-              users={users}
-              customers={customers}
-              modelSave={saveQuote}
-              modelDelete={archiveQuote}
-              additionalActions={additionalActions}
-              key={`editQuote${quote.id}`}
-              showReadOnlyFields
-              raiseState={this.raiseStateForQuote}
-            />
-          ) : (
-            <ViewModelBlock
-              modelFields={quoteFields(quote)}
-              model={quote}
-              bikes={bikes}
-              customers={customers}
-              frames={frames}
-              users={users}
-            />
-          )}
-          <div className="grid-container">
-            <QuoteSummaryParts
-              lockFirstColumn={true}
-              showPrices={false}
-              quoteParts={quotePartList}
-              brands={brands}
-              sections={sections}
-              parts={parts}
-              bikeParts={thisBikeParts}
+              modelSave={this.saveOrCreateCustomerNote}
+              key={`editNote`}
+              data-test="add-customer-note"
             />
           </div>
         </div>
         {quote.quote_status === QUOTE_INITIAL && (
-          <QuotePartGrid
-            isBike={!!quote.bike}
-            quoteParts={quotePartsDetail}
-            updatedQuoteParts={updatedQuoteParts}
-            brands={brands}
-            suppliers={suppliers}
-            sections={sections}
-            parts={parts}
-            supplierProducts={supplierProducts}
-            deleteQuotePart={deleteQuotePart}
-            saveQuotePart={saveQuotePart}
-            addQuotePart={this.addNewQuotePart}
-            raiseStateForQuotePart={this.raiseStateForQuotePart}
-          />
+          <div className="grid-container">
+            <QuotePartGrid
+              isBike={!!quote.bike}
+              quoteParts={quotePartsDetail}
+              updatedQuoteParts={updatedQuoteParts}
+              brands={brands}
+              suppliers={suppliers}
+              sections={sections}
+              parts={parts}
+              supplierProducts={supplierProducts}
+              deleteQuotePart={deleteQuotePart}
+              saveQuotePart={saveQuotePart}
+              addQuotePart={this.addNewQuotePart}
+              raiseStateForQuotePart={this.raiseStateForQuotePart}
+            />
+          </div>
         )}
-      </div>
+      </Fragment>
     );
   }
 }

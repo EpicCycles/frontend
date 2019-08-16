@@ -4,9 +4,9 @@ export const ADD_MESSAGE = 'application/ADD_MESSAGE';
 export const CLEAR_ALL_STATE = 'application/CLEAR_ALL_STATE';
 export const SAVE_STATE_LOCALLY = 'application/SAVE_STATE_LOCALLY';
 export const GET_LOCAL_STATE = 'application/GET_LOCAL_STATE';
-export const changeRoute = newRoute => ({
+export const changeRoute = (newRoute, clearState) => ({
   type: CHANGE_ROUTE,
-  payload: { newRoute },
+  payload: { newRoute, clearState },
 });
 export const removeMessage = () => ({
   type: REMOVE_MESSAGE,

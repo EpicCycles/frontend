@@ -5,7 +5,8 @@ import { doWeHaveObjects, findObjectWithId } from '../../helpers/utils';
 import { Button, Dimmer, Loader } from 'semantic-ui-react';
 import QuoteGrid from './QuoteGrid';
 import QuoteSummary from './QuoteSummary';
-import { QUOTE_DESC_FIELD, QUOTE_PRICE_FIELD } from '../app/model/helpers/fields';
+import { QUOTE_PRICE_FIELD } from './helpers/quoteFields';
+import {QUOTE_DESC_FIELD} from "./helpers/quoteFields";
 
 const quoteListFields = [QUOTE_DESC_FIELD, QUOTE_PRICE_FIELD];
 
@@ -27,7 +28,7 @@ class QuoteList extends React.Component {
       bikes,
       brands,
       customers,
-      clearCustomerState,
+      changeRoute,
       frames,
       quotes,
       archiveQuote,
@@ -108,7 +109,7 @@ class QuoteList extends React.Component {
             isLoading={isLoading}
             getFrameList={getFrameList}
             getCustomerList={getCustomerList}
-            clearCustomerState={clearCustomerState}
+            changeRoute={changeRoute}
             getQuoteList={getQuoteList}
           />
         )}
@@ -149,7 +150,7 @@ QuoteList.propTypes = {
   next: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   getFrameList: PropTypes.func.isRequired,
   getCustomerList: PropTypes.func.isRequired,
-  clearCustomerState: PropTypes.func.isRequired,
+  changeRoute: PropTypes.func.isRequired,
   clearQuoteState: PropTypes.func.isRequired,
   getQuoteList: PropTypes.func.isRequired,
   changeQuote: PropTypes.func.isRequired,

@@ -11,13 +11,8 @@ import {
   SUPPLIER_MISSING,
   VALUE_MISSING,
 } from './error';
-import {
-  validateEmailFormat,
-  validatePostcodeAndReturnError,
-  validateURLAndReturnError,
-} from './validators';
-import { COUNTRIES, NUMBER_TYPE_CHOICES } from '../../../address/helpers/address';
-import { QUOTE_STATUS_CHOICES } from '../../../quote/helpers/quote';
+import {validateEmailFormat, validatePostcodeAndReturnError, validateURLAndReturnError,} from './validators';
+import {COUNTRIES, NUMBER_TYPE_CHOICES} from '../../../address/helpers/address';
 
 export const CHECKBOX = 'checkbox';
 export const RADIO = 'radio';
@@ -41,32 +36,32 @@ export const ATTRIBUTE_VALUE = 'attribute_value';
 export const OPTION_NAME = 'option_name';
 export const BIKE = 'bike';
 export const BILLING = 'billing';
-export const BIKE_PRICE = 'bike_price';
+
 export const BIKE_BRAND = 'bike_brand';
 export const BRAND = 'brand';
 export const BRAND_NAME = 'brand_name';
 export const CHECK_DATE = 'check_date';
 export const CLUB_PRICE = 'club_price';
 export const CLUB_MEMBER = 'club_member';
-export const COLOUR = 'colour';
-export const COLOUR_PRICE = 'colour_price';
+
+
 export const COLOURS = 'colours';
 export const COUNTRY = 'country';
 export const CREATED_BY = 'created_by';
 export const CREATED_DATE = 'created_date';
 export const CUSTOMER = 'customer';
-export const CUSTOMER_VISIBLE = 'customer_visible';
+
 export const DESCRIPTION = 'description';
 export const EMAIL = 'email';
 export const EPIC_PRICE = 'epic_price';
 export const FIRST_NAME = 'first_name';
 export const FITTED_PRICE = 'fitted_price';
 export const FRAME_NAME = 'frame_name';
-export const FRAME_SIZE = 'frame_size';
+
 export const IN_USE = 'in_use';
 export const ISSUED_DATE = 'issued_date';
 export const LAST_NAME = 'last_name';
-export const NOTE_TEXT = 'note_text';
+
 export const NUMBER_TYPE = 'number_type';
 export const LINK = 'link';
 export const MODEL_NAME = 'model_name';
@@ -77,10 +72,10 @@ export const PREFERRED = 'preferred';
 export const PREFERRED_SUPPLIER = 'preferred_supplier';
 export const PRODUCT_CODE = 'product_code';
 export const QUANTITY = 'quantity';
-export const QUOTE_DESC = 'quote_desc';
-export const QUOTE_PRICE = 'quote_price';
-export const CALCULATED_PRICE = 'calculated_price';
-export const QUOTE_STATUS = 'quote_status';
+
+
+
+
 export const RRP = 'rrp';
 export const SIZES = 'sizes';
 export const STANDARD = 'standard';
@@ -93,7 +88,7 @@ export const TRADE_IN_PRICE = 'trade_in_price';
 export const TRADE_PRICE = 'trade_price';
 export const UPD_BY = 'upd_by';
 export const UPD_DATE = 'upd_date';
-export const VERSION = 'version';
+
 
 export const ADD_DATE_FIELD = {
   fieldName: ADD_DATE,
@@ -153,13 +148,7 @@ export const BILLING_FIELD = {
   header: 'Billing Address',
   type: CHECKBOX,
 };
-export const BIKE_PRICE_FIELD = {
-  fieldName: BIKE_PRICE,
-  header: 'Bike Price',
-  type: CURRENCY,
-  maxLength: 7,
-  displaySize: 10,
-};
+
 export const BIKE_BRAND_FIELD = {
   fieldName: BIKE_BRAND,
   header: 'Bike Brand',
@@ -180,13 +169,7 @@ export const CHECK_DATE_FIELD = {
   header: 'Date Checked',
   readOnly: true,
 };
-export const COLOUR_FIELD = {
-  fieldName: COLOUR,
-  header: 'Colour',
-  type: TEXT,
-  maxLength: 100,
-  displaySize: 20,
-};
+
 export const COLOURS_FIELD = {
   fieldName: COLOURS,
   header: 'Colours',
@@ -207,13 +190,7 @@ export const CLUB_MEMBER_FIELD = {
   header: 'Club Member?',
   type: CHECKBOX,
 };
-export const COLOUR_PRICE_FIELD = {
-  fieldName: COLOUR_PRICE,
-  header: 'Colour Price',
-  type: CURRENCY,
-  displaySize: 5,
-  maxLength: 10,
-};
+
 export const COUNTRY_FIELD = {
   fieldName: COUNTRY,
   header: 'Country',
@@ -240,11 +217,8 @@ export const CUSTOMER_FIELD = {
   header: 'Customer',
   readOnly: true,
 };
-export const CUSTOMER_VISIBLE_FIELD = {
-  fieldName: CUSTOMER_VISIBLE,
-  type: CHECKBOX,
-  header: 'Customer View',
-};
+
+
 export const DESCRIPTION_FIELD = {
   fieldName: DESCRIPTION,
   header: 'Description',
@@ -293,11 +267,7 @@ export const FRAME_NAME_FIELD = {
   required: true,
   error: FRAME_NAME_MISSING,
 };
-export const FRAME_SIZE_FIELD = {
-  fieldName: FRAME_SIZE,
-  header: 'Frame Size',
-  type: TEXT,
-};
+
 export const IN_USE_FIELD = {
   fieldName: IN_USE,
   type: CHECKBOX,
@@ -321,12 +291,7 @@ export const LAST_NAME_FIELD = {
   error: VALUE_MISSING,
 };
 
-export const NOTE_TEXT_FIELD = {
-  fieldName: NOTE_TEXT,
-  header: 'Note',
-  type: TEXT_AREA,
-  displaySize: 400,
-};
+
 export const NUMBER_TYPE_FIELD = {
   fieldName: NUMBER_TYPE,
   header: 'Type',
@@ -371,22 +336,8 @@ export const QUANTITY_FIELD = {
   displaySize: 4,
   maxLength: 6,
 };
-export const QUOTE_DESC_FIELD = {
-  fieldName: QUOTE_DESC,
-  type: TEXT,
-  displaySize: 40,
-  maxLength: 60,
-  required: true,
-  maxWidth: '250px',
-  header: 'Description',
-};
-export const QUOTE_STATUS_FIELD = {
-  fieldName: QUOTE_STATUS,
-  type: SELECT_ONE,
-  readOnly: true,
-  header: 'Status',
-  selectList: QUOTE_STATUS_CHOICES,
-};
+
+
 
 export const SUPPLIER_FIELD = {
   fieldName: SUPPLIER,
@@ -403,24 +354,8 @@ export const SUPPLIER_FIELD_OPTIONAL = {
   type: SUPPLIER,
 };
 
-export const QUOTE_PRICE_FIELD = {
-  fieldName: QUOTE_PRICE,
-  header: 'Quote £',
-  synonyms: [],
-  type: CURRENCY,
-  displaySize: 7,
-  maxLength: 10,
-  required: true,
-  error: VALUE_MISSING,
-};
-export const CALCULATED_PRICE_FIELD = {
-  fieldName: CALCULATED_PRICE,
-  header: 'Total £',
-  readOnly: true,
-  type: CURRENCY,
-  displaySize: 6,
-  maxLength: 10,
-};
+
+
 export const BRAND_NAME_FIELD = {
   fieldName: BRAND_NAME,
   header: 'Brand Name',
@@ -535,12 +470,7 @@ export const UPD_BY_FIELD = {
   header: 'Updater',
   readOnly: true,
 };
-export const VERSION_FIELD = {
-  fieldName: VERSION,
-  type: NUMBER,
-  header: 'Version',
-  readOnly: true,
-};
+
 // Model fields include only fields that are shown
 
 export const bikeFields = [
@@ -586,12 +516,7 @@ export const customerPhoneFields = [
   ADD_DATE_FIELD,
   UPD_DATE_FIELD,
 ];
-export const customerNoteFields = [
-  NOTE_TEXT_FIELD,
-  CUSTOMER_VISIBLE_FIELD,
-  CREATED_DATE_FIELD,
-  CREATED_BY_FIELD,
-];
+
 export const frameFields = [BRAND, FRAME_NAME];
 
 export const partFieldsComplete = [

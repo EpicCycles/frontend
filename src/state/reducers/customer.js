@@ -13,7 +13,7 @@ import {
   CUSTOMER_PHONE_SAVE,
   CUSTOMER_SAVE,
 } from '../actions/customer';
-import { CLEAR_ALL_STATE } from '../actions/application';
+import { CHANGE_ROUTE, CLEAR_ALL_STATE } from '../actions/application';
 import { USER_LOGOUT, USER_NOT_VALIDATED } from '../actions/user';
 import {
   addItemsToArray,
@@ -22,6 +22,7 @@ import {
   updateObjectWithApiErrors,
 } from '../../helpers/utils';
 import { FIND_QUOTES } from '../actions/quote';
+import {CUSTOMER_URL} from "../../components/menus/helpers/menu";
 
 const initialState = {
   isLoading: false,
@@ -43,6 +44,12 @@ const customer = (state = initialState, action) => {
     case CUSTOMER_CLEAR_STATE:
     case USER_LOGOUT:
       return initialState;
+
+    case CHANGE_ROUTE:
+      if (action.payload && action.payload.clearState && action.payload.newRoute === CUSTOMER_URL) {
+        return initialState;
+      }
+      return state;
 
     case CUSTOMER_PAGE:
     case `${CUSTOMER_DELETE}_REQUESTED`:

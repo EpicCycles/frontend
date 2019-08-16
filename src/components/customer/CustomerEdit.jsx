@@ -8,11 +8,12 @@ import {
   modelIsAlreadyInArray,
 } from '../app/model/helpers/model';
 import CustomerPhoneGrid from './CustomerPhoneGrid';
-import { customerFields, customerNoteFields } from '../app/model/helpers/fields';
+import { customerFields} from '../app/model/helpers/fields';
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteGrid from '../quote/QuoteGrid';
-import { quoteFieldsNoCustomer } from '../quote/helpers/display';
+import { quoteFieldsNoCustomer } from '../quote/helpers/quoteFields';
 import EditModel from '../app/model/EditModel';
+import {customerNoteFields} from "../note/helpers/noteFields";
 
 class CustomerEdit extends React.Component {
   state = { note: createEmptyModelWithDefaultFields(customerNoteFields) };

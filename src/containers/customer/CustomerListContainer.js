@@ -1,6 +1,7 @@
 import {connect} from 'react-redux'
 import CustomerList from "../../components/customer/CustomerList";
-import {getCustomer, getCustomerList, getCustomerListPage, clearCustomerState} from "../../state/actions/customer";
+import {getCustomer, getCustomerList, getCustomerListPage} from "../../state/actions/customer";
+import {changeRoute} from "../../state/actions/application";
 
 export default connect(({customer}) => ({
     count: customer.count,
@@ -13,6 +14,6 @@ export default connect(({customer}) => ({
     getCustomerList,
     getCustomerListPage,
     getCustomer,
-    clearCustomerState
+    changeRoute,
 })(CustomerList)
 

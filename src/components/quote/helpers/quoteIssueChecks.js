@@ -1,4 +1,4 @@
-import { QUOTE_PRICE } from '../../app/model/helpers/fields';
+import { QUOTE_PRICE } from './quoteFields';
 
 const SAVE_CHANGES_REQD = 'Save all changes before quote can be issued';
 const QUOTE_PRICE_REQD = 'A Quote Price should be entered';

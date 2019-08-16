@@ -5,7 +5,6 @@ import {
   CHECKBOX,
   IN_USE,
   NUMBER_TYPE,
-  QUOTE_STATUS,
   SELECT_ONE,
   TEXT,
 } from '../model/helpers/fields';
@@ -15,6 +14,7 @@ import {
   QUOTE_ISSUED,
   QUOTE_ORDERED,
 } from '../../quote/helpers/quote';
+import {QUOTE_STATUS} from "../../quote/helpers/quoteFields";
 
 describe('getDefaultFieldValue', () => {
   it('should return no value when a field has no default', () => {

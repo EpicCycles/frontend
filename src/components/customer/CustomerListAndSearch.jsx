@@ -49,9 +49,9 @@ const CustomerListAndSearch = props => {
             getPage={getCustomerListPage}
           />
         ) : (
-          <div>No Customer to show, set new criteria and search, or</div>
+          <div>No Customer to show, set new criteria and search, or </div>
         )}
-        <AddLink addFunction={addNewCustomer} />
+        <AddLink addFunction={addNewCustomer} addObjectName={'Customer'} />
       </div>
     </Fragment>
   );

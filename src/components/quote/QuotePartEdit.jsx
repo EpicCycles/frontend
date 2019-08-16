@@ -56,6 +56,7 @@ class QuotePartEdit extends React.Component {
           sections={sections}
           suppliers={suppliers}
           actionsRequired
+          showReadOnlyFields
           modelSave={this.saveQuotePart}
           modelDelete={this.deleteQuotePart}
         />

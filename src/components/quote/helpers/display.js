@@ -1,26 +1,7 @@
-import { buildPartString } from '../../part/helpers/part';
-import {
-  BIKE_FIELD,
-  BIKE_PRICE_FIELD,
-  CALCULATED_PRICE_FIELD,
-  CLUB_MEMBER_FIELD,
-  COLOUR_FIELD,
-  COLOUR_PRICE_FIELD,
-  CREATED_BY_FIELD,
-  CREATED_DATE_FIELD,
-  CUSTOMER_FIELD,
-  FRAME_SIZE_FIELD,
-  ISSUED_DATE_FIELD,
-  QUANTITY_FIELD,
-  QUOTE_DESC_FIELD,
-  QUOTE_PRICE_FIELD,
-  QUOTE_STATUS_FIELD,
-  TRADE_IN_PRICE_FIELD,
-  UPD_DATE_FIELD,
-  VERSION_FIELD,
-} from '../../app/model/helpers/fields';
-import { findObjectWithId } from '../../../helpers/utils';
-import { PART_PRICE_FIELD } from './quotePartFields';
+import {buildPartString} from '../../part/helpers/part';
+import {QUANTITY_FIELD, TRADE_IN_PRICE_FIELD,} from '../../app/model/helpers/fields';
+import {findObjectWithId} from '../../../helpers/utils';
+import {PART_PRICE_FIELD} from './quotePartFields';
 import {findPartsForBikeId} from "../../bike/helpers/bike";
 
 const findReplacementQuotePart = (partTypeId, bikePart, quoteParts) => {
@@ -85,52 +66,10 @@ export const displayQuotePartArray = (
   });
   return arrayOfDetails;
 };
-export const quoteFieldsBike = [
-  BIKE_FIELD,
-  BIKE_PRICE_FIELD,
-  FRAME_SIZE_FIELD,
-  COLOUR_FIELD,
-  COLOUR_PRICE_FIELD,
-];
-export const quoteFieldsNoPrice = [
-  QUOTE_DESC_FIELD,
-  CUSTOMER_FIELD,
-  QUOTE_STATUS_FIELD,
-  CLUB_MEMBER_FIELD,
-  VERSION_FIELD,
-  CREATED_BY_FIELD,
-  CREATED_DATE_FIELD,
-  UPD_DATE_FIELD,
-  ISSUED_DATE_FIELD,
-  CALCULATED_PRICE_FIELD,
-];
-export const quoteFieldsComplete = [
-  QUOTE_DESC_FIELD,
-  CUSTOMER_FIELD,
-  QUOTE_STATUS_FIELD,
-  CLUB_MEMBER_FIELD,
-  VERSION_FIELD,
-  CREATED_BY_FIELD,
-  CREATED_DATE_FIELD,
-  UPD_DATE_FIELD,
-  ISSUED_DATE_FIELD,
-  QUOTE_PRICE_FIELD,
-  CALCULATED_PRICE_FIELD,
-];
-export const quoteFieldsBikeNoPrice = quoteFieldsNoPrice.concat(quoteFieldsBike);
-export const quoteFieldsBikeComplete = quoteFieldsComplete.concat(quoteFieldsBike);
-export const quoteFieldsNoCustomer = [
-  QUOTE_DESC_FIELD,
-  QUOTE_STATUS_FIELD,
-  CLUB_MEMBER_FIELD,
-  VERSION_FIELD,
-  BIKE_FIELD,
-  CREATED_BY_FIELD,
-  UPD_DATE_FIELD,
-  ISSUED_DATE_FIELD,
-  QUOTE_PRICE_FIELD,
-  CALCULATED_PRICE_FIELD,
-];
-export const quoteFieldsBikeNoCustomer = quoteFieldsNoCustomer.concat(quoteFieldsBike);
+
+
+
+
+
 
 export const priceFields = [QUANTITY_FIELD, PART_PRICE_FIELD, TRADE_IN_PRICE_FIELD];

@@ -12,6 +12,7 @@ import CustomerListAndSelect from '../customer/CustomerListAndSelect';
 import BikeListAndSelect from '../bike/BikeListAndSelect';
 import { quoteDescription } from './helpers/quote';
 import QuoteSummary from './QuoteSummary';
+import { CUSTOMER_URL } from '../menus/helpers/menu';
 const defaultState = props => {
   const { quotes, quoteId, customers, bikes } = props;
   let quote;
@@ -38,8 +39,7 @@ class QuoteCopy extends React.Component {
   state = defaultState(this.props);
 
   goToAddCustomer = () => {
-    this.props.clearCustomerState();
-    this.setState({ redirect: '/customer' });
+    this.props.changeRoute(CUSTOMER_URL, true);
   };
 
   handleInputChange = (fieldName, input) => {
@@ -182,6 +182,7 @@ QuoteCopy.defaultProps = {
   isLoading: false,
 };
 QuoteCopy.propTypes = {
+  changeRoute: PropTypes.func.isRequired,
   getCustomerList: PropTypes.func.isRequired,
   copyQuote: PropTypes.func.isRequired,
   getFrameList: PropTypes.func.isRequired,

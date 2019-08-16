@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getFrameList } from '../../state/actions/bike';
-import { clearCustomerState, getCustomerList } from '../../state/actions/customer';
+import { getCustomerList } from '../../state/actions/customer';
 import {
   archiveQuote,
   changeQuote,
@@ -11,6 +11,7 @@ import {
   unarchiveQuote,
 } from '../../state/actions/quote';
 import QuoteList from '../../components/quote/QuoteList';
+import {changeRoute} from "../../state/actions/application";
 
 const mapStateToProps = ({ bike, core, customer, framework, part, quote, user }) => {
   return {
@@ -38,7 +39,7 @@ const mapStateToProps = ({ bike, core, customer, framework, part, quote, user })
 const mapDispatchToProps = {
   getFrameList,
   getCustomerList,
-  clearCustomerState,
+  changeRoute,
   clearQuoteState,
   getQuoteList,
   changeQuote,

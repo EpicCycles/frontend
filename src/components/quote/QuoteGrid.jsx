@@ -1,10 +1,10 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { quoteFieldsBikeComplete } from './helpers/display';
 import { QUOTE_ARCHIVED, quoteActions } from './helpers/quote';
 import ModelTableHeaderRow from '../app/model/ModelTableHeaderRow';
 import ViewModel from '../app/model/ViewModel';
+import {quoteFieldsBikeComplete} from "./helpers/quoteFields";
 
 const QuoteGrid = props => {
   const {
@@ -60,6 +60,7 @@ const QuoteGrid = props => {
           users={users}
           className={displayedQuote === quote.id && 'selected'}
           actionsRequired
+          showReadOnlyFields
           modelActions={quoteActions(quote, availableActions)}
           key={`qgr_${quote.id}`}
           data-test="quote-row"

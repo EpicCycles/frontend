@@ -5,7 +5,7 @@ import { Redirect } from 'react-router';
 import TabbedView from '../../common/TabbedView';
 import { doWeHaveObjects, findObjectWithId } from '../../helpers/utils';
 import CustomerEdit from '../customer/CustomerEdit';
-import { quoteFieldsNoCustomer } from './helpers/display';
+import { quoteFieldsNoCustomer } from './helpers/quoteFields';
 import QuoteGrid from './QuoteGrid';
 import QuoteDetail from './QuoteDetail';
 import NoteGrid from '../note/NoteGrid';

@@ -2,9 +2,9 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import { findObjectWithId } from '../../helpers/utils';
 import { findPartsForBike } from '../bike/helpers/bike';
-import { quoteFieldsBikeComplete } from './helpers/display';
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteSummaryParts from './QuoteSummaryParts';
+import {quoteFieldsBikeComplete} from "./helpers/quoteFields";
 
 const QuoteSummary = props => {
   const {

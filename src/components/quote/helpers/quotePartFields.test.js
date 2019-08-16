@@ -10,6 +10,8 @@ import {
 import {
   ADDITIONAL_DATA_FIELD,
   ADDITIONAL_DATA_FIELD_DISABLED,
+  FIXED_PRICE_FIELD,
+  FIXED_PRICE_FIELD_DISABLED,
   NOT_REQUIRED_FIELD,
   NOT_REQUIRED_FIELD_DISABLED,
   PART_DESC_FIELD,
@@ -23,6 +25,7 @@ import {
   TRADE_IN_PRICE_FIELD_DISABLED,
 } from './quotePartFields';
 import { updateObject } from '../../../helpers/utils';
+import { TOTAL_PRICE_FIELD } from './quoteFields';
 
 describe('quotePartFields', () => {
   const attributesField = {
@@ -54,10 +57,12 @@ describe('quotePartFields', () => {
         NOT_REQUIRED_FIELD_DISABLED,
         TRADE_IN_PRICE_FIELD_DISABLED,
         PART_DESC_FIELD_DISABLED,
+        FIXED_PRICE_FIELD_DISABLED,
         QUANTITY_FIELD_DISABLED,
         PART_PRICE_FIELD_DISABLED,
         SUPPLIER_FIELD_DISABLED,
         ADDITIONAL_DATA_FIELD_DISABLED,
+        TOTAL_PRICE_FIELD,
       ];
       expect(quotePartFields(quotePart)).toEqual(expectedFields);
     });
@@ -69,6 +74,7 @@ describe('quotePartFields', () => {
       expect(result).toContainEqual(NOT_REQUIRED_FIELD_DISABLED);
       expect(result).toContainEqual(TRADE_IN_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(partDescForType);
+      expect(result).toContainEqual(FIXED_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(QUANTITY_FIELD_DISABLED);
       expect(result).toContainEqual(PART_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(SUPPLIER_FIELD_DISABLED);
@@ -84,6 +90,7 @@ describe('quotePartFields', () => {
       expect(result).toContainEqual(NOT_REQUIRED_FIELD_DISABLED);
       expect(result).toContainEqual(TRADE_IN_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(PART_DESC_FIELD_DISABLED);
+      expect(result).toContainEqual(FIXED_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(QUANTITY_FIELD_DISABLED);
       expect(result).toContainEqual(PART_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(SUPPLIER_FIELD_DISABLED);
@@ -105,6 +112,7 @@ describe('quotePartFields', () => {
       expect(result).toContainEqual(NOT_REQUIRED_FIELD);
       expect(result).toContainEqual(TRADE_IN_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(partDescForTypeOptional);
+      expect(result).toContainEqual(FIXED_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(QUANTITY_FIELD_DISABLED);
       expect(result).toContainEqual(PART_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(SUPPLIER_FIELD_DISABLED);
@@ -124,6 +132,7 @@ describe('quotePartFields', () => {
       expect(result).toContainEqual(NOT_REQUIRED_FIELD_DISABLED);
       expect(result).toContainEqual(TRADE_IN_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(partDescForType);
+      expect(result).toContainEqual(FIXED_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(QUANTITY_FIELD_DISABLED);
       expect(result).toContainEqual(PART_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(SUPPLIER_FIELD_DISABLED);
@@ -137,6 +146,7 @@ describe('quotePartFields', () => {
       expect(result).toContainEqual(NOT_REQUIRED_FIELD_DISABLED);
       expect(result).toContainEqual(TRADE_IN_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(partDescForType);
+      expect(result).toContainEqual(FIXED_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(QUANTITY_FIELD_DISABLED);
       expect(result).toContainEqual(PART_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(SUPPLIER_FIELD_DISABLED);
@@ -151,6 +161,7 @@ describe('quotePartFields', () => {
       expect(result).toContainEqual(NOT_REQUIRED_FIELD);
       expect(result).toContainEqual(TRADE_IN_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(partDescForTypeOptional);
+      expect(result).toContainEqual(FIXED_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(QUANTITY_FIELD_DISABLED);
       expect(result).toContainEqual(PART_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(SUPPLIER_FIELD_DISABLED);
@@ -175,12 +186,13 @@ describe('quotePartFields', () => {
         updateObject(TRADE_IN_PRICE_FIELD, { required: false, default: 20.0 }),
       );
       expect(result).toContainEqual(partDescForTypeOptional);
+      expect(result).toContainEqual(FIXED_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(QUANTITY_FIELD_DISABLED);
       expect(result).toContainEqual(PART_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(SUPPLIER_FIELD_DISABLED);
       expect(result).toContainEqual(ADDITIONAL_DATA_FIELD_DISABLED);
     });
-    it('should return replacement wuth required prices when the part is replaced and prices reqd', () => {
+    it('should return replacement with required prices when the part is replaced and prices reqd', () => {
       const partType = { id: 12, can_be_substituted: true };
       const bikePart = { id: 23, trade_in_price: 20.0 };
       const quotePart = {
@@ -199,6 +211,7 @@ describe('quotePartFields', () => {
         updateObject(TRADE_IN_PRICE_FIELD, { required: true, default: 20.0 }),
       );
       expect(result).toContainEqual(partDescForTypeOptional);
+      expect(result).toContainEqual(FIXED_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(QUANTITY_FIELD_DISABLED);
       expect(result).toContainEqual(PART_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(SUPPLIER_FIELD_DISABLED);
@@ -219,6 +232,7 @@ describe('quotePartFields', () => {
       expect(result).toContainEqual(NOT_REQUIRED_FIELD_DISABLED);
       expect(result).toContainEqual(TRADE_IN_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(partDescForType);
+      expect(result).toContainEqual(FIXED_PRICE_FIELD);
       expect(result).toContainEqual(updateObject(QUANTITY_FIELD, { required: true, default: '1' }));
       expect(result).toContainEqual(updateObject(PART_PRICE_FIELD, { required: false }));
       expect(result).toContainEqual(SUPPLIER_FIELD_OPTIONAL);
@@ -239,6 +253,7 @@ describe('quotePartFields', () => {
       expect(result).toContainEqual(NOT_REQUIRED_FIELD_DISABLED);
       expect(result).toContainEqual(TRADE_IN_PRICE_FIELD_DISABLED);
       expect(result).toContainEqual(partDescForType);
+      expect(result).toContainEqual(FIXED_PRICE_FIELD);
       expect(result).toContainEqual(updateObject(QUANTITY_FIELD, { required: true, default: '1' }));
       expect(result).toContainEqual(updateObject(PART_PRICE_FIELD, { required: true }));
       expect(result).toContainEqual(SUPPLIER_FIELD_OPTIONAL);
@@ -259,10 +274,12 @@ describe('quotePartFields', () => {
         NOT_REQUIRED_FIELD_DISABLED,
         TRADE_IN_PRICE_FIELD_DISABLED,
         partDescForType,
-        updateObject(QUANTITY_FIELD, { required: true, default: '1' }),
+        FIXED_PRICE_FIELD,
+        updateObject(QUANTITY_FIELD, { required: true }),
         updateObject(PART_PRICE_FIELD, { required: true }),
         SUPPLIER_FIELD_OPTIONAL,
         attributesField,
+        TOTAL_PRICE_FIELD,
       ];
       expect(quotePartFields(quotePart, undefined, true)).toEqual(expectedFields);
     });
@@ -272,10 +289,12 @@ describe('quotePartFields', () => {
       const expectedFields = [
         PART_TYPE_FIELD,
         PART_DESC_FIELD_DISABLED,
+        FIXED_PRICE_FIELD_DISABLED,
         QUANTITY_FIELD_DISABLED,
         PART_PRICE_FIELD_DISABLED,
         SUPPLIER_FIELD_DISABLED,
         ADDITIONAL_DATA_FIELD_DISABLED,
+        TOTAL_PRICE_FIELD,
       ];
       expect(quotePartFields({})).toEqual(expectedFields);
     });
@@ -284,10 +303,12 @@ describe('quotePartFields', () => {
       const expectedFields = [
         PART_TYPE_FIELD,
         partDescForType,
+        FIXED_PRICE_FIELD_DISABLED,
         QUANTITY_FIELD_DISABLED,
         PART_PRICE_FIELD_DISABLED,
         SUPPLIER_FIELD_DISABLED,
         ADDITIONAL_DATA_FIELD_DISABLED,
+        TOTAL_PRICE_FIELD,
       ];
       expect(quotePartFields({ _partType: partType })).toEqual(expectedFields);
     });
@@ -303,10 +324,12 @@ describe('quotePartFields', () => {
       const expectedFields = [
         PART_TYPE_FIELD_DISABLED,
         partDescForType,
+        FIXED_PRICE_FIELD,
         updateObject(QUANTITY_FIELD, { required: true, default: '1' }),
         updateObject(PART_PRICE_FIELD, { required: false }),
         SUPPLIER_FIELD_OPTIONAL,
         attributesField,
+        TOTAL_PRICE_FIELD,
       ];
       expect(quotePartFields(quotePart)).toEqual(expectedFields);
     });
@@ -322,10 +345,12 @@ describe('quotePartFields', () => {
       const expectedFields = [
         PART_TYPE_FIELD_DISABLED,
         partDescForType,
+        FIXED_PRICE_FIELD,
         updateObject(QUANTITY_FIELD, { required: true, default: '1' }),
         updateObject(PART_PRICE_FIELD, { required: true }),
         SUPPLIER_FIELD_OPTIONAL,
         attributesField,
+        TOTAL_PRICE_FIELD,
       ];
       expect(quotePartFields(quotePart, undefined, true)).toEqual(expectedFields);
     });

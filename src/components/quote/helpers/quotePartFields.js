@@ -9,10 +9,16 @@ import {
 } from '../../app/model/helpers/fields';
 import { updateObject } from '../../../helpers/utils';
 import { attributePlaceholder } from '../../partType/helpers/partType';
+import {TOTAL_PRICE_FIELD} from "./quoteFields";
 
 export const NOT_REQUIRED_FIELD = {
   fieldName: 'not_required',
   header: "Not Req'd",
+  type: CHECKBOX,
+};
+export const FIXED_PRICE_FIELD = {
+  fieldName: 'fixed_price',
+  header: "Fixed Price",
   type: CHECKBOX,
 };
 export const PART_DESC_FIELD = {
@@ -49,26 +55,30 @@ export const PART_TYPE_FIELD_DISABLED = updateObject(PART_TYPE_FIELD, disabledAt
 export const QUANTITY_FIELD_DISABLED = updateObject(QUANTITY_FIELD, disabledAttribute);
 export const PART_PRICE_FIELD_DISABLED = updateObject(PART_PRICE_FIELD, disabledAttribute);
 export const TRADE_IN_PRICE_FIELD_DISABLED = updateObject(TRADE_IN_PRICE_FIELD, disabledAttribute);
-
+export const FIXED_PRICE_FIELD_DISABLED = updateObject(FIXED_PRICE_FIELD, disabledAttribute);
 export const SUPPLIER_FIELD_DISABLED = updateObject(SUPPLIER_FIELD_OPTIONAL, disabledAttribute);
 export const QUOTE_PART_FOR_BIKE = [
   PART_TYPE_FIELD,
   NOT_REQUIRED_FIELD,
   TRADE_IN_PRICE_FIELD,
   PART_DESC_FIELD,
+  FIXED_PRICE_FIELD,
   QUANTITY_FIELD,
   PART_PRICE_FIELD,
   SUPPLIER_FIELD_DISABLED,
   ADDITIONAL_DATA_FIELD,
+  TOTAL_PRICE_FIELD,
 ];
 
 export const QUOTE_PART_NON_BIKE = [
   PART_TYPE_FIELD,
   PART_DESC_FIELD,
+  FIXED_PRICE_FIELD,
   QUANTITY_FIELD,
   PART_PRICE_FIELD,
   SUPPLIER_FIELD_OPTIONAL,
   ADDITIONAL_DATA_FIELD,
+  TOTAL_PRICE_FIELD,
 ];
 export const quotePartFields = (quotePart = {}, additionalProcessing, pricesRequired) => {
   const fields = [];
@@ -139,6 +149,7 @@ export const quotePartFields = (quotePart = {}, additionalProcessing, pricesRequ
       },
       additionalActionAttribute,
     );
+    fields.push(FIXED_PRICE_FIELD);
     fields.push(
       updateObject(QUANTITY_FIELD, { required: true, default: '1' }, additionalActionAttribute),
     );
@@ -148,11 +159,13 @@ export const quotePartFields = (quotePart = {}, additionalProcessing, pricesRequ
     fields.push(updateObject(SUPPLIER_FIELD_OPTIONAL, additionalActionAttribute));
     fields.push(additionalDataField);
   } else {
+    fields.push(FIXED_PRICE_FIELD_DISABLED);
     fields.push(QUANTITY_FIELD_DISABLED);
     fields.push(PART_PRICE_FIELD_DISABLED);
     fields.push(SUPPLIER_FIELD_DISABLED);
     fields.push(ADDITIONAL_DATA_FIELD_DISABLED);
   }
+  fields.push(TOTAL_PRICE_FIELD);
 
   return fields;
 };

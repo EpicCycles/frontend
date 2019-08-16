@@ -1,9 +1,9 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import QuoteBikeParts from './QuoteBikeParts';
-import { quoteFieldsBikeNoCustomer } from './helpers/display';
 import ModelFieldRow from '../app/model/ModelFieldRow';
 import QuoteBikeActions from './QuoteBikeActions';
+import { quoteFieldsBikeNoCustomer } from './helpers/quoteFields';
 
 const QuoteBikes = props => {
   const {

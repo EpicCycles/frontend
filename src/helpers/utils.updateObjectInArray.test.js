@@ -30,7 +30,7 @@ describe('updateObjectInArray', () => {
       { id: 1, attribute: 'not a thing' },
       { dummyKey: 27, attribute: 'thing' },
     ];
-    expect(updateObjectInArray(initialArray, newObject, 1)).toEqual([newObject]);
+    expect(updateObjectInArray(initialArray, newObject, 'notFound')).toEqual(expectedArray);
   });
   it('should add new item when the initial array does not have the item with dummyKey', () => {
     const newObject = { dummyKey: 27, attribute: 'thing' };
@@ -39,6 +39,6 @@ describe('updateObjectInArray', () => {
       { id: 1, attribute: 'not a thing' },
       { dummyKey: 27, attribute: 'thing' },
     ];
-    expect(updateObjectInArray(initialArray, newObject)).toEqual([newObject]);
+    expect(updateObjectInArray(initialArray, newObject)).toEqual(expectedArray);
   });
 });

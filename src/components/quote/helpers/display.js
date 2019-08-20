@@ -1,8 +1,8 @@
-import {buildPartString} from '../../part/helpers/part';
-import {QUANTITY_FIELD, TRADE_IN_PRICE_FIELD,} from '../../app/model/helpers/fields';
-import {findObjectWithId} from '../../../helpers/utils';
-import {PART_PRICE_FIELD} from './quotePartFields';
-import {findPartsForBikeId} from "../../bike/helpers/bike";
+import { buildPartString } from '../../part/helpers/part';
+import { QUANTITY_FIELD, TRADE_IN_PRICE_FIELD } from '../../app/model/helpers/fields';
+import { findObjectWithId } from '../../../helpers/utils';
+import { PART_PRICE_FIELD } from './quotePartFields';
+import { findPartsForBikeId } from '../../bike/helpers/bike';
 
 const findReplacementQuotePart = (partTypeId, bikePart, quoteParts) => {
   if (!bikePart) return undefined;
@@ -31,7 +31,8 @@ export const displayForPartTypeAndQuote = (quote, partTypeId, quoteParts, bikePa
 export const bikePartOnQuote = (bikePart, quotePart, replacementPart, brands) => {
   if (quotePart) {
     if (replacementPart) {
-      return `**** ${buildPartString(replacementPart, brands)} ****`;
+      const qtyString = !!quotePart.quantity ? ` (qty ${quotePart.quantity})` : '';
+      return `**** ${buildPartString(replacementPart, brands)}${qtyString} ****`;
     }
     if (quotePart.not_required) {
       return '**** Not Required ****';
@@ -66,10 +67,5 @@ export const displayQuotePartArray = (
   });
   return arrayOfDetails;
 };
-
-
-
-
-
 
 export const priceFields = [QUANTITY_FIELD, PART_PRICE_FIELD, TRADE_IN_PRICE_FIELD];

@@ -130,7 +130,6 @@ export const quoteFieldsBikeComplete = quoteFieldsComplete.concat(bikeRelatedFie
 export const quoteFields = (quote, readyToIssue, bike) => {
   if (quote.bike) {
     if (bike) {
-      const basicBikeFields = [BIKE_FIELD];
       let priceField = BIKE_PRICE_FIELD;
       let sizeField = FRAME_SIZE_FIELD;
       let colourField = COLOUR_FIELD;

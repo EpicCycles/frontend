@@ -1,6 +1,5 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import ModelTableHeaders from '../app/model/ModelTableHeaders';
 import { customerNoteFields } from './helpers/noteFields';
 import ViewModel from '../app/model/ViewModel';
 import { noteActions } from './helpers/noteActions';

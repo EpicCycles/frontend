@@ -54,7 +54,7 @@ export const deleteNote = noteId => ({
   payload: { noteId },
 });
 
-export const deleteNoteSuccess = note_id => ({
+export const deleteNoteSuccess = noteId => ({
   type: NOTE_DELETE,
   payload: { noteId },
 });

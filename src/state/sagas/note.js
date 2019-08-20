@@ -85,7 +85,7 @@ export function* deleteNote(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      const response = yield call(api.deleteNote, completePayload);
+      yield call(api.deleteNote, completePayload);
       yield put(deleteNoteSuccess(action.payload.noteId));
     } else {
       yield call(history.push, LOGIN_URL);

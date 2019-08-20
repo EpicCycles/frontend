@@ -44,6 +44,8 @@ export const addItemsToArrayAtStart = (oldArray = [], listOfItems = []) => {
   return newArray;
 };
 export const removeItemFromArray = (oldArray = [], idToRemove) => {
+  if (! idToRemove) return oldArray;
+
   let existingIndex = findIndexOfObjectWithKey(oldArray, idToRemove);
   if (existingIndex < 0) return oldArray;
   let newList = oldArray.slice();

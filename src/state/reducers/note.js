@@ -95,7 +95,7 @@ const note = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        notes: removeItemFromArray(state.notes, state.noteId),
+        notes: removeItemFromArray(state.notes, action.payload.noteId),
         noteId: undefined,
       };
 

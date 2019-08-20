@@ -2,27 +2,35 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import ModelTableHeaders from '../app/model/ModelTableHeaders';
 import { customerNoteFields } from './helpers/noteFields';
-import ModelViewRow from '../app/model/ModelViewRow';
+import ViewModel from '../app/model/ViewModel';
+import { noteActions } from './helpers/noteActions';
+import ModelTableHeaderRow from '../app/model/ModelTableHeaderRow';
 
 const NoteGrid = props => {
-  const { notes, users, quote } = props;
-  let notesToUse = notes;
-  if (quote) notesToUse = notes.filter(note => note.quote === quote.id);
+  const { notes, users, deleteNote, saveNote } = props;
+  if (!Array.isArray(notes) || notes.length === 0)
+    return <div data-test="no-data-message">No Notes to view.</div>;
   return (
     <div className="grid-container">
       <div className="grid">
-        <div key="bikeReviewHeaders" className="grid-row grid-row--header">
-          <ModelTableHeaders modelFields={customerNoteFields} lockFirstColumn={true} />
-        </div>
-        {notesToUse.map(note => (
-          <div className={`grid-row`} key={`note${note.id}`}>
-            <ModelViewRow
-              modelFields={customerNoteFields}
-              model={note}
-              users={users}
-              lockFirstColumn={true}
-            />
-          </div>
+        <ModelTableHeaderRow
+          blockIdentity={'noteGrid'}
+          data-test="note-headers"
+          modelFields={customerNoteFields}
+          lockFirstColumn
+          includeActions
+        />
+        {notes.map(note => (
+          <ViewModel
+            model={note}
+            modelFields={customerNoteFields}
+            users={users}
+            data-test="note-row"
+            lockFirstColumn
+            actionsRequired
+            modelActions={noteActions(note, saveNote, deleteNote)}
+            key={`note_${note.id}`}
+          />
         ))}
       </div>
     </div>
@@ -31,6 +39,7 @@ const NoteGrid = props => {
 NoteGrid.propTypes = {
   notes: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired,
-  quote: PropTypes.object,
+  deleteNote: PropTypes.func,
+  saveNote: PropTypes.func,
 };
 export default NoteGrid;

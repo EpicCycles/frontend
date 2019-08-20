@@ -161,10 +161,15 @@ class QuoteManager extends React.Component {
             data-test="quote-detail-tab"
           />
         )}
-        {tab === 3 && (
+        {tab === 3 && !!quoteId && (
           <Fragment>
             <h1 data-test="quote-history-tab">{quote && 'Quote '}History</h1>
-            <NoteGrid notes={notes} users={users} quote={quote} />
+            <NoteGrid
+              notes={notes.filter(note => note.quote === quoteId)}
+              users={users}
+              saveNote={saveNote}
+              deleteNote={deleteNote}
+            />
           </Fragment>
         )}
         {tab === 4 && (

@@ -15,7 +15,10 @@ import {
   CREATE_QUOTE,
   createQuoteError,
   createQuoteOK,
+  DELETE_QUOTE_CHARGE,
   DELETE_QUOTE_PART,
+  deleteQuoteChargeError,
+  deleteQuoteChargeOK,
   deleteQuotePartError,
   deleteQuotePartOK,
   FIND_QUOTES,
@@ -30,7 +33,10 @@ import {
   ISSUE_QUOTE,
   issueQuoteError,
   issueQuoteOK,
+  SAVE_QUOTE_CHARGE,
   SAVE_QUOTE_PART,
+  saveQuoteChargeError,
+  saveQuoteChargeOK,
   saveQuoteError,
   saveQuoteOK,
   saveQuotePartError,
@@ -283,6 +289,65 @@ export function* deleteQuotePart(action) {
 
 export function* watchForDeleteQuotePart() {
   yield takeLatest(`${DELETE_QUOTE_PART}_REQUESTED`, deleteQuotePart);
+}
+export function* saveQuoteCharge(action) {
+  const quoteCharge = updateObject(action.payload.quoteCharge);
+  try {
+    const token = yield select(selectors.token);
+    if (token) {
+      const quoteChargePayload = { quoteCharge, token };
+      let response;
+      if (quoteCharge.id) {
+        response = yield call(quote.updateQuoteCharge, quoteChargePayload);
+      } else {
+        response = yield call(quote.createQuoteCharge, quoteChargePayload);
+      }
+      yield put(saveQuoteChargeOK(response.data, getModelKey(quoteCharge)));
+
+      const quoteId = quoteCharge.quote;
+      const quoteResponse = yield call(quote.recalculateQuote, { quoteId, token });
+      yield put(getQuoteOK(quoteResponse.data));
+    } else {
+      yield call(history.push, LOGIN_URL);
+    }
+  } catch (apiError) {
+    const error = 'Quote Charge save failed';
+    let error_detail;
+    logError(apiError);
+    if (apiError.response) {
+      error_detail = apiError.response.data;
+    }
+    yield put(saveQuoteChargeError({ quoteCharge, error, error_detail }));
+  }
+}
+
+export function* watchForSaveQuoteCharge() {
+  yield takeLatest(`${SAVE_QUOTE_CHARGE}_REQUESTED`, saveQuoteCharge);
+}
+
+export function* deleteQuoteCharge(action) {
+  try {
+    const token = yield select(selectors.token);
+
+    if (token) {
+      const completePayload = updateObject(action.payload, { token });
+      yield call(quote.deleteQuoteCharge, completePayload);
+      yield put(deleteQuoteChargeOK(action.payload.quoteChargeId));
+
+      const quoteId = action.payload.quoteId;
+      const quoteResponse = yield call(quote.recalculateQuote, { quoteId, token });
+      yield put(getQuoteOK(quoteResponse.data));
+    } else {
+      yield call(history.push, LOGIN_URL);
+    }
+  } catch (error) {
+    logError(error);
+    yield put(deleteQuoteChargeError('Delete Quote Charge failed'));
+  }
+}
+
+export function* watchForDeleteQuoteCharge() {
+  yield takeLatest(`${DELETE_QUOTE_CHARGE}_REQUESTED`, deleteQuoteCharge);
 }
 
 export function* issueQuote(action) {

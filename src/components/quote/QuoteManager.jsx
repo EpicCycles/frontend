@@ -62,12 +62,14 @@ class QuoteManager extends React.Component {
       saveCustomer,
       quotes,
       quoteId,
+      quoteCharges,
       quoteParts,
       brands,
       suppliers,
       bikes,
       notes,
       bikeParts,
+      charges,
       frames,
       parts,
       supplierProducts,
@@ -81,6 +83,9 @@ class QuoteManager extends React.Component {
       saveQuotePart,
       saveQuotePartOK,
       deleteQuotePart,
+      saveQuoteCharge,
+      saveQuoteChargeOK,
+      deleteQuoteCharge,
       addMessage,
     } = this.props;
     if (!doWeHaveObjects(quotes)) return <Redirect to="/quote-list" push />;
@@ -137,6 +142,7 @@ class QuoteManager extends React.Component {
           <QuoteDetail
             quote={quote}
             quoteParts={quoteParts}
+            quoteCharges={quoteCharges}
             bikeParts={bikeParts}
             parts={parts}
             supplierProducts={supplierProducts}
@@ -144,6 +150,7 @@ class QuoteManager extends React.Component {
             bikes={bikes}
             customers={customers}
             brands={brands}
+            charges={charges}
             suppliers={suppliers}
             sections={sections}
             issueQuote={this.issueQuote}
@@ -151,6 +158,9 @@ class QuoteManager extends React.Component {
             saveQuotePart={saveQuotePart}
             saveQuotePartOK={saveQuotePartOK}
             deleteQuotePart={deleteQuotePart}
+            saveQuoteCharge={saveQuoteCharge}
+            saveQuoteChargeOK={saveQuoteChargeOK}
+            deleteQuoteCharge={deleteQuoteCharge}
             archiveQuote={archiveQuote}
             unarchiveQuote={unarchiveQuote}
             cloneQuote={getQuoteToCopy}
@@ -223,6 +233,7 @@ QuoteManager.propTypes = {
   brands: PropTypes.array,
   suppliers: PropTypes.array,
   sections: PropTypes.array,
+  charges: PropTypes.array,
   parts: PropTypes.array,
   supplierProducts: PropTypes.array,
   frames: PropTypes.array,
@@ -234,6 +245,7 @@ QuoteManager.propTypes = {
   notes: PropTypes.array,
   quotes: PropTypes.array,
   quoteParts: PropTypes.array,
+  quoteCharges: PropTypes.array,
   users: PropTypes.array,
   saveBrands: PropTypes.func.isRequired,
   getFrameList: PropTypes.func.isRequired,
@@ -252,6 +264,9 @@ QuoteManager.propTypes = {
   saveQuotePart: PropTypes.func.isRequired,
   saveQuote: PropTypes.func.isRequired,
   saveQuotePartOK: PropTypes.func.isRequired,
+  saveQuoteCharge: PropTypes.func.isRequired,
+  saveQuoteChargeOK: PropTypes.func.isRequired,
+  deleteQuoteCharge: PropTypes.func.isRequired,
   addMessage: PropTypes.func.isRequired,
   deleteQuotePart: PropTypes.func.isRequired,
   getQuoteToCopy: PropTypes.func.isRequired,

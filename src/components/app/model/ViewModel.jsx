@@ -14,6 +14,7 @@ const ViewModel = props => {
     sections,
     brands,
     bikes,
+    charges,
     frames,
     suppliers,
     customers,
@@ -32,6 +33,7 @@ const ViewModel = props => {
           modelFields={modelFields}
           brands={brands}
           bikes={bikes}
+          charges={charges}
           frames={frames}
           customers={customers}
           users={users}
@@ -79,6 +81,7 @@ ViewModel.propTypes = {
   className: PropTypes.string,
   sections: PropTypes.array,
   brands: PropTypes.array,
+  charges: PropTypes.array,
   bikes: PropTypes.array,
   frames: PropTypes.array,
   suppliers: PropTypes.array,

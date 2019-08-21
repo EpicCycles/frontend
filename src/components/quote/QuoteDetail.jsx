@@ -21,12 +21,14 @@ import { quoteIssueChecks } from './helpers/quoteIssueChecks';
 import EditModelSimple from '../app/model/EditModelSimple';
 import { quoteFields } from './helpers/quoteFields';
 import { customerNoteFields } from '../note/helpers/noteFields';
+import { quoteChargeFields } from './helpers/quoteChargeFields';
+import ModelTable from '../app/model/ModelTable';
 
 class QuoteDetail extends PureComponent {
-  state = { updatedQuoteParts: [] };
+  state = { updatedQuoteCharges: [], updatedQuoteParts: [] };
   static getDerivedStateFromProps(props, state) {
-    const { updatedQuote, updatedQuoteParts } = state;
-    const { quote, sections, quoteParts, bikeParts, parts, brands } = props;
+    const { updatedQuote, updatedQuoteParts, updatedQuoteCharges } = state;
+    const { quote, sections, quoteCharges, quoteParts, bikeParts, parts, brands } = props;
 
     const quotePartsDetail = getQuoteParts(quote, sections, quoteParts, bikeParts, parts, brands);
     const checkedUpdatedParts = [];
@@ -35,6 +37,12 @@ class QuoteDetail extends PureComponent {
       if (persistedDetail && checkForChanges(QUOTE_PART_FOR_BIKE, persistedDetail, updatedPart))
         checkedUpdatedParts.push(updatedPart);
     });
+    const checkedUpdatedCharges = [];
+    updatedQuoteCharges.forEach(updatedCharge => {
+      const persistedDetail = findObjectWithKey(quoteCharges, getModelKey(updatedCharge));
+      if (persistedDetail && checkForChanges(quoteChargeFields, persistedDetail, updatedCharge))
+        checkedUpdatedCharges.push(updatedCharge);
+    });
 
     let checkedUpdatedQuote;
     if (updatedQuote && checkForChanges(quoteFields(quote), quote, updatedQuote))
@@ -42,20 +50,30 @@ class QuoteDetail extends PureComponent {
 
     return {
       updatedQuote: checkedUpdatedQuote,
+      updatedQuoteCharges: checkedUpdatedCharges,
       updatedQuoteParts: checkedUpdatedParts,
       quotePartsDetail: quotePartsDetail,
     };
   }
 
   issueQuote = quoteKey => {
-    const { quoteParts, quote, addMessage } = this.props;
-    const { updatedQuote, updatedQuoteParts } = this.state;
+    const { quoteParts, quoteCharges, quote, addMessage, readyToIssue, issueQuote } = this.props;
+    const { updatedQuote, updatedQuoteCharges, updatedQuoteParts } = this.state;
     const quoteCurrently = updatedQuote ? updatedQuote : quote;
-    const problems = quoteIssueChecks(updatedQuoteParts, quoteParts, quoteCurrently);
+    const problems = quoteIssueChecks(
+      updatedQuoteParts,
+      quoteParts,
+      quoteCurrently,
+      readyToIssue,
+      updatedQuoteCharges,
+      quoteCharges,
+    );
     if (problems) {
       addMessage(problems.join(' '), 'W');
-    } else {
+    } else if (!readyToIssue) {
       this.props.changeRoute('/quote-issue');
+    } else {
+      issueQuote(quoteKey);
     }
   };
 
@@ -67,6 +85,12 @@ class QuoteDetail extends PureComponent {
 
     const newUpdatedQuoteParts = updateObjectInArray(updatedQuoteParts, updatedQuotePart);
     this.setState({ updatedQuoteParts: newUpdatedQuoteParts });
+  };
+  raiseStateForQuoteCharge = updatedQuoteCharge => {
+    const { updatedQuoteCharges } = this.state;
+
+    const newUpdatedQuoteCharges = updateObjectInArray(updatedQuoteCharges, updatedQuoteCharge);
+    this.setState({ updatedQuoteCharges: newUpdatedQuoteCharges });
   };
   raiseStateForNote = updatedNote => {
     if (updatedNote.dummyKey) {
@@ -80,18 +104,31 @@ class QuoteDetail extends PureComponent {
     const newQuotePart = { dummyKey: generateRandomCode(), quote: quote.id, _isBike: !!quote.bike };
     saveQuotePartOK(newQuotePart);
   };
+  addNewQuoteCharge = () => {
+    const { quote, saveQuoteChargeOK } = this.props;
+    const newQuoteCharge = { dummyKey: generateRandomCode(), quote: quote.id };
+    saveQuoteChargeOK(newQuoteCharge);
+  };
   saveNote = note => {
     this.props.createNote(note);
     this.setState({ updatedNote: undefined });
   };
   render() {
-    const { updatedQuote, updatedQuoteParts, quotePartsDetail, updatedNote } = this.state;
     const {
+      updatedQuote,
+      updatedQuoteParts,
+      updatedQuoteCharges,
+      quotePartsDetail,
+      updatedNote,
+    } = this.state;
+    const {
+      quoteCharges,
       quoteParts,
       parts,
       supplierProducts,
       users,
       brands,
+      charges,
       suppliers,
       sections,
       saveQuote,
@@ -101,10 +138,13 @@ class QuoteDetail extends PureComponent {
       bikeParts,
       frames,
       customers,
+      deleteQuoteCharge,
+      saveQuoteCharge,
       deleteQuotePart,
       saveQuotePart,
       cloneQuote,
       unarchiveQuote,
+      readyToIssue,
     } = this.props;
     const newNote = { quote: quote.id, customer: quote.customer };
 
@@ -116,27 +156,35 @@ class QuoteDetail extends PureComponent {
         iconTitle: 'Add Quote Part',
         iconAction: () => this.addNewQuotePart(),
       },
+      {
+        iconName: 'pound sign',
+        iconTitle: 'Add Quote Charge',
+        iconAction: () => this.addNewQuoteCharge(),
+      },
     ];
     const quotePartList = quoteParts.filter(qp => qp.quote === quote.id);
+    const quoteChargeList = quoteCharges.filter(qp => qp.quote === quote.id);
 
     return (
       <Fragment>
         <div className="row">
           <div>
-            <QuoteActionCell
-              quote={quote}
-              archiveQuote={archiveQuote}
-              unarchiveQuote={unarchiveQuote}
-              cloneQuote={cloneQuote}
-              issueQuote={this.issueQuote}
-            />
+            {!readyToIssue && (
+              <QuoteActionCell
+                quote={quote}
+                archiveQuote={archiveQuote}
+                unarchiveQuote={unarchiveQuote}
+                cloneQuote={cloneQuote}
+                issueQuote={this.issueQuote}
+              />
+            )}
             {quote.quote_status === QUOTE_INITIAL ? (
               <EditModelSimple
                 pageMode
                 actionsRequired
                 model={updatedQuote ? updatedQuote : quote}
                 persistedModel={quote}
-                modelFields={quoteFields(quote, false, bike)}
+                modelFields={quoteFields(quote, readyToIssue, bike)}
                 brands={brands}
                 bikes={bikes}
                 frames={frames}
@@ -181,6 +229,17 @@ class QuoteDetail extends PureComponent {
               key={`editNote`}
               data-test="add-customer-note"
             />
+            <ModelTable
+              modelArray={quoteChargeList}
+              updatedModelArray={updatedQuoteCharges}
+              modelFields={quoteChargeFields}
+              raiseState={this.raiseStateForQuoteCharge}
+              modelDelete={deleteQuoteCharge}
+              modelSave={saveQuoteCharge}
+              blockIdentity={'quoteCharge'}
+              charges={charges}
+              actionsRequired
+            />
           </div>
         </div>
         {quote.quote_status === QUOTE_INITIAL && (
@@ -198,6 +257,7 @@ class QuoteDetail extends PureComponent {
               saveQuotePart={saveQuotePart}
               addQuotePart={this.addNewQuotePart}
               raiseStateForQuotePart={this.raiseStateForQuotePart}
+              pricesRequired={readyToIssue}
             />
           </div>
         )}
@@ -212,15 +272,16 @@ QuoteDetail.defaultProps = {
   suppliers: [],
   users: [],
   sections: [],
-  isLoading: false,
 };
 
 QuoteDetail.propTypes = {
   quote: PropTypes.object.isRequired,
   quoteParts: PropTypes.array.isRequired,
+  quoteCharges: PropTypes.array.isRequired,
   bikes: PropTypes.array.isRequired,
   bikeParts: PropTypes.array.isRequired,
   brands: PropTypes.array,
+  charges: PropTypes.array,
   suppliers: PropTypes.array,
   users: PropTypes.array,
   customers: PropTypes.array,
@@ -229,14 +290,19 @@ QuoteDetail.propTypes = {
   supplierProducts: PropTypes.array.isRequired,
   frames: PropTypes.array.isRequired,
   saveQuote: PropTypes.func.isRequired,
-  archiveQuote: PropTypes.func.isRequired,
+  archiveQuote: PropTypes.func,
+  saveQuoteCharge: PropTypes.func.isRequired,
+  saveQuoteChargeOK: PropTypes.func.isRequired,
+  deleteQuoteCharge: PropTypes.func.isRequired,
   deleteQuotePart: PropTypes.func.isRequired,
   saveQuotePart: PropTypes.func.isRequired,
   saveQuotePartOK: PropTypes.func.isRequired,
   cloneQuote: PropTypes.func.isRequired,
   changeRoute: PropTypes.func.isRequired,
-  unarchiveQuote: PropTypes.func.isRequired,
+  unarchiveQuote: PropTypes.func,
   createNote: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  addMessage: PropTypes.func.isRequired,
+  readyToIssue: PropTypes.bool,
+  issueQuote: PropTypes.func,
 };
 export default QuoteDetail;

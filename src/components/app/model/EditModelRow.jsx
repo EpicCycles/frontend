@@ -18,6 +18,7 @@ const EditModelRow = props => {
     brands,
     bikes,
     sections,
+    charges,
     suppliers,
     users,
     customers,
@@ -52,6 +53,7 @@ const EditModelRow = props => {
                 frames={frames}
                 bikes={bikes}
                 brands={brands}
+                charges={charges}
                 sections={sections}
                 suppliers={suppliers}
                 users={users}
@@ -67,6 +69,7 @@ const EditModelRow = props => {
                 index={index}
                 onChange={onChange}
                 brands={brands}
+                charges={charges}
                 sections={sections}
                 suppliers={suppliers}
               />
@@ -94,6 +97,7 @@ EditModelRow.propTypes = {
   persistedModel: PropTypes.object,
   className: PropTypes.string,
   sections: PropTypes.array,
+  charges: PropTypes.array,
   brands: PropTypes.array,
   bikes: PropTypes.array,
   frames: PropTypes.array,

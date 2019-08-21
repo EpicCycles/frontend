@@ -15,9 +15,12 @@ import QuoteManager from '../../components/quote/QuoteManager';
 import {
   archiveQuote,
   changeQuote,
+  deleteQuoteCharge,
   deleteQuotePart,
   getQuoteToCopy,
   saveQuote,
+  saveQuoteCharge,
+  saveQuoteChargeOK,
   saveQuotePart,
   saveQuotePartOK,
   unarchiveQuote,
@@ -27,9 +30,9 @@ import { addMessage, changeRoute } from '../../state/actions/application';
 const mapStateToProps = ({ bike, core, customer, framework, note, part, quote, user }) => {
   const { customers, customerId, addresses, phones } = customer;
   const { bikes, bikeParts, frames } = bike;
-  const { brands, suppliers } = core;
+  const { brands, suppliers, charges } = core;
   const { notes } = note;
-  const { quoteId, quotes, quoteParts } = quote;
+  const { quoteId, quotes, quoteCharges, quoteParts } = quote;
   const { parts, supplierProducts } = part;
   const { sections } = framework;
   const { users } = user;
@@ -43,8 +46,10 @@ const mapStateToProps = ({ bike, core, customer, framework, note, part, quote, u
     frames,
     brands,
     suppliers,
+    charges,
     quoteId,
     quotes,
+    quoteCharges,
     quoteParts,
     parts,
     supplierProducts,
@@ -80,6 +85,9 @@ const mapDispatchToProps = {
   saveQuotePart,
   saveQuotePartOK,
   deleteQuotePart,
+  saveQuoteCharge,
+  saveQuoteChargeOK,
+  deleteQuoteCharge,
   getQuoteToCopy,
   addMessage,
   changeRoute,

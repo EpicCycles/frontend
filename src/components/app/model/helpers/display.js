@@ -19,6 +19,8 @@ import { getSupplierName } from '../../../supplier/helpers/supplier';
 import { getPartTypeName } from '../../../partType/helpers/partType';
 import { getBikeName } from '../../../bike/helpers/bike';
 import { getUserName } from '../../../user/helpers/user';
+import { CHARGE } from '../../../quote/helpers/quoteChargeFields';
+import { chargeName } from '../../../charge/helpers/chargeName';
 
 export const fixedHeaderClassname = lockColumn => {
   if (lockColumn) return 'grid-header--fixed-left';
@@ -74,6 +76,7 @@ export const buildViewString = (
   bikes,
   frames,
   users,
+  charges,
 ) => {
   let viewData;
   const fieldValue = model ? model[field.fieldName] : undefined;
@@ -107,6 +110,9 @@ export const buildViewString = (
       break;
     case USER:
       viewData = fieldValue ? getUserName(fieldValue, users) : '';
+      break;
+    case CHARGE:
+      viewData = fieldValue ? chargeName(fieldValue, charges) : '';
       break;
     default:
       viewData = fieldValue ? fieldValue : '';

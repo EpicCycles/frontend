@@ -44,7 +44,7 @@ export const addItemsToArrayAtStart = (oldArray = [], listOfItems = []) => {
   return newArray;
 };
 export const removeItemFromArray = (oldArray = [], idToRemove) => {
-  if (! idToRemove) return oldArray;
+  if (!idToRemove) return oldArray;
 
   let existingIndex = findIndexOfObjectWithKey(oldArray, idToRemove);
   if (existingIndex < 0) return oldArray;
@@ -153,10 +153,12 @@ export const buildColourAttributesForId = elementId => {
 };
 
 export const findObjectWithDummyKey = (arrayOfObjects, dummyKey) => {
-  return arrayOfObjects.find(object => object.dummyKey === dummyKey);
+  if (Array.isArray(arrayOfObjects))
+    return arrayOfObjects.find(object => object.dummyKey === dummyKey);
 };
 export const findIndexOfObjectWithDummyKey = (arrayOfObjects, dummyKey) => {
-  return arrayOfObjects.findIndex(object => object.dummyKey === dummyKey);
+  if (Array.isArray(arrayOfObjects))
+    return arrayOfObjects.findIndex(object => object.dummyKey === dummyKey);
 };
 
 export function generateRandomCode() {

@@ -20,7 +20,9 @@ describe('QuoteDetail', () => {
       <QuoteDetail
         quote={{ id: 1, quote_status: QUOTE_INITIAL }}
         quoteParts={[]}
+        quoteCharges={[]}
         brands={[]}
+        charges={[]}
         sections={sections}
         parts={[]}
         bikeParts={[]}
@@ -35,12 +37,19 @@ describe('QuoteDetail', () => {
       bikeParts: [],
       bikes: [],
     });
+    const chargeData = component.find('ModelTable');
+    expect(chargeData).toHaveLength(1);
+    assertComponentHasExpectedProps(chargeData, {
+      models: [],
+      charges: [],
+    });
   });
   it('should render headers and detail when there is part type data', () => {
     const component = shallow(
       <QuoteDetail
         quote={{ id: 1, quote_status: QUOTE_INITIAL }}
         quoteParts={[{ quote: 1, partType: 1 }, { quote: 2, partType: 1 }]}
+        quoteCharges={[]}
         brands={[]}
         sections={sections}
         parts={[]}
@@ -62,6 +71,7 @@ describe('QuoteDetail', () => {
       <QuoteDetail
         quote={{ id: 1, quote_status: QUOTE_INITIAL }}
         quoteParts={[{ quote: 1, partType: 1 }, { quote: 1, partType: 22 }]}
+        quoteCharges={[]}
         brands={[]}
         sections={sections}
         parts={[]}
@@ -83,6 +93,7 @@ describe('QuoteDetail', () => {
       <QuoteDetail
         quote={{ id: 1, bike: 58, quote_status: QUOTE_INITIAL }}
         quoteParts={[{ quote: 1, partType: 1 }, { quote: 1, partType: 22 }]}
+        quoteCharges={[]}
         brands={sampleBrands}
         sections={sections}
         parts={[{ id: 15, partType: 1 }, { id: 25, partType: 1 }, { id: 35, partType: 22 }]}
@@ -104,6 +115,7 @@ describe('QuoteDetail', () => {
       <QuoteDetail
         quote={{ id: 1, bike: 58, quote_status: QUOTE_ARCHIVED }}
         quoteParts={[{ quote: 1, partType: 1 }, { quote: 1, partType: 22 }]}
+        quoteCharges={[]}
         brands={sampleBrands}
         sections={sections}
         parts={[{ id: 15, partType: 1 }, { id: 25, partType: 1 }, { id: 35, partType: 22 }]}

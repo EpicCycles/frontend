@@ -29,6 +29,7 @@ class EditModelSimple extends PureComponent {
       modelFields,
       className,
       sections,
+      charges,
       brands,
       bikes,
       frames,
@@ -58,6 +59,7 @@ class EditModelSimple extends PureComponent {
             customers={customers}
             users={users}
             sections={sections}
+            charges={charges}
             suppliers={suppliers}
             className={className}
             showReadOnlyFields={showReadOnlyFields}
@@ -82,6 +84,7 @@ class EditModelSimple extends PureComponent {
         customers={customers}
         users={users}
         sections={sections}
+        charges={charges}
         suppliers={suppliers}
         className={className}
         showReadOnlyFields={showReadOnlyFields}
@@ -103,6 +106,7 @@ EditModelSimple.propTypes = {
   pageMode: PropTypes.bool,
   className: PropTypes.string,
   sections: PropTypes.array,
+  charges: PropTypes.array,
   brands: PropTypes.array,
   bikes: PropTypes.array,
   frames: PropTypes.array,

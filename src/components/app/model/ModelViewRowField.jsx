@@ -3,7 +3,18 @@ import React from 'react';
 import { buildViewString } from './helpers/display';
 
 const ModelViewRowField = props => {
-  const { field, model, sections, brands, suppliers, users, customers, bikes, frames } = props;
+  const {
+    field,
+    model,
+    sections,
+    charges,
+    brands,
+    suppliers,
+    users,
+    customers,
+    bikes,
+    frames,
+  } = props;
   let viewData = buildViewString(
     model,
     field,
@@ -14,6 +25,7 @@ const ModelViewRowField = props => {
     bikes,
     frames,
     users,
+    charges,
   );
   return field.maxWidth ? (
     <div style={{ maxWidth: field.maxWidth }}>
@@ -30,6 +42,7 @@ ModelViewRowField.propTypes = {
   sections: PropTypes.array,
   brands: PropTypes.array,
   bikes: PropTypes.array,
+  charges: PropTypes.array,
   frames: PropTypes.array,
   suppliers: PropTypes.array,
   customers: PropTypes.array,

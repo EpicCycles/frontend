@@ -68,7 +68,7 @@ import {
   watchForSaveQuotePart,
   watchForDeleteQuotePart,
   watchForGetQuoteToCopy,
-  watchForIssueQuote,
+  watchForIssueQuote, watchForDeleteQuoteCharge, watchForSaveQuoteCharge,
 } from './quote';
 import { watchForChangeRoute } from './application';
 
@@ -133,5 +133,7 @@ export default function* rootSaga() {
     watchForSavePartsAndSupplierProducts(),
     watchForSaveCharge(),
     watchForDeleteCharge(),
+    watchForSaveQuoteCharge(),
+    watchForDeleteQuoteCharge(),
   ]);
 }

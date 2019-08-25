@@ -12,7 +12,7 @@ import { listParts, listPartsOK } from '../../state/actions/part';
 import { getFramework, getFrameworkSuccess } from '../../state/actions/framework';
 
 const mapStateToProps = ({ user, application, core, part, framework }) => {
-  const { brands, charges, suppliers } = core;
+  const { brands, charges, questions, suppliers } = core;
   const { parts, supplierProducts } = part;
   const { sections } = framework;
   return {
@@ -21,6 +21,7 @@ const mapStateToProps = ({ user, application, core, part, framework }) => {
     application,
     brands,
     charges,
+    questions,
     suppliers,
     parts,
     supplierProducts,

@@ -6,6 +6,8 @@ export const BRAND_DELETE = 'core/BRAND_DELETE';
 export const BRANDS_UPDATE = 'core/BRANDS_UPDATE';
 export const CHARGE_SAVE = 'core/CHARGE_SAVE';
 export const CHARGE_DELETE = 'core/CHARGE_DELETE';
+export const QUESTION_SAVE = 'core/QUESTION_SAVE';
+export const QUESTION_DELETE = 'core/QUESTION_DELETE';
 export const SUPPLIER_SAVE = 'core/SUPPLIER_SAVE';
 export const SUPPLIER_DELETE = 'core/SUPPLIER_DELETE';
 export const saveBrand = brand => ({
@@ -37,9 +39,9 @@ export const getCoreData = () => ({
   payload: {},
 });
 
-export const getCoreDataSuccess = (brands, charges, suppliers) => ({
+export const getCoreDataSuccess = (brands, charges, questions, suppliers) => ({
   type: `${CORE_DATA}_OK`,
-  payload: { brands, charges, suppliers },
+  payload: { brands, charges, questions, suppliers },
 });
 
 export const getCoreDataFailure = error => ({
@@ -109,6 +111,37 @@ export const deleteChargeSuccess = charges => ({
 
 export const deleteChargeFailure = error => ({
   type: `${CHARGE_DELETE}_ERROR`,
+  payload: error,
+});
+
+export const saveQuestion = question => ({
+  type: `${QUESTION_SAVE}_REQUESTED`,
+  payload: { question },
+});
+export const addQuestion  = question => ({
+  type: `${QUESTION_SAVE}_ADD`,
+  payload: { question },
+});
+export const saveQuestionSuccess = questions => ({
+  type: `${QUESTION_SAVE}_OK`,
+  payload: questions,
+});
+
+export const saveQuestionFailure = error => ({
+  type: `${QUESTION_SAVE}_ERROR`,
+  payload: error,
+});
+export const deleteQuestion = questionId => ({
+  type: `${QUESTION_DELETE}_REQUESTED`,
+  payload: { questionId },
+});
+export const deleteQuestionSuccess = questions => ({
+  type: `${QUESTION_DELETE}_OK`,
+  payload: questions,
+});
+
+export const deleteQuestionFailure = error => ({
+  type: `${QUESTION_DELETE}_ERROR`,
   payload: error,
 });
 

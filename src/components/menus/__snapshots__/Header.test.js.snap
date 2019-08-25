@@ -104,6 +104,11 @@ exports[`is displays correctly 1`] = `
                   "linkNumber": 313,
                   "linkRoute": "/charges",
                 },
+                Object {
+                  "displayText": "Questions",
+                  "linkNumber": 314,
+                  "linkRoute": "/question",
+                },
               ],
               "groupPos": 31,
             },

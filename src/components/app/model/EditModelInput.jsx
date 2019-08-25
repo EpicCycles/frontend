@@ -191,11 +191,12 @@ class EditModelInput extends Component {
         );
         break;
       case CHARGE:
+        const chargeValue = fieldValue ? fieldValue.toString() : '';
         editComponent = (
           <SelectInput
             className={className}
             fieldName={fieldName}
-            value={fieldValue}
+            value={chargeValue}
             onChange={this.validateOnChange}
             options={chargeOptions(charges)}
             error={error}

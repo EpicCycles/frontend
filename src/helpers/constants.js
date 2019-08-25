@@ -81,6 +81,7 @@ export const STORAGE_SUPPLIER_PRODUCTS = 'epic_supplierProducts';
 export const STORAGE_SECTIONS = 'epic_sections';
 export const STORAGE_BRANDS = 'epic_brands';
 export const STORAGE_CHARGES = 'epic_charges';
+export const STORAGE_QUESTIONS = 'epic_questions';
 export const STORAGE_SUPPLIERS = 'epic_suppliers';
 export const COOKIE_USER = 'epic_user';
 export const COOKIE_TOKEN = 'epic_user_token';

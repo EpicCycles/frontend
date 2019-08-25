@@ -9,6 +9,8 @@ import {
   SUPPLIER_SAVE,
   CHARGE_DELETE,
   CHARGE_SAVE,
+  QUESTION_DELETE,
+  QUESTION_SAVE,
 } from '../actions/core';
 import { USER_LOGIN, USER_LOGOUT } from '../actions/user';
 import {
@@ -31,6 +33,8 @@ const core = (state = initialState, action) => {
     case `${BRAND_DELETE}_REQUESTED`:
     case `${CHARGE_SAVE}_REQUESTED`:
     case `${CHARGE_DELETE}_REQUESTED`:
+    case `${QUESTION_DELETE}_REQUESTED`:
+    case `${QUESTION_SAVE}_REQUESTED`:
       return {
         ...state,
         isLoading: true,
@@ -79,6 +83,8 @@ const core = (state = initialState, action) => {
     case `${BRAND_DELETE}_ERROR`:
     case `${CHARGE_SAVE}_ERROR`:
     case `${CHARGE_DELETE}_ERROR`:
+    case `${QUESTION_DELETE}_ERROR`:
+    case `${QUESTION_SAVE}_ERROR`:
     case `${SUPPLIER_SAVE}_ERROR`:
     case `${SUPPLIER_DELETE}_ERROR`:
       return {
@@ -99,6 +105,7 @@ const core = (state = initialState, action) => {
         ...state,
         brands: action.payload.brands,
         charges: action.payload.charges,
+        questions: action.payload.questions,
         suppliers: action.payload.suppliers,
         isLoading: false,
       };
@@ -114,11 +121,24 @@ const core = (state = initialState, action) => {
         charges: updateObjectInArray(state.charges, action.payload.charge),
         isLoading: false,
       };
+    case `${QUESTION_SAVE}_ADD`:
+      return {
+        ...state,
+        questions: updateObjectInArray(state.questions, action.payload.question),
+        isLoading: false,
+      };
     case `${CHARGE_SAVE}_OK`:
     case `${CHARGE_DELETE}_OK`:
       return {
         ...state,
         charges: action.payload,
+        isLoading: false,
+      };
+    case `${QUESTION_SAVE}_OK`:
+    case `${QUESTION_DELETE}_OK`:
+      return {
+        ...state,
+        questions: action.payload,
         isLoading: false,
       };
     case `${SUPPLIER_SAVE}_OK`:

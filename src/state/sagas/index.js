@@ -26,12 +26,12 @@ import {
 } from './note';
 import { watchForGetFramework, watchForSaveFramework } from './framework';
 import {
-  watchForDeleteCharge,
+  watchForDeleteCharge, watchForDeleteQuestion,
   watchForDeleteSupplier,
   watchForGetBrands,
   watchForGetCoreData,
   watchForSaveBrands,
-  watchForSaveCharge,
+  watchForSaveCharge, watchForSaveQuestion,
   watchForSaveSupplier,
 } from './core';
 import {
@@ -133,6 +133,8 @@ export default function* rootSaga() {
     watchForSavePartsAndSupplierProducts(),
     watchForSaveCharge(),
     watchForDeleteCharge(),
+    watchForSaveQuestion(),
+    watchForDeleteQuestion(),
     watchForSaveQuoteCharge(),
     watchForDeleteQuoteCharge(),
   ]);

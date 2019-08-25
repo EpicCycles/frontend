@@ -11,8 +11,10 @@ import { createCookie, deleteCookie, getCookieObject } from '../../state/helpers
 import {
   COOKIE_TOKEN,
   COOKIE_USER,
-  STORAGE_BRANDS, STORAGE_CHARGES,
+  STORAGE_BRANDS,
+  STORAGE_CHARGES,
   STORAGE_PARTS,
+  STORAGE_QUESTIONS,
   STORAGE_SECTIONS,
   STORAGE_SUPPLIER_PRODUCTS,
   STORAGE_SUPPLIERS,
@@ -50,9 +52,10 @@ class Header extends React.Component {
 
       const brands = getLocalStorage(STORAGE_BRANDS);
       const charges = getLocalStorage(STORAGE_CHARGES);
+      const questions = getLocalStorage(STORAGE_QUESTIONS);
       const suppliers = getLocalStorage(STORAGE_SUPPLIERS);
       if (brands && suppliers && charges) {
-        this.props.getCoreDataSuccess(brands, charges, suppliers);
+        this.props.getCoreDataSuccess(brands, charges, questions, suppliers);
       } else {
         this.props.getCoreData();
       }
@@ -80,7 +83,17 @@ class Header extends React.Component {
     this.props.listParts({});
   };
   saveStateToLocalStorage = () => {
-    const { user, token, parts, supplierProducts, sections, suppliers, charges, brands } = this.props;
+    const {
+      user,
+      token,
+      parts,
+      supplierProducts,
+      sections,
+      suppliers,
+      questions,
+      charges,
+      brands,
+    } = this.props;
     if (user) {
       createCookie(COOKIE_USER, user);
       createCookie(COOKIE_TOKEN, token);
@@ -91,6 +104,7 @@ class Header extends React.Component {
       setLocalStorage(STORAGE_SUPPLIERS, suppliers);
       setLocalStorage(STORAGE_BRANDS, brands);
       setLocalStorage(STORAGE_CHARGES, charges);
+      setLocalStorage(STORAGE_QUESTIONS, questions);
     }
   };
 

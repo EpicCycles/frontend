@@ -1,5 +1,6 @@
 export const CUSTOMER_SEARCH_URL = '/customer-search';
 export const CUSTOMER_URL = '/customer';
+export const QUESTION_URL = '/question';
 export const LOGIN_URL = '/login';
 export const menuStructure = [
   {
@@ -46,6 +47,7 @@ export const menuStructure = [
           { displayText: 'Quote Sections', linkRoute: '/framework', linkNumber: 311 },
           { displayText: 'Brands', linkRoute: '/brands', linkNumber: 312 },
           { displayText: 'Charges', linkRoute: '/charges', linkNumber: 313 },
+          { displayText: 'Questions', linkRoute: QUESTION_URL, linkNumber: 314 },
         ],
       },
       {

@@ -348,6 +348,35 @@ exports[`EditModelInput it renders a part type field that has data that is not f
 </Fragment>
 `;
 
+exports[`EditModelInput it renders a question field that has data 1`] = `
+<Fragment>
+  <SelectInput
+    className=""
+    error=""
+    fieldName="data_field12"
+    isEmptyAllowed={true}
+    isMultiple={false}
+    onChange={[Function]}
+    options={Array []}
+    value={23.9}
+  />
+</Fragment>
+`;
+
+exports[`EditModelInput it renders a question field that has no data 1`] = `
+<Fragment>
+  <SelectInput
+    className=""
+    error=""
+    fieldName="data_field12"
+    isEmptyAllowed={true}
+    isMultiple={false}
+    onChange={[Function]}
+    options={Array []}
+  />
+</Fragment>
+`;
+
 exports[`EditModelInput it renders a supplier field that has data that is found 1`] = `
 <Fragment>
   <SupplierSelect

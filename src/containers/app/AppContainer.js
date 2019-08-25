@@ -5,7 +5,7 @@ import HeaderContainer from './HeaderContainer';
 import NotFound from '../404';
 import Home from '../home';
 
-import { CUSTOMER_SEARCH_URL, CUSTOMER_URL, LOGIN_URL } from '../../components/menus/helpers/menu';
+import { CUSTOMER_SEARCH_URL, CUSTOMER_URL, LOGIN_URL, QUESTION_URL } from '../../components/menus/helpers/menu';
 
 const LazyLoginContainer = lazy(() => import('../user/LoginContainer'));
 const LazyQuoteCopyContainer = lazy(() => import('../quote/QuoteCopyContainer'));
@@ -29,6 +29,7 @@ const LazyUserDetailChangeContainer = lazy(() => import('../user/UserDetailChang
 const LazyFrameworkContainer = lazy(() => import('../framework/FrameworkContainer'));
 const LazyCustomerListContainer = lazy(() => import('../customer/CustomerListContainer'));
 const LazyChargesContainer = lazy(() => import('../charge/ChargesContainer'));
+const LazyQuestionsContainer = lazy(() => import('../question/QuestionsContainer'));
 const App = () => (
   <div>
     <HeaderContainer />
@@ -59,6 +60,7 @@ const App = () => (
           <Route exact path="/quote-copy" component={LazyQuoteCopyContainer} />
           <Route exact path="/quote-issue" component={LazyQuoteIssueContainer} />
           <Route exact path="/charges" component={LazyChargesContainer} />
+          <Route exact path={QUESTION_URL} component={LazyQuestionsContainer} />
           {/* Finally, catch all unmatched routes */}
           <Route component={NotFound} />
         </Switch>

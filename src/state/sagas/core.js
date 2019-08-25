@@ -2,6 +2,7 @@ import history from '../../history';
 import * as selectors from '../selectors/user';
 import brand from './apis/brand';
 import charges from './apis/chargeApi';
+import questions from './apis/questionApi';
 import supplier from './apis/supplier';
 import {
   getCoreDataFailure,
@@ -25,6 +26,12 @@ import {
   saveChargeSuccess,
   deleteChargeSuccess,
   deleteChargeFailure,
+  saveQuestionSuccess,
+  saveQuestionFailure,
+  deleteQuestionSuccess,
+  deleteQuestionFailure,
+  QUESTION_SAVE,
+  QUESTION_DELETE,
 } from '../actions/core';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { errorAsMessage, logError } from '../../helpers/api_error';
@@ -38,15 +45,20 @@ export function* getCoreData(action) {
       const completePayload = updateObject(action.payload, { token });
       const brandsResponse = yield call(brand.getBrands, completePayload);
       const chargesResponse = yield call(charges.getCharges, completePayload);
+      const questionsResponse = yield call(questions.getQuestions, completePayload);
       const suppliersResponse = yield call(supplier.getSuppliers, completePayload);
       yield put(
-        getCoreDataSuccess(brandsResponse.data, chargesResponse.data, suppliersResponse.data),
+        getCoreDataSuccess(
+          brandsResponse.data,
+          chargesResponse.data,
+          questionsResponse.data,
+          suppliersResponse.data,
+        ),
       );
     } else {
       yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
-    // yield put(getCoreDataSuccess(sampleBrands, sampleSuppliers));
     logError(error);
     yield put(getCoreDataFailure('Get Brands and Suppliers Failed'));
   }
@@ -129,6 +141,42 @@ export function* deleteCharge(action) {
     yield put(deleteChargeFailure('Delete Charge Failed'));
   }
 }
+export function* saveQuestionSaga(action) {
+  try {
+    const token = yield select(selectors.token);
+    if (token) {
+      const completePayload = updateObject(action.payload, { token });
+      let saveResponse;
+      if (action.payload.question.id) {
+        saveResponse = yield call(questions.saveQuestion, completePayload);
+      } else {
+        saveResponse = yield call(questions.createQuestion, completePayload);
+      }
+      yield put(saveQuestionSuccess(saveResponse.data));
+    } else {
+      yield call(history.push, LOGIN_URL);
+    }
+  } catch (error) {
+    logError(error);
+    yield put(saveQuestionFailure(errorAsMessage(error, 'Save question Failed')));
+  }
+}
+export function* deleteQuestion(action) {
+  try {
+    const token = yield select(selectors.token);
+    if (token) {
+      const completePayload = updateObject(action.payload, { token });
+      yield call(questions.deleteQuestion, completePayload);
+      const chargesResponse = yield call(questions.getQuestions, completePayload);
+      yield put(deleteQuestionSuccess(chargesResponse.data));
+    } else {
+      yield call(history.push, LOGIN_URL);
+    }
+  } catch (error) {
+    logError(error);
+    yield put(deleteQuestionFailure('Delete question Failed'));
+  }
+}
 
 export function* saveSupplier(action) {
   try {
@@ -184,6 +232,12 @@ export function* watchForSaveCharge() {
 }
 export function* watchForDeleteCharge() {
   yield takeLatest(`${CHARGE_DELETE}_REQUESTED`, deleteCharge);
+}
+export function* watchForSaveQuestion() {
+  yield takeLatest(`${QUESTION_SAVE}_REQUESTED`, saveQuestionSaga);
+}
+export function* watchForDeleteQuestion() {
+  yield takeLatest(`${QUESTION_DELETE}_REQUESTED`, deleteQuestion);
 }
 
 export function* watchForSaveSupplier() {

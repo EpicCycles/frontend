@@ -1,4 +1,4 @@
-import { CHECKBOX, TEXT, UPD_BY_FIELD } from '../../app/model/helpers/fields';
+import { CHECKBOX, TEXT, UPD_BY_FIELD, UPD_DATE_FIELD } from '../../app/model/helpers/fields';
 import { VALUE_MISSING } from '../../app/model/helpers/error';
 import { CHARGE } from '../../quote/helpers/quoteChargeFields';
 
@@ -24,4 +24,11 @@ export const BIKE_ONLY_FIELD = {
   header: 'Bike Quotes Only',
   type: CHECKBOX,
 };
-export const questionFields = [QUESTION_FIELD, CHARGE_FIELD, BIKE_ONLY_FIELD, UPD_BY_FIELD];
+
+export const questionFields = [
+  QUESTION_FIELD,
+  CHARGE_FIELD,
+  BIKE_ONLY_FIELD,
+  UPD_BY_FIELD,
+  UPD_DATE_FIELD,
+];

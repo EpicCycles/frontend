@@ -20,7 +20,7 @@ import BrandSelect from '../../brand/BrandSelect';
 import SupplierSelect from '../../supplier/SupplierSelect';
 import CountrySelect from '../../address/CountrySelect';
 import SelectInput from '../../../common/SelectInput';
-import { CHARGE } from '../../quote/helpers/quoteChargeFields';
+import { CHARGE } from '../../quoteCharge/helpers/quoteChargeFields';
 import { chargeOptions } from '../../charge/helpers/chargeOptions';
 
 class EditModelInput extends Component {

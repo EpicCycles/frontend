@@ -8,20 +8,20 @@ import {
 } from '../../helpers/utils';
 import * as PropTypes from 'prop-types';
 import { findPartsForBike } from '../bike/helpers/bike';
-import QuoteSummaryParts from './QuoteSummaryParts';
-import QuotePartGrid from './QuotePartGrid';
+import QuoteSummaryParts from '../quoteSummary/QuoteSummaryParts';
+import QuotePartGrid from '../quotePart/QuotePartGrid';
 import { QUOTE_INITIAL } from './helpers/quote';
 
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteActionCell from './QuoteActionCell';
-import { getQuoteParts } from './helpers/getQuoteParts';
+import { getQuoteParts } from '../quotePart/helpers/getQuoteParts';
 import { checkForChanges, getModelKey } from '../app/model/helpers/model';
-import { QUOTE_PART_FOR_BIKE } from './helpers/quotePartFields';
+import { QUOTE_PART_FOR_BIKE } from '../quotePart/helpers/quotePartFields';
 import { quoteIssueChecks } from './helpers/quoteIssueChecks';
 import EditModelSimple from '../app/model/EditModelSimple';
 import { quoteFields } from './helpers/quoteFields';
 import { customerNoteFields } from '../note/helpers/noteFields';
-import { quoteChargeFields } from './helpers/quoteChargeFields';
+import { quoteChargeFields } from '../quoteCharge/helpers/quoteChargeFields';
 import ModelTable from '../app/model/ModelTable';
 
 class QuoteDetail extends PureComponent {

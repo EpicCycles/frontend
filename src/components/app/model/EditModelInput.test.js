@@ -12,7 +12,7 @@ import {
 } from './helpers/fields';
 import EditModelInput from './EditModelInput';
 import {findDataTest} from "../../../helpers/jest_helpers/assert";
-import {CHARGE} from "../../quote/helpers/quoteChargeFields";
+import {CHARGE} from "../../quoteCharge/helpers/quoteChargeFields";
 
 const foundName = 'find me';
 const sections = [

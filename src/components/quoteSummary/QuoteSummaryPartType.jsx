@@ -1,10 +1,11 @@
 import React, {Fragment} from 'react';
 import * as PropTypes from "prop-types";
 import ModelViewRow from "../app/model/ModelViewRow";
-import {bikePartOnQuote, priceFields} from "./helpers/display";
+import {priceFields} from "../quote/helpers/display";
 import {buildPartString} from "../part/helpers/part";
 import {findObjectWithId} from "../../helpers/utils";
 import {gridItemClass} from "../app/model/helpers/display";
+import {quotePartSummary} from "../quotePart/helpers/quotePartSummary";
 
 
 const QuoteSummaryPartType = props => {
@@ -21,7 +22,7 @@ const QuoteSummaryPartType = props => {
                 key={`part${bikePart.id}`}
                 data-test="bike-part-cell"
             >
-                {bikePartOnQuote(bikePart, quotePart, replacementPart, brands)}
+                {quotePartSummary(bikePart, quotePart, replacementPart, brands)}
             </div>
             {showPrices && <ModelViewRow
                 modelFields={priceFields}

@@ -4,7 +4,7 @@ import QuoteFind from './QuoteFind';
 import { doWeHaveObjects, findObjectWithId } from '../../helpers/utils';
 import { Button, Dimmer, Loader } from 'semantic-ui-react';
 import QuoteGrid from './QuoteGrid';
-import QuoteSummary from './QuoteSummary';
+import QuoteSummary from '../quoteSummary/QuoteSummary';
 import { QUOTE_PRICE_FIELD } from './helpers/quoteFields';
 import {QUOTE_DESC_FIELD} from "./helpers/quoteFields";
 

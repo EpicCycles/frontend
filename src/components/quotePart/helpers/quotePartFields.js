@@ -9,7 +9,7 @@ import {
 } from '../../app/model/helpers/fields';
 import { updateObject } from '../../../helpers/utils';
 import { attributePlaceholder } from '../../partType/helpers/partType';
-import {TOTAL_PRICE_FIELD} from "./quoteFields";
+import {TOTAL_PRICE_FIELD} from "../../quote/helpers/quoteFields";
 
 export const NOT_REQUIRED_FIELD = {
   fieldName: 'not_required',

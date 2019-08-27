@@ -19,7 +19,7 @@ import { getSupplierName } from '../../../supplier/helpers/supplier';
 import { getPartTypeName } from '../../../partType/helpers/partType';
 import { getBikeName } from '../../../bike/helpers/bike';
 import { getUserName } from '../../../user/helpers/user';
-import { CHARGE } from '../../../quote/helpers/quoteChargeFields';
+import { CHARGE } from '../../../quoteCharge/helpers/quoteChargeFields';
 import { chargeName } from '../../../charge/helpers/chargeName';
 
 export const fixedHeaderClassname = lockColumn => {

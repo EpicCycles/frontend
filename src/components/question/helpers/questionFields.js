@@ -1,6 +1,6 @@
 import { CHECKBOX, TEXT, UPD_BY_FIELD, UPD_DATE_FIELD } from '../../app/model/helpers/fields';
 import { VALUE_MISSING } from '../../app/model/helpers/error';
-import { CHARGE } from '../../quote/helpers/quoteChargeFields';
+import { CHARGE } from '../../quoteCharge/helpers/quoteChargeFields';
 
 export const QUESTION_FIELD = {
   fieldName: 'question',

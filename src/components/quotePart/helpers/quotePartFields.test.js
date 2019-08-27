@@ -25,7 +25,7 @@ import {
   TRADE_IN_PRICE_FIELD_DISABLED,
 } from './quotePartFields';
 import { updateObject } from '../../../helpers/utils';
-import { TOTAL_PRICE_FIELD } from './quoteFields';
+import { TOTAL_PRICE_FIELD } from '../../quote/helpers/quoteFields';
 
 describe('quotePartFields', () => {
   const attributesField = {

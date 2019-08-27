@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import * as PropTypes from 'prop-types';
 import { doWeHaveObjects } from '../../helpers/utils';
 import { sectionHasDetail } from '../framework/helpers/display';
-import { displayForPartType } from './helpers/display';
+import { displayForPartType } from '../quote/helpers/display';
 import QuoteSummaryPartType from './QuoteSummaryPartType';
 import ModelTableHeaderRow from '../app/model/ModelTableHeaderRow';
-import { quoteSummaryHeaders } from './helpers/quoteSummaryHeaders';
+import { quoteSummaryFields } from './helpers/quoteSummaryFields';
 
 const QuoteSummaryParts = props => {
   const { showPrices, quoteParts, brands, sections, parts, bikeParts, lockFirstColumn } = props;
@@ -18,7 +18,7 @@ const QuoteSummaryParts = props => {
       {usedSections.length > 0 && (
         <div className="grid">
           <ModelTableHeaderRow
-            modelFields={quoteSummaryHeaders(showPrices)}
+            modelFields={quoteSummaryFields(showPrices)}
             showPrices={showPrices}
             lockFirstColumn={lockFirstColumn}
             data-test="quote-summary-headers"

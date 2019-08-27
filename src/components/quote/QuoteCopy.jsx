@@ -11,7 +11,7 @@ import * as PropTypes from 'prop-types';
 import CustomerListAndSelect from '../customer/CustomerListAndSelect';
 import BikeListAndSelect from '../bike/BikeListAndSelect';
 import { quoteDescription } from './helpers/quote';
-import QuoteSummary from './QuoteSummary';
+import QuoteSummary from '../quoteSummary/QuoteSummary';
 import { CUSTOMER_URL } from '../menus/helpers/menu';
 const defaultState = props => {
   const { quotes, quoteId, customers, bikes } = props;

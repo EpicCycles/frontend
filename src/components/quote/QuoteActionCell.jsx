@@ -1,5 +1,5 @@
 import React from 'react';
-import { quoteActions } from './helpers/quote';
+import { quoteActions } from './helpers/quoteActions';
 import * as PropTypes from 'prop-types';
 import { getModelKey } from '../app/model/helpers/model';
 import IconArray from '../../common/IconArray';

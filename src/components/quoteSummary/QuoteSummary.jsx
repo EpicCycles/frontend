@@ -4,7 +4,7 @@ import { findObjectWithId } from '../../helpers/utils';
 import { findPartsForBike } from '../bike/helpers/bike';
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteSummaryParts from './QuoteSummaryParts';
-import {quoteFieldsBikeComplete} from "./helpers/quoteFields";
+import {quoteFieldsBikeComplete} from "../quote/helpers/quoteFields";
 
 const QuoteSummary = props => {
   const {

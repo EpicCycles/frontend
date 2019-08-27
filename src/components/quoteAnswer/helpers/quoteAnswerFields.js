@@ -2,6 +2,8 @@
 import { SELECT_ONE, TEXT } from '../../app/model/helpers/fields';
 import { SELECT_ONE_MISSING } from '../../app/model/helpers/error';
 import { postUpdateProcessingQuoteAnswer } from './postUpdateProcessQuoteAnswer';
+import { updateObject } from '../../../helpers/utils';
+import { PRICE_FIELD } from '../../charge/helpers/chargeFields';
 const answerChoices = [
   { name: 'Unknown', value: '', isDefault: true },
   { name: 'Yes', value: 'Y' },
@@ -15,7 +17,6 @@ const QUESTION_TEXT_FIELD = {
   displaySize: 100,
   maxLength: 200,
   maxWidth: '150px',
-  fixed: true,
   readOnly: true,
 };
 const ANSWER_FIELD = {
@@ -26,4 +27,5 @@ const ANSWER_FIELD = {
   error: SELECT_ONE_MISSING,
   addDataMethod: postUpdateProcessingQuoteAnswer,
 };
-export const quoteAnswerFields = [QUESTION_TEXT_FIELD, ANSWER_FIELD];
+const PRICE_READONLY = updateObject(PRICE_FIELD, { readOnly: true });
+export const quoteAnswerFields = [QUESTION_TEXT_FIELD, ANSWER_FIELD, PRICE_READONLY];

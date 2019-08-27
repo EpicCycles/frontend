@@ -2,6 +2,7 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import history from '../../history';
 import { updateObject } from '../../helpers/utils';
 import * as selectors from '../selectors/user';
+import * as quoteSelectors from '../selectors/quote';
 import quote from './apis/quote';
 import part from './apis/part';
 
@@ -15,8 +16,11 @@ import {
   CREATE_QUOTE,
   createQuoteError,
   createQuoteOK,
+  DELETE_QUOTE_ANSWER,
   DELETE_QUOTE_CHARGE,
   DELETE_QUOTE_PART,
+  deleteQuoteAnswerError,
+  deleteQuoteAnswerOK,
   deleteQuoteChargeError,
   deleteQuoteChargeOK,
   deleteQuotePartError,
@@ -33,8 +37,11 @@ import {
   ISSUE_QUOTE,
   issueQuoteError,
   issueQuoteOK,
+  SAVE_QUOTE_ANSWER,
   SAVE_QUOTE_CHARGE,
   SAVE_QUOTE_PART,
+  saveQuoteAnswerError,
+  saveQuoteAnswerOK,
   saveQuoteChargeError,
   saveQuoteChargeOK,
   saveQuoteError,
@@ -275,7 +282,7 @@ export function* deleteQuotePart(action) {
       yield call(quote.deleteQuotePart, completePayload);
       yield put(deleteQuotePartOK(action.payload.quotePartId));
 
-      const quoteId = action.payload.quoteId;
+      const quoteId = yield select(quoteSelectors.quoteId);
       const quoteResponse = yield call(quote.recalculateQuote, { quoteId, token });
       yield put(getQuoteOK(quoteResponse.data));
     } else {
@@ -334,7 +341,7 @@ export function* deleteQuoteCharge(action) {
       yield call(quote.deleteQuoteCharge, completePayload);
       yield put(deleteQuoteChargeOK(action.payload.quoteChargeId));
 
-      const quoteId = action.payload.quoteId;
+      const quoteId = yield select(quoteSelectors.quoteId);
       const quoteResponse = yield call(quote.recalculateQuote, { quoteId, token });
       yield put(getQuoteOK(quoteResponse.data));
     } else {
@@ -348,6 +355,65 @@ export function* deleteQuoteCharge(action) {
 
 export function* watchForDeleteQuoteCharge() {
   yield takeLatest(`${DELETE_QUOTE_CHARGE}_REQUESTED`, deleteQuoteCharge);
+}
+export function* saveQuoteAnswer(action) {
+  const quoteAnswer = updateObject(action.payload.quoteAnswer);
+  try {
+    const token = yield select(selectors.token);
+    if (token) {
+      const quoteAnswerPayload = { quoteAnswer, token };
+      let response;
+      if (quoteAnswer.id) {
+        response = yield call(quote.updateQuoteAnswer, quoteAnswerPayload);
+      } else {
+        response = yield call(quote.createQuoteAnswer, quoteAnswerPayload);
+      }
+      yield put(saveQuoteAnswerOK(response.data, getModelKey(quoteAnswer)));
+
+      const quoteId = quoteAnswer.quote;
+      const quoteResponse = yield call(quote.recalculateQuote, { quoteId, token });
+      yield put(getQuoteOK(quoteResponse.data));
+    } else {
+      yield call(history.push, LOGIN_URL);
+    }
+  } catch (apiError) {
+    const error = 'Quote Answer save failed';
+    let error_detail;
+    logError(apiError);
+    if (apiError.response) {
+      error_detail = apiError.response.data;
+    }
+    yield put(saveQuoteAnswerError({ quoteAnswer, error, error_detail }));
+  }
+}
+
+export function* watchForSaveQuoteAnswer() {
+  yield takeLatest(`${SAVE_QUOTE_ANSWER}_REQUESTED`, saveQuoteAnswer);
+}
+
+export function* deleteQuoteAnswer(action) {
+  try {
+    const token = yield select(selectors.token);
+
+    if (token) {
+      const completePayload = updateObject(action.payload, { token });
+      yield call(quote.deleteQuoteAnswer, completePayload);
+      yield put(deleteQuoteAnswerOK(action.payload.quoteAnswerId));
+
+      const quoteId = yield select(quoteSelectors.quoteId);
+      const quoteResponse = yield call(quote.recalculateQuote, { quoteId, token });
+      yield put(getQuoteOK(quoteResponse.data));
+    } else {
+      yield call(history.push, LOGIN_URL);
+    }
+  } catch (error) {
+    logError(error);
+    yield put(deleteQuoteAnswerError('Delete Quote Answer failed'));
+  }
+}
+
+export function* watchForDeleteQuoteAnswer() {
+  yield takeLatest(`${DELETE_QUOTE_ANSWER}_REQUESTED`, deleteQuoteAnswer);
 }
 
 export function* issueQuote(action) {

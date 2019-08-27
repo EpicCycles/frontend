@@ -64,6 +64,21 @@ const deleteQuotePart = async payload => {
   const quotePartId = payload.quotePartId;
   return api.instance.delete(`/rest-epic/quote-part/${quotePartId}`);
 };
+const createQuoteAnswer = async payload => {
+  api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
+  const quoteAnswer = payload.quoteAnswer;
+  return api.instance.post('/rest-epic/quote-answer', quoteAnswer);
+};
+const updateQuoteAnswer = async payload => {
+  api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
+  const quoteAnswer = payload.quoteAnswer;
+  return api.instance.patch(`/rest-epic/quote-answer/${quoteAnswer.id}`, quoteAnswer);
+};
+const deleteQuoteAnswer = async payload => {
+  api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
+  const quoteAnswerId = payload.quoteAnswerId;
+  return api.instance.delete(`/rest-epic/quote-answer/${quoteAnswerId}`);
+};
 const createQuoteCharge = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
   const quoteCharge = payload.quoteCharge;
@@ -90,6 +105,9 @@ export default {
   createQuotePart,
   updateQuotePart,
   deleteQuotePart,
+  createQuoteAnswer,
+  updateQuoteAnswer,
+  deleteQuoteAnswer,
   createQuoteCharge,
   updateQuoteCharge,
   deleteQuoteCharge,

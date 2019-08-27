@@ -13,6 +13,8 @@ export const SAVE_QUOTE_PART = 'quote/SAVE_QUOTE_PART';
 export const DELETE_QUOTE_PART = 'quote/DELETE_QUOTE_PART';
 export const SAVE_QUOTE_CHARGE = 'quote/SAVE_QUOTE_CHARGE';
 export const DELETE_QUOTE_CHARGE = 'quote/DELETE_QUOTE_CHARGE';
+export const SAVE_QUOTE_ANSWER = 'quote/SAVE_QUOTE_ANSWER';
+export const DELETE_QUOTE_ANSWER = 'quote/DELETE_QUOTE_ANSWER';
 
 export const clearQuoteState = () => ({
   type: CLEAR_QUOTE_DATA,
@@ -30,9 +32,9 @@ export const saveQuotePartError = payload => ({
   type: `${SAVE_QUOTE_PART}_ERROR`,
   payload,
 });
-export const deleteQuotePart = (quotePartId, quoteId) => ({
+export const deleteQuotePart = (quotePartId) => ({
   type: `${DELETE_QUOTE_PART}_REQUESTED`,
-  payload: { quotePartId, quoteId },
+  payload: { quotePartId },
 });
 export const deleteQuotePartOK = quotePartId => ({
   type: `${DELETE_QUOTE_PART}_OK`,
@@ -54,9 +56,9 @@ export const saveQuoteChargeError = payload => ({
   type: `${SAVE_QUOTE_CHARGE}_ERROR`,
   payload,
 });
-export const deleteQuoteCharge = (quoteChargeId, quoteId) => ({
+export const deleteQuoteCharge = (quoteChargeId) => ({
   type: `${DELETE_QUOTE_CHARGE}_REQUESTED`,
-  payload: { quoteChargeId, quoteId },
+  payload: { quoteChargeId },
 });
 export const deleteQuoteChargeOK = quoteChargeId => ({
   type: `${DELETE_QUOTE_CHARGE}_OK`,
@@ -64,6 +66,30 @@ export const deleteQuoteChargeOK = quoteChargeId => ({
 });
 export const deleteQuoteChargeError = error => ({
   type: `${DELETE_QUOTE_CHARGE}_ERROR`,
+  payload: error,
+});
+export const saveQuoteAnswer = quoteAnswer => ({
+  type: `${SAVE_QUOTE_ANSWER}_REQUESTED`,
+  payload: { quoteAnswer },
+});
+export const saveQuoteAnswerOK = (quoteAnswer, existingKey) => ({
+  type: `${SAVE_QUOTE_CHARGE}_OK`,
+  payload: { quoteAnswer, existingKey },
+});
+export const saveQuoteAnswerError = payload => ({
+  type: `${SAVE_QUOTE_ANSWER}_ERROR`,
+  payload,
+});
+export const deleteQuoteAnswer = (quoteAnswerId) => ({
+  type: `${DELETE_QUOTE_ANSWER}_REQUESTED`,
+  payload: { quoteAnswerId },
+});
+export const deleteQuoteAnswerOK = quoteAnswerId => ({
+  type: `${DELETE_QUOTE_ANSWER}_OK`,
+  payload: { quoteAnswerId },
+});
+export const deleteQuoteAnswerError = error => ({
+  type: `${DELETE_QUOTE_ANSWER}_ERROR`,
   payload: error,
 });
 export const createQuote = quote => ({

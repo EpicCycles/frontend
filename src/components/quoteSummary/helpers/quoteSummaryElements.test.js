@@ -234,6 +234,79 @@ describe('quoteSummaryElements', () => {
         trade_in_price: undefined,
       },
       {
+        sectionName: '',
+        partTypeName: '',
+        fixed_price: true,
+        quote: 32,
+        partType: 2,
+        part: 122,
+        quantity: 2,
+        part_desc: '**** hbrand5 fixed (qty 2) ****',
+        part_price: 120.0,
+        total_price: 240.0,
+      },
+      {
+        sectionName: 'second Section',
+        partTypeName: 'PT 21',
+        part_desc: 'hbrand5 visible',
+      },
+    ];
+    expect(
+      quoteSummaryElements(
+        quote,
+        sections,
+        bikeParts,
+        quoteParts,
+        parts,
+        brands,
+        quoteCharges,
+        charges,
+        showPrices,
+        customerView,
+      ),
+    ).toEqual(expectedResults);
+  });
+  it('should show additional quote parts separately when they exist as fixed price on customer view', () => {
+    const quote = { id: 32, bike: 52 };
+    const bikeParts = [{ bike: 52, part: 1 }, { bike: 52, part: 2 }, { bike: 52, part: 3 }];
+    const quoteParts = [
+      { quote: 32, partType: 2, part: 121, quantity: 2, part_price: 120.0, total_price: 240.0 },
+      {
+        quote: 32,
+        partType: 2,
+        part: 122,
+        quantity: 2,
+        part_price: 120.0,
+        total_price: 240.0,
+        fixed_price: true,
+      },
+    ];
+
+    const parts = [
+      { id: 1, partType: 1, brand: 5, part_name: 'Not visible' },
+      { id: 2, partType: 21, brand: 5, part_name: 'visible' },
+      { id: 3, partType: 2, brand: 5, part_name: 'Not visible 2' },
+      { id: 121, partType: 2, brand: 5, part_name: 'alternate' },
+      { id: 122, partType: 2, brand: 5, part_name: 'fixed' },
+    ];
+    const brands = sampleBrands;
+    const quoteCharges = [];
+    const showPrices = false;
+    const customerView = true;
+    const expectedResults = [
+      {
+        sectionName: 'First Section',
+        partTypeName: 'PT 2',
+        quote: 32,
+        partType: 2,
+        part: 121,
+        part_desc: '**** hbrand5 alternate (qty 2) ****',
+        quantity: 2,
+        part_price: undefined,
+        total_price: undefined,
+        trade_in_price: undefined,
+      },
+      {
         sectionName: 'second Section',
         partTypeName: 'PT 21',
         part_desc: 'hbrand5 visible',
@@ -367,14 +440,9 @@ describe('quoteSummaryElements', () => {
         part_desc: 'hbrand5 Not visible',
       },
       {
-        sectionName: 'second Section',
-        partTypeName: 'PT 21',
-        part_desc: 'hbrand5 visible',
-      },
-      {
         quote: 32,
         fixed_price: true,
-        sectionName: 'First Section',
+        sectionName: '',
         partTypeName: 'PT 2',
         part_desc: '**** hbrand5 alternate (qty 2) ****',
         not_required: true,
@@ -384,6 +452,11 @@ describe('quoteSummaryElements', () => {
         quantity: 2,
         part_price: 120.0,
         total_price: 240.0,
+      },
+      {
+        sectionName: 'second Section',
+        partTypeName: 'PT 21',
+        part_desc: 'hbrand5 visible',
       },
     ];
     expect(
@@ -430,7 +503,7 @@ describe('quoteSummaryElements', () => {
       { quote: 32, charge: 21, price: 150 },
     ];
     const showPrices = true;
-    const customerView = false;
+    const customerView = true;
     const expectedResults = [
       {
         quote: 32,

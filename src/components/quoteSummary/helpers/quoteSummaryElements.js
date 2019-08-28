@@ -66,7 +66,7 @@ export const quoteSummaryElements = (
       const { bikePart, quotePart, replacementPart, additionalParts } = detailForPartType;
 
       if (quotePart) {
-        if (quotePart.fixed_price) {
+        if (customerView && quotePart.fixed_price) {
           fixedElements.push(
             buildSummaryObject(
               sectionUsedForFixed,
@@ -122,7 +122,7 @@ export const quoteSummaryElements = (
       }
 
       additionalParts.forEach(quotePart => {
-        if (quotePart.fixed_price) {
+        if (customerView && quotePart.fixed_price) {
           fixedElements.push(
             buildSummaryObject(
               sectionUsedForFixed,
@@ -151,7 +151,7 @@ export const quoteSummaryElements = (
               undefined,
               brands,
               parts,
-              !showPrices,
+              !(showPrices || quotePart.fixed_price),
             ),
           );
           partTypeUsed = true;

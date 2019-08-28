@@ -1,61 +1,63 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import * as PropTypes from 'prop-types';
-import { doWeHaveObjects } from '../../helpers/utils';
-import { sectionHasDetail } from '../framework/helpers/display';
-import { displayForPartType } from '../quote/helpers/display';
-import QuoteSummaryPartType from './QuoteSummaryPartType';
-import ModelTableHeaderRow from '../app/model/ModelTableHeaderRow';
+
 import { quoteSummaryFields } from './helpers/quoteSummaryFields';
+import { quoteSummaryElements } from './helpers/quoteSummaryElements';
+import ModelTable from '../app/model/ModelTable';
 
 const QuoteSummaryParts = props => {
-  const { showPrices, quoteParts, brands, sections, parts, bikeParts, lockFirstColumn } = props;
-  const usedSections = sections.filter(
-    section => sectionHasDetail(section, quoteParts) || sectionHasDetail(section, bikeParts),
+  const {
+    showPrices,
+    customerView,
+    quote,
+    quoteParts,
+    quoteCharges,
+    brands,
+    charges,
+    sections,
+    parts,
+    bikeParts,
+    lockFirstColumn,
+  } = props;
+  const summaryFields = quoteSummaryFields(showPrices);
+  const summaryData = quoteSummaryElements(
+    quote,
+    sections,
+    bikeParts,
+    quoteParts,
+    parts,
+    brands,
+    quoteCharges,
+    charges,
+    showPrices,
+    customerView,
   );
+
+  if (summaryData.length === 0) return <div data-test="no-summary">No Quote details</div>;
+
   return (
-    <Fragment>
-      {usedSections.length === 0 && <div data-test="no-summary">No Quote details</div>}
-      {usedSections.length > 0 && (
-        <div className="grid">
-          <ModelTableHeaderRow
-            modelFields={quoteSummaryFields(showPrices)}
-            showPrices={showPrices}
-            lockFirstColumn={lockFirstColumn}
-            data-test="quote-summary-headers"
-          />
-          {usedSections.map(section => {
-            return section.partTypes.map(partType => {
-              const det = displayForPartType(partType.id, quoteParts, bikeParts, parts);
-              if (det.bikePart || det.quotePart || doWeHaveObjects(det.additionalParts)) {
-                return (
-                  <QuoteSummaryPartType
-                    key={`quote-part-type-${partType.id}`}
-                    lockFirstColumn={lockFirstColumn}
-                    showPrices={showPrices}
-                    partType={partType}
-                    bikePart={det.bikePart}
-                    quotePart={det.quotePart}
-                    replacementPart={det.replacementPart}
-                    additionalParts={det.additionalParts}
-                    parts={parts}
-                    brands={brands}
-                  />
-                );
-              }
-              return null;
-            });
-          })}
-        </div>
-      )}
-    </Fragment>
+      <ModelTable
+        viewMode
+        modelArray={summaryData}
+        modelFields={summaryFields}
+        blockIdentity="summary"
+        lockFirstColumn={lockFirstColumn}
+      />
   );
 };
-
+QuoteSummaryParts.defaultProps = {
+  charges: [],
+  quoteCharges: [],
+};
 QuoteSummaryParts.propTypes = {
+  quote: PropTypes.object.isRequired,
   showPrices: PropTypes.bool,
+  customerView: PropTypes.bool,
   lockFirstColumn: PropTypes.bool,
   quoteParts: PropTypes.array.isRequired,
+  quoteCharges: PropTypes.array,
   brands: PropTypes.array.isRequired,
+  charges: PropTypes.array,
   sections: PropTypes.array.isRequired,
   parts: PropTypes.array.isRequired,
   bikeParts: PropTypes.array.isRequired,

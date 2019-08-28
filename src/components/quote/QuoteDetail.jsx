@@ -149,7 +149,6 @@ class QuoteDetail extends PureComponent {
     const newNote = { quote: quote.id, customer: quote.customer };
 
     const bike = findObjectWithId(bikes, quote.bike);
-    const thisBikeParts = findPartsForBike(bike, bikeParts, parts);
     const additionalActions = [
       {
         iconName: 'add',
@@ -212,10 +211,11 @@ class QuoteDetail extends PureComponent {
             lockFirstColumn={true}
             showPrices={false}
             quoteParts={quotePartList}
+            quote={quote}
             brands={brands}
             sections={sections}
             parts={parts}
-            bikeParts={thisBikeParts}
+            bikeParts={bikeParts}
           />
           <div>
             <EditModelSimple

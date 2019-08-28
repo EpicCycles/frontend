@@ -1,4 +1,4 @@
-import { QUANTITY_FIELD, TEXT, TRADE_IN_PRICE_FIELD } from '../../app/model/helpers/fields';
+import { TEXT, TRADE_IN_PRICE_FIELD } from '../../app/model/helpers/fields';
 import { PART_DESC_FIELD, PART_PRICE_FIELD } from '../../quotePart/helpers/quotePartFields';
 import { TOTAL_PRICE_FIELD } from '../../quote/helpers/quoteFields';
 export const PART_TYPE_NAME_FIELD = {

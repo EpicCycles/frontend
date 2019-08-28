@@ -21,9 +21,6 @@ const QuoteSummary = props => {
     users,
   } = props;
 
-  const thisQuoteParts = quoteParts.filter(quotePart => quotePart.quote === quote.id);
-  const bike = findObjectWithId(bikes, quote.bike);
-  const thisBikeParts = findPartsForBike(bike, bikeParts, parts);
   return (
     <div className="grid-container">
       <ViewModelBlock
@@ -36,12 +33,13 @@ const QuoteSummary = props => {
       />
       <QuoteSummaryParts
         lockFirstColumn
+        quote={quote}
         showPrices={showPrices}
-        quoteParts={thisQuoteParts}
+        quoteParts={quoteParts}
         brands={brands}
         sections={sections}
         parts={parts}
-        bikeParts={thisBikeParts}
+        bikeParts={bikeParts}
       />
     </div>
   );
@@ -49,6 +47,7 @@ const QuoteSummary = props => {
 
 QuoteSummary.propTypes = {
   showPrices: PropTypes.bool,
+  customerView: PropTypes.bool,
   quote: PropTypes.object.isRequired,
   quoteParts: PropTypes.array.isRequired,
   brands: PropTypes.array.isRequired,

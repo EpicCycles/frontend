@@ -40,28 +40,29 @@ const ModelTable = props => {
           const modelInstanceKey = getModelKey(modelInstance);
           const updatedModel = findObjectWithKey(updatedModelArray, modelInstanceKey);
           const rowClass = updatedModel && updatedModel.error ? 'error' : '';
-
+          if (viewMode)
+            return (
+              <ViewModel
+                model={modelInstance}
+                modelFields={modelFields}
+                actionsRequired={actionsRequired}
+                users={users}
+                sections={sections}
+                brands={brands}
+                bikes={bikes}
+                charges={charges}
+                suppliers={suppliers}
+                customers={customers}
+                modelSave={modelSave}
+                modelDelete={modelDelete}
+                additionalActions={modelActions}
+                showReadOnlyFields
+                lockFirstColumn={lockFirstColumn}
+              />
+            );
           return (
             <div className={`grid-row ${rowClass}`} key={`row${modelInstanceKey}`}>
-              {viewMode ? (
-                <ViewModel
-                  model={modelInstance}
-                  modelFields={modelFields}
-                  actionsRequired={actionsRequired}
-                  users={users}
-                  sections={sections}
-                  brands={brands}
-                  bikes={bikes}
-                  charges={charges}
-                  suppliers={suppliers}
-                  customers={customers}
-                  modelSave={modelSave}
-                  modelDelete={modelDelete}
-                  additionalActions={modelActions}
-                  showReadOnlyFields
-                  lockFirstColumn={lockFirstColumn}
-                />
-              ) : raiseState ? (
+              {raiseState ? (
                 <EditModelSimple
                   model={updatedModel ? updatedModel : modelInstance}
                   persistedModel={modelInstance}

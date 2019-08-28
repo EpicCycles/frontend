@@ -7,7 +7,7 @@ import { quotePartSummary } from '../../quotePart/helpers/quotePartSummary';
 
 const findReplacementQuotePart = (partTypeId, bikePart, quoteParts) => {
   if (!bikePart) return undefined;
-  return quoteParts.find(qp => qp.partType === partTypeId && qp.not_required);
+  return quoteParts.find(qp => qp.partType === partTypeId && !!qp.not_required);
 };
 const findReplacementPart = (quotePart, parts) => {
   if (!quotePart) return undefined;

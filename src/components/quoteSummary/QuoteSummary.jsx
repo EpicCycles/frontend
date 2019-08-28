@@ -1,14 +1,13 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import { findObjectWithId } from '../../helpers/utils';
-import { findPartsForBike } from '../bike/helpers/bike';
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteSummaryParts from './QuoteSummaryParts';
-import {quoteFieldsBikeComplete} from "../quote/helpers/quoteFields";
+import { quoteFieldsBikeComplete } from '../quote/helpers/quoteFields';
 
 const QuoteSummary = props => {
   const {
     showPrices,
+    customerView,
     quote,
     quoteParts,
     brands,
@@ -35,6 +34,7 @@ const QuoteSummary = props => {
         lockFirstColumn
         quote={quote}
         showPrices={showPrices}
+        customerView={customerView}
         quoteParts={quoteParts}
         brands={brands}
         sections={sections}

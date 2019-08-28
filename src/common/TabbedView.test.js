@@ -2,7 +2,13 @@ import React from 'react';
 import toJson from 'enzyme-to-json';
 import TabbedView from './TabbedView';
 
-const tabs = ['Addresses', 'Phone numbers', 'Fittings', 'History', 'Quotes'];
+const tabs = [
+  { tabText: 'Addresses', tabValue: 1 },
+  { tabText: 'Phone numbers', tabValue: 2 },
+  { tabText: 'Fittings', tabValue: 3 },
+  { tabText: 'History', tabValue: 4 },
+  { tabText: 'Quotes', tabValue: 5 },
+];
 describe('TabbedView', () => {
   test('it selects the first tab if none passed', () => {
     const component = shallow(<TabbedView tabs={tabs} changeTab={jest.fn()} />);

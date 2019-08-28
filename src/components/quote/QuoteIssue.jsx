@@ -52,7 +52,7 @@ class QuoteIssue extends PureComponent {
       <div>
         <div className="row fit-content">
           <h2>Issue Quote </h2>
-          <QuoteActionCell quote={quote} getQuote={this.cancelIssue} issueQuote={this.issueQuote} />
+          <QuoteActionCell quote={quote} getQuote={this.cancelIssue} issueQuote={issueQuote} />
         </div>
         <QuoteDetail
           quote={quote}

@@ -7,7 +7,6 @@ import {
   updateObjectInArray,
 } from '../../helpers/utils';
 import * as PropTypes from 'prop-types';
-import { findPartsForBike } from '../bike/helpers/bike';
 import QuoteSummaryParts from '../quoteSummary/QuoteSummaryParts';
 import QuotePartGrid from '../quotePart/QuotePartGrid';
 import { QUOTE_INITIAL } from './helpers/quote';
@@ -297,7 +296,7 @@ QuoteDetail.propTypes = {
   deleteQuotePart: PropTypes.func.isRequired,
   saveQuotePart: PropTypes.func.isRequired,
   saveQuotePartOK: PropTypes.func.isRequired,
-  cloneQuote: PropTypes.func.isRequired,
+  cloneQuote: PropTypes.func,
   changeRoute: PropTypes.func.isRequired,
   unarchiveQuote: PropTypes.func,
   createNote: PropTypes.func.isRequired,

@@ -10,23 +10,19 @@ import QuoteGrid from './QuoteGrid';
 import QuoteDetail from './QuoteDetail';
 import NoteGrid from '../note/NoteGrid';
 import QuoteBikes from './QuoteBikes';
-
-const tabs = ['Customer', 'Quote List', 'Quote detail', 'Quote history', 'Bike Quotes'];
-const initialState = {
-  tab: 0,
-};
+import {
+  compareTab,
+  customerTab,
+  detailTab,
+  historyTab,
+  quoteListTab,
+  quoteManagerTabs,
+  summaryTab,
+} from './helpers/quoteManagerTabs';
+import QuoteSummary from '../quoteSummary/QuoteSummary';
 
 class QuoteManager extends React.Component {
-  state = initialState;
-
-  componentDidMount() {
-    this.checkPropsData();
-  }
-
-  checkPropsData = () => {
-    if (this.props.quoteId) this.setState({ tab: 2 });
-  };
-
+  state = {};
   changeCurrentTab = newTab => {
     if (newTab !== this.state.tab) {
       if (newTab === 2 && !this.props.quoteId) return;
@@ -92,10 +88,12 @@ class QuoteManager extends React.Component {
 
     let quote;
     if (quoteId) quote = findObjectWithId(quotes, quoteId);
+    const tabData = quoteManagerTabs(quotes, quoteId);
+    const currentTab = tab ? tab : tabData.defaultTab;
     return (
       <div className="page-content">
-        <TabbedView tabs={tabs} changeTab={this.changeCurrentTab} currentTab={tab} />
-        {tab === 0 && (
+        <TabbedView tabs={tabData.tabs} changeTab={this.changeCurrentTab} currentTab={currentTab} />
+        {currentTab === customerTab.tabValue && (
           <CustomerEdit
             addresses={addresses}
             phones={phones}
@@ -114,7 +112,7 @@ class QuoteManager extends React.Component {
             data-test="customer-tab"
           />
         )}
-        {tab === 1 && (
+        {currentTab === quoteListTab.tabValue && (
           <Fragment>
             <h1>Quote List</h1>
             <div className="row">
@@ -138,7 +136,22 @@ class QuoteManager extends React.Component {
             </div>
           </Fragment>
         )}
-        {quote && tab === 2 && (
+        {currentTab === summaryTab.tabValue && (
+          <QuoteSummary
+            quote={quote}
+            quoteParts={quoteParts}
+            brands={brands}
+            sections={sections}
+            parts={parts}
+            bikeParts={bikeParts}
+            bikes={bikes}
+            customers={customers}
+            frames={frames}
+            users={users}
+            customerView
+          />
+        )}
+        {currentTab === detailTab.tabValue && (
           <QuoteDetail
             quote={quote}
             quoteParts={quoteParts}
@@ -171,7 +184,7 @@ class QuoteManager extends React.Component {
             data-test="quote-detail-tab"
           />
         )}
-        {tab === 3 && !!quoteId && (
+        {currentTab === historyTab.tabValue && (
           <Fragment>
             <h1 data-test="quote-history-tab">{quote && 'Quote '}History</h1>
             <NoteGrid
@@ -182,7 +195,7 @@ class QuoteManager extends React.Component {
             />
           </Fragment>
         )}
-        {tab === 4 && (
+        {currentTab === compareTab.tabValue && (
           <QuoteBikes
             quotes={quotes}
             quoteParts={quoteParts}

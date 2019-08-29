@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import QuoteBikeParts from './QuoteBikeParts';
 import ModelFieldRow from '../app/model/ModelFieldRow';
 import QuoteBikeActions from './QuoteBikeActions';
-import { quoteFieldsBikeNoCustomer } from './helpers/quoteFields';
+import { quoteFields } from './helpers/quoteFields';
 
 const QuoteBikes = props => {
   const {
@@ -25,10 +25,11 @@ const QuoteBikes = props => {
     cloneQuote,
   } = props;
   const bikeQuotes = quotes.filter(quote => !!quote.bike);
+  const quoteFieldShown = quoteFields({}, false, undefined, true);
   return (
     <div className="grid-container">
       <div className="grid">
-        {quoteFieldsBikeNoCustomer.map((quoteField, index) => {
+        {quoteFieldShown.map((quoteField, index) => {
           return (
             <ModelFieldRow
               field={quoteField}

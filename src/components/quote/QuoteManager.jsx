@@ -5,7 +5,6 @@ import { Redirect } from 'react-router';
 import TabbedView from '../../common/TabbedView';
 import { doWeHaveObjects, findObjectWithId } from '../../helpers/utils';
 import CustomerEdit from '../customer/CustomerEdit';
-import { quoteFieldsNoCustomer } from './helpers/quoteFields';
 import QuoteGrid from './QuoteGrid';
 import QuoteDetail from './QuoteDetail';
 import NoteGrid from '../note/NoteGrid';
@@ -32,7 +31,7 @@ class QuoteManager extends React.Component {
 
   editQuote = quoteId => {
     this.props.changeQuote(quoteId);
-    this.changeCurrentTab(2);
+    this.changeCurrentTab(undefined);
   };
   issueQuote = quoteId => {
     this.props.changeQuote(quoteId);
@@ -117,7 +116,6 @@ class QuoteManager extends React.Component {
             <h1>Quote List</h1>
             <div className="row">
               <QuoteGrid
-                displayFields={quoteFieldsNoCustomer}
                 getQuote={this.editQuote}
                 issueQuote={this.issueQuote}
                 archiveQuote={archiveQuote}

@@ -97,12 +97,14 @@ export const bikeRelatedFieldsComplete = [
   FRAME_SIZE_FIELD,
   COLOUR_FIELD,
 ];
-export const quoteFieldsNoPrice = [
+const quoteFieldsBasic = [
   QUOTE_DESC_FIELD,
   CUSTOMER_FIELD,
   QUOTE_STATUS_FIELD,
   CLUB_MEMBER_FIELD,
   VERSION_FIELD,
+];
+const quoteFieldsNoPrice = [
   CREATED_BY_FIELD,
   CREATED_DATE_FIELD,
   UPD_DATE_FIELD,
@@ -110,12 +112,7 @@ export const quoteFieldsNoPrice = [
   CALCULATED_PRICE_FIELD,
   TOTAL_PRICE_FIELD,
 ];
-export const quoteFieldsComplete = [
-  QUOTE_DESC_FIELD,
-  CUSTOMER_FIELD,
-  QUOTE_STATUS_FIELD,
-  CLUB_MEMBER_FIELD,
-  VERSION_FIELD,
+const quoteFieldsComplete = [
   CREATED_BY_FIELD,
   CREATED_DATE_FIELD,
   UPD_DATE_FIELD,
@@ -124,10 +121,25 @@ export const quoteFieldsComplete = [
   CALCULATED_PRICE_FIELD,
   TOTAL_PRICE_FIELD,
 ];
-export const quoteFieldsBike = quoteFieldsNoPrice.concat(bikeRelatedFields);
-export const quoteFieldsBikeComplete = quoteFieldsComplete.concat(bikeRelatedFieldsComplete);
+const quoteFieldsBike = quoteFieldsBasic.concat(bikeRelatedFields.concat(quoteFieldsNoPrice));
+const quoteFieldsBikeComplete = quoteFieldsBasic
+  .concat(bikeRelatedFieldsComplete)
+  .concat(quoteFieldsComplete);
 
-export const quoteFields = (quote, readyToIssue, bike) => {
+export const quoteFields = (quote, readyToIssue, bike, customerView) => {
+  if (!quote) return quoteFieldsBikeComplete;
+  if (customerView)
+    return [
+      QUOTE_DESC_FIELD,
+      CLUB_MEMBER_FIELD,
+      QUOTE_PRICE_FIELD,
+      BIKE_FIELD,
+      BIKE_PRICE_FIELD,
+      FRAME_SIZE_FIELD,
+      COLOUR_FIELD,
+      TOTAL_PRICE_FIELD,
+      UPD_DATE_FIELD,
+    ];
   if (quote.bike) {
     if (bike) {
       let priceField = BIKE_PRICE_FIELD;
@@ -137,27 +149,13 @@ export const quoteFields = (quote, readyToIssue, bike) => {
       if (bike.sizes) sizeField = updateObject(FRAME_SIZE_FIELD, { placeholder: bike.sizes });
       if (bike.colours) colourField = updateObject(COLOUR_FIELD, { placeholder: bike.colours });
       const bikeFieldsSpecific = [BIKE_FIELD, priceField, sizeField, colourField];
-      if (readyToIssue) return quoteFieldsComplete.concat(bikeFieldsSpecific);
-      return quoteFieldsNoPrice.concat(bikeFieldsSpecific);
+      if (readyToIssue)
+        return quoteFieldsBasic.concat(bikeFieldsSpecific.concat(quoteFieldsComplete));
+      return quoteFieldsBasic.concat(bikeFieldsSpecific.concat(quoteFieldsNoPrice));
     }
     if (readyToIssue) return quoteFieldsBikeComplete;
     return quoteFieldsBike;
   }
-  if (readyToIssue) return quoteFieldsComplete;
-  return quoteFieldsNoPrice;
+  if (readyToIssue) return quoteFieldsBasic.concat(quoteFieldsComplete);
+  return quoteFieldsBasic.concat(quoteFieldsNoPrice);
 };
-
-export const quoteFieldsNoCustomer = [
-  QUOTE_DESC_FIELD,
-  QUOTE_STATUS_FIELD,
-  CLUB_MEMBER_FIELD,
-  VERSION_FIELD,
-  BIKE_FIELD,
-  CREATED_BY_FIELD,
-  UPD_DATE_FIELD,
-  ISSUED_DATE_FIELD,
-  QUOTE_PRICE_FIELD,
-  CALCULATED_PRICE_FIELD,
-  TOTAL_PRICE_FIELD,
-];
-export const quoteFieldsBikeNoCustomer = quoteFieldsNoCustomer.concat(bikeRelatedFields);

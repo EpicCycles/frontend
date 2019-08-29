@@ -2,7 +2,7 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteSummaryParts from './QuoteSummaryParts';
-import { quoteFieldsBikeComplete } from '../quote/helpers/quoteFields';
+import { quoteFields } from '../quote/helpers/quoteFields';
 
 const QuoteSummary = props => {
   const {
@@ -23,7 +23,7 @@ const QuoteSummary = props => {
   return (
     <div className="grid-container">
       <ViewModelBlock
-        modelFields={quoteFieldsBikeComplete}
+        modelFields={quoteFields(quote, false, undefined, customerView)}
         model={quote}
         bikes={bikes}
         customers={customers}

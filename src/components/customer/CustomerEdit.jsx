@@ -8,12 +8,12 @@ import {
   modelIsAlreadyInArray,
 } from '../app/model/helpers/model';
 import CustomerPhoneGrid from './CustomerPhoneGrid';
-import { customerFields} from '../app/model/helpers/fields';
+import { customerFields } from '../app/model/helpers/fields';
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteGrid from '../quote/QuoteGrid';
-import { quoteFieldsNoCustomer } from '../quote/helpers/quoteFields';
+import { quoteFields } from '../quote/helpers/quoteFields';
 import EditModel from '../app/model/EditModel';
-import {customerNoteFields} from "../note/helpers/noteFields";
+import { customerNoteFields } from '../note/helpers/noteFields';
 
 class CustomerEdit extends React.Component {
   state = { note: createEmptyModelWithDefaultFields(customerNoteFields) };
@@ -115,7 +115,7 @@ class CustomerEdit extends React.Component {
             {customerId && quotes && doWeHaveObjects(quotes) && (
               <div className="grid-container">
                 <QuoteGrid
-                  displayFields={quoteFieldsNoCustomer}
+                  displayFields={quoteFields({}, false, undefined, true)}
                   getQuote={getQuote}
                   archiveQuote={archiveQuote}
                   unarchiveQuote={unarchiveQuote}

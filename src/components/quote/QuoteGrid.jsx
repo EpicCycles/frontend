@@ -4,7 +4,7 @@ import * as PropTypes from 'prop-types';
 import { QUOTE_ARCHIVED } from './helpers/quote';
 import ModelTableHeaderRow from '../app/model/ModelTableHeaderRow';
 import ViewModel from '../app/model/ViewModel';
-import { quoteFieldsBikeComplete } from './helpers/quoteFields';
+import {quoteFields} from './helpers/quoteFields';
 import { quoteActions } from './helpers/quoteActions';
 
 const QuoteGrid = props => {
@@ -88,7 +88,7 @@ const QuoteGrid = props => {
 };
 
 QuoteGrid.defaultProps = {
-  displayFields: quoteFieldsBikeComplete,
+  displayFields: quoteFields({}, false, undefined, true),
   quotes: [],
 };
 

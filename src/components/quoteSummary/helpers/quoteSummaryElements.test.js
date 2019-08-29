@@ -57,6 +57,7 @@ describe('quoteSummaryElements', () => {
     const customerView = true;
     const expectedResults = [
       {
+        dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
         part_desc: 'hbrand5 visible',
@@ -92,16 +93,19 @@ describe('quoteSummaryElements', () => {
     const customerView = false;
     const expectedResults = [
       {
+        dummyKey: 'bp_1',
         sectionName: 'First Section',
         partTypeName: 'PT 1',
         part_desc: 'hbrand5 Not visible',
       },
       {
+        dummyKey: 'bp_3',
         sectionName: '',
         partTypeName: 'PT 2',
         part_desc: 'hbrand5 Not visible 2',
       },
       {
+        dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
         part_desc: 'hbrand5 visible',
@@ -126,7 +130,15 @@ describe('quoteSummaryElements', () => {
     const quote = { id: 32, bike: 52 };
     const bikeParts = [{ bike: 52, part: 1 }, { bike: 52, part: 2 }, { bike: 52, part: 3 }];
     const quoteParts = [
-      { quote: 32, partType: 2, part: 121, quantity: 2, part_price: 120.0, total_price: 240.0 },
+      {
+        id: 321,
+        quote: 32,
+        partType: 2,
+        part: 121,
+        quantity: 2,
+        part_price: 120.0,
+        total_price: 240.0,
+      },
     ];
 
     const parts = [
@@ -141,16 +153,20 @@ describe('quoteSummaryElements', () => {
     const customerView = false;
     const expectedResults = [
       {
+        dummyKey: 'bp_1',
         sectionName: 'First Section',
         partTypeName: 'PT 1',
         part_desc: 'hbrand5 Not visible',
       },
       {
+        dummyKey: 'bp_3',
         sectionName: '',
         partTypeName: 'PT 2',
         part_desc: 'hbrand5 Not visible 2',
       },
       {
+        id: 321,
+        dummyKey: 'qp_321',
         quote: 32,
         partType: 2,
         part: 121,
@@ -163,6 +179,7 @@ describe('quoteSummaryElements', () => {
         trade_in_price: undefined,
       },
       {
+        dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
         part_desc: 'hbrand5 visible',
@@ -187,8 +204,17 @@ describe('quoteSummaryElements', () => {
     const quote = { id: 32, bike: 52 };
     const bikeParts = [{ bike: 52, part: 1 }, { bike: 52, part: 2 }, { bike: 52, part: 3 }];
     const quoteParts = [
-      { quote: 32, partType: 2, part: 121, quantity: 2, part_price: 120.0, total_price: 240.0 },
       {
+        id: 321,
+        quote: 32,
+        partType: 2,
+        part: 121,
+        quantity: 2,
+        part_price: 120.0,
+        total_price: 240.0,
+      },
+      {
+        id: 322,
         quote: 32,
         partType: 2,
         part: 122,
@@ -212,16 +238,20 @@ describe('quoteSummaryElements', () => {
     const customerView = false;
     const expectedResults = [
       {
+        dummyKey: 'bp_1',
         sectionName: 'First Section',
         partTypeName: 'PT 1',
         part_desc: 'hbrand5 Not visible',
       },
       {
+        dummyKey: 'bp_3',
         sectionName: '',
         partTypeName: 'PT 2',
         part_desc: 'hbrand5 Not visible 2',
       },
       {
+        id: 321,
+        dummyKey: 'qp_321',
         quote: 32,
         partType: 2,
         part: 121,
@@ -234,6 +264,8 @@ describe('quoteSummaryElements', () => {
         trade_in_price: undefined,
       },
       {
+        id: 322,
+        dummyKey: 'qp_322',
         sectionName: '',
         partTypeName: '',
         fixed_price: true,
@@ -246,6 +278,7 @@ describe('quoteSummaryElements', () => {
         total_price: 240.0,
       },
       {
+        dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
         part_desc: 'hbrand5 visible',
@@ -266,12 +299,21 @@ describe('quoteSummaryElements', () => {
       ),
     ).toEqual(expectedResults);
   });
-  it('should show additional quote parts separately when they exist as fixed price on customer view', () => {
+  it('should show additional parts separately when fixed price on customer view', () => {
     const quote = { id: 32, bike: 52 };
     const bikeParts = [{ bike: 52, part: 1 }, { bike: 52, part: 2 }, { bike: 52, part: 3 }];
     const quoteParts = [
-      { quote: 32, partType: 2, part: 121, quantity: 2, part_price: 120.0, total_price: 240.0 },
       {
+        id: 321,
+        quote: 32,
+        partType: 2,
+        part: 121,
+        quantity: 2,
+        part_price: 120.0,
+        total_price: 240.0,
+      },
+      {
+        id: 322,
         quote: 32,
         partType: 2,
         part: 122,
@@ -297,6 +339,8 @@ describe('quoteSummaryElements', () => {
       {
         sectionName: 'First Section',
         partTypeName: 'PT 2',
+        id: 321,
+        dummyKey: 'qp_321',
         quote: 32,
         partType: 2,
         part: 121,
@@ -307,11 +351,15 @@ describe('quoteSummaryElements', () => {
         trade_in_price: undefined,
       },
       {
+        dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
         part_desc: 'hbrand5 visible',
       },
+      { sectionName: 'Itemised changes', dummyKey: 'qp_itemised' },
       {
+        id: 322,
+        dummyKey: 'qp_322',
         sectionName: 'First Section',
         partTypeName: 'PT 2',
         fixed_price: true,
@@ -351,6 +399,7 @@ describe('quoteSummaryElements', () => {
 
     const quoteParts = [
       {
+        id: 321,
         quote: 32,
         not_required: true,
         trade_in_price: 12,
@@ -368,11 +417,14 @@ describe('quoteSummaryElements', () => {
     const customerView = false;
     const expectedResults = [
       {
+        dummyKey: 'bp_1',
         sectionName: 'First Section',
         partTypeName: 'PT 1',
         part_desc: 'hbrand5 Not visible',
       },
       {
+        id: 321,
+        dummyKey: 'qp_321',
         quote: 32,
         sectionName: '',
         partTypeName: 'PT 2',
@@ -386,6 +438,7 @@ describe('quoteSummaryElements', () => {
         total_price: 240.0,
       },
       {
+        dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
         part_desc: 'hbrand5 visible',
@@ -418,6 +471,7 @@ describe('quoteSummaryElements', () => {
 
     const quoteParts = [
       {
+        id: 321,
         quote: 32,
         not_required: true,
         fixed_price: true,
@@ -438,8 +492,11 @@ describe('quoteSummaryElements', () => {
         sectionName: 'First Section',
         partTypeName: 'PT 1',
         part_desc: 'hbrand5 Not visible',
+        dummyKey: 'bp_1',
       },
       {
+        id: 321,
+        dummyKey: 'qp_321',
         quote: 32,
         fixed_price: true,
         sectionName: '',
@@ -454,6 +511,7 @@ describe('quoteSummaryElements', () => {
         total_price: 240.0,
       },
       {
+        dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
         part_desc: 'hbrand5 visible',
@@ -486,6 +544,7 @@ describe('quoteSummaryElements', () => {
 
     const quoteParts = [
       {
+        id: 321,
         quote: 32,
         fixed_price: true,
         trade_in_price: 12,
@@ -498,14 +557,17 @@ describe('quoteSummaryElements', () => {
     ];
     const brands = sampleBrands;
     const quoteCharges = [
-      { quote: 32, charge: 1, price: 400 },
-      { quote: 33, charge: 1, price: 123 },
-      { quote: 32, charge: 21, price: 150 },
+      { id: 1, quote: 32, charge: 1, price: 400 },
+      { id: 2, quote: 33, charge: 1, price: 123 },
+      { id: 3, quote: 32, charge: 21, price: 150 },
     ];
     const showPrices = true;
     const customerView = true;
     const expectedResults = [
+      { sectionName: 'Itemised changes', dummyKey: 'qp_itemised' },
       {
+        id: 321,
+        dummyKey: 'qp_321',
         quote: 32,
         fixed_price: true,
         sectionName: 'First Section',
@@ -518,8 +580,14 @@ describe('quoteSummaryElements', () => {
         part_price: 120.0,
         total_price: 240.0,
       },
-      { sectionName: 'Additional Costs', partTypeName: 'Charge 1', total_price: 400 },
-      { sectionName: '', partTypeName: 'Charge 21', total_price: 150 },
+      { dummyKey: 'qc_blank' },
+      {
+        dummyKey: 'qc_1',
+        sectionName: 'Additional Costs',
+        partTypeName: 'Charge 1',
+        total_price: 400,
+      },
+      { dummyKey: 'qc_3', sectionName: '', partTypeName: 'Charge 21', total_price: 150 },
     ];
     expect(
       quoteSummaryElements(

@@ -36,7 +36,7 @@ export const gridHeaderClass = (baseClassName = '', fieldIndex, firstColumnLocke
 };
 export const gridItemClass = (baseClassName = '', fieldIndex, firstColumnLocked) => {
   const shouldLock = firstColumnLocked && fieldIndex === 0;
-  return `${baseClassName} grid-item ${fixedDetailsClassname(shouldLock)}`;
+  return `grid-item ${fixedDetailsClassname(shouldLock)} ${baseClassName}`;
 };
 export const formattedDate = date => {
   if (date) return date.toLocaleDateString('en-GB');

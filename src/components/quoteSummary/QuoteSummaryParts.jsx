@@ -36,13 +36,14 @@ const QuoteSummaryParts = props => {
   if (summaryData.length === 0) return <div data-test="no-summary">No Quote details</div>;
 
   return (
-      <ModelTable
-        viewMode
-        modelArray={summaryData}
-        modelFields={summaryFields}
-        blockIdentity="summary"
-        lockFirstColumn={lockFirstColumn}
-      />
+    <ModelTable
+      viewMode
+      modelArray={summaryData}
+      modelFields={summaryFields}
+      blockIdentity="summary"
+      lockFirstColumn={lockFirstColumn}
+      hideHeaders={customerView}
+    />
   );
 };
 QuoteSummaryParts.defaultProps = {

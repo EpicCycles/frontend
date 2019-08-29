@@ -26,6 +26,22 @@ describe('ModelTable', () => {
     expect(component.find('EditModel')).toHaveLength(2);
     expect(component.find('ViewModel')).toHaveLength(0);
   });
+  it('should not show headers when hide headers set', () => {
+    const models = [{ id: 1 }, { id: 2 }];
+    const component = shallow(
+      <ModelTable
+        modelSave={jest.fn()}
+        modelDelete={jest.fn()}
+        modelArray={models}
+        modelFields={[]}
+        hideHeaders
+      />,
+    );
+    expect(component.find('ModelTableHeaderRow')).toHaveLength(0);
+    expect(component.find('EditModelSimple')).toHaveLength(0);
+    expect(component.find('EditModel')).toHaveLength(2);
+    expect(component.find('ViewModel')).toHaveLength(0);
+  });
   it('should show all rows as Edit Model  Simple when model elements exist', () => {
     const models = [{ id: 1 }, { id: 2 }];
     const component = shallow(

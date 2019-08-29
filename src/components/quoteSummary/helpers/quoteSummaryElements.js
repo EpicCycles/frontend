@@ -19,16 +19,25 @@ const buildSummaryObject = (
   const priceElements = hidePrices
     ? { trade_in_price: undefined, part_price: undefined, total_price: undefined }
     : {};
+  const dummyKey = quotePart
+    ? `qp_${quotePart.id}`
+    : bikePart
+    ? `bp_${bikePart.id}`
+    : `pt_${partType.id}`;
+  const sectionName = sectionUsed ? '' : section.name;
+  const partTypeName = partTypeUsed ? '' : partType.name;
+  const part_desc = bikePart
+    ? quotePartSummary(bikePart, quotePart, replacementPart, brands)
+    : quotePart.part
+    ? quotePartSummary(bikePart, quotePart, findObjectWithId(parts, quotePart.part), brands)
+    : 'No Part';
   return updateObject(
     quotePart,
     {
-      sectionName: sectionUsed ? '' : section.name,
-      partTypeName: partTypeUsed ? '' : partType.name,
-      part_desc: bikePart
-        ? quotePartSummary(bikePart, quotePart, replacementPart, brands)
-        : quotePart.part
-        ? quotePartSummary(bikePart, quotePart, findObjectWithId(parts, quotePart.part), brands)
-        : 'No Part',
+      sectionName,
+      partTypeName,
+      part_desc,
+      dummyKey,
     },
     priceElements,
   );
@@ -160,16 +169,22 @@ export const quoteSummaryElements = (
       });
     });
   });
+  if (customerView && fixedElements.length > 0)
+    summaryElements.push({ sectionName: 'Itemised changes', dummyKey: 'qp_itemised' });
 
   let chargesAdded = false;
   quoteChargesForQuote.forEach(quoteCharge => {
-    if (quoteCharge.price)
+    if (quoteCharge.price) {
+      if (customerView && !chargesAdded) fixedElements.push({ dummyKey: 'qc_blank' });
       fixedElements.push({
         sectionName: chargesAdded ? '' : 'Additional Costs',
         partTypeName: chargeName(quoteCharge.charge, charges),
         total_price: quoteCharge.price,
+        dummyKey: `qc_${quoteCharge.id}`,
       });
-    chargesAdded = true;
+      chargesAdded = true;
+    }
   });
+
   return summaryElements.concat(fixedElements);
 };

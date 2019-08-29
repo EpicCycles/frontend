@@ -3,7 +3,7 @@
 exports[`EditModelRow it renders 1`] = `
 <Fragment>
   <div
-    className="  grid-item "
+    className="grid-item   "
     key="modelRowaddress1"
   >
     <EditModelInput
@@ -26,7 +26,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="  grid-item "
+    className="grid-item   "
     key="modelRowaddress2"
   >
     <EditModelInput
@@ -47,7 +47,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="  grid-item "
+    className="grid-item   "
     key="modelRowaddress3"
   >
     <EditModelInput
@@ -68,7 +68,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="  grid-item "
+    className="grid-item   "
     key="modelRowaddress4"
   >
     <EditModelInput
@@ -89,7 +89,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="  grid-item "
+    className="grid-item   "
     key="modelRowcountry"
   >
     <EditModelInput
@@ -1109,7 +1109,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className="  grid-item "
+    className="grid-item   "
     key="modelRowpostcode"
   >
     <EditModelInput
@@ -1134,7 +1134,7 @@ exports[`EditModelRow it renders 1`] = `
     />
   </div>
   <div
-    className=" align_center grid-item "
+    className="grid-item   align_center"
     key="modelRowbilling"
   >
     <EditModelInput
@@ -1158,7 +1158,7 @@ exports[`EditModelRow it renders 1`] = `
 exports[`EditModelRow it renders with data 1`] = `
 <Fragment>
   <div
-    className="red  grid-item grid-item--fixed-left"
+    className="grid-item grid-item--fixed-left red "
     key="modelRowaddress1123"
   >
     <EditModelInput
@@ -1263,7 +1263,7 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="red  grid-item "
+    className="grid-item  red "
     key="modelRowaddress2123"
   >
     <EditModelInput
@@ -1366,7 +1366,7 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="red  grid-item "
+    className="grid-item  red "
     key="modelRowaddress3123"
   >
     <EditModelInput
@@ -1469,7 +1469,7 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="red  grid-item "
+    className="grid-item  red "
     key="modelRowaddress4123"
   >
     <EditModelInput
@@ -1572,7 +1572,7 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="red  grid-item "
+    className="grid-item  red "
     key="modelRowcountry123"
   >
     <EditModelInput
@@ -2674,7 +2674,7 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="red  grid-item "
+    className="grid-item  red "
     key="modelRowpostcode123"
   >
     <EditModelInput
@@ -2781,7 +2781,7 @@ exports[`EditModelRow it renders with data 1`] = `
     />
   </div>
   <div
-    className="red align_center grid-item "
+    className="grid-item  red align_center"
     key="modelRowbilling123"
   >
     <EditModelInput

@@ -26,16 +26,19 @@ const ModelTable = props => {
     modelDelete,
     modelActions,
     lockFirstColumn,
+    hideHeaders,
   } = props;
   return (
     <div className="grid-container">
       <div className="grid">
-        <ModelTableHeaderRow
-          modelFields={modelFields}
-          blockIdentity={blockIdentity}
-          includeActions={actionsRequired}
-          lockFirstColumn={lockFirstColumn}
-        />
+        {!hideHeaders && (
+          <ModelTableHeaderRow
+            modelFields={modelFields}
+            blockIdentity={blockIdentity}
+            includeActions={actionsRequired}
+            lockFirstColumn={lockFirstColumn}
+          />
+        )}
         {modelArray.map(modelInstance => {
           const modelInstanceKey = getModelKey(modelInstance);
           const updatedModel = findObjectWithKey(updatedModelArray, modelInstanceKey);
@@ -58,6 +61,8 @@ const ModelTable = props => {
                 additionalActions={modelActions}
                 showReadOnlyFields
                 lockFirstColumn={lockFirstColumn}
+                key={`${blockIdentity}_${modelInstanceKey}`}
+                className={hideHeaders ? 'grid-item--borderless' : ''}
               />
             );
           return (
@@ -81,6 +86,7 @@ const ModelTable = props => {
                   showReadOnlyFields
                   lockFirstColumn={lockFirstColumn}
                   raiseState={raiseState}
+                  key={`${blockIdentity}_${modelInstanceKey}`}
                 />
               ) : (
                 <EditModel
@@ -100,6 +106,7 @@ const ModelTable = props => {
                   additionalActions={modelActions}
                   showReadOnlyFields
                   lockFirstColumn={lockFirstColumn}
+                  key={`${blockIdentity}_${modelInstanceKey}`}
                 />
               )}
             </div>
@@ -134,6 +141,7 @@ ModelTable.propTypes = {
   modelDelete: PropTypes.func,
   modelActions: PropTypes.array,
   showReadOnlyFields: PropTypes.bool,
+  hideHeaders: PropTypes.bool,
   raiseState: PropTypes.func,
 };
 

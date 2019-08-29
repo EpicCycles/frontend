@@ -488,6 +488,9 @@ fieldset {
 .grid-item {
     border: 1px solid gray;
 }
+.grid-item--borderless {
+    border: 0px;
+}
 
 .grid-item--borderless, .grid-item {
     padding: 2px;

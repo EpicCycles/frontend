@@ -23,7 +23,15 @@ const QuoteSummary = props => {
   return (
     <div className="grid-container">
       <ViewModelBlock
-        modelFields={quoteFields(quote, false, undefined, customerView)}
+        modelFields={quoteFields({
+          quote,
+          fieldExclusions: {
+            customer: customerView,
+            history: customerView,
+            status: customerView,
+            epic: customerView,
+          },
+        })}
         model={quote}
         bikes={bikes}
         customers={customers}

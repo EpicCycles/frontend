@@ -115,7 +115,9 @@ class CustomerEdit extends React.Component {
             {customerId && quotes && doWeHaveObjects(quotes) && (
               <div className="grid-container">
                 <QuoteGrid
-                  displayFields={quoteFields({}, false, undefined, true)}
+                  displayFields={quoteFields({
+                    fieldExclusions: { customer: true, history: true },
+                  })}
                   getQuote={getQuote}
                   archiveQuote={archiveQuote}
                   unarchiveQuote={unarchiveQuote}

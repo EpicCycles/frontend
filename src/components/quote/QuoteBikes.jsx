@@ -25,7 +25,7 @@ const QuoteBikes = props => {
     cloneQuote,
   } = props;
   const bikeQuotes = quotes.filter(quote => !!quote.bike);
-  const quoteFieldShown = quoteFields({}, false, undefined, true);
+  const quoteFieldShown = quoteFields({ fieldExclusions: { customer: true, history: true } });
   return (
     <div className="grid-container">
       <div className="grid">

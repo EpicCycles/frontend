@@ -90,72 +90,42 @@ export const VERSION_FIELD = {
   readOnly: true,
 };
 export const BIKE_PRICE_FIELD_REQUIRED = updateObject(BIKE_PRICE_FIELD, requiredAttribute);
-export const bikeRelatedFields = [BIKE_FIELD, BIKE_PRICE_FIELD, FRAME_SIZE_FIELD, COLOUR_FIELD];
-export const bikeRelatedFieldsComplete = [
-  BIKE_FIELD,
-  BIKE_PRICE_FIELD_REQUIRED,
-  FRAME_SIZE_FIELD,
-  COLOUR_FIELD,
-];
-const quoteFieldsBasic = [
-  QUOTE_DESC_FIELD,
-  CUSTOMER_FIELD,
-  QUOTE_STATUS_FIELD,
-  CLUB_MEMBER_FIELD,
-  VERSION_FIELD,
-];
-const quoteFieldsNoPrice = [
-  CREATED_BY_FIELD,
-  CREATED_DATE_FIELD,
-  UPD_DATE_FIELD,
-  ISSUED_DATE_FIELD,
-  CALCULATED_PRICE_FIELD,
-  TOTAL_PRICE_FIELD,
-];
-const quoteFieldsComplete = [
-  CREATED_BY_FIELD,
-  CREATED_DATE_FIELD,
-  UPD_DATE_FIELD,
-  ISSUED_DATE_FIELD,
-  QUOTE_PRICE_FIELD,
-  CALCULATED_PRICE_FIELD,
-  TOTAL_PRICE_FIELD,
-];
-const quoteFieldsBike = quoteFieldsBasic.concat(bikeRelatedFields.concat(quoteFieldsNoPrice));
-const quoteFieldsBikeComplete = quoteFieldsBasic
-  .concat(bikeRelatedFieldsComplete)
-  .concat(quoteFieldsComplete);
+// possible parameters: quote, bike, pricesRequired, fieldExclusions
+// field exclusions are (booleans - customer, status, history, bike)
+export const quoteFields = p => {
+  const { quote, bike, pricesRequired, fieldExclusions } = p;
 
-export const quoteFields = (quote, readyToIssue, bike, customerView) => {
-  if (!quote) return quoteFieldsBikeComplete;
-  if (customerView)
-    return [
-      QUOTE_DESC_FIELD,
-      CLUB_MEMBER_FIELD,
-      QUOTE_PRICE_FIELD,
-      BIKE_FIELD,
-      BIKE_PRICE_FIELD,
-      FRAME_SIZE_FIELD,
-      COLOUR_FIELD,
-      TOTAL_PRICE_FIELD,
-      UPD_DATE_FIELD,
-    ];
-  if (quote.bike) {
-    if (bike) {
-      let priceField = BIKE_PRICE_FIELD;
-      let sizeField = FRAME_SIZE_FIELD;
-      let colourField = COLOUR_FIELD;
-      if (readyToIssue) priceField = BIKE_PRICE_FIELD_REQUIRED;
-      if (bike.sizes) sizeField = updateObject(FRAME_SIZE_FIELD, { placeholder: bike.sizes });
-      if (bike.colours) colourField = updateObject(COLOUR_FIELD, { placeholder: bike.colours });
-      const bikeFieldsSpecific = [BIKE_FIELD, priceField, sizeField, colourField];
-      if (readyToIssue)
-        return quoteFieldsBasic.concat(bikeFieldsSpecific.concat(quoteFieldsComplete));
-      return quoteFieldsBasic.concat(bikeFieldsSpecific.concat(quoteFieldsNoPrice));
+  const excludeCustomer = fieldExclusions && fieldExclusions.customer;
+  const excludeStatus = fieldExclusions && fieldExclusions.status;
+  const excludeHistory = fieldExclusions && fieldExclusions.history;
+  const excludeBike = (fieldExclusions && fieldExclusions.bike) || (quote && !quote.bike);
+  const excludeEpic = fieldExclusions && fieldExclusions.epic;
+  const fields = [QUOTE_DESC_FIELD, VERSION_FIELD];
+  if (!excludeCustomer) fields.push(CUSTOMER_FIELD);
+  fields.push(CLUB_MEMBER_FIELD);
+  if (!excludeStatus) fields.push(QUOTE_STATUS_FIELD);
+  if (!excludeBike) {
+    fields.push(BIKE_FIELD);
+    if (!excludeEpic) {
+      if (pricesRequired) fields.push(BIKE_PRICE_FIELD_REQUIRED);
+      else fields.push(BIKE_PRICE_FIELD);
     }
-    if (readyToIssue) return quoteFieldsBikeComplete;
-    return quoteFieldsBike;
+    if (bike && bike.sizes)
+      fields.push(updateObject(FRAME_SIZE_FIELD, { placeholder: bike.sizes }));
+    else fields.push(FRAME_SIZE_FIELD);
+    if (bike && bike.colours)
+      fields.push(updateObject(COLOUR_FIELD, { placeholder: bike.colours }));
+    else fields.push(COLOUR_FIELD);
   }
-  if (readyToIssue) return quoteFieldsBasic.concat(quoteFieldsComplete);
-  return quoteFieldsBasic.concat(quoteFieldsNoPrice);
+  if (!excludeEpic) fields.push(CALCULATED_PRICE_FIELD);
+  if (pricesRequired) fields.push(QUOTE_PRICE_FIELD);
+  fields.push(TOTAL_PRICE_FIELD);
+  if (!excludeHistory) {
+    fields.push(UPD_DATE_FIELD);
+    fields.push(ISSUED_DATE_FIELD);
+    fields.push(CREATED_BY_FIELD);
+    fields.push(CREATED_DATE_FIELD);
+  }
+
+  return fields;
 };

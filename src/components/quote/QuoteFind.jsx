@@ -99,6 +99,7 @@ class QuoteFind extends React.Component {
           count={count}
           next={next}
           data-test="customer-select"
+          className='flex-vertical'
         />
         <BikeListAndSelect
           brands={brands}

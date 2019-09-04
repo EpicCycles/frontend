@@ -88,7 +88,7 @@ const QuoteGrid = props => {
 };
 
 QuoteGrid.defaultProps = {
-  displayFields: quoteFields({ fieldExclusions: { history: true } }),
+  displayFields: quoteFields({ pricesRequired: true, fieldExclusions: { history: true } }),
   quotes: [],
 };
 

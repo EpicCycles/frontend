@@ -63,7 +63,7 @@ export const QUOTE_STATUS_FIELD = {
 };
 export const QUOTE_PRICE_FIELD = {
   fieldName: QUOTE_PRICE,
-  header: 'Quote £',
+  header: 'Sub-total',
   synonyms: [],
   type: CURRENCY,
   displaySize: 7,
@@ -73,7 +73,7 @@ export const QUOTE_PRICE_FIELD = {
 };
 export const CALCULATED_PRICE_FIELD = {
   fieldName: CALCULATED_PRICE,
-  header: 'Sub-total',
+  header: 'Calculated sub-total',
   readOnly: true,
   type: CURRENCY,
 };

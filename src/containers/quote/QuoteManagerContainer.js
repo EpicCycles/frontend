@@ -9,6 +9,8 @@ import {
   saveCustomer,
   saveCustomerAddress,
   saveCustomerPhone,
+  addCustomerPhone,
+  addCustomerAddress,
 } from '../../state/actions/customer';
 import { createNote, deleteNote, saveNote } from '../../state/actions/note';
 import QuoteManager from '../../components/quote/QuoteManager';
@@ -78,6 +80,8 @@ const mapDispatchToProps = {
   deleteCustomerPhone,
   saveCustomerAddress,
   deleteCustomerAddress,
+  addCustomerAddress,
+  addCustomerPhone,
   archiveQuote,
   unarchiveQuote,
   changeQuote,

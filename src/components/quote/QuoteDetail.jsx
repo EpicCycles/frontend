@@ -197,7 +197,7 @@ class QuoteDetail extends PureComponent {
               />
             ) : (
               <ViewModelBlock
-                modelFields={quoteFields(quote)}
+                modelFields={quoteFields({ quote, pricesRequired: true })}
                 model={quote}
                 bikes={bikes}
                 customers={customers}

@@ -54,6 +54,8 @@ class QuoteManager extends React.Component {
       saveCustomerPhone,
       saveCustomerAddress,
       deleteCustomerAddress,
+      addCustomerPhone,
+      addCustomerAddress,
       saveCustomer,
       quotes,
       quoteId,
@@ -107,6 +109,8 @@ class QuoteManager extends React.Component {
             saveCustomerPhone={saveCustomerPhone}
             saveCustomerAddress={saveCustomerAddress}
             deleteCustomerAddress={deleteCustomerAddress}
+            addCustomerPhone={addCustomerPhone}
+            addCustomerAddress={addCustomerAddress}
             saveCustomer={saveCustomer}
             data-test="customer-tab"
           />
@@ -138,6 +142,7 @@ class QuoteManager extends React.Component {
           <QuoteSummary
             quote={quote}
             quoteParts={quoteParts}
+            quoteCharges={quoteCharges}
             brands={brands}
             sections={sections}
             parts={parts}
@@ -269,6 +274,8 @@ QuoteManager.propTypes = {
   deleteCustomerPhone: PropTypes.func.isRequired,
   saveCustomerAddress: PropTypes.func.isRequired,
   deleteCustomerAddress: PropTypes.func.isRequired,
+  addCustomerPhone: PropTypes.func.isRequired,
+  addCustomerAddress: PropTypes.func.isRequired,
   archiveQuote: PropTypes.func.isRequired,
   unarchiveQuote: PropTypes.func.isRequired,
   changeQuote: PropTypes.func.isRequired,

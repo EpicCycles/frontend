@@ -10,6 +10,7 @@ const QuoteSummary = props => {
     customerView,
     quote,
     quoteParts,
+    quoteCharges,
     brands,
     sections,
     parts,
@@ -25,6 +26,7 @@ const QuoteSummary = props => {
       <ViewModelBlock
         modelFields={quoteFields({
           quote,
+          pricesRequired: customerView,
           fieldExclusions: {
             customer: customerView,
             history: customerView,
@@ -44,6 +46,7 @@ const QuoteSummary = props => {
         showPrices={showPrices}
         customerView={customerView}
         quoteParts={quoteParts}
+        quoteCharges={quoteCharges}
         brands={brands}
         sections={sections}
         parts={parts}
@@ -58,6 +61,7 @@ QuoteSummary.propTypes = {
   customerView: PropTypes.bool,
   quote: PropTypes.object.isRequired,
   quoteParts: PropTypes.array.isRequired,
+  quoteCharges: PropTypes.array.isRequired,
   brands: PropTypes.array.isRequired,
   sections: PropTypes.array.isRequired,
   parts: PropTypes.array.isRequired,

@@ -208,13 +208,13 @@ class QuoteDetail extends PureComponent {
           </div>
           <QuoteSummaryParts
             lockFirstColumn={true}
-            showPrices={false}
             quoteParts={quotePartList}
             quote={quote}
             brands={brands}
             sections={sections}
             parts={parts}
             bikeParts={bikeParts}
+            showPrices
           />
           <div>
             <EditModelSimple

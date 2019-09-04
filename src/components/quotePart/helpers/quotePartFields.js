@@ -26,6 +26,7 @@ export const PART_DESC_FIELD = {
   header: 'Part',
   type: TEXT,
   maxLength: 100,
+  maxWidth: '250px',
   displaySize: 40,
   listId: 'parts-all',
 };

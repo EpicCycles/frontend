@@ -110,7 +110,6 @@ exports[`PartViewRow should display when multiple supplier products exist 1`] = 
       },
     ]
   }
-  rowSpan={2}
   sections={
     Array [
       Object {
@@ -490,7 +489,6 @@ exports[`PartViewRow should display when no part and no supplier products exist 
       },
     ]
   }
-  rowSpan={0}
   sections={
     Array [
       Object {
@@ -879,7 +877,6 @@ exports[`PartViewRow should display when no supplier products exist 1`] = `
       },
     ]
   }
-  rowSpan={0}
   sections={
     Array [
       Object {
@@ -1268,7 +1265,6 @@ exports[`PartViewRow should display when one supplier products exist 1`] = `
       },
     ]
   }
-  rowSpan={1}
   sections={
     Array [
       Object {

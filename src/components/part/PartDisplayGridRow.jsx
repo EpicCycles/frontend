@@ -27,13 +27,11 @@ const PartDisplayGridRow = props => {
     supplierProduct => supplierProduct.part === part.id,
   );
   const firstSupplierProduct = supplierProductsForPart.shift();
-  const rowSpan = supplierProductsForPart.length === 0 ? 1 : supplierProductsForPart.length;
   return (
     <Fragment>
       <div key={`partRow${part.id}`} className="grid-row">
         <div
           className={`grid-item ${fixedDetailsClassname(lockFirstColumn)}`}
-          style={{ gridRow: `span ${rowSpan}` }}
           key={`section_${part.id}`}
           data-test="section-cell"
         >
@@ -57,7 +55,6 @@ const PartDisplayGridRow = props => {
         {includeActions && (
           <div
             className="grid-item align_center"
-            style={{ gridRow: `span ${rowSpan}` }}
             key={`partActions${part.id}`}
             data-test="part-actions"
           >

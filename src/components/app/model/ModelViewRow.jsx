@@ -8,7 +8,6 @@ const ModelViewRow = props => {
   const {
     model,
     modelFields,
-    rowSpan,
     brands,
     customers,
     users,
@@ -31,7 +30,6 @@ const ModelViewRow = props => {
               lockFirstColumn,
             )}
             key={`modelRow${field.fieldName}${componentKey}`}
-            style={{ gridRow: ` span ${rowSpan}` }}
             data-test="model-field-cell"
           >
             <ModelViewRowField
@@ -63,7 +61,6 @@ ModelViewRow.defaultProps = {
   customers: [],
   bikes: [],
   frames: [],
-  rowSpan: 1,
 };
 
 ModelViewRow.propTypes = {
@@ -78,6 +75,5 @@ ModelViewRow.propTypes = {
   frames: PropTypes.array,
   users: PropTypes.array,
   lockFirstColumn: PropTypes.bool,
-  rowSpan: PropTypes.number,
 };
 export default ModelViewRow;

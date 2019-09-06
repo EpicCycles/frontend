@@ -5,12 +5,14 @@ import {
   CLEAR_QUOTE_DATA,
   COPY_QUOTE,
   CREATE_QUOTE,
+  DELETE_QUOTE_ANSWER,
   DELETE_QUOTE_CHARGE,
   DELETE_QUOTE_PART,
   FIND_QUOTES,
   GET_QUOTE,
   GET_QUOTE_TO_COPY,
   ISSUE_QUOTE,
+  SAVE_QUOTE_ANSWER,
   SAVE_QUOTE_CHARGE,
   SAVE_QUOTE_PART,
   UNARCHIVE_QUOTE,
@@ -64,10 +66,26 @@ const quote = (state = initialState, action) => {
         ),
         isLoading: false,
       };
+    case `${SAVE_QUOTE_ANSWER}_OK`:
+      return {
+        ...state,
+        quoteAnswers: updateObjectInArray(
+          state.quoteAnswers,
+          action.payload.quoteAnswer,
+          action.payload.existingKey,
+        ),
+        isLoading: false,
+      };
     case `${DELETE_QUOTE_CHARGE}_OK`:
       return {
         ...state,
         quoteCharges: removeItemFromArray(state.quoteCharges, action.payload.quoteChargeId),
+        isLoading: false,
+      };
+    case `${DELETE_QUOTE_ANSWER}_OK`:
+      return {
+        ...state,
+        quoteAnswers: removeItemFromArray(state.quoteAnswers, action.payload.quoteAnswerId),
         isLoading: false,
       };
     case `${CREATE_QUOTE}_OK`:
@@ -81,6 +99,7 @@ const quote = (state = initialState, action) => {
         quoteId: action.payload.quoteId,
         quotes: action.payload.quotes,
         quoteParts: action.payload.quoteParts,
+        quoteAnswers: action.payload.quoteAnswers,
         quoteCharges: action.payload.quoteCharges,
         isLoading: false,
       };
@@ -110,6 +129,8 @@ const quote = (state = initialState, action) => {
     case `${UNARCHIVE_QUOTE}_REQUESTED`:
     case `${SAVE_QUOTE_PART}_REQUESTED`:
     case `${DELETE_QUOTE_PART}_REQUESTED`:
+    case `${SAVE_QUOTE_ANSWER}_REQUESTED`:
+    case `${DELETE_QUOTE_ANSWER}_REQUESTED`:
     case `${SAVE_QUOTE_CHARGE}_REQUESTED`:
     case `${DELETE_QUOTE_CHARGE}_REQUESTED`:
       return {
@@ -125,6 +146,7 @@ const quote = (state = initialState, action) => {
     case `${ISSUE_QUOTE}_ERROR`:
     case `${UNARCHIVE_QUOTE}_ERROR`:
     case `${DELETE_QUOTE_PART}_ERROR`:
+    case `${DELETE_QUOTE_ANSWER}_ERROR`:
     case `${DELETE_QUOTE_CHARGE}_ERROR`:
       return {
         ...state,
@@ -156,6 +178,16 @@ const quote = (state = initialState, action) => {
         ...state,
         isLoading: false,
         quoteCharges: updateObjectInArray(state.quoteCharges, quoteChargeWithErrors),
+      };
+    case `${SAVE_QUOTE_ANSWER}_ERROR`:
+      const quoteAnswerWithErrors = updateObjectWithApiErrors(
+        action.payload.quoteAnswer,
+        action.payload,
+      );
+      return {
+        ...state,
+        isLoading: false,
+        quoteAnswers: updateObjectInArray(state.quoteAnswers, quoteAnswerWithErrors),
       };
     default:
       return state;

@@ -73,7 +73,7 @@ export const saveQuoteAnswer = quoteAnswer => ({
   payload: { quoteAnswer },
 });
 export const saveQuoteAnswerOK = (quoteAnswer, existingKey) => ({
-  type: `${SAVE_QUOTE_CHARGE}_OK`,
+  type: `${SAVE_QUOTE_ANSWER}_OK`,
   payload: { quoteAnswer, existingKey },
 });
 export const saveQuoteAnswerError = payload => ({

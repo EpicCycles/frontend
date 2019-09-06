@@ -90,28 +90,30 @@ const financial = x => {
   return Number.parseFloat(x).toFixed(2);
 };
 export const validateField = (field, value, fullModelData) => {
-  if (field.required && !value) {
-    if (field.error) return field.error;
-    return VALUE_MISSING;
-  }
-  if (value && field.type === NUMBER) {
-    const numberValue = Number(String(value).trim());
-    if (!Number.isInteger(numberValue)) return INVALID_NUMBER;
-    if (numberValue < 1) return INVALID_INTEGER;
-  }
-  if (value && field.type === CURRENCY) {
-    const numberValue = Number(String(value).trim());
-    if (Number.isNaN(numberValue)) return INVALID_CURRENCY;
-    const displayNumber = financial(numberValue);
-    if (Number(displayNumber) !== numberValue) return INVALID_CURRENCY;
-  }
-  if (value && field.maxLength) {
-    if (value.length > field.maxLength) return `Maximum size is ${field.maxLength}`;
-  }
-  if (field.validator) {
-    const error = field.validator(value, fullModelData);
-    if (error) {
-      return error;
+  if (!field.readOnly) {
+    if (field.required && !value) {
+      if (field.error) return field.error;
+      return VALUE_MISSING;
+    }
+    if (value && field.type === NUMBER) {
+      const numberValue = Number(String(value).trim());
+      if (!Number.isInteger(numberValue)) return INVALID_NUMBER;
+      if (numberValue < 1) return INVALID_INTEGER;
+    }
+    if (value && field.type === CURRENCY) {
+      const numberValue = Number(String(value).trim());
+      if (Number.isNaN(numberValue)) return INVALID_CURRENCY;
+      const displayNumber = financial(numberValue);
+      if (Number(displayNumber) !== numberValue) return INVALID_CURRENCY;
+    }
+    if (value && field.maxLength) {
+      if (value.length > field.maxLength) return `Maximum size is ${field.maxLength}`;
+    }
+    if (field.validator) {
+      const error = field.validator(value, fullModelData);
+      if (error) {
+        return error;
+      }
     }
   }
 };

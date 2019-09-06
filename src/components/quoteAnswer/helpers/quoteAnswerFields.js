@@ -5,7 +5,7 @@ import { postUpdateProcessingQuoteAnswer } from './postUpdateProcessQuoteAnswer'
 import { updateObject } from '../../../helpers/utils';
 import { PRICE_FIELD } from '../../charge/helpers/chargeFields';
 const answerChoices = [
-  { name: 'Unknown', value: '', isDefault: true },
+  { name: 'Unknown', value: 'X', isDefault: true },
   { name: 'Yes', value: 'Y' },
   { name: 'No', value: 'N' },
 ];
@@ -25,7 +25,8 @@ const ANSWER_FIELD = {
   type: SELECT_ONE,
   selectList: answerChoices,
   error: SELECT_ONE_MISSING,
+  required: true,
   addDataMethod: postUpdateProcessingQuoteAnswer,
 };
-const PRICE_READONLY = updateObject(PRICE_FIELD, { readOnly: true });
+const PRICE_READONLY = updateObject(PRICE_FIELD, { readOnly: true, required: false });
 export const quoteAnswerFields = [QUESTION_TEXT_FIELD, ANSWER_FIELD, PRICE_READONLY];

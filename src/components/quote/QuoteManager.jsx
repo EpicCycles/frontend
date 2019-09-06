@@ -10,6 +10,7 @@ import QuoteDetail from './QuoteDetail';
 import NoteGrid from '../note/NoteGrid';
 import QuoteBikes from './QuoteBikes';
 import {
+  answerTab,
   compareTab,
   customerTab,
   detailTab,
@@ -19,6 +20,7 @@ import {
   summaryTab,
 } from './helpers/quoteManagerTabs';
 import QuoteSummary from '../quoteSummary/QuoteSummary';
+import QuoteAnswers from "../quoteAnswer/QuoteAnswers";
 
 class QuoteManager extends React.Component {
   state = {};
@@ -59,6 +61,7 @@ class QuoteManager extends React.Component {
       saveCustomer,
       quotes,
       quoteId,
+      quoteAnswers,
       quoteCharges,
       quoteParts,
       brands,
@@ -69,6 +72,7 @@ class QuoteManager extends React.Component {
       charges,
       frames,
       parts,
+      questions,
       supplierProducts,
       sections,
       users,
@@ -83,6 +87,8 @@ class QuoteManager extends React.Component {
       saveQuoteCharge,
       saveQuoteChargeOK,
       deleteQuoteCharge,
+      saveQuoteAnswer,
+      deleteQuoteAnswer,
       addMessage,
     } = this.props;
     if (!doWeHaveObjects(quotes)) return <Redirect to="/quote-list" push />;
@@ -154,6 +160,17 @@ class QuoteManager extends React.Component {
             customerView
           />
         )}
+        {currentTab === answerTab.tabValue && (
+          <QuoteAnswers
+            quote={quote}
+            questions={questions}
+            quoteCharges={quoteCharges}
+            quoteAnswers={quoteAnswers}
+            saveQuoteAnswer={saveQuoteAnswer}
+            deleteQuoteAnswer={deleteQuoteAnswer}
+          />
+        )}
+
         {currentTab === detailTab.tabValue && (
           <QuoteDetail
             quote={quote}

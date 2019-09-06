@@ -2,6 +2,7 @@ import React from 'react';
 import QuoteManager from './QuoteManager';
 import { sampleBrands, sampleSections, sampleSuppliers } from '../../helpers/sampleData';
 import { assertComponentHasExpectedProps, findDataTest } from '../../helpers/jest_helpers/assert';
+import {compareTab, customerTab, historyTab, quoteListTab} from "./helpers/quoteManagerTabs";
 
 const props = {
   bikes: [],
@@ -59,13 +60,13 @@ describe('QuoteManager', () => {
       let TabbedView = component.find('TabbedView');
       expect(TabbedView).toHaveLength(1);
 
-      component.instance().changeCurrentTab(2);
+      component.instance().changeCurrentTab(quoteListTab.tabValue);
       component.update();
       expect(component.state('tab')).toBe(2);
       TabbedView = component.find('TabbedView');
       expect(TabbedView).toHaveLength(1);
       assertComponentHasExpectedProps(TabbedView, {
-        currentTab: 2,
+        currentTab: quoteListTab.tabValue,
       });
 
       expect(findDataTest(component, 'customer-tab')).toHaveLength(0);
@@ -80,13 +81,13 @@ describe('QuoteManager', () => {
     test('should render with tab 1 and relevant components when first tab clicked', () => {
       let TabbedView = component.find('TabbedView');
       expect(TabbedView).toHaveLength(1);
-      component.instance().changeCurrentTab(1);
+      component.instance().changeCurrentTab(customerTab.tabValue);
       component.update();
-      expect(component.state('tab')).toBe(1);
+      expect(component.state('tab')).toBe(customerTab.tabValue);
       TabbedView = component.find('TabbedView');
       expect(TabbedView).toHaveLength(1);
       assertComponentHasExpectedProps(TabbedView, {
-        currentTab: 1,
+        currentTab: customerTab.tabValue,
       });
 
       expect(findDataTest(component, 'customer-tab')).toHaveLength(1);
@@ -95,13 +96,13 @@ describe('QuoteManager', () => {
       expect(findDataTest(component, 'quote-list-tab')).toHaveLength(0);
     });
     test('should render with history and relevant components when fourth tab clicked', () => {
-      component.instance().changeCurrentTab(5);
+      component.instance().changeCurrentTab(historyTab.tabValue);
       component.update();
-      expect(component.state('tab')).toBe(5);
+      expect(component.state('tab')).toBe(historyTab.tabValue);
       const TabbedView = component.find('TabbedView');
       expect(TabbedView).toHaveLength(1);
       assertComponentHasExpectedProps(TabbedView, {
-        currentTab: 5,
+        currentTab: historyTab.tabValue,
       });
 
       expect(findDataTest(component, 'customer-tab')).toHaveLength(0);
@@ -111,13 +112,13 @@ describe('QuoteManager', () => {
       expect(findDataTest(component, 'bike-quotes-tab')).toHaveLength(0);
     });
     test('should render with compare and relevant components when fourth tab clicked', () => {
-      component.instance().changeCurrentTab(6);
+      component.instance().changeCurrentTab(compareTab.tabValue);
       component.update();
-      expect(component.state('tab')).toBe(6);
+      expect(component.state('tab')).toBe(compareTab.tabValue);
       const TabbedView = component.find('TabbedView');
       expect(TabbedView).toHaveLength(1);
       assertComponentHasExpectedProps(TabbedView, {
-        currentTab: 6,
+        currentTab: compareTab.tabValue,
       });
 
       expect(findDataTest(component, 'customer-tab')).toHaveLength(0);

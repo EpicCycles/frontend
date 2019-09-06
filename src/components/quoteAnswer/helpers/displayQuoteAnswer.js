@@ -10,7 +10,7 @@ export const displayQuoteAnswer = (quote, questions, quoteAnswers, quoteCharges)
     return {
       question: q.id,
       questionText: questionText(q.id, questions),
-      answerText: quoteAnswer ? (quoteAnswer.answer ? 'Y' : 'N') : '',
+      answerText: quoteAnswer ? (quoteAnswer.answer ? 'Y' : 'N') : 'X',
       quote: quote.id,
       answer: quoteAnswer && quoteAnswer.answer,
       id: quoteAnswer && quoteAnswer.id,

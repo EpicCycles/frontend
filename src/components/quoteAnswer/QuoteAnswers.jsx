@@ -17,10 +17,8 @@ class QuoteAnswers extends PureComponent {
     const checkedUpdatedQuoteAnswers = [];
     updatedQuoteAnswers.forEach(updatedQuoteAnswer => {
       const persistedDetail = findObjectWithKey(quoteAnswers, getModelKey(updatedQuoteAnswer));
-      if (
-        persistedDetail &&
-        checkForChanges(quoteAnswerFields, persistedDetail, updatedQuoteAnswer)
-      )
+      if (!persistedDetail) checkedUpdatedQuoteAnswers.push(updatedQuoteAnswer);
+      else if (checkForChanges(quoteAnswerFields, persistedDetail, updatedQuoteAnswer))
         checkedUpdatedQuoteAnswers.push(updatedQuoteAnswer);
     });
 
@@ -50,27 +48,29 @@ class QuoteAnswers extends PureComponent {
 
     return (
       <div className="grid-container">
-        {quoteAnswersDisplay.map(question => {
-          const questionKey = getModelKey(question);
-          const updatedQuoteAnswer = findObjectWithKey(updatedQuoteAnswers, questionKey);
-          const rowClass = updatedQuoteAnswer && updatedQuoteAnswer.error ? 'error' : '';
+        <div className="grid">
+          {quoteAnswersDisplay.map(persistedAnswer => {
+            const questionKey = getModelKey(persistedAnswer);
+            const updatedQuoteAnswer = findObjectWithKey(updatedQuoteAnswers, questionKey);
+            const rowClass = updatedQuoteAnswer && updatedQuoteAnswer.error ? 'error' : '';
 
-          return (
-            <div className={`grid-row ${rowClass}`} key={`row${questionKey}`}>
-              <EditModelSimple
-                model={updatedQuoteAnswer ? updatedQuoteAnswer : question}
-                persistedModel={question}
-                modelFields={quoteAnswerFields}
-                actionsRequired
-                modelSave={saveQuoteAnswer}
-                modelDelete={deleteQuoteAnswer}
-                showReadOnlyFields
-                raiseState={this.raiseStateForQuoteAnswer}
-                className="grid-item--borderless"
-              />
-            </div>
-          );
-        })}
+            return (
+              <div className={`grid-row ${rowClass}`} key={`row${questionKey}`}>
+                <EditModelSimple
+                  model={updatedQuoteAnswer ? updatedQuoteAnswer : persistedAnswer}
+                  persistedModel={persistedAnswer}
+                  modelFields={quoteAnswerFields}
+                  actionsRequired
+                  modelSave={saveQuoteAnswer}
+                  modelDelete={deleteQuoteAnswer}
+                  showReadOnlyFields
+                  raiseState={this.raiseStateForQuoteAnswer}
+                  className="grid-item--borderless"
+                />
+              </div>
+            );
+          })}
+        </div>
         {isLoading && (
           <Dimmer active inverted>
             <Loader content="Loading" />
@@ -86,9 +86,6 @@ QuoteAnswers.defaultProps = {
   quoteAnswers: [],
   quoteCharges: [],
   quote: {},
-  isLoading: PropTypes.bool,
-  saveQuoteAnswer: PropTypes.func.isRequired,
-  deleteQuoteAnswer: PropTypes.func.isRequired,
 };
 QuoteAnswers.propTypes = {
   charges: PropTypes.array,

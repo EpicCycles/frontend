@@ -26,12 +26,14 @@ import {
 } from './note';
 import { watchForGetFramework, watchForSaveFramework } from './framework';
 import {
-  watchForDeleteCharge, watchForDeleteQuestion,
+  watchForDeleteCharge,
+  watchForDeleteQuestion,
   watchForDeleteSupplier,
   watchForGetBrands,
   watchForGetCoreData,
   watchForSaveBrands,
-  watchForSaveCharge, watchForSaveQuestion,
+  watchForSaveCharge,
+  watchForSaveQuestion,
   watchForSaveSupplier,
 } from './core';
 import {
@@ -68,7 +70,11 @@ import {
   watchForSaveQuotePart,
   watchForDeleteQuotePart,
   watchForGetQuoteToCopy,
-  watchForIssueQuote, watchForDeleteQuoteCharge, watchForSaveQuoteCharge,
+  watchForIssueQuote,
+  watchForDeleteQuoteCharge,
+  watchForSaveQuoteCharge,
+  watchForSaveQuoteAnswer,
+  watchForDeleteQuoteAnswer,
 } from './quote';
 import { watchForChangeRoute } from './application';
 
@@ -135,6 +141,8 @@ export default function* rootSaga() {
     watchForDeleteCharge(),
     watchForSaveQuestion(),
     watchForDeleteQuestion(),
+    watchForSaveQuoteAnswer(),
+    watchForDeleteQuoteAnswer(),
     watchForSaveQuoteCharge(),
     watchForDeleteQuoteCharge(),
   ]);

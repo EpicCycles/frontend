@@ -12,6 +12,7 @@ const QuoteSummary = props => {
     quoteParts,
     quoteCharges,
     brands,
+    charges,
     sections,
     parts,
     bikes,
@@ -48,6 +49,7 @@ const QuoteSummary = props => {
         quoteParts={quoteParts}
         quoteCharges={quoteCharges}
         brands={brands}
+        charges={charges}
         sections={sections}
         parts={parts}
         bikeParts={bikeParts}
@@ -63,6 +65,7 @@ QuoteSummary.propTypes = {
   quoteParts: PropTypes.array.isRequired,
   quoteCharges: PropTypes.array.isRequired,
   brands: PropTypes.array.isRequired,
+  charges: PropTypes.array.isRequired,
   sections: PropTypes.array.isRequired,
   parts: PropTypes.array.isRequired,
   bikeParts: PropTypes.array.isRequired,

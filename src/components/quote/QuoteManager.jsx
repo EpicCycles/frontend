@@ -20,7 +20,7 @@ import {
   summaryTab,
 } from './helpers/quoteManagerTabs';
 import QuoteSummary from '../quoteSummary/QuoteSummary';
-import QuoteAnswers from "../quoteAnswer/QuoteAnswers";
+import QuoteAnswers from '../quoteAnswer/QuoteAnswers';
 
 class QuoteManager extends React.Component {
   state = {};
@@ -150,6 +150,7 @@ class QuoteManager extends React.Component {
             quoteParts={quoteParts}
             quoteCharges={quoteCharges}
             brands={brands}
+            charges={charges}
             sections={sections}
             parts={parts}
             bikeParts={bikeParts}

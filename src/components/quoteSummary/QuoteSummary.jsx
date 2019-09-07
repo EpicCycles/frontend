@@ -57,15 +57,18 @@ const QuoteSummary = props => {
     </div>
   );
 };
-
+QuoteSummary.defaultProps = {
+  quoteCharges: [],
+  charges: [],
+};
 QuoteSummary.propTypes = {
   showPrices: PropTypes.bool,
   customerView: PropTypes.bool,
   quote: PropTypes.object.isRequired,
   quoteParts: PropTypes.array.isRequired,
-  quoteCharges: PropTypes.array.isRequired,
+  quoteCharges: PropTypes.array,
   brands: PropTypes.array.isRequired,
-  charges: PropTypes.array.isRequired,
+  charges: PropTypes.array,
   sections: PropTypes.array.isRequired,
   parts: PropTypes.array.isRequired,
   bikeParts: PropTypes.array.isRequired,

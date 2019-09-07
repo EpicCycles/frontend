@@ -69,8 +69,20 @@ const part = (state = initialState, action) => {
         ...state,
         isLoading: false,
       };
-    case `${PART_UPLOAD}_OK`:
     case `${PART_LIST}_OK`:
+      parts = action.payload.parts;
+      supplierProducts = action.payload.supplierProducts;
+
+      setLocalStorage(STORAGE_PARTS, parts);
+      setLocalStorage(STORAGE_SUPPLIER_PRODUCTS, supplierProducts);
+
+      return {
+        ...state,
+        isLoading: false,
+        parts,
+        supplierProducts,
+      };
+    case `${PART_UPLOAD}_OK`:
     case `${BIKE_PART_SAVE}_OK`:
     case `${BIKE_PART_DELETE}_OK`:
     case `${BIKE_ADD_PART}_OK`:

@@ -1,16 +1,12 @@
 import React, { PureComponent } from 'react';
 import { findObjectWithId } from '../../helpers/utils';
 import * as PropTypes from 'prop-types';
-import QuoteActionCell from './QuoteActionCell';
 import { Redirect } from 'react-router';
 import { QUOTE_INITIAL } from './helpers/quote';
 import QuoteDetail from './QuoteDetail';
-import {Dimmer, Loader} from "semantic-ui-react";
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 class QuoteIssue extends PureComponent {
-  cancelIssue = () => {
-    this.props.changeRoute('/quote');
-  };
   render() {
     const {
       quotes,
@@ -50,10 +46,7 @@ class QuoteIssue extends PureComponent {
 
     return (
       <div>
-        <div className="row fit-content">
-          <h2>Issue Quote </h2>
-          <QuoteActionCell quote={quote} getQuote={this.cancelIssue} issueQuote={issueQuote} />
-        </div>
+        <h2>Issue Quote </h2>
         <QuoteDetail
           quote={quote}
           quoteParts={quoteParts}

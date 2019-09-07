@@ -1,7 +1,7 @@
 import { quoteIssueChecks } from './quoteIssueChecks';
 
 const SAVE_CHANGES_REQD = 'Save all changes before quote can be issued';
-const QUOTE_PRICE_REQD = 'A Quote Price should be entered';
+const QUOTE_PRICE_REQD = 'A sub total should be entered for the quote.';
 const QUOTE_PART_PRICES_REQD = 'Parts need prices.';
 const TRADE_IN_PRICES_REQD =
   'All bike parts that are not required must have a trade in price (which can be zero)';

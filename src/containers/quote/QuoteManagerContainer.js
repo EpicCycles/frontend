@@ -16,7 +16,7 @@ import { createNote, deleteNote, saveNote } from '../../state/actions/note';
 import QuoteManager from '../../components/quote/QuoteManager';
 import {
   archiveQuote,
-  changeQuote,
+  changeQuote, copyQuote,
   deleteQuoteAnswer,
   deleteQuoteCharge,
   deleteQuotePart,
@@ -89,6 +89,7 @@ const mapDispatchToProps = {
   archiveQuote,
   unarchiveQuote,
   changeQuote,
+  copyQuote,
   saveQuote,
   saveQuotePart,
   saveQuotePartOK,

@@ -81,6 +81,7 @@ class QuoteManager extends React.Component {
       changeRoute,
       getQuoteToCopy,
       saveQuote,
+      copyQuote,
       saveQuotePart,
       saveQuotePartOK,
       deleteQuotePart,
@@ -189,6 +190,7 @@ class QuoteManager extends React.Component {
             sections={sections}
             issueQuote={this.issueQuote}
             saveQuote={saveQuote}
+            copyQuote={copyQuote}
             saveQuotePart={saveQuotePart}
             saveQuotePartOK={saveQuotePartOK}
             deleteQuotePart={deleteQuotePart}
@@ -299,6 +301,7 @@ QuoteManager.propTypes = {
   changeQuote: PropTypes.func.isRequired,
   saveQuotePart: PropTypes.func.isRequired,
   saveQuote: PropTypes.func.isRequired,
+  copyQuote: PropTypes.func.isRequired,
   saveQuotePartOK: PropTypes.func.isRequired,
   saveQuoteCharge: PropTypes.func.isRequired,
   saveQuoteChargeOK: PropTypes.func.isRequired,

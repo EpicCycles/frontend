@@ -9,7 +9,7 @@ import {
 import * as PropTypes from 'prop-types';
 import QuoteSummaryParts from '../quoteSummary/QuoteSummaryParts';
 import QuotePartGrid from '../quotePart/QuotePartGrid';
-import { QUOTE_INITIAL } from './helpers/quote';
+import { QUOTE_INITIAL, QUOTE_ISSUED } from './helpers/quote';
 
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteActionCell from './QuoteActionCell';
@@ -54,7 +54,12 @@ class QuoteDetail extends PureComponent {
       quotePartsDetail: quotePartsDetail,
     };
   }
-
+  cancelIssue = () => {
+    this.props.changeRoute('/quote');
+  };
+  editIssuedQuote = quoteKey => {
+    this.props.copyQuote(quoteKey, {});
+  };
   issueQuote = quoteKey => {
     const { quoteParts, quoteCharges, quote, addMessage, readyToIssue, issueQuote } = this.props;
     const { updatedQuote, updatedQuoteCharges, updatedQuoteParts } = this.state;
@@ -167,12 +172,19 @@ class QuoteDetail extends PureComponent {
       <Fragment>
         <div className="row">
           <div>
-            {!readyToIssue && (
+            {!readyToIssue ? (
               <QuoteActionCell
                 quote={quote}
                 archiveQuote={archiveQuote}
                 unarchiveQuote={unarchiveQuote}
                 cloneQuote={cloneQuote}
+                issueQuote={this.issueQuote}
+                getQuote={quote.quote_status === QUOTE_ISSUED && this.editIssuedQuote}
+              />
+            ) : (
+              <QuoteActionCell
+                quote={quote}
+                getQuote={this.cancelIssue}
                 issueQuote={this.issueQuote}
               />
             )}
@@ -289,6 +301,7 @@ QuoteDetail.propTypes = {
   supplierProducts: PropTypes.array.isRequired,
   frames: PropTypes.array.isRequired,
   saveQuote: PropTypes.func.isRequired,
+  copyQuote: PropTypes.func.isRequired,
   archiveQuote: PropTypes.func,
   saveQuoteCharge: PropTypes.func.isRequired,
   saveQuoteChargeOK: PropTypes.func.isRequired,
@@ -297,6 +310,7 @@ QuoteDetail.propTypes = {
   saveQuotePart: PropTypes.func.isRequired,
   saveQuotePartOK: PropTypes.func.isRequired,
   cloneQuote: PropTypes.func,
+  editQuote: PropTypes.func,
   changeRoute: PropTypes.func.isRequired,
   unarchiveQuote: PropTypes.func,
   createNote: PropTypes.func.isRequired,

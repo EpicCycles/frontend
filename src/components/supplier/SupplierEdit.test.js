@@ -47,6 +47,7 @@ describe('SupplierEdit', () => {
       link: 'http://supplier.co.uk',
       preferred_supplier: false,
       error_detail: { supplier_name: VALUE_MISSING },
+      error: true,
       changed: true,
     };
     component.instance().handleInputChange('supplier_name', '');

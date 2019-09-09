@@ -56,7 +56,7 @@ describe('model.updateModel', () => {
     expect(result).toEqual(model);
   });
   it('should call the addDataMethod when it is present for a field', () => {
-    const addData = jest.fn();
+    const addData = jest.fn(inputModel => inputModel);
     const modelFields = [
       {
         fieldName: 'data_field',
@@ -115,6 +115,7 @@ describe('model.updateModel', () => {
         id: 123,
         address2: 'line two corrected',
         changed: true,
+        error: true,
         error_detail: { address1: ADDRESS_MISSING, country: 'A country must be selected' },
       };
       const result = updateModel(

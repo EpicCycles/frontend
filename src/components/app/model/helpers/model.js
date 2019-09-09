@@ -191,11 +191,15 @@ export const getField = (modelFields, fieldName) => {
 
 export const updateModel = (model, modelFields, fieldName, fieldValue) => {
   const modelField = getField(modelFields, fieldName);
-  if (modelField) {
+  if (model && modelField) {
     let updatedModel = applyFieldValueToModelOnly(model, modelField, fieldValue);
     updatedModel.error_detail = validateModelAndSetErrors(updatedModel, modelFields);
 
     if (modelField.addDataMethod) updatedModel = modelField.addDataMethod(updatedModel);
+    if (isItAnObject(updatedModel.error_detail)) {
+      updatedModel.error = true;
+      return updatedModel;
+    }
     return removeKey(updatedModel, 'error');
   }
   return model;

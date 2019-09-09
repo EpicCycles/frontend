@@ -6,7 +6,8 @@ import {
   UPD_DATE_FIELD,
 } from '../../app/model/helpers/fields';
 import { VALUE_MISSING } from '../../app/model/helpers/error';
-import {postUpdateProcessingCharge} from "./postUpdateProcessingCharge";
+import { postUpdateProcessingCharge } from './postUpdateProcessingCharge';
+import { percentageValidator } from '../../app/model/helpers/percentageValidator';
 
 export const CHARGE_NAME_FIELD = {
   fieldName: 'charge_name',
@@ -23,6 +24,7 @@ export const PERCENTAGE_FIELD = {
   header: 'Percent charged',
   type: CURRENCY,
   addDataMethod: postUpdateProcessingCharge,
+  validator: percentageValidator,
   displaySize: 5,
   maxLength: 5,
 };

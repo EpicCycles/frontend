@@ -1,6 +1,6 @@
 import React from 'react';
-import {validateEmailFormat} from "../model/helpers/validators";
-import {INVALID_EMAIL} from "../model/helpers/error";
+import {validateEmailFormat} from "./validators";
+import {INVALID_EMAIL} from "./error";
 
 
 describe("validateEmailFormat tests", () => {

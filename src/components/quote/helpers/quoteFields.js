@@ -73,7 +73,19 @@ export const QUOTE_PRICE_FIELD = {
 };
 export const CALCULATED_PRICE_FIELD = {
   fieldName: CALCULATED_PRICE,
-  header: 'Calculated sub-total',
+  header: 'Sub-total',
+  readOnly: true,
+  type: CURRENCY,
+};
+export const FIXED_PRICE_FIELD = {
+  fieldName: 'fixed_price_total',
+  header: 'Optional Items',
+  readOnly: true,
+  type: CURRENCY,
+};
+export const CHARGE_TOTAL_FIELD = {
+  fieldName: 'charges_total',
+  header: 'Charges',
   readOnly: true,
   type: CURRENCY,
 };
@@ -118,7 +130,12 @@ export const quoteFields = p => {
     else fields.push(COLOUR_FIELD);
   }
   if (!excludeEpic) fields.push(CALCULATED_PRICE_FIELD);
+
   if (pricesRequired) fields.push(QUOTE_PRICE_FIELD);
+  if (!excludeEpic) {
+    fields.push(FIXED_PRICE_FIELD);
+    fields.push(CHARGE_TOTAL_FIELD);
+  }
   fields.push(TOTAL_PRICE_FIELD);
   if (!excludeHistory) {
     fields.push(UPD_DATE_FIELD);

@@ -54,7 +54,8 @@ class EditModelInput extends Component {
     const fieldValue = model[field.fieldName];
     const emptyAllowed = !(field.required && fieldValue);
     const error = model.error_detail ? model.error_detail[field.fieldName] : '';
-    const disabled = model.deleted || field.disabled;
+    const readOnly = field.readOnlyFunction && field.readOnlyFunction(model);
+    const disabled = model.deleted || field.disabled || readOnly;
 
     switch (field.type) {
       case SELECT_ONE:

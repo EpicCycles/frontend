@@ -11,8 +11,11 @@ import {
   TEXT_AREA,
 } from './helpers/fields';
 import EditModelInput from './EditModelInput';
-import {findDataTest} from "../../../helpers/jest_helpers/assert";
-import {CHARGE} from "../../quoteCharge/helpers/quoteChargeFields";
+import {
+  assertComponentHasExpectedProps,
+  findDataTest,
+} from '../../../helpers/jest_helpers/assert';
+import { CHARGE } from '../../quoteCharge/helpers/quoteChargeFields';
 
 const foundName = 'find me';
 const sections = [
@@ -38,7 +41,97 @@ const suppliers = [
 const emptyModel = {};
 const componentKey = 12;
 describe('EditModelInput', () => {
-  test('it renders a currency field that has data', () => {
+  it('should render a field disabled when required', () => {
+    const field = {
+      fieldName: 'data_field',
+      type: CURRENCY,
+      maxLength: 10,
+      disabled: true,
+    };
+    const model = { data_field: 23.9 };
+    const component = shallow(
+      <EditModelInput
+        field={field}
+        model={model}
+        componentKey={componentKey}
+        index={0}
+        onChange={jest.fn()}
+      />,
+    );
+    assertComponentHasExpectedProps(component.find('FormTextInput'), {
+      disabled: true,
+    });
+  });
+  it('should render a field disabled when readOnyFunction is satisfied', () => {
+    const field = {
+      fieldName: 'data_field',
+      type: CURRENCY,
+      maxLength: 10,
+      disabled: true,
+      readOnlyFunction: model => {
+        !model.nameField;
+      },
+    };
+    const model = { data_field: 23.9 };
+    const component = shallow(
+      <EditModelInput
+        field={field}
+        model={model}
+        componentKey={componentKey}
+        index={0}
+        onChange={jest.fn()}
+      />,
+    );
+    assertComponentHasExpectedProps(component.find('FormTextInput'), {
+      disabled: true,
+    });
+  });
+  it('should not render a field disabled when readOnyFunction is not satisfied', () => {
+    const field = {
+      fieldName: 'data_field',
+      type: CURRENCY,
+      maxLength: 10,
+      disabled: true,
+      readOnlyFunction: model => {
+        !model.nameField;
+      },
+    };
+    const model = { data_field: 23.9, nameField: 'present' };
+    const component = shallow(
+      <EditModelInput
+        field={field}
+        model={model}
+        componentKey={componentKey}
+        index={0}
+        onChange={jest.fn()}
+      />,
+    );
+    assertComponentHasExpectedProps(component.find('FormTextInput'), {
+      disabled: false,
+    });
+  });
+  it('should render a field disabled when model is deleted', () => {
+    const field = {
+      fieldName: 'data_field',
+      type: CURRENCY,
+      maxLength: 10,
+    };
+    const model = { data_field: 23.9, deleted: true };
+    const component = shallow(
+      <EditModelInput
+        field={field}
+        model={model}
+        componentKey={componentKey}
+        index={0}
+        onChange={jest.fn()}
+      />,
+    );
+    expect(component.find('FormTextInput')).toHaveLength(1);
+    assertComponentHasExpectedProps(component.find('FormTextInput'), {
+      disabled: true,
+    });
+  });
+  it('should renders a currency field that has data', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
@@ -59,7 +152,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a currency field that has no data', () => {
+  it('should renders a currency field that has no data', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
@@ -79,7 +172,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a charge field that has data', () => {
+  it('should renders a charge field that has data', () => {
     const field = {
       fieldName: 'data_field',
       type: CHARGE,
@@ -98,7 +191,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a charge field that has no data', () => {
+  it('should renders a charge field that has no data', () => {
     const field = {
       fieldName: 'data_field',
       type: CHARGE,
@@ -116,7 +209,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a country field that has data', () => {
+  it('should renders a country field that has data', () => {
     const field = {
       fieldName: 'data_field',
       type: COUNTRY,
@@ -136,7 +229,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a country field that has no data', () => {
+  it('should renders a country field that has no data', () => {
     const field = {
       fieldName: 'data_field',
       type: COUNTRY,
@@ -155,7 +248,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a text field that has data', () => {
+  it('should renders a text field that has data', () => {
     const field = {
       fieldName: 'data_field',
       type: TEXT,
@@ -176,7 +269,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a text field that has no data', () => {
+  it('should renders a text field that has no data', () => {
     const field = {
       fieldName: 'data_field',
       type: TEXT,
@@ -196,7 +289,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a textarea field that has data', () => {
+  it('should renders a textarea field that has data', () => {
     const field = {
       fieldName: 'data_field',
       type: TEXT_AREA,
@@ -217,7 +310,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a textarea field that has no data', () => {
+  it('should renders a textarea field that has no data', () => {
     const field = {
       fieldName: 'data_field',
       type: TEXT_AREA,
@@ -239,7 +332,7 @@ describe('EditModelInput', () => {
     ).toMatchSnapshot();
   });
 
-  test('it renders a checkbox field that is true', () => {
+  it('should renders a checkbox field that is true', () => {
     const field = {
       fieldName: 'data_field',
       type: CHECKBOX,
@@ -259,7 +352,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a checkbox field that is false', () => {
+  it('should renders a checkbox field that is false', () => {
     const field = {
       fieldName: 'data_field',
       type: CHECKBOX,
@@ -279,7 +372,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a checkbox field that has no data', () => {
+  it('should renders a checkbox field that has no data', () => {
     const field = {
       fieldName: 'data_field',
       type: CHECKBOX,
@@ -300,7 +393,7 @@ describe('EditModelInput', () => {
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith(field.fieldName, true, componentKey);
   });
-  test('it renders a part type field that has data that is found', () => {
+  it('should renders a part type field that has data that is found', () => {
     const field = {
       fieldName: 'data_field',
       type: PART_TYPE,
@@ -322,7 +415,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a part type field that has data that is not found', () => {
+  it('should renders a part type field that has data that is not found', () => {
     const field = {
       fieldName: 'data_field',
       type: PART_TYPE,
@@ -345,7 +438,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a part Type field that has no data', () => {
+  it('should renders a part Type field that has no data', () => {
     const field = {
       fieldName: 'data_field',
       type: PART_TYPE,
@@ -366,7 +459,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a brand field that has data that is found', () => {
+  it('should renders a brand field that has data that is found', () => {
     const field = {
       fieldName: 'data_field',
       type: BRAND,
@@ -388,7 +481,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a brand field that has data that is not found', () => {
+  it('should renders a brand field that has data that is not found', () => {
     const field = {
       fieldName: 'data_field',
       type: BRAND,
@@ -410,7 +503,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a brand field that has no data', () => {
+  it('should renders a brand field that has no data', () => {
     const field = {
       fieldName: 'data_field',
       type: BRAND,
@@ -430,7 +523,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a supplier field that has data that is found', () => {
+  it('should renders a supplier field that has data that is found', () => {
     const field = {
       fieldName: 'data_field',
       type: SUPPLIER,
@@ -452,7 +545,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a supplier field that has data that is not found', () => {
+  it('should renders a supplier field that has data that is not found', () => {
     const field = {
       fieldName: 'data_field',
       type: SUPPLIER,
@@ -474,7 +567,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it renders a supplier field that has no data', () => {
+  it('should renders a supplier field that has no data', () => {
     const field = {
       fieldName: 'data_field',
       type: SUPPLIER,
@@ -494,7 +587,7 @@ describe('EditModelInput', () => {
       ),
     ).toMatchSnapshot();
   });
-  test('it calls onchange with a valid field setting state correctly', () => {
+  it('should calls onchange with a valid field setting state correctly', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
@@ -519,7 +612,7 @@ describe('EditModelInput', () => {
     expect(onChange.mock.calls[0][1]).toBe('45.75');
     expect(onChange.mock.calls[0][2]).toBe(componentKey);
   });
-  test('it calls reset on a field to set back to model value', () => {
+  it('should calls reset on a field to set back to model value', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
@@ -544,7 +637,7 @@ describe('EditModelInput', () => {
     expect(onChange.mock.calls[0][1]).toBe(persistedModel.data_field);
     expect(onChange.mock.calls[0][2]).toBe(componentKey);
   });
-  test('it calls reset on a field with no model and shows error', () => {
+  it('should calls reset on a field with no model and shows error', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,
@@ -570,7 +663,7 @@ describe('EditModelInput', () => {
     expect(onChange.mock.calls[0][1]).toBe('');
     expect(onChange.mock.calls[0][2]).toBe(componentKey);
   });
-  test('it calls onchange with a missing field setting state correctly', () => {
+  it('should calls onchange with a missing field setting state correctly', () => {
     const field = {
       fieldName: 'data_field',
       type: CURRENCY,

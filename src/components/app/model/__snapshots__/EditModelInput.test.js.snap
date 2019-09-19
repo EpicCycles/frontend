@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditModelInput it renders a brand field that has data that is found 1`] = `
+exports[`EditModelInput should renders a brand field that has data that is found 1`] = `
 <Fragment>
   <BrandSelect
     bikeOnly={false}
@@ -30,7 +30,7 @@ exports[`EditModelInput it renders a brand field that has data that is found 1`]
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a brand field that has data that is not found 1`] = `
+exports[`EditModelInput should renders a brand field that has data that is not found 1`] = `
 <Fragment>
   <BrandSelect
     bikeOnly={false}
@@ -60,7 +60,7 @@ exports[`EditModelInput it renders a brand field that has data that is not found
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a brand field that has no data 1`] = `
+exports[`EditModelInput should renders a brand field that has no data 1`] = `
 <Fragment>
   <BrandSelect
     bikeOnly={false}
@@ -89,7 +89,7 @@ exports[`EditModelInput it renders a brand field that has no data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a charge field that has data 1`] = `
+exports[`EditModelInput should renders a charge field that has data 1`] = `
 <Fragment>
   <SelectInput
     className=""
@@ -104,7 +104,7 @@ exports[`EditModelInput it renders a charge field that has data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a charge field that has no data 1`] = `
+exports[`EditModelInput should renders a charge field that has no data 1`] = `
 <Fragment>
   <SelectInput
     className=""
@@ -119,7 +119,7 @@ exports[`EditModelInput it renders a charge field that has no data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a checkbox field that has no data 1`] = `
+exports[`EditModelInput should renders a checkbox field that has no data 1`] = `
 <Fragment>
   <input
     checked={false}
@@ -132,7 +132,7 @@ exports[`EditModelInput it renders a checkbox field that has no data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a checkbox field that is false 1`] = `
+exports[`EditModelInput should renders a checkbox field that is false 1`] = `
 <Fragment>
   <input
     checked={false}
@@ -145,7 +145,7 @@ exports[`EditModelInput it renders a checkbox field that is false 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a checkbox field that is true 1`] = `
+exports[`EditModelInput should renders a checkbox field that is true 1`] = `
 <Fragment>
   <input
     checked={true}
@@ -158,7 +158,7 @@ exports[`EditModelInput it renders a checkbox field that is true 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a country field that has data 1`] = `
+exports[`EditModelInput should renders a country field that has data 1`] = `
 <Fragment>
   <CountrySelect
     countrySelected="NZ"
@@ -169,7 +169,7 @@ exports[`EditModelInput it renders a country field that has data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a country field that has no data 1`] = `
+exports[`EditModelInput should renders a country field that has no data 1`] = `
 <Fragment>
   <CountrySelect
     fieldName="data_field120"
@@ -179,7 +179,7 @@ exports[`EditModelInput it renders a country field that has no data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a currency field that has data 1`] = `
+exports[`EditModelInput should renders a currency field that has data 1`] = `
 <Fragment>
   <FormTextInput
     className=""
@@ -200,7 +200,7 @@ exports[`EditModelInput it renders a currency field that has data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a currency field that has no data 1`] = `
+exports[`EditModelInput should renders a currency field that has no data 1`] = `
 <Fragment>
   <FormTextInput
     className=""
@@ -221,7 +221,7 @@ exports[`EditModelInput it renders a currency field that has no data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a part Type field that has no data 1`] = `
+exports[`EditModelInput should renders a part Type field that has no data 1`] = `
 <Fragment>
   <PartTypeSelect
     disabled={false}
@@ -263,7 +263,7 @@ exports[`EditModelInput it renders a part Type field that has no data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a part type field that has data that is found 1`] = `
+exports[`EditModelInput should renders a part type field that has data that is found 1`] = `
 <Fragment>
   <PartTypeSelect
     disabled={false}
@@ -306,7 +306,7 @@ exports[`EditModelInput it renders a part type field that has data that is found
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a part type field that has data that is not found 1`] = `
+exports[`EditModelInput should renders a part type field that has data that is not found 1`] = `
 <Fragment>
   <PartTypeSelect
     disabled={false}
@@ -349,7 +349,7 @@ exports[`EditModelInput it renders a part type field that has data that is not f
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a supplier field that has data that is found 1`] = `
+exports[`EditModelInput should renders a supplier field that has data that is found 1`] = `
 <Fragment>
   <SupplierSelect
     disabled={false}
@@ -378,7 +378,7 @@ exports[`EditModelInput it renders a supplier field that has data that is found 
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a supplier field that has data that is not found 1`] = `
+exports[`EditModelInput should renders a supplier field that has data that is not found 1`] = `
 <Fragment>
   <SupplierSelect
     disabled={false}
@@ -407,7 +407,7 @@ exports[`EditModelInput it renders a supplier field that has data that is not fo
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a supplier field that has no data 1`] = `
+exports[`EditModelInput should renders a supplier field that has no data 1`] = `
 <Fragment>
   <SupplierSelect
     disabled={false}
@@ -435,7 +435,7 @@ exports[`EditModelInput it renders a supplier field that has no data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a text field that has data 1`] = `
+exports[`EditModelInput should renders a text field that has data 1`] = `
 <Fragment>
   <FormTextInput
     className=""
@@ -456,7 +456,7 @@ exports[`EditModelInput it renders a text field that has data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a text field that has no data 1`] = `
+exports[`EditModelInput should renders a text field that has no data 1`] = `
 <Fragment>
   <FormTextInput
     className=""
@@ -477,7 +477,7 @@ exports[`EditModelInput it renders a text field that has no data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a textarea field that has data 1`] = `
+exports[`EditModelInput should renders a textarea field that has data 1`] = `
 <Fragment>
   <FormTextAreaInput
     cols={50}
@@ -490,7 +490,7 @@ exports[`EditModelInput it renders a textarea field that has data 1`] = `
 </Fragment>
 `;
 
-exports[`EditModelInput it renders a textarea field that has no data 1`] = `
+exports[`EditModelInput should renders a textarea field that has no data 1`] = `
 <Fragment>
   <FormTextAreaInput
     cols={50}

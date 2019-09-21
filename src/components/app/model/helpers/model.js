@@ -41,7 +41,8 @@ export const checkForChanges = (fieldList, existingObject, newValues) => {
 };
 export const checkForChangesAllFields = (fieldList, existingObject, newValues) => {
   return fieldList.some(field => {
-    const existingValue = existingObject[field.fieldName];
+    let existingValue = existingObject[field.fieldName];
+    if (existingValue === null) existingValue = undefined;
     const newValue = newValues[field.fieldName];
     if (existingValue && newValue)
       switch (field.type) {

@@ -73,7 +73,7 @@ export const QUOTE_PRICE_FIELD = {
 };
 export const CALCULATED_PRICE_FIELD = {
   fieldName: CALCULATED_PRICE,
-  header: 'Sub-total',
+  header: 'Sub-total (calc)',
   readOnly: true,
   type: CURRENCY,
 };

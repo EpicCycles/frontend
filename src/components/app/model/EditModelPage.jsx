@@ -1,7 +1,7 @@
 import React from 'react';
 
 import * as PropTypes from 'prop-types';
-import { eliminateReadOnlyFields, getModelKey, justReadOnlyFields } from './helpers/model';
+import { eliminateReadOnlyFields, getModelKey } from './helpers/model';
 import EditModelPageRow from './EditModelPageRow';
 import ViewModelFieldRow from './ViewModelFieldRow';
 import NonFieldErrors from './NonFieldErrors';
@@ -32,27 +32,16 @@ const EditModelPage = props => {
   } = props;
   const componentKey = getModelKey(model);
   const allActions = modelActions(model, { modelSave, modelDelete, modelReset }, additionalActions);
+  let displayFields = modelFields;
+  if (!showReadOnlyFields) displayFields = eliminateReadOnlyFields(modelFields);
+
   return (
     <div className="grid-container">
       {model.error && <div className="red">{model.error}</div>}
 
       <div key="modelFields" className={`grid ${className}`}>
-        {eliminateReadOnlyFields(modelFields).map(field => (
-          <EditModelPageRow
-            key={`EditModelPageRow${field.fieldName}`}
-            field={field}
-            model={model}
-            persistedModel={persistedModel}
-            componentKey={componentKey}
-            onChange={onChange}
-            sections={sections}
-            brands={brands}
-            suppliers={suppliers}
-            data-test="field-to-edit"
-          />
-        ))}
-        {showReadOnlyFields &&
-          justReadOnlyFields(modelFields).map(field => (
+        {displayFields.map(field => {
+          return field.readOnly ? (
             <ViewModelFieldRow
               key={`EditModelPageRow${field.fieldName}`}
               field={field}
@@ -67,7 +56,21 @@ const EditModelPage = props => {
               users={users}
               data-test="field-to-view"
             />
-          ))}
+          ) : (
+            <EditModelPageRow
+              key={`EditModelPageRow${field.fieldName}`}
+              field={field}
+              model={model}
+              persistedModel={persistedModel}
+              componentKey={componentKey}
+              onChange={onChange}
+              sections={sections}
+              brands={brands}
+              suppliers={suppliers}
+              data-test="field-to-edit"
+            />
+          );
+        })}
         {isItAnObject(model.error_detail) && (
           <NonFieldErrors
             componentKey={componentKey}

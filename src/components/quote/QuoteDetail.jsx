@@ -44,7 +44,10 @@ class QuoteDetail extends PureComponent {
     });
 
     let checkedUpdatedQuote;
-    if (updatedQuote && checkForChanges(quoteFields(quote), quote, updatedQuote))
+    if (
+      updatedQuote &&
+      checkForChanges(quoteFields({ quote, pricesRequired: true }), quote, updatedQuote)
+    )
       checkedUpdatedQuote = updatedQuote;
 
     return {
@@ -119,11 +122,11 @@ class QuoteDetail extends PureComponent {
   };
   render() {
     const {
+      updatedNote,
       updatedQuote,
       updatedQuoteParts,
       updatedQuoteCharges,
       quotePartsDetail,
-      updatedNote,
     } = this.state;
     const {
       quoteCharges,
@@ -148,10 +151,10 @@ class QuoteDetail extends PureComponent {
       saveQuotePart,
       cloneQuote,
       unarchiveQuote,
+      orderQuote,
       readyToIssue,
     } = this.props;
     const newNote = { quote: quote.id, customer: quote.customer };
-
     const bike = findObjectWithId(bikes, quote.bike);
     const additionalActions = [
       {
@@ -167,7 +170,11 @@ class QuoteDetail extends PureComponent {
     ];
     const quotePartList = quoteParts.filter(qp => qp.quote === quote.id);
     const quoteChargeList = quoteCharges.filter(qp => qp.quote === quote.id);
-
+    const quoteModelFields = quoteFields({
+      quote,
+      bike,
+      pricesRequired: readyToIssue || quote.quote_status !== QUOTE_INITIAL,
+    });
     return (
       <Fragment>
         <div className="row">
@@ -179,7 +186,8 @@ class QuoteDetail extends PureComponent {
                 unarchiveQuote={unarchiveQuote}
                 cloneQuote={cloneQuote}
                 issueQuote={this.issueQuote}
-                getQuote={quote.quote_status === QUOTE_ISSUED && this.editIssuedQuote}
+                placeOrder={orderQuote}
+                getQuote={quote.quote_status === QUOTE_ISSUED ? this.editIssuedQuote : undefined}
               />
             ) : (
               <QuoteActionCell
@@ -194,7 +202,7 @@ class QuoteDetail extends PureComponent {
                 actionsRequired
                 model={updatedQuote ? updatedQuote : quote}
                 persistedModel={quote}
-                modelFields={quoteFields({ quote, bike, pricesRequired: readyToIssue })}
+                modelFields={quoteModelFields}
                 brands={brands}
                 bikes={bikes}
                 frames={frames}
@@ -209,7 +217,7 @@ class QuoteDetail extends PureComponent {
               />
             ) : (
               <ViewModelBlock
-                modelFields={quoteFields({ quote, pricesRequired: true })}
+                modelFields={quoteModelFields}
                 model={quote}
                 bikes={bikes}
                 customers={customers}
@@ -303,6 +311,7 @@ QuoteDetail.propTypes = {
   saveQuote: PropTypes.func.isRequired,
   copyQuote: PropTypes.func.isRequired,
   archiveQuote: PropTypes.func,
+  orderQuote: PropTypes.func,
   saveQuoteCharge: PropTypes.func.isRequired,
   saveQuoteChargeOK: PropTypes.func.isRequired,
   deleteQuoteCharge: PropTypes.func.isRequired,

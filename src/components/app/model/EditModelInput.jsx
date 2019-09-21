@@ -51,7 +51,8 @@ class EditModelInput extends Component {
     } = this.props;
     let editComponent;
     const fieldName = `${field.fieldName}${componentKey}${index}`;
-    const fieldValue = model[field.fieldName];
+    let fieldValue = model[field.fieldName];
+    if (fieldValue === null) fieldValue = undefined;
     const emptyAllowed = !(field.required && fieldValue);
     const error = model.error_detail ? model.error_detail[field.fieldName] : '';
     const readOnly = field.readOnlyFunction && field.readOnlyFunction(model);

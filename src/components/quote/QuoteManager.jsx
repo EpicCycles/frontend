@@ -21,6 +21,7 @@ import {
 } from './helpers/quoteManagerTabs';
 import QuoteSummary from '../quoteSummary/QuoteSummary';
 import QuoteAnswers from '../quoteAnswer/QuoteAnswers';
+import { quoteOrderChecks } from './helpers/quoteOrderChecks';
 
 class QuoteManager extends React.Component {
   state = {};
@@ -82,6 +83,7 @@ class QuoteManager extends React.Component {
       getQuoteToCopy,
       saveQuote,
       copyQuote,
+      orderQuote,
       saveQuotePart,
       saveQuotePartOK,
       deleteQuotePart,
@@ -191,6 +193,7 @@ class QuoteManager extends React.Component {
             issueQuote={this.issueQuote}
             saveQuote={saveQuote}
             copyQuote={copyQuote}
+            orderQuote={quoteOrderChecks(quote, questions, quoteAnswers) && orderQuote}
             saveQuotePart={saveQuotePart}
             saveQuotePartOK={saveQuotePartOK}
             deleteQuotePart={deleteQuotePart}
@@ -302,6 +305,7 @@ QuoteManager.propTypes = {
   saveQuotePart: PropTypes.func.isRequired,
   saveQuote: PropTypes.func.isRequired,
   copyQuote: PropTypes.func.isRequired,
+  orderQuote: PropTypes.func.isRequired,
   saveQuotePartOK: PropTypes.func.isRequired,
   saveQuoteCharge: PropTypes.func.isRequired,
   saveQuoteChargeOK: PropTypes.func.isRequired,

@@ -37,6 +37,9 @@ import {
   ISSUE_QUOTE,
   issueQuoteError,
   issueQuoteOK,
+  ORDER_QUOTE,
+  orderQuoteError,
+  orderQuoteOK,
   SAVE_QUOTE_ANSWER,
   SAVE_QUOTE_CHARGE,
   SAVE_QUOTE_PART,
@@ -433,4 +436,23 @@ export function* issueQuote(action) {
 
 export function* watchForIssueQuote() {
   yield takeLatest(`${ISSUE_QUOTE}_REQUESTED`, issueQuote);
+}
+
+export function* orderQuote(action) {
+  try {
+    const token = yield select(selectors.token);
+    if (token) {
+      const completePayload = updateObject(action.payload, { token });
+      const response = yield call(quote.orderQuote, completePayload);
+      yield put(orderQuoteOK(response.data));
+    } else {
+      yield call(history.push, LOGIN_URL);
+    }
+  } catch (error) {
+    yield put(orderQuoteError(errorAsMessage(error, 'Quote Order failed')));
+  }
+}
+
+export function* watchForOrderQuote() {
+  yield takeLatest(`${ORDER_QUOTE}_REQUESTED`, orderQuote);
 }

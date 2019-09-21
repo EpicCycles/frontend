@@ -6,6 +6,7 @@ export const GET_QUOTE = 'quote/QUOTE_FETCH';
 export const CHANGE_QUOTE = 'quote/QUOTE_CHANGE';
 export const ARCHIVE_QUOTE = 'quote/QUOTE_ARCHIVE';
 export const ISSUE_QUOTE = 'quote/QUOTE_ISSUE';
+export const ORDER_QUOTE = 'quote/QUOTE_ORDER';
 export const UNARCHIVE_QUOTE = 'quote/QUOTE_UNARCHIVE';
 export const UPDATE_QUOTE = 'quote/QUOTE_PUT';
 export const CLEAR_QUOTE_DATA = 'quote/QUOTE_CLEAR';
@@ -156,6 +157,19 @@ export const issueQuoteOK = responseData => ({
 });
 export const issueQuoteError = error => ({
   type: `${ISSUE_QUOTE}_ERROR`,
+  payload: error,
+});
+
+export const orderQuote = quoteId => ({
+  type: `${ORDER_QUOTE}_REQUESTED`,
+  payload: { quoteId },
+});
+export const orderQuoteOK = responseData => ({
+  type: `${ORDER_QUOTE}_OK`,
+  payload: responseData,
+});
+export const orderQuoteError = error => ({
+  type: `${ORDER_QUOTE}_ERROR`,
   payload: error,
 });
 

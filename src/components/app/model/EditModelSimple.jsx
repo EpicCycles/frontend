@@ -44,7 +44,6 @@ class EditModelSimple extends PureComponent {
       modelSave,
       modelDelete,
     } = this.props;
-
     if (pageMode)
       return (
         <div>

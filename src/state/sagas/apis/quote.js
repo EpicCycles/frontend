@@ -32,6 +32,11 @@ const issueQuote = async payload => {
   const quoteId = payload.quoteId;
   return api.instance.post(`/rest-epic/quote/${quoteId}/issue`);
 };
+const orderQuote = async payload => {
+  api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
+  const quoteId = payload.quoteId;
+  return api.instance.post(`/rest-epic/quote/${quoteId}/order`);
+};
 const saveQuote = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
   const quoteId = payload.quote.id;
@@ -113,4 +118,5 @@ export default {
   deleteQuoteCharge,
   recalculateQuote,
   issueQuote,
+  orderQuote,
 };

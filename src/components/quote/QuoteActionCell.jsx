@@ -9,6 +9,7 @@ const QuoteActionCell = props => {
     archiveQuote,
     changeQuote,
     getQuote,
+    placeOrder,
     quote,
     cloneQuote,
     issueQuote,
@@ -22,6 +23,7 @@ const QuoteActionCell = props => {
     cloneQuote,
     issueQuote,
     unarchiveQuote,
+    placeOrder,
   };
   const componentKey = getModelKey(quote);
   const actionArray = quoteActions(quote, availableActions);
@@ -40,6 +42,7 @@ QuoteActionCell.propTypes = {
   changeQuote: PropTypes.func,
   getQuote: PropTypes.func,
   archiveQuote: PropTypes.func,
+  placeOrder: PropTypes.func,
   cloneQuote: PropTypes.func,
   issueQuote: PropTypes.func,
   unarchiveQuote: PropTypes.func,

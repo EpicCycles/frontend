@@ -12,6 +12,7 @@ import {
   GET_QUOTE,
   GET_QUOTE_TO_COPY,
   ISSUE_QUOTE,
+  ORDER_QUOTE,
   SAVE_QUOTE_ANSWER,
   SAVE_QUOTE_CHARGE,
   SAVE_QUOTE_PART,
@@ -105,6 +106,7 @@ const quote = (state = initialState, action) => {
       };
     case `${ARCHIVE_QUOTE}_OK`:
     case `${ISSUE_QUOTE}_OK`:
+    case `${ORDER_QUOTE}_OK`:
     case `${UNARCHIVE_QUOTE}_OK`:
       return {
         ...state,
@@ -126,6 +128,7 @@ const quote = (state = initialState, action) => {
     case `${UPDATE_QUOTE}_REQUESTED`:
     case `${ARCHIVE_QUOTE}_REQUESTED`:
     case `${ISSUE_QUOTE}_REQUESTED`:
+    case `${ORDER_QUOTE}_REQUESTED`:
     case `${UNARCHIVE_QUOTE}_REQUESTED`:
     case `${SAVE_QUOTE_PART}_REQUESTED`:
     case `${DELETE_QUOTE_PART}_REQUESTED`:
@@ -143,7 +146,7 @@ const quote = (state = initialState, action) => {
     case `${GET_QUOTE}_ERROR`:
     case `${GET_QUOTE_TO_COPY}_ERROR`:
     case `${ARCHIVE_QUOTE}_ERROR`:
-    case `${ISSUE_QUOTE}_ERROR`:
+    case `${ORDER_QUOTE}_ERROR`:
     case `${UNARCHIVE_QUOTE}_ERROR`:
     case `${DELETE_QUOTE_PART}_ERROR`:
     case `${DELETE_QUOTE_ANSWER}_ERROR`:

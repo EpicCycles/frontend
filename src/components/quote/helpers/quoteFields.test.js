@@ -1,10 +1,16 @@
 import {
   BIKE_FIELD,
+  CHECKBOX,
+  CLUB_MEMBER,
   CLUB_MEMBER_FIELD,
   CREATED_BY_FIELD,
   CREATED_DATE_FIELD,
+  CURRENCY,
   CUSTOMER_FIELD,
   ISSUED_DATE_FIELD,
+  NUMBER,
+  SELECT_ONE,
+  TEXT,
   UPD_DATE_FIELD,
 } from '../../app/model/helpers/fields';
 import {
@@ -21,16 +27,136 @@ import {
   VERSION_FIELD,
   FIXED_PRICE_FIELD,
   CHARGE_TOTAL_FIELD,
+  CALCULATED_PRICE,
+  FRAME_SIZE,
+  VERSION,
+  QUOTE_DESC,
+  BIKE_PRICE,
+  COLOUR,
+  QUOTE_PRICE,
+  TOTAL_PRICE,
+  QUOTE_STATUS,
 } from './quoteFields';
 import { updateObject } from '../../../helpers/utils';
+import { QUOTE_ARCHIVED, QUOTE_ORDERED } from './quote';
+import { VALUE_MISSING } from '../../app/model/helpers/error';
 
 const bike = { id: 123, colours: 'red/blue/green', sizes: '50, 52, 54, 56' };
 const expectedColourField = updateObject(COLOUR_FIELD, { placeholder: bike.colours });
 const expectedSizeField = updateObject(FRAME_SIZE_FIELD, { placeholder: bike.sizes });
+const BIKE_PRICE_FIELD_READONLY = {
+  fieldName: BIKE_PRICE,
+  header: 'Bike Price',
+  type: CURRENCY,
+  maxLength: 7,
+  readOnly: true,
+  displaySize: 10,
+};
+const BIKE_PRICE_FIELD_READONLY_REQD = {
+  fieldName: BIKE_PRICE,
+  header: 'Bike Price',
+  type: CURRENCY,
+  maxLength: 7,
+  readOnly: true,
+  required: true,
+  displaySize: 10,
+};
+const COLOUR_FIELD_READONLY = {
+  fieldName: COLOUR,
+  header: 'Colour',
+  type: TEXT,
+  maxLength: 100,
+  readOnly: true,
+  displaySize: 20,
+};
+const FRAME_SIZE_FIELD_READONLY = {
+  fieldName: FRAME_SIZE,
+  header: 'Frame Size',
+  readOnly: true,
+  type: TEXT,
+};
+const QUOTE_DESC_FIELD_READONLY = {
+  fieldName: QUOTE_DESC,
+  type: TEXT,
+  displaySize: 40,
+  maxLength: 60,
+  required: true,
+  readOnly: true,
+  maxWidth: '250px',
+  header: 'Description',
+};
+
+const QUOTE_PRICE_FIELD_READONLY = {
+  fieldName: QUOTE_PRICE,
+  header: 'Sub-total',
+  synonyms: [],
+  type: CURRENCY,
+  displaySize: 7,
+  maxLength: 10,
+  required: true,
+  readOnly: true,
+  error: VALUE_MISSING,
+};
+const CLUB_MEMBER_FIELD_READONLY = {
+  fieldName: CLUB_MEMBER,
+  header: 'Club Member?',
+  readOnly: true,
+  type: CHECKBOX,
+};
 
 // possible parameters: quote, bike, pricesRequired, fieldExclusions
 // field exclusions are (booleans - customer, status, history, bike, epic)
 describe('quoteFields', () => {
+  it('should return all fields read only for an archived quote', () => {
+    const quote = { id: 23, bike: 123, quote_status: QUOTE_ARCHIVED };
+    const callParameters = { quote, pricesRequired: true };
+    const expectedFields = [
+      QUOTE_DESC_FIELD_READONLY,
+      VERSION_FIELD,
+      CUSTOMER_FIELD,
+      CLUB_MEMBER_FIELD_READONLY,
+      QUOTE_STATUS_FIELD,
+      BIKE_FIELD,
+      BIKE_PRICE_FIELD_READONLY_REQD,
+      FRAME_SIZE_FIELD_READONLY,
+      COLOUR_FIELD_READONLY,
+      CALCULATED_PRICE_FIELD,
+      QUOTE_PRICE_FIELD_READONLY,
+      FIXED_PRICE_FIELD,
+      CHARGE_TOTAL_FIELD,
+      TOTAL_PRICE_FIELD,
+      UPD_DATE_FIELD,
+      ISSUED_DATE_FIELD,
+      CREATED_BY_FIELD,
+      CREATED_DATE_FIELD,
+    ];
+    expect(quoteFields(callParameters)).toEqual(expectedFields);
+  });
+  it('should return most fields read only for an ordered quote', () => {
+    const quote = { id: 23, bike: 123, quote_status: QUOTE_ORDERED };
+    const callParameters = { quote, pricesRequired: true };
+    const expectedFields = [
+      QUOTE_DESC_FIELD,
+      VERSION_FIELD,
+      CUSTOMER_FIELD,
+      CLUB_MEMBER_FIELD,
+      QUOTE_STATUS_FIELD,
+      BIKE_FIELD,
+      BIKE_PRICE_FIELD_READONLY_REQD,
+      FRAME_SIZE_FIELD_READONLY,
+      COLOUR_FIELD_READONLY,
+      CALCULATED_PRICE_FIELD,
+      QUOTE_PRICE_FIELD_READONLY,
+      FIXED_PRICE_FIELD,
+      CHARGE_TOTAL_FIELD,
+      TOTAL_PRICE_FIELD,
+      UPD_DATE_FIELD,
+      ISSUED_DATE_FIELD,
+      CREATED_BY_FIELD,
+      CREATED_DATE_FIELD,
+    ];
+    expect(quoteFields(callParameters)).toEqual(expectedFields);
+  });
   it('should return non bike fields when not for issue and non bike quote', () => {
     const quote = { id: 23 };
     const callParameters = { quote };

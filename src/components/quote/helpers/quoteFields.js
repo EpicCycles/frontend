@@ -13,7 +13,7 @@ import {
 } from '../../app/model/helpers/fields';
 import { updateObject } from '../../../helpers/utils';
 import { VALUE_MISSING } from '../../app/model/helpers/error';
-import { QUOTE_STATUS_CHOICES } from './quote';
+import { QUOTE_ARCHIVED, QUOTE_ORDERED, QUOTE_STATUS_CHOICES } from './quote';
 
 const requiredAttribute = { required: true };
 
@@ -112,26 +112,34 @@ export const quoteFields = p => {
   const excludeHistory = fieldExclusions && fieldExclusions.history;
   const excludeBike = (fieldExclusions && fieldExclusions.bike) || (quote && !quote.bike);
   const excludeEpic = fieldExclusions && fieldExclusions.epic;
-  const fields = [QUOTE_DESC_FIELD, VERSION_FIELD];
+  const readOnlyAll = quote && quote.quote_status === QUOTE_ARCHIVED ? { readOnly: true } : {};
+  const readOnlySome =
+    quote && (quote.quote_status === QUOTE_ARCHIVED || quote.quote_status === QUOTE_ORDERED)
+      ? { readOnly: true }
+      : {};
+  const quoteDescField = updateObject(QUOTE_DESC_FIELD, readOnlyAll);
+  const clubMemberField = updateObject(CLUB_MEMBER_FIELD, readOnlyAll);
+  const fields = [quoteDescField, VERSION_FIELD];
   if (!excludeCustomer) fields.push(CUSTOMER_FIELD);
-  fields.push(CLUB_MEMBER_FIELD);
+  fields.push(clubMemberField);
   if (!excludeStatus) fields.push(QUOTE_STATUS_FIELD);
   if (!excludeBike) {
     fields.push(BIKE_FIELD);
     if (!excludeEpic) {
-      if (pricesRequired) fields.push(BIKE_PRICE_FIELD_REQUIRED);
-      else fields.push(BIKE_PRICE_FIELD);
+      let bikePriceField = BIKE_PRICE_FIELD;
+      if (pricesRequired) bikePriceField = BIKE_PRICE_FIELD_REQUIRED;
+      fields.push(updateObject(bikePriceField, readOnlySome));
     }
     if (bike && bike.sizes)
-      fields.push(updateObject(FRAME_SIZE_FIELD, { placeholder: bike.sizes }));
-    else fields.push(FRAME_SIZE_FIELD);
+      fields.push(updateObject(FRAME_SIZE_FIELD, { placeholder: bike.sizes }, readOnlySome));
+    else fields.push(updateObject(FRAME_SIZE_FIELD, readOnlySome));
     if (bike && bike.colours)
-      fields.push(updateObject(COLOUR_FIELD, { placeholder: bike.colours }));
-    else fields.push(COLOUR_FIELD);
+      fields.push(updateObject(COLOUR_FIELD, { placeholder: bike.colours }, readOnlySome));
+    else fields.push(updateObject(COLOUR_FIELD, readOnlySome));
   }
   if (!excludeEpic) fields.push(CALCULATED_PRICE_FIELD);
 
-  if (pricesRequired) fields.push(QUOTE_PRICE_FIELD);
+  if (pricesRequired) fields.push(updateObject(QUOTE_PRICE_FIELD, readOnlySome));
   if (!excludeEpic) {
     fields.push(FIXED_PRICE_FIELD);
     fields.push(CHARGE_TOTAL_FIELD);

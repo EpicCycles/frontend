@@ -124,8 +124,7 @@ describe('QuoteDetail', () => {
         frames={sampleFrames}
       />,
     );
-    expect(component.find('ViewModelBlock')).toHaveLength(1);
-    expect(component.find('EditModelSimple')).toHaveLength(1);
+    expect(component.find('EditModelSimple')).toHaveLength(2);
     expect(component.find('QuotePartGrid')).toHaveLength(0);
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);

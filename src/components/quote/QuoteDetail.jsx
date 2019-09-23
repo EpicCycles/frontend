@@ -11,7 +11,6 @@ import QuoteSummaryParts from '../quoteSummary/QuoteSummaryParts';
 import QuotePartGrid from '../quotePart/QuotePartGrid';
 import { QUOTE_INITIAL, QUOTE_ISSUED } from './helpers/quote';
 
-import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteActionCell from './QuoteActionCell';
 import { getQuoteParts } from '../quotePart/helpers/getQuoteParts';
 import { checkForChanges, getModelKey } from '../app/model/helpers/model';
@@ -196,35 +195,24 @@ class QuoteDetail extends PureComponent {
                 issueQuote={this.issueQuote}
               />
             )}
-            {quote.quote_status === QUOTE_INITIAL ? (
-              <EditModelSimple
-                pageMode
-                actionsRequired
-                model={updatedQuote ? updatedQuote : quote}
-                persistedModel={quote}
-                modelFields={quoteModelFields}
-                brands={brands}
-                bikes={bikes}
-                frames={frames}
-                users={users}
-                customers={customers}
-                modelSave={saveQuote}
-                modelDelete={archiveQuote}
-                additionalActions={additionalActions}
-                key={`editQuote${quote.id}`}
-                showReadOnlyFields
-                raiseState={this.raiseStateForQuote}
-              />
-            ) : (
-              <ViewModelBlock
-                modelFields={quoteModelFields}
-                model={quote}
-                bikes={bikes}
-                customers={customers}
-                frames={frames}
-                users={users}
-              />
-            )}
+            <EditModelSimple
+              pageMode
+              actionsRequired
+              model={updatedQuote ? updatedQuote : quote}
+              persistedModel={quote}
+              modelFields={quoteModelFields}
+              brands={brands}
+              bikes={bikes}
+              frames={frames}
+              users={users}
+              customers={customers}
+              modelSave={saveQuote}
+              modelDelete={archiveQuote}
+              additionalActions={additionalActions}
+              key={`editQuote${quote.id}`}
+              showReadOnlyFields
+              raiseState={this.raiseStateForQuote}
+            />
           </div>
           <QuoteSummaryParts
             lockFirstColumn={true}

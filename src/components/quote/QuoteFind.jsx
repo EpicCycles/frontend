@@ -12,12 +12,7 @@ import { CUSTOMER_URL } from '../menus/helpers/menu';
 
 class QuoteFind extends React.Component {
   state = {
-    quoteDesc: '',
-    brand: '',
-    frameName: '',
-    selectedCustomer: '',
-    bike: '',
-    archived: false,
+    bikeSearchCriteria: {},
   };
 
   goToAddCustomer = () => {
@@ -29,18 +24,28 @@ class QuoteFind extends React.Component {
     newState[fieldName] = input;
     this.setState(newState);
   };
+  raiseStateForCriteria = bikeSearchCriteria => {
+    this.setState({ bikeSearchCriteria });
+  };
 
   checkCriteriaForQuoteSearch = () => {
-    if (this.state.quoteDesc) return true;
-    if (this.state.bike) return true;
-    if (this.state.brand) return true;
-    if (this.state.frameName) return true;
-    if (this.state.selectedCustomer) return true;
+    const { quoteDesc, bikeSearchCriteria, selectedCustomer, bike } = this.state;
+
+    if (quoteDesc || bike || selectedCustomer) return true;
+    if (bikeSearchCriteria && (bikeSearchCriteria.brand || bikeSearchCriteria.frameName))
+      return true;
+
     return false;
   };
 
   getQuoteList = () => {
-    const { quoteDesc, brand, frameName, selectedCustomer, bike, archived } = this.state;
+    const {
+      quoteDesc = '',
+      bikeSearchCriteria = {},
+      selectedCustomer = '',
+      bike = '',
+    } = this.state;
+    const { brand = '', frameName = '', archived } = bikeSearchCriteria;
     this.props.getQuoteList({ quoteDesc, brand, frameName, selectedCustomer, bike, archived });
   };
 
@@ -110,7 +115,7 @@ class QuoteFind extends React.Component {
           getFrameList={getFrameList}
           selectedBike={bike}
           data-test="bike-select"
-          onKeyPress={this.handleKeyPress}
+          raiseStateForCriteria={this.raiseStateForCriteria}
         />
         <hr />
         <SearchButton

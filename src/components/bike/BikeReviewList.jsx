@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { changeList, doWeHaveObjects, removeKey, updateObject } from '../../helpers/utils';
+import { changeList, doWeHaveObjects, updateObject } from '../../helpers/utils';
 import { Button, Dimmer, Icon, Loader } from 'semantic-ui-react';
 import BikeReviewListSelection from './BikeReviewListSelection';
 import { Redirect } from 'react-router';
@@ -28,26 +28,7 @@ class BikeReviewList extends React.Component {
     bikeReviewList: [],
     bikeDeleteList: [],
   };
-  handleInputChange = (fieldName, input) => {
-    let newState = updateObject(this.state);
-    newState[fieldName] = input;
-    this.setState(newState);
-  };
-  handleInputClear = fieldName => {
-    removeKey(this.state, fieldName);
-  };
-  handleKeyPress = e => {
-    if (e.key === 'Enter') {
-      this.getFrameList();
-    }
-  };
-  buildSearchCriteria = () => {
-    const { brand, frameName, archived } = this.state;
-    return { brand, frameName, archived };
-  };
-  getFrameList = () => {
-    this.props.getFrameList(this.buildSearchCriteria());
-  };
+
   showSearch = () => {
     const { frameArchiveList, frameDeleteList, bikeReviewList, bikeDeleteList } = this.state;
     if (
@@ -151,30 +132,18 @@ class BikeReviewList extends React.Component {
     return '';
   };
 
-  constructor(props) {
-    super();
-    if (!(props.brands && props.brands.length > 0)) {
-      if (!props.isLoading) {
-        props.getBrands();
-      }
-    }
-  }
-
   render() {
     const {
       reviewFirstBike,
-      brand,
-      frameName,
-      archived,
       frameArchiveList,
       bikeReviewList,
       bikeDeleteList,
       frameDeleteList,
     } = this.state;
-    const { isLoading, brands, frames, bikes, saveFrame, saveBike } = this.props;
+    const { isLoading, brands, frames, bikes, saveFrame, saveBike, getFrameList } = this.props;
     const archivedFrames = frames ? frames.filter(frame => frame.archived) : [];
     const nonArchivedFrames = frames ? frames.filter(frame => !frame.archived) : [];
-    let framesWidth = archived ? window.innerWidth * 0.75 : window.innerWidth;
+    let framesWidth = archivedFrames.length > 0 ? window.innerWidth * 0.75 : window.innerWidth;
     const haveFrames = doWeHaveObjects(frames);
     return (
       <Fragment key="bikeUpload">
@@ -182,12 +151,7 @@ class BikeReviewList extends React.Component {
         {!haveFrames ? (
           <BikeReviewListSelection
             brands={brands}
-            onChange={this.handleInputChange}
-            brand={brand}
-            frameName={frameName}
-            archived={archived}
-            getFrameList={this.getFrameList}
-            onKeyPress={this.handleKeyPress}
+            getFrameList={getFrameList}
           />
         ) : (
           <Fragment>
@@ -290,7 +254,7 @@ class BikeReviewList extends React.Component {
               ) : (
                 <div>No current frames found</div>
               )}
-              {archived && archivedFrames.length > 0 && (
+              {archivedFrames.length > 0 && (
                 <div
                   key="bikeArchiveGrid"
                   className="grid"
@@ -329,7 +293,6 @@ class BikeReviewList extends React.Component {
                   ))}
                 </div>
               )}
-              {archived && archivedFrames.length === 0 && <div>No Archived frames found</div>}
             </div>
           </Fragment>
         )}

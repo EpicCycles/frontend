@@ -27,9 +27,7 @@ const defaultState = props => {
       selectedBike: bike,
       existingCustomer,
       existingBike,
-      brand: '',
-      frameName: '',
-      archived: false,
+      bikeSearchCriteria: {},
     };
   }
   return {};
@@ -50,12 +48,10 @@ class QuoteCopy extends React.Component {
   handleInputClear = fieldName => {
     removeKey(this.state, fieldName);
   };
-  buildBikeSearchCriteria = () => {
-    const { brand, frameName, archived } = this.state;
-    return { brand, frameName, archived };
-  };
-  getFrameList = () => {
-    this.props.getFrameList(this.buildBikeSearchCriteria());
+
+  getFrameList = bikeSearchCriteria => {
+    this.setState({ bikeSearchCriteria });
+    this.props.getFrameList(bikeSearchCriteria);
   };
   copyQuote = () => {
     const { selectedCustomer, selectedBike, existingCustomer, existingBike } = this.state;
@@ -103,9 +99,7 @@ class QuoteCopy extends React.Component {
     const {
       selectedBike,
       selectedCustomer,
-      brand,
-      frameName,
-      archived,
+      bikeSearchCriteria,
       existingCustomer,
       existingBike,
     } = this.state;
@@ -131,18 +125,15 @@ class QuoteCopy extends React.Component {
           />
           {quote.bike && (
             <BikeListAndSelect
-              onChange={this.handleInputChange}
-              onClick={this.handleInputClear}
               getFrameList={this.getFrameList}
               brands={brands}
               bikes={fullBikes}
               frames={frames}
-              brand={brand}
-              frameName={frameName}
+              bikeSearchCriteria={bikeSearchCriteria}
               canSelectArchived={true}
-              archived={archived}
               selectedBike={selectedBike}
               data-test="select-bike"
+              onChange={this.handleInputChange}
             />
           )}
           <Button disabled={!copyAllowed} onClick={this.copyQuote} data-test="copy-button">

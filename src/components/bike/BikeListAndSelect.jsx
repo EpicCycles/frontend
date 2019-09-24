@@ -7,31 +7,19 @@ import { bikeFullName } from './helpers/bike';
 import BikeSearch from './BikeSearch';
 
 class BikeListAndSelect extends React.Component {
-  findFrames = () => {
-    const { brand, frameName, archived, getFrameList } = this.props;
-    getFrameList({ brand, frameName, archived });
-  };
-  handleKeyPress = e => {
-    if (e.key === 'Enter') {
-      if (this.props.onKeyPress) {
-        this.props.onKeyPress(e);
-      } else {
-        this.props.getFrameList();
-      }
-    }
-  };
+
   render() {
     const {
       className,
       brands,
       onChange,
-      brand,
-      frameName,
+      bikeSearchCriteria,
       canSelectArchived,
-      archived,
       bikes,
       frames,
       selectedBike,
+      getFrameList,
+      raiseStateForCriteria,
     } = this.props;
     const bikeOptions = bikes.map(bike => {
       return {
@@ -45,16 +33,13 @@ class BikeListAndSelect extends React.Component {
         <h2 data-test="list-and-search-heading">Select Bike</h2>
         <div className={className}>
           <BikeSearch
-            onChange={onChange}
-            getFrameList={this.findFrames}
+            getFrameList={getFrameList}
             brands={brands}
-            brand={brand}
-            frameName={frameName}
-            archived={archived}
+            bikeSearchCriteria={bikeSearchCriteria}
             canSelectArchived={canSelectArchived}
             data-test="bikes-search"
-            className={className}
-            onKeyPress={this.handleKeyPress}
+            pageMode
+            raiseStateForCriteria={raiseStateForCriteria}
           />
           {bikeOptions.length > 0 ? (
             <SelectInput
@@ -81,9 +66,7 @@ BikeListAndSelect.defaultProps = {
   frames: [],
   className: 'row',
   selectedBike: '',
-  brand: '',
-  frameName: '',
-  archived: false,
+  bikeSearchCriteria: {},
 };
 BikeListAndSelect.propTypes = {
   brands: PropTypes.array,
@@ -91,10 +74,8 @@ BikeListAndSelect.propTypes = {
   frames: PropTypes.array,
   onChange: PropTypes.func.isRequired,
   onKeyPress: PropTypes.func,
-  brand: PropTypes.string,
-  frameName: PropTypes.string,
   canSelectArchived: PropTypes.bool,
-  archived: PropTypes.bool,
+  bikeSearchCriteria: PropTypes.object,
   getFrameList: PropTypes.func.isRequired,
   selectedBike: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,

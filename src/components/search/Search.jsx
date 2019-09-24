@@ -21,7 +21,10 @@ class Search extends React.Component {
   }
 
   raiseStateForSearchCriteria = updatedSearchCriteria => {
-    this.setState({ updatedSearchCriteria: updatedSearchCriteria });
+    // update local and higher level state as required
+    const { raiseStateForCriteria } = this.props;
+    if (raiseStateForCriteria) raiseStateForCriteria(updatedSearchCriteria);
+    this.setState({ updatedSearchCriteria });
   };
 
   handleKeyPress = e => {
@@ -100,6 +103,7 @@ Search.propTypes = {
   searchCriteria: PropTypes.object,
   searchFields: PropTypes.array.isRequired,
   doSearch: PropTypes.func.isRequired,
+  raiseStateForCriteria: PropTypes.func,
   searchTitle: PropTypes.string,
   sections: PropTypes.array,
   brands: PropTypes.array,

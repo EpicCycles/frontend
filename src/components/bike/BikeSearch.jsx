@@ -1,67 +1,42 @@
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import { ARCHIVED, CHECKBOX, SELECT_ONE, TEXT } from '../app/model/helpers/fields';
-import { buildBrandOptions } from '../brand/helpers/brand';
-import SearchBlock from '../../common/SearchBlock';
+import { bikeSearchFields } from './helpers/bikeSearch';
+import Search from '../search/Search';
 
 const BikeSearch = props => {
   const {
+    raiseStateForCriteria,
     brands,
-    onChange,
-    brand,
-    onKeyPress,
-    frameName,
-    archived,
-    className,
+    bikeSearchCriteria,
     getFrameList,
-    displayRow,
+    pageMode,
+    canSelectArchived,
   } = props;
-  const searchFields = [
-    {
-      displayName: 'Brand:',
-      fieldName: 'brand',
-      type: SELECT_ONE,
-      selectList: buildBrandOptions(brands.filter(brand => brand.bike_brand)),
-    },
-    { displayName: 'Frame Name like:', fieldName: 'frameName', type: TEXT },
-  ];
-  if (props.canSelectArchived)
-    searchFields.push({
-      displayName: 'Include archived Frames:',
-      fieldName: ARCHIVED,
-      type: CHECKBOX,
-    });
-  const selectionCriteria = { brand, frameName, archived };
+  const searchFields = bikeSearchFields(canSelectArchived);
   return (
-    <SearchBlock
+    <Search
       searchFields={searchFields}
-      onChange={onChange}
-      searchFnc={getFrameList}
-      onKeyPress={onKeyPress}
+      doSearch={getFrameList}
       searchTitle="Find Bikes"
-      displayRow={displayRow}
-      searchCriteria={selectionCriteria}
-      searchCriteriaValid={!!(brand || frameName)}
-      className={className}
+      pageMode={pageMode}
+      brands={brands}
+      searchCriteria={bikeSearchCriteria}
+      raiseStateForCriteria={raiseStateForCriteria}
     />
   );
 };
 BikeSearch.defaultProps = {
   brands: [],
   className: '',
-  displayRow: true,
 };
 BikeSearch.propTypes = {
   brands: PropTypes.any,
-  onChange: PropTypes.func.isRequired,
-  brand: PropTypes.string,
+  bikeSearchCriteria: PropTypes.object,
   className: PropTypes.string,
-  frameName: PropTypes.string,
   canSelectArchived: PropTypes.bool,
-  archived: PropTypes.bool,
-  displayRow: PropTypes.bool,
+  pageMode: PropTypes.bool,
   getFrameList: PropTypes.func.isRequired,
-  onKeyPress: PropTypes.func,
+  raiseStateForCriteria: PropTypes.func,
 };
 
 export default BikeSearch;

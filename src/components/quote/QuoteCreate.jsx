@@ -9,9 +9,7 @@ import { quoteDescription } from './helpers/quote';
 import { CUSTOMER_URL } from '../menus/helpers/menu';
 
 const initialState = {
-  brand: '',
-  frameName: '',
-  archived: false,
+ bikeSearchCriteria: {},
 };
 
 class QuoteCreate extends React.Component {
@@ -39,12 +37,9 @@ class QuoteCreate extends React.Component {
   handleInputClear = fieldName => {
     removeKey(this.state, fieldName);
   };
-  buildBikeSearchCriteria = () => {
-    const { brand, frameName, archived } = this.state;
-    return { brand, frameName, archived };
-  };
-  getFrameList = () => {
-    this.props.getFrameList(this.buildBikeSearchCriteria());
+  getFrameList = bikeSearchCriteria => {
+    this.setState({ bikeSearchCriteria });
+    this.props.getFrameList(bikeSearchCriteria);
   };
   buildQuote = () => {
     const customer = this.state.selectedCustomer;
@@ -83,7 +78,7 @@ class QuoteCreate extends React.Component {
   }
 
   render() {
-    const { redirect } = this.state;
+    const { selectedBike, selectedCustomer, redirect, bikeSearchCriteria } = this.state;
     const {
       getCustomerList,
       searchParams,
@@ -95,7 +90,6 @@ class QuoteCreate extends React.Component {
       bikes,
       frames,
     } = this.props;
-    const { selectedBike, selectedCustomer, brand, frameName, archived } = this.state;
     if (redirect) return <Redirect to={redirect} push />;
 
     return (
@@ -114,17 +108,15 @@ class QuoteCreate extends React.Component {
           data-test="select-customer"
         />
         <BikeListAndSelect
-          onChange={this.handleInputChange}
           getFrameList={this.getFrameList}
           brands={brands}
           bikes={bikes}
           frames={frames}
-          brand={brand}
-          frameName={frameName}
+          bikeSearchCriteria={bikeSearchCriteria}
           canSelectArchived={true}
-          archived={archived}
           selectedBike={selectedBike}
           data-test="select-bike"
+          onChange={this.handleInputChange}
         />
         <Button disabled={!selectedCustomer} onClick={this.buildQuote} data-test="create-button">
           Create Quote

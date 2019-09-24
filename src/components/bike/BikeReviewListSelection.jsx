@@ -7,14 +7,10 @@ const BikeReviewListSelection = props => {
     <Fragment>
       <h2 data-test="bike-review-heading">Get Frames to Review</h2>
       <BikeSearch
-        brand={props.brand}
         brands={props.brands}
-        onChange={props.onChange}
-        onKeyPress={props.onKeyPress}
         getFrameList={props.getFrameList}
-        frameName={props.frameName}
-        archived={props.archived}
         canSelectArchived
+        pageMode
         data-test="bike-search"
       />
     </Fragment>

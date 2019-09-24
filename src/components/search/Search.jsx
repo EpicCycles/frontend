@@ -42,7 +42,20 @@ class Search extends React.Component {
 
   render() {
     let { updatedSearchCriteria } = this.state;
-    const { searchCriteria, searchFields, pageMode, searchTitle, isLoading } = this.props;
+    const {
+      searchCriteria,
+      searchFields,
+      pageMode,
+      searchTitle,
+      isLoading,
+      sections,
+      brands,
+      suppliers,
+      bikes,
+      frames,
+      customers,
+      users,
+    } = this.props;
     const searchCriteriaValid =
       !isLoading &&
       updatedSearchCriteria &&
@@ -63,6 +76,13 @@ class Search extends React.Component {
           raiseState={this.raiseStateForSearchCriteria}
           key={`changeSearchCriteria`}
           data-test="change-criteria"
+          sections={sections}
+          brands={brands}
+          bikes={bikes}
+          frames={frames}
+          customers={customers}
+          suppliers={suppliers}
+          users={users}
         />
         <SearchButton onClick={this.onSubmit} disabled={!searchCriteriaValid} title={searchTitle} />
       </form>
@@ -81,5 +101,12 @@ Search.propTypes = {
   searchFields: PropTypes.array.isRequired,
   doSearch: PropTypes.func.isRequired,
   searchTitle: PropTypes.string,
+  sections: PropTypes.array,
+  brands: PropTypes.array,
+  bikes: PropTypes.array,
+  frames: PropTypes.array,
+  suppliers: PropTypes.array,
+  customers: PropTypes.array,
+  users: PropTypes.array,
 };
 export default Search;

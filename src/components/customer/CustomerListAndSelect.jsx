@@ -50,17 +50,17 @@ const CustomerListAndSelect = props => {
             isEmptyAllowed={true}
           />
         )}
-      </div>
-      <div className="row align_left">
-        {count === 0 && (
-          <div data-test="start-message">No Customer to show, set new criteria and search,</div>
-        )}
-        {next && (
-          <div data-test="search-message">
-            Not all customers matching are shown, refine criteria and search,
-          </div>
-        )}
-        {addNewCustomer && <AddLink addFunction={addNewCustomer} />}
+        <div className="row align_left">
+          {count === 0 && (
+            <div data-test="start-message">No Customer to show, set new criteria and search,</div>
+          )}
+          {next && (
+            <div data-test="search-message">
+              Not all customers matching are shown, refine criteria and search,
+            </div>
+          )}
+          {addNewCustomer && <AddLink addFunction={addNewCustomer} />}
+        </div>
       </div>
     </Fragment>
   );

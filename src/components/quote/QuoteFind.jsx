@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import React, { Fragment } from 'react';
+import React from 'react';
 import * as PropTypes from 'prop-types';
 
 import { updateObject } from '../../helpers/utils';
@@ -8,7 +8,7 @@ import BikeListAndSelect from '../bike/BikeListAndSelect';
 import SearchButton from '../../common/SearchButton';
 import { CHECKBOX, TEXT } from '../app/model/helpers/fields';
 import Search from '../../common/Search';
-import {CUSTOMER_URL} from "../menus/helpers/menu";
+import { CUSTOMER_URL } from '../menus/helpers/menu';
 
 class QuoteFind extends React.Component {
   state = {
@@ -74,7 +74,7 @@ class QuoteFind extends React.Component {
       { displayName: 'Include archived quotes:', fieldName: 'archived', type: CHECKBOX },
     ];
     return (
-      <Fragment>
+      <div className="fit-block">
         <h1>Find Quotes</h1>
         <div
           className="row vertical-middle"
@@ -99,7 +99,6 @@ class QuoteFind extends React.Component {
           count={count}
           next={next}
           data-test="customer-select"
-          className='flex-vertical'
         />
         <BikeListAndSelect
           brands={brands}
@@ -114,17 +113,14 @@ class QuoteFind extends React.Component {
           onKeyPress={this.handleKeyPress}
         />
         <hr />
-        <h2>Search</h2>
-        <div className="row align-right">
-          <SearchButton
-            onClick={this.getQuoteList}
-            disabled={!this.checkCriteriaForQuoteSearch()}
-            title="find matching quotes"
-            data-test="search"
-            className="big"
-          />
-        </div>
-      </Fragment>
+        <SearchButton
+          onClick={this.getQuoteList}
+          disabled={!this.checkCriteriaForQuoteSearch()}
+          title="find matching quotes"
+          data-test="search"
+          className="big"
+        />
+      </div>
     );
   }
 }

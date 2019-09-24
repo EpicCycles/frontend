@@ -1,8 +1,5 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import { updateObject, updateObjectWithSelectionChanges } from '../../helpers/utils';
-import SearchBlock from '../../common/SearchBlock';
 import { customerSearchFields } from './helpers/search';
 import Search from '../search/Search';
 

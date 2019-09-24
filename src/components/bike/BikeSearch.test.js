@@ -13,6 +13,6 @@ describe('BikeSearch', () => {
         canSelectArchived={true}
       />,
     );
-    expect(component.find('SearchBlock')).toHaveLength(1);
+    expect(component.find('Search')).toHaveLength(1);
   });
 });

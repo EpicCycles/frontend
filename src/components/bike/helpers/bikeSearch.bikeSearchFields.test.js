@@ -5,6 +5,6 @@ describe('bikeSearchFields', () => {
     expect(bikeSearchFields(true)).toHaveLength(3);
   });
   it('should return two fields when archived cannot be selected', () => {
-    expect(bikeSearchFields(true)).toHaveLength(2);
+    expect(bikeSearchFields(false)).toHaveLength(2);
   });
 });

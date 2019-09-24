@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search should render when minimal data passed 1`] = `
+<form
+  className="fit-block"
+  data-test="search-form"
+  onSubmit={[Function]}
+>
+  <EditModelSimple
+    data-test="change-criteria"
+    key="changeSearchCriteria"
+    model={Object {}}
+    modelFields={
+      Array [
+        Object {
+          "displaySize": 20,
+          "error": "A value is required.",
+          "fieldName": "first_name",
+          "header": "First Name",
+          "maxLength": 60,
+          "required": true,
+          "synonyms": Array [],
+          "type": "text",
+        },
+      ]
+    }
+    persistedModel={Object {}}
+    raiseState={[Function]}
+  />
+  <SearchButton
+    className=""
+    disabled={true}
+    onClick={[Function]}
+    title=""
+  />
+</form>
+`;

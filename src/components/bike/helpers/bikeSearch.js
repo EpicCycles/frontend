@@ -28,7 +28,7 @@ const archivedSelectField = {
   type: CHECKBOX,
 };
 const fullFields = [brandField, frameNameField, archivedSelectField];
-const partialFields = [brandField, frameNameField, archivedSelectField];
+const partialFields = [brandField, frameNameField];
 
 export const bikeSearchFields = canSelectArchived => {
   if (canSelectArchived) return fullFields;

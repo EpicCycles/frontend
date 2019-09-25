@@ -9,7 +9,7 @@ import { quoteDescription } from './helpers/quote';
 import { CUSTOMER_URL } from '../menus/helpers/menu';
 
 const initialState = {
- bikeSearchCriteria: {},
+  bikeSearchCriteria: {},
 };
 
 class QuoteCreate extends React.Component {
@@ -113,7 +113,6 @@ class QuoteCreate extends React.Component {
           bikes={bikes}
           frames={frames}
           bikeSearchCriteria={bikeSearchCriteria}
-          canSelectArchived={true}
           selectedBike={selectedBike}
           data-test="select-bike"
           onChange={this.handleInputChange}

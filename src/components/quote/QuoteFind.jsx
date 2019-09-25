@@ -146,7 +146,6 @@ QuoteFind.propTypes = {
   next: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   getFrameList: PropTypes.func.isRequired,
   getCustomerList: PropTypes.func.isRequired,
-  clearCustomerState: PropTypes.func.isRequired,
   getQuoteList: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
 };

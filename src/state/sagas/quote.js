@@ -10,6 +10,7 @@ import {
   ARCHIVE_QUOTE,
   archiveQuoteError,
   archiveQuoteOK,
+  clearQuoteState,
   COPY_QUOTE,
   copyQuoteError,
   copyQuoteOK,
@@ -62,6 +63,7 @@ import { getCustomer } from '../actions/customer';
 import { savePartOK } from '../actions/part';
 import { getModelKey } from '../../components/app/model/helpers/model';
 import { LOGIN_URL } from '../../components/menus/helpers/menu';
+import { addMessage } from '../actions/application';
 
 export function* saveQuoteProcess(action) {
   const quoteToSave = action.payload.quote;
@@ -194,7 +196,12 @@ export function* getQuoteList(action) {
     if (token) {
       const completePayload = updateObject(action.payload, { token });
       const response = yield call(quote.getQuoteList, completePayload);
-      yield put(getQuoteListOK(response.data));
+      if (response.data) {
+        yield put(getQuoteListOK(response.data));
+      } else {
+        yield put(addMessage('No quotes matching criteria'));
+        yield put(clearQuoteState());
+      }
     } else {
       yield call(history.push, LOGIN_URL);
     }

@@ -11,7 +11,7 @@ import {
   unarchiveQuote,
 } from '../../state/actions/quote';
 import QuoteList from '../../components/quote/QuoteList';
-import {changeRoute} from "../../state/actions/application";
+import { changeRoute } from '../../state/actions/application';
 
 const mapStateToProps = ({ bike, core, customer, framework, part, quote, user }) => {
   return {

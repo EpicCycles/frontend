@@ -39,12 +39,17 @@ class SelectInput extends Component {
   };
 
   findDefaultSelections = () => {
+    const { options, isMultiple } = this.props;
     let defaultValue = [];
-    this.props.options.forEach(option => {
-      if (option.isDefault) defaultValue.push(option.value.toString());
-    });
+    if (options.length > 1) {
+      options.forEach(option => {
+        if (option.isDefault) defaultValue.push(option.value.toString());
+      });
+    } else {
+      if (options.length === 1) defaultValue.push(options[0].value.toString());
+    }
     if (defaultValue.length > 0)
-      if (this.props.isMultiple) {
+      if (isMultiple) {
         return defaultValue;
       } else {
         return defaultValue[0];

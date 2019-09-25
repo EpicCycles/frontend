@@ -135,4 +135,11 @@ describe('SelectInput', () => {
     );
     expect(toJson(component)).toMatchSnapshot();
   });
+  test('it shows the only choice as selected when the array has length 1', () => {
+    const options = [{ value: 'H', name: 'Home' }];
+    const component = shallow(
+      <SelectInput fieldName="myField" onChange={jest.fn()} options={options} isEmptyAllowed />,
+    );
+    expect(component.instance().findDefaultSelections()).toEqual('H');
+  });
 });

@@ -1,16 +1,11 @@
-import React, {Component} from 'react'
-import {Message} from 'semantic-ui-react'
+import React from 'react';
+import { Message } from 'semantic-ui-react';
 
-class ErrorDismissibleBlock extends Component {
-    render() {
-        const { application, removeMessage } = this.props;
-        const messageColor = (application.messageType && (application.messageType === 'E')) ? 'red' : 'green';
+const ErrorDismissibleBlock = props => {
+  const { application, removeMessage } = props;
+  const messageColor = application.messageType && application.messageType === 'E' ? 'red' : 'green';
 
-        return <Message color={messageColor}
-                        content={application.message}
-                        onDismiss={removeMessage}
-        />
-    };
-}
+  return <Message color={messageColor} content={application.message} onDismiss={removeMessage} />;
+};
 
 export default ErrorDismissibleBlock;

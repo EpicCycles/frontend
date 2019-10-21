@@ -3,79 +3,79 @@ import * as PropTypes from 'prop-types';
 import EditModelRow from './EditModelRow';
 import EditModelPage from './EditModelPage';
 const EditModelData = props => {
+  const {
+    model,
+    persistedModel,
+    pageMode,
+    modelFields,
+    className,
+    sections,
+    brands,
+    bikes,
+    frames,
+    suppliers,
+    customers,
+    users,
+    lockFirstColumn,
+    actionsRequired,
+    additionalActions,
+    dummyRow,
+    showReadOnlyFields,
+    modelSave,
+    modelDelete,
+  } = props;
 
-    const {
-      model, persistedModel,
-      pageMode,
-      modelFields,
-      className,
-      sections,
-      brands,
-      bikes,
-      frames,
-      suppliers,
-      customers,
-      users,
-      lockFirstColumn,
-      actionsRequired,
-      additionalActions,
-      dummyRow,
-      showReadOnlyFields,
-      modelSave,
-      modelDelete,
-    } = props;
-
-    if (pageMode)
-      return (
-        <div>
-          <EditModelPage
-            model={model}
-            persistedModel={persistedModel}
-            modelFields={modelFields}
-            onChange={this.handleModelValueChange}
-            brands={brands}
-            bikes={bikes}
-            frames={frames}
-            customers={customers}
-            users={users}
-            sections={sections}
-            suppliers={suppliers}
-            className={className}
-            showReadOnlyFields={showReadOnlyFields}
-            modelSave={modelSave}
-            modelDelete={modelDelete}
-            modelReset={this.onClickReset}
-            additionalActions={additionalActions}
-            dummyRow={dummyRow}
-            actionsRequired={actionsRequired}
-          />
-        </div>
-      );
+  if (pageMode)
     return (
-      <EditModelRow
-        model={model}
-        persistedModel={persistedModel}
-        modelFields={modelFields}
-        onChange={this.handleModelValueChange}
-        brands={brands}
-        bikes={bikes}
-        frames={frames}
-        customers={customers}
-        users={users}
-        sections={sections}
-        suppliers={suppliers}
-        className={className}
-        showReadOnlyFields={showReadOnlyFields}
-        lockFirstColumn={lockFirstColumn}
-        modelSave={modelSave}
-        modelDelete={modelDelete}
-        modelReset={this.onClickReset}
-        additionalActions={additionalActions}
-        dummyRow={dummyRow}
-        actionsRequired={actionsRequired}
-      />
+      <div>
+        <EditModelPage
+          model={model}
+          persistedModel={persistedModel}
+          modelFields={modelFields}
+          onChange={this.handleModelValueChange}
+          brands={brands}
+          bikes={bikes}
+          frames={frames}
+          customers={customers}
+          users={users}
+          sections={sections}
+          suppliers={suppliers}
+          className={className}
+          showReadOnlyFields={showReadOnlyFields}
+          modelSave={modelSave}
+          modelDelete={modelDelete}
+          modelReset={this.onClickReset}
+          additionalActions={additionalActions}
+          dummyRow={dummyRow}
+          actionsRequired={actionsRequired}
+        />
+      </div>
     );
-  };
+  return (
+    <EditModelRow
+      model={model}
+      persistedModel={persistedModel}
+      modelFields={modelFields}
+      onChange={this.handleModelValueChange}
+      brands={brands}
+      bikes={bikes}
+      frames={frames}
+      customers={customers}
+      users={users}
+      sections={sections}
+      suppliers={suppliers}
+      className={className}
+      showReadOnlyFields={showReadOnlyFields}
+      lockFirstColumn={lockFirstColumn}
+      modelSave={modelSave}
+      modelDelete={modelDelete}
+      modelReset={this.onClickReset}
+      additionalActions={additionalActions}
+      dummyRow={dummyRow}
+      actionsRequired={actionsRequired}
+    />
+  );
+};
 EditModelData.propTypes = {
   model: PropTypes.object.isRequired,
   persistedModel: PropTypes.object.isRequired,

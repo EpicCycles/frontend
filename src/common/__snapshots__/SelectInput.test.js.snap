@@ -97,7 +97,7 @@ exports[`SelectInput it renders an empty option if one is allowed 1`] = `
     key="myField"
     name="myField"
     onChange={[Function]}
-    value={0}
+    value="H"
   >
     <option
       id="myField_0"
@@ -207,7 +207,7 @@ exports[`SelectInput it renders with minimum data 1`] = `
     key="myField"
     name="myField"
     onChange={[Function]}
-    value={0}
+    value="H"
   >
     <option
       id="myField_H"

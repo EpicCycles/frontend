@@ -1,6 +1,6 @@
 import React from 'react';
 import FormCheckbox from './FormCheckbox';
-import {findDataTest} from "../helpers/jest_helpers/assert";
+import { findDataTest } from '../helpers/jest_helpers/assert';
 
 describe('FormCheckbox', () => {
   it('should render when minimum values are passed', () => {

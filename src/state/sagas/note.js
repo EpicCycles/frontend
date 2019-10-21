@@ -19,7 +19,7 @@ import * as selectors from '../selectors/user';
 import history from '../../history';
 import { updateObject } from '../../helpers/utils';
 import { LOGIN_URL } from '../../components/menus/helpers/menu';
-import {logError} from "../../helpers/api_error";
+import { logError } from '../../helpers/api_error';
 
 export function* getNoteList(action) {
   try {

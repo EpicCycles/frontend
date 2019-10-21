@@ -1,18 +1,16 @@
+/* eslint-disable jest/valid-expect */
 export const assertComponentHasExpectedProps = (component, expectedProps) =>
-    Object.entries(expectedProps, ([propName, propValue]) => {
-        if (propValue === 'function') {
-            expect(
-                component.prop(propName),
-                `${propName} should be an instance of a function`
-            ).to.be.instanceOf(Function);
-            return;
-        }
-        expect(
-            component.prop(propName),
-            `${propName} should equal ${propValue}`
-        ).to.eql(propValue);
-    });
+  Object.entries(expectedProps, ([propName, propValue]) => {
+    if (propValue === 'function') {
+      expect(
+        component.prop(propName),
+        `${propName} should be an instance of a function`,
+      ).to.be.instanceOf(Function);
+      return;
+    }
+    expect(component.prop(propName), `${propName} should equal ${propValue}`).toEqual(propValue);
+  });
 
 export const findDataTest = (component, dataTest) => {
-    return component.find(`[data-test="${dataTest}"]`)
+  return component.find(`[data-test="${dataTest}"]`);
 };

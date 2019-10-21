@@ -1,7 +1,4 @@
-import {
-  CHECKBOX,
-  SELECT_MULTIPLE,
-} from '../components/app/model/helpers/fields';
+import { CHECKBOX, SELECT_MULTIPLE } from '../components/app/model/helpers/fields';
 import { doesArrayContainMatches } from './search';
 
 describe('doesArrayContainMatches', () => {

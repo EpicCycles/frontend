@@ -22,7 +22,7 @@ import {
   updateObjectWithApiErrors,
 } from '../../helpers/utils';
 import { FIND_QUOTES } from '../actions/quote';
-import {CUSTOMER_URL} from "../../components/menus/helpers/menu";
+import { CUSTOMER_URL } from '../../components/menus/helpers/menu';
 
 const initialState = {
   isLoading: false,

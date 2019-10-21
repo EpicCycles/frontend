@@ -1,4 +1,1 @@
-
-export const questionAndAnswer = (questions, quoteAnswers ) => {
-
-}
+export const questionAndAnswer = (questions, quoteAnswers) => {};

@@ -6,7 +6,7 @@ describe('getCountryName', () => {
   it('no country matching code use code', () => {
     expect(getCountryName('ZZZ')).toBe('ZZZ');
   });
-  it('no country code no name', () => {
+  it('when country code found return name', () => {
     expect(getCountryName('GB')).toBe('United Kingdom');
   });
 });

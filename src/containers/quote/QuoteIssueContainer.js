@@ -5,13 +5,15 @@ import {
   deleteQuoteCharge,
   deleteQuotePart,
   issueQuote,
-  saveQuote, saveQuoteCharge, saveQuoteChargeOK,
+  saveQuote,
+  saveQuoteCharge,
+  saveQuoteChargeOK,
   saveQuotePart,
   saveQuotePartOK,
 } from '../../state/actions/quote';
 import { addMessage, changeRoute } from '../../state/actions/application';
 import QuoteIssue from '../../components/quote/QuoteIssue';
-import {createNote, deleteNote, saveNote} from "../../state/actions/note";
+import { createNote, deleteNote, saveNote } from '../../state/actions/note';
 
 const mapStateToProps = ({ bike, core, customer, framework, note, part, quote, user }) => {
   const { customers } = customer;

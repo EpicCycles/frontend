@@ -3,7 +3,7 @@ import toJson from 'enzyme-to-json';
 import FormTextInput from './FormTextInput';
 
 describe('FormTextInput', () => {
-  test('renders the form text input correctly', () => {
+  it('renders the form text input correctly', () => {
     const input = shallow(
       <FormTextInput
         id="1234"
@@ -14,7 +14,7 @@ describe('FormTextInput', () => {
     );
     expect(toJson(input)).toMatchSnapshot();
   });
-  test('renders the form numeric input correctly', () => {
+  it('renders the form numeric input correctly', () => {
     const input = shallow(
       <FormTextInput
         id="1234"
@@ -27,7 +27,7 @@ describe('FormTextInput', () => {
     expect(toJson(input)).toMatchSnapshot();
   });
 
-  test('renders an error when present', () => {
+  it('renders an error when present', () => {
     const input = shallow(
       <FormTextInput
         id="5678"
@@ -40,7 +40,7 @@ describe('FormTextInput', () => {
     expect(toJson(input)).toMatchSnapshot();
   });
 
-  xit('should call onClearEmail when the button is clicked', () => {
+  it('should call onClearEmail when the button is clicked', () => {
     const onChange = jest.fn();
     const value = 'test@johnlewis.co.uk';
     const fieldName = 'email';
@@ -59,7 +59,7 @@ describe('FormTextInput', () => {
     expect(onClearEmail.mock.calls).toHaveLength(1);
   });
 
-  test('should call onChange when an input is entered', () => {
+  it('should call onChange when an input is entered', () => {
     const onChange = jest.fn();
     const value = 'test@johnlewis.co.uk';
     const fieldName = 'email';

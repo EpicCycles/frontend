@@ -2,7 +2,7 @@ import React from 'react';
 import QuoteManager from './QuoteManager';
 import { sampleBrands, sampleSections, sampleSuppliers } from '../../helpers/sampleData';
 import { assertComponentHasExpectedProps, findDataTest } from '../../helpers/jest_helpers/assert';
-import {compareTab, customerTab, historyTab, quoteListTab} from "./helpers/quoteManagerTabs";
+import { compareTab, customerTab, historyTab, quoteListTab } from './helpers/quoteManagerTabs';
 
 const props = {
   bikes: [],

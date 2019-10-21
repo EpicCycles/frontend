@@ -3,7 +3,7 @@ import { getFrameList } from '../../state/actions/bike';
 import { getCustomerList } from '../../state/actions/customer';
 import { copyQuote } from '../../state/actions/quote';
 import QuoteCopy from '../../components/quote/QuoteCopy';
-import {changeRoute} from "../../state/actions/application";
+import { changeRoute } from '../../state/actions/application';
 
 const mapStateToProps = ({ bike, core, customer, framework, part, quote, user }) => {
   return {

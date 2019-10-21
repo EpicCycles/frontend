@@ -9,7 +9,7 @@ import {
 } from '../../app/model/helpers/fields';
 import { updateObject } from '../../../helpers/utils';
 import { attributePlaceholder } from '../../partType/helpers/partType';
-import {TOTAL_PRICE_FIELD} from "../../quote/helpers/quoteFields";
+import { TOTAL_PRICE_FIELD } from '../../quote/helpers/quoteFields';
 
 export const NOT_REQUIRED_FIELD = {
   fieldName: 'not_required',
@@ -18,7 +18,7 @@ export const NOT_REQUIRED_FIELD = {
 };
 export const FIXED_PRICE_FIELD = {
   fieldName: 'fixed_price',
-  header: "Fixed Price",
+  header: 'Fixed Price',
   type: CHECKBOX,
 };
 export const PART_DESC_FIELD = {

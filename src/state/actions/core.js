@@ -118,7 +118,7 @@ export const saveQuestion = question => ({
   type: `${QUESTION_SAVE}_REQUESTED`,
   payload: { question },
 });
-export const addQuestion  = question => ({
+export const addQuestion = question => ({
   type: `${QUESTION_SAVE}_ADD`,
   payload: { question },
 });

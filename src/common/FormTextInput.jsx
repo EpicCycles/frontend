@@ -46,6 +46,7 @@ const FormTextInput = props => {
           <Icon
             name="remove"
             key={`remove${fieldName}`}
+            id={`remove${fieldName}`}
             size="small"
             circular
             link

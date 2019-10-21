@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 export const logError = error => {
   if (error.response) {
     // The request was made and the server responded with a status code

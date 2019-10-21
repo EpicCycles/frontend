@@ -1,14 +1,15 @@
-import {definedOrZero} from "./utils";
-
-test("undefined returns false", () => {
+import { definedOrZero } from './utils';
+describe('definedOrZero', () => {
+  it('undefined returns false', () => {
     expect(definedOrZero()).toBeFalsy();
-});
-test("empty string returns false", () => {
+  });
+  it('empty string returns false', () => {
     expect(definedOrZero('')).toBeFalsy();
-});
-test("0 returns true", () => {
+  });
+  it('0 returns true', () => {
     expect(definedOrZero(0)).toBeTruthy();
-});
-test("undefined returns false", () => {
+  });
+  it('12 returns true', () => {
     expect(definedOrZero(12)).toBeTruthy();
+  });
 });

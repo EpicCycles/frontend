@@ -3,7 +3,7 @@ import toJson from 'enzyme-to-json';
 import ShowOrHide from './ShowOrHide';
 
 describe('ShowOrHide', () => {
-  test('it renders without failing', () => {
+  it('it renders without failing', () => {
     const hideDetail = jest.fn();
     const showDetail = jest.fn();
     const component = shallow(
@@ -16,7 +16,7 @@ describe('ShowOrHide', () => {
     );
     expect(toJson(component)).toMatchSnapshot();
   });
-  test('it calls hide when details shown and icon clicked', () => {
+  it('it calls hide when details shown and icon clicked', () => {
     const hideDetail = jest.fn();
     const showDetail = jest.fn();
     const component = shallow(

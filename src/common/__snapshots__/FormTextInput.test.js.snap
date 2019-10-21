@@ -90,6 +90,42 @@ exports[`FormTextInput should call onChange when an input is entered 1`] = `
     <Icon
       as="i"
       circular={true}
+      id="removeemail"
+      key="removeemail"
+      link={true}
+      name="remove"
+      onClick={[Function]}
+      size="small"
+    />
+  </span>
+</div>
+`;
+
+exports[`FormTextInput should call onClearEmail when the button is clicked 1`] = `
+<div
+  className="row "
+>
+  <input
+    autoComplete="off"
+    className=" "
+    key="email"
+    list=""
+    maxLength={30}
+    name="email"
+    onChange={[Function]}
+    placeholder=""
+    size={30}
+    title=" "
+    type="text"
+    value="test@johnlewis.co.uk"
+  />
+  <span
+    className="clearInput"
+  >
+    <Icon
+      as="i"
+      circular={true}
+      id="removeemail"
       key="removeemail"
       link={true}
       name="remove"

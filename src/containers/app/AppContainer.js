@@ -5,7 +5,12 @@ import HeaderContainer from './HeaderContainer';
 import NotFound from '../404';
 import Home from '../home';
 
-import { CUSTOMER_SEARCH_URL, CUSTOMER_URL, LOGIN_URL, QUESTION_URL } from '../../components/menus/helpers/menu';
+import {
+  CUSTOMER_SEARCH_URL,
+  CUSTOMER_URL,
+  LOGIN_URL,
+  QUESTION_URL,
+} from '../../components/menus/helpers/menu';
 
 const LazyLoginContainer = lazy(() => import('../user/LoginContainer'));
 const LazyQuoteCopyContainer = lazy(() => import('../quote/QuoteCopyContainer'));

@@ -102,7 +102,7 @@ describe('doesObjectMatchCriteria', () => {
     const fieldsToCheck = [selectValue];
     expect(doesObjectMatchCriteria(model, fieldsToCheck)).toBeFalsy();
   });
-  it('should return false when the field on the model has no value', () => {
+  it('should return false when the field on the model has no value for multiple', () => {
     const model = {
       mMultiple: 'anything',
       mText: 'any text',
@@ -120,7 +120,7 @@ describe('doesObjectMatchCriteria', () => {
     const fieldsToCheck = [multipleValue];
     expect(doesObjectMatchCriteria(model, fieldsToCheck)).toBeTruthy();
   });
-  it('should return false when none of the selected values does not match the field on the model', () => {
+  it('should return false when none of the selected values match the field on the model', () => {
     const model = {
       mMultiple: '6',
       mText: 'any text',
@@ -130,7 +130,7 @@ describe('doesObjectMatchCriteria', () => {
     const fieldsToCheck = [multipleValue];
     expect(doesObjectMatchCriteria(model, fieldsToCheck)).toBeFalsy();
   });
-  it('should return false when the field on the model has no value', () => {
+  it('should return false when the multiple field on the model has no value', () => {
     const model = {
       mText: 'any text',
       m_select: 'select any',
@@ -158,7 +158,7 @@ describe('doesObjectMatchCriteria', () => {
     const fieldsToCheck = [stringValue];
     expect(doesObjectMatchCriteria(model, fieldsToCheck)).toBeFalsy();
   });
-  it('should return false when the field on the model has no value', () => {
+  it('should return false when the string field on the model has no value', () => {
     const model = {
       m_select: 'select any',
     };

@@ -3,7 +3,8 @@ import {
   deletePart,
   deleteSupplierProduct,
   savePart,
-  saveSupplierProduct, saveSupplierProductOK,
+  saveSupplierProduct,
+  saveSupplierProductOK,
 } from '../../state/actions/part';
 import SupplierProductReview from '../../components/supplierProduct/SupplierProductReview';
 import { addMessage } from '../../state/actions/application';

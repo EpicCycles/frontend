@@ -11,8 +11,12 @@ import {
   SUPPLIER_MISSING,
   VALUE_MISSING,
 } from './error';
-import {validateEmailFormat, validatePostcodeAndReturnError, validateURLAndReturnError,} from './validators';
-import {COUNTRIES, NUMBER_TYPE_CHOICES} from '../../../address/helpers/address';
+import {
+  validateEmailFormat,
+  validatePostcodeAndReturnError,
+  validateURLAndReturnError,
+} from './validators';
+import { COUNTRIES, NUMBER_TYPE_CHOICES } from '../../../address/helpers/address';
 
 export const CHECKBOX = 'checkbox';
 export const RADIO = 'radio';
@@ -44,7 +48,6 @@ export const CHECK_DATE = 'check_date';
 export const CLUB_PRICE = 'club_price';
 export const CLUB_MEMBER = 'club_member';
 
-
 export const COLOURS = 'colours';
 export const COUNTRY = 'country';
 export const CREATED_BY = 'created_by';
@@ -73,9 +76,6 @@ export const PREFERRED_SUPPLIER = 'preferred_supplier';
 export const PRODUCT_CODE = 'product_code';
 export const QUANTITY = 'quantity';
 
-
-
-
 export const RRP = 'rrp';
 export const SIZES = 'sizes';
 export const STANDARD = 'standard';
@@ -88,7 +88,6 @@ export const TRADE_IN_PRICE = 'trade_in_price';
 export const TRADE_PRICE = 'trade_price';
 export const UPD_BY = 'upd_by';
 export const UPD_DATE = 'upd_date';
-
 
 export const ADD_DATE_FIELD = {
   fieldName: ADD_DATE,
@@ -218,7 +217,6 @@ export const CUSTOMER_FIELD = {
   readOnly: true,
 };
 
-
 export const DESCRIPTION_FIELD = {
   fieldName: DESCRIPTION,
   header: 'Description',
@@ -291,7 +289,6 @@ export const LAST_NAME_FIELD = {
   error: VALUE_MISSING,
 };
 
-
 export const NUMBER_TYPE_FIELD = {
   fieldName: NUMBER_TYPE,
   header: 'Type',
@@ -337,8 +334,6 @@ export const QUANTITY_FIELD = {
   maxLength: 6,
 };
 
-
-
 export const SUPPLIER_FIELD = {
   fieldName: SUPPLIER,
   header: 'Supplier',
@@ -353,8 +348,6 @@ export const SUPPLIER_FIELD_OPTIONAL = {
   synonyms: [SUPPLIER],
   type: SUPPLIER,
 };
-
-
 
 export const BRAND_NAME_FIELD = {
   fieldName: BRAND_NAME,

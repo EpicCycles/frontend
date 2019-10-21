@@ -1,7 +1,7 @@
 import { customerAddressFields } from '../model/helpers/fields';
 import { createEmptyModelWithDefaultFields, modelIsAlreadyInArray } from '../model/helpers/model';
 
-describe.only('model.modelIsAlreadyInArray', () => {
+describe('model.modelIsAlreadyInArray', () => {
   it('returns false when the model does not match', () => {
     const arrayToCheck = [];
     const addressToCheck = createEmptyModelWithDefaultFields(customerAddressFields);
@@ -32,7 +32,7 @@ describe.only('model.modelIsAlreadyInArray', () => {
     };
     expect(modelIsAlreadyInArray(arrayToCheck, addressToCheck, customerAddressFields)).toBeTruthy();
   });
-  it('returns true when there are multipl addresses to check and teh address matches one of them', () => {
+  it('returns true when there are many items to check and the model matches one of them', () => {
     const arrayToCheck = [
       {
         id: 19,

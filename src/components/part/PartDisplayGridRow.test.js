@@ -176,7 +176,7 @@ test('should show a part and supplier products when a single supplier product ex
   expect(findDataTest(component, 'part-actions')).toHaveLength(1);
   expect(findDataTest(component, 'edit-icon')).toHaveLength(1);
 });
-test('should show a part and multiple supplier products when multiple supplier product exists', () => {
+test('should show a part and multiple products when multiple supplier product exists', () => {
   const component = shallow(
     <PartDisplayGridRow
       part={partDeletable}

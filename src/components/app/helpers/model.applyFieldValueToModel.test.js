@@ -1,8 +1,4 @@
-import {
-  ADDRESS1_FIELD,
-  ADDRESS2_FIELD,
-  POSTCODE_FIELD,
-} from '../model/helpers/fields';
+import { ADDRESS1_FIELD, ADDRESS2_FIELD, POSTCODE_FIELD } from '../model/helpers/fields';
 import { ADDRESS_MISSING } from '../model/helpers/error';
 import { applyFieldValueToModel } from '../model/helpers/model';
 

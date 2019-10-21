@@ -1,10 +1,4 @@
-import {
-  ATTRIBUTE_VALUE,
-  NUMBER,
-  RADIO,
-  SELECT_ONE,
-  TEXT,
-} from '../../app/model/helpers/fields';
+import { ATTRIBUTE_VALUE, NUMBER, RADIO, SELECT_ONE, TEXT } from '../../app/model/helpers/fields';
 import { buildFieldForAttribute } from './partTypeAttribute';
 import { SELECT_ONE_MISSING, VALUE_MISSING } from '../../app/model/helpers/error';
 

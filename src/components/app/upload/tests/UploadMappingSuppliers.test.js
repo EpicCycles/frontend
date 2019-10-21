@@ -43,7 +43,7 @@ describe('UploadMappingSuppliers', () => {
     );
     component.instance().setUpSupplierModalForNewField('id 111');
     expect(component.state('showModal')).toBeTruthy();
-    expect(component.state('supplier')).toHaveProperty("supplier_name", 'id 111');
+    expect(component.state('supplier')).toHaveProperty('supplier_name', 'id 111');
   });
   test('it marks a discarded row as ignore', () => {
     const component = shallow(

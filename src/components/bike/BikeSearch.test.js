@@ -3,7 +3,7 @@ import BikeSearch from './BikeSearch';
 import { sampleBrands } from '../../helpers/sampleData';
 
 describe('BikeSearch', () => {
-  it('should display frame name, brand select and archived selection when archived is allowed', () => {
+  it('should display search component', () => {
     const component = shallow(
       <BikeSearch
         onChange={jest.fn()}

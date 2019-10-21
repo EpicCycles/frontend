@@ -33,7 +33,7 @@ export const saveQuotePartError = payload => ({
   type: `${SAVE_QUOTE_PART}_ERROR`,
   payload,
 });
-export const deleteQuotePart = (quotePartId) => ({
+export const deleteQuotePart = quotePartId => ({
   type: `${DELETE_QUOTE_PART}_REQUESTED`,
   payload: { quotePartId },
 });
@@ -57,7 +57,7 @@ export const saveQuoteChargeError = payload => ({
   type: `${SAVE_QUOTE_CHARGE}_ERROR`,
   payload,
 });
-export const deleteQuoteCharge = (quoteChargeId) => ({
+export const deleteQuoteCharge = quoteChargeId => ({
   type: `${DELETE_QUOTE_CHARGE}_REQUESTED`,
   payload: { quoteChargeId },
 });
@@ -81,7 +81,7 @@ export const saveQuoteAnswerError = payload => ({
   type: `${SAVE_QUOTE_ANSWER}_ERROR`,
   payload,
 });
-export const deleteQuoteAnswer = (quoteAnswerId) => ({
+export const deleteQuoteAnswer = quoteAnswerId => ({
   type: `${DELETE_QUOTE_ANSWER}_REQUESTED`,
   payload: { quoteAnswerId },
 });

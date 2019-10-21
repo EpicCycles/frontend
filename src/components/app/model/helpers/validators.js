@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { INVALID_EMAIL, INVALID_POSTCODE, INVALID_URL } from './error';
 import { POSTCODE_RULES } from './constants';
 const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import axios from 'axios';
 
 const instance = axios.create({
@@ -9,17 +10,13 @@ const instance = axios.create({
 // "Authorization: Token 5e2effff34c85c11a8720a597b96d73a4634c9ad"
 const getCustomerList = async payload => {
   instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  const api = `/rest-epic/customers?firstName=${payload.firstName}&lastName=${
-    payload.lastName
-  }&email=${payload.email}&page=${payload.page}`;
+  const api = `/rest-epic/customers?firstName=${payload.firstName}&lastName=${payload.lastName}&email=${payload.email}&page=${payload.page}`;
   return instance.get(api);
 };
 
 const getNoteList = async payload => {
   instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  const api = `/rest-epic/customernotes?customerId=${payload.customerId}&quoteId=${
-    payload.quoteId
-  }&customerVisible=${payload.customerVisible}`;
+  const api = `/rest-epic/customernotes?customerId=${payload.customerId}&quoteId=${payload.quoteId}&customerVisible=${payload.customerVisible}`;
   return instance.get(api);
 };
 

@@ -4,7 +4,7 @@ import { sampleSections } from '../../helpers/sampleData';
 import PartSearch from './PartSearch';
 
 const brands = [
-{ id: 1, brand_name: 'brand 1' },
+  { id: 1, brand_name: 'brand 1' },
   { id: 2, brand_name: 'brand 2', supplier: [] },
   { id: 3, brand_name: 'brand 3', supplier: [1] },
   { id: 4, brand_name: 'brand 4', delete: true },

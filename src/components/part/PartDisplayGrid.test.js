@@ -1,8 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
-import {NEW_ELEMENT_ID} from "../../helpers/constants";
-import PartDisplayGrid from "./PartDisplayGrid";
-
+import { NEW_ELEMENT_ID } from '../../helpers/constants';
+import PartDisplayGrid from './PartDisplayGrid';
 
 const brands = [
   { id: 1, brand_name: 'brand 1' },

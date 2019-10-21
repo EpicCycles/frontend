@@ -13,7 +13,7 @@ describe('calculatePrice', () => {
     const expectedPrices = { part_price: 12 };
     expect(calculatePrice(false, part, supplierProducts)).toEqual(expectedPrices);
   });
-  it('should return a part fitted price when no bike part is passed but part is and it is a bike quote', () => {
+  it('should return a fitted price when bike quote, no bike part is passed, part is', () => {
     const expectedPrices = { part_price: 23 };
     expect(calculatePrice(true, part, supplierProducts)).toEqual(expectedPrices);
   });

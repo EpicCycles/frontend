@@ -18,7 +18,7 @@ import {
   USER_LOGOUT,
 } from '../actions/user';
 import { FRAMEWORK, FRAMEWORK_SAVE } from '../actions/framework';
-import {BRANDS_SAVE, CHARGE_SAVE, SUPPLIER_SAVE} from '../actions/core';
+import { BRANDS_SAVE, CHARGE_SAVE, SUPPLIER_SAVE } from '../actions/core';
 import {
   BIKE_ADD_PART,
   BIKE_DELETE,

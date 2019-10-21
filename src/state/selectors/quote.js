@@ -1,1 +1,1 @@
-export const quoteId = (state) => state.quote.quoteId;
+export const quoteId = state => state.quote.quoteId;

@@ -1,20 +1,12 @@
-import {
-  getDefaultFieldValue
-} from '../model/helpers/getDefaultFieldValue';
-import {
-  CHECKBOX,
-  IN_USE,
-  NUMBER_TYPE,
-  SELECT_ONE,
-  TEXT,
-} from '../model/helpers/fields';
+import { getDefaultFieldValue } from '../model/helpers/getDefaultFieldValue';
+import { CHECKBOX, IN_USE, NUMBER_TYPE, SELECT_ONE, TEXT } from '../model/helpers/fields';
 import {
   QUOTE_ARCHIVED,
   QUOTE_INITIAL,
   QUOTE_ISSUED,
   QUOTE_ORDERED,
 } from '../../quote/helpers/quote';
-import {QUOTE_STATUS} from "../../quote/helpers/quoteFields";
+import { QUOTE_STATUS } from '../../quote/helpers/quoteFields';
 
 describe('getDefaultFieldValue', () => {
   it('should return no value when a field has no default', () => {

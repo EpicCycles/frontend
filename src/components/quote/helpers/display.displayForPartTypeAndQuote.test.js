@@ -25,7 +25,8 @@ describe('displayForPartTypeAndQuote', () => {
     { id: 11, partType: 231 },
     { id: 31, partType: 331 },
     { id: 131, partType: 631 },
-    { id: 331, partType: 631 },  ];
+    { id: 331, partType: 631 },
+  ];
   it('should return all a replacement part', () => {
     const partTypeId = 231;
     const expectedResult = {

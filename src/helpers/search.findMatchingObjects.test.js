@@ -35,7 +35,7 @@ describe('findMatchingObjects', () => {
     ];
     expect(findMatchingObjects(models, fieldsToCheck, searchCriteria)).toEqual(expectedResult);
   });
-  it('should return the matching object when a single object in the array matches the criteria', () => {
+  it('should return a match when a single object in the array matches the criteria', () => {
     const models = [
       { mBool: false },
       {

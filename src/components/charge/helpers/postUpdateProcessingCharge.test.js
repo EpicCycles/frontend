@@ -33,7 +33,15 @@ describe('postUpdateProcessingCharge', () => {
   });
   it('should add an error when charge and percentage are in place', () => {
     const charge = { price: '130.0', percentage: '5.0', error_detail: { thing: 'rong' } };
-    const expectedCharge = { price: '130.0', percentage: '5.0', error_detail: { thing: 'rong', price: 'Either a price or a percentage can be specified', percentage: 'Either a price or a percentage can be specified'  } };
+    const expectedCharge = {
+      price: '130.0',
+      percentage: '5.0',
+      error_detail: {
+        thing: 'rong',
+        price: 'Either a price or a percentage can be specified',
+        percentage: 'Either a price or a percentage can be specified',
+      },
+    };
     expect(postUpdateProcessingCharge(charge)).toEqual(expectedCharge);
   });
 });

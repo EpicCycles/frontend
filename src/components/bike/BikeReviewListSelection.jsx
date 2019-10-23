@@ -12,6 +12,7 @@ const BikeReviewListSelection = props => {
         canSelectArchived
         pageMode
         data-test="bike-search"
+        raiseStateForCriteria={props.raiseStateForCriteria}
       />
     </Fragment>
   );
@@ -26,6 +27,7 @@ BikeReviewListSelection.propTypes = {
   frameName: PropTypes.string,
   archived: PropTypes.bool,
   getFrameList: PropTypes.func,
+  raiseStateForCriteria: PropTypes.func,
 };
 
 export default BikeReviewListSelection;

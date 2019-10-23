@@ -12,6 +12,7 @@ import {
   saveFrame,
 } from '../../state/actions/bike';
 import BikeReviewList from '../../components/bike/BikeReviewList';
+import { addMessage } from '../../state/actions/application';
 const mapStateToProps = ({ core, framework, bike }) => {
   return {
     brands: core.brands,
@@ -31,6 +32,7 @@ const mapDispatchToProps = {
   saveBike,
   archiveFrames,
   deleteFrames,
+  addMessage,
 };
 export default connect(
   mapStateToProps,

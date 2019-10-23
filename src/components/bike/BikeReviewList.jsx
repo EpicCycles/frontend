@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import * as PropTypes from 'prop-types';
+
 import { changeList, doWeHaveObjects, updateObject } from '../../helpers/utils';
 import { Button, Dimmer, Icon, Loader } from 'semantic-ui-react';
 import BikeReviewListSelection from './BikeReviewListSelection';
@@ -15,9 +17,11 @@ import ModelTableHeaders from '../app/model/ModelTableHeaders';
 import EditModel from '../app/model/EditModel';
 import { frameActions } from './helpers/frameActions';
 import { bikeActions } from './helpers/bikeActions';
+import { WARNING_MESSAGE } from '../../helpers/messages';
 
 const frameFields = [FRAME_NAME_FIELD];
 const bikeFields = [MODEL_NAME_FIELD, RRP_FIELD, EPIC_PRICE_FIELD, CLUB_PRICE_FIELD];
+const REMOVE_SELECTIONS = 'Remove any selections.';
 class BikeReviewList extends React.Component {
   state = {
     brand: '',
@@ -27,18 +31,25 @@ class BikeReviewList extends React.Component {
     frameDeleteList: [],
     bikeReviewList: [],
     bikeDeleteList: [],
+    bikeSearchCriteria: {},
   };
-
-  showSearch = () => {
+  cancelAction = () => {
+    const { addMessage } = this.props;
+    addMessage(REMOVE_SELECTIONS, WARNING_MESSAGE);
+  };
+  raiseStateForCriteria = bikeSearchCriteria => {
+    this.setState({ bikeSearchCriteria });
+  };
+  checkSelections = includeReview => {
     const { frameArchiveList, frameDeleteList, bikeReviewList, bikeDeleteList } = this.state;
-    if (
+    return (
       frameArchiveList.length > 0 ||
       frameDeleteList.length > 0 ||
-      bikeReviewList.length > 0 ||
+      (includeReview && bikeReviewList.length > 0) ||
       bikeDeleteList.length > 0
-    ) {
-      if (!window.confirm('Are You Sure?')) return;
-    }
+    );
+  };
+  resetActions = () => {
     let newState = updateObject(this.state, {
       frameArchiveList: [],
       frameDeleteList: [],
@@ -46,6 +57,13 @@ class BikeReviewList extends React.Component {
       bikeDeleteList: [],
     });
     this.setState(newState);
+  };
+  showSearch = () => {
+    if (this.checkSelections(true)) {
+      this.cancelAction();
+      return;
+    }
+
     this.props.clearFrame();
   };
   changeFrameArchiveList = frameId => {
@@ -81,16 +99,20 @@ class BikeReviewList extends React.Component {
     this.props.saveFrame(frame, this.buildSearchCriteria());
   };
   archiveFrames = () => {
-    this.props.archiveFrames(this.state.frameArchiveList, this.buildSearchCriteria());
+    this.props.archiveFrames(this.state.frameArchiveList, this.state.bikeSearchCriteria);
     let newState = updateObject(this.state, { frameArchiveList: [] });
     this.setState(newState);
   };
   deleteFrames = () => {
-    this.props.deleteFrames(this.state.frameDeleteList, this.buildSearchCriteria());
+    this.props.deleteFrames(this.state.frameDeleteList, this.state.bikeSearchCriteria);
     let newState = updateObject(this.state, { frameDeleteList: [] });
     this.setState(newState);
   };
   reviewAll = () => {
+    if (this.checkSelections(false)) {
+      this.cancelAction();
+      return;
+    }
     const { frames } = this.props;
     const nonArchivedFrames = frames ? frames.filter(frame => !frame.archived) : [];
     let bikeReviewList = [];
@@ -106,24 +128,25 @@ class BikeReviewList extends React.Component {
     }
   };
   startReview = () => {
+    if (this.checkSelections(false)) {
+      this.cancelAction();
+      return;
+    }
     if (this.kickOffReview(this.state.bikeReviewList)) {
       this.setState(updateObject(this.state, { reviewFirstBike: true }));
     }
   };
   kickOffReview = bikeReviewList => {
-    const { frameArchiveList, frameDeleteList, bikeDeleteList } = this.state;
-    if (frameArchiveList.length > 0 || frameDeleteList.length > 0 || bikeDeleteList.length > 0) {
-      if (
-        !window.confirm('Do you want to continue without processing delete and archive requests?')
-      ) {
-        return false;
-      }
+    if (this.checkSelections(false)) {
+      this.cancelAction();
+      return false;
     }
-    this.props.reviewBikes(bikeReviewList, this.buildSearchCriteria());
+
+    this.props.reviewBikes(bikeReviewList, this.state.bikeSearchCriteria);
     return true;
   };
   deleteBikes = () => {
-    this.props.deleteBikes(this.state.bikeDeleteList, this.buildSearchCriteria());
+    this.props.deleteBikes(this.state.bikeDeleteList, this.state.bikeSearchCriteria);
     let newState = updateObject(this.state, { bikeDeleteList: [] });
     this.setState(newState);
   };
@@ -150,6 +173,7 @@ class BikeReviewList extends React.Component {
         {reviewFirstBike && <Redirect to="/bike-review" push />}
         {!haveFrames ? (
           <BikeReviewListSelection
+            raiseStateForCriteria={this.raiseStateForCriteria}
             brands={brands}
             getFrameList={getFrameList}
           />
@@ -191,6 +215,13 @@ class BikeReviewList extends React.Component {
               </Button>
               <Button key="reviewAllBikes" onClick={this.reviewAll}>
                 Review All
+              </Button>
+              <Button
+                key="clearSelections"
+                onClick={this.resetActions}
+                disabled={!this.checkSelections(true)}
+              >
+                Reset
               </Button>
             </div>
             <div className="row">
@@ -305,5 +336,21 @@ class BikeReviewList extends React.Component {
     );
   }
 }
-
+BikeReviewList.propTypes = {
+  brands: PropTypes.array,
+  sections: PropTypes.array,
+  isLoading: PropTypes.bool,
+  frames: PropTypes.array,
+  bikes: PropTypes.array,
+  getBrands: PropTypes.func.isRequired,
+  getFrameList: PropTypes.func.isRequired,
+  clearFrame: PropTypes.func.isRequired,
+  reviewBikes: PropTypes.func.isRequired,
+  deleteBikes: PropTypes.func.isRequired,
+  saveFrame: PropTypes.func.isRequired,
+  saveBike: PropTypes.func.isRequired,
+  archiveFrames: PropTypes.func.isRequired,
+  deleteFrames: PropTypes.func.isRequired,
+  addMessage: PropTypes.func.isRequired,
+};
 export default BikeReviewList;

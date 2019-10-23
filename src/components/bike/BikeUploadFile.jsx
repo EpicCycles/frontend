@@ -3,6 +3,7 @@ import FormTextInput from '../../common/FormTextInput';
 import { Button } from 'semantic-ui-react';
 import FormTextAreaInput from '../../common/FormTextAreaInput';
 import { handleFileUpload } from '../../helpers/upload';
+import CSVReader from 'react-csv-reader';
 
 class BikeUploadFile extends React.Component {
   state = {};
@@ -20,6 +21,12 @@ class BikeUploadFile extends React.Component {
       if (uploadResults) this.setState(uploadResults);
     };
     fileReader.readAsText(bikeUploadFile);
+  };
+  addData = csvFileContents => {
+    if (csvFileContents.length > 0) {
+      const uploadedHeaders = csvFileContents.shift();
+      this.setState({ uploadedHeaders, uploadedData: csvFileContents });
+    }
   };
   processTextArea = textInput => {
     let partLines = textInput.split('#');
@@ -64,11 +71,10 @@ class BikeUploadFile extends React.Component {
               <div className="grid-item--borderless field-label red align_right">Either:</div>
               <div className="grid-item--borderless field-label">Select file for upload</div>
               <div className="grid-item--borderless">
-                <input
-                  type="file"
-                  id="bikeUploadFile"
-                  accept=".csv"
-                  onChange={event => this.handleFileChosen(event.target.files[0])}
+                <CSVReader
+                  onFileLoaded={this.addData}
+                  onError={this.clearUploadData}
+                  inputId="bikeData"
                   disabled={uploadDisabled}
                 />
               </div>

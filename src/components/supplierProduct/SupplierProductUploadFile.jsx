@@ -1,128 +1,95 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Button } from 'semantic-ui-react';
-import FormTextAreaInput from '../../common/FormTextAreaInput';
 import { supplierProductHeaders } from './helpers/supplierProduct';
-import { handleFileUpload } from '../../helpers/upload';
+import CSVReader from 'react-csv-reader';
+import * as PropTypes from 'prop-types';
 
-class SupplierProductUploadFile extends React.Component {
-  state = {};
-
-  goToNextStep = () => {
-    const { uploadedData } = this.state;
-    const rowMappings = this.props.buildInitialRowMappings(uploadedData);
-    this.props.addDataAndProceed({ uploadedData, rowMappings });
-  };
-
-  handleFileChosen = supplierProductUploadFile => {
-    let fileReader = new FileReader();
-    fileReader.onloadend = () => {
-      const uploadResults = handleFileUpload(fileReader);
-      if (uploadResults) this.setState({ uploadedData: uploadResults.uploadedData });
-    };
-    fileReader.readAsText(supplierProductUploadFile);
-  };
-  processTextArea = textInput => {
-    let partLines = textInput.split('\n');
-    let uploadedData = [];
-    let splitCharacter = '\t';
-    partLines.forEach(partLine => uploadedData.push(partLine.split(splitCharacter)));
-    if (uploadedData.length > 0) {
-      this.setState({ uploadedData });
+const SupplierProductUploadFile = props => {
+  const [uploadedData, setUploadedData] = useState(undefined);
+  function useFileContents(fileContents) {
+    if (Array.isArray(fileContents) && fileContents.length > 1) {
+      const withoutHeader = fileContents.slice(1);
+      setUploadedData(withoutHeader);
+    } else {
+      setUploadedData(undefined);
     }
+  }
+  const clearUploadData = () => {
+    setUploadedData(undefined);
   };
-  clearUploadData = () => {
-    this.setState({ uploadedData: [] });
-  };
+  const { buildInitialRowMappings, addDataAndProceed } = props;
+  const uploadDisabled = false;
 
-  render() {
-    const { modelName, uploadedData } = this.state;
-    const uploadData = uploadedData && uploadedData.length > 0;
-    const uploadDisabled = false;
+  if (uploadedData) {
     return (
-      <Fragment key="supplierProductUploadFile">
-        {!uploadData && (
-          <div key="supplierProductUploadInput" className="grid">
-            <div className="grid-row">
-              <div className="grid-item--borderless field-label red align_right">Either:</div>
-              <div className="grid-item--borderless field-label">Select file for upload</div>
-              <div className="grid-item--borderless">
-                <input
-                  type="file"
-                  id="supplierProductUploadFile"
-                  accept=".csv"
-                  onChange={event => this.handleFileChosen(event.target.files[0])}
-                  disabled={uploadDisabled}
-                />
+      <Fragment>
+        <div>
+          <Button
+            key="supplierProductFileUploadCont"
+            onClick={() => addDataAndProceed(uploadedData, buildInitialRowMappings(uploadedData))}
+            data-test="proceed"
+          >
+            Continue ...
+          </Button>
+          <Button key="supplierProductFileUploadReset" onClick={clearUploadData} data-test="clear">
+            Clear data
+          </Button>
+        </div>
+        <div
+          key="supplierProductUploadGrid"
+          className="grid"
+          style={{
+            height: window.innerHeight - 100 + 'px',
+            width: window.innerWidth - 50 + 'px',
+            overflow: 'scroll',
+          }}
+        >
+          <div key="supplierProductUploadHeaders" className="grid-row grid-row--header">
+            {supplierProductHeaders.map((cell, index) => (
+              <div
+                key={`col1${index}`}
+                className={
+                  index === 0 ? 'grid-item--header grid-header--fixed-left' : 'grid-item--header'
+                }
+              >
+                {cell}
               </div>
-            </div>
-            <div className="grid-row">
-              <div className="grid-item--borderless field-label red align_right">Or:</div>
-              <div className="grid-item--borderless field-label">
-                Paste a list of supplier products
-              </div>
-              <div className="grid-item--borderless">
-                <FormTextAreaInput
-                  title="Paste list of supplier part types and values here"
-                  placeholder={'e.g. Bars Deda 30cm'}
-                  onChange={this.processTextArea}
-                  disabled={!modelName}
-                  rows={20}
-                />
-              </div>
-            </div>
+            ))}
           </div>
-        )}
-        {uploadData && (
-          <Fragment>
-            <div>
-              <Button key="supplierProductFileUploadCont" onClick={this.goToNextStep}>
-                Continue ...
-              </Button>
-              <Button key="supplierProductFileUploadReset" onClick={this.clearUploadData}>
-                Clear data
-              </Button>
-            </div>
-            <div
-              key="supplierProductUploadGrid"
-              className="grid"
-              style={{
-                height: window.innerHeight - 100 + 'px',
-                width: window.innerWidth - 50 + 'px',
-                overflow: 'scroll',
-              }}
-            >
-              <div key="supplierProductUploadHeaders" className="grid-row grid-row--header">
-                {supplierProductHeaders.map((cell, index) => (
-                  <div
-                    key={`col1${index}`}
-                    className={
-                      index === 0
-                        ? 'grid-item--header grid-header--fixed-left'
-                        : 'grid-item--header'
-                    }
-                  >
-                    {cell}
-                  </div>
-                ))}
-              </div>
-              {uploadedData.map((uploadedRow, rowIndex) => (
-                <div key={`detailRow${rowIndex}`} className="grid-row">
-                  {uploadedRow.map((cell, index) => (
-                    <div
-                      className={index === 0 ? 'grid-item grid-item--fixed-left' : 'grid-item'}
-                      key={`row${rowIndex}col${index}`}
-                    >
-                      <nobr>{cell}</nobr>
-                    </div>
-                  ))}
+          {uploadedData.map((uploadedRow, rowIndex) => (
+            <div key={`detailRow${rowIndex}`} className="grid-row">
+              {uploadedRow.map((cell, index) => (
+                <div
+                  className={index === 0 ? 'grid-item grid-item--fixed-left' : 'grid-item'}
+                  key={`row${rowIndex}col${index}`}
+                >
+                  {cell}
                 </div>
               ))}
             </div>
-          </Fragment>
-        )}
+          ))}
+        </div>
       </Fragment>
     );
   }
-}
+  return (
+    <div key="supplierProductUploadInput" className="row">
+      <div className="field-label">Select file for upload</div>
+      <div>
+        <CSVReader
+          onFileLoaded={useFileContents}
+          onError={clearUploadData}
+          inputId="partsData"
+          disabled={uploadDisabled}
+          data-test="uploader"
+        />
+      </div>
+    </div>
+  );
+};
 
+SupplierProductUploadFile.propTypes = {
+  buildInitialRowMappings: PropTypes.func.isRequired,
+  addDataAndProceed: PropTypes.func.isRequired,
+};
 export default SupplierProductUploadFile;

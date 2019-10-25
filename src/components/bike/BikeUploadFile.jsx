@@ -1,8 +1,5 @@
 import React, { Fragment } from 'react';
-import FormTextInput from '../../common/FormTextInput';
 import { Button } from 'semantic-ui-react';
-import FormTextAreaInput from '../../common/FormTextAreaInput';
-import { handleFileUpload } from '../../helpers/upload';
 import CSVReader from 'react-csv-reader';
 
 class BikeUploadFile extends React.Component {
@@ -14,45 +11,13 @@ class BikeUploadFile extends React.Component {
     this.props.addDataAndProceed({ uploadedHeaders, uploadedData, rowMappings });
   };
 
-  handleFileChosen = bikeUploadFile => {
-    let fileReader = new FileReader();
-    fileReader.onloadend = () => {
-      const uploadResults = handleFileUpload(fileReader);
-      if (uploadResults) this.setState(uploadResults);
-    };
-    fileReader.readAsText(bikeUploadFile);
-  };
   addData = csvFileContents => {
     if (csvFileContents.length > 0) {
       const uploadedHeaders = csvFileContents.shift();
       this.setState({ uploadedHeaders, uploadedData: csvFileContents });
     }
   };
-  processTextArea = textInput => {
-    let partLines = textInput.split('#');
-    let uploadedData = [];
-    let uploadedHeaders = ['', this.state.modelName];
-    let splitCharacter = '/t';
-    partLines.forEach(partLine => uploadedData.push(partLine.split(splitCharacter)));
-    if (uploadedData.length > 0) {
-      if (uploadedData[0].length === 1) {
-        // we have a table and not a list of pairs
-        let uploadedPairs = [];
-        let eachPair = [];
-        uploadedData.forEach(uploadValue => {
-          if (uploadValue[0] !== '') {
-            eachPair.push(uploadValue[0]);
-            if (eachPair.length > 1) {
-              uploadedPairs.push(eachPair);
-              eachPair = [];
-            }
-          }
-        });
-        uploadedData = uploadedPairs;
-      }
-      this.setState({ uploadedHeaders, uploadedData });
-    }
-  };
+
   clearUploadData = () => {
     this.setState({ uploadedHeaders: [], uploadedData: [] });
   };
@@ -66,45 +31,15 @@ class BikeUploadFile extends React.Component {
     return (
       <Fragment key="bikeUploadFile">
         {!uploadData && (
-          <div key="bikeUploadInput" className="grid">
-            <div className="grid-row">
-              <div className="grid-item--borderless field-label red align_right">Either:</div>
-              <div className="grid-item--borderless field-label">Select file for upload</div>
-              <div className="grid-item--borderless">
-                <CSVReader
-                  onFileLoaded={this.addData}
-                  onError={this.clearUploadData}
-                  inputId="bikeData"
-                  disabled={uploadDisabled}
-                />
-              </div>
-            </div>
-            <div className="grid-row">
-              <div className="grid-item--borderless field-label red align_right">Or:</div>
-              <div className="grid-item--borderless field-label">Enter a model Name</div>
-              <div className="grid-item--borderless">
-                <FormTextInput
-                  id="modelName"
-                  fieldName="modelName"
-                  placeholder="Model Name"
-                  value={modelName}
-                  onChange={this.onChangeField}
-                  size={100}
-                />
-              </div>
-            </div>
-            <div className="grid-row">
-              <div className="grid-item--borderless field-label red align_right">and:</div>
-              <div className="grid-item--borderless field-label">Paste a list of parts</div>
-              <div className="grid-item--borderless">
-                <FormTextAreaInput
-                  title="Paste list of bike part types and values here"
-                  placeholder={'e.g. Bars Deda 30cm'}
-                  onChange={this.processTextArea}
-                  disabled={!modelName}
-                  rows={20}
-                />
-              </div>
+          <div key="bikeUploadInput" className="row">
+            <div className="field-label">Select file for upload</div>
+            <div>
+              <CSVReader
+                onFileLoaded={this.addData}
+                onError={this.clearUploadData}
+                inputId="bikeData"
+                disabled={uploadDisabled}
+              />
             </div>
           </div>
         )}

@@ -140,6 +140,6 @@ describe('SelectInput', () => {
     const component = shallow(
       <SelectInput fieldName="myField" onChange={jest.fn()} options={options} isEmptyAllowed />,
     );
-    expect(component.instance().findDefaultSelections()).toEqual('H');
+    expect(component.find('select').prop('value')).toEqual('H');
   });
 });

@@ -2,6 +2,7 @@ import EditModel from './EditModel';
 import React from 'react';
 import { assertComponentHasExpectedProps } from '../../../helpers/jest_helpers/assert';
 import { customerFields } from './helpers/fields';
+import { updateObject } from '../../../helpers/utils';
 
 describe('EditModel', () => {
   const model = { id: 12 };
@@ -66,6 +67,7 @@ describe('EditModel', () => {
   });
   describe('update changes', () => {
     it('should reflect a field change when onchange is called for the model', () => {
+      const modelWithUpdates = updateObject(model, { first_name: 'Anna' });
       const component = shallow(
         <EditModel
           actionsRequired={true}
@@ -76,12 +78,13 @@ describe('EditModel', () => {
           additionalActions={actions}
         />,
       );
-      component.instance().handleModelValueChange('first_name', 'Anna');
-      expect(component.state('persistedModel')).toEqual(model);
-      expect(component.state('model').first_name).toEqual('Anna');
+      component.find('EditModelRow').prop('onChange')('first_name', 'Anna');
+      assertComponentHasExpectedProps(component.find('EditModelRow'), {
+        model: modelWithUpdates,
+        persistedModel: model,
+      });
     });
     it('should reset state when the model in props is not the original persisted model', () => {
-      const model2 = { id: 14, first_name: 'Anna' };
       const modelWithUpdates = { id: 14, first_name: 'Belinda' };
       const component = shallow(
         <EditModel
@@ -93,16 +96,12 @@ describe('EditModel', () => {
           additionalActions={actions}
         />,
       );
-      component.setState({ model: modelWithUpdates });
-      expect(component.state('persistedModel')).toEqual(model);
+      component.find('EditModelRow').prop('onChange')('first_name', 'Belinda');
 
       assertComponentHasExpectedProps(component.find('EditModelRow'), {
         model: modelWithUpdates,
         persistedModel: model,
       });
-      component.setProps({ model: model2 });
-      expect(component.state('persistedModel')).toEqual(model2);
-      expect(component.state('model')).toEqual(model2);
     });
   });
 });

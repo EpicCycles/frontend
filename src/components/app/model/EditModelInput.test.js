@@ -606,7 +606,7 @@ describe('EditModelInput', () => {
         onChange={onChange}
       />,
     );
-    component.instance().validateOnChange(field.fieldName, '45.75');
+    component.find('FormTextInput').prop('onChange')(field.fieldName, '45.75');
     expect(onChange.mock.calls).toHaveLength(1);
     expect(onChange.mock.calls[0][0]).toBe(field.fieldName);
     expect(onChange.mock.calls[0][1]).toBe('45.75');
@@ -615,7 +615,7 @@ describe('EditModelInput', () => {
   it('should calls reset on a field to set back to model value', () => {
     const field = {
       fieldName: 'data_field',
-      type: CURRENCY,
+      type: TEXT_AREA,
       maxLength: 10,
     };
     const model = { data_field: 23.9 };
@@ -631,7 +631,8 @@ describe('EditModelInput', () => {
         onChange={onChange}
       />,
     );
-    component.instance().resetField(field.fieldName);
+    component.find('FormTextAreaInput').prop('onClick')(field.fieldName);
+
     expect(onChange.mock.calls).toHaveLength(1);
     expect(onChange.mock.calls[0][0]).toBe(field.fieldName);
     expect(onChange.mock.calls[0][1]).toBe(persistedModel.data_field);
@@ -640,7 +641,7 @@ describe('EditModelInput', () => {
   it('should calls reset on a field with no model and shows error', () => {
     const field = {
       fieldName: 'data_field',
-      type: CURRENCY,
+      type: TEXT_AREA,
       maxLength: 10,
       required: true,
       error: 'My data is missing',
@@ -657,7 +658,8 @@ describe('EditModelInput', () => {
         onChange={onChange}
       />,
     );
-    component.instance().resetField(field.fieldName);
+    component.find('FormTextAreaInput').prop('onClick')(field.fieldName);
+
     expect(onChange.mock.calls).toHaveLength(1);
     expect(onChange.mock.calls[0][0]).toBe(field.fieldName);
     expect(onChange.mock.calls[0][1]).toBe('');
@@ -684,7 +686,8 @@ describe('EditModelInput', () => {
         onChange={onChange}
       />,
     );
-    component.instance().validateOnChange(field.fieldName);
+    component.find('FormTextInput').prop('onChange')(field.fieldName, '');
+
     expect(onChange.mock.calls).toHaveLength(1);
     expect(onChange.mock.calls[0][0]).toBe(field.fieldName);
     expect(onChange.mock.calls[0][1]).toBe('');

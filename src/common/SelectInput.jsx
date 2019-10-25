@@ -1,9 +1,10 @@
+/* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
 
-class SelectInput extends Component {
-  makeValueStrings = () => {
-    const { value, isMultiple } = this.props;
+const SelectInput = props => {
+  const makeValueStrings = () => {
+    const { value, isMultiple } = props;
     if (Array.isArray(value) && value.length > 0) {
       if (isMultiple) {
         return value.map(inputValue => inputValue.toString());
@@ -21,8 +22,8 @@ class SelectInput extends Component {
     }
   };
 
-  buildOptions = () => {
-    const { options, isEmptyAllowed } = this.props;
+  const buildOptions = () => {
+    const { options, isEmptyAllowed } = props;
 
     let displayOptions = [];
     if (isEmptyAllowed) {
@@ -38,8 +39,8 @@ class SelectInput extends Component {
     return displayOptions;
   };
 
-  findDefaultSelections = () => {
-    const { options, isMultiple } = this.props;
+  const findDefaultSelections = () => {
+    const { options, isMultiple } = props;
     let defaultValue = [];
     if (options.length > 1) {
       options.forEach(option => {
@@ -57,8 +58,8 @@ class SelectInput extends Component {
     return 0;
   };
 
-  handleChange = event => {
-    if (this.props.isMultiple) {
+  const handleChange = event => {
+    if (props.isMultiple) {
       let value = [];
       const options = event.target.options;
       for (let i = 0; i < options.length; i++) {
@@ -66,61 +67,50 @@ class SelectInput extends Component {
           value.push(options[i].value);
         }
       }
-      this.props.onChange(event.target.name, value);
+      props.onChange(event.target.name, value);
     } else {
-      this.props.onChange(event.target.name, event.target.value);
+      props.onChange(event.target.name, event.target.value);
     }
   };
 
-  render() {
-    const {
-      disabled,
-      className,
-      fieldName,
-      error,
-      title,
-      label,
-      isMultiple,
-      multipleSize,
-    } = this.props;
-    const selectedValue = this.makeValueStrings() || this.findDefaultSelections();
-    const displayOptions = this.buildOptions(selectedValue);
-    let useMultipleSize = multipleSize;
-    if (isMultiple && multipleSize === 1) useMultipleSize = 5;
-    return (
-      <div
-        key={'select-container' + fieldName}
-        className={className + (error ? ' error' : '')}
-        title={error}
+  const { disabled, className, fieldName, error, title, label, isMultiple, multipleSize } = props;
+  const selectedValue = makeValueStrings() || findDefaultSelections();
+  const displayOptions = buildOptions(selectedValue);
+  let useMultipleSize = multipleSize;
+  if (isMultiple && multipleSize === 1) useMultipleSize = 5;
+  return (
+    <div
+      key={'select-container' + fieldName}
+      className={className + (error ? ' error' : '')}
+      title={error}
+    >
+      {label && <label>{label}</label>}
+      <select
+        name={fieldName}
+        id={fieldName}
+        key={fieldName}
+        title={title}
+        multiple={isMultiple}
+        size={useMultipleSize}
+        onChange={event => this.handleChange(event)}
+        value={selectedValue}
+        disabled={disabled}
       >
-        {label && <label>{label}</label>}
-        <select
-          name={fieldName}
-          id={fieldName}
-          key={fieldName}
-          title={title}
-          multiple={isMultiple}
-          size={useMultipleSize}
-          onChange={event => this.handleChange(event)}
-          value={selectedValue}
-          disabled={disabled}
-        >
-          {displayOptions.map(option => {
-            return (
-              <option
-                id={`${fieldName}_${option.value}`}
-                key={`${fieldName}_${option.value}`}
-                value={option.value}
-              >
-                {option.name}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-    );
-  }
-}
+        {displayOptions.map(option => {
+          return (
+            <option
+              id={`${fieldName}_${option.value}`}
+              key={`${fieldName}_${option.value}`}
+              value={option.value}
+            >
+              {option.name}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
+};
 
 SelectInput.defaultProps = {
   className: '',

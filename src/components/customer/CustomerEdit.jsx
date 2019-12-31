@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { doWeHaveObjects, findObjectWithId, updateObject } from '../../helpers/utils';
 import CustomerAddressGrid from './CustomerAddressGrid';
@@ -8,167 +8,189 @@ import {
   modelIsAlreadyInArray,
 } from '../app/model/helpers/model';
 import CustomerPhoneGrid from './CustomerPhoneGrid';
-import { customerFields } from '../app/model/helpers/fields';
+import { CREATED_DATE, customerFields } from '../app/model/helpers/fields';
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteGrid from '../quote/QuoteGrid';
 import { quoteFields } from '../quote/helpers/quoteFields';
 import EditModel from '../app/model/EditModel';
-import { customerNoteFields } from '../note/helpers/noteFields';
+import { customerNoteFields, NOTE_TEXT } from '../note/helpers/noteFields';
+import FormCheckbox from '../../common/FormCheckbox';
+import { formattedDateTime } from '../app/model/helpers/display';
 
-class CustomerEdit extends React.Component {
-  state = { note: createEmptyModelWithDefaultFields(customerNoteFields) };
+const CustomerEdit = props => {
+  const [note, setNote] = useState(createEmptyModelWithDefaultFields(customerNoteFields));
+  const [seeAllNotes, setSeeAllNotes] = useState(false);
+  const [seeNoteDetail, setSeeNoteDetail] = useState(false);
+  useEffect(() => {
+    // Any time the notes in props cjhanges check the current note isnt in list
+    if (modelIsAlreadyInArray(props.notes, note, customerNoteFields))
+      setNote(createEmptyModelWithDefaultFields(customerNoteFields));
+  }, [props.notes]);
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.notes !== prevProps.notes) {
-      if (modelIsAlreadyInArray(this.props.notes, this.state.note, customerNoteFields))
-        this.setState({ note: createEmptyModelWithDefaultFields(customerNoteFields) });
-    }
-  }
-
-  saveOrCreateCustomerNote = note => {
-    this.setState({ note });
-    if (note.id) {
-      this.props.saveNote(note);
+  const saveOrCreateCustomerNote = noteToSave => {
+    setNote(noteToSave);
+    if (noteToSave.id) {
+      props.saveNote(noteToSave);
     } else {
-      const noteToSave = updateObject(note, { customer: this.props.customerId });
-      this.props.createNote(noteToSave);
+      const noteCompleteToSave = updateObject(noteToSave, { customer: props.customerId });
+      props.createNote(noteCompleteToSave);
     }
   };
-  saveOrCreateCustomer = customer => {
+  const saveOrCreateCustomer = customer => {
     if (customer.id) {
-      this.props.saveCustomer(customer);
+      props.saveCustomer(customer);
     } else {
-      this.props.createCustomer(customer);
+      props.createCustomer(customer);
     }
   };
 
-  render() {
-    const { note } = this.state;
-    const {
-      addresses,
-      phones,
-      customers,
-      notes,
-      frames,
-      bikes,
-      quotes,
-      brands,
-      users,
-      deleteCustomer,
-      isLoading,
-      customerId,
-      deleteNote,
-      addCustomerPhone,
-      deleteCustomerPhone,
-      saveCustomerPhone,
-      addCustomerAddress,
-      saveCustomerAddress,
-      deleteCustomerAddress,
-      getQuote,
-      archiveQuote,
-      unarchiveQuote,
-      getQuoteToCopy,
-    } = this.props;
-    const customer = findObjectWithId(customers, customerId) || {};
-    const customer_key = getModelKey(customer);
-    return (
-      <div id="customer-edit">
-        <h2>Customer</h2>
-        <section className="row">
-          <div>
-            <EditModel
-              model={customer}
-              modelFields={customerFields}
-              pageMode
-              actionsRequired
-              showReadOnlyFields
-              modelSave={this.saveOrCreateCustomer}
-              modelDelete={deleteCustomer}
-              componentKey={customer_key}
-              users={users}
-              key="customerEdit"
-              data-test="edit-customer"
-              className="fit-content"
-            />
-            {customerId && (
-              <div className="grid-container">
-                <CustomerAddressGrid
-                  deleteCustomerAddress={deleteCustomerAddress}
-                  saveCustomerAddress={saveCustomerAddress}
-                  addCustomerAddress={addCustomerAddress}
-                  addresses={addresses}
-                  users={users}
-                  customerId={customerId}
-                  data-test="edit-customer-addresses"
-                />
-                <CustomerPhoneGrid
-                  deleteCustomerPhone={deleteCustomerPhone}
-                  saveCustomerPhone={saveCustomerPhone}
-                  addCustomerPhone={addCustomerPhone}
-                  customerId={customerId}
-                  phones={phones}
-                  users={users}
-                  data-test="edit-customer-phones"
-                />
-              </div>
-            )}
-            {customerId && quotes && doWeHaveObjects(quotes) && (
-              <div className="grid-container">
-                <QuoteGrid
-                  displayFields={quoteFields({
-                    fieldExclusions: { customer: true, history: true },
-                  })}
-                  getQuote={getQuote}
-                  archiveQuote={archiveQuote}
-                  unarchiveQuote={unarchiveQuote}
-                  cloneQuote={getQuoteToCopy}
-                  bikes={bikes}
-                  frames={frames}
-                  brands={brands}
-                  quotes={quotes.filter(quote => quote.customer === customerId)}
-                  users={users}
-                />
-              </div>
-            )}
-          </div>
-          <div>
-            {customerId && (
-              <Fragment>
-                <EditModel
-                  model={note}
-                  modelFields={customerNoteFields}
-                  showReadOnlyFields
-                  pageMode
-                  actionsRequired
-                  modelSave={this.saveOrCreateCustomerNote}
-                  key={`editNote`}
-                  modelDelete={deleteNote}
-                  data-test="add-customer-note"
-                />
-                {notes &&
-                  notes
-                    .filter(note => !note.quote)
-                    .map(oldNote => (
+  const {
+    addresses,
+    phones,
+    customers,
+    notes,
+    frames,
+    bikes,
+    quotes,
+    brands,
+    users,
+    deleteCustomer,
+    isLoading,
+    customerId,
+    deleteNote,
+    addCustomerPhone,
+    deleteCustomerPhone,
+    saveCustomerPhone,
+    addCustomerAddress,
+    saveCustomerAddress,
+    deleteCustomerAddress,
+    getQuote,
+    archiveQuote,
+    unarchiveQuote,
+    getQuoteToCopy,
+  } = props;
+  const customer = findObjectWithId(customers, customerId) || {};
+  const customer_key = getModelKey(customer);
+  const notesToView = notes ? notes.filter(note => seeAllNotes || !note.quote) : [];
+  return (
+    <div id="customer-edit">
+      <h2>Customer</h2>
+      <section className="row">
+        <div>
+          <EditModel
+            model={customer}
+            modelFields={customerFields}
+            pageMode
+            actionsRequired
+            showReadOnlyFields
+            modelSave={saveOrCreateCustomer}
+            modelDelete={deleteCustomer}
+            componentKey={customer_key}
+            users={users}
+            key="customerEdit"
+            data-test="edit-customer"
+            className="fit-content"
+          />
+          {customerId && (
+            <div className="grid-container">
+              <CustomerAddressGrid
+                deleteCustomerAddress={deleteCustomerAddress}
+                saveCustomerAddress={saveCustomerAddress}
+                addCustomerAddress={addCustomerAddress}
+                addresses={addresses}
+                users={users}
+                customerId={customerId}
+                data-test="edit-customer-addresses"
+              />
+              <CustomerPhoneGrid
+                deleteCustomerPhone={deleteCustomerPhone}
+                saveCustomerPhone={saveCustomerPhone}
+                addCustomerPhone={addCustomerPhone}
+                customerId={customerId}
+                phones={phones}
+                users={users}
+                data-test="edit-customer-phones"
+              />
+            </div>
+          )}
+          {customerId && quotes && doWeHaveObjects(quotes) && (
+            <div className="grid-container">
+              <QuoteGrid
+                displayFields={quoteFields({
+                  fieldExclusions: { customer: true, history: true },
+                })}
+                getQuote={getQuote}
+                archiveQuote={archiveQuote}
+                unarchiveQuote={unarchiveQuote}
+                cloneQuote={getQuoteToCopy}
+                bikes={bikes}
+                frames={frames}
+                brands={brands}
+                quotes={quotes.filter(quote => quote.customer === customerId)}
+                users={users}
+              />
+            </div>
+          )}
+        </div>
+        <div>
+          {customerId && (
+            <Fragment>
+              <EditModel
+                model={note}
+                modelFields={customerNoteFields}
+                showReadOnlyFields
+                pageMode
+                actionsRequired
+                modelSave={saveOrCreateCustomerNote}
+                key={`editNote`}
+                modelDelete={deleteNote}
+                data-test="add-customer-note"
+              />
+              {notesToView.length > 0 && (
+                <Fragment>
+                  <h2>Notes</h2>
+                  <div className="row">
+                    <FormCheckbox
+                      onChange={() => setSeeNoteDetail(!seeNoteDetail)}
+                      fieldName={'seeNoteDetail'}
+                      fieldLabel={'See details'}
+                      fieldValue={seeNoteDetail}
+                    />
+                    <FormCheckbox
+                      onChange={() => setSeeAllNotes(!seeAllNotes)}
+                      fieldName={'seeAllNotes'}
+                      fieldLabel={'See all notes'}
+                      fieldValue={seeAllNotes}
+                    />
+                  </div>
+                  {notesToView.map(oldNote =>
+                    seeNoteDetail ? (
                       <ViewModelBlock
                         modelFields={customerNoteFields}
                         model={oldNote}
                         key={`note_${getModelKey(oldNote)}`}
                         users={users}
                       />
-                    ))}
-              </Fragment>
-            )}
-          </div>
-        </section>
+                    ) : (
+                      <div>
+                        {oldNote[NOTE_TEXT]} ({formattedDateTime(new Date(oldNote[CREATED_DATE]))})
+                      </div>
+                    ),
+                  )}
+                </Fragment>
+              )}
+            </Fragment>
+          )}
+        </div>
+      </section>
 
-        {isLoading && (
-          <Dimmer active inverted>
-            <Loader content="Loading" />
-          </Dimmer>
-        )}
-      </div>
-    );
-  }
-}
+      {isLoading && (
+        <Dimmer active inverted>
+          <Loader content="Loading" />
+        </Dimmer>
+      )}
+    </div>
+  );
+};
 
 export default CustomerEdit;

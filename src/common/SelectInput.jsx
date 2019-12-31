@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-for */
-import React, { Component } from 'react';
+import React from 'react';
 import * as PropTypes from 'prop-types';
 
 const SelectInput = props => {
@@ -92,7 +92,7 @@ const SelectInput = props => {
         title={title}
         multiple={isMultiple}
         size={useMultipleSize}
-        onChange={event => this.handleChange(event)}
+        onChange={event => handleChange(event)}
         value={selectedValue}
         disabled={disabled}
       >

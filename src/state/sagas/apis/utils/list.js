@@ -1,7 +1,11 @@
 export const buildSearchCriteria = searchCriteria => {
   const keys = searchCriteria ? Object.keys(searchCriteria) : [];
-  if (keys.length > 0) {
-    return `?${keys.map(key => `${key}=${searchCriteria[key]}`).join('&')}`;
+  const keysWithValues = keys.filter(key => {
+    if (key === 'token') return false;
+    return !!searchCriteria[key];
+  });
+  if (keysWithValues.length > 0) {
+    return `?${keysWithValues.map(key => `${key}=${searchCriteria[key]}`).join('&')}`;
   }
   return '';
 };

@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import axios from 'axios';
+import { buildSearchCriteria } from './apis/utils/list';
 
 const instance = axios.create({
   baseURL: '',
@@ -16,7 +17,7 @@ const getCustomerList = async payload => {
 
 const getNoteList = async payload => {
   instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  const api = `/rest-epic/customernotes?customerId=${payload.customerId}&quoteId=${payload.quoteId}&customerVisible=${payload.customerVisible}`;
+  const api = `/rest-epic/customernotes${buildSearchCriteria(payload)}`;
   return instance.get(api);
 };
 

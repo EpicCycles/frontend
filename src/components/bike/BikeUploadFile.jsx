@@ -23,7 +23,7 @@ class BikeUploadFile extends React.Component {
   };
 
   render() {
-    const { modelName, uploadedHeaders, uploadedData } = this.state;
+    const { uploadedHeaders, uploadedData } = this.state;
     const { brandName, frameName } = this.props;
     const uploadData = uploadedHeaders && uploadedHeaders.length > 0;
     const uploadDisabled = false;

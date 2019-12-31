@@ -37,6 +37,7 @@ import * as customerSelectors from '../selectors/customer.js';
 import { updateObject } from '../../helpers/utils';
 import { logError } from '../../helpers/api_error';
 import { LOGIN_URL } from '../../components/menus/helpers/menu';
+import { getNoteList } from '../actions/note';
 
 export function* getCustomerList(action) {
   try {
@@ -84,13 +85,12 @@ export function* getCustomer(action) {
       const completePayload = updateObject(action.payload, { token });
       const response = yield call(api.getCustomer, completePayload);
       yield put(getCustomerSuccess(response.data));
-      // yield call(history.push, "/customer");
+      yield put(getNoteList(action.payload.customerId));
     } else {
       yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     yield put(getCustomerFailure('Get Customer failed'));
-    // yield put(history.push("/customer"));
   }
 }
 

@@ -17,7 +17,6 @@ const EditModel = props => {
       setModel(updateObject(props.model));
       setPersistedModel(props.model);
     }
-    return null;
   }, [props.model]);
 
   const handleModelValueChange = (fieldName, input) => {

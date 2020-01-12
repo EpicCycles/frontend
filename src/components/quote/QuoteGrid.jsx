@@ -54,11 +54,7 @@ const QuoteGrid = props => {
         <ViewModel
           model={quote}
           modelFields={displayFields}
-          customers={customers}
-          brands={brands}
-          bikes={bikes}
-          frames={frames}
-          users={users}
+          sourceDataArrays={{ customers, brands, bikes, frames, users }}
           className={displayedQuote === quote.id ? 'selected' : ''}
           actionsRequired
           showReadOnlyFields
@@ -71,11 +67,7 @@ const QuoteGrid = props => {
         <ViewModel
           model={quote}
           modelFields={displayFields}
-          customers={customers}
-          brands={brands}
-          bikes={bikes}
-          frames={frames}
-          users={users}
+          sourceDataArrays={{ customers, brands, bikes, frames, users }}
           actionsRequired
           modelActions={quoteActions(quote, availableActions)}
           className={displayedQuote === quote.id ? 'selected' : ''}

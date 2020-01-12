@@ -26,7 +26,7 @@ class CustomerAddressGrid extends React.Component {
                 pageMode
                 model={address}
                 modelFields={customerAddressFields}
-                users={users}
+                                  sourceDataArrays={{ users }}
                 actionsRequired
                 modelDelete={deleteCustomerAddress}
                 key={`editAddress${getModelKey(address)}`}

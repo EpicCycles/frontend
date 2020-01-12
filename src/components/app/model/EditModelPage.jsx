@@ -16,12 +16,7 @@ const EditModelPage = props => {
     persistedModel,
     users,
     className = '',
-    sections,
-    brands,
-    suppliers,
-    bikes,
-    frames,
-    customers,
+    sourceDataArrays,
     onChange,
     showReadOnlyFields,
     actionsRequired,
@@ -47,12 +42,7 @@ const EditModelPage = props => {
               field={field}
               model={persistedModel}
               componentKey={componentKey}
-              sections={sections}
-              brands={brands}
-              bikes={bikes}
-              frames={frames}
-              customers={customers}
-              suppliers={suppliers}
+              sourceDataArrays={sourceDataArrays}
               users={users}
               data-test="field-to-view"
             />
@@ -64,9 +54,7 @@ const EditModelPage = props => {
               persistedModel={persistedModel}
               componentKey={componentKey}
               onChange={onChange}
-              sections={sections}
-              brands={brands}
-              suppliers={suppliers}
+              sourceDataArrays={sourceDataArrays}
               data-test="field-to-edit"
             />
           );
@@ -102,13 +90,16 @@ EditModelPage.propTypes = {
   modelFields: PropTypes.array.isRequired,
   persistedModel: PropTypes.object,
   className: PropTypes.string,
-  sections: PropTypes.array,
-  brands: PropTypes.array,
-  bikes: PropTypes.array,
-  frames: PropTypes.array,
-  suppliers: PropTypes.array,
-  customers: PropTypes.array,
-  users: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+  }),
   onChange: PropTypes.func.isRequired,
   showReadOnlyFields: PropTypes.bool,
   actionsRequired: PropTypes.bool,

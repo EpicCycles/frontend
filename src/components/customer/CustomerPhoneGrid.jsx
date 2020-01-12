@@ -27,8 +27,8 @@ class CustomerPhoneGrid extends React.Component {
                 pageMode
                 model={phone}
                 modelFields={customerPhoneFields}
-                users={users}
-                actionsRequired
+                                                  sourceDataArrays={{ users }}
+ actionsRequired
                 modelDelete={deleteCustomerPhone}
                 key={`editPhone${getModelKey(phone)}`}
                 modelSave={saveCustomerPhone}

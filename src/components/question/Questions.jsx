@@ -75,8 +75,7 @@ class Questions extends PureComponent {
                   persistedModel={question}
                   modelFields={questionFields}
                   actionsRequired
-                  users={users}
-                  charges={charges}
+                  sourceDataArrays={{ users, charges }}
                   modelSave={saveQuestion}
                   modelDelete={deleteQuestion}
                   showReadOnlyFields

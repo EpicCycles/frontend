@@ -57,9 +57,7 @@ describe('EditModelPageRow', () => {
         index={2}
         onChange={jest.fn()}
         className="red"
-        suppliers={suppliers}
-        sections={sections}
-        brands={brands}
+        sourceDataArrays={{ suppliers, sections, brands }}
         persistedModel={model}
       />,
     );

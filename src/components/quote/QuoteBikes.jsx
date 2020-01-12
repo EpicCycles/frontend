@@ -34,12 +34,7 @@ const QuoteBikes = props => {
             <ModelFieldRow
               field={quoteField}
               modelArray={bikeQuotes}
-              bikes={bikes}
-              customers={customers}
-              brands={brands}
-              suppliers={suppliers}
-              frames={frames}
-              users={users}
+              sourceDataArrays={{ bikes, customers, brands, suppliers, frames, users }}
               firstRow={index === 0}
               key={`quoteFieldRow_${quoteField.fieldName}`}
             />

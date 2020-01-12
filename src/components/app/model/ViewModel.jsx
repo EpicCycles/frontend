@@ -11,14 +11,7 @@ const ViewModel = props => {
     pageMode,
     modelFields,
     className,
-    sections,
-    brands,
-    bikes,
-    charges,
-    frames,
-    suppliers,
-    customers,
-    users,
+    sourceDataArrays,
     lockFirstColumn,
     actionsRequired,
     modelActions,
@@ -31,14 +24,7 @@ const ViewModel = props => {
         <ViewModelBlock
           model={model}
           modelFields={modelFields}
-          brands={brands}
-          bikes={bikes}
-          charges={charges}
-          frames={frames}
-          customers={customers}
-          users={users}
-          sections={sections}
-          suppliers={suppliers}
+          sourceDataArrays={sourceDataArrays}
           className={className}
         />
         {actionsRequired && (
@@ -53,13 +39,7 @@ const ViewModel = props => {
       <ModelViewRow
         model={model}
         modelFields={modelFields}
-        brands={brands}
-        bikes={bikes}
-        frames={frames}
-        customers={customers}
-        users={users}
-        sections={sections}
-        suppliers={suppliers}
+        sourceDataArrays={sourceDataArrays}
         className={className}
         lockFirstColumn={lockFirstColumn}
       />
@@ -79,14 +59,17 @@ ViewModel.propTypes = {
   modelFields: PropTypes.array.isRequired,
   pageMode: PropTypes.bool,
   className: PropTypes.string,
-  sections: PropTypes.array,
-  brands: PropTypes.array,
-  charges: PropTypes.array,
-  bikes: PropTypes.array,
-  frames: PropTypes.array,
-  suppliers: PropTypes.array,
-  customers: PropTypes.array,
-  users: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+    charges: PropTypes.array,
+  }),
   lockFirstColumn: PropTypes.bool,
   actionsRequired: PropTypes.bool,
   modelSave: PropTypes.func,

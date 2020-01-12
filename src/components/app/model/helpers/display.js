@@ -21,6 +21,9 @@ import { getBikeName } from '../../../bike/helpers/bike';
 import { getUserName } from '../../../user/helpers/user';
 import { CHARGE } from '../../../quoteCharge/helpers/quoteChargeFields';
 import { chargeName } from '../../../charge/helpers/chargeName';
+import { findObjectWithKey } from '../../../../helpers/utils';
+import { fittingText } from '../../../fitting/helpers/fitting';
+import { FITTING } from '../../../quote/helpers/quoteFields';
 
 export const fixedHeaderClassname = lockColumn => {
   if (lockColumn) return 'grid-header--fixed-left';
@@ -66,19 +69,19 @@ export const fieldAlignment = field => {
       return '';
   }
 };
-export const buildViewString = (
-  model,
-  field,
-  sections,
-  brands,
-  suppliers,
-  customers,
-  bikes,
-  frames,
-  users,
-  charges,
-) => {
+export const buildViewString = (model, field, sourceDataArrays = {}) => {
   let viewData;
+  const {
+    sections,
+    brands,
+    suppliers,
+    customers,
+    bikes,
+    frames,
+    users,
+    charges,
+    fittings,
+  } = sourceDataArrays;
   const fieldValue = model ? model[field.fieldName] : undefined;
   switch (field.type) {
     case CUSTOMER:
@@ -113,6 +116,10 @@ export const buildViewString = (
       break;
     case CHARGE:
       viewData = fieldValue ? chargeName(fieldValue, charges) : '';
+      break;
+    case FITTING:
+      const fitting = fieldValue ? findObjectWithKey(fittings, fieldValue) : undefined;
+      viewData = fitting ? fittingText(fitting) : '';
       break;
     default:
       viewData = fieldValue ? fieldValue : '';

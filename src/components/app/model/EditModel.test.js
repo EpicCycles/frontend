@@ -86,6 +86,7 @@ describe('EditModel', () => {
     });
     it('should reset state when the model in props is not the original persisted model', () => {
       const modelWithUpdates = { id: 14, first_name: 'Belinda' };
+      const sourceDataArrays = { fittings: [] };
       const component = shallow(
         <EditModel
           actionsRequired={true}
@@ -94,6 +95,7 @@ describe('EditModel', () => {
           modelFields={customerFields}
           pageMode={false}
           additionalActions={actions}
+          sourceDataArrays={sourceDataArrays}
         />,
       );
       component.find('EditModelRow').prop('onChange')('first_name', 'Belinda');
@@ -101,6 +103,7 @@ describe('EditModel', () => {
       assertComponentHasExpectedProps(component.find('EditModelRow'), {
         model: modelWithUpdates,
         persistedModel: model,
+        sourceDataArrays: sourceDataArrays,
       });
     });
   });

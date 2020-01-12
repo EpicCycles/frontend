@@ -47,9 +47,7 @@ describe('ViewModelBlock', () => {
         model={model}
         modelFields={customerAddressFields}
         className="red"
-        suppliers={suppliers}
-        sections={sections}
-        brands={brands}
+        sourceDataArrays={{ suppliers, sections, brands }}
       />,
     );
     expect(toJson(component)).toMatchSnapshot();

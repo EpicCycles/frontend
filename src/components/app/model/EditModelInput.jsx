@@ -22,6 +22,8 @@ import CountrySelect from '../../address/CountrySelect';
 import SelectInput from '../../../common/SelectInput';
 import { CHARGE } from '../../quoteCharge/helpers/quoteChargeFields';
 import { chargeOptions } from '../../charge/helpers/chargeOptions';
+import FittingSelect from '../../fitting/FittingSelect';
+import { FITTING } from '../../quote/helpers/quoteFields';
 
 const EditModelInput = props => {
   const validateOnChange = (fieldName, fieldValue) => {
@@ -37,17 +39,8 @@ const EditModelInput = props => {
     validateOnChange(fieldName, originalValue);
   };
 
-  const {
-    field,
-    model,
-    className,
-    componentKey,
-    index,
-    sections,
-    brands,
-    charges,
-    suppliers,
-  } = props;
+  const { field, model, className, componentKey, index, sourceDataArrays } = props;
+  const { sections, brands, charges, suppliers, fittings } = sourceDataArrays;
   let editComponent;
   const fieldName = `${field.fieldName}${componentKey}${index}`;
   let fieldValue = model[field.fieldName];
@@ -220,6 +213,18 @@ const EditModelInput = props => {
         />
       );
       break;
+    case FITTING:
+      editComponent = (
+        <FittingSelect
+          selectFitting={validateOnChange}
+          fittings={fittings}
+          selectedFitting={fieldValue}
+          isEmptyAllowed={emptyAllowed}
+          error={error}
+          disabled={disabled}
+        />
+      );
+      break;
     default:
       editComponent = (
         <FormTextInput
@@ -244,6 +249,7 @@ EditModelInput.defaultProps = {
   index: '',
   model: {},
   persistedModel: {},
+  sourceDataArrays: {},
 };
 EditModelInput.propTypes = {
   field: PropTypes.object.isRequired,
@@ -252,11 +258,16 @@ EditModelInput.propTypes = {
   className: PropTypes.string,
   componentKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  sections: PropTypes.array,
-  brands: PropTypes.array,
-  charges: PropTypes.array,
-  suppliers: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+  }),
   onChange: PropTypes.func.isRequired,
-  fittings: PropTypes.array,
 };
 export default EditModelInput;

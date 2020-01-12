@@ -38,13 +38,6 @@ const EditModel = props => {
     pageMode,
     modelFields,
     className,
-    sections,
-    brands,
-    bikes,
-    frames,
-    suppliers,
-    customers,
-    users,
     lockFirstColumn,
     actionsRequired,
     additionalActions,
@@ -52,6 +45,7 @@ const EditModel = props => {
     showReadOnlyFields,
     modelSave,
     modelDelete,
+    sourceDataArrays
   } = props;
 
   if (pageMode)
@@ -62,13 +56,6 @@ const EditModel = props => {
           persistedModel={persistedModel}
           modelFields={modelFields}
           onChange={handleModelValueChange}
-          brands={brands}
-          bikes={bikes}
-          frames={frames}
-          customers={customers}
-          users={users}
-          sections={sections}
-          suppliers={suppliers}
           className={className}
           showReadOnlyFields={showReadOnlyFields}
           modelSave={modelSave}
@@ -77,6 +64,7 @@ const EditModel = props => {
           additionalActions={additionalActions}
           dummyRow={dummyRow}
           actionsRequired={actionsRequired}
+          sourceDataArrays={sourceDataArrays}
         />
       </div>
     );
@@ -86,13 +74,7 @@ const EditModel = props => {
       persistedModel={persistedModel}
       modelFields={modelFields}
       onChange={handleModelValueChange}
-      brands={brands}
-      bikes={bikes}
-      frames={frames}
-      customers={customers}
-      users={users}
-      sections={sections}
-      suppliers={suppliers}
+      sourceDataArrays={sourceDataArrays}
       className={className}
       showReadOnlyFields={showReadOnlyFields}
       lockFirstColumn={lockFirstColumn}
@@ -110,13 +92,16 @@ EditModel.propTypes = {
   modelFields: PropTypes.array.isRequired,
   pageMode: PropTypes.bool,
   className: PropTypes.string,
-  sections: PropTypes.array,
-  brands: PropTypes.array,
-  bikes: PropTypes.array,
-  frames: PropTypes.array,
-  suppliers: PropTypes.array,
-  customers: PropTypes.array,
-  users: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+  }),
   lockFirstColumn: PropTypes.bool,
   actionsRequired: PropTypes.bool,
   modelSave: PropTypes.func,

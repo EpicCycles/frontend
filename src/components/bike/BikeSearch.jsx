@@ -19,7 +19,7 @@ const BikeSearch = props => {
       doSearch={getFrameList}
       searchTitle="Find Bikes"
       pageMode={pageMode}
-      brands={brands}
+      sourceDataArrays={{ brands }}
       searchCriteria={bikeSearchCriteria}
       raiseStateForCriteria={raiseStateForCriteria}
     />

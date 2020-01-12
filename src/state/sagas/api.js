@@ -71,7 +71,21 @@ const deleteCustomerAddress = async payload => {
   const customerAddressId = payload.customerAddressId;
   return instance.delete(`/rest-epic/customeraddress/${customerAddressId}`);
 };
-
+const createFitting = async payload => {
+  instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
+  const fitting = payload.fitting;
+  return instance.post('/rest-epic/fitting', fitting);
+};
+const saveFitting = async payload => {
+  instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
+  const fitting = payload.fitting;
+  return instance.post(`/rest-epic/fitting/${fitting.id}`, fitting);
+};
+const deleteFitting = async payload => {
+  instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
+  const fittingId = payload.fittingId;
+  return instance.delete(`/rest-epic/customerphone/${fittingId}`);
+};
 const createNote = async payload => {
   instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
   const note = payload.note;
@@ -103,6 +117,9 @@ export default {
   createCustomerAddress,
   saveCustomerAddress,
   deleteCustomerAddress,
+  createFitting,
+  saveFitting,
+  deleteFitting,
   getNoteList,
   createNote,
   saveNote,

@@ -29,6 +29,12 @@ import {
   CUSTOMER_PHONE_SAVE,
   CUSTOMER_ADDRESS_DELETE,
   CUSTOMER_ADDRESS_SAVE,
+  saveFittingSuccess,
+  saveFittingFailure,
+  FITTING_SAVE,
+  deleteFittingSuccess,
+  deleteFittingFailure,
+  FITTING_DELETE,
 } from '../actions/customer';
 
 import api from './api';
@@ -255,4 +261,54 @@ export function* saveCustomerAddress(action) {
 
 export function* watchForSaveCustomerAddress() {
   yield takeLatest(`${CUSTOMER_ADDRESS_SAVE}_REQUEST`, saveCustomerAddress);
+}
+
+export function* saveFitting(action) {
+  const fitting = action.payload.fitting;
+  try {
+    const token = yield select(selectors.token);
+    if (token) {
+      const completePayload = updateObject(action.payload, { token });
+      let response;
+      if (fitting.id) {
+        response = yield call(api.saveFitting, completePayload);
+      } else {
+        response = yield call(api.createFitting, completePayload);
+      }
+      yield put(saveFittingSuccess(response.data));
+    } else {
+      yield call(history.push, LOGIN_URL);
+    }
+  } catch (apiError) {
+    const error = 'Fitting save failed';
+    let error_detail;
+    logError(apiError);
+    if (apiError.response) {
+      error_detail = apiError.response.data;
+    }
+    yield put(saveFittingFailure({ fitting, error, error_detail }));
+  }
+}
+
+export function* watchForSaveFitting() {
+  yield takeLatest(`${FITTING_SAVE}_REQUEST`, saveFitting);
+}
+
+export function* deleteFitting(action) {
+  try {
+    const token = yield select(selectors.token);
+    if (token) {
+      const completePayload = updateObject(action.payload, { token });
+      const response = yield call(api.deleteFitting, completePayload);
+      yield put(deleteFittingSuccess(response.data));
+    } else {
+      yield call(history.push, LOGIN_URL);
+    }
+  } catch (error) {
+    yield put(deleteFittingFailure('Fitting delete failed'));
+  }
+}
+
+export function* watchForDeleteFitting() {
+  yield takeLatest(`${FITTING_DELETE}_REQUEST`, deleteFitting);
 }

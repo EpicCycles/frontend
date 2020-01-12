@@ -201,11 +201,7 @@ class QuoteDetail extends PureComponent {
               model={updatedQuote ? updatedQuote : quote}
               persistedModel={quote}
               modelFields={quoteModelFields}
-              brands={brands}
-              bikes={bikes}
-              frames={frames}
-              users={users}
-              customers={customers}
+              sourceDataArrays={{ brands, bikes, frames, users, customers }}
               modelSave={saveQuote}
               modelDelete={archiveQuote}
               additionalActions={additionalActions}
@@ -244,7 +240,7 @@ class QuoteDetail extends PureComponent {
               modelDelete={deleteQuoteCharge}
               modelSave={saveQuoteCharge}
               blockIdentity={'quoteCharge'}
-              charges={charges}
+              sourceDataArrays={{ charges }}
               actionsRequired
             />
           </div>

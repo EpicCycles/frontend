@@ -16,6 +16,7 @@ import {
   findDataTest,
 } from '../../../helpers/jest_helpers/assert';
 import { CHARGE } from '../../quoteCharge/helpers/quoteChargeFields';
+import { FITTING } from '../../quote/helpers/quoteFields';
 
 const foundName = 'find me';
 const sections = [
@@ -409,7 +410,7 @@ describe('EditModelInput', () => {
             componentKey={componentKey}
             index={0}
             onChange={jest.fn()}
-            sections={sections}
+            sourceDataArrays={{ sections }}
           />,
         ),
       ),
@@ -432,7 +433,7 @@ describe('EditModelInput', () => {
             componentKey={componentKey}
             index={0}
             onChange={jest.fn()}
-            sections={sections}
+            sourceDataArrays={{ sections }}
           />,
         ),
       ),
@@ -453,7 +454,7 @@ describe('EditModelInput', () => {
             componentKey={componentKey}
             index={0}
             onChange={jest.fn()}
-            sections={sections}
+            sourceDataArrays={{ sections }}
           />,
         ),
       ),
@@ -475,7 +476,7 @@ describe('EditModelInput', () => {
             componentKey={componentKey}
             index={0}
             onChange={jest.fn()}
-            brands={brands}
+            sourceDataArrays={{ brands }}
           />,
         ),
       ),
@@ -497,7 +498,7 @@ describe('EditModelInput', () => {
             componentKey={componentKey}
             index={0}
             onChange={jest.fn()}
-            brands={brands}
+            sourceDataArrays={{ brands }}
           />,
         ),
       ),
@@ -517,7 +518,7 @@ describe('EditModelInput', () => {
             componentKey={componentKey}
             index={0}
             onChange={jest.fn()}
-            brands={brands}
+            sourceDataArrays={{ brands }}
           />,
         ),
       ),
@@ -539,7 +540,7 @@ describe('EditModelInput', () => {
             componentKey={componentKey}
             index={0}
             onChange={jest.fn()}
-            suppliers={suppliers}
+            sourceDataArrays={{ suppliers }}
           />,
         ),
       ),
@@ -561,7 +562,7 @@ describe('EditModelInput', () => {
             componentKey={componentKey}
             index={0}
             onChange={jest.fn()}
-            suppliers={suppliers}
+            sourceDataArrays={{ suppliers }}
           />,
         ),
       ),
@@ -581,7 +582,7 @@ describe('EditModelInput', () => {
             componentKey={componentKey}
             index={0}
             onChange={jest.fn()}
-            suppliers={suppliers}
+            sourceDataArrays={{ suppliers }}
           />,
         ),
       ),
@@ -692,5 +693,26 @@ describe('EditModelInput', () => {
     expect(onChange.mock.calls[0][0]).toBe(field.fieldName);
     expect(onChange.mock.calls[0][1]).toBe('');
     expect(onChange.mock.calls[0][2]).toBe(componentKey);
+  });
+  it('should renders a fitting field that has data', () => {
+    const field = {
+      fieldName: 'data_field',
+      type: FITTING,
+    };
+    const model = { data_field: 23.9 };
+    const fittings = [{ id: 21 }, { id: 22 }];
+    const component = shallow(
+      <EditModelInput
+        field={field}
+        model={model}
+        componentKey={componentKey}
+        sourceDataArrays={{ fittings }}
+        onChange={jest.fn()}
+      />,
+    );
+    expect(toJson(component)).toMatchSnapshot();
+    const fittingSelect = component.find('FittingSelect');
+    expect(fittingSelect).toHaveLength(1);
+    expect(fittingSelect.prop('fittings')).toEqual(fittings);
   });
 });

@@ -4,19 +4,7 @@ import { buildViewString, gridHeaderClass, gridItemClass } from './helpers/displ
 import { getModelKey } from './helpers/model';
 
 const ModelFieldRow = props => {
-  const {
-    firstRow,
-    modelArray,
-    field,
-    sections,
-    brands,
-    bikes,
-    frames,
-    suppliers,
-    customers,
-    users,
-    className,
-  } = props;
+  const { firstRow, modelArray, field, sourceDataArrays, users, className } = props;
   const rowClass = firstRow ? 'grid-row--header' : '';
   const cellClass = firstRow
     ? gridHeaderClass(className, 1, true)
@@ -38,17 +26,7 @@ const ModelFieldRow = props => {
             data-test="part-type-header"
             key={`${field.field_name}_${modelKey}`}
           >
-            {buildViewString(
-              modelInstance,
-              field,
-              sections,
-              brands,
-              suppliers,
-              customers,
-              bikes,
-              frames,
-              users,
-            )}
+            {buildViewString(modelInstance, field, sourceDataArrays, users)}
           </div>
         );
       })}
@@ -58,26 +36,23 @@ const ModelFieldRow = props => {
 ModelFieldRow.defaultProps = {
   modelArray: [],
   firstRow: false,
-  sections: [],
-  brands: [],
-  bikes: [],
-  frames: [],
-  suppliers: [],
-  customers: [],
-  users: [],
+  sourceDataArrays: {},
   className: '',
 };
 ModelFieldRow.propTypes = {
   modelArray: PropTypes.array,
   field: PropTypes.object.isRequired,
   firstRow: PropTypes.bool,
-  sections: PropTypes.array,
-  brands: PropTypes.array,
-  bikes: PropTypes.array,
-  frames: PropTypes.array,
-  suppliers: PropTypes.array,
-  customers: PropTypes.array,
-  users: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+  }),
   className: PropTypes.string,
 };
 export default ModelFieldRow;

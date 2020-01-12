@@ -32,14 +32,13 @@ class SupplierProductUploadReview extends React.Component {
                 modelFields={partFieldsComplete}
                 model={part}
                 lockFirstColumn={true}
-                sections={sections}
-                brands={brands}
+                sourceDataArrays={{ sections, brands }}
               />
               <ModelViewRow
                 key={`supplierProduct${partIndex}`}
                 modelFields={supplierProductFields}
                 model={part.supplierProduct}
-                suppliers={suppliers}
+                sourceDataArrays={{ suppliers }}
               />
               <div className="grid-item">{part.error && part.error_detail.join()}</div>
             </div>

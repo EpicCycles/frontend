@@ -49,7 +49,7 @@ const PartDisplayGridRow = props => {
             key={`supplierProduct${getModelKey(firstSupplierProduct)}`}
             modelFields={supplierProductFields}
             model={firstSupplierProduct}
-            suppliers={suppliers}
+            sourceDataArrays={{ suppliers }}
           />
         )}
         {includeActions && (
@@ -84,7 +84,7 @@ const PartDisplayGridRow = props => {
               key={`supplierProduct${supplierProduct.id}`}
               modelFields={supplierProductFields}
               model={supplierProduct}
-              suppliers={suppliers}
+              sourceDataArrays={{ suppliers }}
             />
           </div>
         ))}

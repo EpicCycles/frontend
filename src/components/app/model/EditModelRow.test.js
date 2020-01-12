@@ -48,9 +48,7 @@ describe('EditModelRow', () => {
         modelFields={customerAddressFields}
         onChange={jest.fn()}
         className="red"
-        suppliers={suppliers}
-        sections={sections}
-        brands={brands}
+        sourceDataArrays={{ suppliers, sections, brands }}
         persistedModel={model}
         lockFirstColumn
         childModels={[{ id: 23 }, { id: 34 }]}

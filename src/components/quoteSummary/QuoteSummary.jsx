@@ -36,10 +36,7 @@ const QuoteSummary = props => {
           },
         })}
         model={quote}
-        bikes={bikes}
-        customers={customers}
-        frames={frames}
-        users={users}
+        sourceDataArrays={{ bikes, customers, frames, users }}
       />
       <QuoteSummaryParts
         lockFirstColumn

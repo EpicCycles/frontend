@@ -144,8 +144,7 @@ class PartFinder extends React.Component {
           modelFields={getModelFields(part, !(part && part.id))}
           model={part}
           persistedModel={persistedPart}
-          sections={sections}
-          brands={brands}
+          sourceDataArrays={{ sections, brands }}
           onChange={this.updatePartFieldsInState}
         />
         {part && (

@@ -1,4 +1,4 @@
-import { formattedDateTime } from '../model/helpers/display';
+import { formattedDateTime } from './display';
 
 describe('formattedDate', () => {
   it('should format a given date', () => {

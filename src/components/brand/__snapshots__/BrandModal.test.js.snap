@@ -84,25 +84,27 @@ exports[`BrandModal BrandModal displays correctly for a brand 1`] = `
       modelSave={[Function]}
       pageMode={true}
       showReadOnlyFields={true}
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "supplier 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "supplier 2",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "supplier 3",
-          },
-          Object {
-            "id": 4,
-            "supplier_name": "supplier 4",
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "supplier 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "supplier 2",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "supplier 3",
+            },
+            Object {
+              "id": 4,
+              "supplier_name": "supplier 4",
+            },
+          ],
+        }
       }
     />
   </div>
@@ -180,25 +182,27 @@ exports[`BrandModal BrandModal displays correctly for a new brand 1`] = `
       modelSave={[Function]}
       pageMode={true}
       showReadOnlyFields={true}
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "supplier 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "supplier 2",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "supplier 3",
-          },
-          Object {
-            "id": 4,
-            "supplier_name": "supplier 4",
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "supplier 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "supplier 2",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "supplier 3",
+            },
+            Object {
+              "id": 4,
+              "supplier_name": "supplier 4",
+            },
+          ],
+        }
       }
     />
   </div>

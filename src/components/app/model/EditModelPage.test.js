@@ -50,9 +50,7 @@ describe('EditModelPage', () => {
         modelFields={customerAddressFields}
         onChange={jest.fn()}
         className="red"
-        suppliers={suppliers}
-        sections={sections}
-        brands={brands}
+        sourceDataArrays={{ suppliers, sections, brands }}
         persistedModel={model}
         actionsRequired={true}
         modelSave={jest.fn()}
@@ -83,9 +81,7 @@ describe('EditModelPage', () => {
         modelFields={customerAddressFields}
         onChange={jest.fn()}
         className="red"
-        suppliers={suppliers}
-        sections={sections}
-        brands={brands}
+        sourceDataArrays={{ suppliers, sections, brands }}
         persistedModel={model}
         showReadOnlyFields
       />,

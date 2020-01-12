@@ -27,14 +27,7 @@ const EditModelSimple = props => {
     pageMode,
     modelFields,
     className,
-    sections,
-    charges,
-    brands,
-    bikes,
-    frames,
-    suppliers,
-    customers,
-    users,
+    sourceDataArrays,
     lockFirstColumn,
     actionsRequired,
     additionalActions,
@@ -51,14 +44,7 @@ const EditModelSimple = props => {
           persistedModel={persistedModel}
           modelFields={modelFields}
           onChange={handleModelValueChange}
-          brands={brands}
-          bikes={bikes}
-          frames={frames}
-          customers={customers}
-          users={users}
-          sections={sections}
-          charges={charges}
-          suppliers={suppliers}
+          sourceDataArrays={sourceDataArrays}
           className={className}
           showReadOnlyFields={showReadOnlyFields}
           modelSave={modelSave}
@@ -76,14 +62,7 @@ const EditModelSimple = props => {
       persistedModel={persistedModel}
       modelFields={modelFields}
       onChange={handleModelValueChange}
-      brands={brands}
-      bikes={bikes}
-      frames={frames}
-      customers={customers}
-      users={users}
-      sections={sections}
-      charges={charges}
-      suppliers={suppliers}
+      sourceDataArrays={sourceDataArrays}
       className={className}
       showReadOnlyFields={showReadOnlyFields}
       lockFirstColumn={lockFirstColumn}
@@ -102,14 +81,17 @@ EditModelSimple.propTypes = {
   modelFields: PropTypes.array.isRequired,
   pageMode: PropTypes.bool,
   className: PropTypes.string,
-  sections: PropTypes.array,
-  charges: PropTypes.array,
-  brands: PropTypes.array,
-  bikes: PropTypes.array,
-  frames: PropTypes.array,
-  suppliers: PropTypes.array,
-  customers: PropTypes.array,
-  users: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    charges: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+  }),
   lockFirstColumn: PropTypes.bool,
   actionsRequired: PropTypes.bool,
   modelSave: PropTypes.func,

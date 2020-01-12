@@ -34,6 +34,7 @@ exports[`BrandEdit should shows new brand without supplier correctly 1`] = `
     }
     onChange={[Function]}
     persistedModel={Object {}}
+    sourceDataArrays={Object {}}
   />
   <div
     className="row"
@@ -62,6 +63,7 @@ exports[`BrandEdit should shows new brand without supplier correctly 1`] = `
       }
       onChange={[Function]}
       persistedModel={Object {}}
+      sourceDataArrays={Object {}}
     />
   </div>
   Supplier(s):

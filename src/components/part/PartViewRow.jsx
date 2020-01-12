@@ -9,8 +9,7 @@ const PartViewRow = props => {
     <ModelViewRow
       modelFields={partFieldsComplete}
       model={part}
-      brands={brands}
-      sections={sections}
+      sourceDataArrays={{ brands, sections }}
       lockFirstColumn={lockFirstColumn}
     />
   );

@@ -11,6 +11,9 @@ import {
   CUSTOMER_PHONE_ADD,
   CUSTOMER_PHONE_DELETE,
   CUSTOMER_PHONE_SAVE,
+  FITTING_ADD,
+  FITTING_DELETE,
+  FITTING_SAVE,
   CUSTOMER_SAVE,
 } from '../actions/customer';
 import { CHANGE_ROUTE, CLEAR_ALL_STATE } from '../actions/application';
@@ -57,6 +60,8 @@ const customer = (state = initialState, action) => {
     case `${CUSTOMER_PHONE_DELETE}_REQUEST`:
     case `${CUSTOMER_PHONE_SAVE}_REQUEST`:
     case `${CUSTOMER_ADDRESS_SAVE}_REQUEST`:
+    case `${FITTING_DELETE}_REQUEST`:
+    case `${FITTING_SAVE}_REQUEST`:
       return {
         ...state,
         isLoading: true,
@@ -114,6 +119,7 @@ const customer = (state = initialState, action) => {
     case `${CUSTOMER_DELETE}_ERROR`:
     case `${CUSTOMER_PHONE_DELETE}_ERROR`:
     case `${CUSTOMER_ADDRESS_DELETE}_ERROR`:
+    case `${FITTING_DELETE}_ERROR`:
     case USER_NOT_VALIDATED:
       return {
         ...state,
@@ -168,6 +174,7 @@ const customer = (state = initialState, action) => {
         customers: addItemsToArray(state.customers, [action.payload.customer]),
         addresses: action.payload.addresses,
         phones: action.payload.phones,
+        fittings: action.payload.fittings,
       };
     case CUSTOMER_CREATE:
     case CUSTOMER_SAVE:
@@ -211,6 +218,19 @@ const customer = (state = initialState, action) => {
           lastName: '',
           email: '',
         },
+      };
+    case FITTING_ADD:
+      return {
+        ...state,
+        isLoading: false,
+        fittings: updateObjectInArray(state.fittings, action.payload.fitting),
+      };
+    case FITTING_DELETE:
+    case FITTING_SAVE:
+      return {
+        ...state,
+        isLoading: false,
+        fittings: action.payload,
       };
     default:
       return state;

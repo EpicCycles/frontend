@@ -9,10 +9,7 @@ exports[`ViewModelBlock it renders 1`] = `
     key="modelFields"
   >
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={Array []}
       componentKey=""
-      customers={Array []}
       field={
         Object {
           "displaySize": 30,
@@ -24,18 +21,12 @@ exports[`ViewModelBlock it renders 1`] = `
           "type": "text",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowaddress1"
       model={Object {}}
-      sections={Array []}
-      suppliers={Array []}
-      users={Array []}
+      sourceDataArrays={Object {}}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={Array []}
       componentKey=""
-      customers={Array []}
       field={
         Object {
           "displaySize": 30,
@@ -45,18 +36,12 @@ exports[`ViewModelBlock it renders 1`] = `
           "type": "text",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowaddress2"
       model={Object {}}
-      sections={Array []}
-      suppliers={Array []}
-      users={Array []}
+      sourceDataArrays={Object {}}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={Array []}
       componentKey=""
-      customers={Array []}
       field={
         Object {
           "displaySize": 30,
@@ -66,18 +51,12 @@ exports[`ViewModelBlock it renders 1`] = `
           "type": "text",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowaddress3"
       model={Object {}}
-      sections={Array []}
-      suppliers={Array []}
-      users={Array []}
+      sourceDataArrays={Object {}}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={Array []}
       componentKey=""
-      customers={Array []}
       field={
         Object {
           "displaySize": 30,
@@ -87,18 +66,12 @@ exports[`ViewModelBlock it renders 1`] = `
           "type": "text",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowaddress4"
       model={Object {}}
-      sections={Array []}
-      suppliers={Array []}
-      users={Array []}
+      sourceDataArrays={Object {}}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={Array []}
       componentKey=""
-      customers={Array []}
       field={
         Object {
           "error": "A country must be selected",
@@ -1107,18 +1080,12 @@ exports[`ViewModelBlock it renders 1`] = `
           "type": "select_one",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowcountry"
       model={Object {}}
-      sections={Array []}
-      suppliers={Array []}
-      users={Array []}
+      sourceDataArrays={Object {}}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={Array []}
       componentKey=""
-      customers={Array []}
       field={
         Object {
           "displaySize": 10,
@@ -1132,18 +1099,12 @@ exports[`ViewModelBlock it renders 1`] = `
           ],
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowpostcode"
       model={Object {}}
-      sections={Array []}
-      suppliers={Array []}
-      users={Array []}
+      sourceDataArrays={Object {}}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={Array []}
       componentKey=""
-      customers={Array []}
       field={
         Object {
           "fieldName": "billing",
@@ -1151,18 +1112,12 @@ exports[`ViewModelBlock it renders 1`] = `
           "type": "checkbox",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowbilling"
       model={Object {}}
-      sections={Array []}
-      suppliers={Array []}
-      users={Array []}
+      sourceDataArrays={Object {}}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={Array []}
       componentKey=""
-      customers={Array []}
       field={
         Object {
           "fieldName": "add_date",
@@ -1171,18 +1126,12 @@ exports[`ViewModelBlock it renders 1`] = `
           "type": "date_time",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowadd_date"
       model={Object {}}
-      sections={Array []}
-      suppliers={Array []}
-      users={Array []}
+      sourceDataArrays={Object {}}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={Array []}
       componentKey=""
-      customers={Array []}
       field={
         Object {
           "fieldName": "upd_date",
@@ -1191,12 +1140,9 @@ exports[`ViewModelBlock it renders 1`] = `
           "type": "date_time",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowupd_date"
       model={Object {}}
-      sections={Array []}
-      suppliers={Array []}
-      users={Array []}
+      sourceDataArrays={Object {}}
     />
   </div>
 </div>
@@ -1211,25 +1157,7 @@ exports[`ViewModelBlock it renders with data 1`] = `
     key="modelFields"
   >
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={
-        Array [
-          Object {
-            "brand_name": "id is 1",
-            "id": 1,
-          },
-          Object {
-            "brand_name": "find me",
-            "id": 2,
-          },
-          Object {
-            "brand_name": "id is 3",
-            "id": 3,
-          },
-        ]
-      }
       componentKey={123}
-      customers={Array []}
       field={
         Object {
           "displaySize": 30,
@@ -1241,7 +1169,6 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "type": "text",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowaddress1"
       model={
         Object {
@@ -1254,74 +1181,69 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "postcode": "xxxyyy",
         }
       }
-      sections={
-        Array [
-          Object {
-            "id": 1,
-            "partTypes": Array [
-              Object {
-                "id": 11,
-                "name": "id 11",
-              },
-              Object {
-                "id": 21,
-                "name": "id 11",
-              },
-            ],
-          },
-          Object {
-            "id": 2,
-            "partTypes": Array [
-              Object {
-                "id": 2,
-                "name": "find me",
-              },
-              Object {
-                "id": 22,
-                "name": "id 11",
-              },
-            ],
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "brands": Array [
+            Object {
+              "brand_name": "id is 1",
+              "id": 1,
+            },
+            Object {
+              "brand_name": "find me",
+              "id": 2,
+            },
+            Object {
+              "brand_name": "id is 3",
+              "id": 3,
+            },
+          ],
+          "sections": Array [
+            Object {
+              "id": 1,
+              "partTypes": Array [
+                Object {
+                  "id": 11,
+                  "name": "id 11",
+                },
+                Object {
+                  "id": 21,
+                  "name": "id 11",
+                },
+              ],
+            },
+            Object {
+              "id": 2,
+              "partTypes": Array [
+                Object {
+                  "id": 2,
+                  "name": "find me",
+                },
+                Object {
+                  "id": 22,
+                  "name": "id 11",
+                },
+              ],
+            },
+          ],
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ],
+        }
       }
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "id is 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "find me",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "id is 3",
-          },
-        ]
-      }
-      users={Array []}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={
-        Array [
-          Object {
-            "brand_name": "id is 1",
-            "id": 1,
-          },
-          Object {
-            "brand_name": "find me",
-            "id": 2,
-          },
-          Object {
-            "brand_name": "id is 3",
-            "id": 3,
-          },
-        ]
-      }
       componentKey={123}
-      customers={Array []}
       field={
         Object {
           "displaySize": 30,
@@ -1331,7 +1253,6 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "type": "text",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowaddress2"
       model={
         Object {
@@ -1344,74 +1265,69 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "postcode": "xxxyyy",
         }
       }
-      sections={
-        Array [
-          Object {
-            "id": 1,
-            "partTypes": Array [
-              Object {
-                "id": 11,
-                "name": "id 11",
-              },
-              Object {
-                "id": 21,
-                "name": "id 11",
-              },
-            ],
-          },
-          Object {
-            "id": 2,
-            "partTypes": Array [
-              Object {
-                "id": 2,
-                "name": "find me",
-              },
-              Object {
-                "id": 22,
-                "name": "id 11",
-              },
-            ],
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "brands": Array [
+            Object {
+              "brand_name": "id is 1",
+              "id": 1,
+            },
+            Object {
+              "brand_name": "find me",
+              "id": 2,
+            },
+            Object {
+              "brand_name": "id is 3",
+              "id": 3,
+            },
+          ],
+          "sections": Array [
+            Object {
+              "id": 1,
+              "partTypes": Array [
+                Object {
+                  "id": 11,
+                  "name": "id 11",
+                },
+                Object {
+                  "id": 21,
+                  "name": "id 11",
+                },
+              ],
+            },
+            Object {
+              "id": 2,
+              "partTypes": Array [
+                Object {
+                  "id": 2,
+                  "name": "find me",
+                },
+                Object {
+                  "id": 22,
+                  "name": "id 11",
+                },
+              ],
+            },
+          ],
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ],
+        }
       }
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "id is 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "find me",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "id is 3",
-          },
-        ]
-      }
-      users={Array []}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={
-        Array [
-          Object {
-            "brand_name": "id is 1",
-            "id": 1,
-          },
-          Object {
-            "brand_name": "find me",
-            "id": 2,
-          },
-          Object {
-            "brand_name": "id is 3",
-            "id": 3,
-          },
-        ]
-      }
       componentKey={123}
-      customers={Array []}
       field={
         Object {
           "displaySize": 30,
@@ -1421,7 +1337,6 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "type": "text",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowaddress3"
       model={
         Object {
@@ -1434,74 +1349,69 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "postcode": "xxxyyy",
         }
       }
-      sections={
-        Array [
-          Object {
-            "id": 1,
-            "partTypes": Array [
-              Object {
-                "id": 11,
-                "name": "id 11",
-              },
-              Object {
-                "id": 21,
-                "name": "id 11",
-              },
-            ],
-          },
-          Object {
-            "id": 2,
-            "partTypes": Array [
-              Object {
-                "id": 2,
-                "name": "find me",
-              },
-              Object {
-                "id": 22,
-                "name": "id 11",
-              },
-            ],
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "brands": Array [
+            Object {
+              "brand_name": "id is 1",
+              "id": 1,
+            },
+            Object {
+              "brand_name": "find me",
+              "id": 2,
+            },
+            Object {
+              "brand_name": "id is 3",
+              "id": 3,
+            },
+          ],
+          "sections": Array [
+            Object {
+              "id": 1,
+              "partTypes": Array [
+                Object {
+                  "id": 11,
+                  "name": "id 11",
+                },
+                Object {
+                  "id": 21,
+                  "name": "id 11",
+                },
+              ],
+            },
+            Object {
+              "id": 2,
+              "partTypes": Array [
+                Object {
+                  "id": 2,
+                  "name": "find me",
+                },
+                Object {
+                  "id": 22,
+                  "name": "id 11",
+                },
+              ],
+            },
+          ],
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ],
+        }
       }
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "id is 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "find me",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "id is 3",
-          },
-        ]
-      }
-      users={Array []}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={
-        Array [
-          Object {
-            "brand_name": "id is 1",
-            "id": 1,
-          },
-          Object {
-            "brand_name": "find me",
-            "id": 2,
-          },
-          Object {
-            "brand_name": "id is 3",
-            "id": 3,
-          },
-        ]
-      }
       componentKey={123}
-      customers={Array []}
       field={
         Object {
           "displaySize": 30,
@@ -1511,7 +1421,6 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "type": "text",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowaddress4"
       model={
         Object {
@@ -1524,74 +1433,69 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "postcode": "xxxyyy",
         }
       }
-      sections={
-        Array [
-          Object {
-            "id": 1,
-            "partTypes": Array [
-              Object {
-                "id": 11,
-                "name": "id 11",
-              },
-              Object {
-                "id": 21,
-                "name": "id 11",
-              },
-            ],
-          },
-          Object {
-            "id": 2,
-            "partTypes": Array [
-              Object {
-                "id": 2,
-                "name": "find me",
-              },
-              Object {
-                "id": 22,
-                "name": "id 11",
-              },
-            ],
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "brands": Array [
+            Object {
+              "brand_name": "id is 1",
+              "id": 1,
+            },
+            Object {
+              "brand_name": "find me",
+              "id": 2,
+            },
+            Object {
+              "brand_name": "id is 3",
+              "id": 3,
+            },
+          ],
+          "sections": Array [
+            Object {
+              "id": 1,
+              "partTypes": Array [
+                Object {
+                  "id": 11,
+                  "name": "id 11",
+                },
+                Object {
+                  "id": 21,
+                  "name": "id 11",
+                },
+              ],
+            },
+            Object {
+              "id": 2,
+              "partTypes": Array [
+                Object {
+                  "id": 2,
+                  "name": "find me",
+                },
+                Object {
+                  "id": 22,
+                  "name": "id 11",
+                },
+              ],
+            },
+          ],
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ],
+        }
       }
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "id is 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "find me",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "id is 3",
-          },
-        ]
-      }
-      users={Array []}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={
-        Array [
-          Object {
-            "brand_name": "id is 1",
-            "id": 1,
-          },
-          Object {
-            "brand_name": "find me",
-            "id": 2,
-          },
-          Object {
-            "brand_name": "id is 3",
-            "id": 3,
-          },
-        ]
-      }
       componentKey={123}
-      customers={Array []}
       field={
         Object {
           "error": "A country must be selected",
@@ -2600,7 +2504,6 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "type": "select_one",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowcountry"
       model={
         Object {
@@ -2613,74 +2516,69 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "postcode": "xxxyyy",
         }
       }
-      sections={
-        Array [
-          Object {
-            "id": 1,
-            "partTypes": Array [
-              Object {
-                "id": 11,
-                "name": "id 11",
-              },
-              Object {
-                "id": 21,
-                "name": "id 11",
-              },
-            ],
-          },
-          Object {
-            "id": 2,
-            "partTypes": Array [
-              Object {
-                "id": 2,
-                "name": "find me",
-              },
-              Object {
-                "id": 22,
-                "name": "id 11",
-              },
-            ],
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "brands": Array [
+            Object {
+              "brand_name": "id is 1",
+              "id": 1,
+            },
+            Object {
+              "brand_name": "find me",
+              "id": 2,
+            },
+            Object {
+              "brand_name": "id is 3",
+              "id": 3,
+            },
+          ],
+          "sections": Array [
+            Object {
+              "id": 1,
+              "partTypes": Array [
+                Object {
+                  "id": 11,
+                  "name": "id 11",
+                },
+                Object {
+                  "id": 21,
+                  "name": "id 11",
+                },
+              ],
+            },
+            Object {
+              "id": 2,
+              "partTypes": Array [
+                Object {
+                  "id": 2,
+                  "name": "find me",
+                },
+                Object {
+                  "id": 22,
+                  "name": "id 11",
+                },
+              ],
+            },
+          ],
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ],
+        }
       }
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "id is 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "find me",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "id is 3",
-          },
-        ]
-      }
-      users={Array []}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={
-        Array [
-          Object {
-            "brand_name": "id is 1",
-            "id": 1,
-          },
-          Object {
-            "brand_name": "find me",
-            "id": 2,
-          },
-          Object {
-            "brand_name": "id is 3",
-            "id": 3,
-          },
-        ]
-      }
       componentKey={123}
-      customers={Array []}
       field={
         Object {
           "displaySize": 10,
@@ -2694,7 +2592,6 @@ exports[`ViewModelBlock it renders with data 1`] = `
           ],
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowpostcode"
       model={
         Object {
@@ -2707,74 +2604,69 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "postcode": "xxxyyy",
         }
       }
-      sections={
-        Array [
-          Object {
-            "id": 1,
-            "partTypes": Array [
-              Object {
-                "id": 11,
-                "name": "id 11",
-              },
-              Object {
-                "id": 21,
-                "name": "id 11",
-              },
-            ],
-          },
-          Object {
-            "id": 2,
-            "partTypes": Array [
-              Object {
-                "id": 2,
-                "name": "find me",
-              },
-              Object {
-                "id": 22,
-                "name": "id 11",
-              },
-            ],
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "brands": Array [
+            Object {
+              "brand_name": "id is 1",
+              "id": 1,
+            },
+            Object {
+              "brand_name": "find me",
+              "id": 2,
+            },
+            Object {
+              "brand_name": "id is 3",
+              "id": 3,
+            },
+          ],
+          "sections": Array [
+            Object {
+              "id": 1,
+              "partTypes": Array [
+                Object {
+                  "id": 11,
+                  "name": "id 11",
+                },
+                Object {
+                  "id": 21,
+                  "name": "id 11",
+                },
+              ],
+            },
+            Object {
+              "id": 2,
+              "partTypes": Array [
+                Object {
+                  "id": 2,
+                  "name": "find me",
+                },
+                Object {
+                  "id": 22,
+                  "name": "id 11",
+                },
+              ],
+            },
+          ],
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ],
+        }
       }
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "id is 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "find me",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "id is 3",
-          },
-        ]
-      }
-      users={Array []}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={
-        Array [
-          Object {
-            "brand_name": "id is 1",
-            "id": 1,
-          },
-          Object {
-            "brand_name": "find me",
-            "id": 2,
-          },
-          Object {
-            "brand_name": "id is 3",
-            "id": 3,
-          },
-        ]
-      }
       componentKey={123}
-      customers={Array []}
       field={
         Object {
           "fieldName": "billing",
@@ -2782,7 +2674,6 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "type": "checkbox",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowbilling"
       model={
         Object {
@@ -2795,74 +2686,69 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "postcode": "xxxyyy",
         }
       }
-      sections={
-        Array [
-          Object {
-            "id": 1,
-            "partTypes": Array [
-              Object {
-                "id": 11,
-                "name": "id 11",
-              },
-              Object {
-                "id": 21,
-                "name": "id 11",
-              },
-            ],
-          },
-          Object {
-            "id": 2,
-            "partTypes": Array [
-              Object {
-                "id": 2,
-                "name": "find me",
-              },
-              Object {
-                "id": 22,
-                "name": "id 11",
-              },
-            ],
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "brands": Array [
+            Object {
+              "brand_name": "id is 1",
+              "id": 1,
+            },
+            Object {
+              "brand_name": "find me",
+              "id": 2,
+            },
+            Object {
+              "brand_name": "id is 3",
+              "id": 3,
+            },
+          ],
+          "sections": Array [
+            Object {
+              "id": 1,
+              "partTypes": Array [
+                Object {
+                  "id": 11,
+                  "name": "id 11",
+                },
+                Object {
+                  "id": 21,
+                  "name": "id 11",
+                },
+              ],
+            },
+            Object {
+              "id": 2,
+              "partTypes": Array [
+                Object {
+                  "id": 2,
+                  "name": "find me",
+                },
+                Object {
+                  "id": 22,
+                  "name": "id 11",
+                },
+              ],
+            },
+          ],
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ],
+        }
       }
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "id is 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "find me",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "id is 3",
-          },
-        ]
-      }
-      users={Array []}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={
-        Array [
-          Object {
-            "brand_name": "id is 1",
-            "id": 1,
-          },
-          Object {
-            "brand_name": "find me",
-            "id": 2,
-          },
-          Object {
-            "brand_name": "id is 3",
-            "id": 3,
-          },
-        ]
-      }
       componentKey={123}
-      customers={Array []}
       field={
         Object {
           "fieldName": "add_date",
@@ -2871,7 +2757,6 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "type": "date_time",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowadd_date"
       model={
         Object {
@@ -2884,74 +2769,69 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "postcode": "xxxyyy",
         }
       }
-      sections={
-        Array [
-          Object {
-            "id": 1,
-            "partTypes": Array [
-              Object {
-                "id": 11,
-                "name": "id 11",
-              },
-              Object {
-                "id": 21,
-                "name": "id 11",
-              },
-            ],
-          },
-          Object {
-            "id": 2,
-            "partTypes": Array [
-              Object {
-                "id": 2,
-                "name": "find me",
-              },
-              Object {
-                "id": 22,
-                "name": "id 11",
-              },
-            ],
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "brands": Array [
+            Object {
+              "brand_name": "id is 1",
+              "id": 1,
+            },
+            Object {
+              "brand_name": "find me",
+              "id": 2,
+            },
+            Object {
+              "brand_name": "id is 3",
+              "id": 3,
+            },
+          ],
+          "sections": Array [
+            Object {
+              "id": 1,
+              "partTypes": Array [
+                Object {
+                  "id": 11,
+                  "name": "id 11",
+                },
+                Object {
+                  "id": 21,
+                  "name": "id 11",
+                },
+              ],
+            },
+            Object {
+              "id": 2,
+              "partTypes": Array [
+                Object {
+                  "id": 2,
+                  "name": "find me",
+                },
+                Object {
+                  "id": 22,
+                  "name": "id 11",
+                },
+              ],
+            },
+          ],
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ],
+        }
       }
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "id is 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "find me",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "id is 3",
-          },
-        ]
-      }
-      users={Array []}
     />
     <ViewModelFieldRow
-      bikes={Array []}
-      brands={
-        Array [
-          Object {
-            "brand_name": "id is 1",
-            "id": 1,
-          },
-          Object {
-            "brand_name": "find me",
-            "id": 2,
-          },
-          Object {
-            "brand_name": "id is 3",
-            "id": 3,
-          },
-        ]
-      }
       componentKey={123}
-      customers={Array []}
       field={
         Object {
           "fieldName": "upd_date",
@@ -2960,7 +2840,6 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "type": "date_time",
         }
       }
-      frames={Array []}
       key="ViewModelFieldRowupd_date"
       model={
         Object {
@@ -2973,53 +2852,66 @@ exports[`ViewModelBlock it renders with data 1`] = `
           "postcode": "xxxyyy",
         }
       }
-      sections={
-        Array [
-          Object {
-            "id": 1,
-            "partTypes": Array [
-              Object {
-                "id": 11,
-                "name": "id 11",
-              },
-              Object {
-                "id": 21,
-                "name": "id 11",
-              },
-            ],
-          },
-          Object {
-            "id": 2,
-            "partTypes": Array [
-              Object {
-                "id": 2,
-                "name": "find me",
-              },
-              Object {
-                "id": 22,
-                "name": "id 11",
-              },
-            ],
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "brands": Array [
+            Object {
+              "brand_name": "id is 1",
+              "id": 1,
+            },
+            Object {
+              "brand_name": "find me",
+              "id": 2,
+            },
+            Object {
+              "brand_name": "id is 3",
+              "id": 3,
+            },
+          ],
+          "sections": Array [
+            Object {
+              "id": 1,
+              "partTypes": Array [
+                Object {
+                  "id": 11,
+                  "name": "id 11",
+                },
+                Object {
+                  "id": 21,
+                  "name": "id 11",
+                },
+              ],
+            },
+            Object {
+              "id": 2,
+              "partTypes": Array [
+                Object {
+                  "id": 2,
+                  "name": "find me",
+                },
+                Object {
+                  "id": 22,
+                  "name": "id 11",
+                },
+              ],
+            },
+          ],
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ],
+        }
       }
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "id is 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "find me",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "id is 3",
-          },
-        ]
-      }
-      users={Array []}
     />
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { fixedDetailsClassname } from '../model/helpers/display';
+import { fixedDetailsClassname } from './display';
 
 test('should return the fixed header class when it is required', () => {
   expect(fixedDetailsClassname(true)).toBe('grid-item--fixed-left');

@@ -5,19 +5,7 @@ import { fieldAlignment, gridItemClass } from './helpers/display';
 import { getModelKey } from './helpers/model';
 
 const ModelViewRow = props => {
-  const {
-    model,
-    modelFields,
-    brands,
-    customers,
-    users,
-    sections,
-    suppliers,
-    lockFirstColumn,
-    className,
-    bikes,
-    frames,
-  } = props;
+  const { model, modelFields, sourceDataArrays, lockFirstColumn, className } = props;
   const componentKey = getModelKey(model);
   return (
     <Fragment>
@@ -35,13 +23,7 @@ const ModelViewRow = props => {
             <ModelViewRowField
               field={field}
               model={model}
-              brands={brands}
-              bikes={bikes}
-              frames={frames}
-              users={users}
-              sections={sections}
-              suppliers={suppliers}
-              customers={customers}
+              sourceDataArrays={sourceDataArrays}
               key={`modelField${field.fieldName}${componentKey}`}
             />
           </div>
@@ -54,26 +36,24 @@ const ModelViewRow = props => {
 ModelViewRow.defaultProps = {
   model: {},
   className: '',
-  sections: [],
-  brands: [],
-  suppliers: [],
-  users: [],
-  customers: [],
-  bikes: [],
-  frames: [],
+  sourceDataArrays: {},
 };
 
 ModelViewRow.propTypes = {
   modelFields: PropTypes.array.isRequired,
   model: PropTypes.object,
-  sections: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    charges: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+  }),
   className: PropTypes.string,
-  brands: PropTypes.array,
-  suppliers: PropTypes.array,
-  customers: PropTypes.array,
-  bikes: PropTypes.array,
-  frames: PropTypes.array,
-  users: PropTypes.array,
   lockFirstColumn: PropTypes.bool,
 };
 export default ModelViewRow;

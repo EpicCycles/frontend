@@ -40,7 +40,7 @@ class BrandModal extends React.Component {
             pageMode
             model={brand}
             modelFields={brandFields}
-            suppliers={suppliers}
+            sourceDataArrays={{ suppliers }}
             modelSave={this.saveOrCreateBrand}
             modelDelete={this.deleteOrRemoveBrand}
             showReadOnlyFields

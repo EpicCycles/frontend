@@ -3,30 +3,8 @@ import React from 'react';
 import { buildViewString } from './helpers/display';
 
 const ModelViewRowField = props => {
-  const {
-    field,
-    model,
-    sections,
-    charges,
-    brands,
-    suppliers,
-    users,
-    customers,
-    bikes,
-    frames,
-  } = props;
-  let viewData = buildViewString(
-    model,
-    field,
-    sections,
-    brands,
-    suppliers,
-    customers,
-    bikes,
-    frames,
-    users,
-    charges,
-  );
+  const { field, model, sourceDataArrays } = props;
+  let viewData = buildViewString(model, field, sourceDataArrays);
   return field.maxWidth ? (
     <div style={{ maxWidth: field.maxWidth }}>
       {Array.isArray(viewData) ? viewData.join() : viewData}
@@ -35,17 +13,22 @@ const ModelViewRowField = props => {
     <nobr>{Array.isArray(viewData) ? viewData.join() : viewData}</nobr>
   );
 };
-
+ModelViewRowField.defaultProps = {
+  sourceDataArrays: {},
+};
 ModelViewRowField.propTypes = {
   field: PropTypes.any.isRequired,
   model: PropTypes.any,
-  sections: PropTypes.array,
-  brands: PropTypes.array,
-  bikes: PropTypes.array,
-  charges: PropTypes.array,
-  frames: PropTypes.array,
-  suppliers: PropTypes.array,
-  customers: PropTypes.array,
-  users: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+    charges: PropTypes.array,
+  }),
 };
 export default ModelViewRowField;

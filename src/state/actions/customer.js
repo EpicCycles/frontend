@@ -11,6 +11,9 @@ export const CUSTOMER_PHONE_DELETE = 'customer/CUSTOMER_PHONE_DELETE';
 export const CUSTOMER_ADDRESS_SAVE = 'customer/CUSTOMER_ADDRESS_SAVE';
 export const CUSTOMER_ADDRESS_ADD = 'customer/CUSTOMER_ADDRESS_ADD';
 export const CUSTOMER_ADDRESS_DELETE = 'customer/CUSTOMER_ADDRESS_DELETE';
+export const FITTING_SAVE = 'customer/FITTING_SAVE';
+export const FITTING_ADD = 'customer/FITTING_ADD';
+export const FITTING_DELETE = 'customer/FITTING_DELETE';
 
 export const clearCustomerState = () => ({
   type: CUSTOMER_CLEAR_STATE,
@@ -148,5 +151,33 @@ export const deleteCustomerAddressSuccess = customerAddressList => ({
 });
 export const deleteCustomerAddressFailure = error => ({
   type: `${CUSTOMER_ADDRESS_DELETE}_ERROR`,
+  payload: error,
+});
+export const saveFitting = fitting => ({
+  type: `${FITTING_SAVE}_REQUEST`,
+  payload: { fitting },
+});
+export const addFitting = fitting => ({
+  type: FITTING_ADD,
+  payload: { fitting },
+});
+export const saveFittingSuccess = fittingList => ({
+  type: FITTING_SAVE,
+  payload: fittingList,
+});
+export const saveFittingFailure = payload => ({
+  type: `${FITTING_SAVE}_ERROR`,
+  payload,
+});
+export const deleteFitting = fittingId => ({
+  type: `${FITTING_DELETE}_REQUEST`,
+  payload: { fittingId },
+});
+export const deleteFittingSuccess = fittingList => ({
+  type: FITTING_DELETE,
+  payload: fittingList,
+});
+export const deleteFittingFailure = error => ({
+  type: `${FITTING_DELETE}_ERROR`,
   payload: error,
 });

@@ -23,7 +23,7 @@ const NoteGrid = props => {
           <ViewModel
             model={note}
             modelFields={customerNoteFields}
-            users={users}
+            sourceDataArrays={{ users }}
             data-test="note-row"
             lockFirstColumn
             actionsRequired

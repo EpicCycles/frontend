@@ -55,9 +55,7 @@ describe('ViewModelFieldRow', () => {
         componentKey={1}
         index={2}
         className="red"
-        suppliers={suppliers}
-        sections={sections}
-        brands={brands}
+        sourceDataArrays={{ suppliers, sections, brands }}
       />,
     );
     expect(toJson(component)).toMatchSnapshot();
@@ -70,9 +68,7 @@ describe('ViewModelFieldRow', () => {
         componentKey={1}
         index={2}
         className="red"
-        suppliers={suppliers}
-        sections={sections}
-        brands={brands}
+        sourceDataArrays={{ suppliers, sections, brands }}
       />,
     );
     expect(component.type()).toEqual(null);

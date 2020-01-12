@@ -51,13 +51,7 @@ class Search extends React.Component {
       pageMode,
       searchTitle,
       isLoading,
-      sections,
-      brands,
-      suppliers,
-      bikes,
-      frames,
-      customers,
-      users,
+      sourceDataArrays,
     } = this.props;
     const searchCriteriaValid =
       !isLoading &&
@@ -79,13 +73,7 @@ class Search extends React.Component {
           raiseState={this.raiseStateForSearchCriteria}
           key={`changeSearchCriteria`}
           data-test="change-criteria"
-          sections={sections}
-          brands={brands}
-          bikes={bikes}
-          frames={frames}
-          customers={customers}
-          suppliers={suppliers}
-          users={users}
+          sourceDataArrays={sourceDataArrays}
         />
         <SearchButton onClick={this.onSubmit} disabled={!searchCriteriaValid} title={searchTitle} />
       </form>
@@ -105,12 +93,16 @@ Search.propTypes = {
   doSearch: PropTypes.func.isRequired,
   raiseStateForCriteria: PropTypes.func,
   searchTitle: PropTypes.string,
-  sections: PropTypes.array,
-  brands: PropTypes.array,
-  bikes: PropTypes.array,
-  frames: PropTypes.array,
-  suppliers: PropTypes.array,
-  customers: PropTypes.array,
-  users: PropTypes.array,
+    sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    charges: PropTypes.array,
+    fittings: PropTypes.array,
+  }),
 };
 export default Search;

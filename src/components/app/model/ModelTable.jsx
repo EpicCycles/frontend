@@ -15,13 +15,7 @@ const ModelTable = props => {
     raiseState,
     actionsRequired,
     updatedModelArray,
-    bikes,
-    brands,
-    customers,
-    charges,
-    sections,
-    suppliers,
-    users,
+    sourceDataArrays,
     modelSave,
     modelDelete,
     modelActions,
@@ -49,13 +43,7 @@ const ModelTable = props => {
                 model={modelInstance}
                 modelFields={modelFields}
                 actionsRequired={actionsRequired}
-                users={users}
-                sections={sections}
-                brands={brands}
-                bikes={bikes}
-                charges={charges}
-                suppliers={suppliers}
-                customers={customers}
+                sourceDataArrays={sourceDataArrays}
                 modelSave={modelSave}
                 modelDelete={modelDelete}
                 additionalActions={modelActions}
@@ -73,13 +61,7 @@ const ModelTable = props => {
                   persistedModel={modelInstance}
                   modelFields={modelFields}
                   actionsRequired={actionsRequired}
-                  users={users}
-                  sections={sections}
-                  brands={brands}
-                  bikes={bikes}
-                  charges={charges}
-                  suppliers={suppliers}
-                  customers={customers}
+                  sourceDataArrays={sourceDataArrays}
                   modelSave={modelSave}
                   modelDelete={modelDelete}
                   additionalActions={modelActions}
@@ -94,13 +76,7 @@ const ModelTable = props => {
                   persistedModel={modelInstance}
                   modelFields={modelFields}
                   actionsRequired={actionsRequired}
-                  users={users}
-                  sections={sections}
-                  brands={brands}
-                  bikes={bikes}
-                  charges={charges}
-                  suppliers={suppliers}
-                  customers={customers}
+                  sourceDataArrays={sourceDataArrays}
                   modelSave={modelSave}
                   modelDelete={modelDelete}
                   additionalActions={modelActions}
@@ -119,6 +95,7 @@ const ModelTable = props => {
 ModelTable.defaultProps = {
   blockIdentity: 'model',
   updatedModelArray: [],
+  sourceDataArrays: {},
 };
 ModelTable.propTypes = {
   modelArray: PropTypes.array.isRequired,
@@ -127,14 +104,17 @@ ModelTable.propTypes = {
   viewMode: PropTypes.bool,
   blockIdentity: PropTypes.string,
   className: PropTypes.string,
-  sections: PropTypes.array,
-  brands: PropTypes.array,
-  bikes: PropTypes.array,
-  charges: PropTypes.array,
-  frames: PropTypes.array,
-  suppliers: PropTypes.array,
-  customers: PropTypes.array,
-  users: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    charges: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+  }),
   lockFirstColumn: PropTypes.bool,
   actionsRequired: PropTypes.bool,
   modelSave: PropTypes.func,

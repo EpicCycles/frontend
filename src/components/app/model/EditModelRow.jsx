@@ -15,14 +15,7 @@ const EditModelRow = props => {
     className,
     onChange,
     lockFirstColumn,
-    brands,
-    bikes,
-    sections,
-    charges,
-    suppliers,
-    users,
-    customers,
-    frames,
+    sourceDataArrays,
     actionsRequired,
     modelSave,
     modelDelete,
@@ -50,14 +43,7 @@ const EditModelRow = props => {
               <ModelViewRowField
                 field={field}
                 model={model}
-                frames={frames}
-                bikes={bikes}
-                brands={brands}
-                charges={charges}
-                sections={sections}
-                suppliers={suppliers}
-                users={users}
-                customers={customers}
+                sourceDataArrays={sourceDataArrays}
               />
             )}
             {!dummyRow && !field.readOnly && (
@@ -68,10 +54,7 @@ const EditModelRow = props => {
                 componentKey={componentKey}
                 index={index}
                 onChange={onChange}
-                brands={brands}
-                charges={charges}
-                sections={sections}
-                suppliers={suppliers}
+                sourceDataArrays={sourceDataArrays}
               />
             )}
           </div>
@@ -96,13 +79,17 @@ EditModelRow.propTypes = {
   modelFields: PropTypes.array.isRequired,
   persistedModel: PropTypes.object,
   className: PropTypes.string,
-  sections: PropTypes.array,
-  charges: PropTypes.array,
-  brands: PropTypes.array,
-  bikes: PropTypes.array,
-  frames: PropTypes.array,
-  suppliers: PropTypes.array,
-  users: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    charges: PropTypes.array,
+    fittings: PropTypes.array,
+  }),
   onChange: PropTypes.func.isRequired,
   lockFirstColumn: PropTypes.bool,
   actionsRequired: PropTypes.bool,

@@ -71,7 +71,7 @@ class ChargesEdit extends PureComponent {
                   persistedModel={charge}
                   modelFields={chargeFields}
                   actionsRequired
-                  users={users}
+                  sourceDataArrays={{ users }}
                   modelSave={saveCharge}
                   modelDelete={charge['can_be_deleted'] ? deleteCharge : undefined}
                   showReadOnlyFields

@@ -221,6 +221,28 @@ exports[`EditModelInput should renders a currency field that has no data 1`] = `
 </Fragment>
 `;
 
+exports[`EditModelInput should renders a fitting field that has data 1`] = `
+<Fragment>
+  <FittingSelect
+    className=""
+    error=""
+    fittings={
+      Array [
+        Object {
+          "id": 21,
+        },
+        Object {
+          "id": 22,
+        },
+      ]
+    }
+    isEmptyAllowed={true}
+    selectFitting={[Function]}
+    selectedFitting={23.9}
+  />
+</Fragment>
+`;
+
 exports[`EditModelInput should renders a part Type field that has no data 1`] = `
 <Fragment>
   <PartTypeSelect

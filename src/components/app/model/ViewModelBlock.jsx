@@ -5,18 +5,7 @@ import { getModelKey } from './helpers/model';
 import ViewModelFieldRow from './ViewModelFieldRow';
 
 const ViewModelBlock = props => {
-  const {
-    model,
-    modelFields,
-    className = '',
-    sections,
-    bikes,
-    frames,
-    brands,
-    suppliers,
-    customers,
-    users,
-  } = props;
+  const { model, modelFields, className = '', sourceDataArrays } = props;
   const componentKey = getModelKey(model);
   return (
     <div className="grid-container">
@@ -27,13 +16,7 @@ const ViewModelBlock = props => {
             field={field}
             model={model}
             componentKey={componentKey}
-            sections={sections}
-            brands={brands}
-            bikes={bikes}
-            frames={frames}
-            customers={customers}
-            suppliers={suppliers}
-            users={users}
+            sourceDataArrays={sourceDataArrays}
           />
         ))}
       </div>
@@ -43,25 +26,23 @@ const ViewModelBlock = props => {
 
 ViewModelBlock.defaultProps = {
   model: {},
-  sections: [],
-  brands: [],
-  bikes: [],
-  frames: [],
-  suppliers: [],
-  customers: [],
-  users: [],
+  sourceDataArrays: {},
 };
 
 ViewModelBlock.propTypes = {
   model: PropTypes.object,
   modelFields: PropTypes.array.isRequired,
   className: PropTypes.string,
-  sections: PropTypes.array,
-  brands: PropTypes.array,
-  bikes: PropTypes.array,
-  frames: PropTypes.array,
-  suppliers: PropTypes.array,
-  customers: PropTypes.array,
-  users: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+    charges: PropTypes.array,
+  }),
 };
 export default ViewModelBlock;

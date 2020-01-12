@@ -9,11 +9,13 @@ import {
   SELECT_ONE,
   SUPPLIER,
   TEXT,
-} from '../model/helpers/fields';
-import { buildViewString } from '../model/helpers/display';
-import { COUNTRIES } from '../../address/helpers/address';
-import { getBikeName } from '../../bike/helpers/bike';
-import { sampleBikes, sampleFrames } from '../../../helpers/sampleData';
+} from './fields';
+import { buildViewString } from './display';
+import { COUNTRIES } from '../../../address/helpers/address';
+import { getBikeName } from '../../../bike/helpers/bike';
+import { sampleBikes, sampleFrames } from '../../../../helpers/sampleData';
+import { FITTING } from '../../../quote/helpers/quoteFields';
+import { fittingText } from '../../../fitting/helpers/fitting';
 
 const foundName = 'find me';
 const sections = [
@@ -136,7 +138,7 @@ describe('buildViewString', () => {
       maxLength: 10,
     };
     const model = { data_field: 2 };
-    expect(buildViewString(model, field, sections)).toBe('find me');
+    expect(buildViewString(model, field, { sections })).toBe('find me');
   });
   it('it renders a part type field that has data that is not found', () => {
     const field = {
@@ -145,7 +147,7 @@ describe('buildViewString', () => {
       maxLength: 10,
     };
     const model = { data_field: 202 };
-    expect(buildViewString(model, field, sections)).toBe('Unknown Part Type');
+    expect(buildViewString(model, field, { sections })).toBe('Unknown Part Type');
   });
   it('it renders a part Type field that has no data', () => {
     const field = {
@@ -153,7 +155,7 @@ describe('buildViewString', () => {
       type: PART_TYPE,
       maxLength: 10,
     };
-    expect(buildViewString(undefined, field, sections)).toBe('');
+    expect(buildViewString(undefined, field, { sections })).toBe('');
   });
   it('it renders a brand field that has data that is found', () => {
     const field = {
@@ -162,7 +164,7 @@ describe('buildViewString', () => {
       maxLength: 10,
     };
     const model = { data_field: 2 };
-    expect(buildViewString(model, field, sections, brands)).toBe('find me');
+    expect(buildViewString(model, field, { brands })).toBe('find me');
   });
   it('it renders a brand field that has data that is not found', () => {
     const field = {
@@ -170,14 +172,14 @@ describe('buildViewString', () => {
       type: BRAND,
     };
     const model = { data_field: 202 };
-    expect(buildViewString(model, field, sections, brands)).toBe('Unknown Brand');
+    expect(buildViewString(model, field, { brands })).toBe('Unknown Brand');
   });
   it('it renders a brand field that has no data', () => {
     const field = {
       fieldName: 'data_field',
       type: BRAND,
     };
-    expect(buildViewString(undefined, field, sections, brands)).toBe('');
+    expect(buildViewString(undefined, field, { brands })).toBe('');
   });
   it('it renders a supplier field that has data that is found', () => {
     const field = {
@@ -186,7 +188,7 @@ describe('buildViewString', () => {
       maxLength: 10,
     };
     const model = { data_field: 2 };
-    expect(buildViewString(model, field, sections, brands, suppliers)).toBe('find me');
+    expect(buildViewString(model, field, { suppliers })).toBe('find me');
   });
   it('it renders a supplier field that has data that is not found', () => {
     const field = {
@@ -194,14 +196,14 @@ describe('buildViewString', () => {
       type: SUPPLIER,
     };
     const model = { data_field: 202 };
-    expect(buildViewString(model, field, sections, brands, suppliers)).toBe('Unknown Supplier');
+    expect(buildViewString(model, field, { suppliers })).toBe('Unknown Supplier');
   });
   it('it renders a supplier field that has no data', () => {
     const field = {
       fieldName: 'data_field',
       type: SUPPLIER,
     };
-    expect(buildViewString(undefined, field, sections, brands, suppliers)).toBe('');
+    expect(buildViewString(undefined, field, { suppliers })).toBe('');
   });
   it('should return bike name when a bike is passed that is found', () => {
     const field = {
@@ -211,16 +213,10 @@ describe('buildViewString', () => {
     const model = { bike: 58 };
     const expectedBike = getBikeName(58, sampleBikes, sampleFrames);
     expect(
-      buildViewString(
-        model,
-        field,
-        sections,
-        brands,
-        suppliers,
-        undefined,
-        sampleBikes,
-        sampleFrames,
-      ),
+      buildViewString(model, field, {
+        bikes: sampleBikes,
+        frames: sampleFrames,
+      }),
     ).toBe(expectedBike);
   });
   it('should return customer name when a customer is passed that is found', () => {
@@ -230,18 +226,35 @@ describe('buildViewString', () => {
     };
     const model = { customer: 34 };
     const customers = [{ id: 34, first_name: 'Bob' }];
-    const expectedBike = getBikeName(58, sampleBikes, sampleFrames);
-    expect(
-      buildViewString(
-        model,
-        field,
-        sections,
-        brands,
-        suppliers,
-        customers,
-        sampleBikes,
-        sampleFrames,
-      ),
-    ).toBe('Bob');
+    expect(buildViewString(model, field, { customers })).toBe('Bob');
+  });
+  describe('view fitting data', () => {
+    const fittings = [
+      { id: 12, fitting_type: 'C', saddle_height: '55cm', bar_height: '67cm, ', reach: '50cm' },
+      { id: 14, fitting_type: 'C', saddle_height: '55cm', bar_height: '67cm, ', reach: '50cm' },
+    ];
+    it('it renders a fitting field that has data that is found', () => {
+      const field = {
+        fieldName: 'data_field',
+        type: FITTING,
+      };
+      const model = { data_field: 12 };
+      expect(buildViewString(model, field, { fittings })).toBe(fittingText(fittings[0]));
+    });
+    it('it renders a fitting field that has data that is not found', () => {
+      const field = {
+        fieldName: 'data_field',
+        type: FITTING,
+      };
+      const model = { data_field: 202 };
+      expect(buildViewString(model, field, { fittings })).toBe('');
+    });
+    it('it renders a fitting field that has no data', () => {
+      const field = {
+        fieldName: 'data_field',
+        type: FITTING,
+      };
+      expect(buildViewString(undefined, field, { fittings })).toBe('');
+    });
   });
 });

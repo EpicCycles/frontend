@@ -86,7 +86,7 @@ const CustomerEdit = props => {
             modelSave={saveOrCreateCustomer}
             modelDelete={deleteCustomer}
             componentKey={customer_key}
-            users={users}
+            sourceDataArrays={{ users }}
             key="customerEdit"
             data-test="edit-customer"
             className="fit-content"
@@ -138,6 +138,7 @@ const CustomerEdit = props => {
               <EditModel
                 model={note}
                 modelFields={customerNoteFields}
+                sourceDataArrays={{ users }}
                 showReadOnlyFields
                 pageMode
                 actionsRequired
@@ -169,7 +170,7 @@ const CustomerEdit = props => {
                         modelFields={customerNoteFields}
                         model={oldNote}
                         key={`note_${getModelKey(oldNote)}`}
-                        users={users}
+                        sourceDataArrays={{ users }}
                       />
                     ) : (
                       <div>

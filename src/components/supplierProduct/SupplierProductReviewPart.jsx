@@ -49,9 +49,7 @@ class SupplierProductReviewPart extends PureComponent {
             persistedModel={part}
             raiseState={raiseStateForPart}
             modelFields={partFieldsComplete}
-            sections={sections}
-            brands={brands}
-            users={users}
+            sourceDataArrays={{ sections, brands, users }}
             childModels={supplierProducts}
             lockFirstColumn
             actionsRequired
@@ -67,8 +65,7 @@ class SupplierProductReviewPart extends PureComponent {
             persistedModel={supplierProduct}
             raiseState={raiseStateForSupplierProduct}
             modelFields={supplierProductFields}
-            suppliers={suppliers}
-            users={users}
+            sourceDataArrays={{ suppliers, users }}
             modelSave={saveSupplierProduct}
             modelDelete={deleteSupplierProduct}
             actionsRequired

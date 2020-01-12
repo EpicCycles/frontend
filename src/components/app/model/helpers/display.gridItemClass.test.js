@@ -1,4 +1,4 @@
-import { gridItemClass } from '../model/helpers/display';
+import { gridItemClass } from './display';
 
 describe('display.gridItemClass', () => {
   it('should show just the grid header when required', () => {

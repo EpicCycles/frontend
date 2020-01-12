@@ -32,6 +32,7 @@ exports[`EditModelPageRow it renders 1`] = `
       model={Object {}}
       onChange={[MockFunction]}
       persistedModel={Object {}}
+      sourceDataArrays={Object {}}
     />
   </div>
 </div>
@@ -53,22 +54,6 @@ exports[`EditModelPageRow it renders with data 1`] = `
     key="fieldValueDivaddress1"
   >
     <EditModelInput
-      brands={
-        Array [
-          Object {
-            "brand_name": "id is 1",
-            "id": 1,
-          },
-          Object {
-            "brand_name": "find me",
-            "id": 2,
-          },
-          Object {
-            "brand_name": "id is 3",
-            "id": 3,
-          },
-        ]
-      }
       componentKey={1}
       field={
         Object {
@@ -105,51 +90,65 @@ exports[`EditModelPageRow it renders with data 1`] = `
           "postcode": "xxxyyy",
         }
       }
-      sections={
-        Array [
-          Object {
-            "id": 1,
-            "partTypes": Array [
-              Object {
-                "id": 11,
-                "name": "id 11",
-              },
-              Object {
-                "id": 21,
-                "name": "id 11",
-              },
-            ],
-          },
-          Object {
-            "id": 2,
-            "partTypes": Array [
-              Object {
-                "id": 2,
-                "name": "find me",
-              },
-              Object {
-                "id": 22,
-                "name": "id 11",
-              },
-            ],
-          },
-        ]
-      }
-      suppliers={
-        Array [
-          Object {
-            "id": 1,
-            "supplier_name": "id is 1",
-          },
-          Object {
-            "id": 2,
-            "supplier_name": "find me",
-          },
-          Object {
-            "id": 3,
-            "supplier_name": "id is 3",
-          },
-        ]
+      sourceDataArrays={
+        Object {
+          "brands": Array [
+            Object {
+              "brand_name": "id is 1",
+              "id": 1,
+            },
+            Object {
+              "brand_name": "find me",
+              "id": 2,
+            },
+            Object {
+              "brand_name": "id is 3",
+              "id": 3,
+            },
+          ],
+          "sections": Array [
+            Object {
+              "id": 1,
+              "partTypes": Array [
+                Object {
+                  "id": 11,
+                  "name": "id 11",
+                },
+                Object {
+                  "id": 21,
+                  "name": "id 11",
+                },
+              ],
+            },
+            Object {
+              "id": 2,
+              "partTypes": Array [
+                Object {
+                  "id": 2,
+                  "name": "find me",
+                },
+                Object {
+                  "id": 22,
+                  "name": "id 11",
+                },
+              ],
+            },
+          ],
+          "suppliers": Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ],
+        }
       }
     />
   </div>

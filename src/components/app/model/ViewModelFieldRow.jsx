@@ -2,21 +2,10 @@ import React from 'react';
 
 import * as PropTypes from 'prop-types';
 import ModelViewRowField from './ModelViewRowField';
-import {CHECKBOX} from "./helpers/fields";
+import { CHECKBOX } from './helpers/fields';
 
 const ViewModelFieldRow = props => {
-  const {
-    model,
-    field,
-    sections,
-    brands,
-    suppliers,
-    bikes,
-    frames,
-    customers,
-    users,
-    componentKey,
-  } = props;
+  const { model, field, sourceDataArrays, componentKey } = props;
   if (field.type === CHECKBOX || model[field.fieldName]) {
     return (
       <div className="grid-row" key={`field-row${field.fieldName}`}>
@@ -30,13 +19,7 @@ const ViewModelFieldRow = props => {
           <ModelViewRowField
             field={field}
             model={model}
-            brands={brands}
-            sections={sections}
-            suppliers={suppliers}
-            bikes={bikes}
-            frames={frames}
-            customers={customers}
-            users={users}
+            sourceDataArrays={sourceDataArrays}
             key={`modelField${field.fieldName}${componentKey}`}
           />
         </div>
@@ -52,12 +35,16 @@ ViewModelFieldRow.propTypes = {
   field: PropTypes.object.isRequired,
   componentKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   className: PropTypes.string,
-  sections: PropTypes.array,
-  brands: PropTypes.array,
-  bikes: PropTypes.array,
-  frames: PropTypes.array,
-  suppliers: PropTypes.array,
-  customers: PropTypes.array,
-  users: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+    charges: PropTypes.array,
+  }),
 };
 export default ViewModelFieldRow;

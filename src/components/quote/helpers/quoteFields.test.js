@@ -8,8 +8,6 @@ import {
   CURRENCY,
   CUSTOMER_FIELD,
   ISSUED_DATE_FIELD,
-  NUMBER,
-  SELECT_ONE,
   TEXT,
   UPD_DATE_FIELD,
 } from '../../app/model/helpers/fields';
@@ -27,15 +25,13 @@ import {
   VERSION_FIELD,
   FIXED_PRICE_FIELD,
   CHARGE_TOTAL_FIELD,
-  CALCULATED_PRICE,
   FRAME_SIZE,
-  VERSION,
   QUOTE_DESC,
   BIKE_PRICE,
   COLOUR,
   QUOTE_PRICE,
-  TOTAL_PRICE,
-  QUOTE_STATUS,
+  FITTING_FIELD,
+  FITTING,
 } from './quoteFields';
 import { updateObject } from '../../../helpers/utils';
 import { QUOTE_ARCHIVED, QUOTE_ORDERED } from './quote';
@@ -44,14 +40,7 @@ import { VALUE_MISSING } from '../../app/model/helpers/error';
 const bike = { id: 123, colours: 'red/blue/green', sizes: '50, 52, 54, 56' };
 const expectedColourField = updateObject(COLOUR_FIELD, { placeholder: bike.colours });
 const expectedSizeField = updateObject(FRAME_SIZE_FIELD, { placeholder: bike.sizes });
-const BIKE_PRICE_FIELD_READONLY = {
-  fieldName: BIKE_PRICE,
-  header: 'Bike Price',
-  type: CURRENCY,
-  maxLength: 7,
-  readOnly: true,
-  displaySize: 10,
-};
+
 const BIKE_PRICE_FIELD_READONLY_REQD = {
   fieldName: BIKE_PRICE,
   header: 'Bike Price',
@@ -68,6 +57,12 @@ const COLOUR_FIELD_READONLY = {
   maxLength: 100,
   readOnly: true,
   displaySize: 20,
+};
+const FITTING_FIELD_READONLY = {
+  fieldName: FITTING,
+  header: 'Fitting',
+  type: FITTING,
+  readOnly: true,
 };
 const FRAME_SIZE_FIELD_READONLY = {
   fieldName: FRAME_SIZE,
@@ -120,6 +115,7 @@ describe('quoteFields', () => {
       BIKE_PRICE_FIELD_READONLY_REQD,
       FRAME_SIZE_FIELD_READONLY,
       COLOUR_FIELD_READONLY,
+      FITTING_FIELD_READONLY,
       CALCULATED_PRICE_FIELD,
       QUOTE_PRICE_FIELD_READONLY,
       FIXED_PRICE_FIELD,
@@ -145,6 +141,7 @@ describe('quoteFields', () => {
       BIKE_PRICE_FIELD_READONLY_REQD,
       FRAME_SIZE_FIELD_READONLY,
       COLOUR_FIELD_READONLY,
+      FITTING_FIELD,
       CALCULATED_PRICE_FIELD,
       QUOTE_PRICE_FIELD_READONLY,
       FIXED_PRICE_FIELD,
@@ -190,6 +187,7 @@ describe('quoteFields', () => {
       BIKE_PRICE_FIELD,
       FRAME_SIZE_FIELD,
       COLOUR_FIELD,
+      FITTING_FIELD,
       CALCULATED_PRICE_FIELD,
       FIXED_PRICE_FIELD,
       CHARGE_TOTAL_FIELD,
@@ -235,6 +233,7 @@ describe('quoteFields', () => {
       BIKE_PRICE_FIELD_REQUIRED,
       FRAME_SIZE_FIELD,
       COLOUR_FIELD,
+      FITTING_FIELD,
       CALCULATED_PRICE_FIELD,
       QUOTE_PRICE_FIELD,
       FIXED_PRICE_FIELD,
@@ -261,6 +260,7 @@ describe('quoteFields', () => {
       BIKE_PRICE_FIELD,
       FRAME_SIZE_FIELD,
       COLOUR_FIELD,
+      FITTING_FIELD,
       CALCULATED_PRICE_FIELD,
       FIXED_PRICE_FIELD,
       CHARGE_TOTAL_FIELD,
@@ -285,6 +285,7 @@ describe('quoteFields', () => {
       BIKE_PRICE_FIELD,
       expectedSizeField,
       expectedColourField,
+      FITTING_FIELD,
       CALCULATED_PRICE_FIELD,
       FIXED_PRICE_FIELD,
       CHARGE_TOTAL_FIELD,
@@ -310,6 +311,7 @@ describe('quoteFields', () => {
       BIKE_PRICE_FIELD,
       expectedSizeField,
       expectedColourField,
+      FITTING_FIELD,
       CALCULATED_PRICE_FIELD,
       FIXED_PRICE_FIELD,
       CHARGE_TOTAL_FIELD,
@@ -335,6 +337,7 @@ describe('quoteFields', () => {
       BIKE_PRICE_FIELD,
       expectedSizeField,
       expectedColourField,
+      FITTING_FIELD,
       CALCULATED_PRICE_FIELD,
       FIXED_PRICE_FIELD,
       CHARGE_TOTAL_FIELD,
@@ -355,6 +358,7 @@ describe('quoteFields', () => {
       BIKE_PRICE_FIELD,
       expectedSizeField,
       expectedColourField,
+      FITTING_FIELD,
       CALCULATED_PRICE_FIELD,
       FIXED_PRICE_FIELD,
       CHARGE_TOTAL_FIELD,
@@ -398,6 +402,7 @@ describe('quoteFields', () => {
       BIKE_FIELD,
       expectedSizeField,
       expectedColourField,
+      FITTING_FIELD,
       QUOTE_PRICE_FIELD,
       TOTAL_PRICE_FIELD,
     ];

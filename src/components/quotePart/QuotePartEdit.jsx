@@ -53,8 +53,7 @@ class QuotePartEdit extends React.Component {
           persistedModel={persistedQuotePart}
           raiseState={raiseStateForQuotePart}
           modelFields={fields}
-          sections={sections}
-          suppliers={suppliers}
+          sourceDataArrays={{ sections, suppliers }}
           actionsRequired
           showReadOnlyFields
           modelSave={this.saveQuotePart}

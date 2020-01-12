@@ -1,4 +1,4 @@
-import { fixedHeaderClassname } from '../model/helpers/display';
+import { fixedHeaderClassname } from './display';
 
 test('should return the fixed header class when it is required', () => {
   expect(fixedHeaderClassname(true)).toBe('grid-header--fixed-left');

@@ -19,6 +19,7 @@ const requiredAttribute = { required: true };
 
 export const BIKE_PRICE = 'bike_price';
 export const COLOUR = 'colour';
+export const FITTING = 'fitting';
 export const FRAME_SIZE = 'frame_size';
 export const QUOTE_DESC = 'quote_desc';
 export const QUOTE_PRICE = 'quote_price';
@@ -39,6 +40,11 @@ export const COLOUR_FIELD = {
   type: TEXT,
   maxLength: 100,
   displaySize: 20,
+};
+export const FITTING_FIELD = {
+  fieldName: FITTING,
+  header: 'Fitting',
+  type: FITTING,
 };
 export const FRAME_SIZE_FIELD = {
   fieldName: FRAME_SIZE,
@@ -136,6 +142,7 @@ export const quoteFields = p => {
     if (bike && bike.colours)
       fields.push(updateObject(COLOUR_FIELD, { placeholder: bike.colours }, readOnlySome));
     else fields.push(updateObject(COLOUR_FIELD, readOnlySome));
+    fields.push(updateObject(FITTING_FIELD, readOnlyAll));
   }
   if (!excludeEpic) fields.push(CALCULATED_PRICE_FIELD);
 

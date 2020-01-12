@@ -4,16 +4,8 @@ import * as PropTypes from 'prop-types';
 import EditModelInput from './EditModelInput';
 
 const EditModelPageRow = props => {
-  const {
-    model,
-    field,
-    persistedModel,
-    sections,
-    brands,
-    suppliers,
-    onChange,
-    componentKey,
-  } = props;
+  const { model, field, persistedModel, sourceDataArrays, onChange, componentKey } = props;
+
   return (
     <div className="grid-row" key={`field-row${field.fieldName}`}>
       <div
@@ -29,9 +21,7 @@ const EditModelPageRow = props => {
           persistedModel={persistedModel}
           componentKey={componentKey}
           onChange={onChange}
-          sections={sections}
-          brands={brands}
-          suppliers={suppliers}
+          sourceDataArrays={sourceDataArrays}
         />
       </div>
     </div>
@@ -44,9 +34,16 @@ EditModelPageRow.propTypes = {
   componentKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   persistedModel: PropTypes.object,
   className: PropTypes.string,
-  sections: PropTypes.array,
-  brands: PropTypes.array,
-  suppliers: PropTypes.array,
+  sourceDataArrays: PropTypes.shape({
+    sections: PropTypes.array,
+    brands: PropTypes.array,
+    bikes: PropTypes.array,
+    frames: PropTypes.array,
+    suppliers: PropTypes.array,
+    customers: PropTypes.array,
+    users: PropTypes.array,
+    fittings: PropTypes.array,
+  }),
   onChange: PropTypes.func.isRequired,
 };
 export default EditModelPageRow;

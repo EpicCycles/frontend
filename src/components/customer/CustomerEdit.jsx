@@ -1,6 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Dimmer, Loader } from 'semantic-ui-react';
-import { doWeHaveObjects, findObjectWithId, updateObject } from '../../helpers/utils';
+import {
+  doWeHaveObjects,
+  findObjectWithId,
+  findObjectWithKey,
+  updateObject,
+} from '../../helpers/utils';
 import CustomerAddressGrid from './CustomerAddressGrid';
 import {
   createEmptyModelWithDefaultFields,
@@ -16,9 +21,12 @@ import EditModel from '../app/model/EditModel';
 import { customerNoteFields, NOTE_TEXT } from '../note/helpers/noteFields';
 import FormCheckbox from '../../common/FormCheckbox';
 import { formattedDateTime } from '../app/model/helpers/display';
+import { fittingFields } from '../fitting/helpers/fittingFields';
+import ModelTable from '../app/model/ModelTable';
 
 const CustomerEdit = props => {
   const [note, setNote] = useState(createEmptyModelWithDefaultFields(customerNoteFields));
+  const [fitting, setFitting] = useState(createEmptyModelWithDefaultFields(customerNoteFields));
   const [seeAllNotes, setSeeAllNotes] = useState(false);
   const [seeNoteDetail, setSeeNoteDetail] = useState(false);
   useEffect(() => {
@@ -26,6 +34,11 @@ const CustomerEdit = props => {
     if (modelIsAlreadyInArray(props.notes, note, customerNoteFields))
       setNote(createEmptyModelWithDefaultFields(customerNoteFields));
   }, [props.notes]);
+
+  useEffect(() => {
+    console.log('in use Effect for fittings');
+    setFitting(createEmptyModelWithDefaultFields(fittingFields));
+  }, [props.fittings]);
 
   const saveOrCreateCustomerNote = noteToSave => {
     setNote(noteToSave);
@@ -36,6 +49,25 @@ const CustomerEdit = props => {
       props.createNote(noteCompleteToSave);
     }
   };
+  const saveOrCreateFitting = fittingToSave => {
+    setFitting(fitting);
+    if (fittingToSave.id) {
+      props.saveFitting(fittingToSave);
+    } else {
+      const fitttingCompleteToSave = updateObject(fittingToSave, { customer: props.customerId });
+      props.saveFitting(fitttingCompleteToSave);
+    }
+  };
+  const moveFittingToEdit = fittingToEdit => {
+    if (fittingToEdit) setFitting(fittingToEdit);
+  };
+  const deleteFittingBeingEdited = () => {
+    if (fitting.id) {
+      deleteFitting(fitting.id);
+    } else {
+      setFitting(createEmptyModelWithDefaultFields(fittingFields));
+    }
+  };
   const saveOrCreateCustomer = customer => {
     if (customer.id) {
       props.saveCustomer(customer);
@@ -43,11 +75,19 @@ const CustomerEdit = props => {
       props.createCustomer(customer);
     }
   };
-
+  const additionalFittingActions = [
+    {
+      iconName: 'edit',
+      iconTitle: 'edit Fitting',
+      requiresIdOnly: false,
+      actionFunction: moveFittingToEdit,
+    },
+  ];
   const {
     addresses,
     phones,
     customers,
+    fittings,
     notes,
     frames,
     bikes,
@@ -68,6 +108,7 @@ const CustomerEdit = props => {
     archiveQuote,
     unarchiveQuote,
     getQuoteToCopy,
+    deleteFitting,
   } = props;
   const customer = findObjectWithId(customers, customerId) || {};
   const customer_key = getModelKey(customer);
@@ -77,20 +118,49 @@ const CustomerEdit = props => {
       <h2>Customer</h2>
       <section className="row">
         <div>
-          <EditModel
-            model={customer}
-            modelFields={customerFields}
-            pageMode
-            actionsRequired
-            showReadOnlyFields
-            modelSave={saveOrCreateCustomer}
-            modelDelete={deleteCustomer}
-            componentKey={customer_key}
-            sourceDataArrays={{ users }}
-            key="customerEdit"
-            data-test="edit-customer"
-            className="fit-content"
-          />
+          <div className="row">
+            <EditModel
+              model={customer}
+              modelFields={customerFields}
+              pageMode
+              actionsRequired
+              showReadOnlyFields
+              modelSave={saveOrCreateCustomer}
+              modelDelete={deleteCustomer}
+              componentKey={customer_key}
+              sourceDataArrays={{ users }}
+              key="customerEdit"
+              data-test="edit-customer"
+              className="fit-content"
+            />
+            {customerId && (
+              <EditModel
+                model={fitting}
+                modelFields={fittingFields}
+                pageMode
+                actionsRequired
+                showReadOnlyFields
+                modelSave={saveOrCreateFitting}
+                modelDelete={deleteFittingBeingEdited}
+                componentKey={getModelKey(fitting)}
+                data-test="edit-fitting"
+                className="fit-content"
+                key={`edit_fitting_${getModelKey(fitting)}`}
+              />
+            )}
+            {fittings && fittings.length > 0 && (
+              <ModelTable
+                viewMode
+                modelArray={fittings}
+                modelFields={fittingFields}
+                blockIdentity={'fittings'}
+                actionsRequired
+                sourceDataArrays={{ users }}
+                modelDelete={deleteFitting}
+                additionalActionsRequired={additionalFittingActions}
+              />
+            )}
+          </div>
           {customerId && (
             <div className="grid-container">
               <CustomerAddressGrid

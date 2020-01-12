@@ -144,6 +144,7 @@ class QuoteDetail extends PureComponent {
       bikeParts,
       frames,
       customers,
+      fittings,
       deleteQuoteCharge,
       saveQuoteCharge,
       deleteQuotePart,
@@ -201,7 +202,7 @@ class QuoteDetail extends PureComponent {
               model={updatedQuote ? updatedQuote : quote}
               persistedModel={quote}
               modelFields={quoteModelFields}
-              sourceDataArrays={{ brands, bikes, frames, users, customers }}
+              sourceDataArrays={{ brands, bikes, frames, users, customers, fittings }}
               modelSave={saveQuote}
               modelDelete={archiveQuote}
               additionalActions={additionalActions}

@@ -6,6 +6,8 @@ import EditModelSimple from './EditModelSimple';
 import { getModelKey } from './helpers/model';
 import ViewModel from './ViewModel';
 import EditModel from './EditModel';
+import { modelActions } from './helpers/modelActions';
+import {buildModelActions} from "./helpers/buildModelActions";
 const ModelTable = props => {
   const {
     viewMode,
@@ -18,9 +20,9 @@ const ModelTable = props => {
     sourceDataArrays,
     modelSave,
     modelDelete,
-    modelActions,
     lockFirstColumn,
     hideHeaders,
+    additionalActionsRequired,
   } = props;
   return (
     <div className="grid-container">
@@ -37,6 +39,7 @@ const ModelTable = props => {
           const modelInstanceKey = getModelKey(modelInstance);
           const updatedModel = findObjectWithKey(updatedModelArray, modelInstanceKey);
           const rowClass = updatedModel && updatedModel.error ? 'error' : '';
+          const additionalActions = buildModelActions(additionalActionsRequired, modelInstance);
           if (viewMode)
             return (
               <ViewModel
@@ -44,9 +47,7 @@ const ModelTable = props => {
                 modelFields={modelFields}
                 actionsRequired={actionsRequired}
                 sourceDataArrays={sourceDataArrays}
-                modelSave={modelSave}
-                modelDelete={modelDelete}
-                additionalActions={modelActions}
+                modelActions={modelActions(modelInstance, { modelSave, modelDelete }, additionalActions)}
                 showReadOnlyFields
                 lockFirstColumn={lockFirstColumn}
                 key={`${blockIdentity}_${modelInstanceKey}`}
@@ -64,7 +65,7 @@ const ModelTable = props => {
                   sourceDataArrays={sourceDataArrays}
                   modelSave={modelSave}
                   modelDelete={modelDelete}
-                  additionalActions={modelActions}
+                  additionalActions={additionalActions}
                   showReadOnlyFields
                   lockFirstColumn={lockFirstColumn}
                   raiseState={raiseState}
@@ -79,7 +80,7 @@ const ModelTable = props => {
                   sourceDataArrays={sourceDataArrays}
                   modelSave={modelSave}
                   modelDelete={modelDelete}
-                  additionalActions={modelActions}
+                  additionalActions={additionalActions}
                   showReadOnlyFields
                   lockFirstColumn={lockFirstColumn}
                   key={`${blockIdentity}_${modelInstanceKey}`}
@@ -96,6 +97,7 @@ ModelTable.defaultProps = {
   blockIdentity: 'model',
   updatedModelArray: [],
   sourceDataArrays: {},
+  additionalActionsRequired: [],
 };
 ModelTable.propTypes = {
   modelArray: PropTypes.array.isRequired,
@@ -119,7 +121,7 @@ ModelTable.propTypes = {
   actionsRequired: PropTypes.bool,
   modelSave: PropTypes.func,
   modelDelete: PropTypes.func,
-  modelActions: PropTypes.array,
+  additionalActionsRequired: PropTypes.array,
   showReadOnlyFields: PropTypes.bool,
   hideHeaders: PropTypes.bool,
   raiseState: PropTypes.func,

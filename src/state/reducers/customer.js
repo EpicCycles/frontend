@@ -11,7 +11,6 @@ import {
   CUSTOMER_PHONE_ADD,
   CUSTOMER_PHONE_DELETE,
   CUSTOMER_PHONE_SAVE,
-  FITTING_ADD,
   FITTING_DELETE,
   FITTING_SAVE,
   CUSTOMER_SAVE,
@@ -120,6 +119,7 @@ const customer = (state = initialState, action) => {
     case `${CUSTOMER_PHONE_DELETE}_ERROR`:
     case `${CUSTOMER_ADDRESS_DELETE}_ERROR`:
     case `${FITTING_DELETE}_ERROR`:
+    case `${FITTING_SAVE}_ERROR`:
     case USER_NOT_VALIDATED:
       return {
         ...state,
@@ -218,12 +218,6 @@ const customer = (state = initialState, action) => {
           lastName: '',
           email: '',
         },
-      };
-    case FITTING_ADD:
-      return {
-        ...state,
-        isLoading: false,
-        fittings: updateObjectInArray(state.fittings, action.payload.fitting),
       };
     case FITTING_DELETE:
     case FITTING_SAVE:

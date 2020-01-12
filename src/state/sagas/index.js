@@ -10,13 +10,13 @@ import {
   watchForCreateCustomer,
   watchForDeleteCustomer,
   watchForDeleteCustomerAddress,
-  watchForDeleteCustomerPhone,
+  watchForDeleteCustomerPhone, watchForDeleteFitting,
   watchForGetCustomer,
   watchForGetCustomerList,
   watchForGetCustomerListPage,
   watchForSaveCustomer,
   watchForSaveCustomerAddress,
-  watchForSaveCustomerPhone,
+  watchForSaveCustomerPhone, watchForSaveFitting,
 } from './customer';
 import {
   watchForCreateNote,
@@ -147,5 +147,7 @@ export default function* rootSaga() {
     watchForDeleteQuoteAnswer(),
     watchForSaveQuoteCharge(),
     watchForDeleteQuoteCharge(),
+    watchForSaveFitting(),
+    watchForDeleteFitting(),
   ]);
 }

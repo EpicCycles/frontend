@@ -14,6 +14,7 @@ const QuoteBikes = props => {
     bikeParts,
     parts,
     customers,
+    fittings,
     brands,
     suppliers,
     sections,
@@ -34,7 +35,7 @@ const QuoteBikes = props => {
             <ModelFieldRow
               field={quoteField}
               modelArray={bikeQuotes}
-              sourceDataArrays={{ bikes, customers, brands, suppliers, frames, users }}
+              sourceDataArrays={{ bikes, customers, brands, suppliers, frames, users, fittings }}
               firstRow={index === 0}
               key={`quoteFieldRow_${quoteField.fieldName}`}
             />
@@ -68,6 +69,7 @@ QuoteBikes.propTypes = {
   bikeParts: PropTypes.array,
   parts: PropTypes.array,
   customers: PropTypes.array.isRequired,
+  fittings: PropTypes.array,
   brands: PropTypes.array,
   suppliers: PropTypes.array,
   sections: PropTypes.array,

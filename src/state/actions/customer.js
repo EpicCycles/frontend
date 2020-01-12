@@ -157,10 +157,6 @@ export const saveFitting = fitting => ({
   type: `${FITTING_SAVE}_REQUEST`,
   payload: { fitting },
 });
-export const addFitting = fitting => ({
-  type: FITTING_ADD,
-  payload: { fitting },
-});
 export const saveFittingSuccess = fittingList => ({
   type: FITTING_SAVE,
   payload: fittingList,

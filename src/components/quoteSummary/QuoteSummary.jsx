@@ -19,6 +19,7 @@ const QuoteSummary = props => {
     bikeParts,
     frames,
     customers,
+    fittings,
     users,
   } = props;
 
@@ -36,7 +37,7 @@ const QuoteSummary = props => {
           },
         })}
         model={quote}
-        sourceDataArrays={{ bikes, customers, frames, users }}
+        sourceDataArrays={{ bikes, customers, frames, users, fittings }}
       />
       <QuoteSummaryParts
         lockFirstColumn
@@ -57,6 +58,7 @@ const QuoteSummary = props => {
 QuoteSummary.defaultProps = {
   quoteCharges: [],
   charges: [],
+  fittings: [],
 };
 QuoteSummary.propTypes = {
   showPrices: PropTypes.bool,
@@ -71,6 +73,7 @@ QuoteSummary.propTypes = {
   bikeParts: PropTypes.array.isRequired,
   bikes: PropTypes.array.isRequired,
   customers: PropTypes.array.isRequired,
+  fittings: PropTypes.array,
   frames: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired,
 };

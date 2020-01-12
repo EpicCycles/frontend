@@ -49,6 +49,7 @@ class QuoteManager extends React.Component {
       customerId,
       addresses,
       phones,
+      fittings,
       deleteCustomer,
       deleteNote,
       saveNote,
@@ -60,6 +61,8 @@ class QuoteManager extends React.Component {
       addCustomerPhone,
       addCustomerAddress,
       saveCustomer,
+      saveFitting,
+      deleteFitting,
       quotes,
       quoteId,
       quoteAnswers,
@@ -108,12 +111,15 @@ class QuoteManager extends React.Component {
             addresses={addresses}
             phones={phones}
             customers={customers}
+            fittings={fittings}
             deleteCustomer={deleteCustomer}
             isLoading={isLoading}
             customerId={customerId}
             deleteNote={deleteNote}
             saveNote={saveNote}
             createNote={createNote}
+            saveFitting={saveFitting}
+            deleteFitting={deleteFitting}
             deleteCustomerPhone={deleteCustomerPhone}
             saveCustomerPhone={saveCustomerPhone}
             saveCustomerAddress={saveCustomerAddress}
@@ -159,6 +165,7 @@ class QuoteManager extends React.Component {
             bikeParts={bikeParts}
             bikes={bikes}
             customers={customers}
+            fittings={fittings}
             frames={frames}
             users={users}
             customerView
@@ -186,6 +193,7 @@ class QuoteManager extends React.Component {
             frames={frames}
             bikes={bikes}
             customers={customers}
+            fittings={fittings}
             brands={brands}
             charges={charges}
             suppliers={suppliers}
@@ -230,6 +238,7 @@ class QuoteManager extends React.Component {
             bikeParts={bikeParts}
             parts={parts}
             customers={customers}
+            fittings={fittings}
             brands={brands}
             suppliers={suppliers}
             sections={sections}
@@ -254,6 +263,7 @@ QuoteManager.defaultProps = {
   frames: [],
   addresses: [],
   phones: [],
+  fittings: [],
   notes: [],
   parts: [],
   supplierProducts: [],
@@ -281,6 +291,7 @@ QuoteManager.propTypes = {
   quoteId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   addresses: PropTypes.array,
   phones: PropTypes.array,
+  fittings: PropTypes.array,
   notes: PropTypes.array,
   quotes: PropTypes.array,
   quoteParts: PropTypes.array,
@@ -299,6 +310,8 @@ QuoteManager.propTypes = {
   deleteCustomerAddress: PropTypes.func.isRequired,
   addCustomerPhone: PropTypes.func.isRequired,
   addCustomerAddress: PropTypes.func.isRequired,
+  saveFitting: PropTypes.func.isRequired,
+  deleteFitting: PropTypes.func.isRequired,
   archiveQuote: PropTypes.func.isRequired,
   unarchiveQuote: PropTypes.func.isRequired,
   changeQuote: PropTypes.func.isRequired,

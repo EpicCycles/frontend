@@ -7,7 +7,7 @@ import {
   saveCustomerAddress,
   deleteCustomerAddress,
   addCustomerPhone,
-  addCustomerAddress,
+  addCustomerAddress, saveFitting, deleteFitting,
 } from '../../state/actions/customer';
 import { connect } from 'react-redux';
 import CustomerEdit from '../../components/customer/CustomerEdit';
@@ -47,5 +47,7 @@ export default connect(
     archiveQuote,
     unarchiveQuote,
     getQuoteToCopy,
+    saveFitting,
+    deleteFitting
   },
 )(CustomerEdit);

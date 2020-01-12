@@ -84,7 +84,7 @@ const saveFitting = async payload => {
 const deleteFitting = async payload => {
   instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
   const fittingId = payload.fittingId;
-  return instance.delete(`/rest-epic/customerphone/${fittingId}`);
+  return instance.delete(`/rest-epic/fitting/${fittingId}`);
 };
 const createNote = async payload => {
   instance.defaults.headers.common.Authorization = `Token ${payload.token}`;

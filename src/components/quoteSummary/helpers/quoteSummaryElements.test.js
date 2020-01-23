@@ -6,12 +6,18 @@ describe('quoteSummaryElements', () => {
     {
       id: 1,
       name: 'First Section',
-      partTypes: [{ id: 1, name: 'PT 1' }, { id: 2, name: 'PT 2' }],
+      partTypes: [
+        { id: 1, name: 'PT 1' },
+        { id: 2, name: 'PT 2' },
+      ],
     },
     {
       id: 2,
       name: 'second Section',
-      partTypes: [{ id: 21, name: 'PT 21', customer_visible: true }, { id: 22, name: 'PT 22' }],
+      partTypes: [
+        { id: 21, name: 'PT 21', customer_visible: true },
+        { id: 22, name: 'PT 22' },
+      ],
     },
   ];
   const charges = [
@@ -45,7 +51,10 @@ describe('quoteSummaryElements', () => {
   });
   it('should return customer visible bike parts when that is all there is', () => {
     const quote = { id: 32, bike: 52 };
-    const bikeParts = [{ bike: 52, part: 1 }, { bike: 52, part: 2 }];
+    const bikeParts = [
+      { bike: 52, part: 1 },
+      { bike: 52, part: 2 },
+    ];
     const quoteParts = [];
     const parts = [
       { id: 1, partType: 1, brand: 5, part_name: 'Not visible' },
@@ -80,7 +89,11 @@ describe('quoteSummaryElements', () => {
   });
   it('should return all bike parts when it is not a customer view', () => {
     const quote = { id: 32, bike: 52 };
-    const bikeParts = [{ bike: 52, part: 1 }, { bike: 52, part: 2 }, { bike: 52, part: 3 }];
+    const bikeParts = [
+      { bike: 52, part: 1 },
+      { bike: 52, part: 2 },
+      { bike: 52, part: 3 },
+    ];
     const quoteParts = [];
     const parts = [
       { id: 1, partType: 1, brand: 5, part_name: 'Not visible' },
@@ -128,7 +141,11 @@ describe('quoteSummaryElements', () => {
   });
   it('should show additional quote parts when they exist', () => {
     const quote = { id: 32, bike: 52 };
-    const bikeParts = [{ bike: 52, part: 1 }, { bike: 52, part: 2 }, { bike: 52, part: 3 }];
+    const bikeParts = [
+      { bike: 52, part: 1 },
+      { bike: 52, part: 2 },
+      { bike: 52, part: 3 },
+    ];
     const quoteParts = [
       {
         id: 321,
@@ -202,7 +219,11 @@ describe('quoteSummaryElements', () => {
   });
   it('should show additional quote parts when they exist as fixed price', () => {
     const quote = { id: 32, bike: 52 };
-    const bikeParts = [{ bike: 52, part: 1 }, { bike: 52, part: 2 }, { bike: 52, part: 3 }];
+    const bikeParts = [
+      { bike: 52, part: 1 },
+      { bike: 52, part: 2 },
+      { bike: 52, part: 3 },
+    ];
     const quoteParts = [
       {
         id: 321,
@@ -301,7 +322,11 @@ describe('quoteSummaryElements', () => {
   });
   it('should show additional parts separately when fixed price on customer view', () => {
     const quote = { id: 32, bike: 52 };
-    const bikeParts = [{ bike: 52, part: 1 }, { bike: 52, part: 2 }, { bike: 52, part: 3 }];
+    const bikeParts = [
+      { bike: 52, part: 1 },
+      { bike: 52, part: 2 },
+      { bike: 52, part: 3 },
+    ];
     const quoteParts = [
       {
         id: 321,
@@ -389,7 +414,11 @@ describe('quoteSummaryElements', () => {
   });
   it('should show alternative quote parts when they exist', () => {
     const quote = { id: 32, bike: 52 };
-    const bikeParts = [{ bike: 52, part: 1 }, { bike: 52, part: 2 }, { bike: 52, part: 3 }];
+    const bikeParts = [
+      { bike: 52, part: 1 },
+      { bike: 52, part: 2 },
+      { bike: 52, part: 3 },
+    ];
     const parts = [
       { id: 1, partType: 1, brand: 5, part_name: 'Not visible' },
       { id: 2, partType: 21, brand: 5, part_name: 'visible' },
@@ -461,7 +490,11 @@ describe('quoteSummaryElements', () => {
   });
   it('should show alternative quote parts when they exist as fixed', () => {
     const quote = { id: 32, bike: 52 };
-    const bikeParts = [{ bike: 52, part: 1 }, { bike: 52, part: 2 }, { bike: 52, part: 3 }];
+    const bikeParts = [
+      { bike: 52, part: 1 },
+      { bike: 52, part: 2 },
+      { bike: 52, part: 3 },
+    ];
     const parts = [
       { id: 1, partType: 1, brand: 5, part_name: 'Not visible' },
       { id: 2, partType: 21, brand: 5, part_name: 'visible' },

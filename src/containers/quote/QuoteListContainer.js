@@ -48,7 +48,4 @@ const mapDispatchToProps = {
   unarchiveQuote,
   getQuoteToCopy,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(QuoteList);
+export default connect(mapStateToProps, mapDispatchToProps)(QuoteList);

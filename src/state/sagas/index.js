@@ -10,13 +10,15 @@ import {
   watchForCreateCustomer,
   watchForDeleteCustomer,
   watchForDeleteCustomerAddress,
-  watchForDeleteCustomerPhone, watchForDeleteFitting,
+  watchForDeleteCustomerPhone,
+  watchForDeleteFitting,
   watchForGetCustomer,
   watchForGetCustomerList,
   watchForGetCustomerListPage,
   watchForSaveCustomer,
   watchForSaveCustomerAddress,
-  watchForSaveCustomerPhone, watchForSaveFitting,
+  watchForSaveCustomerPhone,
+  watchForSaveFitting,
 } from './customer';
 import {
   watchForCreateNote,

@@ -26,10 +26,7 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-const composedEnhancers = compose(
-  middleware,
-  ...enhancers,
-);
+const composedEnhancers = compose(middleware, ...enhancers);
 
 const store = createStore(reducers, composedEnhancers);
 sagaMiddleware.run(rootSaga);

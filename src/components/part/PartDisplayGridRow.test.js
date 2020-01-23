@@ -59,7 +59,10 @@ const partEditable = { id: 13, partType: 3 };
 const partDeletable = { id: 214, partType: 14 };
 const partAll = { id: 212, partType: 12 };
 
-const suppliers = [{ id: 12, name: 'supplier Name' }, { id: 22, name: 'supplier Name 2' }];
+const suppliers = [
+  { id: 12, name: 'supplier Name' },
+  { id: 22, name: 'supplier Name 2' },
+];
 const supplierProducts = [
   {
     id: 121,

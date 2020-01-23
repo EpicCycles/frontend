@@ -28,7 +28,4 @@ const mapDispatchToProps = {
   deleteSupplierProduct,
   addMessage,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SupplierProductReview);
+export default connect(mapStateToProps, mapDispatchToProps)(SupplierProductReview);

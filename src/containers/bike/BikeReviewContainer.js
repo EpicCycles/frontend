@@ -39,7 +39,4 @@ const mapDispatchToProps = {
   addBikePart,
   listParts,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(BikeReview);
+export default connect(mapStateToProps, mapDispatchToProps)(BikeReview);

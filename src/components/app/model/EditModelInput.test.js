@@ -5,6 +5,7 @@ import {
   CHECKBOX,
   COUNTRY,
   CURRENCY,
+  EMAIL,
   PART_TYPE,
   SUPPLIER,
   TEXT,
@@ -22,11 +23,17 @@ const foundName = 'find me';
 const sections = [
   {
     id: 1,
-    partTypes: [{ id: 11, name: 'id 11' }, { id: 21, name: 'id 11' }],
+    partTypes: [
+      { id: 11, name: 'id 11' },
+      { id: 21, name: 'id 11' },
+    ],
   },
   {
     id: 2,
-    partTypes: [{ id: 2, name: foundName }, { id: 22, name: 'id 11' }],
+    partTypes: [
+      { id: 2, name: foundName },
+      { id: 22, name: 'id 11' },
+    ],
   },
 ];
 const brands = [
@@ -139,6 +146,26 @@ describe('EditModelInput', () => {
       maxLength: 10,
     };
     const model = { data_field: 23.9 };
+    expect(
+      toJson(
+        shallow(
+          <EditModelInput
+            field={field}
+            model={model}
+            componentKey={componentKey}
+            index={0}
+            onChange={jest.fn()}
+          />,
+        ),
+      ),
+    ).toMatchSnapshot();
+  });
+  it('should renders an email field that has data', () => {
+    const field = {
+      fieldName: 'data_field',
+      type: EMAIL,
+    };
+    const model = { data_field: 'bill.bloggs@gmail.com' };
     expect(
       toJson(
         shallow(

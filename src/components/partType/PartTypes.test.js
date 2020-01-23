@@ -25,7 +25,10 @@ test('PartTypes displays when some present', () => {
   expect(toJson(component)).toMatchSnapshot();
 });
 test('PartTypes displays when only deleted present', () => {
-  const partTypes = [{ dummyKey: 'dummy2', changed: true, delete: true }, { id: 45, delete: true }];
+  const partTypes = [
+    { dummyKey: 'dummy2', changed: true, delete: true },
+    { id: 45, delete: true },
+  ];
   const sectionKey = 66;
 
   const component = shallow(<PartTypes sectionKey={sectionKey} partTypes={partTypes} />);

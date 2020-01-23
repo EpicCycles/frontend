@@ -63,7 +63,10 @@ const parts = [
   { id: 29, partType: 9 },
   { id: 3171, partType: 171 },
 ];
-const suppliers = [{ id: 12, name: 'supplier Name' }, { id: 22, name: 'supplier Name 2' }];
+const suppliers = [
+  { id: 12, name: 'supplier Name' },
+  { id: 22, name: 'supplier Name 2' },
+];
 const supplierProducts = [
   {
     id: 121,

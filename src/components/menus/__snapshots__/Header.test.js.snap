@@ -13,12 +13,12 @@ exports[`is displays correctly 1`] = `
       <li
         className="dropdown"
       >
-        <Link
+        <ForwardRef
           className="dropbtn"
           to="/"
         >
           Home
-        </Link>
+        </ForwardRef>
       </li>
       <HeaderSection
         key="headerSection1"

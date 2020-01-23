@@ -12,7 +12,10 @@ describe('QuoteGrid', () => {
     expect(component.find('ViewModel')).toHaveLength(0);
   });
   it('should show archived quotes separately when they exist', () => {
-    const quotes = [{ id: 1, quote_status: QUOTE_ISSUED }, { id: 1, quote_status: QUOTE_ARCHIVED }];
+    const quotes = [
+      { id: 1, quote_status: QUOTE_ISSUED },
+      { id: 1, quote_status: QUOTE_ARCHIVED },
+    ];
     const component = shallow(<QuoteGrid displayFields={quoteFields({})} quotes={quotes} />);
     expect(component.find('ModelTableHeaderRow')).toHaveLength(1);
     expect(component.find('ViewModel')).toHaveLength(2);

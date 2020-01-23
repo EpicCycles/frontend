@@ -18,7 +18,10 @@ describe('quoteIssueChecks', () => {
   });
   it('should return quote item warning when parts quote has no parts', () => {
     const quote = { id: 'qb', quote_price: 1234 };
-    const quoteParts = [{ quote: 'qb', partType: 2 }, { quote: 'qb', partType: 3 }];
+    const quoteParts = [
+      { quote: 'qb', partType: 2 },
+      { quote: 'qb', partType: 3 },
+    ];
     expect(quoteIssueChecks([], quoteParts, quote)).toEqual([QUOTE_PARTS_REQD]);
   });
   it('should message when unsaved changes to quote exist', () => {
@@ -57,7 +60,10 @@ describe('quoteIssueChecks', () => {
   });
   it('should return no warning when parts quote missing prices', () => {
     const quote = { id: 'qb', quote_price: 1234 };
-    const quoteParts = [{ quote: 'qb', partType: 2 }, { quote: 'qb', partType: 3, part: 234 }];
+    const quoteParts = [
+      { quote: 'qb', partType: 2 },
+      { quote: 'qb', partType: 3, part: 234 },
+    ];
     expect(quoteIssueChecks([], quoteParts, quote)).toBeUndefined();
   });
   it('should return trade in price warning when bike quote missing those', () => {

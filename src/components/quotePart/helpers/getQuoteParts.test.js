@@ -88,7 +88,10 @@ describe('getQuoteParts', () => {
   });
   describe('bike quotes', () => {
     it('should return bike parts when no quote parts exist for a bike quote', () => {
-      const bikeParts = [{ id: 'bp1', bike: 57, part: 73 }, { id: 'bp2', bike: 57, part: 74 }];
+      const bikeParts = [
+        { id: 'bp1', bike: 57, part: 73 },
+        { id: 'bp2', bike: 57, part: 74 },
+      ];
       const parts = [part65, part74, part73];
       const expectedResults = [
         {
@@ -113,7 +116,10 @@ describe('getQuoteParts', () => {
       );
     });
     it('should return quote part when replacement part exists', () => {
-      const bikeParts = [{ id: 'bp1', bike: 57, part: 73 }, { id: 'bp2', bike: 57, part: 74 }];
+      const bikeParts = [
+        { id: 'bp1', bike: 57, part: 73 },
+        { id: 'bp2', bike: 57, part: 74 },
+      ];
       const parts = [part65, part74, part73, part74Replacement];
       const quoteParts = [
         { quote: 'bq', id: 'qp1', partType: 2, not_required: true, part: 741, quantity: 1 },
@@ -146,7 +152,10 @@ describe('getQuoteParts', () => {
       ).toEqual(expectedResults);
     });
     it('should return quote part when part not required', () => {
-      const bikeParts = [{ id: 'bp1', bike: 57, part: 73 }, { id: 'bp2', bike: 57, part: 74 }];
+      const bikeParts = [
+        { id: 'bp1', bike: 57, part: 73 },
+        { id: 'bp2', bike: 57, part: 74 },
+      ];
       const parts = [part65, part74, part73, part74Replacement];
       const quoteParts = [{ quote: 'bq', id: 'qp1', partType: 2, not_required: true }];
       const expectedResults = [
@@ -173,7 +182,10 @@ describe('getQuoteParts', () => {
       ).toEqual(expectedResults);
     });
     it('should return quote part when not a replacement part and no part', () => {
-      const bikeParts = [{ id: 'bp1', bike: 57, part: 73 }, { id: 'bp2', bike: 57, part: 74 }];
+      const bikeParts = [
+        { id: 'bp1', bike: 57, part: 73 },
+        { id: 'bp2', bike: 57, part: 74 },
+      ];
       const parts = [part65, part74, part73, part74Replacement];
       const quoteParts = [{ quote: 'bq', id: 'qp1', partType: 2 }];
       const expectedResults = [
@@ -207,7 +219,10 @@ describe('getQuoteParts', () => {
     });
   });
   it('should return quote part when not a replacement part', () => {
-    const bikeParts = [{ id: 'bp1', bike: 57, part: 73 }, { id: 'bp2', bike: 57, part: 74 }];
+    const bikeParts = [
+      { id: 'bp1', bike: 57, part: 73 },
+      { id: 'bp2', bike: 57, part: 74 },
+    ];
     const parts = [part65, part74, part73, part74Replacement];
     const quoteParts = [
       { quote: 'bq', id: 'qp1', partType: 2, part: part74Replacement.id, quantity: 1 },
@@ -246,7 +261,10 @@ describe('getQuoteParts', () => {
     ).toEqual(expectedResults);
   });
   it('should return quote part when no part type', () => {
-    const bikeParts = [{ id: 'bp1', bike: 57, part: 73 }, { id: 'bp2', bike: 57, part: 74 }];
+    const bikeParts = [
+      { id: 'bp1', bike: 57, part: 73 },
+      { id: 'bp2', bike: 57, part: 74 },
+    ];
     const parts = [part65, part74, part73, part74Replacement];
     const quoteParts = [
       { quote: 'bq', id: 'qp1', partType: 2, part: part74Replacement.id, quantity: 1 },

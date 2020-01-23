@@ -21,7 +21,4 @@ const mapDispatchToProps = {
   uploadParts,
   clearParts,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SupplierProductUpload);
+export default connect(mapStateToProps, mapDispatchToProps)(SupplierProductUpload);

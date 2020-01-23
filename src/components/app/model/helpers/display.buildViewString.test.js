@@ -21,11 +21,17 @@ const foundName = 'find me';
 const sections = [
   {
     id: 1,
-    partTypes: [{ id: 11, name: 'id 11' }, { id: 21, name: 'id 11' }],
+    partTypes: [
+      { id: 11, name: 'id 11' },
+      { id: 21, name: 'id 11' },
+    ],
   },
   {
     id: 2,
-    partTypes: [{ id: 2, name: foundName }, { id: 22, name: 'id 11' }],
+    partTypes: [
+      { id: 2, name: foundName },
+      { id: 22, name: 'id 11' },
+    ],
   },
 ];
 const brands = [

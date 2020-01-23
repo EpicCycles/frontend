@@ -3,7 +3,10 @@ import toJson from 'enzyme-to-json';
 import PartTypeModal from './PartTypeModal';
 import { PART_TYPE_NAME_MISSING, SECTION_MISSING } from '../app/model/helpers/error';
 
-const sections = [{ name: 'section 1', id: 1 }, { name: 'section 2', id: 2 }];
+const sections = [
+  { name: 'section 1', id: 1 },
+  { name: 'section 2', id: 2 },
+];
 describe('PartTypeModal', () => {
   it('displays correctly with a new part', () => {
     const component = shallow(<PartTypeModal partTypeModalOpen sections={sections} />);

@@ -8,7 +8,10 @@ describe('getBrandsForSupplier', () => {
     expect(getBrandsForSupplier(1, [])).toEqual([]);
   });
   it('should return empty array when no brands have the supplier provided', () => {
-    const brands = [{ id: 101, supplier: [] }, { id: 102, supplier: [2, 3] }];
+    const brands = [
+      { id: 101, supplier: [] },
+      { id: 102, supplier: [2, 3] },
+    ];
     expect(getBrandsForSupplier(1, brands)).toEqual([]);
   });
   it('should return single entry array when one brand has the supplier provided', () => {

@@ -32,7 +32,10 @@ describe('sectionHasDetail', () => {
   });
   it('should return true when there is one check objects matching part types', () => {
     const section = { id: 1, partTypes: [{ id: 1 }, { id: 21 }, { id: 2 }] };
-    const objectsToCheck = [{ id: 1, partType: 34 }, { id: 1, partType: 21 }];
+    const objectsToCheck = [
+      { id: 1, partType: 34 },
+      { id: 1, partType: 21 },
+    ];
     expect(sectionHasDetail(section, objectsToCheck)).toBeTruthy();
   });
   it('should return true when there is more than one check objects matching part types', () => {

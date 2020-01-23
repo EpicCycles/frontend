@@ -34,7 +34,4 @@ const mapDispatchToProps = {
   deleteFrames,
   addMessage,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(BikeReviewList);
+export default connect(mapStateToProps, mapDispatchToProps)(BikeReviewList);

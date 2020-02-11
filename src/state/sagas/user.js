@@ -33,17 +33,22 @@ import { LOGIN_URL } from '../../components/menus/helpers/menu';
 export function* loginUser(action) {
   try {
     yield put(cancelActionForLogin());
-    const loginResponse = yield call(userApis.loginUser, action.payload);
+    const loginResponse = yield call(userApis.loginUserApi, action.payload);
     const token = loginResponse.data.token;
     const user = loginResponse.data.user;
-    yield put(loginUserSuccess(token, user));
-    yield call(history.push, '/');
+    if (token) {
+      yield put(loginUserSuccess(token, user));
+      yield call(history.push, '/');
 
-    // start fetch of basic data
-    yield put(getCoreData());
-    yield put(getFramework());
-    yield put(listParts({}));
-    yield put(getUsers());
+      // start fetch of basic data
+      yield put(getCoreData());
+      yield put(getFramework());
+      yield put(listParts({}));
+      yield put(getUsers());
+    } else {
+      yield put(loginUserFailure('Login was not successful'));
+
+    }
   } catch (error) {
     logError(error);
     yield put(loginUserFailure(errorAsMessage(error, 'Login was not successful')));

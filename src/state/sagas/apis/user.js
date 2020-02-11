@@ -2,7 +2,7 @@ import api from '../api';
 
 // from https://django-rest-auth.readthedocs.io/en/latest/api_endpoints.html#basic
 
-export const loginUser = async payload => {
+export const loginUserApi = async payload => {
   api.instance.defaults.headers.common.Authorization = '';
   const loginApi = 'rest-epic/api-token-auth';
   return await api.instance.post(loginApi, payload);

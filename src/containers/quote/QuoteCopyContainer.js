@@ -40,7 +40,4 @@ const mapDispatchToProps = {
   changeRoute,
   copyQuote,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(QuoteCopy);
+export default connect(mapStateToProps, mapDispatchToProps)(QuoteCopy);

@@ -42,7 +42,4 @@ const mapDispatchToProps = {
   listPartsOK,
   getUsers,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

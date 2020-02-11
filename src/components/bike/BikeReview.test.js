@@ -3,7 +3,11 @@ import BikeReview from './BikeReview';
 import { sampleBrands, sampleSections, sampleSuppliers } from '../../helpers/sampleData';
 import { assertComponentHasExpectedProps } from '../../helpers/jest_helpers/assert';
 
-const bikes = [{ id: 1, frame: 1001 }, { id: 2, frame: 1001 }, { id: 3, frame: 3001 }];
+const bikes = [
+  { id: 1, frame: 1001 },
+  { id: 2, frame: 1001 },
+  { id: 3, frame: 3001 },
+];
 const bikeParts = [
   { id: 101, bike: 1, part: 11 },
   { id: 102, bike: 1, part: 12 },

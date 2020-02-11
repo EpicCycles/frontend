@@ -19,7 +19,4 @@ const mapDispatchToProps = {
   uploadFrame,
   clearFrame,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(BikeUpload);
+export default connect(mapStateToProps, mapDispatchToProps)(BikeUpload);

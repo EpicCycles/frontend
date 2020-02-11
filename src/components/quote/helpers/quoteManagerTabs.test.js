@@ -30,7 +30,10 @@ describe('quoteManagerTabs', () => {
     expect(quoteManagerTabs(quotes, quoteId)).toEqual(expectedResult);
   });
   it('should show summary tab when quote is issued as default', () => {
-    const quotes = [{ id: 16, bike: 53 }, { id: 12, bike: 14, quote_status: QUOTE_ISSUED }];
+    const quotes = [
+      { id: 16, bike: 53 },
+      { id: 12, bike: 14, quote_status: QUOTE_ISSUED },
+    ];
     const quoteId = 12;
     const expectedResult = {
       tabs: [customerTab, quoteListTab, summaryTab, answerTab, detailTab, historyTab, compareTab],

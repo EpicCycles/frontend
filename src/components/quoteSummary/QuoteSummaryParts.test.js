@@ -71,7 +71,10 @@ describe('QuoteSummaryParts', () => {
     const component = shallow(
       <QuoteSummaryParts
         quote={qouteWithData}
-        quoteParts={[{ quote: 1, partType: 1, part: 16 }, { quote: 1, partType: 22, part: 26 }]}
+        quoteParts={[
+          { quote: 1, partType: 1, part: 16 },
+          { quote: 1, partType: 22, part: 26 },
+        ]}
         brands={[]}
         sections={sections}
         parts={[]}

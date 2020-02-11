@@ -67,7 +67,4 @@ const mapDispatchToProps = {
   addMessage,
   changeRoute,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(QuoteIssue);
+export default connect(mapStateToProps, mapDispatchToProps)(QuoteIssue);

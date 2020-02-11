@@ -3,7 +3,10 @@ import { moveObjectUpOnePlace } from './framework';
 
 describe('moveObjectUpOnePlace tests', () => {
   it('does not fail if an id is not found', () => {
-    const sections = [{ id: 97, placing: 2 }, { id: 7, placing: 3 }];
+    const sections = [
+      { id: 97, placing: 2 },
+      { id: 7, placing: 3 },
+    ];
     const newSections = moveObjectUpOnePlace(sections, 33);
     expect(newSections).toBe(sections);
   });
@@ -13,7 +16,10 @@ describe('moveObjectUpOnePlace tests', () => {
     expect(newSections).toBe(sections);
   });
   it('does not fail if first item in array', () => {
-    const sections = [{ id: 33, placing: 2 }, { id: 7, placing: 3 }];
+    const sections = [
+      { id: 33, placing: 2 },
+      { id: 7, placing: 3 },
+    ];
     const newSections = moveObjectUpOnePlace(sections, 33);
     expect(newSections).toBe(sections);
   });

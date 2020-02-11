@@ -10,7 +10,9 @@ import {
   saveCustomerAddress,
   saveCustomerPhone,
   addCustomerPhone,
-  addCustomerAddress, saveFitting, deleteFitting,
+  addCustomerAddress,
+  saveFitting,
+  deleteFitting,
 } from '../../state/actions/customer';
 import { createNote, deleteNote, saveNote } from '../../state/actions/note';
 import QuoteManager from '../../components/quote/QuoteManager';
@@ -109,7 +111,4 @@ const mapDispatchToProps = {
   addMessage,
   changeRoute,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(QuoteManager);
+export default connect(mapStateToProps, mapDispatchToProps)(QuoteManager);

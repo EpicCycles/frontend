@@ -183,7 +183,7 @@ exports[`EditModelInput should renders a currency field that has data 1`] = `
 <Fragment>
   <FormTextInput
     className=""
-    dataType="text"
+    dataType="number"
     error=""
     fieldName="data_field120"
     inputClass="align_right"
@@ -204,7 +204,7 @@ exports[`EditModelInput should renders a currency field that has no data 1`] = `
 <Fragment>
   <FormTextInput
     className=""
-    dataType="text"
+    dataType="number"
     error=""
     fieldName="data_field120"
     inputClass="align_right"
@@ -226,6 +226,7 @@ exports[`EditModelInput should renders a fitting field that has data 1`] = `
   <FittingSelect
     className=""
     error=""
+    fieldName="data_field12"
     fittings={
       Array [
         Object {
@@ -521,6 +522,26 @@ exports[`EditModelInput should renders a textarea field that has no data 1`] = `
     onChange={[Function]}
     onClick={[Function]}
     placeholder="put text here"
+  />
+</Fragment>
+`;
+
+exports[`EditModelInput should renders an email field that has data 1`] = `
+<Fragment>
+  <FormTextInput
+    className=""
+    dataType="email"
+    error=""
+    fieldName="data_field120"
+    inputClass="align_right"
+    label=""
+    list=""
+    onChange={[Function]}
+    onClick={[Function]}
+    placeholder=""
+    size={30}
+    title=""
+    value="bill.bloggs@gmail.com"
   />
 </Fragment>
 `;

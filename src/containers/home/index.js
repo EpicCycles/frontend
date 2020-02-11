@@ -7,7 +7,4 @@ const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => bindActionCreators({ clearAllState }, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -223,12 +223,12 @@ export const DESCRIPTION_FIELD = {
   synonyms: [DESCRIPTION, 'desc'],
   type: TEXT_AREA,
   displaySize: 400,
+  maxWidth: '250px',
 };
 export const EMAIL_FIELD = {
   fieldName: EMAIL,
-  type: TEXT,
+  type: EMAIL,
   header: 'email',
-  validator: validateEmailFormat,
 };
 export const EPIC_PRICE_FIELD = {
   fieldName: EPIC_PRICE,

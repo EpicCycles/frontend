@@ -5,6 +5,7 @@ import {
   CHECKBOX,
   COUNTRY,
   CURRENCY,
+  EMAIL,
   NUMBER,
   PART_TYPE,
   PASSWORD,
@@ -112,10 +113,29 @@ const EditModelInput = props => {
       editComponent = (
         <FormTextInput
           className={className}
+          dataType="number"
           placeholder={field.header}
           error={error}
           fieldName={fieldName}
           value={displayValue}
+          onChange={validateOnChange}
+          size={field.displaySize}
+          onClick={validateOnChange}
+          maxLength={field.maxLength}
+          disabled={disabled}
+          inputClass={'align_right'}
+        />
+      );
+      break;
+    case EMAIL:
+      editComponent = (
+        <FormTextInput
+          className={className}
+          dataType="email"
+          placeholder={field.header}
+          error={error}
+          fieldName={fieldName}
+          value={fieldValue}
           onChange={validateOnChange}
           size={field.displaySize}
           onClick={validateOnChange}
@@ -216,6 +236,7 @@ const EditModelInput = props => {
     case FITTING:
       editComponent = (
         <FittingSelect
+          fieldName={fieldName}
           selectFitting={validateOnChange}
           fittings={fittings}
           selectedFitting={fieldValue}

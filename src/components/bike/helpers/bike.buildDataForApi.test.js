@@ -32,7 +32,10 @@ test('single bike, part and attribute set', () => {
 });
 test('multiple bikes, parts and attributes set', () => {
   const brand = 1;
-  const brands = [{ id: 1, brand_name: 'Well' }, { id: 2, brand_name: 'Wellgo' }];
+  const brands = [
+    { id: 1, brand_name: 'Well' },
+    { id: 2, brand_name: 'Wellgo' },
+  ];
   const frameName = 'Frame thing';
   const rowMappings = [
     { rowIndex: 0, partTypeName: 'sizes', bikeAttribute: 'sizes' },

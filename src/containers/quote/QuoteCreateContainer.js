@@ -37,7 +37,4 @@ const mapDispatchToProps = {
   getCustomerList,
   createQuote,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(QuoteCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(QuoteCreate);

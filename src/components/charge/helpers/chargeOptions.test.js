@@ -12,7 +12,10 @@ describe('chargeOptions', () => {
     expect(chargeOptions(charges)).toEqual(expectedOptions);
   });
   it('should return all persisted values when charges are passed', () => {
-    const expectedOptions = [{ value: '1', name: 'CHarge 1' }, { value: '21', name: 'Charge 21' }];
+    const expectedOptions = [
+      { value: '1', name: 'CHarge 1' },
+      { value: '21', name: 'Charge 21' },
+    ];
     const charges = [
       { id: 1, charge_name: 'CHarge 1' },
       { dummyKey: 'notsaved', charge_name: 'do not see me' },

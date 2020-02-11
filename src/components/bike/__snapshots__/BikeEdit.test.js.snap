@@ -43,6 +43,7 @@ exports[`basic render should show the bike name and bike edit page when rendered
           "displaySize": 400,
           "fieldName": "description",
           "header": "Description",
+          "maxWidth": "250px",
           "synonyms": Array [
             "description",
             "desc",

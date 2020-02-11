@@ -3,7 +3,10 @@ import { moveObjectToBottom } from './framework';
 
 describe('moveObjectToBottom tests', () => {
   it('does not fail if an id is not found', () => {
-    const sections = [{ id: 97, placing: 2 }, { id: 7, placing: 3 }];
+    const sections = [
+      { id: 97, placing: 2 },
+      { id: 7, placing: 3 },
+    ];
     const newSections = moveObjectToBottom(sections, 33);
     expect(newSections).toEqual(sections);
   });
@@ -13,7 +16,10 @@ describe('moveObjectToBottom tests', () => {
     expect(newSections).toEqual(sections);
   });
   it('does not fail if last item in array', () => {
-    const sections = [{ id: 7, placing: 3 }, { id: 33, placing: 2 }];
+    const sections = [
+      { id: 7, placing: 3 },
+      { id: 33, placing: 2 },
+    ];
     const newSections = moveObjectToBottom(sections, 33);
     expect(newSections).toEqual(sections);
   });

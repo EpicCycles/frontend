@@ -39,7 +39,10 @@ describe('QuoteSummary', () => {
     const component = shallow(
       <QuoteSummary
         quote={{ id: 1 }}
-        quoteParts={[{ quote: 1, partType: 1 }, { quote: 2, partType: 1 }]}
+        quoteParts={[
+          { quote: 1, partType: 1 },
+          { quote: 2, partType: 1 },
+        ]}
         brands={[]}
         sections={sections}
         parts={[]}
@@ -60,7 +63,10 @@ describe('QuoteSummary', () => {
     const component = shallow(
       <QuoteSummary
         quote={{ id: 1 }}
-        quoteParts={[{ quote: 1, partType: 1 }, { quote: 1, partType: 22 }]}
+        quoteParts={[
+          { quote: 1, partType: 1 },
+          { quote: 1, partType: 22 },
+        ]}
         brands={[]}
         sections={sections}
         parts={[]}
@@ -72,7 +78,10 @@ describe('QuoteSummary', () => {
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);
     assertComponentHasExpectedProps(partData, {
-      quoteParts: [{ quote: 1, partType: 1 }, { quote: 1, partType: 22 }],
+      quoteParts: [
+        { quote: 1, partType: 1 },
+        { quote: 1, partType: 22 },
+      ],
       bikeParts: [],
     });
   });
@@ -80,11 +89,22 @@ describe('QuoteSummary', () => {
     const component = shallow(
       <QuoteSummary
         quote={{ id: 1, bike: 58 }}
-        quoteParts={[{ quote: 1, partType: 1 }, { quote: 1, partType: 22 }]}
+        quoteParts={[
+          { quote: 1, partType: 1 },
+          { quote: 1, partType: 22 },
+        ]}
         brands={sampleBrands}
         sections={sections}
-        parts={[{ id: 15, partType: 1 }, { id: 25, partType: 1 }, { id: 35, partType: 22 }]}
-        bikeParts={[{ bike: 58, part: 15 }, { bike: 68, part: 25 }, { bike: 58, part: 35 }]}
+        parts={[
+          { id: 15, partType: 1 },
+          { id: 25, partType: 1 },
+          { id: 35, partType: 22 },
+        ]}
+        bikeParts={[
+          { bike: 58, part: 15 },
+          { bike: 68, part: 25 },
+          { bike: 58, part: 35 },
+        ]}
         bikes={sampleBikes}
         frames={sampleFrames}
       />,
@@ -93,8 +113,14 @@ describe('QuoteSummary', () => {
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);
     assertComponentHasExpectedProps(partData, {
-      quoteParts: [{ quote: 1, partType: 1 }, { quote: 1, partType: 22 }],
-      bikeParts: [{ id: 15, partType: 1 }, { id: 35, partType: 22 }],
+      quoteParts: [
+        { quote: 1, partType: 1 },
+        { quote: 1, partType: 22 },
+      ],
+      bikeParts: [
+        { id: 15, partType: 1 },
+        { id: 35, partType: 22 },
+      ],
     });
   });
 });

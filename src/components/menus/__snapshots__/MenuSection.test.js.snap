@@ -10,20 +10,20 @@ exports[`it displays correctly 1`] = `
   <div
     className=""
   >
-    <Link
+    <ForwardRef
       className="internal_link"
       key="menuLink1"
       to="/customer-search"
     >
       Find Customer
-    </Link>
-    <Link
+    </ForwardRef>
+    <ForwardRef
       className="internal_link"
       key="menuLink2"
       to="/customer"
     >
       New Customer
-    </Link>
+    </ForwardRef>
   </div>
   <h2>
     Core Data
@@ -31,20 +31,20 @@ exports[`it displays correctly 1`] = `
   <div
     className=""
   >
-    <Link
+    <ForwardRef
       className="internal_link"
       key="menuLink3"
       to="/framework"
     >
       Quote Sections
-    </Link>
-    <Link
+    </ForwardRef>
+    <ForwardRef
       className="internal_link"
       key="menuLink4"
       to="/brands"
     >
       Brands
-    </Link>
+    </ForwardRef>
   </div>
 </Fragment>
 `;

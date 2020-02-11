@@ -3,7 +3,10 @@ import { moveObjectToTop } from './framework';
 
 describe('moveObjectToTop tests', () => {
   it('does not fail if an id is not found', () => {
-    const sections = [{ id: 97, placing: 2 }, { id: 7, placing: 3 }];
+    const sections = [
+      { id: 97, placing: 2 },
+      { id: 7, placing: 3 },
+    ];
     const newSections = moveObjectToTop(sections, 33);
     expect(newSections).toEqual(sections);
   });
@@ -13,7 +16,10 @@ describe('moveObjectToTop tests', () => {
     expect(newSections).toEqual(sections);
   });
   it('does not fail if first item in array', () => {
-    const sections = [{ id: 33, placing: 2 }, { id: 7, placing: 3 }];
+    const sections = [
+      { id: 33, placing: 2 },
+      { id: 7, placing: 3 },
+    ];
     const newSections = moveObjectToTop(sections, 33);
     expect(newSections).toEqual(sections);
   });

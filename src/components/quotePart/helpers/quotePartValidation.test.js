@@ -9,7 +9,10 @@ describe('validatedQuotePart', () => {
     { id: 12, part_name: 'bike', brand: 1, partType: 16 },
     { id: 13, part_name: 'other', brand: 2, partType: 16 },
   ];
-  const brands = [{ id: 1, brand_name: 'B1' }, { id: 2, brand_name: 'B2' }];
+  const brands = [
+    { id: 1, brand_name: 'B1' },
+    { id: 2, brand_name: 'B2' },
+  ];
   describe('for a bike quote', () => {
     it('should return no errors when all fields are OK', () => {
       const startPart = {

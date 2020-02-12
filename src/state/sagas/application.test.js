@@ -5,6 +5,6 @@ import history from '../../history';
 describe('application saga', () => {
   test('changeApplicationRoute should update history', async () => {
     const generator = changeApplicationRoute({ payload: { newRoute: 'myNewRoute' } });
-    expect(generator.next().value).toEqual(call(history.push, 'myNewRoute' ));
+    expect(generator.next().value).toEqual(call(history.push, 'myNewRoute'));
   });
 });

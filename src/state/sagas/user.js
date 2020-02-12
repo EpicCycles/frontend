@@ -1,6 +1,5 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import history from '../../history.js';
-import * as userApis from './apis/user';
 
 import {
   cancelActionForLogin,
@@ -29,11 +28,18 @@ import { getCoreData } from '../actions/core';
 import { getFramework } from '../actions/framework';
 import { listParts } from '../actions/part';
 import { LOGIN_URL } from '../../components/menus/helpers/menu';
+import {
+  changePasswordApi,
+  loginUserApi,
+  logoutUserApi,
+  changeUserDataApi,
+  getUsersApi,
+} from './apis/user';
 
 export function* loginUser(action) {
   try {
     yield put(cancelActionForLogin());
-    const loginResponse = yield call(userApis.loginUserApi, action.payload);
+    const loginResponse = yield call(loginUserApi, action.payload);
     const token = loginResponse.data.token;
     const user = loginResponse.data.user;
     if (token) {
@@ -47,7 +53,6 @@ export function* loginUser(action) {
       yield put(getUsers());
     } else {
       yield put(loginUserFailure('Login was not successful'));
-
     }
   } catch (error) {
     logError(error);
@@ -64,14 +69,14 @@ export function* logoutUser(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      yield call(userApis.logoutUser, completePayload);
+      yield call(logoutUserApi, completePayload);
       yield put(logoutUserSuccess());
-      yield put(clearAllState());
     }
-    yield call(history.push, LOGIN_URL);
   } catch (error) {
     yield put(logoutUserFailure(errorAsMessage(error, 'Logout was not successful')));
   }
+  yield put(clearAllState());
+  yield call(history.push, LOGIN_URL);
 }
 
 export function* watchForLogoutUser() {
@@ -83,9 +88,10 @@ export function* changePassword(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      yield call(userApis.changePassword, completePayload);
+      yield call(changePasswordApi, completePayload);
       yield put(changePasswordOK());
     } else {
+      yield put(clearAllState());
       yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
@@ -102,9 +108,10 @@ export function* changeUserData(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      const changeUserResponse = yield call(userApis.changeUserData, completePayload);
+      const changeUserResponse = yield call(changeUserDataApi, completePayload);
       yield put(changeUserDataOK(changeUserResponse.data));
     } else {
+      yield put(clearAllState());
       yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
@@ -122,15 +129,15 @@ export function* getUserList(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      const getUsersResponse = yield call(userApis.getUsers, completePayload);
+      const getUsersResponse = yield call(getUsersApi, completePayload);
       yield put(getUsersSuccess(getUsersResponse.data));
     } else {
+      yield put(clearAllState());
       yield call(history.push, LOGIN_URL);
     }
   } catch (error) {
     logError(error);
     yield put(getUsersFailure('Get Users was not successful'));
-    yield call(history.push, LOGIN_URL);
   }
 }
 

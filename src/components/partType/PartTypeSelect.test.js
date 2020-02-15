@@ -33,6 +33,8 @@ test('it displays correctly', () => {
       ],
     },
   ];
-  const component = shallow(<PartTypeSelect sections={sections} fieldName="name_of_field" />);
+  const component = shallow(
+    <PartTypeSelect sections={sections} fieldName="name_of_field" onChange={jest.fn()} />,
+  );
   expect(toJson(component)).toMatchSnapshot();
 });

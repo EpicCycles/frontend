@@ -11,7 +11,7 @@ export const quotePartSummary = (bikePart, quotePart, replacementPart, brands) =
     }
   }
   if (bikePart) {
-    return buildPartString(bikePart, brands);
+    return bikePart.partName;
   }
   return 'No Part';
 };

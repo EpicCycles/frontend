@@ -1,5 +1,6 @@
 import { findSupplierNameforId } from '../../supplier/helpers/supplier';
 import { getModelKey } from '../../app/model/helpers/model';
+import { findObjectWithId } from '../../../helpers/utils';
 
 export const buildBrandNameArray = brands => {
   const brandsLower = brands.map(brand => {
@@ -14,16 +15,8 @@ export const buildBrandNameArray = brands => {
 
 export const getBrandName = (brandId, brands) => {
   if (!brandId) return undefined;
-  let brandName = 'Unknown Brand';
-
-  brands.some(brand => {
-    if (brand.id === brandId) {
-      brandName = brand.brand_name;
-      return true;
-    }
-    return false;
-  });
-  return brandName;
+  const brand = findObjectWithId(brands, brandId);
+  return brand ? brand.brand_name : 'Unknown Brand';
 };
 
 export const getSupplierNamesForBrand = (brand, suppliers) => {

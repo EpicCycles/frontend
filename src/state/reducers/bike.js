@@ -1,12 +1,14 @@
 import { USER_LOGOUT } from '../actions/user';
 import { updateObjectInArray } from '../../helpers/utils';
-import { findNextBikeToReview, removeIdFromReviewList, replaceBikeParts } from '../helpers/bike';
+import {
+  bikeListToFrontEndFormat,
+  bikeToFrontEndFormat,
+  findNextBikeToReview,
+  removeIdFromReviewList,
+} from '../helpers/bike';
 import { CLEAR_ALL_STATE } from '../actions/application';
 import {
-  BIKE_ADD_PART,
   BIKE_DELETE,
-  BIKE_PART_DELETE,
-  BIKE_PART_SAVE,
   BIKE_REVIEW_BIKE,
   BIKE_REVIEW_START,
   BIKE_SAVE,
@@ -16,7 +18,6 @@ import {
   FRAME_LIST,
   FRAME_SAVE,
   FRAME_UPLOAD,
-  GET_BIKE_PARTS,
 } from '../actions/bike';
 import { COPY_QUOTE, CREATE_QUOTE, FIND_QUOTES, GET_QUOTE, UPDATE_QUOTE } from '../actions/quote';
 import { CUSTOMER } from '../actions/customer';
@@ -35,15 +36,10 @@ const bike = (state = initialState, action) => {
       return {
         ...state,
         bikes: state.bikes.filter(bike => bike.id !== state.bikeId),
-        bikeParts: state.bikeParts.filter(bikePart => bikePart.bike !== state.bikeId),
         bikeId: findNextBikeToReview(state.bikeReviewList, state.bikeId),
         bikeReviewList: removeIdFromReviewList(state.bikeReviewList, state.bikeId),
       };
     case `${BIKE_SAVE}_REQUESTED`:
-    case `${BIKE_PART_DELETE}_REQUESTED`:
-    case `${BIKE_PART_SAVE}_REQUESTED`:
-    case `${BIKE_ADD_PART}_REQUESTED`:
-    case `${GET_BIKE_PARTS}_REQUESTED`:
       return {
         ...state,
         isLoading: true,
@@ -51,16 +47,11 @@ const bike = (state = initialState, action) => {
     case `${BIKE_SAVE}_OK`:
       return {
         ...state,
-        bikes: updateObjectInArray(state.bikes, action.payload.bike, action.payload.bikeId),
-        isLoading: false,
-      };
-    case `${BIKE_PART_SAVE}_OK`:
-    case `${BIKE_PART_DELETE}_OK`:
-    case `${BIKE_ADD_PART}_OK`:
-    case `${GET_BIKE_PARTS}_OK`:
-      return {
-        ...state,
-        bikeParts: replaceBikeParts(state.bikeId, action.payload.bikeParts, state.bikeParts),
+        bikes: updateObjectInArray(
+          state.bikes,
+          bikeToFrontEndFormat(action.payload.bike),
+          action.payload.bikeId,
+        ),
         isLoading: false,
       };
     case BIKE_REVIEW_START:
@@ -74,9 +65,6 @@ const bike = (state = initialState, action) => {
       return {
         ...state,
         bikeId: action.payload.bikeId,
-        // bike: {},
-        // parts: [],
-        // isLoading: true
       };
     case `${FRAME_SAVE}_REQUESTED`:
     case `${FRAME_UPLOAD}_REQUESTED`:
@@ -111,27 +99,22 @@ const bike = (state = initialState, action) => {
       return {
         ...state,
         frames: action.payload.frames,
-        bikes: action.payload.bikes,
-        bikeParts: action.payload.bikeParts,
+        bikes: bikeListToFrontEndFormat(action.payload.bikes),
         isLoading: false,
       };
     case CUSTOMER:
       return {
         ...state,
         frames: action.payload.frames,
-        bikes: action.payload.bikes,
+        bikes: bikeListToFrontEndFormat(action.payload.bikes),
       };
     case `${BIKE_DELETE}_ERROR`:
     case `${BIKE_SAVE}_ERROR`:
-    case `${BIKE_ADD_PART}_ERROR`:
-    case `${BIKE_PART_SAVE}_ERROR`:
-    case `${BIKE_PART_DELETE}_ERROR`:
     case `${FRAME_SAVE}_ERROR`:
     case `${FRAME_UPLOAD}_ERROR`:
     case `${FRAME_LIST}_ERROR`:
     case `${FRAME_ARCHIVE}_ERROR`:
     case `${FRAME_DELETE}_ERROR`:
-    case `${GET_BIKE_PARTS}_ERROR`:
       return {
         ...state,
         isLoading: false,

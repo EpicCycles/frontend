@@ -29,18 +29,6 @@ export const saveBikeError = error => ({
   type: `${BIKE_SAVE}_ERROR`,
   payload: error,
 });
-export const getBikeParts = bikeId => ({
-  type: `${GET_BIKE_PARTS}_REQUESTED`,
-  payload: { bikeId },
-});
-export const getBikePartsOK = responseData => ({
-  type: `${GET_BIKE_PARTS}_OK`,
-  payload: responseData,
-});
-export const getBikePartsError = error => ({
-  type: `${GET_BIKE_PARTS}_ERROR`,
-  payload: error,
-});
 export const getBike = bikeId => ({
   type: `${GET_BIKE}_REQUESTED`,
   payload: { bikeId },
@@ -53,42 +41,7 @@ export const getBikeError = error => ({
   type: `${GET_BIKE}_ERROR`,
   payload: error,
 });
-export const saveBikePart = (bikeId, part) => ({
-  type: `${BIKE_PART_SAVE}_REQUESTED`,
-  payload: { bikeId, part },
-});
-export const saveBikePartOK = responseData => ({
-  type: `${BIKE_PART_SAVE}_OK`,
-  payload: responseData,
-});
-export const saveBikePartError = error => ({
-  type: `${BIKE_PART_SAVE}_ERROR`,
-  payload: error,
-});
-export const addBikePart = (bikeId, part) => ({
-  type: `${BIKE_ADD_PART}_REQUESTED`,
-  payload: { bikeId, part },
-});
-export const addBikePartOK = responseData => ({
-  type: `${BIKE_ADD_PART}_OK`,
-  payload: responseData,
-});
-export const addBikePartError = error => ({
-  type: `${BIKE_ADD_PART}_ERROR`,
-  payload: error,
-});
-export const deleteBikePart = (bikeId, partId) => ({
-  type: `${BIKE_PART_DELETE}_REQUESTED`,
-  payload: { bikeId, partId },
-});
-export const deleteBikePartOK = responseData => ({
-  type: `${BIKE_PART_DELETE}_OK`,
-  payload: responseData,
-});
-export const deleteBikePartError = error => ({
-  type: `${BIKE_PART_DELETE}_ERROR`,
-  payload: error,
-});
+
 export const reviewBikes = bikeReviewList => ({
   type: BIKE_REVIEW_START,
   payload: { bikeReviewList },

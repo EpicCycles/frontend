@@ -1,6 +1,6 @@
 import React from 'react';
 import QuoteSummary from './QuoteSummary';
-import { assertComponentHasExpectedProps, findDataTest } from '../../helpers/jest_helpers/assert';
+import { assertComponentHasExpectedProps } from '../../helpers/jest_helpers/assert';
 import { sampleBikes, sampleBrands, sampleFrames } from '../../helpers/sampleData';
 
 describe('QuoteSummary', () => {
@@ -46,7 +46,6 @@ describe('QuoteSummary', () => {
         brands={[]}
         sections={sections}
         parts={[]}
-        bikeParts={[]}
         bikes={[]}
       />,
     );
@@ -55,7 +54,6 @@ describe('QuoteSummary', () => {
     expect(partData).toHaveLength(1);
     assertComponentHasExpectedProps(partData, {
       quoteParts: [{ quote: 1, partType: 1 }],
-      bikeParts: [],
       bikes: [],
     });
   });
@@ -70,7 +68,6 @@ describe('QuoteSummary', () => {
         brands={[]}
         sections={sections}
         parts={[]}
-        bikeParts={[]}
         bikes={[]}
       />,
     );
@@ -100,11 +97,6 @@ describe('QuoteSummary', () => {
           { id: 25, partType: 1 },
           { id: 35, partType: 22 },
         ]}
-        bikeParts={[
-          { bike: 58, part: 15 },
-          { bike: 68, part: 25 },
-          { bike: 58, part: 35 },
-        ]}
         bikes={sampleBikes}
         frames={sampleFrames}
       />,
@@ -117,10 +109,7 @@ describe('QuoteSummary', () => {
         { quote: 1, partType: 1 },
         { quote: 1, partType: 22 },
       ],
-      bikeParts: [
-        { id: 15, partType: 1 },
-        { id: 35, partType: 22 },
-      ],
+      bikeParts: [{ partType: 1 }, { partType: 22 }],
     });
   });
 });

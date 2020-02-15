@@ -105,6 +105,10 @@ exports[`should render with maximum information 1`] = `
                 "name": "Headset (Frameset)",
                 "value": "3",
               },
+              Object {
+                "name": "Wheels (Finishing kit)",
+                "value": "4",
+              },
             ],
             "type": "select_one",
           },
@@ -223,6 +227,24 @@ exports[`should render with maximum information 1`] = `
               },
             ],
             "placing": 10,
+          },
+          Object {
+            "id": 2,
+            "name": "Finishing kit",
+            "partTypes": Array [
+              Object {
+                "attributes": Array [],
+                "can_be_omitted": false,
+                "can_be_substituted": false,
+                "customer_facing": true,
+                "id": 4,
+                "includeInSection": 2,
+                "name": "Wheels",
+                "placing": 30,
+                "synonyms": Array [],
+              },
+            ],
+            "placing": 20,
           },
         ]
       }
@@ -394,6 +416,24 @@ exports[`should render with maximum information 1`] = `
             ],
             "placing": 10,
           },
+          Object {
+            "id": 2,
+            "name": "Finishing kit",
+            "partTypes": Array [
+              Object {
+                "attributes": Array [],
+                "can_be_omitted": false,
+                "can_be_substituted": false,
+                "customer_facing": true,
+                "id": 4,
+                "includeInSection": 2,
+                "name": "Wheels",
+                "placing": 30,
+                "synonyms": Array [],
+              },
+            ],
+            "placing": 20,
+          },
         ],
       }
     }
@@ -529,6 +569,10 @@ exports[`should render with minimum information 1`] = `
                 "name": "Headset (Frameset)",
                 "value": "3",
               },
+              Object {
+                "name": "Wheels (Finishing kit)",
+                "value": "4",
+              },
             ],
             "type": "select_one",
           },
@@ -647,6 +691,24 @@ exports[`should render with minimum information 1`] = `
               },
             ],
             "placing": 10,
+          },
+          Object {
+            "id": 2,
+            "name": "Finishing kit",
+            "partTypes": Array [
+              Object {
+                "attributes": Array [],
+                "can_be_omitted": false,
+                "can_be_substituted": false,
+                "customer_facing": true,
+                "id": 4,
+                "includeInSection": 2,
+                "name": "Wheels",
+                "placing": 30,
+                "synonyms": Array [],
+              },
+            ],
+            "placing": 20,
           },
         ]
       }
@@ -817,6 +879,24 @@ exports[`should render with minimum information 1`] = `
               },
             ],
             "placing": 10,
+          },
+          Object {
+            "id": 2,
+            "name": "Finishing kit",
+            "partTypes": Array [
+              Object {
+                "attributes": Array [],
+                "can_be_omitted": false,
+                "can_be_substituted": false,
+                "customer_facing": true,
+                "id": 4,
+                "includeInSection": 2,
+                "name": "Wheels",
+                "placing": 30,
+                "synonyms": Array [],
+              },
+            ],
+            "placing": 20,
           },
         ],
       }

@@ -26,7 +26,6 @@ describe('quoteSummaryElements', () => {
     { id: 1, charge_name: 'Charge 1' },
   ];
   it('should return an empty array when no data exists', () => {
-    const bikeParts = [];
     const quoteParts = [];
     const parts = [];
     const brands = [];
@@ -37,8 +36,9 @@ describe('quoteSummaryElements', () => {
     const expectedResults = [];
     expect(
       quoteSummaryElements(
+        {},
         sections,
-        bikeParts,
+        [],
         quoteParts,
         parts,
         brands,
@@ -52,8 +52,8 @@ describe('quoteSummaryElements', () => {
   it('should return customer visible bike parts when that is all there is', () => {
     const quote = { id: 32, bike: 52 };
     const bikeParts = [
-      { bike: 52, part: 1 },
-      { bike: 52, part: 2 },
+      { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
+      { id: 2, partType: 21, partName: 'Brand 5 visible' },
     ];
     const quoteParts = [];
     const parts = [
@@ -69,7 +69,7 @@ describe('quoteSummaryElements', () => {
         dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
-        part_desc: 'hbrand5 visible',
+        part_desc: 'Brand 5 visible',
       },
     ];
     expect(
@@ -90,9 +90,9 @@ describe('quoteSummaryElements', () => {
   it('should return all bike parts when it is not a customer view', () => {
     const quote = { id: 32, bike: 52 };
     const bikeParts = [
-      { bike: 52, part: 1 },
-      { bike: 52, part: 2 },
-      { bike: 52, part: 3 },
+      { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
+      { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
+      { id: 2, partType: 21, partName: 'Brand 5 visible' },
     ];
     const quoteParts = [];
     const parts = [
@@ -109,19 +109,19 @@ describe('quoteSummaryElements', () => {
         dummyKey: 'bp_1',
         sectionName: 'First Section',
         partTypeName: 'PT 1',
-        part_desc: 'hbrand5 Not visible',
+        part_desc: 'Brand 5 Not visible',
       },
       {
         dummyKey: 'bp_3',
         sectionName: '',
         partTypeName: 'PT 2',
-        part_desc: 'hbrand5 Not visible 2',
+        part_desc: 'Brand 5 Not visible 2',
       },
       {
         dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
-        part_desc: 'hbrand5 visible',
+        part_desc: 'Brand 5 visible',
       },
     ];
     expect(
@@ -142,9 +142,9 @@ describe('quoteSummaryElements', () => {
   it('should show additional quote parts when they exist', () => {
     const quote = { id: 32, bike: 52 };
     const bikeParts = [
-      { bike: 52, part: 1 },
-      { bike: 52, part: 2 },
-      { bike: 52, part: 3 },
+      { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
+      { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
+      { id: 2, partType: 21, partName: 'Brand 5 visible' },
     ];
     const quoteParts = [
       {
@@ -173,13 +173,13 @@ describe('quoteSummaryElements', () => {
         dummyKey: 'bp_1',
         sectionName: 'First Section',
         partTypeName: 'PT 1',
-        part_desc: 'hbrand5 Not visible',
+        part_desc: 'Brand 5 Not visible',
       },
       {
         dummyKey: 'bp_3',
         sectionName: '',
         partTypeName: 'PT 2',
-        part_desc: 'hbrand5 Not visible 2',
+        part_desc: 'Brand 5 Not visible 2',
       },
       {
         id: 321,
@@ -199,7 +199,7 @@ describe('quoteSummaryElements', () => {
         dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
-        part_desc: 'hbrand5 visible',
+        part_desc: 'Brand 5 visible',
       },
     ];
     expect(
@@ -220,9 +220,9 @@ describe('quoteSummaryElements', () => {
   it('should show additional quote parts when they exist as fixed price', () => {
     const quote = { id: 32, bike: 52 };
     const bikeParts = [
-      { bike: 52, part: 1 },
-      { bike: 52, part: 2 },
-      { bike: 52, part: 3 },
+      { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
+      { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
+      { id: 2, partType: 21, partName: 'Brand 5 visible' },
     ];
     const quoteParts = [
       {
@@ -262,13 +262,13 @@ describe('quoteSummaryElements', () => {
         dummyKey: 'bp_1',
         sectionName: 'First Section',
         partTypeName: 'PT 1',
-        part_desc: 'hbrand5 Not visible',
+        part_desc: 'Brand 5 Not visible',
       },
       {
         dummyKey: 'bp_3',
         sectionName: '',
         partTypeName: 'PT 2',
-        part_desc: 'hbrand5 Not visible 2',
+        part_desc: 'Brand 5 Not visible 2',
       },
       {
         id: 321,
@@ -302,7 +302,7 @@ describe('quoteSummaryElements', () => {
         dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
-        part_desc: 'hbrand5 visible',
+        part_desc: 'Brand 5 visible',
       },
     ];
     expect(
@@ -323,9 +323,9 @@ describe('quoteSummaryElements', () => {
   it('should show additional parts separately when fixed price on customer view', () => {
     const quote = { id: 32, bike: 52 };
     const bikeParts = [
-      { bike: 52, part: 1 },
-      { bike: 52, part: 2 },
-      { bike: 52, part: 3 },
+      { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
+      { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
+      { id: 2, partType: 21, partName: 'Brand 5 visible' },
     ];
     const quoteParts = [
       {
@@ -379,7 +379,7 @@ describe('quoteSummaryElements', () => {
         dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
-        part_desc: 'hbrand5 visible',
+        part_desc: 'Brand 5 visible',
       },
       { sectionName: 'Itemised changes', dummyKey: 'qp_itemised' },
       {
@@ -415,9 +415,9 @@ describe('quoteSummaryElements', () => {
   it('should show alternative quote parts when they exist', () => {
     const quote = { id: 32, bike: 52 };
     const bikeParts = [
-      { bike: 52, part: 1 },
-      { bike: 52, part: 2 },
-      { bike: 52, part: 3 },
+      { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
+      { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
+      { id: 2, partType: 21, partName: 'Brand 5 visible' },
     ];
     const parts = [
       { id: 1, partType: 1, brand: 5, part_name: 'Not visible' },
@@ -449,7 +449,7 @@ describe('quoteSummaryElements', () => {
         dummyKey: 'bp_1',
         sectionName: 'First Section',
         partTypeName: 'PT 1',
-        part_desc: 'hbrand5 Not visible',
+        part_desc: 'Brand 5 Not visible',
       },
       {
         id: 321,
@@ -470,7 +470,7 @@ describe('quoteSummaryElements', () => {
         dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
-        part_desc: 'hbrand5 visible',
+        part_desc: 'Brand 5 visible',
       },
     ];
     expect(
@@ -491,9 +491,9 @@ describe('quoteSummaryElements', () => {
   it('should show alternative quote parts when they exist as fixed', () => {
     const quote = { id: 32, bike: 52 };
     const bikeParts = [
-      { bike: 52, part: 1 },
-      { bike: 52, part: 2 },
-      { bike: 52, part: 3 },
+      { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
+      { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
+      { id: 2, partType: 21, partName: 'Brand 5 visible' },
     ];
     const parts = [
       { id: 1, partType: 1, brand: 5, part_name: 'Not visible' },
@@ -524,7 +524,7 @@ describe('quoteSummaryElements', () => {
       {
         sectionName: 'First Section',
         partTypeName: 'PT 1',
-        part_desc: 'hbrand5 Not visible',
+        part_desc: 'Brand 5 Not visible',
         dummyKey: 'bp_1',
       },
       {
@@ -547,7 +547,7 @@ describe('quoteSummaryElements', () => {
         dummyKey: 'bp_2',
         sectionName: 'second Section',
         partTypeName: 'PT 21',
-        part_desc: 'hbrand5 visible',
+        part_desc: 'Brand 5 visible',
       },
     ];
     expect(

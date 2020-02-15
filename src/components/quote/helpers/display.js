@@ -2,7 +2,6 @@ import { buildPartString } from '../../part/helpers/part';
 import { QUANTITY_FIELD, TRADE_IN_PRICE_FIELD } from '../../app/model/helpers/fields';
 import { findObjectWithId } from '../../../helpers/utils';
 import { PART_PRICE_FIELD } from '../../quotePart/helpers/quotePartFields';
-import { findPartsForBikeId } from '../../bike/helpers/bike';
 import { quotePartSummary } from '../../quotePart/helpers/quotePartSummary';
 
 const findReplacementQuotePart = (partTypeId, bikePart, quoteParts) => {
@@ -22,11 +21,10 @@ export const displayForPartType = (partTypeId, quoteParts, bikeParts, parts) => 
 
   return { bikePart, quotePart, replacementPart, additionalParts };
 };
-export const displayForPartTypeAndQuote = (quote, partTypeId, quoteParts, bikeParts, parts) => {
-  const bikePartsForBike = findPartsForBikeId(quote.bike, bikeParts, parts);
+export const displayForPartTypeAndQuote = (quote, partTypeId, quoteParts, bike, parts) => {
   const quotePartsForQuote = quoteParts.filter(qp => qp.quote === quote.id);
 
-  return displayForPartType(partTypeId, quotePartsForQuote, bikePartsForBike, parts);
+  return displayForPartType(partTypeId, quotePartsForQuote, bike.bikeParts, parts);
 };
 
 export const displayQuotePartArray = (

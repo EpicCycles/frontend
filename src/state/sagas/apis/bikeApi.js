@@ -13,25 +13,6 @@ const getBike = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
   return await api.instance.get(`rest-epic/bike/${payload.bikeId}`);
 };
-const getBikeParts = async payload => {
-  api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  return await api.instance.get(`rest-epic/bike/${payload.bikeId}/parts`);
-};
-const saveBikePart = async payload => {
-  api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  return await api.instance.put(
-    `rest-epic/bike/${payload.bikeId}/parts/${payload.part.id}`,
-    payload.part,
-  );
-};
-const addBikePart = async payload => {
-  api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  return await api.instance.post(`rest-epic/bike/${payload.bikeId}/parts`, payload.part);
-};
-const deleteBikePart = async payload => {
-  api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  return await api.instance.delete(`rest-epic/bike/${payload.bikeId}/parts/${payload.partId}`);
-};
 const saveFrame = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
   return await api.instance.patch(`rest-epic/frames/${payload.frame.id}`, payload.frame);
@@ -56,10 +37,6 @@ export default {
   getBike,
   deleteBike,
   saveBike,
-  getBikeParts,
-  saveBikePart,
-  deleteBikePart,
-  addBikePart,
   deleteFrame,
   uploadFrame,
   getFrames,

@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteSummaryParts from './QuoteSummaryParts';
 import { quoteFields } from '../quote/helpers/quoteFields';
+import { findObjectWithId } from '../../helpers/utils';
 
 const QuoteSummary = props => {
   const {
@@ -16,12 +17,12 @@ const QuoteSummary = props => {
     sections,
     parts,
     bikes,
-    bikeParts,
     frames,
     customers,
     fittings,
     users,
   } = props;
+  const bike = findObjectWithId(bikes, quote.bike);
 
   return (
     <div className="grid-container">
@@ -50,7 +51,7 @@ const QuoteSummary = props => {
         charges={charges}
         sections={sections}
         parts={parts}
-        bikeParts={bikeParts}
+        bikeParts={bike && bike.bikeParts}
       />
     </div>
   );
@@ -70,7 +71,6 @@ QuoteSummary.propTypes = {
   charges: PropTypes.array,
   sections: PropTypes.array.isRequired,
   parts: PropTypes.array.isRequired,
-  bikeParts: PropTypes.array.isRequired,
   bikes: PropTypes.array.isRequired,
   customers: PropTypes.array.isRequired,
   fittings: PropTypes.array,

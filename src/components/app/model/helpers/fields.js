@@ -466,16 +466,6 @@ export const UPD_BY_FIELD = {
 
 // Model fields include only fields that are shown
 
-export const bikeFields = [
-  MODEL_NAME_FIELD,
-  DESCRIPTION_FIELD,
-  PRODUCT_CODE_FIELD,
-  COLOURS_FIELD,
-  RRP_FIELD,
-  EPIC_PRICE_FIELD,
-  CLUB_PRICE_FIELD,
-  SIZES_FIELD,
-];
 export const brandFields = [
   BRAND_NAME_FIELD,
   BIKE_BRAND_FIELD,

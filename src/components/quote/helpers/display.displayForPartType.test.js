@@ -33,9 +33,9 @@ describe('displayForPartType', () => {
   it('should return replacement parts when they have a dummy key only', () => {
     const partTypeId = 34;
     const expectedResult = {
-      undefined,
-      undefined,
-      undefined,
+      bikePart: undefined,
+      quotePart: undefined,
+      replacementPart: undefined,
       additionalParts: [
         { dummyKey: 'adummy', partType: 34, error_detail: { part: 'part is required' } },
       ],

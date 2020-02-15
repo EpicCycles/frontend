@@ -8,6 +8,7 @@ describe('FormTextInput', () => {
       <FormTextInput
         id="1234"
         label="Test"
+        fieldName="testfield"
         placeholder="Please enter your loyalty number"
         onChange={jest.fn()}
       />,
@@ -19,6 +20,7 @@ describe('FormTextInput', () => {
       <FormTextInput
         id="1234"
         label="Test"
+        fieldName="testfield"
         placeholder="Please enter your loyalty number"
         onChange={jest.fn()}
         dataType="number"
@@ -32,6 +34,7 @@ describe('FormTextInput', () => {
       <FormTextInput
         id="5678"
         label="Test"
+        fieldName="testfield"
         placeholder="Please enter your loyalty number"
         onChange={jest.fn()}
         error="Incorrect loyalty number"
@@ -48,6 +51,7 @@ describe('FormTextInput', () => {
     const input = shallow(
       <FormTextInput
         onClick={onClearEmail}
+        fieldName="testfield"
         onChange={onChange}
         value={value}
         fieldName={fieldName}
@@ -67,6 +71,7 @@ describe('FormTextInput', () => {
     const input = shallow(
       <FormTextInput
         onClick={onClearEmail}
+        fieldName="testfield"
         onChange={onChange}
         value={value}
         fieldName={fieldName}

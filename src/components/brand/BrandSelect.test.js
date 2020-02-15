@@ -18,6 +18,6 @@ const brands = [
   { dummyKey: NEW_ELEMENT_ID, brand_name: 'brand new 2', changed: true },
 ];
 test('component displays correctly with brands', () => {
-  const component = shallow(<BrandSelect brands={brands} />);
+  const component = shallow(<BrandSelect brands={brands} onChange={jest.fn()} />);
   expect(toJson(component)).toMatchSnapshot();
 });

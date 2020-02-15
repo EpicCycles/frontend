@@ -3,18 +3,11 @@ import * as selectors from '../selectors/user';
 import bikeApi from './apis/bikeApi';
 import history from '../../history';
 import {
-  addBikePartError,
-  addBikePartOK,
   archiveFramesError,
   archiveFramesSuccess,
-  BIKE_ADD_PART,
   BIKE_DELETE,
-  BIKE_PART_DELETE,
-  BIKE_PART_SAVE,
   BIKE_SAVE,
   bikeDeleted,
-  deleteBikePartError,
-  deleteBikePartOK,
   deleteBikesError,
   deleteBikesSuccess,
   deleteFramesError,
@@ -25,18 +18,13 @@ import {
   FRAME_SAVE,
   FRAME_UPLOAD,
   GET_BIKE,
-  GET_BIKE_PARTS,
   getBikeError,
   getBikeOK,
-  getBikePartsError,
-  getBikePartsOK,
   getFrameList,
   getFrameListError,
   getFrameListOK,
   saveBikeError,
   saveBikeOK,
-  saveBikePartError,
-  saveBikePartOK,
   saveFrameError,
   saveFrameSuccess,
   uploadFrameError,
@@ -51,9 +39,6 @@ import {
   WARNING_MESSAGE,
 } from '../../helpers/messages';
 import { doWeHaveObjects, updateObject } from '../../helpers/utils';
-import { findPart } from '../../components/part/helpers/part';
-import partApi from './apis/part';
-import { savePartOK } from '../actions/part';
 import { LOGIN_URL } from '../../components/menus/helpers/menu';
 
 export function* getBike(action) {
@@ -94,88 +79,6 @@ export function* saveBike(action) {
 
 export function* watchForSaveBike() {
   yield takeLatest(`${BIKE_SAVE}_REQUESTED`, saveBike);
-}
-
-export function* getBikeParts(action) {
-  try {
-    const token = yield select(selectors.token);
-    if (token) {
-      const completePayload = updateObject(action.payload, { token });
-      const response = yield call(bikeApi.getBikeParts, completePayload);
-      yield put(getBikePartsOK(response.data));
-    } else {
-      yield call(history.push, LOGIN_URL);
-    }
-  } catch (error) {
-    logError(error);
-    yield put(getBikePartsError('Get Bike Parts failed'));
-  }
-}
-
-export function* watchForGetBikeParts() {
-  yield takeLatest(`${GET_BIKE_PARTS}_REQUESTED`, getBikeParts);
-}
-
-export function* addBikePart(action) {
-  try {
-    const token = yield select(selectors.token);
-    if (token) {
-      const completePayload = updateObject(action.payload, { token });
-      const response = yield call(bikeApi.addBikePart, completePayload);
-      yield put(addBikePartOK(response.data));
-    } else {
-      yield call(history.push, LOGIN_URL);
-    }
-  } catch (error) {
-    logError(error);
-    yield put(addBikePartError('Add Bike Part failed'));
-  }
-}
-
-export function* watchForAddBikePart() {
-  yield takeLatest(`${BIKE_ADD_PART}_REQUESTED`, addBikePart);
-}
-
-export function* saveBikePart(action) {
-  try {
-    const token = yield select(selectors.token);
-    if (token) {
-      const completePayload = updateObject(action.payload, { token });
-      const response = yield call(bikeApi.saveBikePart, completePayload);
-      // const response = yield call(bike.getBikeParts, completePayload);
-      yield put(saveBikePartOK(response.data));
-    } else {
-      yield call(history.push, LOGIN_URL);
-    }
-  } catch (error) {
-    logError(error);
-    yield put(saveBikePartError('Save Bike Part failed'));
-  }
-}
-
-export function* watchForSaveBikePart() {
-  yield takeLatest(`${BIKE_PART_SAVE}_REQUESTED`, saveBikePart);
-}
-
-export function* deleteBikePart(action) {
-  try {
-    const token = yield select(selectors.token);
-    if (token) {
-      const completePayload = updateObject(action.payload, { token });
-      yield call(bikeApi.deleteBikePart, completePayload);
-      const response = yield call(bikeApi.getBikeParts, completePayload);
-      yield put(deleteBikePartOK(response.data));
-    } else {
-      yield call(history.push, LOGIN_URL);
-    }
-  } catch (error) {
-    logError(error);
-    yield put(deleteBikePartError('Delete Bike Part failed'));
-  }
-}
-
-export function* watchForDeleteBikePart() {
-  yield takeLatest(`${BIKE_PART_DELETE}_REQUESTED`, deleteBikePart);
 }
 
 export function* deleteBikes(bikeIdsToDelete, token) {
@@ -336,39 +239,7 @@ export function* uploadFrame(action) {
     if (token) {
       // structure is frame { [bikes { [parts]}}
       const frameData = action.payload.frame;
-      const newParts = [];
-      const bikes = [];
-      for (let i = 0; i < frameData.bikes.length; i++) {
-        let bikeParts = [];
-        const bikeToSave = frameData.bikes[i];
-        for (let i = 0; i < bikeToSave.parts.length; i++) {
-          const partToSave = bikeToSave.parts[i];
-          if (partToSave.id) {
-            bikeParts.push({ partType: partToSave.partType, part: partToSave.id });
-          } else {
-            const createdPart = findPart(
-              newParts,
-              partToSave.partType,
-              partToSave.brand,
-              partToSave.part_name,
-            );
-
-            if (createdPart) {
-              bikeParts.push({ partType: createdPart.partType, part: createdPart.id });
-            } else {
-              const completePayload = { part: partToSave, token };
-              const partResponse = yield call(partApi.createPart, completePayload);
-              const newPart = partResponse.data;
-              yield put(savePartOK(newPart));
-              newParts.push(newPart);
-              bikeParts.push({ partType: newPart.partType, part: newPart.id });
-            }
-          }
-        }
-        bikes.push(updateObject(bikeToSave, { bikeParts, parts: [] }));
-      }
-
-      const completePayload = { token, frame: updateObject(frameData, { bikes }) };
+      const completePayload = { token, frame: frameData };
       const response = yield call(bikeApi.uploadFrame, completePayload);
 
       if (response.status === 201) {

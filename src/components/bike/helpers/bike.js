@@ -1,17 +1,7 @@
-import { buildPartObject } from '../../part/helpers/part';
-import { buildBrandNameArray, getBrandName } from '../../brand/helpers/brand';
-import { findObjectWithId } from '../../../helpers/utils';
+import { getBrandName } from '../../brand/helpers/brand';
+import { findObjectWithId, updateObject } from '../../../helpers/utils';
 
-export const buildDataForApi = (
-  brand,
-  frameName,
-  rowMappings,
-  uploadedHeaders,
-  uploadedData,
-  brands,
-) => {
-  const brandsLower = buildBrandNameArray(brands);
-
+export const buildDataForApi = (brand, frameName, rowMappings, uploadedHeaders, uploadedData) => {
   const frame = {
     brand: brand,
     frame_name: frameName,
@@ -19,7 +9,7 @@ export const buildDataForApi = (
   // start by building an array of bike objects.
   const bikeNames = uploadedHeaders.slice(1);
   let bikes = bikeNames.map(bikeName => {
-    return { model_name: bikeName, parts: [] };
+    return { model_name: bikeName, bikeParts: [] };
   });
   const numberOfBikes = bikes.length;
 
@@ -31,15 +21,19 @@ export const buildDataForApi = (
           if (rowMapping.bikeAttribute) {
             bikes[bikeIndex][rowMapping.bikeAttribute] = dataValue;
           } else if (rowMapping.partType) {
-            bikes[bikeIndex].parts.push(
-              buildPartObject(rowMapping.partType, dataValue, brandsLower, brand),
-            );
+            bikes[bikeIndex].bikeParts.push({
+              id: rowMapping.partType,
+              partType: rowMapping.partType,
+              partName: dataValue,
+            });
           }
         }
       });
     }
   });
-  frame.bikes = bikes;
+  frame.bikes = bikes.map(bike =>
+    updateObject(bike, { bikeParts: JSON.stringify(bike.bikeParts) }),
+  );
   return frame;
 };
 
@@ -54,17 +48,4 @@ export const getBikeName = (bikeId, bikes, frames, brands) => {
   const bike = findObjectWithId(bikes, bikeId);
   if (bike) return bikeFullName(bike, frames, brands);
   return 'Unknown Bike';
-};
-
-export const findPartsForBike = (bike, bikeParts, parts) => {
-  if (!(bike && bikeParts && parts)) return [];
-  return findPartsForBikeId(bike.id, bikeParts, parts);
-};
-export const findPartsForBikeId = (bikeId, bikeParts, parts) => {
-  if (!(bikeId && bikeParts && parts)) return [];
-  return bikeParts
-    .filter(bikePart => bikePart.bike === bikeId)
-    .map(bikePart => {
-      return findObjectWithId(parts, bikePart.part);
-    });
 };

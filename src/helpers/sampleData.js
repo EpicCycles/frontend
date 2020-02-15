@@ -55,6 +55,7 @@ export const sampleBikes = [
     club_price: 2249.0,
     sizes: null,
     frame: 14,
+    bikeParts: [{ partType: 1 }, { partType: 22 }],
   },
   {
     id: 59,
@@ -67,6 +68,7 @@ export const sampleBikes = [
     club_price: 2249.0,
     sizes: null,
     frame: 14,
+    bikeParts: [],
   },
   {
     id: 60,
@@ -79,6 +81,7 @@ export const sampleBikes = [
     club_price: 2549.0,
     sizes: null,
     frame: 14,
+    bikeParts: [],
   },
 ];
 export const sampleSuppliers = [
@@ -147,11 +150,28 @@ export const partType3 = {
   customer_facing: true,
   includeInSection: 1,
 };
+export const partType4 = {
+  id: 4,
+  attributes: [],
+  synonyms: [],
+  name: 'Wheels',
+  placing: 30,
+  can_be_substituted: false,
+  can_be_omitted: false,
+  customer_facing: true,
+  includeInSection: 2,
+};
 export const sampleSections = [
   {
     id: 1,
     name: 'Frameset',
     placing: 10,
     partTypes: [partType1, partType2, partType3],
+  },
+  {
+    id: 2,
+    name: 'Finishing kit',
+    placing: 20,
+    partTypes: [partType4],
   },
 ];

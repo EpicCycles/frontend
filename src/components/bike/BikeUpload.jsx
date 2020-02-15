@@ -2,15 +2,14 @@ import React, { Fragment } from 'react';
 import { Button } from 'semantic-ui-react';
 import BikeUploadFile from './BikeUploadFile';
 import BikeUploadMapping from './BikeUploadMapping';
-import BikeUploadParts from './BikeUploadParts';
-import BikeUploadReview from './BikeUploadReview';
 import BikeUploadFrame from './BikeUploadFrame';
 import UploadMappingPartTypes from '../app/upload/UploadMappingPartTypes';
 import { getPartTypeForName } from '../partType/helpers/partType';
 import { findObjectWithId, updateObject } from '../../helpers/utils';
 import BikeUploadMappingReview from './BikeUploadMappingReview';
 import { colourStyles } from '../../helpers/constants';
-import { bikeFields } from '../app/model/helpers/fields';
+import { bikeFields } from './helpers/bikeFields';
+import BikeUploadReview from './BikeUploadReview';
 
 const uploadSteps = [
   {
@@ -20,11 +19,7 @@ const uploadSteps = [
   { stepNumber: 2, description: 'Assign Part Types for upload data' },
   { stepNumber: 3, description: 'Assign Bike level fields' },
   { stepNumber: 4, description: 'Review mapping for all data' },
-  {
-    stepNumber: 5,
-    description: 'Review brands for parts to be created during upload',
-  },
-  { stepNumber: 6, description: 'List Bikes created during upload' },
+  { stepNumber: 5, description: 'List Bikes created during upload' },
 ];
 const initialState = {
   step: 0,
@@ -99,7 +94,6 @@ class BikeUpload extends React.Component {
       brands,
       suppliers,
       sections,
-      parts,
       saveBrands,
       saveFramework,
       uploadFrame,
@@ -149,7 +143,11 @@ class BikeUpload extends React.Component {
           />
         )}
         {step === 2 && (
-          <BikeUploadMapping rowMappings={rowMappings} addDataAndProceed={this.addDataAndProceed} />
+          <BikeUploadMapping
+            rowMappings={rowMappings}
+            addDataAndProceed={this.addDataAndProceed}
+            uploadFrame={uploadFrame}
+          />
         )}
         {step === 3 && (
           <BikeUploadMappingReview
@@ -160,21 +158,10 @@ class BikeUpload extends React.Component {
             brand={brand}
             frameName={frameName}
             addDataAndProceed={this.addDataAndProceed}
-          />
-        )}
-        {step === 4 && (
-          <BikeUploadParts
-            apiData={apiData}
-            brands={brands}
-            sections={sections}
-            parts={parts}
-            addDataAndProceed={this.addDataAndProceed}
-            saveBrands={saveBrands}
-            recheckBrands={() => this.goToStep(3)}
             uploadFrame={uploadFrame}
           />
         )}
-        {step === 5 && <BikeUploadReview sections={sections} brands={brands} frame={frame} />}
+        {step === 4 && <BikeUploadReview sections={sections} brands={brands} frame={frame} />}
         <div className="full align_center">
           {this.state.step < uploadSteps.length - 1 ? (
             uploadSteps.map((stepDetails, stepIndex) => {

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import { bikeFields } from '../app/model/helpers/fields';
 import { Button, Icon } from 'semantic-ui-react';
 import { BikeUploadFieldMapping } from './BikeUploadFieldMapping';
+import { bikeFields } from './helpers/bikeFields';
 
 class BikeUploadMapping extends React.Component {
   constructor(props) {

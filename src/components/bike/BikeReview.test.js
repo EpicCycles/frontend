@@ -1,36 +1,30 @@
 import React from 'react';
 import BikeReview from './BikeReview';
 import { sampleBrands, sampleSections, sampleSuppliers } from '../../helpers/sampleData';
-import { assertComponentHasExpectedProps } from '../../helpers/jest_helpers/assert';
+import { updateObject } from '../../helpers/utils';
 
 const bikes = [
-  { id: 1, frame: 1001 },
-  { id: 2, frame: 1001 },
+  {
+    id: 1,
+    frame: 1001,
+    bikeParts: [
+      { id: 101, partType: 1 },
+      { id: 102, partType: 2 },
+      { id: 103, partType: 3 },
+    ],
+  },
+  { id: 2, frame: 1001, bikeParts: [{ id: 101, partType: 1 }] },
   { id: 3, frame: 3001 },
 ];
-const bikeParts = [
-  { id: 101, bike: 1, part: 11 },
-  { id: 102, bike: 1, part: 12 },
-  { id: 103, bike: 1, part: 13 },
-];
-const parts = [{ id: 10 }, { id: 11 }, { id: 12 }, { id: 13 }, { id: 21 }];
 const frames = [{ id: 1001 }, { id: 3001 }];
 describe('BikeReview', () => {
   let component;
   let reviewBike;
   let saveBike;
   let deleteBikes;
-  let getBike;
-  let getBikeParts;
-  let saveBikePart;
-  let deleteBikePart;
-  let addBikePart;
-  let listParts;
   const props = {
     sections: sampleSections,
-    parts,
     bikes,
-    bikeParts,
     frames,
     brands: sampleBrands,
     suppliers: sampleSuppliers,
@@ -41,116 +35,124 @@ describe('BikeReview', () => {
     saveBike = jest.fn();
     deleteBikes = jest.fn();
     reviewBike = jest.fn();
-    getBike = jest.fn();
-    getBikeParts = jest.fn();
-    saveBikePart = jest.fn();
-    deleteBikePart = jest.fn();
-    addBikePart = jest.fn();
-    listParts = jest.fn();
     component = shallow(
       <BikeReview
         {...props}
         saveBike={saveBike}
         deleteBikes={deleteBikes}
         reviewBike={reviewBike}
-        getBike={getBike}
-        getBikeParts={getBikeParts}
-        saveBikePart={saveBikePart}
-        deleteBikePart={deleteBikePart}
-        addBikePart={addBikePart}
-        listParts={listParts}
       />,
     );
   });
   test('should render with basic info', () => {
-    const component = shallow(
-      <BikeReview
-        bikeId={1}
-        bikeReviewList={[1, 2, 3]}
-        bikes={bikes}
-        bikeParts={bikeParts}
-        parts={parts}
-        frames={frames}
-        saveBrands={jest.fn()}
-        reviewBike={jest.fn()}
-        saveBike={jest.fn()}
-        deleteBikes={jest.fn()}
-        getBike={jest.fn()}
-        getBikeParts={jest.fn()}
-        saveBikePart={jest.fn()}
-        deleteBikePart={jest.fn()}
-        addBikePart={jest.fn()}
-        listParts={jest.fn()}
-      />,
-    );
-    expect(component.find('PartFinder')).toHaveLength(0);
-    expect(component.find('BikeEdit')).toHaveLength(1);
-    expect(component.find('PartDisplayGrid')).toHaveLength(1);
-    expect(component.find('PartDisplaySummary')).toHaveLength(1);
-    expect(component.find('Pagination')).toHaveLength(2);
+    expect(component.find('h3')).toHaveLength(1);
+    expect(component.find('button')).toHaveLength(3);
+    expect(
+      component
+        .find('button')
+        .at(0)
+        .prop('disabled'),
+    ).toBeFalsy();
+    expect(
+      component
+        .find('button')
+        .at(1)
+        .prop('disabled'),
+    ).toBeTruthy();
+    expect(
+      component
+        .find('button')
+        .at(2)
+        .prop('disabled'),
+    ).toBeTruthy();
+    expect(component.find('EditModel')).toHaveLength(5);
+    expect(component.find('Pagination')).toHaveLength(1);
   });
   test('should call review bike with next bike when page is selected', () => {
-    component.instance().reviewSelectedBike(2);
+    component.find('Pagination').prop('getPage')(2);
     expect(reviewBike).toHaveBeenCalledTimes(1);
     expect(reviewBike).toHaveBeenCalledWith(2);
   });
-  test('should call deleteBikePart when it is requested', () => {
-    component.instance().deletePart(222);
-    expect(deleteBikePart).toHaveBeenCalledTimes(1);
-    expect(deleteBikePart).toHaveBeenCalledWith(1, 222);
+  test('should remove a bike part when delete is used from row', () => {
+    const editBike = component.find("[data-test='edit-bike']");
+    expect(editBike.prop('persistedModel')).toEqual(bikes[0]);
+
+    const updatedBike = updateObject(bikes[0], {
+      bikeParts: [bikes[0].bikeParts[1], bikes[0].bikeParts[2]],
+    });
+    const editPart = component.find("[data-test='edit-bike-part']").at(0);
+    const bikePartBeingEdited = editPart.prop('persistedModel');
+    expect(bikePartBeingEdited).toEqual(bikes[0].bikeParts[0]);
+    editPart.prop('modelDelete')(bikePartBeingEdited.id);
+
+    const editBikePostDelete = component.find("[data-test='edit-bike']");
+    expect(editBikePostDelete.prop('model')).toEqual(updatedBike);
+
+    const editPartPostDelete = component.find("[data-test='edit-bike-part']").at(0);
+    expect(editPartPostDelete.prop('persistedModel')).toEqual(bikes[0].bikeParts[1]);
+    expect(
+      component
+        .find('button')
+        .at(1)
+        .prop('disabled'),
+    ).toBeFalsy();
+    expect(
+      component
+        .find('button')
+        .at(2)
+        .prop('disabled'),
+    ).toBeFalsy();
   });
-  test('should call saveBikePart when a part that exists is saved', () => {
-    const existingPart = { id: 123345, part_name: '2thing' };
-    component.instance().saveOrAddPart(existingPart);
-    expect(saveBikePart).toHaveBeenCalledTimes(1);
-    expect(saveBikePart).toHaveBeenCalledWith(1, existingPart);
+  test('should replace a bike part when a partType that exists is saved', () => {
+    const editPart = component.find("[data-test='edit-bike-part']").at(0);
+    const bikePartBeingEdited = editPart.prop('persistedModel');
+    expect(bikePartBeingEdited).toEqual(bikes[0].bikeParts[0]);
+
+    const updatedBikePart = updateObject(bikePartBeingEdited, { partName: 'newPartName' });
+    editPart.prop('modelSave')(updatedBikePart);
+
+    const editPartPostDelete = component.find("[data-test='edit-bike-part']").at(0);
+    expect(editPartPostDelete.prop('persistedModel')).toEqual(bikes[0].bikeParts[0]);
+    expect(editPartPostDelete.prop('model')).toEqual({
+      id: 101,
+      partType: 1,
+      partName: 'newPartName',
+    });
+    expect(
+      component
+        .find('button')
+        .at(1)
+        .prop('disabled'),
+    ).toBeFalsy();
+    expect(
+      component
+        .find('button')
+        .at(2)
+        .prop('disabled'),
+    ).toBeFalsy();
   });
   test('should call addBikePart when a part that is new is saved', () => {
-    const newPart = { part_name: '2thing' };
-    component.instance().saveOrAddPart(newPart);
-    expect(addBikePart).toHaveBeenCalledTimes(1);
-    expect(addBikePart).toHaveBeenCalledWith(1, newPart);
-  });
-  test('should show part finder with selected part when it is requested', () => {
-    const existingPart = { id: 123345, part_name: '2thing' };
-    component.instance().showPartFinder(existingPart);
-    expect(component.state('showPartFinder')).toBeTruthy();
-    expect(component.find('PartFinder')).toHaveLength(1);
-    assertComponentHasExpectedProps(component.find('PartFinder'), {
-      part: existingPart,
-    });
-    expect(component.find('BikeEdit')).toHaveLength(1);
-    expect(component.find('PartDisplayGrid')).toHaveLength(1);
-    expect(component.find('PartDisplaySummary')).toHaveLength(1);
-    expect(component.find('Pagination')).toHaveLength(2);
-  });
-  test('should show part finder with different selected part when it is requested', () => {
-    const existingPart = { id: 123345, part_name: '2thing' };
-    component.instance().showPartFinder(existingPart);
-    expect(component.state('showPartFinder')).toBeTruthy();
-    expect(component.find('PartFinder')).toHaveLength(1);
-    assertComponentHasExpectedProps(component.find('PartFinder'), {
-      part: existingPart,
-    });
+    const editPart = component.find("[data-test='edit-bike-part']").at(3);
+    const newPart = updateObject(editPart.prop('model'), { partType: 4, partName: 'my new part' });
+    editPart.prop('modelSave')(newPart);
 
-    const newPart = { part_name: '2thing' };
-    component.instance().showPartFinder(newPart);
-    expect(component.state('showPartFinder')).toBeTruthy();
-    expect(component.find('PartFinder')).toHaveLength(1);
-    assertComponentHasExpectedProps(component.find('PartFinder'), {
-      part: existingPart,
-    });
-  });
-  test('should show part finder with no selected part when it is requested', () => {
-    component.instance().showPartFinder();
-    expect(component.state('showPartFinder')).toBeTruthy();
-    expect(component.find('PartFinder')).toHaveLength(1);
-    assertComponentHasExpectedProps(component.find('PartFinder'), {
-      part: {},
-    });
-    expect(component.find('BikeEdit')).toHaveLength(1);
-    expect(component.find('PartDisplayGrid')).toHaveLength(1);
-    expect(component.find('PartDisplaySummary')).toHaveLength(1);
-    expect(component.find('Pagination')).toHaveLength(2);
+    const partsNow = component.find("[data-test='edit-bike-part']");
+    expect(partsNow).toHaveLength(5);
+
+    const editPart4Now = component.find("[data-test='edit-bike-part']").at(3);
+    expect(editPart4Now.prop('model')).toEqual({ id: 4, partType: 4, partName: 'my new part' });
+    expect(editPart4Now.prop('persistedModel')).not.toBeDefined();
+    expect(
+      component
+        .find('button')
+        .at(1)
+        .prop('disabled'),
+    ).toBeFalsy();
+    expect(
+      component
+        .find('button')
+        .at(2)
+        .prop('disabled'),
+    ).toBeFalsy();
   });
 });

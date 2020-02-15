@@ -2,7 +2,6 @@ import { buildDataForApi } from './bike';
 
 test('single bike, part and attribute set', () => {
   const brand = 1;
-  const brands = [];
   const frameName = 'Frame thing';
   const rowMappings = [
     { rowIndex: 0, partTypeName: 'sizes', bikeAttribute: 'sizes' },
@@ -22,20 +21,23 @@ test('single bike, part and attribute set', () => {
       {
         model_name: uploadedHeaders[1],
         sizes: uploadedData[0][1],
-        parts: [{ brand: brand, partType: rowMappings[1].partType, part_name: uploadedData[1][1] }],
+        bikeParts: JSON.stringify([
+          {
+            id: rowMappings[1].partType,
+            partType: rowMappings[1].partType,
+            partName: uploadedData[1][1],
+          },
+        ]),
       },
     ],
   };
-  expect(
-    buildDataForApi(brand, frameName, rowMappings, uploadedHeaders, uploadedData, brands),
-  ).toEqual(expectedData);
+  expect(buildDataForApi(brand, frameName, rowMappings, uploadedHeaders, uploadedData)).toEqual(
+    expectedData,
+  );
 });
 test('multiple bikes, parts and attributes set', () => {
   const brand = 1;
-  const brands = [
-    { id: 1, brand_name: 'Well' },
-    { id: 2, brand_name: 'Wellgo' },
-  ];
+
   const frameName = 'Frame thing';
   const rowMappings = [
     { rowIndex: 0, partTypeName: 'sizes', bikeAttribute: 'sizes' },
@@ -60,33 +62,43 @@ test('multiple bikes, parts and attributes set', () => {
         model_name: uploadedHeaders[1],
         sizes: uploadedData[0][1],
         description: uploadedData[3][1],
-        parts: [{ brand: brand, partType: rowMappings[1].partType, part_name: uploadedData[1][1] }],
+        bikeParts: JSON.stringify([
+          {
+            id: rowMappings[1].partType,
+            partType: rowMappings[1].partType,
+            partName: uploadedData[1][1],
+          },
+        ]),
       },
       {
         model_name: uploadedHeaders[2],
-        parts: [
-          { brand: brand, partType: rowMappings[1].partType, part_name: uploadedData[1][2] },
+        bikeParts: JSON.stringify([
           {
-            brand: brands[1].id,
-            partType: rowMappings[4].partType,
-            part_name: uploadedData[4][2].slice(brands[1].brand_name.length).trim(),
+            id: rowMappings[1].partType,
+            partType: rowMappings[1].partType,
+            partName: uploadedData[1][2],
           },
-        ],
+          {
+            id: rowMappings[4].partType,
+            partType: rowMappings[4].partType,
+            partName: uploadedData[4][2],
+          },
+        ]),
       },
       {
         model_name: uploadedHeaders[3],
         description: uploadedData[3][3],
-        parts: [
+        bikeParts: JSON.stringify([
           {
-            brand: brands[0].id,
+            id: rowMappings[4].partType,
             partType: rowMappings[4].partType,
-            part_name: uploadedData[4][3].slice(brands[0].brand_name.length).trim(),
+            partName: uploadedData[4][3],
           },
-        ],
+        ]),
       },
     ],
   };
-  expect(
-    buildDataForApi(brand, frameName, rowMappings, uploadedHeaders, uploadedData, brands),
-  ).toEqual(expectedData);
+  expect(buildDataForApi(brand, frameName, rowMappings, uploadedHeaders, uploadedData)).toEqual(
+    expectedData,
+  );
 });

@@ -2,7 +2,6 @@ import { displayForPartType } from '../../quote/helpers/display';
 import { findObjectWithId, updateObject } from '../../../helpers/utils';
 import { quotePartSummary } from '../../quotePart/helpers/quotePartSummary';
 import { chargeName } from '../../charge/helpers/chargeName';
-import { findPartsForBikeId } from '../../bike/helpers/bike';
 
 const buildSummaryObject = (
   sectionUsed,
@@ -54,7 +53,6 @@ export const quoteSummaryElements = (
   showPrices,
   customerView,
 ) => {
-  const bikePartsForBike = findPartsForBikeId(quote.bike, bikeParts, parts);
   const quotePartsForQuote = quoteParts.filter(qp => qp.quote === quote.id);
   const quoteChargesForQuote = quoteCharges.filter(qp => qp.quote === quote.id);
   let summaryElements = [];
@@ -69,7 +67,7 @@ export const quoteSummaryElements = (
       const detailForPartType = displayForPartType(
         partType.id,
         quotePartsForQuote,
-        bikePartsForBike,
+        bikeParts,
         parts,
       );
       const { bikePart, quotePart, replacementPart, additionalParts } = detailForPartType;

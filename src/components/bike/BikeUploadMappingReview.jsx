@@ -14,7 +14,8 @@ const BikeUploadMappingReview = props => {
       props.uploadedData,
       props.brands,
     );
-    props.addDataAndProceed({ rowMappings, apiData });
+    props.uploadFrame(apiData);
+    props.addDataAndProceed({ apiData });
   };
   const discardData = rowIndex => {
     const updatedRowMappings = rowMappings.map(rowMap => {
@@ -41,7 +42,7 @@ const BikeUploadMappingReview = props => {
     <Fragment key="bikeUploadParts">
       <div>
         <Button key="bikeFileUploadCont" onClick={goToNextStep}>
-          Assign brands for Parts and Continue
+          Continue
         </Button>
       </div>
       <div
@@ -76,7 +77,8 @@ const BikeUploadMappingReview = props => {
                 <nobr>
                   {cell}
                   {index === 0 &&
-                    (rowMapping.ignore && (rowMapping.partType || rowMapping.bikeAttribute)) && (
+                    rowMapping.ignore &&
+                    (rowMapping.partType || rowMapping.bikeAttribute) && (
                       <Icon
                         id={`undoDelete-field${index}`}
                         name="undo"

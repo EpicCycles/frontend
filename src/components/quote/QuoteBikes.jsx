@@ -11,7 +11,6 @@ const QuoteBikes = props => {
     quoteParts,
     bikes,
     frames,
-    bikeParts,
     parts,
     customers,
     fittings,
@@ -53,7 +52,7 @@ const QuoteBikes = props => {
           quotes={bikeQuotes}
           sections={sections}
           quoteParts={quoteParts}
-          bikeParts={bikeParts}
+          bikes={bikes}
           parts={parts}
           brands={brands}
         />
@@ -66,7 +65,6 @@ QuoteBikes.propTypes = {
   quoteParts: PropTypes.array.isRequired,
   bikes: PropTypes.array,
   frames: PropTypes.array,
-  bikeParts: PropTypes.array,
   parts: PropTypes.array,
   customers: PropTypes.array.isRequired,
   fittings: PropTypes.array,

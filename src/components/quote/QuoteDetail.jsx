@@ -26,9 +26,9 @@ class QuoteDetail extends PureComponent {
   state = { updatedQuoteCharges: [], updatedQuoteParts: [] };
   static getDerivedStateFromProps(props, state) {
     const { updatedQuote, updatedQuoteParts, updatedQuoteCharges } = state;
-    const { quote, sections, quoteCharges, quoteParts, bikeParts, parts, brands } = props;
-
-    const quotePartsDetail = getQuoteParts(quote, sections, quoteParts, bikeParts, parts, brands);
+    const { quote, sections, quoteCharges, quoteParts, bikes, parts, brands } = props;
+    const bike =  findObjectWithId(bikes, quote.bike);
+    const quotePartsDetail = getQuoteParts(quote, sections, quoteParts, bike, parts, brands);
     const checkedUpdatedParts = [];
     updatedQuoteParts.forEach(updatedPart => {
       const persistedDetail = findObjectWithKey(quotePartsDetail, getModelKey(updatedPart));
@@ -141,7 +141,6 @@ class QuoteDetail extends PureComponent {
       archiveQuote,
       quote,
       bikes,
-      bikeParts,
       frames,
       customers,
       fittings,
@@ -218,7 +217,7 @@ class QuoteDetail extends PureComponent {
             brands={brands}
             sections={sections}
             parts={parts}
-            bikeParts={bikeParts}
+            bikeParts={bike && bike.bikeParts}
             showPrices
           />
           <div>
@@ -283,7 +282,6 @@ QuoteDetail.propTypes = {
   quoteParts: PropTypes.array.isRequired,
   quoteCharges: PropTypes.array.isRequired,
   bikes: PropTypes.array.isRequired,
-  bikeParts: PropTypes.array.isRequired,
   brands: PropTypes.array,
   charges: PropTypes.array,
   suppliers: PropTypes.array,

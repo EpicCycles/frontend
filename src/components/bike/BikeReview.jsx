@@ -1,179 +1,166 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import Pagination from '../../common/pagination';
-import { doWeHaveObjects, findObjectWithId } from '../../helpers/utils';
+import { findObjectWithId, generateRandomCode, updateObject } from '../../helpers/utils';
 import { Redirect } from 'react-router';
-import BikeEdit from './BikeEdit';
 import * as PropTypes from 'prop-types';
-import { findPartsForBike } from './helpers/bike';
-import PartDisplayGrid from '../part/PartDisplayGrid';
-import PartFinder from '../part/PartFinder';
-import { getModelKey } from '../app/model/helpers/model';
-import PartDisplaySummary from '../part/PartDisplaySummary';
+import { isModelValid } from '../app/model/helpers/model';
+import ModelTableHeaderRow from '../app/model/ModelTableHeaderRow';
+import { bikeFullName } from './helpers/bike';
+import EditModel from '../app/model/EditModel';
+import { bikeFields, bikePartFields } from './helpers/bikeFields';
 
-const initialState = {
-  showPartFinder: false,
-};
+const BikeReview = props => {
+  let [bike, setBike] = useState(undefined);
+  let [newBikePart, setNewBikePart] = useState({ dummyKey: generateRandomCode() });
 
-class BikeReview extends React.Component {
-  state = initialState;
+  const {
+    bikeId,
+    bikeReviewList,
+    bikes,
+    sections,
+    brands,
+    frames,
+    isLoading,
+    reviewBike,
+    deleteBikes,
+    saveBike,
+  } = props;
 
-  componentDidMount() {
-    this.checkPropsData();
-  }
+  const persistedBike = findObjectWithId(bikes, bikeId);
 
-  componentDidUpdate(prevProps) {
-    this.checkPropsData();
-    if (prevProps.bikeId !== this.props.bikeId) {
-      this.setState(initialState);
-    }
-  }
-
-  checkPropsData = () => {
-    if (!this.props.isLoading) {
-      this.getData();
-    }
-  };
-  getData = () => {
-    let bikeRequired = true;
-    let bikePartsRequired = true;
-
-    if (doWeHaveObjects(this.props.bikeParts)) {
-      const partsForCurrentBike = this.props.bikeParts.filter(
-        bikePart => bikePart.bike === this.props.bikeId,
-      );
-      if (partsForCurrentBike.length) bikePartsRequired = false;
-    }
-    if (doWeHaveObjects(this.props.bikes)) {
-      const currentBike = this.props.bikes.filter(bike => bike.id === this.props.bikeId);
-      if (currentBike.length) bikeRequired = false;
-    }
-    if (bikeRequired) {
-      this.props.getBike(this.props.bikeId);
-    } else if (bikePartsRequired) {
-      this.props.getBikeParts(this.props.bikeId);
-    }
-  };
-  reviewSelectedBike = bikePage => {
+  const reviewSelectedBike = bikePage => {
     const bikeIndex = bikePage - 1;
-    this.props.reviewBike(this.props.bikeReviewList[bikeIndex]);
+    reviewBike(props.bikeReviewList[bikeIndex]);
   };
-  deletePart = partId => {
-    this.props.deleteBikePart(this.props.bikeId, partId);
+  const updateBike = bikeData => {
+    const bikeBeforeChange = bike ? bike : persistedBike;
+    setBike(updateObject(bikeBeforeChange, bikeData));
   };
-  saveOrAddPart = part => {
-    const bikeId = this.props.bikeId;
-    if (part.id) {
-      this.props.saveBikePart(bikeId, part);
-    } else {
-      this.props.addBikePart(bikeId, part);
+  const deleteBike = () => {
+    deleteBikes([bikeId]);
+  };
+  const resetChanges = () => {
+    setBike(undefined);
+  };
+  const deletePart = bikePartId => {
+    const bikeBeforeChange = bike ? bike : persistedBike;
+    const bikePartsUpdated = bikeBeforeChange.bikeParts.filter(bp => bp.id !== bikePartId);
+    setBike(updateObject(bikeBeforeChange, { bikeParts: bikePartsUpdated }));
+  };
+  const saveOrAddPart = bikePart => {
+    const bikeBeforeChange = bike ? bike : persistedBike;
+    if (bikePart.dummyKey) {
+      setNewBikePart({ dummyKey: generateRandomCode() });
     }
-    this.setState({ partEditPart: part, showPartFinder: false });
-  };
-  showPartFinder = part => {
-    this.setState({ partEditPart: part, showPartFinder: true });
-  };
-  closePartFinder = () => {
-    this.setState(initialState);
-  };
-  deleteBikePart = partId => {
-    this.props.deleteBikePart(this.props.bikeId, partId);
+    // first remove any existing with this part type
+    const bikePartsUpdated = bikeBeforeChange.bikeParts.filter(
+      bp => bp.partType !== bikePart.partType,
+    );
+    const newPartId = bikePart.id ? bikePart.id : bikePart.partType;
+    bikePartsUpdated.push({
+      id: newPartId,
+      partType: bikePart.partType,
+      partName: bikePart.partName,
+    });
+    setBike(updateObject(bikeBeforeChange, { bikeParts: bikePartsUpdated }));
   };
 
-  render() {
-    const {
-      bikes,
-      bikeParts,
-      parts,
-      bikeReviewList,
-      isLoading,
-      brands,
-      frames,
-      sections,
-      saveBike,
-      deleteBikes,
-      bikeId,
-      listParts,
-    } = this.props;
-    if (!bikeId) return <Redirect to="/bike-review-list" push />;
-    const { partEditPart, showPartFinder } = this.state;
-    const selectedBikeIndex = bikeReviewList.indexOf(bikeId);
-    if (selectedBikeIndex < 0) return <Redirect to="/bike-review-list" push />;
-    const bike = findObjectWithId(bikes, bikeId);
-    const partsForBike = bike ? findPartsForBike(bike, bikeParts, parts) : [];
+  if (!bikeId) return <Redirect to="/bike-review-list" push />;
+  if (!persistedBike) return <Redirect to="/bike-review-list" push />;
+  const partTypesToShow = [];
+  const bikeParts = bike ? bike.bikeParts : persistedBike.bikeParts;
+  sections.forEach(section => {
+    section.partTypes.forEach(partType => {
+      if (bikeParts.some(bp => bp.partType === partType.id)) {
+        partTypesToShow.push(partType);
+      }
+    });
+  });
+  const canSave = bike && isModelValid(bike);
+  return (
+    <Fragment key={`bikeReview`}>
+      <h3>{bikeFullName(persistedBike, frames, brands)}</h3>
 
-    return (
-      <Fragment key={`bikeReview`}>
-        <section className="row">
-          {showPartFinder && (
-            <PartFinder
-              sections={sections}
-              parts={parts}
-              brands={brands}
-              savePart={this.saveOrAddPart}
-              deletePart={this.deletePart}
-              findParts={listParts}
-              part={partEditPart}
-              closeAction={this.closePartFinder}
-              partActionPrimary={this.saveOrAddPart}
-              partActionPrimaryIcon={'add'}
-              partActionPrimaryTitle={'Update bike with part'}
-              key={`partFinder${getModelKey(partEditPart)}`}
-            />
-          )}
-          <div>
-            <div className="row">
-              <div>
-                <BikeEdit
-                  bike={bike}
-                  brands={brands}
-                  frames={frames}
-                  saveBike={saveBike}
-                  deleteBikes={deleteBikes}
-                  addPart={this.showPartFinder}
-                  key={`editBike${bike.id}`}
+      <section className="row">
+        <div>
+          <div className="row">
+            <button onClick={deleteBike}>Delete</button>
+            <button onClick={() => saveBike(bike)} disabled={!canSave}>
+              Save changes
+            </button>
+            <button onClick={resetChanges} disabled={!canSave}>
+              Reset
+            </button>
+          </div>
+          <EditModel
+            key={`editBike${bikeId}`}
+            model={bike || persistedBike}
+            modelFields={bikeFields}
+            persistedModel={persistedBike}
+            data-test="edit-bike"
+            actionsRequired
+            modelSave={updateBike}
+            pageMode
+          />
+        </div>
+        <div>
+          <div className="grid-container">
+            <div className="grid">
+              <ModelTableHeaderRow modelFields={bikePartFields} includeActions />
+              {partTypesToShow.map(pt => {
+                const persistedBikePart = persistedBike.bikeParts.find(bp => bp.partType === pt.id);
+                const bikePart = bikeParts.find(bp => bp.partType === pt.id) || persistedBikePart;
+                return (
+                  <div className={`grid-row`} key={`row${bikePart.id}`}>
+                    <EditModel
+                      model={bikePart}
+                      persistedModel={persistedBikePart}
+                      modelFields={bikePartFields}
+                      data-test="edit-bike-part"
+                      key={`edit-bike-part-${pt.id}`}
+                      modelSave={saveOrAddPart}
+                      modelDelete={deletePart}
+                      sourceDataArrays={{ sections }}
+                      actionsRequired
+                    />
+                  </div>
+                );
+              })}
+              <div className={`grid-row`} key={`row${newBikePart.dummyKey}`}>
+                <EditModel
+                  model={newBikePart}
+                  persistedModel={{}}
+                  modelFields={bikePartFields}
+                  data-test="edit-bike-part"
+                  key={`edit-bike-part-${newBikePart.dummyKey}`}
+                  modelSave={saveOrAddPart}
+                  modelDelete={deletePart}
+                  sourceDataArrays={{ sections }}
+                  actionsRequired
                 />
-                <PartDisplayGrid
-                  parts={partsForBike}
-                  sections={sections}
-                  brands={brands}
-                  editPart={this.showPartFinder}
-                  deletePart={this.deleteBikePart}
-                  key={`partGrid${bike.id}`}
-                />
-              </div>
-              <div>
-                <Pagination
-                  key="toppagination"
-                  type="Bike"
-                  getPage={this.reviewSelectedBike}
-                  lastPage={bikeReviewList.length}
-                  count={bikeReviewList.length}
-                  page={selectedBikeIndex + 1}
-                />
-                <PartDisplaySummary parts={partsForBike} sections={sections} brands={brands} />
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <Pagination
-          key="bottompagination"
-          type="Bike"
-          getPage={this.reviewSelectedBike}
-          lastPage={bikeReviewList.length}
-          count={bikeReviewList.length}
-          page={selectedBikeIndex + 1}
-        />
-        {isLoading && (
-          <Dimmer active inverted>
-            <Loader content="Loading" />
-          </Dimmer>
-        )}
-      </Fragment>
-    );
-  }
-}
+      <Pagination
+        key="bottompagination"
+        type="Bike"
+        getPage={reviewSelectedBike}
+        lastPage={bikeReviewList.length}
+        count={bikeReviewList.length}
+        page={bikes.indexOf(persistedBike) + 1}
+      />
+      {isLoading && (
+        <Dimmer active inverted>
+          <Loader content="Loading" />
+        </Dimmer>
+      )}
+    </Fragment>
+  );
+};
 
 BikeReview.defaultProps = {
   parts: [],
@@ -186,21 +173,13 @@ BikeReview.propTypes = {
   bikeId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   bikeReviewList: PropTypes.array.isRequired,
   bikes: PropTypes.array.isRequired,
-  bikeParts: PropTypes.array.isRequired,
   brands: PropTypes.array,
   sections: PropTypes.array,
-  parts: PropTypes.array.isRequired,
   frames: PropTypes.array.isRequired,
-  saveBrands: PropTypes.func.isRequired,
   reviewBike: PropTypes.func.isRequired,
   saveBike: PropTypes.func.isRequired,
   deleteBikes: PropTypes.func.isRequired,
   getBike: PropTypes.func.isRequired,
-  getBikeParts: PropTypes.func.isRequired,
-  saveBikePart: PropTypes.func.isRequired,
-  deleteBikePart: PropTypes.func.isRequired,
-  addBikePart: PropTypes.func.isRequired,
-  listParts: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
 };
 export default BikeReview;

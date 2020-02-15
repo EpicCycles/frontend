@@ -7,6 +7,7 @@ exports[`it displays correctly 1`] = `
   error=""
   fieldName="name_of_field"
   isEmptyAllowed={false}
+  onChange={[MockFunction]}
   options={
     Array [
       Object {

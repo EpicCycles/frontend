@@ -1,12 +1,11 @@
 import { updateObject } from '../../../helpers/utils';
 import { buildPartString } from '../../part/helpers/part';
-import { findPartsForBikeId } from '../../bike/helpers/bike';
 
-export const getQuoteParts = (quote, sections, quoteParts, bikeParts, parts, brands) => {
+export const getQuoteParts = (quote, sections, quoteParts, bike, parts, brands) => {
   const displayQuoteParts = [];
   const isBike = !!quote.bike;
   const quoteQP = quoteParts.filter(qp => qp.quote === quote.id);
-  const quoteBP = isBike ? findPartsForBikeId(quote.bike, bikeParts, parts) : [];
+  const quoteBP = bike ? bike.bikeParts : [];
   const basicQuotePart = { quote: quote.id, _isBike: isBike };
   sections.forEach(section => {
     section.partTypes.forEach(partType => {

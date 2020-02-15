@@ -15,7 +15,7 @@ export const logError = error => {
     // Something happened in setting up the request that triggered an Error
     console.log('Error', error);
   }
-  console.log(error.config);
+  if (error.config) console.log(error.config);
 };
 
 export const errorAsMessage = (error, defaultMessage) => {

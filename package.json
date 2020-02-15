@@ -54,7 +54,8 @@
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
     "react-test-renderer": "16.8.*",
-    "redux-mock-store": "^1.5.4"
+    "redux-mock-store": "^1.5.4",
+    "@redux-saga/core": "latest"
   },
   "browserslist": {
     "production": [

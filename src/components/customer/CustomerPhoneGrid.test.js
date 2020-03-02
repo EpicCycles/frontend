@@ -9,6 +9,7 @@ describe('CustomerPhoneGrid', () => {
       <CustomerPhoneGrid deleteCustomerPhone={jest.fn()} saveCustomerPhone={jest.fn()} />,
     );
     expect(findDataTest(component, 'existing-phone')).toHaveLength(0);
+    expect(findDataTest(component, 'new-phone')).toHaveLength(0);
   });
   it('should render existing and new phones when phones passed', () => {
     const phones = [
@@ -16,26 +17,16 @@ describe('CustomerPhoneGrid', () => {
       { id: 2, telephone: 'FirstLine 2' },
       { id: 3, telephone: 'FirstLine 3' },
     ];
+    const newPhone = { telephone: '7889987' };
     const component = shallow(
       <CustomerPhoneGrid
         deleteCustomerPhone={jest.fn()}
         saveCustomerPhone={jest.fn()}
         phones={phones}
+        newPhone={{}}
       />,
     );
     expect(findDataTest(component, 'existing-phone')).toHaveLength(3);
-  });
-  it('should call add phone with the customer Id when a new phone is requested', () => {
-    const addCustomerPhone = jest.fn();
-    const component = shallow(
-      <CustomerPhoneGrid
-        deleteCustomerPhone={jest.fn()}
-        saveCustomerPhone={jest.fn()}
-        addCustomerPhone={addCustomerPhone}
-        customerId={23}
-      />,
-    );
-    component.instance().addNewPhone();
-    expect(addCustomerPhone).toHaveBeenCalled();
+    expect(findDataTest(component, 'new-phone')).toHaveLength(1);
   });
 });

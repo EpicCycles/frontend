@@ -1,7 +1,6 @@
 import { displayForPartTypeAndQuote } from './display';
 
 describe('displayForPartTypeAndQuote', () => {
-  const quote = { id: 17, bike: 45 };
   const quoteParts = [
     { id: 11, quote: 17, partType: 231, part: 1, not_required: true },
     { id: 11, quote: 19, partType: 231, part: 1, not_required: true },
@@ -10,6 +9,8 @@ describe('displayForPartTypeAndQuote', () => {
     { id: 9331, quote: 17, part: 19331, partType: 91 },
     { dummyKey: 'adummy', quote: 17, partType: 34, error_detail: { part: 'part is required' } },
   ];
+  const quote = { id: 17, bike: 45, quoteParts };
+
   const bike = {
     bikeParts: [
       { partType: 231, partName: 'Part name 231' },
@@ -37,9 +38,7 @@ describe('displayForPartTypeAndQuote', () => {
       replacementPart: { id: 1, partType: 231 },
       additionalParts: [{ id: 12, quote: 17, partType: 231 }],
     };
-    expect(displayForPartTypeAndQuote(quote, partTypeId, quoteParts, bike, parts)).toEqual(
-      expectedResult,
-    );
+    expect(displayForPartTypeAndQuote(quote, partTypeId, bike, parts)).toEqual(expectedResult);
   });
   it('should return replacement parts when they have a dummy key only', () => {
     const partTypeId = 34;
@@ -51,9 +50,7 @@ describe('displayForPartTypeAndQuote', () => {
         { dummyKey: 'adummy', quote: 17, partType: 34, error_detail: { part: 'part is required' } },
       ],
     };
-    expect(displayForPartTypeAndQuote(quote, partTypeId, quoteParts, bike, parts)).toEqual(
-      expectedResult,
-    );
+    expect(displayForPartTypeAndQuote(quote, partTypeId, bike, parts)).toEqual(expectedResult);
   });
   it('should return no values if none are found', () => {
     const partTypeId = 23;
@@ -63,9 +60,7 @@ describe('displayForPartTypeAndQuote', () => {
       replacementPart: undefined,
       additionalParts: [],
     };
-    expect(displayForPartTypeAndQuote(quote, partTypeId, quoteParts, bike, parts)).toEqual(
-      expectedResult,
-    );
+    expect(displayForPartTypeAndQuote(quote, partTypeId, bike, parts)).toEqual(expectedResult);
   });
   it('should return just a bike part when there are no matching quote parts', () => {
     const partTypeId = 631;
@@ -75,9 +70,7 @@ describe('displayForPartTypeAndQuote', () => {
       replacementPart: undefined,
       additionalParts: [],
     };
-    expect(displayForPartTypeAndQuote(quote, partTypeId, quoteParts, bike, parts)).toEqual(
-      expectedResult,
-    );
+    expect(displayForPartTypeAndQuote(quote, partTypeId, bike, parts)).toEqual(expectedResult);
   });
   it('should return just additional parts when there are no matching quote parts', () => {
     const partTypeId = 91;
@@ -90,8 +83,6 @@ describe('displayForPartTypeAndQuote', () => {
         { id: 9331, quote: 17, part: 19331, partType: 91 },
       ],
     };
-    expect(displayForPartTypeAndQuote(quote, partTypeId, quoteParts, bike, parts)).toEqual(
-      expectedResult,
-    );
+    expect(displayForPartTypeAndQuote(quote, partTypeId, bike, parts)).toEqual(expectedResult);
   });
 });

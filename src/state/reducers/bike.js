@@ -19,11 +19,12 @@ import {
   FRAME_SAVE,
   FRAME_UPLOAD,
 } from '../actions/bike';
-import { COPY_QUOTE, CREATE_QUOTE, FIND_QUOTES, GET_QUOTE, UPDATE_QUOTE } from '../actions/quote';
+import { CREATE_QUOTE, FIND_QUOTES, GET_QUOTE, UPDATE_QUOTE } from '../actions/quote';
 import { CUSTOMER } from '../actions/customer';
 
 const initialState = {
   isLoading: false,
+  bikes: [],
 };
 
 const bike = (state = initialState, action) => {
@@ -93,7 +94,6 @@ const bike = (state = initialState, action) => {
     case `${FRAME_LIST}_OK`:
     case `${CREATE_QUOTE}_OK`:
     case `${GET_QUOTE}_OK`:
-    case `${COPY_QUOTE}_OK`:
     case `${UPDATE_QUOTE}_OK`:
     case `${FIND_QUOTES}_OK`:
       return {

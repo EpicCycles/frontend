@@ -34,5 +34,5 @@ export const quotePartChanges = (
   if (updatedQuotePart.not_required && updatedQuotePart.not_required !== quotePart.not_required) {
     updatedQuotePart.trade_in_price = updatedQuotePart._bikePart.trade_in_price;
   }
-  return updatedQuotePart;
+  return quotePartPrice(updatedQuotePart);
 };

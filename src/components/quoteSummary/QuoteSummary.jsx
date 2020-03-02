@@ -10,8 +10,6 @@ const QuoteSummary = props => {
     showPrices,
     customerView,
     quote,
-    quoteParts,
-    quoteCharges,
     brands,
     charges,
     sections,
@@ -19,11 +17,11 @@ const QuoteSummary = props => {
     bikes,
     frames,
     customers,
-    fittings,
     users,
   } = props;
   const bike = findObjectWithId(bikes, quote.bike);
-
+  const customer = findObjectWithId(customers, quote.customer);
+  const { fittings } = customer ? customer.fittings : [];
   return (
     <div className="grid-container">
       <ViewModelBlock
@@ -45,8 +43,6 @@ const QuoteSummary = props => {
         quote={quote}
         showPrices={showPrices}
         customerView={customerView}
-        quoteParts={quoteParts}
-        quoteCharges={quoteCharges}
         brands={brands}
         charges={charges}
         sections={sections}
@@ -57,23 +53,18 @@ const QuoteSummary = props => {
   );
 };
 QuoteSummary.defaultProps = {
-  quoteCharges: [],
   charges: [],
-  fittings: [],
 };
 QuoteSummary.propTypes = {
   showPrices: PropTypes.bool,
   customerView: PropTypes.bool,
   quote: PropTypes.object.isRequired,
-  quoteParts: PropTypes.array.isRequired,
-  quoteCharges: PropTypes.array,
   brands: PropTypes.array.isRequired,
   charges: PropTypes.array,
   sections: PropTypes.array.isRequired,
   parts: PropTypes.array.isRequired,
   bikes: PropTypes.array.isRequired,
   customers: PropTypes.array.isRequired,
-  fittings: PropTypes.array,
   frames: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired,
 };

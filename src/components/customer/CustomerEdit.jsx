@@ -1,11 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Dimmer, Loader } from 'semantic-ui-react';
-import {
-  doWeHaveObjects,
-  findObjectWithId,
-  findObjectWithKey,
-  updateObject,
-} from '../../helpers/utils';
+import { doWeHaveObjects, findObjectWithId, updateObject } from '../../helpers/utils';
 import CustomerAddressGrid from './CustomerAddressGrid';
 import {
   createEmptyModelWithDefaultFields,
@@ -13,7 +8,12 @@ import {
   modelIsAlreadyInArray,
 } from '../app/model/helpers/model';
 import CustomerPhoneGrid from './CustomerPhoneGrid';
-import { CREATED_DATE, customerFields } from '../app/model/helpers/fields';
+import {
+  CREATED_DATE,
+  customerAddressFields,
+  customerFields,
+  customerPhoneFields,
+} from '../app/model/helpers/fields';
 import ViewModelBlock from '../app/model/ViewModelBlock';
 import QuoteGrid from '../quote/QuoteGrid';
 import { quoteFields } from '../quote/helpers/quoteFields';
@@ -23,23 +23,41 @@ import FormCheckbox from '../../common/FormCheckbox';
 import { formattedDateTime } from '../app/model/helpers/display';
 import { fittingFields } from '../fitting/helpers/fittingFields';
 import ModelTable from '../app/model/ModelTable';
+import { updateModelArrayOnModel } from '../app/model/helpers/updateModelArrayOnModel';
+import { removeModelFromArrayOnModel } from '../app/model/helpers/removeModelFromArrayOnModel';
+import EditModelButtons from '../app/model/EditModelButtons';
 
+const emptyFitting = createEmptyModelWithDefaultFields(fittingFields);
+const emptyAddress = createEmptyModelWithDefaultFields(customerAddressFields);
+const emptyPhone = createEmptyModelWithDefaultFields(customerPhoneFields);
 const CustomerEdit = props => {
   const [note, setNote] = useState(createEmptyModelWithDefaultFields(customerNoteFields));
-  const [fitting, setFitting] = useState(createEmptyModelWithDefaultFields(customerNoteFields));
   const [seeAllNotes, setSeeAllNotes] = useState(false);
   const [seeNoteDetail, setSeeNoteDetail] = useState(false);
+  let [customer, setCustomer] = useState(
+    findObjectWithId(props.customers, props.customerId) ||
+      createEmptyModelWithDefaultFields(customerFields),
+  );
+  let [fitting, setFitting] = useState(emptyFitting);
+  let [newAddress, setNewAddress] = useState(emptyAddress);
+  let [newPhone, setNewPhone] = useState(emptyPhone);
+
   useEffect(() => {
     // Any time the notes in props cjhanges check the current note isnt in list
     if (modelIsAlreadyInArray(props.notes, note, customerNoteFields))
       setNote(createEmptyModelWithDefaultFields(customerNoteFields));
   }, [props.notes]);
 
-  useEffect(() => {
-    console.log('in use Effect for fittings');
+  const resetCustomer = () => {
+    setCustomer(
+      findObjectWithId(props.customers, props.customerId) ||
+        createEmptyModelWithDefaultFields(customerFields),
+    );
     setFitting(createEmptyModelWithDefaultFields(fittingFields));
-  }, [props.fittings]);
-
+    setNewAddress(createEmptyModelWithDefaultFields(customerAddressFields));
+    setNewPhone(createEmptyModelWithDefaultFields(customerPhoneFields));
+    setNote(createEmptyModelWithDefaultFields(customerNoteFields));
+  };
   const saveOrCreateCustomerNote = noteToSave => {
     setNote(noteToSave);
     if (noteToSave.id) {
@@ -49,24 +67,39 @@ const CustomerEdit = props => {
       props.createNote(noteCompleteToSave);
     }
   };
+  const saveArrayObject = (arrayName, arrayFields, arrayObject) => {
+    setCustomer(updateModelArrayOnModel(customer, arrayName, arrayFields, arrayObject));
+  };
+  const removeItemFromArrayObject = (arrayName, itemId) => {
+    setCustomer(removeModelFromArrayOnModel(customer, arrayName, itemId));
+  };
   const saveOrCreateFitting = fittingToSave => {
-    setFitting(fitting);
-    if (fittingToSave.id) {
-      props.saveFitting(fittingToSave);
-    } else {
-      const fitttingCompleteToSave = updateObject(fittingToSave, { customer: props.customerId });
-      props.saveFitting(fitttingCompleteToSave);
+    saveArrayObject('fittings', fittingFields, fittingToSave);
+  };
+  const saveOrCreateAddress = addressToSave => {
+    if (!addressToSave.id) {
+      setNewAddress(createEmptyModelWithDefaultFields(customerAddressFields));
     }
+    saveArrayObject('addresses', customerAddressFields, addressToSave);
+  };
+  const saveOrCreatePhone = phoneToSave => {
+    if (!phoneToSave.id) {
+      setNewPhone(createEmptyModelWithDefaultFields(customerPhoneFields));
+    }
+    saveArrayObject('phoneNumbers', customerPhoneFields, phoneToSave);
   };
   const moveFittingToEdit = fittingToEdit => {
     if (fittingToEdit) setFitting(fittingToEdit);
   };
+  const deleteFitting = idToDelete => removeItemFromArrayObject('fittings', idToDelete);
+  const deleteAddress = idToDelete => removeItemFromArrayObject('addresses', idToDelete);
+  const deletePhone = idToDelete => removeItemFromArrayObject('phoneNumbers', idToDelete);
+
   const deleteFittingBeingEdited = () => {
     if (fitting.id) {
       deleteFitting(fitting.id);
-    } else {
-      setFitting(createEmptyModelWithDefaultFields(fittingFields));
     }
+    setFitting(emptyFitting);
   };
   const saveOrCreateCustomer = customer => {
     if (customer.id) {
@@ -84,10 +117,6 @@ const CustomerEdit = props => {
     },
   ];
   const {
-    addresses,
-    phones,
-    customers,
-    fittings,
     notes,
     frames,
     bikes,
@@ -98,24 +127,25 @@ const CustomerEdit = props => {
     isLoading,
     customerId,
     deleteNote,
-    addCustomerPhone,
-    deleteCustomerPhone,
-    saveCustomerPhone,
-    addCustomerAddress,
-    saveCustomerAddress,
-    deleteCustomerAddress,
     getQuote,
     archiveQuote,
     unarchiveQuote,
     getQuoteToCopy,
-    deleteFitting,
   } = props;
-  const customer = findObjectWithId(customers, customerId) || {};
-  const customer_key = getModelKey(customer);
+  const { fittings, addresses, phones } = customer;
+  const customerKey = getModelKey(customer);
   const notesToView = notes ? notes.filter(note => seeAllNotes || !note.quote) : [];
   return (
     <div id="customer-edit">
-      <h2>Customer</h2>
+      <div className="row">
+        <h2>Customer</h2>
+        <EditModelButtons
+          deleteModel={deleteCustomer}
+          model={customer}
+          resetChanges={resetCustomer}
+          saveModel={saveOrCreateCustomer}
+        />
+      </div>
       <section className="row">
         <div>
           <div className="row">
@@ -125,29 +155,25 @@ const CustomerEdit = props => {
               pageMode
               actionsRequired
               showReadOnlyFields
-              modelSave={saveOrCreateCustomer}
-              modelDelete={deleteCustomer}
-              componentKey={customer_key}
+              componentKey={customerKey}
               sourceDataArrays={{ users }}
               key="customerEdit"
               data-test="edit-customer"
               className="fit-content"
             />
-            {customerId && (
-              <EditModel
-                model={fitting}
-                modelFields={fittingFields}
-                pageMode
-                actionsRequired
-                showReadOnlyFields
-                modelSave={saveOrCreateFitting}
-                modelDelete={deleteFittingBeingEdited}
-                componentKey={getModelKey(fitting)}
-                data-test="edit-fitting"
-                className="fit-content"
-                key={`edit_fitting_${getModelKey(fitting)}`}
-              />
-            )}
+            <EditModel
+              model={fitting}
+              modelFields={fittingFields}
+              pageMode
+              actionsRequired
+              showReadOnlyFields
+              modelSave={saveOrCreateFitting}
+              modelDelete={deleteFittingBeingEdited}
+              componentKey={getModelKey(fitting)}
+              data-test="edit-fitting"
+              className="fit-content"
+              key={`edit_fitting_${getModelKey(fitting)}`}
+            />
             {fittings && fittings.length > 0 && (
               <ModelTable
                 viewMode
@@ -155,34 +181,29 @@ const CustomerEdit = props => {
                 modelFields={fittingFields}
                 blockIdentity={'fittings'}
                 actionsRequired
-                sourceDataArrays={{ users }}
                 modelDelete={deleteFitting}
                 additionalActionsRequired={additionalFittingActions}
+                data-test="fitting-table"
               />
             )}
           </div>
-          {customerId && (
-            <div className="grid-container">
-              <CustomerAddressGrid
-                deleteCustomerAddress={deleteCustomerAddress}
-                saveCustomerAddress={saveCustomerAddress}
-                addCustomerAddress={addCustomerAddress}
-                addresses={addresses}
-                users={users}
-                customerId={customerId}
-                data-test="edit-customer-addresses"
-              />
-              <CustomerPhoneGrid
-                deleteCustomerPhone={deleteCustomerPhone}
-                saveCustomerPhone={saveCustomerPhone}
-                addCustomerPhone={addCustomerPhone}
-                customerId={customerId}
-                phones={phones}
-                users={users}
-                data-test="edit-customer-phones"
-              />
-            </div>
-          )}
+
+          <div className="grid-container">
+            <CustomerAddressGrid
+              deleteCustomerAddress={deleteAddress}
+              saveCustomerAddress={saveOrCreateAddress}
+              addresses={addresses}
+              newAddress={newAddress}
+              data-test="edit-customer-addresses"
+            />
+            <CustomerPhoneGrid
+              deleteCustomerPhone={deletePhone}
+              saveCustomerPhone={saveOrCreatePhone}
+              phones={phones}
+              newPhone={newPhone}
+              data-test="edit-customer-phones"
+            />
+          </div>
           {customerId && quotes && doWeHaveObjects(quotes) && (
             <div className="grid-container">
               <QuoteGrid

@@ -1,18 +1,10 @@
 import {
   CUSTOMER,
-  CUSTOMER_ADDRESS_ADD,
-  CUSTOMER_ADDRESS_DELETE,
-  CUSTOMER_ADDRESS_SAVE,
   CUSTOMER_CLEAR_STATE,
   CUSTOMER_CREATE,
   CUSTOMER_DELETE,
   CUSTOMER_LIST,
   CUSTOMER_PAGE,
-  CUSTOMER_PHONE_ADD,
-  CUSTOMER_PHONE_DELETE,
-  CUSTOMER_PHONE_SAVE,
-  FITTING_DELETE,
-  FITTING_SAVE,
   CUSTOMER_SAVE,
 } from '../actions/customer';
 import { CHANGE_ROUTE, CLEAR_ALL_STATE } from '../actions/application';
@@ -25,6 +17,7 @@ import {
 } from '../../helpers/utils';
 import { FIND_QUOTES } from '../actions/quote';
 import { CUSTOMER_URL } from '../../components/menus/helpers/menu';
+import { customerListToFrontEndFormat, customerToFrontEndFormat } from '../helpers/customer';
 
 const initialState = {
   isLoading: false,
@@ -55,12 +48,6 @@ const customer = (state = initialState, action) => {
 
     case CUSTOMER_PAGE:
     case `${CUSTOMER_DELETE}_REQUESTED`:
-    case `${CUSTOMER_ADDRESS_DELETE}_REQUEST`:
-    case `${CUSTOMER_PHONE_DELETE}_REQUEST`:
-    case `${CUSTOMER_PHONE_SAVE}_REQUEST`:
-    case `${CUSTOMER_ADDRESS_SAVE}_REQUEST`:
-    case `${FITTING_DELETE}_REQUEST`:
-    case `${FITTING_SAVE}_REQUEST`:
       return {
         ...state,
         isLoading: true,
@@ -116,51 +103,15 @@ const customer = (state = initialState, action) => {
     case `${CUSTOMER_SAVE}_ERROR`:
     case `${CUSTOMER_CREATE}_ERROR`:
     case `${CUSTOMER_DELETE}_ERROR`:
-    case `${CUSTOMER_PHONE_DELETE}_ERROR`:
-    case `${CUSTOMER_ADDRESS_DELETE}_ERROR`:
-    case `${FITTING_DELETE}_ERROR`:
-    case `${FITTING_SAVE}_ERROR`:
     case USER_NOT_VALIDATED:
       return {
         ...state,
         isLoading: false,
       };
-    case CUSTOMER_PHONE_ADD:
-      return {
-        ...state,
-        isLoading: false,
-        phones: updateObjectInArray(state.phones, action.payload.customerPhone),
-      };
-    case CUSTOMER_ADDRESS_ADD:
-      return {
-        ...state,
-        isLoading: false,
-        addresses: updateObjectInArray(state.addresses, action.payload.customerAddress),
-      };
-    case `${CUSTOMER_ADDRESS_SAVE}_ERROR`:
-      const addressWithError = updateObjectWithApiErrors(
-        action.payload.customerAddress,
-        action.payload,
-      );
-      return {
-        ...state,
-        isLoading: false,
-        addresses: updateObjectInArray(state.addresses, addressWithError),
-      };
-    case `${CUSTOMER_PHONE_SAVE}_ERROR`:
-      const phoneWithError = updateObjectWithApiErrors(
-        action.payload.customerPhone,
-        action.payload,
-      );
-      return {
-        ...state,
-        isLoading: false,
-        phones: updateObjectInArray(state.phones, phoneWithError),
-      };
     case CUSTOMER_LIST:
       return {
         ...state,
-        customers: action.payload.customers,
+        customers: customerListToFrontEndFormat(action.payload.customers),
         count: action.payload.count,
         previous: action.payload.previous,
         next: action.payload.next,
@@ -171,10 +122,9 @@ const customer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         customerId: action.payload.customer.id,
-        customers: addItemsToArray(state.customers, [action.payload.customer]),
-        addresses: action.payload.addresses,
-        phones: action.payload.phones,
-        fittings: action.payload.fittings,
+        customers: addItemsToArray(state.customers, [
+          customerToFrontEndFormat(action.payload.customer),
+        ]),
       };
     case CUSTOMER_CREATE:
     case CUSTOMER_SAVE:
@@ -182,7 +132,9 @@ const customer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         customerId: action.payload.customer.id,
-        customers: addItemsToArray(state.customers, [action.payload.customer]),
+        customers: addItemsToArray(state.customers, [
+          customerToFrontEndFormat(action.payload.customer),
+        ]),
       };
     case CUSTOMER_DELETE:
       return {
@@ -191,25 +143,10 @@ const customer = (state = initialState, action) => {
         customers: removeItemFromArray(state.customers, action.payload.customerId),
         customerId: undefined,
       };
-    case CUSTOMER_PHONE_DELETE:
-    case CUSTOMER_PHONE_SAVE:
-      return {
-        ...state,
-        isLoading: false,
-        phones: action.payload,
-      };
-
-    case CUSTOMER_ADDRESS_DELETE:
-    case CUSTOMER_ADDRESS_SAVE:
-      return {
-        ...state,
-        isLoading: false,
-        addresses: action.payload,
-      };
     case `${FIND_QUOTES}_OK`:
       return {
         ...state,
-        customers: action.payload.customers,
+        customers: quoteToFrontEndFormat(action.payload.customers),
         count: 0,
         previous: '',
         next: '',
@@ -218,13 +155,6 @@ const customer = (state = initialState, action) => {
           lastName: '',
           email: '',
         },
-      };
-    case FITTING_DELETE:
-    case FITTING_SAVE:
-      return {
-        ...state,
-        isLoading: false,
-        fittings: action.payload,
       };
     default:
       return state;

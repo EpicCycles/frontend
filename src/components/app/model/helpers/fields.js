@@ -488,17 +488,9 @@ export const customerAddressFields = [
   COUNTRY_FIELD,
   POSTCODE_FIELD,
   BILLING_FIELD,
-  ADD_DATE_FIELD,
-  UPD_DATE_FIELD,
 ];
 
-export const customerPhoneFields = [
-  NUMBER_TYPE_FIELD,
-  TELEPHONE_FIELD,
-  PREFERRED_FIELD,
-  ADD_DATE_FIELD,
-  UPD_DATE_FIELD,
-];
+export const customerPhoneFields = [NUMBER_TYPE_FIELD, TELEPHONE_FIELD, PREFERRED_FIELD];
 
 export const frameFields = [BRAND, FRAME_NAME];
 

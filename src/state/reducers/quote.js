@@ -3,30 +3,20 @@ import {
   ARCHIVE_QUOTE,
   CHANGE_QUOTE,
   CLEAR_QUOTE_DATA,
-  COPY_QUOTE,
   CREATE_QUOTE,
-  DELETE_QUOTE_ANSWER,
-  DELETE_QUOTE_CHARGE,
-  DELETE_QUOTE_PART,
   FIND_QUOTES,
   GET_QUOTE,
   GET_QUOTE_TO_COPY,
   ISSUE_QUOTE,
   ORDER_QUOTE,
-  SAVE_QUOTE_ANSWER,
-  SAVE_QUOTE_CHARGE,
-  SAVE_QUOTE_PART,
   UNARCHIVE_QUOTE,
   UPDATE_QUOTE,
 } from '../actions/quote';
 import { CLEAR_ALL_STATE } from '../actions/application';
 import { CUSTOMER } from '../actions/customer';
-import {
-  removeItemFromArray,
-  updateObjectInArray,
-  updateObjectWithApiErrors,
-} from '../../helpers/utils';
+import { updateObjectInArray, updateObjectWithApiErrors } from '../../helpers/utils';
 import { getModelKey } from '../../components/app/model/helpers/model';
+import { quoteListToFrontEndFormat } from '../helpers/quote';
 
 const initialState = {};
 
@@ -41,56 +31,8 @@ const quote = (state = initialState, action) => {
         ...state,
         quoteId: action.payload.quoteId,
       };
-    case `${SAVE_QUOTE_PART}_OK`:
-      return {
-        ...state,
-        quoteParts: updateObjectInArray(
-          state.quoteParts,
-          action.payload.quotePart,
-          action.payload.existingKey,
-        ),
-        isLoading: false,
-      };
-    case `${DELETE_QUOTE_PART}_OK`:
-      return {
-        ...state,
-        quoteParts: removeItemFromArray(state.quoteParts, action.payload.quotePartId),
-        isLoading: false,
-      };
-    case `${SAVE_QUOTE_CHARGE}_OK`:
-      return {
-        ...state,
-        quoteCharges: updateObjectInArray(
-          state.quoteCharges,
-          action.payload.quoteCharge,
-          action.payload.existingKey,
-        ),
-        isLoading: false,
-      };
-    case `${SAVE_QUOTE_ANSWER}_OK`:
-      return {
-        ...state,
-        quoteAnswers: updateObjectInArray(
-          state.quoteAnswers,
-          action.payload.quoteAnswer,
-          action.payload.existingKey,
-        ),
-        isLoading: false,
-      };
-    case `${DELETE_QUOTE_CHARGE}_OK`:
-      return {
-        ...state,
-        quoteCharges: removeItemFromArray(state.quoteCharges, action.payload.quoteChargeId),
-        isLoading: false,
-      };
-    case `${DELETE_QUOTE_ANSWER}_OK`:
-      return {
-        ...state,
-        quoteAnswers: removeItemFromArray(state.quoteAnswers, action.payload.quoteAnswerId),
-        isLoading: false,
-      };
+
     case `${CREATE_QUOTE}_OK`:
-    case `${COPY_QUOTE}_OK`:
     case `${GET_QUOTE}_OK`:
     case `${GET_QUOTE_TO_COPY}_OK`:
     case `${UPDATE_QUOTE}_OK`:
@@ -98,10 +40,7 @@ const quote = (state = initialState, action) => {
       return {
         ...state,
         quoteId: action.payload.quoteId,
-        quotes: action.payload.quotes,
-        quoteParts: action.payload.quoteParts,
-        quoteAnswers: action.payload.quoteAnswers,
-        quoteCharges: action.payload.quoteCharges,
+        quotes: quoteListToFrontEndFormat(action.payload.quotes),
         isLoading: false,
       };
     case `${ARCHIVE_QUOTE}_OK`:
@@ -110,18 +49,17 @@ const quote = (state = initialState, action) => {
     case `${UNARCHIVE_QUOTE}_OK`:
       return {
         ...state,
-        quotes: updateObjectInArray(state.quotes, action.payload),
+        quotes: updateObjectInArray(state.quotes, quoteToFrontEndFormat(action.payload)),
         quoteId: getModelKey(action.payload),
         isLoading: false,
       };
     case CUSTOMER:
       return {
         ...state,
-        quotes: action.payload.quotes,
+        quotes: quoteListToFrontEndFormat(action.payload.quotes),
         isLoading: false,
       };
     case `${CREATE_QUOTE}_REQUESTED`:
-    case `${COPY_QUOTE}_REQUESTED`:
     case `${FIND_QUOTES}_REQUESTED`:
     case `${GET_QUOTE}_REQUESTED`:
     case `${GET_QUOTE_TO_COPY}_REQUESTED`:
@@ -130,27 +68,17 @@ const quote = (state = initialState, action) => {
     case `${ISSUE_QUOTE}_REQUESTED`:
     case `${ORDER_QUOTE}_REQUESTED`:
     case `${UNARCHIVE_QUOTE}_REQUESTED`:
-    case `${SAVE_QUOTE_PART}_REQUESTED`:
-    case `${DELETE_QUOTE_PART}_REQUESTED`:
-    case `${SAVE_QUOTE_ANSWER}_REQUESTED`:
-    case `${DELETE_QUOTE_ANSWER}_REQUESTED`:
-    case `${SAVE_QUOTE_CHARGE}_REQUESTED`:
-    case `${DELETE_QUOTE_CHARGE}_REQUESTED`:
       return {
         ...state,
         isLoading: true,
       };
     case `${CREATE_QUOTE}_ERROR`:
-    case `${COPY_QUOTE}_ERROR`:
     case `${FIND_QUOTES}_ERROR`:
     case `${GET_QUOTE}_ERROR`:
     case `${GET_QUOTE_TO_COPY}_ERROR`:
     case `${ARCHIVE_QUOTE}_ERROR`:
     case `${ORDER_QUOTE}_ERROR`:
     case `${UNARCHIVE_QUOTE}_ERROR`:
-    case `${DELETE_QUOTE_PART}_ERROR`:
-    case `${DELETE_QUOTE_ANSWER}_ERROR`:
-    case `${DELETE_QUOTE_CHARGE}_ERROR`:
       return {
         ...state,
         isLoading: false,
@@ -162,36 +90,7 @@ const quote = (state = initialState, action) => {
         isLoading: false,
         quotes: updateObjectInArray(state.quotes, quoteWithError),
       };
-    case `${SAVE_QUOTE_PART}_ERROR`:
-      const quotePartWithErrors = updateObjectWithApiErrors(
-        action.payload.quotePart,
-        action.payload,
-      );
-      return {
-        ...state,
-        isLoading: false,
-        quoteParts: updateObjectInArray(state.quoteParts, quotePartWithErrors),
-      };
-    case `${SAVE_QUOTE_CHARGE}_ERROR`:
-      const quoteChargeWithErrors = updateObjectWithApiErrors(
-        action.payload.quoteCharge,
-        action.payload,
-      );
-      return {
-        ...state,
-        isLoading: false,
-        quoteCharges: updateObjectInArray(state.quoteCharges, quoteChargeWithErrors),
-      };
-    case `${SAVE_QUOTE_ANSWER}_ERROR`:
-      const quoteAnswerWithErrors = updateObjectWithApiErrors(
-        action.payload.quoteAnswer,
-        action.payload,
-      );
-      return {
-        ...state,
-        isLoading: false,
-        quoteAnswers: updateObjectInArray(state.quoteAnswers, quoteAnswerWithErrors),
-      };
+
     default:
       return state;
   }

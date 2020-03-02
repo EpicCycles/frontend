@@ -1,12 +1,12 @@
-import history from '../../history';
+import history from '../../../history';
 import { runSaga } from '@redux-saga/core';
-import { USER_LOGOUT } from '../actions/user';
-import { LOGIN_URL } from '../../components/menus/helpers/menu';
-import { CLEAR_ALL_STATE } from '../actions/application';
-import { changePassword } from './user';
+import { USER_LOGOUT } from '../../actions/user';
+import { LOGIN_URL } from '../../../components/menus/helpers/menu';
+import { CLEAR_ALL_STATE } from '../../actions/application';
+import { changePassword } from '../user';
 
-jest.mock('./apis/user');
-const { changePasswordApi } = require('./apis/user');
+jest.mock('../apis/user');
+const { changePasswordApi } = require('../apis/user');
 
 describe('user.changePassword saga', () => {
   const action = {

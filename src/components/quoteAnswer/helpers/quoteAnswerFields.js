@@ -30,3 +30,4 @@ const ANSWER_FIELD = {
 };
 const PRICE_READONLY = updateObject(PRICE_FIELD, { readOnly: true, required: false });
 export const quoteAnswerFields = [QUESTION_TEXT_FIELD, ANSWER_FIELD, PRICE_READONLY];
+export const quoteAnswerDataFields = [{ fieldName: 'question' }, { fieldName: 'answer' }];

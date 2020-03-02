@@ -26,27 +26,14 @@ describe('quoteSummaryElements', () => {
     { id: 1, charge_name: 'Charge 1' },
   ];
   it('should return an empty array when no data exists', () => {
-    const quoteParts = [];
     const parts = [];
     const brands = [];
-    const quoteCharges = [];
     const charges = [];
     const showPrices = false;
     const customerView = false;
     const expectedResults = [];
     expect(
-      quoteSummaryElements(
-        {},
-        sections,
-        [],
-        quoteParts,
-        parts,
-        brands,
-        quoteCharges,
-        charges,
-        showPrices,
-        customerView,
-      ),
+      quoteSummaryElements({}, sections, [], parts, brands, charges, showPrices, customerView),
     ).toEqual(expectedResults);
   });
   it('should return customer visible bike parts when that is all there is', () => {
@@ -55,13 +42,11 @@ describe('quoteSummaryElements', () => {
       { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
       { id: 2, partType: 21, partName: 'Brand 5 visible' },
     ];
-    const quoteParts = [];
     const parts = [
       { id: 1, partType: 1, brand: 5, part_name: 'Not visible' },
       { id: 2, partType: 21, brand: 5, part_name: 'visible' },
     ];
     const brands = sampleBrands;
-    const quoteCharges = [];
     const showPrices = false;
     const customerView = true;
     const expectedResults = [
@@ -77,10 +62,8 @@ describe('quoteSummaryElements', () => {
         quote,
         sections,
         bikeParts,
-        quoteParts,
         parts,
         brands,
-        quoteCharges,
         charges,
         showPrices,
         customerView,
@@ -94,14 +77,12 @@ describe('quoteSummaryElements', () => {
       { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
       { id: 2, partType: 21, partName: 'Brand 5 visible' },
     ];
-    const quoteParts = [];
     const parts = [
       { id: 1, partType: 1, brand: 5, part_name: 'Not visible' },
       { id: 2, partType: 21, brand: 5, part_name: 'visible' },
       { id: 3, partType: 2, brand: 5, part_name: 'Not visible 2' },
     ];
     const brands = sampleBrands;
-    const quoteCharges = [];
     const showPrices = false;
     const customerView = false;
     const expectedResults = [
@@ -129,10 +110,8 @@ describe('quoteSummaryElements', () => {
         quote,
         sections,
         bikeParts,
-        quoteParts,
         parts,
         brands,
-        quoteCharges,
         charges,
         showPrices,
         customerView,
@@ -140,22 +119,25 @@ describe('quoteSummaryElements', () => {
     ).toEqual(expectedResults);
   });
   it('should show additional quote parts when they exist', () => {
-    const quote = { id: 32, bike: 52 };
+    const quote = {
+      id: 32,
+      bike: 52,
+      parts: [
+        {
+          id: 321,
+          quote: 32,
+          partType: 2,
+          part: 121,
+          quantity: 2,
+          part_price: 120.0,
+          total_price: 240.0,
+        },
+      ],
+    };
     const bikeParts = [
       { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
       { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
       { id: 2, partType: 21, partName: 'Brand 5 visible' },
-    ];
-    const quoteParts = [
-      {
-        id: 321,
-        quote: 32,
-        partType: 2,
-        part: 121,
-        quantity: 2,
-        part_price: 120.0,
-        total_price: 240.0,
-      },
     ];
 
     const parts = [
@@ -165,7 +147,6 @@ describe('quoteSummaryElements', () => {
       { id: 121, partType: 2, brand: 5, part_name: 'alternate' },
     ];
     const brands = sampleBrands;
-    const quoteCharges = [];
     const showPrices = false;
     const customerView = false;
     const expectedResults = [
@@ -207,10 +188,8 @@ describe('quoteSummaryElements', () => {
         quote,
         sections,
         bikeParts,
-        quoteParts,
         parts,
         brands,
-        quoteCharges,
         charges,
         showPrices,
         customerView,
@@ -218,34 +197,36 @@ describe('quoteSummaryElements', () => {
     ).toEqual(expectedResults);
   });
   it('should show additional quote parts when they exist as fixed price', () => {
-    const quote = { id: 32, bike: 52 };
+    const quote = {
+      id: 32,
+      bike: 52,
+      parts: [
+        {
+          id: 321,
+          quote: 32,
+          partType: 2,
+          part: 121,
+          quantity: 2,
+          part_price: 120.0,
+          total_price: 240.0,
+        },
+        {
+          id: 322,
+          quote: 32,
+          partType: 2,
+          part: 122,
+          quantity: 2,
+          part_price: 120.0,
+          total_price: 240.0,
+          fixed_price: true,
+        },
+      ],
+    };
     const bikeParts = [
       { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
       { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
       { id: 2, partType: 21, partName: 'Brand 5 visible' },
     ];
-    const quoteParts = [
-      {
-        id: 321,
-        quote: 32,
-        partType: 2,
-        part: 121,
-        quantity: 2,
-        part_price: 120.0,
-        total_price: 240.0,
-      },
-      {
-        id: 322,
-        quote: 32,
-        partType: 2,
-        part: 122,
-        quantity: 2,
-        part_price: 120.0,
-        total_price: 240.0,
-        fixed_price: true,
-      },
-    ];
-
     const parts = [
       { id: 1, partType: 1, brand: 5, part_name: 'Not visible' },
       { id: 2, partType: 21, brand: 5, part_name: 'visible' },
@@ -254,7 +235,6 @@ describe('quoteSummaryElements', () => {
       { id: 122, partType: 2, brand: 5, part_name: 'fixed' },
     ];
     const brands = sampleBrands;
-    const quoteCharges = [];
     const showPrices = false;
     const customerView = false;
     const expectedResults = [
@@ -310,10 +290,8 @@ describe('quoteSummaryElements', () => {
         quote,
         sections,
         bikeParts,
-        quoteParts,
         parts,
         brands,
-        quoteCharges,
         charges,
         showPrices,
         customerView,
@@ -321,32 +299,35 @@ describe('quoteSummaryElements', () => {
     ).toEqual(expectedResults);
   });
   it('should show additional parts separately when fixed price on customer view', () => {
-    const quote = { id: 32, bike: 52 };
+    const quote = {
+      id: 32,
+      bike: 52,
+      parts: [
+        {
+          id: 321,
+          quote: 32,
+          partType: 2,
+          part: 121,
+          quantity: 2,
+          part_price: 120.0,
+          total_price: 240.0,
+        },
+        {
+          id: 322,
+          quote: 32,
+          partType: 2,
+          part: 122,
+          quantity: 2,
+          part_price: 120.0,
+          total_price: 240.0,
+          fixed_price: true,
+        },
+      ],
+    };
     const bikeParts = [
       { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
       { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
       { id: 2, partType: 21, partName: 'Brand 5 visible' },
-    ];
-    const quoteParts = [
-      {
-        id: 321,
-        quote: 32,
-        partType: 2,
-        part: 121,
-        quantity: 2,
-        part_price: 120.0,
-        total_price: 240.0,
-      },
-      {
-        id: 322,
-        quote: 32,
-        partType: 2,
-        part: 122,
-        quantity: 2,
-        part_price: 120.0,
-        total_price: 240.0,
-        fixed_price: true,
-      },
     ];
 
     const parts = [
@@ -357,7 +338,6 @@ describe('quoteSummaryElements', () => {
       { id: 122, partType: 2, brand: 5, part_name: 'fixed' },
     ];
     const brands = sampleBrands;
-    const quoteCharges = [];
     const showPrices = false;
     const customerView = true;
     const expectedResults = [
@@ -402,10 +382,8 @@ describe('quoteSummaryElements', () => {
         quote,
         sections,
         bikeParts,
-        quoteParts,
         parts,
         brands,
-        quoteCharges,
         charges,
         showPrices,
         customerView,
@@ -413,7 +391,23 @@ describe('quoteSummaryElements', () => {
     ).toEqual(expectedResults);
   });
   it('should show alternative quote parts when they exist', () => {
-    const quote = { id: 32, bike: 52 };
+    const quote = {
+      id: 32,
+      bike: 52,
+      parts: [
+        {
+          id: 321,
+          quote: 32,
+          not_required: true,
+          trade_in_price: 12,
+          partType: 2,
+          part: 121,
+          quantity: 2,
+          part_price: 120.0,
+          total_price: 240.0,
+        },
+      ],
+    };
     const bikeParts = [
       { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
       { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
@@ -426,21 +420,7 @@ describe('quoteSummaryElements', () => {
       { id: 121, partType: 2, brand: 5, part_name: 'alternate' },
     ];
 
-    const quoteParts = [
-      {
-        id: 321,
-        quote: 32,
-        not_required: true,
-        trade_in_price: 12,
-        partType: 2,
-        part: 121,
-        quantity: 2,
-        part_price: 120.0,
-        total_price: 240.0,
-      },
-    ];
     const brands = sampleBrands;
-    const quoteCharges = [];
     const charges = [];
     const showPrices = true;
     const customerView = false;
@@ -478,10 +458,8 @@ describe('quoteSummaryElements', () => {
         quote,
         sections,
         bikeParts,
-        quoteParts,
         parts,
         brands,
-        quoteCharges,
         charges,
         showPrices,
         customerView,
@@ -489,7 +467,24 @@ describe('quoteSummaryElements', () => {
     ).toEqual(expectedResults);
   });
   it('should show alternative quote parts when they exist as fixed', () => {
-    const quote = { id: 32, bike: 52 };
+    const quote = {
+      id: 32,
+      bike: 52,
+      parts: [
+        {
+          id: 321,
+          quote: 32,
+          not_required: true,
+          fixed_price: true,
+          trade_in_price: 12,
+          partType: 2,
+          part: 121,
+          quantity: 2,
+          part_price: 120.0,
+          total_price: 240.0,
+        },
+      ],
+    };
     const bikeParts = [
       { id: 1, partType: 1, partName: 'Brand 5 Not visible' },
       { id: 3, partType: 2, partName: 'Brand 5 Not visible 2' },
@@ -502,22 +497,7 @@ describe('quoteSummaryElements', () => {
       { id: 121, partType: 2, brand: 5, part_name: 'alternate' },
     ];
 
-    const quoteParts = [
-      {
-        id: 321,
-        quote: 32,
-        not_required: true,
-        fixed_price: true,
-        trade_in_price: 12,
-        partType: 2,
-        part: 121,
-        quantity: 2,
-        part_price: 120.0,
-        total_price: 240.0,
-      },
-    ];
     const brands = sampleBrands;
-    const quoteCharges = [];
     const showPrices = true;
     const customerView = false;
     const expectedResults = [
@@ -555,10 +535,8 @@ describe('quoteSummaryElements', () => {
         quote,
         sections,
         bikeParts,
-        quoteParts,
         parts,
         brands,
-        quoteCharges,
         charges,
         showPrices,
         customerView,
@@ -566,7 +544,26 @@ describe('quoteSummaryElements', () => {
     ).toEqual(expectedResults);
   });
   it('should show a non bike quote when there are parts', () => {
-    const quote = { id: 32 };
+    const quote = {
+      id: 32,
+      parts: [
+        {
+          id: 321,
+          quote: 32,
+          fixed_price: true,
+          trade_in_price: 12,
+          partType: 2,
+          part: 121,
+          quantity: 2,
+          part_price: 120.0,
+          total_price: 240.0,
+        },
+      ],
+      charges: [
+        { id: 1, quote: 32, charge: 1, price: 400 },
+        { id: 3, quote: 32, charge: 21, price: 150 },
+      ],
+    };
     const bikeParts = [];
     const parts = [
       { id: 1, partType: 1, brand: 5, part_name: 'Not visible' },
@@ -575,25 +572,7 @@ describe('quoteSummaryElements', () => {
       { id: 121, partType: 2, brand: 5, part_name: 'alternate' },
     ];
 
-    const quoteParts = [
-      {
-        id: 321,
-        quote: 32,
-        fixed_price: true,
-        trade_in_price: 12,
-        partType: 2,
-        part: 121,
-        quantity: 2,
-        part_price: 120.0,
-        total_price: 240.0,
-      },
-    ];
     const brands = sampleBrands;
-    const quoteCharges = [
-      { id: 1, quote: 32, charge: 1, price: 400 },
-      { id: 2, quote: 33, charge: 1, price: 123 },
-      { id: 3, quote: 32, charge: 21, price: 150 },
-    ];
     const showPrices = true;
     const customerView = true;
     const expectedResults = [
@@ -627,10 +606,8 @@ describe('quoteSummaryElements', () => {
         quote,
         sections,
         bikeParts,
-        quoteParts,
         parts,
         brands,
-        quoteCharges,
         charges,
         showPrices,
         customerView,

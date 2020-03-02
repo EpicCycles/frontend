@@ -8,7 +8,7 @@ export const fittingText = fitting => {
   fittingFields.forEach(field => {
     if (!field.readOnly) {
       const fieldValue = fitting[field.fieldName] ? fitting[field.fieldName] : 'Unknown';
-      if (field.fieldName === 'fitting_type') {
+      if (field.fieldName === 'type') {
         valuesToShow.push(`(${getFittingType(fieldValue)})`);
       } else {
         valuesToShow.push(` ${field.header}: ${fieldValue}`);

@@ -19,13 +19,10 @@ describe('QuoteDetail', () => {
     const component = shallow(
       <QuoteDetail
         quote={{ id: 1, quote_status: QUOTE_INITIAL }}
-        quoteParts={[]}
-        quoteCharges={[]}
         brands={[]}
         charges={[]}
         sections={sections}
         parts={[]}
-        bikeParts={[]}
         bikes={[]}
       />,
     );
@@ -47,16 +44,14 @@ describe('QuoteDetail', () => {
   it('should render headers and detail when there is part type data', () => {
     const component = shallow(
       <QuoteDetail
-        quote={{ id: 1, quote_status: QUOTE_INITIAL }}
-        quoteParts={[
-          { quote: 1, partType: 1 },
-          { quote: 2, partType: 1 },
-        ]}
-        quoteCharges={[]}
+        quote={{
+          id: 1,
+          quote_status: QUOTE_INITIAL,
+          quoteParts: [{ partType: 1 }, { quote: 2, partType: 1 }],
+        }}
         brands={[]}
         sections={sections}
         parts={[]}
-        bikeParts={[]}
         bikes={[]}
       />,
     );
@@ -64,7 +59,7 @@ describe('QuoteDetail', () => {
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);
     assertComponentHasExpectedProps(partData, {
-      quoteParts: [{ quote: 1, partType: 1 }],
+      quoteParts: [{ partType: 1 }],
       bikeParts: [],
       bikes: [],
     });
@@ -72,12 +67,11 @@ describe('QuoteDetail', () => {
   it('should render headers and all section detail when there is part type data', () => {
     const component = shallow(
       <QuoteDetail
-        quote={{ id: 1, quote_status: QUOTE_INITIAL }}
-        quoteParts={[
-          { quote: 1, partType: 1 },
-          { quote: 1, partType: 22 },
-        ]}
-        quoteCharges={[]}
+        quote={{
+          id: 1,
+          quote_status: QUOTE_INITIAL,
+          quoteParts: [{ partType: 1 }, { partType: 22 }],
+        }}
         brands={[]}
         sections={sections}
         parts={[]}
@@ -90,33 +84,25 @@ describe('QuoteDetail', () => {
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);
     assertComponentHasExpectedProps(partData, {
-      quoteParts: [
-        { quote: 1, partType: 1 },
-        { quote: 1, partType: 22 },
-      ],
+      quoteParts: [{ partType: 1 }, { partType: 22 }],
       bikeParts: [],
     });
   });
   it('should render bike parts and section details when a bike is present on quote', () => {
     const component = shallow(
       <QuoteDetail
-        quote={{ id: 1, bike: 58, quote_status: QUOTE_INITIAL }}
-        quoteParts={[
-          { quote: 1, partType: 1 },
-          { quote: 1, partType: 22 },
-        ]}
-        quoteCharges={[]}
+        quote={{
+          id: 1,
+          bike: 58,
+          quote_status: QUOTE_INITIAL,
+          quoteParts: [{ partType: 1 }, { partType: 22 }],
+        }}
         brands={sampleBrands}
         sections={sections}
         parts={[
           { id: 15, partType: 1 },
           { id: 25, partType: 1 },
           { id: 35, partType: 22 },
-        ]}
-        bikeParts={[
-          { bike: 58, part: 15 },
-          { bike: 68, part: 25 },
-          { bike: 58, part: 35 },
         ]}
         bikes={sampleBikes}
         frames={sampleFrames}
@@ -126,36 +112,25 @@ describe('QuoteDetail', () => {
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);
     assertComponentHasExpectedProps(partData, {
-      quoteParts: [
-        { quote: 1, partType: 1 },
-        { quote: 1, partType: 22 },
-      ],
-      bikeParts: [
-        { id: 15, partType: 1 },
-        { id: 35, partType: 22 },
-      ],
+      quoteParts: [{ partType: 1 }, { partType: 22 }],
+      bikeParts: sampleBikes.find(b => b.id === 58).bikeParts,
     });
   });
   it('should render view only when a quote is not new', () => {
     const component = shallow(
       <QuoteDetail
-        quote={{ id: 1, bike: 58, quote_status: QUOTE_ARCHIVED }}
-        quoteParts={[
-          { quote: 1, partType: 1 },
-          { quote: 1, partType: 22 },
-        ]}
-        quoteCharges={[]}
+        quote={{
+          id: 1,
+          bike: 58,
+          quote_status: QUOTE_ARCHIVED,
+          quoteParts: [{ partType: 1 }, { partType: 22 }],
+        }}
         brands={sampleBrands}
         sections={sections}
         parts={[
           { id: 15, partType: 1 },
           { id: 25, partType: 1 },
           { id: 35, partType: 22 },
-        ]}
-        bikeParts={[
-          { bike: 58, part: 15 },
-          { bike: 68, part: 25 },
-          { bike: 58, part: 35 },
         ]}
         bikes={sampleBikes}
         frames={sampleFrames}
@@ -166,14 +141,8 @@ describe('QuoteDetail', () => {
     const partData = component.find('QuoteSummaryParts');
     expect(partData).toHaveLength(1);
     assertComponentHasExpectedProps(partData, {
-      quoteParts: [
-        { quote: 1, partType: 1 },
-        { quote: 1, partType: 22 },
-      ],
-      bikeParts: [
-        { id: 15, partType: 1 },
-        { id: 35, partType: 22 },
-      ],
+      quoteParts: [{ partType: 1 }, { partType: 22 }],
+      bikeParts: sampleBikes.find(b => b.id === 58).bikeParts,
     });
   });
 });

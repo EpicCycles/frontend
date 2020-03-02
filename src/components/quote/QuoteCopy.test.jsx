@@ -2,14 +2,14 @@ import React from 'react';
 import QuoteCopy from './QuoteCopy';
 import { sampleBikes } from '../../helpers/sampleData';
 import { findDataTest } from '../../helpers/jest_helpers/assert';
-
+// TODO mock out copy function and change that it is called and that save is called correctly
 describe('QuoteCopy', () => {
   const customers = [{ id: 1, first_name: 'Fred', last_name: 'Smith' }];
   it('should render with find customer and find bike components', () => {
     const component = shallow(
       <QuoteCopy
         getCustomerList={jest.fn()}
-        copyQuote={jest.fn()}
+        saveQuote={jest.fn()}
         getFrameList={jest.fn()}
         quoteId={2}
         quotes={[{ id: 2, customer: 23, bike: 53 }]}
@@ -26,7 +26,7 @@ describe('QuoteCopy', () => {
     const component = shallow(
       <QuoteCopy
         getCustomerList={jest.fn()}
-        copyQuote={jest.fn()}
+        saveQuote={jest.fn()}
         getFrameList={jest.fn()}
         quoteId={2}
         quotes={[{ id: 2, customer: 23 }]}
@@ -40,11 +40,11 @@ describe('QuoteCopy', () => {
   });
 
   it('should create a new quote with customer when create quote is clicked', () => {
-    const copyQuote = jest.fn();
+    const saveQuote = jest.fn();
     const component = shallow(
       <QuoteCopy
         getCustomerList={jest.fn()}
-        copyQuote={copyQuote}
+        saveQuote={saveQuote}
         getFrameList={jest.fn()}
         bikes={sampleBikes}
         quoteId={2}
@@ -58,17 +58,17 @@ describe('QuoteCopy', () => {
     };
     component.instance().handleInputChange('selectedCustomer', 1);
     findDataTest(component, 'copy-button').simulate('click');
-    expect(copyQuote).toHaveBeenCalledTimes(1);
+    expect(saveQuote).toHaveBeenCalledTimes(1);
 
-    expect(copyQuote.mock.calls[0][0]).toEqual(2);
-    expect(copyQuote.mock.calls[0][1]).toEqual(expect.objectContaining(expectedNewQuote));
+    expect(saveQuote.mock.calls[0][0]).toEqual(2);
+    expect(saveQuote.mock.calls[0][1]).toEqual(expect.objectContaining(expectedNewQuote));
   });
   it('should create a new quote with customer and bike when create quote is clicked', () => {
-    const copyQuote = jest.fn();
+    const saveQuote = jest.fn();
     const component = shallow(
       <QuoteCopy
         getCustomerList={jest.fn()}
-        copyQuote={copyQuote}
+        saveQuote={saveQuote}
         getFrameList={jest.fn()}
         bikes={sampleBikes}
         quoteId={2}
@@ -82,7 +82,7 @@ describe('QuoteCopy', () => {
       bike: 58,
     };
     findDataTest(component, 'copy-button').simulate('click');
-    expect(copyQuote.mock.calls[0][0]).toEqual(2);
-    expect(copyQuote.mock.calls[0][1]).toEqual(expect.objectContaining(expectedNewQuote));
+    expect(saveQuote.mock.calls[0][0]).toEqual(2);
+    expect(saveQuote.mock.calls[0][1]).toEqual(expect.objectContaining(expectedNewQuote));
   });
 });

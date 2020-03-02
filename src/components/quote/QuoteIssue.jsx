@@ -11,10 +11,7 @@ class QuoteIssue extends PureComponent {
     const {
       quotes,
       quoteId,
-      quoteParts,
-      quoteCharges,
       bikes,
-      bikeParts,
       brands,
       charges,
       suppliers,
@@ -25,12 +22,6 @@ class QuoteIssue extends PureComponent {
       supplierProducts,
       frames,
       saveQuote,
-      saveQuoteCharge,
-      saveQuoteChargeOK,
-      deleteQuoteCharge,
-      deleteQuotePart,
-      saveQuotePart,
-      saveQuotePartOK,
       changeRoute,
       addMessage,
       createNote,
@@ -49,9 +40,6 @@ class QuoteIssue extends PureComponent {
         <h2>Issue Quote </h2>
         <QuoteDetail
           quote={quote}
-          quoteParts={quoteParts}
-          quoteCharges={quoteCharges}
-          bikeParts={bikeParts}
           parts={parts}
           supplierProducts={supplierProducts}
           frames={frames}
@@ -62,12 +50,6 @@ class QuoteIssue extends PureComponent {
           suppliers={suppliers}
           sections={sections}
           saveQuote={saveQuote}
-          saveQuotePart={saveQuotePart}
-          saveQuotePartOK={saveQuotePartOK}
-          deleteQuotePart={deleteQuotePart}
-          saveQuoteCharge={saveQuoteCharge}
-          saveQuoteChargeOK={saveQuoteChargeOK}
-          deleteQuoteCharge={deleteQuoteCharge}
           changeRoute={changeRoute}
           users={users}
           createNote={createNote}
@@ -98,10 +80,7 @@ QuoteIssue.defaultProps = {
 QuoteIssue.propTypes = {
   quoteId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   quotes: PropTypes.array.isRequired,
-  quoteParts: PropTypes.array.isRequired,
-  quoteCharges: PropTypes.array.isRequired,
   bikes: PropTypes.array.isRequired,
-  bikeParts: PropTypes.array.isRequired,
   brands: PropTypes.array,
   charges: PropTypes.array,
   suppliers: PropTypes.array,
@@ -112,12 +91,6 @@ QuoteIssue.propTypes = {
   supplierProducts: PropTypes.array.isRequired,
   frames: PropTypes.array.isRequired,
   saveQuote: PropTypes.func.isRequired,
-  saveQuoteCharge: PropTypes.func.isRequired,
-  saveQuoteChargeOK: PropTypes.func.isRequired,
-  deleteQuoteCharge: PropTypes.func.isRequired,
-  deleteQuotePart: PropTypes.func.isRequired,
-  saveQuotePart: PropTypes.func.isRequired,
-  saveQuotePartOK: PropTypes.func.isRequired,
   cloneQuote: PropTypes.func.isRequired,
   changeRoute: PropTypes.func.isRequired,
   createNote: PropTypes.func.isRequired,

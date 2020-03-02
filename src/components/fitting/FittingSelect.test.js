@@ -14,8 +14,8 @@ describe('FittingSelect', () => {
   });
   it('should show a list when fitting data is provided', () => {
     const fittings = [
-      { id: 12, fitting_type: 'C', saddle_height: '55cm', bar_height: '67cm, ', reach: '50cm' },
-      { id: 14, fitting_type: 'C', saddle_height: '55cm', bar_height: '67cm, ', reach: '50cm' },
+      { id: 12, type: 'C', saddle: '55cm', bar: '67cm, ', reach: '50cm' },
+      { id: 14, type: 'C', saddle: '55cm', bar: '67cm, ', reach: '50cm' },
     ];
     const fittingOptions = [
       { value: '12', name: fittingText(fittings[0]) },

@@ -10,8 +10,6 @@ const QuoteSummaryParts = props => {
     showPrices,
     customerView,
     quote,
-    quoteParts,
-    quoteCharges,
     brands,
     charges,
     sections,
@@ -24,10 +22,8 @@ const QuoteSummaryParts = props => {
     quote,
     sections,
     bikeParts,
-    quoteParts,
     parts,
     brands,
-    quoteCharges,
     charges,
     showPrices,
     customerView,
@@ -48,15 +44,12 @@ const QuoteSummaryParts = props => {
 };
 QuoteSummaryParts.defaultProps = {
   charges: [],
-  quoteCharges: [],
 };
 QuoteSummaryParts.propTypes = {
   quote: PropTypes.object.isRequired,
   showPrices: PropTypes.bool,
   customerView: PropTypes.bool,
   lockFirstColumn: PropTypes.bool,
-  quoteParts: PropTypes.array.isRequired,
-  quoteCharges: PropTypes.array,
   brands: PropTypes.array.isRequired,
   charges: PropTypes.array,
   sections: PropTypes.array.isRequired,

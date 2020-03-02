@@ -236,8 +236,8 @@ describe('buildViewString', () => {
   });
   describe('view fitting data', () => {
     const fittings = [
-      { id: 12, fitting_type: 'C', saddle_height: '55cm', bar_height: '67cm, ', reach: '50cm' },
-      { id: 14, fitting_type: 'C', saddle_height: '55cm', bar_height: '67cm, ', reach: '50cm' },
+      { id: 12, type: 'C', saddle: '55cm', bar: '67cm, ', reach: '50cm' },
+      { id: 14, type: 'C', saddle: '55cm', bar: '67cm, ', reach: '50cm' },
     ];
     it('it renders a fitting field that has data that is found', () => {
       const field = {

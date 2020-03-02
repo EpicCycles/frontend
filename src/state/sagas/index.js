@@ -9,16 +9,10 @@ import {
 import {
   watchForCreateCustomer,
   watchForDeleteCustomer,
-  watchForDeleteCustomerAddress,
-  watchForDeleteCustomerPhone,
-  watchForDeleteFitting,
   watchForGetCustomer,
   watchForGetCustomerList,
   watchForGetCustomerListPage,
   watchForSaveCustomer,
-  watchForSaveCustomerAddress,
-  watchForSaveCustomerPhone,
-  watchForSaveFitting,
 } from './customer';
 import {
   watchForCreateNote,
@@ -58,22 +52,15 @@ import {
   watchForUploadParts,
 } from './part';
 import {
-  watchForCopyQuote,
   watchForCreateQuote,
   watchForGetQuote,
   watchForGetQuoteList,
   watchForArchiveQuote,
   watchForSaveQuote,
   watchForUnarchiveQuote,
-  watchForSaveQuotePart,
-  watchForDeleteQuotePart,
   watchForGetQuoteToCopy,
   watchForIssueQuote,
   watchForOrderQuote,
-  watchForDeleteQuoteCharge,
-  watchForSaveQuoteCharge,
-  watchForSaveQuoteAnswer,
-  watchForDeleteQuoteAnswer,
 } from './quote';
 import { watchForChangeRoute } from './application';
 
@@ -93,10 +80,6 @@ export default function* rootSaga() {
     watchForCreateCustomer(),
     watchForDeleteCustomer(),
     watchForSaveCustomer(),
-    watchForDeleteCustomerAddress(),
-    watchForSaveCustomerAddress(),
-    watchForDeleteCustomerPhone(),
-    watchForSaveCustomerPhone(),
     watchForCreateNote(),
     watchForDeleteNote(),
     watchForSaveNote(),
@@ -119,7 +102,6 @@ export default function* rootSaga() {
     watchForUploadParts(),
     watchForGetParts(),
     watchForCreateQuote(),
-    watchForCopyQuote(),
     watchForGetQuoteList(),
     watchForGetQuote(),
     watchForSaveQuote(),
@@ -137,11 +119,5 @@ export default function* rootSaga() {
     watchForDeleteCharge(),
     watchForSaveQuestion(),
     watchForDeleteQuestion(),
-    watchForSaveQuoteAnswer(),
-    watchForDeleteQuoteAnswer(),
-    watchForSaveQuoteCharge(),
-    watchForDeleteQuoteCharge(),
-    watchForSaveFitting(),
-    watchForDeleteFitting(),
   ]);
 }

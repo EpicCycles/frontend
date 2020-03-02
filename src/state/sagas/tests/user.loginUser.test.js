@@ -1,9 +1,9 @@
-import history from '../../history';
+import history from '../../../history';
 import { runSaga } from '@redux-saga/core';
-import { USER_LOGIN, USER_NOT_VALIDATED } from '../actions/user';
-import { loginUser } from './user';
-jest.mock('./apis/user');
-const { loginUserApi } = require('./apis/user');
+import { USER_LOGIN, USER_NOT_VALIDATED } from '../../actions/user';
+import { loginUser } from '../user';
+jest.mock('../apis/user');
+const { loginUserApi } = require('../apis/user');
 
 describe('user loginUser saga', () => {
   const action = {

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getFrameList } from '../../state/actions/bike';
 import { getCustomerList } from '../../state/actions/customer';
-import { copyQuote } from '../../state/actions/quote';
+import { saveQuote } from '../../state/actions/quote';
 import QuoteCopy from '../../components/quote/QuoteCopy';
 import { changeRoute } from '../../state/actions/application';
 
@@ -10,6 +10,7 @@ const mapStateToProps = ({ bike, core, customer, framework, part, quote, user })
     bikes: bike.bikes,
     bikeParts: bike.bikeParts,
     brands: core.brands,
+    charges: core.charges,
     suppliers: core.suppliers,
     sections: framework.sections,
     parts: part.parts,
@@ -38,6 +39,6 @@ const mapDispatchToProps = {
   getFrameList,
   getCustomerList,
   changeRoute,
-  copyQuote,
+  saveQuote,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(QuoteCopy);

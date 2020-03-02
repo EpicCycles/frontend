@@ -45,16 +45,14 @@ export const quoteSummaryElements = (
   quote,
   sections,
   bikeParts,
-  quoteParts,
   parts,
   brands,
-  quoteCharges,
   charges,
   showPrices,
   customerView,
 ) => {
-  const quotePartsForQuote = quoteParts.filter(qp => qp.quote === quote.id);
-  const quoteChargesForQuote = quoteCharges.filter(qp => qp.quote === quote.id);
+  const quotePartsForQuote = quote.parts || [];
+  const quoteChargesForQuote = quote.charges || [];
   let summaryElements = [];
   let fixedElements = [];
   // first show the non fixed elements

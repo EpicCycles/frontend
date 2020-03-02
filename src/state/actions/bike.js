@@ -1,13 +1,10 @@
 export const CLEAR_FRAME = 'bike/CLEAR_FRAME';
 export const GET_BIKE = 'bike/GET_BIKE';
-export const GET_BIKE_PARTS = 'bike/GET_BIKE_PARTS';
 export const BIKE_REVIEW_START = 'bike/BIKE_REVIEW_START';
 export const BIKE_REVIEW_BIKE = 'bike/BIKE_REVIEW_BIKE';
 export const BIKE_DELETE = 'bike/BIKE_DELETE';
 export const BIKE_ADD_PART = 'bike/BIKE_ADD_PART';
 export const BIKE_SAVE = 'bike/BIKE_SAVE';
-export const BIKE_PART_DELETE = 'bike/BIKE_PART_DELETE';
-export const BIKE_PART_SAVE = 'bike/BIKE_PART_SAVE';
 export const FRAME_ARCHIVE = 'bike/FRAME_ARCHIVE';
 export const FRAME_DELETE = 'bike/FRAME_DELETE';
 export const FRAME_SAVE = 'bike/FRAME_SAVE';

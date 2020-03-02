@@ -1,19 +1,22 @@
-import history from '../../history';
+import history from '../../../history';
 import { runSaga } from '@redux-saga/core';
-import { USER_LOGOUT } from '../actions/user';
-import { LOGIN_URL } from '../../components/menus/helpers/menu';
-import { CLEAR_ALL_STATE } from '../actions/application';
-import { logoutUser } from './user';
+import { USER_LOGOUT } from '../../actions/user';
+import { LOGIN_URL } from '../../../components/menus/helpers/menu';
+import { CLEAR_ALL_STATE } from '../../actions/application';
+import { logoutUser } from '../user';
 
-jest.mock('./apis/user');
-const { logoutUserApi } = require('./apis/user');
+jest.mock('../apis/user');
+const { logoutUserApi } = require('../apis/user');
 
 describe('user.logoutUser saga', () => {
   const action = {
     type: `${USER_LOGOUT}_REQUESTED`,
   };
+  const historySpy = jest.spyOn(history, 'push');
+
   afterEach(() => {
     logoutUserApi.mockClear();
+    historySpy.mockClear();
   });
   it('should log user out and redirect to login page when logout succeeds', async () => {
     const dispatched = [];
@@ -21,12 +24,12 @@ describe('user.logoutUser saga', () => {
       dispatch: action => dispatched.push(action),
       getState: () => ({ user: { token: 'existingToken' } }),
     };
-    const historySpy = jest.spyOn(history, 'push');
     logoutUserApi.mockImplementation(() => {
       return {};
     });
     const result = await runSaga(myIO, logoutUser, action);
     expect(logoutUserApi).toHaveBeenCalledWith({ token: 'existingToken' });
+    expect(historySpy).toHaveBeenCalledTimes(1);
     expect(historySpy).toHaveBeenCalledWith(LOGIN_URL);
     expect(dispatched).toEqual([
       {
@@ -43,10 +46,10 @@ describe('user.logoutUser saga', () => {
       dispatch: action => dispatched.push(action),
       getState: () => ({ user: { token: 'existingToken' } }),
     };
-    const historySpy = jest.spyOn(history, 'push');
     logoutUserApi.mockRejectedValue(new Error('the error'));
     const result = await runSaga(myIO, logoutUser, action);
     expect(logoutUserApi).toHaveBeenCalledWith({ token: 'existingToken' });
+    expect(historySpy).toHaveBeenCalledTimes(1);
     expect(historySpy).toHaveBeenCalledWith(LOGIN_URL);
     expect(dispatched).toEqual([
       {
@@ -64,7 +67,6 @@ describe('user.logoutUser saga', () => {
       dispatch: action => dispatched.push(action),
       getState: () => ({ user: {} }),
     };
-    const historySpy = jest.spyOn(history, 'push');
     const result = await runSaga(myIO, logoutUser, action);
     expect(logoutUserApi).not.toHaveBeenCalled();
     expect(historySpy).toHaveBeenCalledWith(LOGIN_URL);

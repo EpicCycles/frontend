@@ -8,7 +8,6 @@ import { quoteFields } from './helpers/quoteFields';
 const QuoteBikes = props => {
   const {
     quotes,
-    quoteParts,
     bikes,
     frames,
     parts,
@@ -24,7 +23,7 @@ const QuoteBikes = props => {
     issueQuote,
     cloneQuote,
   } = props;
-  const bikeQuotes = quotes.filter(quote => !!quote.bike);
+ const bikeQuotes = quotes.filter(quote => !!quote.bike);
   const quoteFieldShown = quoteFields({ fieldExclusions: { customer: true, history: true } });
   return (
     <div className="grid-container">

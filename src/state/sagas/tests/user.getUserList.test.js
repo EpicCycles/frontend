@@ -1,12 +1,12 @@
-import history from '../../history';
+import history from '../../../history';
 import { runSaga } from '@redux-saga/core';
-import { GET_USERS } from '../actions/user';
-import { LOGIN_URL } from '../../components/menus/helpers/menu';
-import { CLEAR_ALL_STATE } from '../actions/application';
-import { getUserList } from './user';
+import { GET_USERS } from '../../actions/user';
+import { LOGIN_URL } from '../../../components/menus/helpers/menu';
+import { CLEAR_ALL_STATE } from '../../actions/application';
+import { getUserList } from '../user';
 
-jest.mock('./apis/user');
-const { getUsersApi } = require('./apis/user');
+jest.mock('../apis/user');
+const { getUsersApi } = require('../apis/user');
 
 describe('user.getUserList saga', () => {
   const action = {

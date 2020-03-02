@@ -5,15 +5,6 @@ export const CUSTOMER_CREATE = 'customer/CUSTOMER_CREATE';
 export const CUSTOMER_SAVE = 'customer/CUSTOMER_SAVE';
 export const CUSTOMER_DELETE = 'customer/CUSTOMER_DELETE';
 export const CUSTOMER_CLEAR_STATE = 'customer/CUSTOMER_CLEAR_STATE';
-export const CUSTOMER_PHONE_SAVE = 'customer/CUSTOMER_PHONE_SAVE';
-export const CUSTOMER_PHONE_ADD = 'customer/CUSTOMER_PHONE_ADD';
-export const CUSTOMER_PHONE_DELETE = 'customer/CUSTOMER_PHONE_DELETE';
-export const CUSTOMER_ADDRESS_SAVE = 'customer/CUSTOMER_ADDRESS_SAVE';
-export const CUSTOMER_ADDRESS_ADD = 'customer/CUSTOMER_ADDRESS_ADD';
-export const CUSTOMER_ADDRESS_DELETE = 'customer/CUSTOMER_ADDRESS_DELETE';
-export const FITTING_SAVE = 'customer/FITTING_SAVE';
-export const FITTING_ADD = 'customer/FITTING_ADD';
-export const FITTING_DELETE = 'customer/FITTING_DELETE';
 
 export const clearCustomerState = () => ({
   type: CUSTOMER_CLEAR_STATE,
@@ -94,86 +85,5 @@ export const deleteCustomerSuccess = customerId => ({
 
 export const deleteCustomerFailure = error => ({
   type: `${CUSTOMER_DELETE}_ERROR`,
-  payload: error,
-});
-
-export const saveCustomerPhone = customerPhone => ({
-  type: `${CUSTOMER_PHONE_SAVE}_REQUEST`,
-  payload: { customerPhone },
-});
-export const addCustomerPhone = customerPhone => ({
-  type: CUSTOMER_PHONE_ADD,
-  payload: { customerPhone },
-});
-export const saveCustomerPhoneSuccess = customerPhoneList => ({
-  type: CUSTOMER_PHONE_SAVE,
-  payload: customerPhoneList,
-});
-export const saveCustomerPhoneFailure = payload => ({
-  type: `${CUSTOMER_PHONE_SAVE}_ERROR`,
-  payload,
-});
-export const deleteCustomerPhone = customerPhoneId => ({
-  type: `${CUSTOMER_PHONE_DELETE}_REQUEST`,
-  payload: { customerPhoneId },
-});
-export const deleteCustomerPhoneSuccess = customerPhoneList => ({
-  type: CUSTOMER_PHONE_DELETE,
-  payload: customerPhoneList,
-});
-export const deleteCustomerPhoneFailure = error => ({
-  type: `${CUSTOMER_PHONE_DELETE}_ERROR`,
-  payload: error,
-});
-export const saveCustomerAddress = customerAddress => ({
-  type: `${CUSTOMER_ADDRESS_SAVE}_REQUEST`,
-  payload: { customerAddress },
-});
-export const addCustomerAddress = customerAddress => ({
-  type: CUSTOMER_ADDRESS_ADD,
-  payload: { customerAddress },
-});
-export const saveCustomerAddressSuccess = customerAddressList => ({
-  type: CUSTOMER_ADDRESS_SAVE,
-  payload: customerAddressList,
-});
-export const saveCustomerAddressFailure = error => ({
-  type: `${CUSTOMER_ADDRESS_SAVE}_ERROR`,
-  payload: error,
-});
-export const deleteCustomerAddress = customerAddressId => ({
-  type: `${CUSTOMER_ADDRESS_DELETE}_REQUEST`,
-  payload: { customerAddressId },
-});
-export const deleteCustomerAddressSuccess = customerAddressList => ({
-  type: CUSTOMER_ADDRESS_DELETE,
-  payload: customerAddressList,
-});
-export const deleteCustomerAddressFailure = error => ({
-  type: `${CUSTOMER_ADDRESS_DELETE}_ERROR`,
-  payload: error,
-});
-export const saveFitting = fitting => ({
-  type: `${FITTING_SAVE}_REQUEST`,
-  payload: { fitting },
-});
-export const saveFittingSuccess = fittingList => ({
-  type: FITTING_SAVE,
-  payload: fittingList,
-});
-export const saveFittingFailure = payload => ({
-  type: `${FITTING_SAVE}_ERROR`,
-  payload,
-});
-export const deleteFitting = fittingId => ({
-  type: `${FITTING_DELETE}_REQUEST`,
-  payload: { fittingId },
-});
-export const deleteFittingSuccess = fittingList => ({
-  type: FITTING_DELETE,
-  payload: fittingList,
-});
-export const deleteFittingFailure = error => ({
-  type: `${FITTING_DELETE}_ERROR`,
   payload: error,
 });

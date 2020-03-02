@@ -1,101 +1,73 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import * as PropTypes from 'prop-types';
 
-import { findObjectWithKey, updateObjectInArray } from '../../helpers/utils';
-import { checkForChanges, getModelKey } from '../app/model/helpers/model';
-import EditModelSimple from '../app/model/EditModelSimple';
+import { getModelKey } from '../app/model/helpers/model';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { displayQuoteAnswer } from './helpers/displayQuoteAnswer';
 import { quoteAnswerFields } from './helpers/quoteAnswerFields';
+import EditModelButtons from '../app/model/EditModelButtons';
+import { updateModelArrayOnModel } from '../app/model/helpers/updateModelArrayOnModel';
+import { removeModelFromArrayOnModel } from '../app/model/helpers/removeModelFromArrayOnModel';
+import EditModel from '../app/model/EditModel';
 
-class QuoteAnswers extends PureComponent {
-  state = { updatedQuoteAnswers: [] };
-  static getDerivedStateFromProps(props, state) {
-    const { updatedQuoteAnswers } = state;
-    const { quoteAnswers } = props;
-
-    const checkedUpdatedQuoteAnswers = [];
-    updatedQuoteAnswers.forEach(updatedQuoteAnswer => {
-      const persistedDetail = findObjectWithKey(quoteAnswers, getModelKey(updatedQuoteAnswer));
-      if (!persistedDetail) checkedUpdatedQuoteAnswers.push(updatedQuoteAnswer);
-      else if (checkForChanges(quoteAnswerFields, persistedDetail, updatedQuoteAnswer))
-        checkedUpdatedQuoteAnswers.push(updatedQuoteAnswer);
-    });
-
-    return {
-      updatedQuoteAnswers: checkedUpdatedQuoteAnswers,
-    };
-  }
-  raiseStateForQuoteAnswer = updatedQuoteAnswer => {
-    const { updatedQuoteAnswers } = this.state;
-
-    const newUpdatedQuoteAnswers = updateObjectInArray(updatedQuoteAnswers, updatedQuoteAnswer);
-    this.setState({ updatedQuoteAnswers: newUpdatedQuoteAnswers });
+const QuoteAnswers = props => {
+  let [updatedQuote, setUpdatedQuote] = useState(props.quote);
+  const { quote, questions, saveQuote, isLoading } = props;
+  const resetQuote = () => {
+    setUpdatedQuote(quote);
   };
+  const saveAnswer = arrayObject => {
+    if (arrayObject.answerText === 'X') {
+      removeAnswer(arrayObject.id);
+    } else {
+      setUpdatedQuote(
+        updateModelArrayOnModel(updatedQuote, 'answers', quoteAnswerDataFields, arrayObject),
+      );
+    }
+  };
+  const removeAnswer = itemId => {
+    setUpdatedQuote(removeModelFromArrayOnModel(updatedQuote, 'answers', itemId));
+  };
+  const quoteAnswersDisplay = displayQuoteAnswer(updatedQuote, questions);
 
-  render() {
-    const { updatedQuoteAnswers } = this.state;
-    const {
-      quote,
-      questions,
-      quoteAnswers,
-      quoteCharges,
-      saveQuoteAnswer,
-      deleteQuoteAnswer,
-      isLoading,
-    } = this.props;
-    const quoteAnswersDisplay = displayQuoteAnswer(quote, questions, quoteAnswers, quoteCharges);
+  return (
+    <div className="grid-container">
+      <EditModelButtons model={updatedQuote} resetChanges={resetQuote} saveModel={saveQuote} />
+      <div className="grid">
+        {quoteAnswersDisplay.map(answer => {
+          const questionKey = getModelKey(answer);
+          const rowClass = answer && answer.error ? 'error' : '';
 
-    return (
-      <div className="grid-container">
-        <div className="grid">
-          {quoteAnswersDisplay.map(persistedAnswer => {
-            const questionKey = getModelKey(persistedAnswer);
-            const updatedQuoteAnswer = findObjectWithKey(updatedQuoteAnswers, questionKey);
-            const rowClass = updatedQuoteAnswer && updatedQuoteAnswer.error ? 'error' : '';
-
-            return (
-              <div className={`grid-row ${rowClass}`} key={`row${questionKey}`}>
-                <EditModelSimple
-                  model={updatedQuoteAnswer ? updatedQuoteAnswer : persistedAnswer}
-                  persistedModel={persistedAnswer}
-                  modelFields={quoteAnswerFields}
-                  actionsRequired
-                  modelSave={saveQuoteAnswer}
-                  modelDelete={deleteQuoteAnswer}
-                  showReadOnlyFields
-                  raiseState={this.raiseStateForQuoteAnswer}
-                  className="grid-item--borderless"
-                />
-              </div>
-            );
-          })}
-        </div>
-        {isLoading && (
-          <Dimmer active inverted>
-            <Loader content="Loading" />
-          </Dimmer>
-        )}
+          return (
+            <div className={`grid-row ${rowClass}`} key={`row${questionKey}`}>
+              <EditModel
+                model={answer}
+                modelFields={quoteAnswerFields}
+                actionsRequired
+                modelSave={saveAnswer}
+                modelDelete={removeAnswer}
+                showReadOnlyFields
+                className="grid-item--borderless"
+              />
+            </div>
+          );
+        })}
       </div>
-    );
-  }
-}
+      {isLoading && (
+        <Dimmer active inverted>
+          <Loader content="Loading" />
+        </Dimmer>
+      )}
+    </div>
+  );
+};
 QuoteAnswers.defaultProps = {
-  charges: [],
   questions: [],
-  quoteAnswers: [],
-  quoteCharges: [],
-  quote: {},
 };
 QuoteAnswers.propTypes = {
-  charges: PropTypes.array,
-  questions: PropTypes.array,
-  quoteAnswers: PropTypes.array,
-  quoteCharges: PropTypes.array,
-  quote: PropTypes.object,
-  users: PropTypes.array,
   isLoading: PropTypes.bool,
-  saveQuoteAnswer: PropTypes.func.isRequired,
-  deleteQuoteAnswer: PropTypes.func.isRequired,
+  questions: PropTypes.array,
+  quote: PropTypes.object.isRequired,
+  saveQuote: PropTypes.func.isRequired,
 };
 export default QuoteAnswers;

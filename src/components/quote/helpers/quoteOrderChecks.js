@@ -1,4 +1,4 @@
-export const quoteOrderChecks = (quote, questions = [], quoteAnswers = []) => {
+export const quoteOrderChecks = (quote, questions = []) => {
   if (!quote) return false;
   let checkQuestions = questions.filter(q => !q.deleted);
   if (quote.bike) {
@@ -7,7 +7,8 @@ export const quoteOrderChecks = (quote, questions = [], quoteAnswers = []) => {
   } else {
     checkQuestions = checkQuestions.filter(q => !q.bike_only);
   }
+  const currentAnswers = quote.quoteAnswers ? quote.quoteAnswers : [];
   return checkQuestions.every(q =>
-    quoteAnswers.some(qa => qa.quote === quote.id && qa.question === q.id),
+    currentAnswers.some(qa => qa.quote === quote.id && qa.question === q.id),
   );
 };

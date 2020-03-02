@@ -21,8 +21,8 @@ export const displayForPartType = (partTypeId, quoteParts, bikeParts, parts) => 
 
   return { bikePart, quotePart, replacementPart, additionalParts };
 };
-export const displayForPartTypeAndQuote = (quote, partTypeId, quoteParts, bike, parts) => {
-  const quotePartsForQuote = quoteParts.filter(qp => qp.quote === quote.id);
+export const displayForPartTypeAndQuote = (quote, partTypeId, bike, parts) => {
+  const quotePartsForQuote = quote.quoteParts;
 
   return displayForPartType(partTypeId, quotePartsForQuote, bike.bikeParts, parts);
 };

@@ -19,7 +19,6 @@ const Quotebikes = props => {
                 const displayData = displayForPartTypeAndQuote(
                   quote,
                   partType.id,
-                  quoteParts,
                   bikes,
                   parts,
                 );

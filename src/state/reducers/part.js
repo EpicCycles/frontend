@@ -11,14 +11,13 @@ import {
   UPDATE_SUPPLIER_PRODUCTS,
 } from '../actions/part';
 import { USER_LOGOUT } from '../actions/user';
-import { BIKE_ADD_PART, BIKE_PART_DELETE, BIKE_PART_SAVE, GET_BIKE_PARTS } from '../actions/bike';
 import {
   addItemsToArray,
   removeItemFromArray,
   updateObjectInArray,
   updateObjectWithApiErrors,
 } from '../../helpers/utils';
-import { COPY_QUOTE, CREATE_QUOTE, FIND_QUOTES, GET_QUOTE, UPDATE_QUOTE } from '../actions/quote';
+import { CREATE_QUOTE, FIND_QUOTES, GET_QUOTE, UPDATE_QUOTE } from '../actions/quote';
 import { STORAGE_PARTS, STORAGE_SUPPLIER_PRODUCTS } from '../../helpers/constants';
 import { setLocalStorage } from '../helpers/localStorage';
 
@@ -83,13 +82,8 @@ const part = (state = initialState, action) => {
         supplierProducts,
       };
     case `${PART_UPLOAD}_OK`:
-    case `${BIKE_PART_SAVE}_OK`:
-    case `${BIKE_PART_DELETE}_OK`:
-    case `${BIKE_ADD_PART}_OK`:
-    case `${GET_BIKE_PARTS}_OK`:
     case `${CREATE_QUOTE}_OK`:
     case `${GET_QUOTE}_OK`:
-    case `${COPY_QUOTE}_OK`:
     case `${UPDATE_QUOTE}_OK`:
     case `${FIND_QUOTES}_OK`:
       parts = addItemsToArray(state.parts, action.payload.parts);

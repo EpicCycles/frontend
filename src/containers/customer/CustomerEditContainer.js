@@ -1,16 +1,4 @@
-import {
-  createCustomer,
-  saveCustomer,
-  deleteCustomer,
-  saveCustomerPhone,
-  deleteCustomerPhone,
-  saveCustomerAddress,
-  deleteCustomerAddress,
-  addCustomerPhone,
-  addCustomerAddress,
-  saveFitting,
-  deleteFitting,
-} from '../../state/actions/customer';
+import { createCustomer, saveCustomer, deleteCustomer } from '../../state/actions/customer';
 import { connect } from 'react-redux';
 import CustomerEdit from '../../components/customer/CustomerEdit';
 import { createNote, deleteNote, saveNote } from '../../state/actions/note';
@@ -19,9 +7,6 @@ import { archiveQuote, getQuote, getQuoteToCopy, unarchiveQuote } from '../../st
 export default connect(
   ({ customer, note, quote, bike, core, user }) => ({
     customers: customer.customers,
-    addresses: customer.addresses,
-    phones: customer.phones,
-    fittings: customer.fittings,
     customerId: customer.customerId,
     note: note.note,
     notes: note.notes,
@@ -39,17 +24,9 @@ export default connect(
     createNote,
     saveNote,
     deleteNote,
-    saveCustomerPhone,
-    deleteCustomerPhone,
-    addCustomerPhone,
-    saveCustomerAddress,
-    deleteCustomerAddress,
-    addCustomerAddress,
     getQuote,
     archiveQuote,
     unarchiveQuote,
     getQuoteToCopy,
-    saveFitting,
-    deleteFitting,
   },
 )(CustomerEdit);

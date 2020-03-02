@@ -7,7 +7,7 @@ export const FITTING_TYPE_CHOICES = [
 ];
 
 export const FITTING_TYPE_FIELD = {
-  fieldName: 'fitting_type',
+  fieldName: 'type',
   header: 'Source',
   required: true,
   error: VALUE_MISSING,
@@ -15,7 +15,7 @@ export const FITTING_TYPE_FIELD = {
   selectList: FITTING_TYPE_CHOICES,
 };
 export const SADDLE_HEIGHT_FIELD = {
-  fieldName: 'saddle_height',
+  fieldName: 'saddle',
   header: 'Saddle height',
   required: true,
   error: VALUE_MISSING,
@@ -25,7 +25,7 @@ export const SADDLE_HEIGHT_FIELD = {
   maxWidth: '20px',
 };
 export const BAR_HEIGHT = {
-  fieldName: 'bar_height',
+  fieldName: 'bar',
   header: 'Bar height',
   required: true,
   error: VALUE_MISSING,
@@ -44,11 +44,4 @@ export const REACH_FIELD = {
   maxLength: 20,
   maxWidth: '20px',
 };
-export const fittingFields = [
-  FITTING_TYPE_FIELD,
-  SADDLE_HEIGHT_FIELD,
-  BAR_HEIGHT,
-  REACH_FIELD,
-  UPD_BY_FIELD,
-  UPD_DATE_FIELD,
-];
+export const fittingFields = [FITTING_TYPE_FIELD, SADDLE_HEIGHT_FIELD, BAR_HEIGHT, REACH_FIELD];

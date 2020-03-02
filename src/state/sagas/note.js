@@ -14,24 +14,24 @@ import {
   saveNoteSuccess,
 } from '../actions/note';
 
-import api from './api';
 import * as selectors from '../selectors/user';
-import history from '../../history';
 import { updateObject } from '../../helpers/utils';
-import { LOGIN_URL } from '../../components/menus/helpers/menu';
 import { logError } from '../../helpers/api_error';
+import { createNoteApi, deleteNoteApi, getNoteListApi, saveNoteApi } from './apis/noteApi';
+import { logoutUser } from '../actions/user';
 
 export function* getNoteList(action) {
   try {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      const response = yield call(api.getNoteList, completePayload);
+      const response = yield call(getNoteListApi, completePayload);
       yield put(getNoteListSuccess(response.data));
     } else {
-      yield call(history.push, LOGIN_URL);
+      yield put(logoutUser());
     }
   } catch (error) {
+    logError(error);
     yield put(getNoteListFailure(error));
   }
 }
@@ -45,15 +45,14 @@ export function* createNote(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      const response = yield call(api.createNote, completePayload);
+      const response = yield call(createNoteApi, completePayload);
       yield put(createNoteSuccess(response.data));
     } else {
-      yield call(history.push, LOGIN_URL);
+      yield put(logoutUser());
     }
   } catch (error) {
     logError(error);
     yield put(createNoteFailure('Create Note failed'));
-    // yield put(history.push("/note"));
   }
 }
 
@@ -66,12 +65,13 @@ export function* saveNote(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      const response = yield call(api.saveNote, completePayload);
+      const response = yield call(saveNoteApi, completePayload);
       yield put(saveNoteSuccess(response.data));
     } else {
-      yield call(history.push, LOGIN_URL);
+      yield put(logoutUser());
     }
   } catch (error) {
+    logError(error);
     yield put(saveNoteFailure('Note save failed'));
   }
 }
@@ -85,12 +85,13 @@ export function* deleteNote(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      yield call(api.deleteNote, completePayload);
+      yield call(deleteNoteApi, completePayload);
       yield put(deleteNoteSuccess(action.payload.noteId));
     } else {
-      yield call(history.push, LOGIN_URL);
+      yield put(logoutUser());
     }
   } catch (error) {
+    logError(error);
     yield put(deleteNoteFailure('Note delete failed'));
   }
 }

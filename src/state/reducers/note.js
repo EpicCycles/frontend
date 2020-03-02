@@ -7,7 +7,7 @@ import {
   removeItemFromArray,
   updateObjectInArray,
 } from '../../helpers/utils';
-import { COPY_QUOTE, CREATE_QUOTE, GET_QUOTE, UPDATE_QUOTE } from '../actions/quote';
+import { CREATE_QUOTE, GET_QUOTE, UPDATE_QUOTE } from '../actions/quote';
 
 const initialState = {
   count: 0,
@@ -83,7 +83,6 @@ const note = (state = initialState, action) => {
       };
     case `${CREATE_QUOTE}_OK`:
     case `${GET_QUOTE}_OK`:
-    case `${COPY_QUOTE}_OK`:
     case `${UPDATE_QUOTE}_OK`:
       return {
         ...state,

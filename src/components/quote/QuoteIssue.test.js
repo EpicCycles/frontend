@@ -18,12 +18,10 @@ describe('QuoteIssue', () => {
       <QuoteIssue
         quoteId={1}
         quotes={[{ id: 1, quote_status: QUOTE_INITIAL }]}
-        quoteParts={[]}
         brands={[]}
         charges={[]}
         sections={sections}
         parts={[]}
-        bikeParts={[]}
         bikes={[]}
       />,
     );
@@ -34,12 +32,10 @@ describe('QuoteIssue', () => {
       <QuoteIssue
         quoteId={1}
         quotes={[{ id: 1, quote_status: QUOTE_ISSUED }]}
-        quoteParts={[]}
         brands={[]}
         charges={[]}
         sections={sections}
         parts={[]}
-        bikeParts={[]}
         bikes={[]}
       />,
     );
@@ -51,12 +47,10 @@ describe('QuoteIssue', () => {
       <QuoteIssue
         quoteId={2}
         quotes={[{ id: 1, quote_status: QUOTE_ISSUED }]}
-        quoteParts={[]}
         brands={[]}
         charges={[]}
         sections={sections}
         parts={[]}
-        bikeParts={[]}
         bikes={[]}
       />,
     );
@@ -67,12 +61,10 @@ describe('QuoteIssue', () => {
     const component = shallow(
       <QuoteIssue
         quotes={[{ id: 1, quote_status: QUOTE_ISSUED }]}
-        quoteParts={[]}
         brands={[]}
         charges={[]}
         sections={sections}
         parts={[]}
-        bikeParts={[]}
         bikes={[]}
       />,
     );

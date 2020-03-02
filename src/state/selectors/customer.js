@@ -1,1 +1,1 @@
-export const searchParams = state => state.customer.searchParams;
+export const searchParams = state => (state.customer ? state.customer.searchParams : {});

@@ -1,6 +1,6 @@
 import React from 'react';
 import EditModelPage from './EditModelPage';
-import { customerAddressFields } from './helpers/fields';
+import { customerFields } from './helpers/fields';
 import { findDataTest } from '../../../helpers/jest_helpers/assert';
 
 const foundName = 'find me';
@@ -43,9 +43,9 @@ const model = {
 describe('EditModelPage', () => {
   it('should show just edit fields when read only not required and there are no errors', () => {
     const component = shallow(
-      <EditModelPage model={emptyModel} modelFields={customerAddressFields} onChange={jest.fn()} />,
+      <EditModelPage model={emptyModel} modelFields={customerFields} onChange={jest.fn()} />,
     );
-    expect(findDataTest(component, 'field-to-edit')).toHaveLength(7);
+    expect(findDataTest(component, 'field-to-edit')).toHaveLength(4);
     expect(findDataTest(component, 'field-to-view')).toHaveLength(0);
     expect(findDataTest(component, 'show-error-detail')).toHaveLength(0);
   });
@@ -53,7 +53,7 @@ describe('EditModelPage', () => {
     const component = shallow(
       <EditModelPage
         model={model}
-        modelFields={customerAddressFields}
+        modelFields={customerFields}
         onChange={jest.fn()}
         className="red"
         sourceDataArrays={{ suppliers, sections, brands }}
@@ -63,7 +63,7 @@ describe('EditModelPage', () => {
         showReadOnlyFields
       />,
     );
-    expect(findDataTest(component, 'field-to-edit')).toHaveLength(7);
+    expect(findDataTest(component, 'field-to-edit')).toHaveLength(4);
     expect(findDataTest(component, 'field-to-view')).toHaveLength(2);
     expect(component.find('IconArray')).toHaveLength(1);
     expect(findDataTest(component, 'show-error-detail')).toHaveLength(0);
@@ -84,7 +84,7 @@ describe('EditModelPage', () => {
     const component = shallow(
       <EditModelPage
         model={modelWithError}
-        modelFields={customerAddressFields}
+        modelFields={customerFields}
         onChange={jest.fn()}
         className="red"
         sourceDataArrays={{ suppliers, sections, brands }}
@@ -92,7 +92,7 @@ describe('EditModelPage', () => {
         showReadOnlyFields
       />,
     );
-    expect(findDataTest(component, 'field-to-edit')).toHaveLength(7);
+    expect(findDataTest(component, 'field-to-edit')).toHaveLength(4);
     expect(findDataTest(component, 'field-to-view')).toHaveLength(2);
     expect(findDataTest(component, 'show-error-detail')).toHaveLength(1);
   });

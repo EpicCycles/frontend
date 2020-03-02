@@ -12,50 +12,40 @@ import {
   getCustomerSuccess,
   saveCustomerFailure,
   saveCustomerSuccess,
-  saveCustomerPhoneSuccess,
-  saveCustomerPhoneFailure,
-  deleteCustomerPhoneSuccess,
-  deleteCustomerPhoneFailure,
-  saveCustomerAddressSuccess,
-  saveCustomerAddressFailure,
-  deleteCustomerAddressSuccess,
-  deleteCustomerAddressFailure,
   CUSTOMER,
   CUSTOMER_LIST,
   CUSTOMER_DELETE,
   CUSTOMER_CREATE,
   CUSTOMER_SAVE,
-  CUSTOMER_PHONE_DELETE,
-  CUSTOMER_PHONE_SAVE,
-  CUSTOMER_ADDRESS_DELETE,
-  CUSTOMER_ADDRESS_SAVE,
-  saveFittingSuccess,
-  saveFittingFailure,
-  FITTING_SAVE,
-  deleteFittingSuccess,
-  deleteFittingFailure,
-  FITTING_DELETE,
 } from '../actions/customer';
 
-import api from './api';
 import * as selectors from '../selectors/user.js';
 import * as customerSelectors from '../selectors/customer.js';
 import { updateObject } from '../../helpers/utils';
 import { logError } from '../../helpers/api_error';
 import { LOGIN_URL } from '../../components/menus/helpers/menu';
 import { getNoteList } from '../actions/note';
+import {
+  createCustomerApi,
+  deleteCustomerApi,
+  getCustomerApi,
+  getCustomerListApi,
+  saveCustomerApi,
+} from './apis/customerApi';
+import { logoutUser } from '../actions/user';
 
 export function* getCustomerList(action) {
   try {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token, page: 1 });
-      const response = yield call(api.getCustomerList, completePayload);
+      const response = yield call(getCustomerListApi, completePayload);
       yield put(getCustomerListSuccess(response.data));
     } else {
-      yield call(history.push, LOGIN_URL);
+      yield put(logoutUser());
     }
   } catch (error) {
+    logError(error);
     yield put(getCustomerListFailure('Get Customer List failed'));
   }
 }
@@ -70,12 +60,13 @@ export function* getCustomerListPage(action) {
     const searchParams = yield select(customerSelectors.searchParams);
     if (token) {
       const completePayload2 = updateObject(action.payload, { token }, searchParams);
-      const response = yield call(api.getCustomerList, completePayload2);
+      const response = yield call(getCustomerListApi, completePayload2);
       yield put(getCustomerListSuccess(response.data));
     } else {
-      yield call(history.push, LOGIN_URL);
+      yield put(logoutUser());
     }
   } catch (error) {
+    logError(error);
     yield put(getCustomerListFailure('Get Customer List Page failed'));
   }
 }
@@ -89,13 +80,14 @@ export function* getCustomer(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      const response = yield call(api.getCustomer, completePayload);
+      const response = yield call(getCustomerApi, completePayload);
       yield put(getCustomerSuccess(response.data));
       yield put(getNoteList(action.payload.customerId));
     } else {
-      yield call(history.push, LOGIN_URL);
+      yield put(logoutUser());
     }
   } catch (error) {
+    logError(error);
     yield put(getCustomerFailure('Get Customer failed'));
   }
 }
@@ -109,12 +101,13 @@ export function* createCustomer(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      const response = yield call(api.createCustomer, completePayload);
+      const response = yield call(createCustomerApi, completePayload);
       yield put(createCustomerSuccess(response.data));
     } else {
-      yield call(history.push, LOGIN_URL);
+      yield put(logoutUser());
     }
   } catch (error) {
+    logError(error);
     yield put(createCustomerFailure('Create Customer failed'));
     // yield put(history.push("/customer"));
   }
@@ -129,12 +122,13 @@ export function* saveCustomer(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      const response = yield call(api.saveCustomer, completePayload);
+      const response = yield call(saveCustomerApi, completePayload);
       yield put(saveCustomerSuccess(response.data));
     } else {
-      yield call(history.push, LOGIN_URL);
+      yield put(logoutUser());
     }
   } catch (error) {
+    logError(error);
     yield put(saveCustomerFailure('Customer save failed'));
   }
 }
@@ -148,167 +142,18 @@ export function* deleteCustomer(action) {
     const token = yield select(selectors.token);
     if (token) {
       const completePayload = updateObject(action.payload, { token });
-      yield call(api.deleteCustomer, completePayload);
+      yield call(deleteCustomerApi, completePayload);
       yield put(deleteCustomerSuccess(action.payload.customerId));
       yield call(history.push, '/');
     } else {
-      yield call(history.push, LOGIN_URL);
+      yield put(logoutUser());
     }
   } catch (error) {
+    logError(error);
     yield put(deleteCustomerFailure('Customer delete failed'));
   }
 }
 
 export function* watchForDeleteCustomer() {
   yield takeLatest(`${CUSTOMER_DELETE}_REQUESTED`, deleteCustomer);
-}
-
-export function* deleteCustomerPhone(action) {
-  try {
-    const token = yield select(selectors.token);
-    if (token) {
-      const completePayload = updateObject(action.payload, { token });
-      const response = yield call(api.deleteCustomerPhone, completePayload);
-      yield put(deleteCustomerPhoneSuccess(response.data));
-    } else {
-      yield call(history.push, LOGIN_URL);
-    }
-  } catch (error) {
-    yield put(deleteCustomerPhoneFailure('Customer Phone delete failed'));
-  }
-}
-
-export function* watchForDeleteCustomerPhone() {
-  yield takeLatest(`${CUSTOMER_PHONE_DELETE}_REQUEST`, deleteCustomerPhone);
-}
-
-export function* saveCustomerPhone(action) {
-  const customerPhone = action.payload.customerPhone;
-  try {
-    const token = yield select(selectors.token);
-    if (token) {
-      const completePayload = updateObject(action.payload, { token });
-      let response;
-      if (customerPhone.id) {
-        response = yield call(api.saveCustomerPhone, completePayload);
-      } else {
-        response = yield call(api.createCustomerPhone, completePayload);
-      }
-      yield put(saveCustomerPhoneSuccess(response.data));
-    } else {
-      yield call(history.push, LOGIN_URL);
-    }
-  } catch (apiError) {
-    const error = 'Customer Phone save failed';
-    let error_detail;
-    logError(apiError);
-    if (apiError.response) {
-      error_detail = apiError.response.data;
-    }
-    yield put(saveCustomerPhoneFailure({ customerPhone, error, error_detail }));
-  }
-}
-
-export function* watchForSaveCustomerPhone() {
-  yield takeLatest(`${CUSTOMER_PHONE_SAVE}_REQUEST`, saveCustomerPhone);
-}
-
-export function* deleteCustomerAddress(action) {
-  try {
-    const token = yield select(selectors.token);
-    if (token) {
-      const completePayload = updateObject(action.payload, { token });
-      const response = yield call(api.deleteCustomerAddress, completePayload);
-      yield put(deleteCustomerAddressSuccess(response.data));
-    } else {
-      yield call(history.push, LOGIN_URL);
-    }
-  } catch (error) {
-    yield put(deleteCustomerAddressFailure('Customer Address delete failed'));
-  }
-}
-
-export function* watchForDeleteCustomerAddress() {
-  yield takeLatest(`${CUSTOMER_ADDRESS_DELETE}_REQUEST`, deleteCustomerAddress);
-}
-
-export function* saveCustomerAddress(action) {
-  const customerAddress = action.payload.customerAddress;
-  try {
-    const token = yield select(selectors.token);
-    if (token) {
-      const completePayload = updateObject(action.payload, { token });
-      let response;
-      if (customerAddress.id) {
-        response = yield call(api.saveCustomerAddress, completePayload);
-      } else {
-        response = yield call(api.createCustomerAddress, completePayload);
-      }
-      yield put(saveCustomerAddressSuccess(response.data));
-    } else {
-      yield call(history.push, LOGIN_URL);
-    }
-  } catch (apiError) {
-    const error = 'Customer Address save failed';
-    let error_detail;
-    logError(apiError);
-    if (apiError.response) {
-      error_detail = apiError.response.data;
-    }
-    yield put(saveCustomerAddressFailure({ customerAddress, error, error_detail }));
-  }
-}
-
-export function* watchForSaveCustomerAddress() {
-  yield takeLatest(`${CUSTOMER_ADDRESS_SAVE}_REQUEST`, saveCustomerAddress);
-}
-
-export function* saveFitting(action) {
-  const fitting = action.payload.fitting;
-  try {
-    const token = yield select(selectors.token);
-    if (token) {
-      const completePayload = updateObject(action.payload, { token });
-      let response;
-      if (fitting.id) {
-        response = yield call(api.saveFitting, completePayload);
-      } else {
-        response = yield call(api.createFitting, completePayload);
-      }
-      yield put(saveFittingSuccess(response.data));
-    } else {
-      yield call(history.push, LOGIN_URL);
-    }
-  } catch (apiError) {
-    const error = 'Fitting save failed';
-    let error_detail;
-    logError(apiError);
-    if (apiError.response) {
-      error_detail = apiError.response.data;
-    }
-    yield put(saveFittingFailure({ fitting, error, error_detail }));
-  }
-}
-
-export function* watchForSaveFitting() {
-  yield takeLatest(`${FITTING_SAVE}_REQUEST`, saveFitting);
-}
-
-export function* deleteFitting(action) {
-  try {
-    const token = yield select(selectors.token);
-    if (token) {
-      const completePayload = updateObject(action.payload, { token });
-      const response = yield call(api.deleteFitting, completePayload);
-      yield put(deleteFittingSuccess(response.data));
-    } else {
-      yield call(history.push, LOGIN_URL);
-    }
-  } catch (error) {
-    yield put(deleteFittingFailure('Fitting delete failed'));
-  }
-}
-
-export function* watchForDeleteFitting() {
-  yield takeLatest(`${FITTING_DELETE}_REQUEST`, deleteFitting);
 }

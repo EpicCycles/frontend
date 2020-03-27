@@ -3,8 +3,9 @@ import * as PropTypes from 'prop-types';
 import { gridItemClass } from '../app/model/helpers/display';
 import { displayForPartTypeAndQuote, displayQuotePartArray } from './helpers/display';
 import DisplayBlock from '../../common/DisplayBlock';
+import { findObjectWithId } from '../../helpers/utils';
 
-const Quotebikes = props => {
+const QuoteBikeParts = props => {
   const { quotes, bikes, parts, brands, sections } = props;
   return (
     <Fragment>
@@ -16,7 +17,8 @@ const Quotebikes = props => {
                 {partType.name}
               </div>
               {quotes.map(quote => {
-                const displayData = displayForPartTypeAndQuote(quote, partType.id, bikes, parts);
+                const bike = findObjectWithId(bikes, quote.bike);
+                const displayData = displayForPartTypeAndQuote(quote, partType.id, bike, parts);
                 const displayArray = displayQuotePartArray(
                   displayData.bikePart,
                   displayData.quotePart,
@@ -43,7 +45,7 @@ const Quotebikes = props => {
   );
 };
 
-Quotebikes.propTypes = {
+QuoteBikeParts.propTypes = {
   quotes: PropTypes.array.isRequired,
   brands: PropTypes.array.isRequired,
   sections: PropTypes.array.isRequired,
@@ -51,4 +53,4 @@ Quotebikes.propTypes = {
   bikes: PropTypes.array.isRequired,
 };
 
-export default Quotebikes;
+export default QuoteBikeParts;

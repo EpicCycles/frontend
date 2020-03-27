@@ -1,4 +1,3 @@
-import { buildPartString } from '../../part/helpers/part';
 import { QUANTITY_FIELD, TRADE_IN_PRICE_FIELD } from '../../app/model/helpers/fields';
 import { findObjectWithId } from '../../../helpers/utils';
 import { PART_PRICE_FIELD } from '../../quotePart/helpers/quotePartFields';
@@ -44,13 +43,7 @@ export const displayQuotePartArray = (
     arrayOfDetails.push(quotePartSummary(bikePart, quotePart, replacementPart, brands));
   }
   additionalParts.forEach(additionalQuotePart => {
-    if (additionalQuotePart.part) {
-      arrayOfDetails.push(
-        `**** ${buildPartString(findObjectWithId(parts, additionalQuotePart.part), brands)} ****`,
-      );
-    } else {
-      arrayOfDetails.push('No Part');
-    }
+    arrayOfDetails.push(quotePartSummary(undefined, additionalQuotePart, undefined, brands));
   });
   return arrayOfDetails;
 };

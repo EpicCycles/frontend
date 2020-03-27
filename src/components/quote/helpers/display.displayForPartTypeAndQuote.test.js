@@ -2,8 +2,8 @@ import { displayForPartTypeAndQuote } from './display';
 
 describe('displayForPartTypeAndQuote', () => {
   const quoteParts = [
-    { id: 11, quote: 17, partType: 231, part: 1, not_required: true },
-    { id: 11, quote: 19, partType: 231, part: 1, not_required: true },
+    { id: 11, quote: 17, partType: 231, part: 1, omit: true },
+    { id: 11, quote: 19, partType: 231, part: 1, omit: true },
     { id: 12, quote: 17, partType: 231 },
     { id: 92, quote: 17, part: 192, partType: 91 },
     { id: 9331, quote: 17, part: 19331, partType: 91 },
@@ -34,7 +34,7 @@ describe('displayForPartTypeAndQuote', () => {
     const partTypeId = 231;
     const expectedResult = {
       bikePart: { partType: 231, partName: 'Part name 231' },
-      quotePart: { id: 11, quote: 17, partType: 231, part: 1, not_required: true },
+      quotePart: { id: 11, quote: 17, partType: 231, part: 1, omit: true },
       replacementPart: { id: 1, partType: 231 },
       additionalParts: [{ id: 12, quote: 17, partType: 231 }],
     };

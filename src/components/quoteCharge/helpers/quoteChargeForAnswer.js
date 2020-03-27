@@ -1,3 +1,37 @@
+import { findObjectWithId } from '../../../helpers/utils';
+import { updateModelArrayOnModel } from '../../app/model/helpers/updateModelArrayOnModel';
+import { quoteChargeFieldsBasic } from './quoteChargeFields';
+import { quotePrice } from '../../quote/helpers/quotePrice';
+
+export const quoteChargeForAnswer = (quote, answer, questions, charges) => {
+  if (!answer.answer) {
+    return quote;
+  }
+
+  const question = findObjectWithId(questions, answer.question);
+  if (question && question.charge) {
+    const charge = findObjectWithId(charges, question.charge);
+    if (charge) {
+      const quoteCharge = quote.charges
+        ? quote.charges.find(qc => qc.charge === charge.id)
+        : undefined;
+      if (!quoteCharge) {
+        const newQuoteCharge = { charge: charge.id };
+        if (charge.price) {
+          newQuoteCharge.price = charge.price;
+        }
+        const quoteWithCharge = updateModelArrayOnModel(
+          quote,
+          'charges',
+          quoteChargeFieldsBasic,
+          newQuoteCharge,
+        );
+        return quotePrice(quoteWithCharge, undefined, charges);
+      }
+    }
+  }
+  return quote;
+};
 //    if quote_answer.answer is True:
 //         if quote_answer.question.charge:
 //             if not QuoteCharge.objects.filter(quote=quote_answer.quote,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Dimmer, Loader } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import { findObjectWithId, removeKey, updateObject } from '../../helpers/utils';
@@ -7,128 +7,105 @@ import CustomerListAndSelect from '../customer/CustomerListAndSelect';
 import BikeListAndSelect from '../bike/BikeListAndSelect';
 import { quoteDescription } from './helpers/quote';
 import { CUSTOMER_URL } from '../menus/helpers/menu';
+import { quotePrice } from './helpers/quotePrice';
 
-const initialState = {
-  bikeSearchCriteria: {},
-};
+const QuoteCreate = props => {
+  let [bikeSearchCriteria, setBikeSearchCriteria] = useState({});
+  let [quoteDate, setQuoteData] = useState({ selectedCustomer: props.customerId });
+  let [redirect, setRedirect] = useState(undefined);
 
-class QuoteCreate extends React.Component {
-  state = initialState;
-
-  componentDidMount() {
-    this.setState(
-      updateObject(initialState, {
-        selectedCustomer: this.props.customerId,
-        selectedBike: this.props.bikeId,
-      }),
-    );
-  }
-
-  goToAddCustomer = () => {
-    this.props.clearCustomerState();
-    this.setState({ redirect: CUSTOMER_URL });
+  const goToAddCustomer = () => {
+    props.clearCustomerState();
+    setRedirect(CUSTOMER_URL);
   };
 
-  handleInputChange = (fieldName, input) => {
-    let newState = updateObject(this.state);
-    newState[fieldName] = input;
-    this.setState(newState);
+  const handleInputChange = (fieldName, input) => {
+    let newData = updateObject(quoteDate);
+    newData[fieldName] = input;
+    setQuoteData(newData);
   };
-  handleInputClear = fieldName => {
-    removeKey(this.state, fieldName);
+  const getFrameList = searchCriteria => {
+    setBikeSearchCriteria(searchCriteria);
+    props.getFrameList(searchCriteria);
   };
-  getFrameList = bikeSearchCriteria => {
-    this.setState({ bikeSearchCriteria });
-    this.props.getFrameList(bikeSearchCriteria);
-  };
-  buildQuote = () => {
-    const customer = this.state.selectedCustomer;
-    const bike = this.state.selectedBike;
-    let quote = this.quoteStart(customer, bike);
-    this.props.createQuote(quote);
+  const buildQuote = () => {
+    const customer = quoteDate.selectedCustomer;
+    const bike = quoteDate.selectedBike;
+    let quote = quoteStart(customer, bike);
+    props.createQuote(quote);
   };
 
-  quoteStart(customer, bike) {
+  const quoteStart = (customer, bike) => {
     const quote_desc = quoteDescription(
       customer,
       bike,
-      this.props.customers,
-      this.props.frames,
-      this.props.bikes,
-      this.props.brands,
+      props.customers,
+      props.frames,
+      props.bikes,
+      props.brands,
     );
     let quote = { customer, bike, quote_desc };
 
-    const customerObject = findObjectWithId(this.props.customers, customer);
+    const customerObject = findObjectWithId(props.customers, customer);
     if (customerObject) quote.club_member = customerObject.club_member;
 
-    let bikeObject;
     if (bike) {
-      bikeObject = findObjectWithId(this.props.bikes, bike);
-      if (bikeObject)
-        quote.bike_price =
-          quote.club_member && bikeObject.club_price
-            ? bikeObject.club_price
-            : bikeObject.epic_price
-            ? bikeObject.epic_price
-            : bikeObject.rrp;
-      quote.quote_price = quote.bike_price;
+      const bikeObject = findObjectWithId(props.bikes, bike);
+      quote = quotePrice(quote, bikeObject, []);
     }
     return quote;
-  }
+  };
 
-  render() {
-    const { selectedBike, selectedCustomer, redirect, bikeSearchCriteria } = this.state;
-    const {
-      getCustomerList,
-      searchParams,
-      isLoading,
-      customers,
-      count,
-      next,
-      brands,
-      bikes,
-      frames,
-    } = this.props;
-    if (redirect) return <Redirect to={redirect} push />;
+  const { selectedBike, selectedCustomer } = quoteDate;
+  const {
+    getCustomerList,
+    searchParams,
+    isLoading,
+    customers,
+    count,
+    next,
+    brands,
+    bikes,
+    frames,
+  } = props;
+  if (redirect) return <Redirect to={redirect} push />;
 
-    return (
-      <div key="create-quote" className="grid-container">
-        <h1 data-test="page-header">Create Quote</h1>
-        <CustomerListAndSelect
-          addNewCustomer={this.goToAddCustomer}
-          getCustomerList={getCustomerList}
-          selectCustomer={this.handleInputChange}
-          searchParams={searchParams}
-          isLoading={isLoading}
-          customers={customers}
-          count={count}
-          next={next}
-          selectedCustomer={selectedCustomer}
-          data-test="select-customer"
-        />
-        <BikeListAndSelect
-          getFrameList={this.getFrameList}
-          brands={brands}
-          bikes={bikes}
-          frames={frames}
-          bikeSearchCriteria={bikeSearchCriteria}
-          selectedBike={selectedBike}
-          data-test="select-bike"
-          onChange={this.handleInputChange}
-        />
-        <Button disabled={!selectedCustomer} onClick={this.buildQuote} data-test="create-button">
-          Create Quote
-        </Button>
-        {isLoading && (
-          <Dimmer active inverted>
-            <Loader content="Loading" />
-          </Dimmer>
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div key="create-quote" className="grid-container">
+      <h1 data-test="page-header">Create Quote</h1>
+      <CustomerListAndSelect
+        addNewCustomer={goToAddCustomer}
+        getCustomerList={getCustomerList}
+        selectCustomer={handleInputChange}
+        searchParams={searchParams}
+        isLoading={isLoading}
+        customers={customers}
+        count={count}
+        next={next}
+        selectedCustomer={selectedCustomer}
+        data-test="select-customer"
+      />
+      <BikeListAndSelect
+        getFrameList={getFrameList}
+        brands={brands}
+        bikes={bikes}
+        frames={frames}
+        bikeSearchCriteria={bikeSearchCriteria}
+        selectedBike={selectedBike}
+        data-test="select-bike"
+        onChange={handleInputChange}
+      />
+      <Button disabled={!selectedCustomer} onClick={buildQuote} data-test="create-button">
+        Create Quote
+      </Button>
+      {isLoading && (
+        <Dimmer active inverted>
+          <Loader content="Loading" />
+        </Dimmer>
+      )}
+    </div>
+  );
+};
 
 QuoteCreate.propTypes = {
   getCustomerList: PropTypes.func.isRequired,

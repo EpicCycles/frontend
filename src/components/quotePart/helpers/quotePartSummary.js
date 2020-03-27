@@ -2,11 +2,14 @@ import { buildPartString } from '../../part/helpers/part';
 
 export const quotePartSummary = (bikePart, quotePart, replacementPart, brands) => {
   if (quotePart) {
-    if (replacementPart) {
-      const qtyString = !!quotePart.quantity ? ` (qty ${quotePart.quantity})` : '';
+    if (replacementPart || quotePart.desc) {
+      const qtyString = !!quotePart.qty ? ` (qty ${quotePart.qty})` : '';
+      if (quotePart.desc) {
+        return `**** ${quotePart.desc}${qtyString} ****`;
+      }
       return `**** ${buildPartString(replacementPart, brands)}${qtyString} ****`;
     }
-    if (quotePart.not_required) {
+    if (quotePart.omit) {
       return '**** Not Required ****';
     }
   }

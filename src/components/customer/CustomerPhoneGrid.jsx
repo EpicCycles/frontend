@@ -5,12 +5,12 @@ import { customerPhoneFields } from '../app/model/helpers/fields';
 import EditModel from '../app/model/EditModel';
 
 const CustomerPhoneGrid = props => {
-  const { newPhone, phones, saveCustomerPhone, deleteCustomerPhone } = props;
+  const { newPhone, phoneNumbers, saveCustomerPhone, deleteCustomerPhone } = props;
   return (
     <Fragment>
       <h3>Customer Phone</h3>
       <div key="customerPhoneGrid" className="grid-3">
-        {phones.map(phone => {
+        {phoneNumbers.map(phone => {
           return (
             <EditModel
               pageMode
@@ -46,11 +46,11 @@ const CustomerPhoneGrid = props => {
 };
 
 CustomerPhoneGrid.defaultProps = {
-  phones: [],
+  phoneNumbers: [],
 };
 CustomerPhoneGrid.propTypes = {
   newPhone: PropTypes.object,
-  phones: PropTypes.array,
+  phoneNumbers: PropTypes.array,
   deleteCustomerPhone: PropTypes.func.isRequired,
   saveCustomerPhone: PropTypes.func.isRequired,
 };

@@ -88,27 +88,45 @@ export const isModelValid = modelInstance => {
 };
 
 const financial = x => {
-  return Number.parseFloat(x).toFixed(2);
+  if (Number.isNaN(Number.parseFloat(x))) {
+    return x;
+  }
+  return parseFloat(x).toFixed(2) * 1;
+};
+export const toDecimal = x => {
+  if (Number.isNaN(Number.parseFloat(x))) {
+    return x;
+  }
+  return financial(x) * 1;
+};
+export const toInteger = x => {
+  if (Number.isNaN(Number.parseInt(x))) {
+    return x;
+  }
+  return parseInt(x);
 };
 export const validateField = (field, value, fullModelData) => {
   if (!field.readOnly) {
-    if (field.required && !value) {
+    if (field.required && (value === null || value === undefined || value.length === 0)) {
       if (field.error) return field.error;
       return VALUE_MISSING;
     }
-    if (value && field.type === NUMBER) {
-      const numberValue = Number(String(value).trim());
-      if (!Number.isInteger(numberValue)) return INVALID_NUMBER;
-      if (numberValue < 1) return INVALID_INTEGER;
-    }
-    if (value && field.type === CURRENCY) {
-      const numberValue = Number(String(value).trim());
-      if (Number.isNaN(numberValue)) return INVALID_CURRENCY;
-      const displayNumber = financial(numberValue);
-      if (Number(displayNumber) !== numberValue) return INVALID_CURRENCY;
-    }
-    if (value && field.maxLength) {
-      if (value.length > field.maxLength) return `Maximum size is ${field.maxLength}`;
+    if (value !== null && value !== undefined) {
+      if (field.type === NUMBER) {
+        const numberValue = Number(String(value).trim());
+        if (!Number.isInteger(numberValue)) return INVALID_NUMBER;
+        if (numberValue < 1) return INVALID_INTEGER;
+      }
+      if (field.type === CURRENCY) {
+        const numberValue = Number(String(value).trim());
+        if (Number.isNaN(numberValue)) return INVALID_CURRENCY;
+        const displayNumber = financial(numberValue);
+        if (Number(displayNumber) !== numberValue) return INVALID_CURRENCY;
+      }
+
+      if (field.maxLength) {
+        if (value.length > field.maxLength) return `Maximum size is ${field.maxLength}`;
+      }
     }
     if (field.validator) {
       const error = field.validator(value, fullModelData);
@@ -131,8 +149,17 @@ export const applyFieldValueToModel = (modelInstance, field, value) => {
 };
 export const applyFieldValueToModelOnly = (modelInstance, field, value) => {
   let updatedModelInstance = updateObject(modelInstance);
-  if (value) updatedModelInstance[field.fieldName] = value;
-  else updatedModelInstance[field.fieldName] = defaultFieldValue(field);
+  if (value) {
+    let valueToSave = value;
+    if (field.type === CURRENCY) {
+      valueToSave = toDecimal(value);
+    } else if (field.type === NUMBER) {
+      valueToSave = toInteger(value);
+    }
+    updatedModelInstance[field.fieldName] = valueToSave;
+  } else {
+    updatedModelInstance[field.fieldName] = defaultFieldValue(field);
+  }
   updatedModelInstance.changed = true;
   return updatedModelInstance;
 };
@@ -141,7 +168,8 @@ const defaultFieldValue = field => {
   let defaultValue;
   switch (field.type) {
     case CURRENCY:
-      defaultValue = '';
+    case NUMBER:
+      defaultValue = undefined;
       break;
     case CHECKBOX:
       defaultValue = false;
@@ -194,9 +222,11 @@ export const updateModel = (model, modelFields, fieldName, fieldValue) => {
   const modelField = getField(modelFields, fieldName);
   if (model && modelField) {
     let updatedModel = applyFieldValueToModelOnly(model, modelField, fieldValue);
+    if (modelField.addDataMethod)
+      updatedModel = modelField.addDataMethod(updatedModel, modelFields);
+
     updatedModel.error_detail = validateModelAndSetErrors(updatedModel, modelFields);
 
-    if (modelField.addDataMethod) updatedModel = modelField.addDataMethod(updatedModel);
     if (isItAnObject(updatedModel.error_detail)) {
       updatedModel.error = true;
       return updatedModel;

@@ -1,13 +1,14 @@
 import { getQuoteParts } from './getQuoteParts';
 import { partType1, partType2, sampleBrands, sampleSections } from '../../../helpers/sampleData';
 import { buildPartString } from '../../part/helpers/part';
+import { updateObject } from '../../../helpers/utils';
 const nonBikeQuote = { id: 'nbq', bike: undefined };
 const bikeQuote = { id: 'bq', bike: 57 };
 
 const part65 = {
   id: 65,
   part_name: 'A-Head Tapered Cartridge aluminium',
-  trade_in_price: null,
+  tradeIn: null,
   standard: false,
   stocked: false,
   partType: 3,
@@ -16,7 +17,7 @@ const part65 = {
 const part73 = {
   id: 73,
   part_name: 'Part 73',
-  trade_in_price: null,
+  tradeIn: null,
   standard: false,
   stocked: false,
   partType: 1,
@@ -25,7 +26,7 @@ const part73 = {
 const part74 = {
   id: 74,
   part_name: 'Part 74',
-  trade_in_price: null,
+  tradeIn: null,
   standard: false,
   stocked: false,
   partType: 2,
@@ -34,7 +35,7 @@ const part74 = {
 const part74Replacement = {
   id: 741,
   part_name: 'Part name',
-  trade_in_price: null,
+  tradeIn: null,
   standard: false,
   stocked: false,
   partType: 2,
@@ -44,62 +45,43 @@ const part74Replacement = {
 describe('getQuoteParts', () => {
   describe('non bike quotes', () => {
     it('should return an empty array when not a bike quote and no quote parts', () => {
-      expect(getQuoteParts(nonBikeQuote, sampleSections, [], { bikeParts: [] }, [], [])).toEqual(
-        [],
-      );
+      expect(getQuoteParts(nonBikeQuote, sampleSections, { bikeParts: [] }, [], [])).toEqual([]);
     });
     it('should return quote parts when some are present', () => {
       const parts = [part65, part74, part73, part74Replacement];
-      const quoteParts = [
-        { quote: 'nbq', id: 'qp1', partType: 2, part: part74Replacement.id, quantity: 1 },
-      ];
+      const testQuote = updateObject(nonBikeQuote, {
+        quoteParts: [{ id: 'qp1', partType: 2, part: part74Replacement.id, qty: 1 }],
+      });
       const expectedResults = [
         {
-          quote: 'nbq',
           _isBike: false,
-          part_desc: buildPartString(part74Replacement, sampleBrands),
+          desc: buildPartString(part74Replacement, sampleBrands),
           id: 'qp1',
           part: part74Replacement.id,
           _completePart: part74Replacement,
           partType: 2,
-          quantity: 1,
+          qty: 1,
           _partType: partType2,
         },
       ];
-      expect(
-        getQuoteParts(
-          nonBikeQuote,
-          sampleSections,
-          quoteParts,
-          { bikeParts: [] },
-          parts,
-          sampleBrands,
-        ),
-      ).toEqual(expectedResults);
+      expect(getQuoteParts(testQuote, sampleSections, undefined, parts, sampleBrands)).toEqual(
+        expectedResults,
+      );
     });
     it('should return quote parts when they have no part type', () => {
       const parts = [part65, part74, part73, part74Replacement];
-      const quoteParts = [
-        { quote: 'nbq', dummyKey: 'newPart' },
-        { quote: 'bq', dummyKey: 'newPartignore' },
-      ];
+      const testQuote = updateObject(nonBikeQuote, {
+        quoteParts: [{ dummyKey: 'newPart' }],
+      });
       const expectedResults = [
         {
-          quote: 'nbq',
           _isBike: false,
           dummyKey: 'newPart',
         },
       ];
-      expect(
-        getQuoteParts(
-          nonBikeQuote,
-          sampleSections,
-          quoteParts,
-          { bikeParts: [] },
-          parts,
-          sampleBrands,
-        ),
-      ).toEqual(expectedResults);
+      expect(getQuoteParts(testQuote, sampleSections, undefined, parts, sampleBrands)).toEqual(
+        expectedResults,
+      );
     });
   });
   describe('bike quotes', () => {
@@ -111,7 +93,6 @@ describe('getQuoteParts', () => {
       const parts = [part65, part74, part73];
       const expectedResults = [
         {
-          quote: 'bq',
           _isBike: true,
           dummyKey: 'bikePart_1',
           partType: 1,
@@ -119,7 +100,6 @@ describe('getQuoteParts', () => {
           _partType: partType1,
         },
         {
-          quote: 'bq',
           _isBike: true,
           dummyKey: 'bikePart_2',
           partType: 2,
@@ -127,9 +107,9 @@ describe('getQuoteParts', () => {
           _partType: partType2,
         },
       ];
-      expect(
-        getQuoteParts(bikeQuote, sampleSections, [], { bikeParts }, parts, sampleBrands),
-      ).toEqual(expectedResults);
+      expect(getQuoteParts(bikeQuote, sampleSections, { bikeParts }, parts, sampleBrands)).toEqual(
+        expectedResults,
+      );
     });
     it('should return quote part when replacement part exists', () => {
       const bikeParts = [
@@ -137,12 +117,12 @@ describe('getQuoteParts', () => {
         { id: 1, partType: 1, partName: 'part for bike 1' },
       ];
       const parts = [part65, part74, part73, part74Replacement];
-      const quoteParts = [
-        { quote: 'bq', id: 'qp1', partType: 2, not_required: true, part: 741, quantity: 1 },
-      ];
+      const testQuote = updateObject(bikeQuote, {
+        quoteParts: [{ id: 'qp1', partType: 2, omit: true, part: 741, qty: 1 }],
+      });
       const expectedResults = [
         {
-          quote: 'bq',
+          desc: undefined,
           partType: 1,
           _isBike: true,
           dummyKey: 'bikePart_1',
@@ -150,22 +130,21 @@ describe('getQuoteParts', () => {
           _partType: partType1,
         },
         {
-          quote: 'bq',
           _isBike: true,
           _completePart: part74Replacement,
-          part_desc: buildPartString(part74Replacement, sampleBrands),
+          desc: buildPartString(part74Replacement, sampleBrands),
           id: 'qp1',
-          not_required: true,
+          omit: true,
           part: 741,
-          quantity: 1,
+          qty: 1,
           partType: 2,
           _bikePart: { id: 2, partType: 2, partName: 'part for bike 2' },
           _partType: partType2,
         },
       ];
-      expect(
-        getQuoteParts(bikeQuote, sampleSections, quoteParts, { bikeParts }, parts, sampleBrands),
-      ).toEqual(expectedResults);
+      const result = getQuoteParts(testQuote, sampleSections, { bikeParts }, parts, sampleBrands);
+      expect(result).toHaveLength(2);
+      expect(result).toEqual(expectedResults);
     });
     it('should return quote part when part not required', () => {
       const bikeParts = [
@@ -173,10 +152,11 @@ describe('getQuoteParts', () => {
         { id: 1, partType: 1, partName: 'part for bike 1' },
       ];
       const parts = [part65, part74, part73, part74Replacement];
-      const quoteParts = [{ quote: 'bq', id: 'qp1', partType: 2, not_required: true }];
+      const testQuote = updateObject(bikeQuote, {
+        quoteParts: [{ id: 'qp1', partType: 2, omit: true }],
+      });
       const expectedResults = [
         {
-          quote: 'bq',
           partType: 1,
           _isBike: true,
           dummyKey: 'bikePart_1',
@@ -184,18 +164,17 @@ describe('getQuoteParts', () => {
           _partType: partType1,
         },
         {
-          quote: 'bq',
           _isBike: true,
           id: 'qp1',
           partType: 2,
-          not_required: true,
+          omit: true,
           _bikePart: { id: 2, partType: 2, partName: 'part for bike 2' },
           _partType: partType2,
         },
       ];
-      expect(
-        getQuoteParts(bikeQuote, sampleSections, quoteParts, { bikeParts }, parts, sampleBrands),
-      ).toEqual(expectedResults);
+      expect(getQuoteParts(testQuote, sampleSections, { bikeParts }, parts, sampleBrands)).toEqual(
+        expectedResults,
+      );
     });
     it('should return quote part when not a replacement part and no part', () => {
       const bikeParts = [
@@ -203,10 +182,12 @@ describe('getQuoteParts', () => {
         { id: 1, partType: 1, partName: 'part for bike 1' },
       ];
       const parts = [part65, part74, part73, part74Replacement];
-      const quoteParts = [{ quote: 'bq', id: 'qp1', partType: 2 }];
+      const testQuote = updateObject(bikeQuote, {
+        quoteParts: [{ id: 'qp1', partType: 2 }],
+      });
       const expectedResults = [
         {
-          quote: 'bq',
+          desc: undefined,
           _isBike: true,
           dummyKey: 'bikePart_1',
           partType: 1,
@@ -214,24 +195,24 @@ describe('getQuoteParts', () => {
           _partType: partType1,
         },
         {
-          quote: 'bq',
           _isBike: true,
+          desc: undefined,
           partType: 2,
           _bikePart: { id: 2, partType: 2, partName: 'part for bike 2' },
           _partType: partType2,
           dummyKey: 'bikePart_2',
         },
         {
-          quote: 'bq',
           _isBike: true,
+          desc: undefined,
           id: 'qp1',
           partType: 2,
           _partType: partType2,
         },
       ];
-      expect(
-        getQuoteParts(bikeQuote, sampleSections, quoteParts, { bikeParts }, parts, sampleBrands),
-      ).toEqual(expectedResults);
+      expect(getQuoteParts(testQuote, sampleSections, { bikeParts }, parts, sampleBrands)).toEqual(
+        expectedResults,
+      );
     });
   });
   it('should return quote part when not a replacement part', () => {
@@ -240,12 +221,11 @@ describe('getQuoteParts', () => {
       { id: 1, partType: 1, partName: 'part for bike 1' },
     ];
     const parts = [part65, part74, part73, part74Replacement];
-    const quoteParts = [
-      { quote: 'bq', id: 'qp1', partType: 2, part: part74Replacement.id, quantity: 1 },
-    ];
+    const testQuote = updateObject(bikeQuote, {
+      quoteParts: [{ id: 'qp1', partType: 2, part: part74Replacement.id, qty: 1 }],
+    });
     const expectedResults = [
       {
-        quote: 'bq',
         _isBike: true,
         dummyKey: 'bikePart_1',
         partType: 1,
@@ -253,7 +233,6 @@ describe('getQuoteParts', () => {
         _partType: partType1,
       },
       {
-        quote: 'bq',
         _isBike: true,
         partType: 2,
         _bikePart: { id: 2, partType: 2, partName: 'part for bike 2' },
@@ -261,20 +240,19 @@ describe('getQuoteParts', () => {
         dummyKey: 'bikePart_2',
       },
       {
-        quote: 'bq',
         _isBike: true,
-        part_desc: buildPartString(part74Replacement, sampleBrands),
+        desc: buildPartString(part74Replacement, sampleBrands),
         _completePart: part74Replacement,
         id: 'qp1',
         part: 741,
         partType: 2,
-        quantity: 1,
+        qty: 1,
         _partType: partType2,
       },
     ];
-    expect(
-      getQuoteParts(bikeQuote, sampleSections, quoteParts, { bikeParts }, parts, sampleBrands),
-    ).toEqual(expectedResults);
+    expect(getQuoteParts(testQuote, sampleSections, { bikeParts }, parts, sampleBrands)).toEqual(
+      expectedResults,
+    );
   });
   it('should return quote part when no part type', () => {
     const bikeParts = [
@@ -282,14 +260,14 @@ describe('getQuoteParts', () => {
       { id: 1, partType: 1, partName: 'part for bike 1' },
     ];
     const parts = [part65, part74, part73, part74Replacement];
-    const quoteParts = [
-      { quote: 'bq', id: 'qp1', partType: 2, part: part74Replacement.id, quantity: 1 },
-      { quote: 'bq', dummyKey: 'nopt' },
-      { quote: 'nbq', dummyKey: 'noptignre' },
-    ];
+    const testQuote = updateObject(bikeQuote, {
+      quoteParts: [
+        { id: 'qp1', partType: 2, part: part74Replacement.id, qty: 1 },
+        { dummyKey: 'nopt' },
+      ],
+    });
     const expectedResults = [
       {
-        quote: 'bq',
         _isBike: true,
         dummyKey: 'bikePart_1',
         partType: 1,
@@ -297,7 +275,6 @@ describe('getQuoteParts', () => {
         _partType: partType1,
       },
       {
-        quote: 'bq',
         _isBike: true,
         partType: 2,
         _bikePart: { id: 2, partType: 2, partName: 'part for bike 2' },
@@ -305,24 +282,22 @@ describe('getQuoteParts', () => {
         dummyKey: 'bikePart_2',
       },
       {
-        quote: 'bq',
         _isBike: true,
-        part_desc: buildPartString(part74Replacement, sampleBrands),
+        desc: buildPartString(part74Replacement, sampleBrands),
         _completePart: part74Replacement,
         id: 'qp1',
         part: 741,
         partType: 2,
-        quantity: 1,
+        qty: 1,
         _partType: partType2,
       },
       {
-        quote: 'bq',
         _isBike: true,
         dummyKey: 'nopt',
       },
     ];
-    expect(
-      getQuoteParts(bikeQuote, sampleSections, quoteParts, { bikeParts }, parts, sampleBrands),
-    ).toEqual(expectedResults);
+    expect(getQuoteParts(testQuote, sampleSections, { bikeParts }, parts, sampleBrands)).toEqual(
+      expectedResults,
+    );
   });
 });

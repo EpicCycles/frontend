@@ -47,7 +47,7 @@ const QuoteSummary = props => {
         charges={charges}
         sections={sections}
         parts={parts}
-        bikeParts={bike && bike.bikeParts}
+        bikeParts={bike ? bike.bikeParts : []}
       />
     </div>
   );

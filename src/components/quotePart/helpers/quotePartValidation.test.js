@@ -18,21 +18,21 @@ describe('validatedQuotePart', () => {
       const startPart = {
         partType: normalPartType.id,
         _partType: normalPartType,
-        part_desc: 'B1 Bike',
-        quantity: 1,
-        part_price: 12.99,
+        desc: 'B1 Bike',
+        qty: 1,
+        price: 12.99,
         _isBike: true,
       };
       const validatedPart = {
         _isBike: true,
         partType: normalPartType.id,
         _partType: normalPartType,
-        part_desc: 'B1 Bike',
+        desc: 'B1 Bike',
         _completePart: { id: 12, part_name: 'bike', brand: 1, partType: 16 },
         part: 12,
-        quantity: 1,
-        part_price: 12.99,
-        trade_in_price: undefined,
+        qty: 1,
+        price: 12.99,
+        tradeIn: undefined,
         error: false,
         error_detail: {},
       };
@@ -42,23 +42,23 @@ describe('validatedQuotePart', () => {
       const startPart = {
         partType: noAlternatePartType.id,
         _partType: noAlternatePartType,
-        part_desc: 'B1 Bike',
-        quantity: 1,
-        part_price: 12.99,
+        desc: 'B1 Bike',
+        qty: 1,
+        price: 12.99,
         _isBike: true,
-        not_required: true,
+        omit: true,
       };
       const validatedPart = {
         _isBike: true,
-        not_required: true,
+        omit: true,
         partType: noAlternatePartType.id,
         _partType: noAlternatePartType,
-        part_desc: undefined,
+        desc: undefined,
         _completePart: undefined,
         part: undefined,
-        quantity: undefined,
-        part_price: undefined,
-        additional_data: undefined,
+        qty: undefined,
+        price: undefined,
+        info: undefined,
         error: false,
         error_detail: {},
       };
@@ -68,22 +68,22 @@ describe('validatedQuotePart', () => {
       const startPart = {
         partType: normalPartType.id,
         _partType: normalPartType,
-        part_desc: 'B1 Bike',
-        quantity: 1,
-        part_price: 12.99,
-        trade_in_price: 2.99,
+        desc: 'B1 Bike',
+        qty: 1,
+        price: 12.99,
+        tradeIn: 2.99,
         _isBike: true,
       };
       const validatedPart = {
         partType: normalPartType.id,
         _partType: normalPartType,
         _isBike: true,
-        part_desc: 'B1 Bike',
+        desc: 'B1 Bike',
         _completePart: { id: 12, part_name: 'bike', brand: 1, partType: 16 },
         part: 12,
-        quantity: 1,
-        part_price: 12.99,
-        trade_in_price: undefined,
+        qty: 1,
+        price: 12.99,
+        tradeIn: undefined,
         error: false,
         error_detail: {},
       };
@@ -91,23 +91,23 @@ describe('validatedQuotePart', () => {
     });
     it('should return no errors when all fields are OK for a replacement part', () => {
       const startPart = {
-        part_desc: 'B2 other',
+        desc: 'B2 other',
         _partType: normalPartType,
-        not_required: true,
-        trade_in_price: 12.99,
-        part_price: 22.99,
+        omit: true,
+        tradeIn: 12.99,
+        price: 22.99,
         partType: 16,
       };
       const validatedPart = {
-        part_desc: 'B2 other',
+        desc: 'B2 other',
         partType: 16,
         _partType: normalPartType,
-        not_required: true,
-        quantity: undefined,
+        omit: true,
+        qty: undefined,
         _completePart: { id: 13, part_name: 'other', brand: 2, partType: 16 },
         part: 13,
-        trade_in_price: 12.99,
-        part_price: 22.99,
+        tradeIn: 12.99,
+        price: 22.99,
         error: false,
         error_detail: {},
       };
@@ -116,22 +116,22 @@ describe('validatedQuotePart', () => {
     it('should return no errors when all fields are OK for an omitted part', () => {
       const startPart = {
         _isBike: true,
-        not_required: true,
-        trade_in_price: 12.99,
+        omit: true,
+        tradeIn: 12.99,
         partType: 16,
         _partType: normalPartType,
       };
       const validatedPart = {
         _isBike: true,
-        not_required: true,
+        omit: true,
         _completePart: undefined,
         part: undefined,
         partType: 16,
         _partType: normalPartType,
-        quantity: undefined,
-        trade_in_price: 12.99,
-        additional_data: undefined,
-        part_price: undefined,
+        qty: undefined,
+        tradeIn: 12.99,
+        info: undefined,
+        price: undefined,
         error: false,
         error_detail: {},
       };
@@ -140,69 +140,69 @@ describe('validatedQuotePart', () => {
     it('should return part error when part is not found', () => {
       const startPart = {
         _isBike: true,
-        part_desc: 'B3 Bike',
-        quantity: 1,
-        part_price: 12.99,
-        additional_data: 'big sprockets',
+        desc: 'B3 Bike',
+        qty: 1,
+        price: 12.99,
+        info: 'big sprockets',
         partType: 16,
         _partType: normalPartType,
       };
       const validatedPart = {
         _isBike: true,
-        part_desc: 'B3 Bike',
+        desc: 'B3 Bike',
         partType: 16,
         _partType: normalPartType,
+        qty: 1,
+        info: 'big sprockets',
+        price: 12.99,
+        tradeIn: undefined,
         _completePart: undefined,
         part: undefined,
-        quantity: undefined,
-        trade_in_price: undefined,
-        part_price: undefined,
-        additional_data: undefined,
-        error: true,
-        error_detail: { part_desc: 'Please include a brand in the part name to add this part.' },
-      };
-      expect(quotePartValidation(startPart, brands, parts)).toEqual(validatedPart);
-    });
-    it('should return price error when new part with no price', () => {
-      const startPart = {
-        part_desc: 'B1 Bike',
-        quantity: 1,
-        partType: 16,
-        _isBike: true,
-        _partType: normalPartType,
-      };
-      const validatedPart = {
-        _isBike: true,
-        part_desc: 'B1 Bike',
-        partType: 16,
-        _partType: normalPartType,
-        _completePart: { id: 12, part_name: 'bike', brand: 1, partType: 16 },
-        part: 12,
-        trade_in_price: undefined,
-        quantity: 1,
-        part_price: undefined,
         error: false,
         error_detail: {},
       };
       expect(quotePartValidation(startPart, brands, parts)).toEqual(validatedPart);
     });
-    it('should return a quantity error when this is not a replacement part and there is no quantity', () => {
+    it('should return price error when new part with no price', () => {
+      const startPart = {
+        desc: 'B1 Bike',
+        qty: 1,
+        partType: 16,
+        _isBike: true,
+        _partType: normalPartType,
+      };
+      const validatedPart = {
+        _isBike: true,
+        desc: 'B1 Bike',
+        partType: 16,
+        _partType: normalPartType,
+        _completePart: { id: 12, part_name: 'bike', brand: 1, partType: 16 },
+        part: 12,
+        tradeIn: undefined,
+        qty: 1,
+        price: undefined,
+        error: false,
+        error_detail: {},
+      };
+      expect(quotePartValidation(startPart, brands, parts)).toEqual(validatedPart);
+    });
+    it('should return a qty error when this is not a replacement part and there is no qty', () => {
       const startPart = {
         _isBike: true,
-        part_desc: 'B1 Bike',
-        part_price: 12.99,
+        desc: 'B1 Bike',
+        price: 12.99,
         partType: 16,
         _partType: normalPartType,
       };
       const validatedPart = {
         _isBike: true,
-        part_desc: 'B1 Bike',
+        desc: 'B1 Bike',
         partType: 16,
         _partType: normalPartType,
         _completePart: { id: 12, part_name: 'bike', brand: 1, partType: 16 },
         part: 12,
-        part_price: 12.99,
-        trade_in_price: undefined,
+        price: 12.99,
+        tradeIn: undefined,
         club_price: undefined,
         error: false,
         error_detail: {},
@@ -211,21 +211,21 @@ describe('validatedQuotePart', () => {
     });
   });
   describe('for a non bike quote', () => {
-    it('should set part_price to ticket price when present', () => {
+    it('should set price to ticket price when present', () => {
       const startPart = {
-        part_desc: 'B1 Bike',
-        part_price: 12.99,
+        desc: 'B1 Bike',
+        price: 12.99,
         partType: 16,
         _partType: normalPartType,
       };
       const validatedPart = {
-        part_desc: 'B1 Bike',
+        desc: 'B1 Bike',
         partType: 16,
         _partType: normalPartType,
         _completePart: { id: 12, part_name: 'bike', brand: 1, partType: 16 },
         part: 12,
-        part_price: 12.99,
-        trade_in_price: undefined,
+        price: 12.99,
+        tradeIn: undefined,
         error: false,
         error_detail: {},
       };
@@ -233,17 +233,17 @@ describe('validatedQuotePart', () => {
     });
     it('should add part details when a part is found', () => {
       const startPart = {
-        part_desc: 'B1 Bike',
+        desc: 'B1 Bike',
         partType: 16,
         _partType: normalPartType,
       };
       const validatedPart = {
-        part_desc: 'B1 Bike',
+        desc: 'B1 Bike',
         partType: 16,
         _partType: normalPartType,
         _completePart: { id: 12, part_name: 'bike', brand: 1, partType: 16 },
         part: 12,
-        trade_in_price: undefined,
+        tradeIn: undefined,
         error: false,
         error_detail: {},
       };

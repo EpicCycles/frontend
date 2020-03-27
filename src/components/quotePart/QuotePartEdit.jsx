@@ -1,13 +1,27 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import { updateObject } from '../../helpers/utils';
 import { quotePartChanges } from './helpers/quotePartChanges';
 import { quotePartFields } from './helpers/quotePartFields';
 import EditModelSimple from '../app/model/EditModelSimple';
 
-class QuotePartEdit extends React.Component {
-  additionalProcessingOnChange = validatedQuotePart => {
-    const { quotePart, sections, brands, parts, supplierProducts } = this.props;
+const QuotePartEdit = props => {
+  const {
+    modelFields,
+    quotePart,
+    persistedQuotePart,
+    componentKey,
+    sections,
+    suppliers,
+    raiseStateForQuotePart,
+    pricesRequired,
+    brands,
+    parts,
+    supplierProducts,
+    saveQuotePart,
+    deleteQuotePart,
+  } = props;
+
+  const additionalProcessingOnChange = validatedQuotePart => {
     return quotePartChanges(
       quotePart,
       validatedQuotePart,
@@ -18,54 +32,29 @@ class QuotePartEdit extends React.Component {
     );
   };
 
-  saveQuotePart = quotePartToSave => {
-    let quotePart = updateObject(quotePartToSave);
-    const _completePart = quotePart._completePart;
+  const fields = quotePartFields(modelFields, quotePart, additionalProcessingOnChange, pricesRequired);
+  const rowClass = quotePart && quotePart.error ? 'error' : '';
 
-    if (_completePart && !_completePart.id) {
-      this.props.saveQuotePart(quotePart, _completePart);
-    } else {
-      if (_completePart) quotePart.part = _completePart.id;
-      this.props.saveQuotePart(quotePart);
-    }
-  };
-  deleteQuotePart = deletionKey => {
-    const { persistedQuotePart } = this.props;
-    this.props.deleteQuotePart(deletionKey, persistedQuotePart.quote);
-  };
-  render() {
-    const {
-      quotePart,
-      persistedQuotePart,
-      componentKey,
-      sections,
-      suppliers,
-      raiseStateForQuotePart,
-      pricesRequired,
-    } = this.props;
-    const fields = quotePartFields(quotePart, this.additionalProcessingOnChange, pricesRequired);
-    const rowClass = quotePart && quotePart.error ? 'error' : '';
-
-    return (
-      <div className={`grid-row ${rowClass}`} key={`row${componentKey}`}>
-        <EditModelSimple
-          model={quotePart}
-          persistedModel={persistedQuotePart}
-          raiseState={raiseStateForQuotePart}
-          modelFields={fields}
-          sourceDataArrays={{ sections, suppliers }}
-          actionsRequired
-          showReadOnlyFields
-          modelSave={this.saveQuotePart}
-          modelDelete={this.deleteQuotePart}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={`grid-row ${rowClass}`} key={`row${componentKey}`}>
+      <EditModelSimple
+        model={quotePart}
+        persistedModel={persistedQuotePart}
+        raiseState={raiseStateForQuotePart}
+        modelFields={fields}
+        sourceDataArrays={{ sections, suppliers }}
+        actionsRequired
+        showReadOnlyFields
+        modelSave={saveQuotePart}
+        modelDelete={deleteQuotePart}
+      />
+    </div>
+  );
+};
 
 QuotePartEdit.defaultProps = {};
 QuotePartEdit.propTypes = {
+  modelFields: PropTypes.array.isRequired,
   quotePart: PropTypes.object,
   persistedQuotePart: PropTypes.object,
   deleteQuotePart: PropTypes.func.isRequired,

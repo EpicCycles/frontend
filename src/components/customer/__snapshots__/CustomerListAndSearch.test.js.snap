@@ -7,6 +7,23 @@ exports[`CustomerListAndSearch.index tests renders the CustomerListAndSearch cor
   </h2>
   <CustomerSearch
     className="row"
+    getCustomerList={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "",
+            "",
+            "",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
     isLoading={false}
     searchParams={
       Object {
@@ -37,12 +54,11 @@ exports[`CustomerListAndSearch.index tests renders the CustomerListAndSearch cor
   </h2>
   <CustomerSearch
     className="row"
+    getCustomerList={[MockFunction]}
     isLoading={false}
     searchParams={
       Object {
-        "email": "",
-        "firstName": "",
-        "lastName": "",
+        "firstName": "fred",
       }
     }
   />
@@ -87,6 +103,7 @@ exports[`CustomerListAndSearch.index tests renders the CustomerListAndSearch cor
   >
     <Pagination
       count={6}
+      getPage={[MockFunction]}
       id="customer-pagination"
     />
     <AddLink

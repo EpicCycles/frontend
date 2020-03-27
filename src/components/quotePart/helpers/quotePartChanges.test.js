@@ -11,8 +11,8 @@ describe('quotePartChanges', () => {
   beforeEach(() => {
     quotePartValidation.mockImplementation((quotePart, brands, parts) => quotePart);
     calculatePrice.mockImplementation((is_bike_quote, part, supplierProducts) => {
-      if (part) return { part_price: 23.0, supplier: 4 };
-      return { part_price: undefined, supplier: undefined };
+      if (part) return { price: 23.0, supplier: 4 };
+      return { price: undefined, supplier: undefined };
     });
   });
   afterEach(() => {
@@ -47,16 +47,16 @@ describe('quotePartChanges', () => {
       id: 12,
       partType: '2',
       _partType: partType2,
-      part_desc: 'new part desc',
+      desc: 'new part desc',
       _completePart: { id: 234 },
     };
     const expectedQuotePart = {
       id: 12,
       partType: '2',
       _partType: partType2,
-      part_desc: 'new part desc',
+      desc: 'new part desc',
       _completePart: { id: 234 },
-      part_price: 23.0,
+      price: 23.0,
       supplier: 4,
     };
     const finalQuotePart = quotePartChanges({}, validatedQuotePart, sampleSections, [], [], []);
@@ -68,21 +68,21 @@ describe('quotePartChanges', () => {
       id: 12,
       partType: '2',
       _partType: partType2,
-      part_desc: 'new part desc',
+      desc: 'new part desc',
       _completePart: { id: 234 },
     };
     const validatedQuotePart = {
       id: 12,
       partType: '2',
       _partType: partType2,
-      part_desc: 'new part desc',
+      desc: 'new part desc',
       _completePart: { id: 234 },
     };
     const expectedQuotePart = {
       id: 12,
       partType: '2',
       _partType: partType2,
-      part_desc: 'new part desc',
+      desc: 'new part desc',
       _completePart: { id: 234 },
     };
     const finalQuotePart = quotePartChanges(
@@ -101,28 +101,33 @@ describe('quotePartChanges', () => {
       id: 12,
       partType: '2',
       _partType: partType2,
-      part_desc: 'new part desc',
+      desc: 'new part desc',
       _completePart: { id: 234 },
     };
     const validatedQuotePart = {
       id: 12,
-      not_required: true,
+      omit: true,
+      price: 23.0,
+      supplier: 4,
+      qty: 1,
       partType: '2',
       _partType: partType2,
       _bikePart: { trade_in_price: 23.5 },
-      part_desc: 'new part desc',
+      desc: 'new part desc',
       _completePart: { id: 234 },
     };
     const expectedQuotePart = {
       id: 12,
       partType: '2',
-      not_required: true,
-      trade_in_price: 23.5,
-      part_price: 23.0,
+      omit: true,
+      tradeIn: 23.5,
+      price: 23.0,
       supplier: 4,
+      qty: 1,
+      total_price: -0.5,
       _partType: partType2,
       _bikePart: { trade_in_price: 23.5 },
-      part_desc: 'new part desc',
+      desc: 'new part desc',
       _completePart: { id: 234 },
     };
     const finalQuotePart = quotePartChanges(
@@ -133,34 +138,35 @@ describe('quotePartChanges', () => {
       [],
       [],
     );
-    expect(calculatePrice).toHaveBeenCalled();
+    expect(calculatePrice).not.toHaveBeenCalled();
     expect(finalQuotePart).toEqual(expectedQuotePart);
   });
   it('should not take trade in price from bike part when already not required', () => {
     const quotePart = {
-      not_required: true,
+      omit: true,
       id: 12,
       partType: '2',
       _partType: partType2,
-      part_desc: 'new part desc',
+      desc: 'new part desc',
       _completePart: { id: 234 },
     };
     const validatedQuotePart = {
       id: 12,
-      not_required: true,
-      part_desc: 'new part desc',
+      omit: true,
+      desc: 'new part desc',
       partType: '2',
       _partType: partType2,
       _bikePart: { trade_in_price: 23.5 },
       _completePart: { id: 234 },
-      trade_in_price: '34.4',
+      tradeIn: '34.4',
     };
     const expectedQuotePart = {
       id: 12,
       partType: '2',
-      not_required: true,
-      part_desc: 'new part desc',
-      trade_in_price: '34.4',
+      omit: true,
+      desc: 'new part desc',
+      tradeIn: '34.4',
+      total_price: -34.4,
       _partType: partType2,
       _bikePart: { trade_in_price: 23.5 },
       _completePart: { id: 234 },

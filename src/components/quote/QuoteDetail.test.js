@@ -24,6 +24,7 @@ describe('QuoteDetail', () => {
         sections={sections}
         parts={[]}
         bikes={[]}
+        charges={[]}
       />,
     );
     expect(component.find('EditModelSimple')).toHaveLength(2);
@@ -53,6 +54,7 @@ describe('QuoteDetail', () => {
         sections={sections}
         parts={[]}
         bikes={[]}
+        charges={[]}
       />,
     );
     expect(component.find('EditModelSimple')).toHaveLength(2);
@@ -77,6 +79,7 @@ describe('QuoteDetail', () => {
         parts={[]}
         bikeParts={[]}
         bikes={[]}
+        charges={[]}
       />,
     );
     expect(component.find('EditModelSimple')).toHaveLength(2);
@@ -106,6 +109,7 @@ describe('QuoteDetail', () => {
         ]}
         bikes={sampleBikes}
         frames={sampleFrames}
+        charges={[]}
       />,
     );
     expect(component.find('EditModelSimple')).toHaveLength(2);
@@ -134,6 +138,7 @@ describe('QuoteDetail', () => {
         ]}
         bikes={sampleBikes}
         frames={sampleFrames}
+        charges={[]}
       />,
     );
     expect(component.find('EditModelSimple')).toHaveLength(2);

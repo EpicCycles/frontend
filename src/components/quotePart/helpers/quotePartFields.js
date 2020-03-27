@@ -1,28 +1,28 @@
 import {
   CHECKBOX,
   CURRENCY,
+  PART_TYPE,
   PART_TYPE_FIELD,
   QUANTITY_FIELD,
   SUPPLIER_FIELD_OPTIONAL,
   TEXT,
-  TRADE_IN_PRICE_FIELD,
 } from '../../app/model/helpers/fields';
 import { updateObject } from '../../../helpers/utils';
 import { attributePlaceholder } from '../../partType/helpers/partType';
 import { TOTAL_PRICE_FIELD } from '../../quote/helpers/quoteFields';
 
-export const NOT_REQUIRED_FIELD = {
-  fieldName: 'not_required',
+export const OMIT_FIELD = {
+  fieldName: 'omit',
   header: "Not Req'd",
   type: CHECKBOX,
 };
-export const FIXED_PRICE_FIELD = {
-  fieldName: 'fixed_price',
+export const FIXED_FIELD = {
+  fieldName: 'fixed',
   header: 'Fixed Price',
   type: CHECKBOX,
 };
-export const PART_DESC_FIELD = {
-  fieldName: 'part_desc',
+export const DESC_FIELD = {
+  fieldName: 'desc',
   header: 'Part',
   type: TEXT,
   maxLength: 100,
@@ -31,142 +31,142 @@ export const PART_DESC_FIELD = {
   listId: 'parts-all',
 };
 export const PART_PRICE_FIELD = {
-  fieldName: 'part_price',
+  fieldName: 'price',
   header: 'Price £',
   synonyms: [],
   type: CURRENCY,
   displaySize: 6,
   maxLength: 10,
 };
-export const ADDITIONAL_DATA_FIELD = {
-  fieldName: 'additional_data',
+export const INFO_FIELD = {
+  fieldName: 'info',
   header: 'Attributes',
   type: TEXT,
   maxLength: 100,
   displaySize: 20,
 };
+export const TRADE_IN_FIELD = {
+  fieldName: 'tradeIn',
+  header: 'Trade In £',
+  type: CURRENCY,
+  displaySize: 5,
+  maxLength: 10,
+};
 const disabledAttribute = { disabled: true };
-export const NOT_REQUIRED_FIELD_DISABLED = updateObject(NOT_REQUIRED_FIELD, disabledAttribute);
-export const ADDITIONAL_DATA_FIELD_DISABLED = updateObject(
-  ADDITIONAL_DATA_FIELD,
-  disabledAttribute,
-);
-export const PART_DESC_FIELD_DISABLED = updateObject(PART_DESC_FIELD, disabledAttribute);
+export const OMIT_FIELD_DISABLED = updateObject(OMIT_FIELD, disabledAttribute);
+export const INFO_FIELD_DISABLED = updateObject(INFO_FIELD, disabledAttribute);
+export const DESC_FIELD_DISABLED = updateObject(DESC_FIELD, disabledAttribute);
 export const PART_TYPE_FIELD_DISABLED = updateObject(PART_TYPE_FIELD, disabledAttribute);
 export const QUANTITY_FIELD_DISABLED = updateObject(QUANTITY_FIELD, disabledAttribute);
 export const PART_PRICE_FIELD_DISABLED = updateObject(PART_PRICE_FIELD, disabledAttribute);
-export const TRADE_IN_PRICE_FIELD_DISABLED = updateObject(TRADE_IN_PRICE_FIELD, disabledAttribute);
-export const FIXED_PRICE_FIELD_DISABLED = updateObject(FIXED_PRICE_FIELD, disabledAttribute);
+export const TRADE_IN_FIELD_DISABLED = updateObject(TRADE_IN_FIELD, disabledAttribute);
+export const FIXED_FIELD_DISABLED = updateObject(FIXED_FIELD, disabledAttribute);
 export const SUPPLIER_FIELD_DISABLED = updateObject(SUPPLIER_FIELD_OPTIONAL, disabledAttribute);
 export const QUOTE_PART_FOR_BIKE = [
   PART_TYPE_FIELD,
-  NOT_REQUIRED_FIELD,
-  TRADE_IN_PRICE_FIELD,
-  PART_DESC_FIELD,
-  FIXED_PRICE_FIELD,
+  OMIT_FIELD,
+  TRADE_IN_FIELD,
+  DESC_FIELD,
+  FIXED_FIELD,
   QUANTITY_FIELD,
   PART_PRICE_FIELD,
-  SUPPLIER_FIELD_DISABLED,
-  ADDITIONAL_DATA_FIELD,
+  SUPPLIER_FIELD_OPTIONAL,
+  INFO_FIELD,
   TOTAL_PRICE_FIELD,
 ];
 
 export const QUOTE_PART_NON_BIKE = [
   PART_TYPE_FIELD,
-  PART_DESC_FIELD,
-  FIXED_PRICE_FIELD,
+  DESC_FIELD,
+  FIXED_FIELD,
   QUANTITY_FIELD,
   PART_PRICE_FIELD,
   SUPPLIER_FIELD_OPTIONAL,
-  ADDITIONAL_DATA_FIELD,
+  INFO_FIELD,
   TOTAL_PRICE_FIELD,
 ];
-export const quotePartFields = (quotePart = {}, additionalProcessing, pricesRequired) => {
-  const fields = [];
-  const additionalActionAttribute = additionalProcessing
-    ? { addDataMethod: additionalProcessing }
-    : {};
-  if (quotePart && (quotePart._bikePart || quotePart.id || quotePart._completePart)) {
-    fields.push(PART_TYPE_FIELD_DISABLED);
-  } else {
-    fields.push(updateObject(PART_TYPE_FIELD, additionalActionAttribute));
-  }
-  const isBikeQuote = quotePart && quotePart._isBike;
+export const quotePartFields = (
+  modelFields,
+  quotePart = {},
+  additionalProcessing,
+  pricesRequired,
+) => {
   const mustHavePrices = !!pricesRequired;
 
-  const required =
-    quotePart._bikePart &&
-    quotePart._partType &&
-    (quotePart._partType.can_be_omitted || quotePart._partType.can_be_substituted);
   let desc = !!quotePart._partType;
   const part = quotePart._completePart;
-
   if (quotePart._bikePart && quotePart._partType) {
     desc = quotePart._partType.can_be_substituted;
   }
 
-  if (isBikeQuote) {
-    if (required) {
-      fields.push(NOT_REQUIRED_FIELD);
-      if (quotePart && quotePart.not_required) {
-        const defaultTradePrice = quotePart._bikePart
-          ? quotePart._bikePart.trade_in_price
-          : undefined;
-        fields.push(
-          updateObject(
-            TRADE_IN_PRICE_FIELD,
-            { required: mustHavePrices, default: defaultTradePrice },
-            additionalActionAttribute,
-          ),
-        );
-      } else {
-        fields.push(TRADE_IN_PRICE_FIELD_DISABLED);
-      }
-    } else {
-      fields.push(NOT_REQUIRED_FIELD_DISABLED);
-      fields.push(TRADE_IN_PRICE_FIELD_DISABLED);
+  return modelFields.map(field => {
+    const updatedField = updateObject(field);
+    switch (field.fieldName) {
+      case PART_TYPE:
+        if (quotePart && (quotePart._bikePart || quotePart._completePart)) {
+          updatedField.disabled = true;
+        }
+        break;
+      case 'omit':
+        if (!(quotePart._bikePart && quotePart._partType.can_be_substituted)) {
+          updatedField.disabled = true;
+        }
+        break;
+      case 'tradeIn':
+        if (!quotePart.omit) {
+          updatedField.disabled = true;
+        } else {
+          const defaultTradePrice = quotePart._bikePart
+            ? quotePart._bikePart.trade_in_price
+            : undefined;
+          updatedField.required = mustHavePrices;
+          updatedField.default = defaultTradePrice;
+        }
+        break;
+      case 'desc':
+        if (desc) {
+          updatedField.listId = `parts-${quotePart._partType.id}`;
+          updatedField.required = !!quotePart._partType && !quotePart.omit;
+        } else {
+          updatedField.disabled = true;
+        }
+        break;
+      case 'info':
+        if (quotePart.desc || part) {
+          const attributes = attributePlaceholder(quotePart._partType);
+          updatedField.placeholder = attributes;
+          updatedField.title = attributes;
+        } else {
+          updatedField.disabled = true;
+        }
+        break;
+      case 'qty':
+        if (quotePart.desc || part) {
+          updatedField.required = true;
+          updatedField.default = 1;
+        } else {
+          updatedField.disabled = true;
+        }
+        break;
+      case 'price':
+        if (quotePart.desc || part) {
+          updatedField.required = mustHavePrices;
+        } else {
+          updatedField.disabled = true;
+        }
+        break;
+      default:
+        if (!updatedField.readOnly) {
+          if (!(quotePart.desc || part)) {
+            updatedField.disabled = true;
+          }
+        }
     }
-  }
-  if (desc) {
-    const mustHaveDesc = !quotePart._bikePart;
-    fields.push(
-      updateObject(
-        PART_DESC_FIELD,
-        { listId: `parts-${quotePart._partType.id}`, required: mustHaveDesc },
-        additionalActionAttribute,
-      ),
-    );
-  } else {
-    fields.push(PART_DESC_FIELD_DISABLED);
-  }
-
-  if (part) {
-    const attributes = attributePlaceholder(quotePart._partType);
-    const additionalDataField = updateObject(
-      ADDITIONAL_DATA_FIELD,
-      {
-        placeholder: attributes,
-        title: attributes,
-      },
-      additionalActionAttribute,
-    );
-    fields.push(FIXED_PRICE_FIELD);
-    fields.push(
-      updateObject(QUANTITY_FIELD, { required: true, default: '1' }, additionalActionAttribute),
-    );
-    fields.push(
-      updateObject(PART_PRICE_FIELD, { required: mustHavePrices }, additionalActionAttribute),
-    );
-    fields.push(updateObject(SUPPLIER_FIELD_OPTIONAL, additionalActionAttribute));
-    fields.push(additionalDataField);
-  } else {
-    fields.push(FIXED_PRICE_FIELD_DISABLED);
-    fields.push(QUANTITY_FIELD_DISABLED);
-    fields.push(PART_PRICE_FIELD_DISABLED);
-    fields.push(SUPPLIER_FIELD_DISABLED);
-    fields.push(ADDITIONAL_DATA_FIELD_DISABLED);
-  }
-  fields.push(TOTAL_PRICE_FIELD);
-
-  return fields;
+    if (!(updatedField.disabled || updatedField.readOnly)) {
+      if (additionalProcessing) {
+        updatedField.addDataMethod = additionalProcessing;
+      }
+    }
+    return updatedField;
+  });
 };

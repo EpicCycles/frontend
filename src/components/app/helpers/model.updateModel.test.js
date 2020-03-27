@@ -69,7 +69,10 @@ describe('model.updateModel', () => {
     ];
     const result = updateModel({}, modelFields, 'data_field_x', '23');
     expect(addData).toHaveBeenCalledTimes(1);
-    expect(addData).toHaveBeenCalledWith({ data_field: '23', changed: true, error_detail: {} });
+    expect(addData).toHaveBeenCalledWith(
+      { data_field: 23, changed: true, error_detail: {} },
+      modelFields,
+    );
   });
   describe('error related tests', () => {
     it('should remove error field and replace error detail', () => {

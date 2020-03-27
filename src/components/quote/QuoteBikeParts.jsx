@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import * as PropTypes from 'prop-types';
 import { gridItemClass } from '../app/model/helpers/display';
 import { displayForPartTypeAndQuote, displayQuotePartArray } from './helpers/display';
-import DisplayBlock from "../../common/DisplayBlock";
+import DisplayBlock from '../../common/DisplayBlock';
 
 const Quotebikes = props => {
-  const { quotes, quoteParts, bikes, parts, brands, sections } = props;
+  const { quotes, bikes, parts, brands, sections } = props;
   return (
     <Fragment>
       {sections.map(section => {
@@ -16,12 +16,7 @@ const Quotebikes = props => {
                 {partType.name}
               </div>
               {quotes.map(quote => {
-                const displayData = displayForPartTypeAndQuote(
-                  quote,
-                  partType.id,
-                  bikes,
-                  parts,
-                );
+                const displayData = displayForPartTypeAndQuote(quote, partType.id, bikes, parts);
                 const displayArray = displayQuotePartArray(
                   displayData.bikePart,
                   displayData.quotePart,
@@ -50,7 +45,6 @@ const Quotebikes = props => {
 
 Quotebikes.propTypes = {
   quotes: PropTypes.array.isRequired,
-  quoteParts: PropTypes.array.isRequired,
   brands: PropTypes.array.isRequired,
   sections: PropTypes.array.isRequired,
   parts: PropTypes.array.isRequired,

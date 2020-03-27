@@ -16,7 +16,7 @@ const buildSummaryObject = (
   hidePrices,
 ) => {
   const priceElements = hidePrices
-    ? { trade_in_price: undefined, part_price: undefined, total_price: undefined }
+    ? { tradeIn: undefined, price: undefined, total_price: undefined }
     : {};
   const dummyKey = quotePart
     ? `qp_${quotePart.id}`
@@ -25,9 +25,9 @@ const buildSummaryObject = (
     : `pt_${partType.id}`;
   const sectionName = sectionUsed ? '' : section.name;
   const partTypeName = partTypeUsed ? '' : partType.name;
-  const part_desc = bikePart
+  const desc = bikePart
     ? quotePartSummary(bikePart, quotePart, replacementPart, brands)
-    : quotePart.part
+    : quotePart.part || quotePart.desc
     ? quotePartSummary(bikePart, quotePart, findObjectWithId(parts, quotePart.part), brands)
     : 'No Part';
   return updateObject(
@@ -35,7 +35,7 @@ const buildSummaryObject = (
     {
       sectionName,
       partTypeName,
-      part_desc,
+      desc,
       dummyKey,
     },
     priceElements,
@@ -51,8 +51,8 @@ export const quoteSummaryElements = (
   showPrices,
   customerView,
 ) => {
-  const quotePartsForQuote = quote.parts || [];
-  const quoteChargesForQuote = quote.charges || [];
+  const quoteParts = quote.quoteParts || [];
+  const quoteCharges = quote.charges || [];
   let summaryElements = [];
   let fixedElements = [];
   // first show the non fixed elements
@@ -62,16 +62,11 @@ export const quoteSummaryElements = (
     section.partTypes.forEach(partType => {
       let partTypeUsed = false;
       let partTypeUsedForFixed = false;
-      const detailForPartType = displayForPartType(
-        partType.id,
-        quotePartsForQuote,
-        bikeParts,
-        parts,
-      );
+      const detailForPartType = displayForPartType(partType.id, quoteParts, bikeParts, parts);
       const { bikePart, quotePart, replacementPart, additionalParts } = detailForPartType;
 
       if (quotePart) {
-        if (customerView && quotePart.fixed_price) {
+        if (customerView && quotePart.fixed) {
           fixedElements.push(
             buildSummaryObject(
               sectionUsedForFixed,
@@ -127,7 +122,7 @@ export const quoteSummaryElements = (
       }
 
       additionalParts.forEach(quotePart => {
-        if (customerView && quotePart.fixed_price) {
+        if (customerView && quotePart.fixed) {
           fixedElements.push(
             buildSummaryObject(
               sectionUsedForFixed,
@@ -156,7 +151,7 @@ export const quoteSummaryElements = (
               undefined,
               brands,
               parts,
-              !(showPrices || quotePart.fixed_price),
+              !(showPrices || quotePart.fixed),
             ),
           );
           partTypeUsed = true;
@@ -169,7 +164,7 @@ export const quoteSummaryElements = (
     summaryElements.push({ sectionName: 'Itemised changes', dummyKey: 'qp_itemised' });
 
   let chargesAdded = false;
-  quoteChargesForQuote.forEach(quoteCharge => {
+  quoteCharges.forEach(quoteCharge => {
     if (quoteCharge.price) {
       if (customerView && !chargesAdded) fixedElements.push({ dummyKey: 'qc_blank' });
       fixedElements.push({

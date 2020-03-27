@@ -50,7 +50,7 @@ describe('QuotePartGrid', () => {
     });
   });
   it('should show quote part when unmodified quopte part exists', () => {
-    const quoteParts = [{ id: 1, not_required: true }];
+    const quoteParts = [{ id: 1, omit: true }];
     const updatedQuoteParts = [];
     const component = shallow(
       <QuotePartGrid
@@ -80,8 +80,8 @@ describe('QuotePartGrid', () => {
     });
   });
   it('should show quote part when modified quote part exists', () => {
-    const quoteParts = [{ id: 1, not_required: true }];
-    const updatedQuoteParts = [{ id: 1, not_required: true, trade_in_price: 45.0 }];
+    const quoteParts = [{ id: 1, omit: true }];
+    const updatedQuoteParts = [{ id: 1, omit: true, tradeIn: 45.0 }];
     const component = shallow(
       <QuotePartGrid
         isBike
@@ -111,11 +111,11 @@ describe('QuotePartGrid', () => {
   });
   it('should show all quote parts when modified quote part exists', () => {
     const quoteParts = [
-      { id: 1, not_required: true },
-      { id: 12, not_required: true },
-      { id: 13, not_required: true },
+      { id: 1, omit: true },
+      { id: 12, omit: true },
+      { id: 13, omit: true },
     ];
-    const updatedQuoteParts = [{ id: 12, not_required: true, trade_in_price: 45 }];
+    const updatedQuoteParts = [{ id: 12, omit: true, tradeIn: 45 }];
     const component = shallow(
       <QuotePartGrid
         isBike

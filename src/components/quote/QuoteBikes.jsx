@@ -50,7 +50,6 @@ const QuoteBikes = props => {
         <QuoteBikeParts
           quotes={bikeQuotes}
           sections={sections}
-          quoteParts={quoteParts}
           bikes={bikes}
           parts={parts}
           brands={brands}

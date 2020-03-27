@@ -78,18 +78,18 @@ export const buildFrameWorkPartDisplay = (
   return sectionsWithParts.filter(section => section.parts.length > 0);
 };
 
-export const findPartWithDescription = (part_desc, partType, parts, brands) => {
+export const findPartWithDescription = (desc, partType, parts, brands) => {
   const partToConsider = parts.filter(part => part.partType === partType);
 
   //first find an exact match
   const exactPart = partToConsider.find(
-    part => part.part_name.toLowerCase() === part_desc.toLowerCase(),
+    part => part.part_name.toLowerCase() === desc.toLowerCase(),
   );
   if (exactPart) return exactPart;
 
   // strip off the brand
   const brandsLower = buildBrandNameArray(brands);
-  const proposedPart = buildPartObject(partType, part_desc, brandsLower);
+  const proposedPart = buildPartObject(partType, desc, brandsLower);
 
   const exactPartWithBrand = partToConsider.find(
     part =>

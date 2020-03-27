@@ -11,11 +11,7 @@ import {
   SUPPLIER_MISSING,
   VALUE_MISSING,
 } from './error';
-import {
-  validateEmailFormat,
-  validatePostcodeAndReturnError,
-  validateURLAndReturnError,
-} from './validators';
+import { validatePostcodeAndReturnError, validateURLAndReturnError } from './validators';
 import { COUNTRIES, NUMBER_TYPE_CHOICES } from '../../../address/helpers/address';
 
 export const CHECKBOX = 'checkbox';
@@ -74,7 +70,7 @@ export const POSTCODE = 'postcode';
 export const PREFERRED = 'preferred';
 export const PREFERRED_SUPPLIER = 'preferred_supplier';
 export const PRODUCT_CODE = 'product_code';
-export const QUANTITY = 'quantity';
+export const QUANTITY = 'qty';
 
 export const RRP = 'rrp';
 export const SIZES = 'sizes';

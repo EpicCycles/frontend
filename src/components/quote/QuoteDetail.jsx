@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import {
   addItemsToArray,
   findObjectWithId,
@@ -13,18 +13,23 @@ import QuotePartGrid from '../quotePart/QuotePartGrid';
 import { QUOTE_INITIAL, QUOTE_ISSUED } from './helpers/quote';
 
 import QuoteActionCell from './QuoteActionCell';
-import { getModelKey } from '../app/model/helpers/model';
-import { quotePartFields } from '../quotePart/helpers/quotePartFields';
+import { checkForChanges, getModelKey } from '../app/model/helpers/model';
+import { QUOTE_PART_FOR_BIKE } from '../quotePart/helpers/quotePartFields';
 import { quoteIssueChecks } from './helpers/quoteIssueChecks';
 import EditModelSimple from '../app/model/EditModelSimple';
 import { quoteFields } from './helpers/quoteFields';
 import { customerNoteFields } from '../note/helpers/noteFields';
-import { quoteChargeFields } from '../quoteCharge/helpers/quoteChargeFields';
+import {
+  quoteChargeFields,
+  quoteChargeFieldsBasic,
+} from '../quoteCharge/helpers/quoteChargeFields';
 import ModelTable from '../app/model/ModelTable';
 import { updateModelArrayOnModel } from '../app/model/helpers/updateModelArrayOnModel';
 import EditModelButtons from '../app/model/EditModelButtons';
 import { quotePrice } from './helpers/quotePrice';
 import { getEditedFields } from '../app/model/helpers/getEditedFields';
+import { removeModelFromArrayOnModel } from '../app/model/helpers/removeModelFromArrayOnModel';
+import { getQuoteParts } from '../quotePart/helpers/getQuoteParts';
 
 const QuoteDetail = props => {
   let [updatedQuote, setUpdatedQuote] = useState(props.quote);
@@ -32,6 +37,13 @@ const QuoteDetail = props => {
   let [updatedQuoteParts, setUpdatedQuoteParts] = useState([]);
   let [updatedNote, setUpdatedNote] = useState(undefined);
 
+  useEffect(() => {
+    if (updatedQuote.changed) {
+      if (props.quote.upd_date > updatedQuote.upd_date) {
+        setUpdatedQuote(props.quote);
+      }
+    }
+  }, [updatedQuote, props.quote]);
   const {
     quote,
     parts,
@@ -49,9 +61,10 @@ const QuoteDetail = props => {
     bikes,
     frames,
     customers = [],
-    cloneQuote,
     unarchiveQuote,
     orderQuote,
+    createNote,
+    cloneQuote,
   } = props;
 
   const bike = findObjectWithId(bikes, quote.bike);
@@ -60,17 +73,24 @@ const QuoteDetail = props => {
     bike,
     pricesRequired: readyToIssue || quote.quote_status !== QUOTE_INITIAL,
   });
-
+  const chargesFields = quoteChargeFields(charges);
+  const saveQuoteChanges = quoteToSave => {
+    if (quoteToSave.quote_status === QUOTE_INITIAL) {
+      saveQuote(quoteToSave);
+    } else {
+      saveQuote(updateObject(quoteToSave, { id: undefined, quote_status: QUOTE_INITIAL}));
+    }
+  };
   const cancelIssue = () => {
     props.changeRoute('/quote');
   };
   const editIssuedQuote = quoteKey => {
-    const copiedQuote = updateObject(quote, {id: undefined, version: quote.version + 1});
-    props.saveQuote(copiedQuote);
+    const copiedQuote = updateObject(quote, { id: undefined, quote_status: QUOTE_INITIAL });
+    saveQuote(copiedQuote);
   };
   const attemptToIssueQuote = quoteKey => {
     if (updatedQuoteParts.length > 0 || updatedQuoteCharges.length > 0) {
-      addMessage('Comfirm all charge or part changes before saving quote', 'W');
+      addMessage('Confirm all charge or part changes before saving quote', 'W');
       return;
     }
 
@@ -99,11 +119,11 @@ const QuoteDetail = props => {
 
   const raiseStateForQuotePart = updatedQuotePart => {
     const newUpdatedQuoteParts = updateObjectInArray(updatedQuoteParts, updatedQuotePart);
-    updatePricingAndState(newUpdatedQuoteParts);
+    setUpdatedQuoteParts(newUpdatedQuoteParts);
   };
   const raiseStateForQuoteCharge = updatedQuoteCharge => {
     const newUpdatedQuoteCharges = updateObjectInArray(updatedQuoteCharges, updatedQuoteCharge);
-    updatePricingAndState(newUpdatedQuoteCharges);
+    setUpdatedQuoteCharges(newUpdatedQuoteCharges);
   };
   const raiseStateForNote = changedNote => {
     if (changedNote.dummyKey) {
@@ -113,18 +133,26 @@ const QuoteDetail = props => {
     }
   };
   const addNewQuotePart = () => {
-    const newQuotePart = { dummyKey: generateRandomCode() };
-    setUpdatedQuoteParts(addItemsToArray(updatedQuoteParts, [newQuotePart]));
-    setUpdatedQuote(
-      updateModelArrayOnModel(updatedQuote, 'quoteParts', quotePartFields(), newQuotePart),
+    const quoteWithNewPart = updateModelArrayOnModel(
+      updatedQuote,
+      'quoteParts',
+      QUOTE_PART_FOR_BIKE,
+      {},
     );
+    const lastAddedQuotePart = quoteWithNewPart.quoteParts[quoteWithNewPart.quoteParts.length - 1];
+    setUpdatedQuoteParts(addItemsToArray(updatedQuoteParts, [lastAddedQuotePart]));
+    setUpdatedQuote(quoteWithNewPart);
   };
   const addNewQuoteCharge = () => {
-    const newQuoteCharge = { dummyKey: generateRandomCode(), quote: quote.id };
-    setUpdatedQuoteCharges(addItemsToArray(updatedQuoteCharges, [newQuoteCharge]));
-    setUpdatedQuote(
-      updateModelArrayOnModel(updatedQuote, 'charges', quotePartFields(), newQuoteCharge),
+    const quoteWithNewCharge = updateModelArrayOnModel(
+      updatedQuote,
+      'charges',
+      quoteChargeFieldsBasic,
+      {},
     );
+    const lastAddedQuoteCharge = quoteWithNewCharge.charges[quoteWithNewCharge.charges.length - 1];
+    setUpdatedQuoteCharges(addItemsToArray(updatedQuoteCharges, [lastAddedQuoteCharge]));
+    setUpdatedQuote(quoteWithNewCharge);
   };
   const saveNote = note => {
     createNote(note);
@@ -132,22 +160,23 @@ const QuoteDetail = props => {
   };
   const deleteQuoteCharge = itemId => {
     setUpdatedQuoteCharges(removeItemFromArray(updatedQuoteCharges, itemId));
-    setUpdatedQuote(removeModelFromArrayOnModel(updatedQuote, 'charges', itemId));
+    updatePricingAndState(removeModelFromArrayOnModel(updatedQuote, 'charges', itemId));
   };
   const saveQuoteCharge = updatedCharge => {
     setUpdatedQuoteCharges(removeItemFromArray(updatedQuoteCharges, getModelKey(updatedCharge)));
-    setUpdatedQuote(
-      updateModelArrayOnModel(updatedQuote, 'charges', quoteChargeFields, updatedCharge),
+
+    updatePricingAndState(
+      updateModelArrayOnModel(updatedQuote, 'charges', chargesFields, updatedCharge),
     );
   };
   const deleteQuotePart = itemId => {
     setUpdatedQuoteParts(removeItemFromArray(updatedQuoteParts, itemId));
-    setUpdatedQuote(removeModelFromArrayOnModel(updatedQuote, 'quoteParts', itemId));
+    updatePricingAndState(removeModelFromArrayOnModel(updatedQuote, 'quoteParts', itemId));
   };
   const saveQuotePart = quotePart => {
     setUpdatedQuoteParts(removeItemFromArray(updatedQuoteParts, getModelKey(quotePart)));
-    setUpdatedQuote(
-      updateModelArrayOnModel(updatedQuote, 'quoteParts', quoteChargeFields, quotePart),
+    updatePricingAndState(
+      updateModelArrayOnModel(updatedQuote, 'quoteParts', QUOTE_PART_FOR_BIKE, quotePart),
     );
   };
 
@@ -173,7 +202,7 @@ const QuoteDetail = props => {
       <div className="row">
         <div>
           <EditModelButtons
-            saveModel={saveQuote}
+            saveModel={saveQuoteChanges}
             resetChanges={resetAllChanges}
             model={updatedQuote}
           />
@@ -210,8 +239,9 @@ const QuoteDetail = props => {
           quote={quote}
           brands={brands}
           sections={sections}
+          charges={charges}
           parts={parts}
-          bikeParts={bike && bike.bikeParts}
+          bikeParts={bike ? bike.bikeParts : []}
           showPrices
         />
         <div>
@@ -227,9 +257,9 @@ const QuoteDetail = props => {
             data-test="add-customer-note"
           />
           <ModelTable
-            modelArray={quote.charges}
+            modelArray={updatedQuote.charges}
             updatedModelArray={updatedQuoteCharges}
-            modelFields={quoteChargeFields}
+            modelFields={chargesFields}
             raiseState={raiseStateForQuoteCharge}
             modelDelete={deleteQuoteCharge}
             modelSave={saveQuoteCharge}
@@ -243,7 +273,7 @@ const QuoteDetail = props => {
         <div className="grid-container">
           <QuotePartGrid
             isBike={!!quote.bike}
-            quoteParts={quote.quoteParts}
+            quoteParts={getQuoteParts(updatedQuote, sections, bike, parts, brands)}
             updatedQuoteParts={updatedQuoteParts}
             brands={brands}
             suppliers={suppliers}
@@ -285,8 +315,8 @@ QuoteDetail.propTypes = {
   saveQuote: PropTypes.func.isRequired,
   archiveQuote: PropTypes.func,
   orderQuote: PropTypes.func,
-  cloneQuote: PropTypes.func,
   editQuote: PropTypes.func,
+  cloneQuote: PropTypes.func,
   changeRoute: PropTypes.func.isRequired,
   unarchiveQuote: PropTypes.func,
   createNote: PropTypes.func.isRequired,

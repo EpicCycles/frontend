@@ -1,4 +1,4 @@
-import { SELECT_ONE, TEXT, UPD_BY_FIELD, UPD_DATE_FIELD } from '../../app/model/helpers/fields';
+import { SELECT_ONE, TEXT } from '../../app/model/helpers/fields';
 import { VALUE_MISSING } from '../../app/model/helpers/error';
 
 export const FITTING_TYPE_CHOICES = [

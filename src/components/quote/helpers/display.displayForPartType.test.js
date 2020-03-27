@@ -2,7 +2,7 @@ import { displayForPartType } from './display';
 
 describe('displayForPartType', () => {
   const quoteParts = [
-    { id: 11, partType: 231, part: 1, not_required: true },
+    { id: 11, partType: 231, part: 1, omit: true },
     { id: 12, partType: 231 },
     { id: 92, part: 192, partType: 91 },
     { id: 9331, part: 19331, partType: 91 },
@@ -24,7 +24,7 @@ describe('displayForPartType', () => {
     const partTypeId = 231;
     const expectedResult = {
       bikePart: { id: 11, partType: 231 },
-      quotePart: { id: 11, partType: 231, part: 1, not_required: true },
+      quotePart: { id: 11, partType: 231, part: 1, omit: true },
       replacementPart: { id: 1, partType: 231 },
       additionalParts: [{ id: 12, partType: 231 }],
     };

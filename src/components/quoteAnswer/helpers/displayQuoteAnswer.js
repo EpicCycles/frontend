@@ -7,8 +7,8 @@ export const displayQuoteAnswer = (quote, questions) => {
   return questionsToUse
     .filter(q => {
       const quoteAnswer = answers ? answers.find(qa => qa.question === q.id) : undefined;
-         const quoteCharge = charges ? charges.find(qc => qc.charge === q.charge) : undefined;
-   return !!quoteAnswer  || !! quoteCharge|| !q.deleted;
+      const quoteCharge = charges ? charges.find(qc => qc.charge === q.charge) : undefined;
+      return !!quoteAnswer || !!quoteCharge || !q.deleted;
     })
     .map(q => {
       const quoteAnswer = answers ? answers.find(qa => qa.question === q.id) : undefined;

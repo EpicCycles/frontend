@@ -46,7 +46,7 @@ describe('EditModelButtons', () => {
       />,
     );
     expect(findDataTest(component, 'save-button')).toHaveLength(1);
-    expect(findDataTest(component, 'save-button').prop('disabled')).toBeFalsy();
+    expect(findDataTest(component, 'save-button').prop('disabled')).toBeTruthy();
     expect(findDataTest(component, 'reset-button')).toHaveLength(1);
     expect(findDataTest(component, 'reset-button').prop('disabled')).toBeTruthy();
     expect(findDataTest(component, 'delete-button')).toHaveLength(1);

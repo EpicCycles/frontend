@@ -1,5 +1,8 @@
-import { QUANTITY_FIELD, TRADE_IN_PRICE_FIELD } from '../../app/model/helpers/fields';
-import { PART_DESC_FIELD, PART_PRICE_FIELD } from '../../quotePart/helpers/quotePartFields';
+import {
+  DESC_FIELD,
+  PART_PRICE_FIELD,
+  TRADE_IN_FIELD,
+} from '../../quotePart/helpers/quotePartFields';
 import { PART_TYPE_NAME_FIELD, quoteSummaryFields, SECTION_NAME_FIELD } from './quoteSummaryFields';
 import { TOTAL_PRICE_FIELD } from '../../quote/helpers/quoteFields';
 
@@ -9,7 +12,7 @@ describe('quoteSummaryHeaders', () => {
     expect(results).toEqual([
       SECTION_NAME_FIELD,
       PART_TYPE_NAME_FIELD,
-      PART_DESC_FIELD,
+      DESC_FIELD,
       TOTAL_PRICE_FIELD,
     ]);
   });
@@ -18,7 +21,7 @@ describe('quoteSummaryHeaders', () => {
     expect(results).toEqual([
       SECTION_NAME_FIELD,
       PART_TYPE_NAME_FIELD,
-      PART_DESC_FIELD,
+      DESC_FIELD,
       TOTAL_PRICE_FIELD,
     ]);
   });
@@ -27,8 +30,18 @@ describe('quoteSummaryHeaders', () => {
     expect(results).toEqual([
       SECTION_NAME_FIELD,
       PART_TYPE_NAME_FIELD,
-      PART_DESC_FIELD,
-      TRADE_IN_PRICE_FIELD,
+      DESC_FIELD,
+      PART_PRICE_FIELD,
+      TOTAL_PRICE_FIELD,
+    ]);
+  });
+  it('should show all fields when prices are required and bike exists', () => {
+    const results = quoteSummaryFields(true, 12);
+    expect(results).toEqual([
+      SECTION_NAME_FIELD,
+      PART_TYPE_NAME_FIELD,
+      DESC_FIELD,
+      TRADE_IN_FIELD,
       PART_PRICE_FIELD,
       TOTAL_PRICE_FIELD,
     ]);

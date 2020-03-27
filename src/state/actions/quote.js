@@ -106,10 +106,19 @@ export const unarchiveQuoteError = error => ({
   type: `${UNARCHIVE_QUOTE}_ERROR`,
   payload: error,
 });
-export const saveQuote = quote => ({
-  type: `${UPDATE_QUOTE}_REQUESTED`,
-  payload: { quote },
-});
+export const saveQuote = quote => {
+  if (quote.id) {
+    return {
+      type: `${UPDATE_QUOTE}_REQUESTED`,
+      payload: { quote },
+    };
+  } else {
+    return {
+      type: `${CREATE_QUOTE}_REQUESTED`,
+      payload: { quote },
+    };
+  }
+};
 export const saveQuoteOK = responseData => ({
   type: `${UPDATE_QUOTE}_OK`,
   payload: responseData,

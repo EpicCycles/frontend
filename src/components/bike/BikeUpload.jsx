@@ -107,7 +107,6 @@ class BikeUpload extends React.Component {
       rowMappings,
       uploadedHeaders,
       uploadedData,
-      apiData,
     } = this.state;
     return (
       <Fragment key="bikeUpload">

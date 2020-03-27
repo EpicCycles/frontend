@@ -26,6 +26,7 @@ import ModelTable from '../app/model/ModelTable';
 import { updateModelArrayOnModel } from '../app/model/helpers/updateModelArrayOnModel';
 import { removeModelFromArrayOnModel } from '../app/model/helpers/removeModelFromArrayOnModel';
 import EditModelButtons from '../app/model/EditModelButtons';
+import {getEditedFields} from "../app/model/helpers/getEditedFields";
 
 const emptyFitting = createEmptyModelWithDefaultFields(fittingFields);
 const emptyAddress = createEmptyModelWithDefaultFields(customerAddressFields);
@@ -101,12 +102,16 @@ const CustomerEdit = props => {
     }
     setFitting(emptyFitting);
   };
-  const saveOrCreateCustomer = customer => {
+  const saveOrCreateCustomer = () => {
     if (customer.id) {
       props.saveCustomer(customer);
     } else {
       props.createCustomer(customer);
     }
+  };
+  const saveCustomerChanges = customerWithChanges => {
+    const customerChangedFields = getEditedFields(customerWithChanges, customerFields);
+    setCustomer(updateObject(customer, customerChangedFields));
   };
   const additionalFittingActions = [
     {
@@ -132,7 +137,7 @@ const CustomerEdit = props => {
     unarchiveQuote,
     getQuoteToCopy,
   } = props;
-  const { fittings, addresses, phones } = customer;
+  const { fittings, addresses, phoneNumbers } = customer;
   const customerKey = getModelKey(customer);
   const notesToView = notes ? notes.filter(note => seeAllNotes || !note.quote) : [];
   return (
@@ -160,6 +165,7 @@ const CustomerEdit = props => {
               key="customerEdit"
               data-test="edit-customer"
               className="fit-content"
+              modelSave={saveCustomerChanges}
             />
             <EditModel
               model={fitting}
@@ -199,9 +205,9 @@ const CustomerEdit = props => {
             <CustomerPhoneGrid
               deleteCustomerPhone={deletePhone}
               saveCustomerPhone={saveOrCreatePhone}
-              phones={phones}
+              phoneNumbers={phoneNumbers}
               newPhone={newPhone}
-              data-test="edit-customer-phones"
+              data-test="edit-customer-phoneNumbers"
             />
           </div>
           {customerId && quotes && doWeHaveObjects(quotes) && (

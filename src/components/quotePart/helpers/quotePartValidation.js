@@ -6,35 +6,31 @@ export const quotePartValidation = (updatedQuotePart, brands, parts) => {
   if (!validatedQuotePart.error_detail) validatedQuotePart.error_detail = {};
   // reset price if there is no part or this is not a replacement
 
-  if (updatedQuotePart.not_required) {
-    if (!updatedQuotePart._partType.can_be_substituted) validatedQuotePart.part_desc = undefined;
+  if (updatedQuotePart.omit) {
+    if (!updatedQuotePart._partType.can_be_substituted) validatedQuotePart.desc = undefined;
   } else {
-    validatedQuotePart.trade_in_price = undefined;
+    validatedQuotePart.tradeIn = undefined;
   }
 
-  if (validatedQuotePart.part_desc) {
+  if (validatedQuotePart.desc) {
     const _completePart = findPartWithDescription(
-      validatedQuotePart.part_desc,
+      validatedQuotePart.desc,
       validatedQuotePart.partType,
       parts,
       brands,
     );
-    if (!_completePart) {
-      validatedQuotePart.error_detail.part_desc =
-        'Please include a brand in the part name to add this part.';
-    } else {
+    if (_completePart) {
       validatedQuotePart.part = _completePart.id;
+    } else {
+      validatedQuotePart.part = undefined;
     }
     validatedQuotePart._completePart = _completePart;
   } else {
     validatedQuotePart._completePart = undefined;
-  }
-
-  if (!validatedQuotePart._completePart) {
-    validatedQuotePart.quantity = undefined;
-    validatedQuotePart.part_price = undefined;
     validatedQuotePart.part = undefined;
-    validatedQuotePart.additional_data = undefined;
+    validatedQuotePart.qty = undefined;
+    validatedQuotePart.price = undefined;
+    validatedQuotePart.info = undefined;
   }
 
   validatedQuotePart.error = isItAnObject(validatedQuotePart.error_detail);

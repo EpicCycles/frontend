@@ -18,6 +18,7 @@ export const updateModelArrayOnModel = (
   entryToSave,
 ) => {
   const updatedModel = updateObject(model);
+
   const existingObjectArray = updatedModel[modelArrayFieldName];
   const entryToSaveData = updateObject(
     { id: entryToSave.id || getNextIdValue(existingObjectArray) },

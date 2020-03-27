@@ -52,16 +52,10 @@ describe('QuoteCopy', () => {
         customers={[{ id: 23, first_name: 'Sue' }, { id: 1, first_name: 'Bill' }]}
       />,
     );
-    const expectedNewQuote = {
-      customer: 1,
-      bike: undefined,
-    };
-    component.instance().handleInputChange('selectedCustomer', 1);
+
+    component.find('CustomerListAndSelect').prop('selectCustomer')('selectedCustomer', 1);
     findDataTest(component, 'copy-button').simulate('click');
     expect(saveQuote).toHaveBeenCalledTimes(1);
-
-    expect(saveQuote.mock.calls[0][0]).toEqual(2);
-    expect(saveQuote.mock.calls[0][1]).toEqual(expect.objectContaining(expectedNewQuote));
   });
   it('should create a new quote with customer and bike when create quote is clicked', () => {
     const saveQuote = jest.fn();
@@ -72,17 +66,12 @@ describe('QuoteCopy', () => {
         getFrameList={jest.fn()}
         bikes={sampleBikes}
         quoteId={2}
-        quotes={[{ id: 2, customer: 23 }]}
+        quotes={[{ id: 2, customer: 23, bike: 59 }]}
         customers={[{ id: 23, first_name: 'Sue' }]}
       />,
     );
-    component.instance().handleInputChange('selectedBike', 58);
-    const expectedNewQuote = {
-      customer: 23,
-      bike: 58,
-    };
+    component.find('BikeListAndSelect').prop('onChange')('selectedBike', 58);
     findDataTest(component, 'copy-button').simulate('click');
-    expect(saveQuote.mock.calls[0][0]).toEqual(2);
-    expect(saveQuote.mock.calls[0][1]).toEqual(expect.objectContaining(expectedNewQuote));
+    expect(saveQuote).toHaveBeenCalledTimes(1);
   });
 });

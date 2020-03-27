@@ -4,25 +4,31 @@ import * as PropTypes from 'prop-types';
 import { getModelKey } from '../app/model/helpers/model';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { displayQuoteAnswer } from './helpers/displayQuoteAnswer';
-import { quoteAnswerFields } from './helpers/quoteAnswerFields';
+import { quoteAnswerDataFields, quoteAnswerFields } from './helpers/quoteAnswerFields';
 import EditModelButtons from '../app/model/EditModelButtons';
 import { updateModelArrayOnModel } from '../app/model/helpers/updateModelArrayOnModel';
 import { removeModelFromArrayOnModel } from '../app/model/helpers/removeModelFromArrayOnModel';
 import EditModel from '../app/model/EditModel';
+import { quoteChargeForAnswer } from '../quoteCharge/helpers/quoteChargeForAnswer';
 
 const QuoteAnswers = props => {
   let [updatedQuote, setUpdatedQuote] = useState(props.quote);
-  const { quote, questions, saveQuote, isLoading } = props;
+  const { quote, questions, saveQuote, isLoading, charges } = props;
   const resetQuote = () => {
     setUpdatedQuote(quote);
   };
-  const saveAnswer = arrayObject => {
-    if (arrayObject.answerText === 'X') {
-      removeAnswer(arrayObject.id);
+  const saveAnswer = newAnswer => {
+    if (newAnswer.answerText === 'X') {
+      removeAnswer(getModelKey(newAnswer));
     } else {
-      setUpdatedQuote(
-        updateModelArrayOnModel(updatedQuote, 'answers', quoteAnswerDataFields, arrayObject),
+      const quoteWithAnswer = updateModelArrayOnModel(
+        updatedQuote,
+        'answers',
+        quoteAnswerDataFields,
+        newAnswer,
       );
+
+      setUpdatedQuote(quoteChargeForAnswer(quoteWithAnswer, newAnswer, questions, charges));
     }
   };
   const removeAnswer = itemId => {
@@ -67,6 +73,7 @@ QuoteAnswers.defaultProps = {
 QuoteAnswers.propTypes = {
   isLoading: PropTypes.bool,
   questions: PropTypes.array,
+  charges: PropTypes.array,
   quote: PropTypes.object.isRequired,
   saveQuote: PropTypes.func.isRequired,
 };

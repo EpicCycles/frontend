@@ -4,8 +4,7 @@ import CustomerListAndSearch from './CustomerListAndSearch';
 
 describe('CustomerListAndSearch.index tests', () => {
   // our mock login function to replace the one provided by mapDispatchToProps
-  const mockGetCustomerListAndSearchPagefn = jest.fn();
-  const mockGetCustomerListAndSearchfn = jest.fn();
+
   const initialState = {
     customer: {
       count: 0,
@@ -34,27 +33,33 @@ describe('CustomerListAndSearch.index tests', () => {
     },
   ];
   it('renders the CustomerListAndSearch correctly', () => {
+    const mockGetCustomerListPagefn = jest.fn();
+    const mockGetCustomerListfn = jest.fn();
     const initialList = shallow(
       <CustomerListAndSearch
-        getCustomerListAndSearchPage={mockGetCustomerListAndSearchPagefn}
-        getCustomerListAndSearch={mockGetCustomerListAndSearchfn}
+        getCustomerListPage={mockGetCustomerListPagefn}
+        getCustomerList={mockGetCustomerListfn}
         clearCustomerState={jest.fn()}
         addNewCustomer={jest.fn()}
         getCustomer={jest.fn()}
         count={0}
-        customers={[]}
+        f
         isLoading={false}
         page={0}
         totalPages={0}
       />,
     );
     expect(toJson(initialList)).toMatchSnapshot();
+    expect(mockGetCustomerListfn).toHaveBeenCalledWith('', '', '');
+    expect(mockGetCustomerListPagefn).not.toHaveBeenCalled();
   });
   it('renders the CustomerListAndSearch correctly when there are customers', () => {
+    const mockGetCustomerListPagefn = jest.fn();
+    const mockGetCustomerListfn = jest.fn();
     const initialList = shallow(
       <CustomerListAndSearch
-        getCustomerListAndSearchPage={mockGetCustomerListAndSearchPagefn}
-        getCustomerListAndSearch={mockGetCustomerListAndSearchfn}
+        getCustomerListPage={mockGetCustomerListPagefn}
+        getCustomerList={mockGetCustomerListfn}
         addNewCustomer={jest.fn()}
         clearCustomerState={jest.fn()}
         getCustomer={jest.fn()}
@@ -63,8 +68,11 @@ describe('CustomerListAndSearch.index tests', () => {
         isLoading={false}
         page={0}
         totalPages={1}
+        searchParams={{ firstName: 'fred' }}
       />,
     );
     expect(toJson(initialList)).toMatchSnapshot();
+    expect(mockGetCustomerListfn).not.toHaveBeenCalled();
+    expect(mockGetCustomerListPagefn).not.toHaveBeenCalled();
   });
 });

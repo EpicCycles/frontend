@@ -1,5 +1,5 @@
 import { colourStyles } from './constants';
-import { getModelKey } from '../components/app/model/helpers/model';
+import { getModelKey, toInteger } from '../components/app/model/helpers/model';
 
 export const sortObjectsByAttribute = (initialArray, attributeName = 'id') => {
   return initialArray.sort((a, b) => {
@@ -123,7 +123,7 @@ export const findObjectWithId = (arrayOfObjects, objectId) => {
   if (isNaN(objectId)) return;
   if (Array.isArray(arrayOfObjects)) {
     // eslint-disable-next-line
-        return arrayOfObjects.find(object => object.id === Number.parseInt(objectId));
+        return arrayOfObjects.find(object => toInteger(object.id) === toInteger(objectId));
   } else {
     return;
   }
@@ -184,8 +184,13 @@ export const updateObjectInArray = (initialArray, updatedObject, componentKey) =
   return arrayWithUpdates;
 };
 
-export const updateObject = (initialObject = {}, fieldList1 = {}, fieldList2 = {}) => {
-  return Object.assign({}, initialObject, fieldList1, fieldList2);
+export const updateObject = (
+  initialObject = {},
+  fieldList1 = {},
+  fieldList2 = {},
+  fieldList3 = {},
+) => {
+  return Object.assign({}, initialObject, fieldList1, fieldList2, fieldList3);
 };
 export const updateObjectWithApiErrors = (object, actionPayload) => {
   const { error, error_detail } = actionPayload;

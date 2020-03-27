@@ -109,7 +109,7 @@ const EditModelInput = props => {
       break;
     case NUMBER:
     case CURRENCY:
-      const displayValue = fieldValue ? fieldValue.toString() : '';
+      const displayValue = fieldValue === undefined ? '' : fieldValue.toString();
       editComponent = (
         <FormTextInput
           className={className}

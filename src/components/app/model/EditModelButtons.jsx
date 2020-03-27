@@ -5,7 +5,7 @@ import { isModelValid } from './helpers/model';
 
 const EditModelButtons = props => {
   const { deleteModel, saveModel, model, resetChanges } = props;
-  const canSave = !!model && isModelValid(model);
+  const canSave = !!model && model.changed && isModelValid(model);
   const canReset = !!model && model.changed;
 
   return (

@@ -47,7 +47,11 @@ const ModelTable = props => {
                 modelFields={modelFields}
                 actionsRequired={actionsRequired}
                 sourceDataArrays={sourceDataArrays}
-                modelActions={modelActions(modelInstance, { modelSave, modelDelete }, additionalActions)}
+                modelActions={modelActions(
+                  modelInstance,
+                  { modelSave, modelDelete },
+                  additionalActions,
+                )}
                 showReadOnlyFields
                 lockFirstColumn={lockFirstColumn}
                 key={`${blockIdentity}_${modelInstanceKey}`}

@@ -29,6 +29,7 @@ class QuoteList extends React.Component {
       bikes,
       brands,
       customers,
+      charges,
       changeRoute,
       frames,
       quotes,
@@ -85,15 +86,14 @@ class QuoteList extends React.Component {
                 <QuoteSummary
                   showPrices={true}
                   quote={quote}
-                  quoteParts={quoteParts}
                   brands={brands}
                   sections={sections}
                   parts={parts}
-                  bikeParts={bikeParts}
                   bikes={bikes}
                   customers={customers}
                   frames={frames}
                   users={users}
+                  charges={charges}
                 />
               )}
             </div>
@@ -136,13 +136,12 @@ QuoteList.defaultProps = {
 };
 QuoteList.propTypes = {
   bikes: PropTypes.array,
-  bikeParts: PropTypes.array,
   brands: PropTypes.array,
   suppliers: PropTypes.array,
   frames: PropTypes.array,
+  charges: PropTypes.array,
   customers: PropTypes.array,
   quotes: PropTypes.array,
-  quoteParts: PropTypes.array,
   parts: PropTypes.array,
   users: PropTypes.array,
   sections: PropTypes.array,

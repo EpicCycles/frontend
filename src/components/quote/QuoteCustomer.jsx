@@ -85,7 +85,7 @@ QuoteCustomer.propTypes = {
   isLoading: PropTypes.bool,
   customers: PropTypes.array,
   addresses: PropTypes.array,
-  phones: PropTypes.array,
+  phoneNumbers: PropTypes.array,
   count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   next: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   previous: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

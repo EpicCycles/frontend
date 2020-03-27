@@ -17,7 +17,7 @@ const QuoteSummaryParts = props => {
     bikeParts,
     lockFirstColumn,
   } = props;
-  const summaryFields = quoteSummaryFields(showPrices);
+  const summaryFields = quoteSummaryFields(showPrices, quote.bike);
   const summaryData = quoteSummaryElements(
     quote,
     sections,

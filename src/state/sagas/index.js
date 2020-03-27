@@ -107,8 +107,6 @@ export default function* rootSaga() {
     watchForSaveQuote(),
     watchForUnarchiveQuote(),
     watchForArchiveQuote(),
-    watchForSaveQuotePart(),
-    watchForDeleteQuotePart(),
     watchForGetQuoteToCopy(),
     watchForIssueQuote(),
     watchForOrderQuote(),

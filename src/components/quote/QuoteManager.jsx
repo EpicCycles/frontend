@@ -132,6 +132,7 @@ const QuoteManager = props => {
       )}
       {currentTab === answerTab.tabValue && (
         <QuoteAnswers
+          charges={charges}
           quote={quote}
           questions={questions}
           saveQuote={saveQuote}

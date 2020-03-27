@@ -2,11 +2,11 @@ import { removeModelFromArrayOnModel } from './removeModelFromArrayOnModel';
 
 describe('removeModelFromArrayOnModel', () => {
   it('should return an empty array when field is not found', () => {
-    const expectedResult = { arrayOfThings: [] };
+    const expectedResult = { arrayOfThings: [], changed: true };
     expect(removeModelFromArrayOnModel(undefined, 'arrayOfThings', 123)).toEqual(expectedResult);
   });
   it('should return an empty array when field is found but empty', () => {
-    const expectedResult = { id: 123, arrayOfThings: [] };
+    const expectedResult = { id: 123, arrayOfThings: [], changed: true };
     const model = { id: 123, arrayOfThings: [] };
     expect(removeModelFromArrayOnModel(model, 'arrayOfThings', 123)).toEqual(expectedResult);
   });
@@ -14,15 +14,16 @@ describe('removeModelFromArrayOnModel', () => {
     const expectedResult = {
       id: 123,
       arrayOfThings: [
-        { id: 12, fieldvaluu: 'jhg jhg' },
-        { id: 1234, fieldvaluu: 'jhg jhg x' },
+        { id: 12, fieldValue: 'jhg jhg' },
+        { id: 1234, fieldValue: 'jhg jhg x' },
       ],
+      changed: true,
     };
     const model = {
       id: 123,
       arrayOfThings: [
-        { id: 12, fieldvaluu: 'jhg jhg' },
-        { id: 1234, fieldvaluu: 'jhg jhg x' },
+        { id: 12, fieldValue: 'jhg jhg' },
+        { id: 1234, fieldValue: 'jhg jhg x' },
       ],
     };
     expect(removeModelFromArrayOnModel(model, 'arrayOfThings', 123)).toEqual(expectedResult);
@@ -31,23 +32,24 @@ describe('removeModelFromArrayOnModel', () => {
     const expectedResult = {
       id: 123,
       arrayOfThings: [
-        { id: 12, fieldvaluu: 'jhg jhg' },
-        { id: 1234, fieldvaluu: 'jhg jhg x' },
+        { id: 12, fieldValue: 'jhg jhg' },
+        { id: 1234, fieldValue: 'jhg jhg x' },
       ],
+      changed: true,
     };
     const model = {
       id: 123,
       arrayOfThings: [
-        { id: 12, fieldvaluu: 'jhg jhg' },
-        { id: 123, fieldvaluu: 'jhg jhg fdf' },
-        { id: 1234, fieldvaluu: 'jhg jhg x' },
+        { id: 12, fieldValue: 'jhg jhg' },
+        { id: 123, fieldValue: 'jhg jhg fdf' },
+        { id: 1234, fieldValue: 'jhg jhg x' },
       ],
     };
     expect(removeModelFromArrayOnModel(model, 'arrayOfThings', 123)).toEqual(expectedResult);
   });
   it('should remove element from array when id is only item in array', () => {
-    const expectedResult = { id: 123, arrayOfThings: [] };
-    const model = { id: 123, arrayOfThings: [{ id: 123, fieldvaluu: 'jhg jhg fdf' }] };
+    const expectedResult = { id: 123, arrayOfThings: [], changed: true };
+    const model = { id: 123, arrayOfThings: [{ id: 123, fieldValue: 'jhg jhg fdf' }] };
     expect(removeModelFromArrayOnModel(model, 'arrayOfThings', 123)).toEqual(expectedResult);
   });
 });

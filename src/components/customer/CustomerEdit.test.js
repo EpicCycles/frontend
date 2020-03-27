@@ -18,7 +18,7 @@ describe('CustomerEdit', () => {
       last_name: 'Blogs',
       email: 'anna@blogs.co.uk',
       addresses: ['1', '2'],
-      phones: ['10', '20'],
+      phoneNumbers: ['10', '20'],
       fittings: ['1011', '2022'],
     };
     const component = shallow(
@@ -28,7 +28,7 @@ describe('CustomerEdit', () => {
     expect(findDataTest(component, 'edit-fitting')).toHaveLength(1);
     expect(findDataTest(component, 'fitting-table')).toHaveLength(1);
     expect(findDataTest(component, 'edit-customer-addresses')).toHaveLength(1);
-    expect(findDataTest(component, 'edit-customer-phones')).toHaveLength(1);
+    expect(findDataTest(component, 'edit-customer-phoneNumbers')).toHaveLength(1);
     expect(findDataTest(component, 'add-customer-note')).toHaveLength(1);
   });
   it('displays a new customer (no id) properly', () => {
@@ -38,7 +38,7 @@ describe('CustomerEdit', () => {
     expect(findDataTest(component, 'edit-fitting')).toHaveLength(1);
     expect(findDataTest(component, 'fitting-table')).toHaveLength(0);
     expect(findDataTest(component, 'edit-customer-addresses')).toHaveLength(1);
-    expect(findDataTest(component, 'edit-customer-phones')).toHaveLength(1);
+    expect(findDataTest(component, 'edit-customer-phoneNumbers')).toHaveLength(1);
     expect(findDataTest(component, 'add-customer-note')).toHaveLength(0);
   });
 });

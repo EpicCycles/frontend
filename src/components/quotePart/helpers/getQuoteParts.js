@@ -1,68 +1,75 @@
 import { updateObject } from '../../../helpers/utils';
 import { buildPartString } from '../../part/helpers/part';
+import { toInteger } from '../../app/model/helpers/model';
 
-export const getQuoteParts = (quote, sections, quoteParts, bike, parts, brands) => {
+export const getQuoteParts = (quote, sections, bike, parts, brands) => {
   const displayQuoteParts = [];
   const isBike = !!quote.bike;
-  const quoteQP = quoteParts.filter(qp => qp.quote === quote.id);
+  const quoteQP = quote.quoteParts ? quote.quoteParts : [];
   const quoteBP = bike ? bike.bikeParts : [];
-  const basicQuotePart = { quote: quote.id, _isBike: isBike };
   sections.forEach(section => {
     section.partTypes.forEach(partType => {
       const partTypeId = partType.id;
+      let standardReplacements = { _partType: partType, _isBike: isBike };
       const bikePart = quoteBP.find(bp => bp.partType === partTypeId);
       if (bikePart) {
-        const quotePartReplacement = quoteQP.find(
-          qp => qp.not_required && qp.partType === partTypeId,
-        );
+        const quotePartReplacement = quoteQP.find(qp => qp.omit && qp.partType === partTypeId);
+        standardReplacements._bikePart = bikePart;
         if (quotePartReplacement) {
           if (quotePartReplacement.part) {
             const completePart = parts.find(p => p.id === quotePartReplacement.part);
             displayQuoteParts.push(
-              updateObject(basicQuotePart, quotePartReplacement, {
-                _bikePart: bikePart,
-                _completePart: completePart,
-                _partType: partType,
-                part_desc: buildPartString(completePart, brands),
-              }),
+              updateObject(
+                quotePartReplacement,
+                {
+                  _completePart: completePart,
+                  desc: buildPartString(completePart, brands),
+                },
+                standardReplacements,
+              ),
             );
           } else {
             displayQuoteParts.push(
-              updateObject(basicQuotePart, quotePartReplacement, {
-                _partType: partType,
-                _bikePart: bikePart,
-              }),
+              updateObject(
+                quotePartReplacement,
+                {
+                  desc: quotePartReplacement.desc,
+                },
+                standardReplacements,
+              ),
             );
           }
         } else {
           displayQuoteParts.push(
-            updateObject(basicQuotePart, {
-              dummyKey: `bikePart_${bikePart.id}`,
-              partType: partTypeId,
-              _bikePart: bikePart,
-              _partType: partType,
-            }),
+            updateObject(
+              {
+                dummyKey: `bikePart_${bikePart.id}`,
+                desc: bikePart.desc,
+                partType: partTypeId,
+              },
+              standardReplacements,
+            ),
           );
         }
       }
+      standardReplacements = { _partType: partType, _isBike: isBike };
       quoteQP
-        .filter(qp => !qp.not_required && qp.partType === partTypeId)
+        .filter(qp => !qp.omit && toInteger(qp.partType) === partTypeId)
         .forEach(np => {
           if (np.part) {
             const completePart = parts.find(p => p.id === np.part);
             displayQuoteParts.push(
-              updateObject(basicQuotePart, np, {
-                _completePart: completePart,
-                _partType: partType,
-                part_desc: buildPartString(completePart, brands),
-              }),
+              updateObject(
+                np,
+                {
+                  _completePart: completePart,
+                  desc: buildPartString(completePart, brands),
+                },
+                standardReplacements,
+              ),
             );
           } else {
-            displayQuoteParts.push(
-              updateObject(basicQuotePart, np, {
-                _partType: partType,
-              }),
-            );
+            displayQuoteParts.push(updateObject(np, standardReplacements));
           }
         });
     });
@@ -70,7 +77,7 @@ export const getQuoteParts = (quote, sections, quoteParts, bike, parts, brands) 
   quoteQP
     .filter(qp => !qp.partType)
     .forEach(np => {
-      displayQuoteParts.push(updateObject(basicQuotePart, np));
+      displayQuoteParts.push(updateObject(np, { _isBike: isBike }));
     });
   return displayQuoteParts;
 };

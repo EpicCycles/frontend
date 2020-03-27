@@ -50,7 +50,7 @@ export const sampleBikes = [
     model_name: '4',
     description: null,
     colours: 'anthracite/black/lime',
-    rrp: null,
+    rrp: 2300,
     epic_price: null,
     club_price: 2249.0,
     sizes: null,

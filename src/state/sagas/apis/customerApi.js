@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
 import api from '../api';
+import { updateObject } from '../../../helpers/utils';
+import { customerToDatabaseFormat } from './utils/customerToDatabaseFormat';
 
 export const getCustomerListApi = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
@@ -14,12 +16,12 @@ export const getCustomerApi = async payload => {
 
 export const createCustomerApi = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  const customer = payload.customer;
+  const customer = customerToDatabaseFormat(payload.customer);
   return await api.instance.post('/rest-epic/customer', customer);
 };
 export const saveCustomerApi = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  const customer = payload.customer;
+  const customer = customerToDatabaseFormat(payload.customer);
   return await api.instance.post(`/rest-epic/customer/${customer.id}`, customer);
 };
 export const deleteCustomerApi = async payload => {

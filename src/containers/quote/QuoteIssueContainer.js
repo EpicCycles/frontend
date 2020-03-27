@@ -1,10 +1,7 @@
 import { connect } from 'react-redux';
 import { saveBrands } from '../../state/actions/core';
 import { getFrameList } from '../../state/actions/bike';
-import {
-  issueQuote,
-  saveQuote,
-} from '../../state/actions/quote';
+import { issueQuote, saveQuote } from '../../state/actions/quote';
 import { addMessage, changeRoute } from '../../state/actions/application';
 import QuoteIssue from '../../components/quote/QuoteIssue';
 import { createNote, deleteNote, saveNote } from '../../state/actions/note';

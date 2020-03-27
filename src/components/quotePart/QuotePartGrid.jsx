@@ -23,11 +23,12 @@ const QuotePartGrid = props => {
     raiseStateForQuotePart,
     pricesRequired,
   } = props;
+  const baseModelFields = isBike ? QUOTE_PART_FOR_BIKE : QUOTE_PART_NON_BIKE;
   return (
     <div className="grid-container">
       <div className="grid">
         <ModelTableHeaderRow
-          modelFields={isBike ? QUOTE_PART_FOR_BIKE : QUOTE_PART_NON_BIKE}
+          modelFields={baseModelFields}
           lockFirstColumn
           includeActions
         />
@@ -37,6 +38,7 @@ const QuotePartGrid = props => {
           const updatedQuotePart = findObjectWithKey(updatedQuoteParts, rowKey);
           return (
             <QuotePartEdit
+              modelFields={baseModelFields}
               quotePart={updatedQuotePart ? updatedQuotePart : quotePart}
               persistedQuotePart={quotePart}
               deleteQuotePart={deleteQuotePart}

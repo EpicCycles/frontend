@@ -30,8 +30,8 @@ describe('quoteIssueChecks', () => {
       bike: 23,
       quote_price: 1234,
       quoteParts: [
-        { partType: 2, not_required: true, trade_in_price: 10 },
-        { partType: 3, part: 234, part_price: 123.45 },
+        { partType: 2, omit: true, tradeIn: 10 },
+        { partType: 3, part: 234, price: 123.45 },
       ],
     };
     expect(quoteIssueChecks(quote)).toBeUndefined();
@@ -41,8 +41,8 @@ describe('quoteIssueChecks', () => {
       id: 'qb',
       bike: 23,
       quoteParts: [
-        { partType: 2, not_required: true, trade_in_price: 10 },
-        { partType: 3, part: 234, part_price: 123.45 },
+        { partType: 2, omit: true, tradeIn: 10 },
+        { partType: 3, part: 234, price: 123.45 },
       ],
     };
     expect(quoteIssueChecks(quote)).toBeUndefined();
@@ -53,8 +53,8 @@ describe('quoteIssueChecks', () => {
       bike: 23,
       quote_price: 1234,
       quoteParts: [
-        { partType: 2, not_required: true },
-        { partType: 3, part: 234, part_price: 123.45 },
+        { partType: 2, omit: true },
+        { partType: 3, part: 234, price: 123.45 },
       ],
     };
     expect(quoteIssueChecks(quote)).toBeUndefined();
@@ -64,7 +64,7 @@ describe('quoteIssueChecks', () => {
       id: 'qb',
       quote_price: 1234,
       quoteParts: [
-        { partType: 2, part_desc: 'I know I need something' },
+        { partType: 2, desc: 'I know I need something' },
         { partType: 3, part: 234 },
       ],
     };
@@ -75,7 +75,7 @@ describe('quoteIssueChecks', () => {
       id: 'qb',
       quote_price: 1234,
       bike: 23,
-      quoteParts: [{ partType: 2, not_required: true }, { partType: 3 }],
+      quoteParts: [{ partType: 2, omit: true }, { partType: 3 }],
     };
     expect(quoteIssueChecks(quote, true)).toEqual([TRADE_IN_PRICES_REQD]);
   });
@@ -85,7 +85,7 @@ describe('quoteIssueChecks', () => {
       quote_price: 1234,
       bike: 23,
       quoteParts: [
-        { partType: 2, not_required: true, trade_in_price: 10 },
+        { partType: 2, omit: true, tradeIn: 10 },
         { partType: 3, part: 234 },
       ],
     };

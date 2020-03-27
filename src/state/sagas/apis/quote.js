@@ -1,9 +1,10 @@
 import api from '../api';
 import { buildSearchCriteria } from './utils/list';
+import { quoteToDatabaseFormat } from './utils/quoteToDatabaseFormat';
 
 const createQuote = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  const quote = payload.quote;
+  const quote = quoteToDatabaseFormat(payload.quote);
   return await api.instance.post('/rest-epic/quotes', quote);
 };
 
@@ -31,7 +32,7 @@ const orderQuote = async payload => {
 const saveQuote = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
   const quoteId = payload.quote.id;
-  const quoteData = payload.quote;
+  const quoteData = quoteToDatabaseFormat(payload.quote);
   return api.instance.put(`/rest-epic/quote/${quoteId}`, quoteData);
 };
 const getQuote = async payload => {

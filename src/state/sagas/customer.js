@@ -23,7 +23,6 @@ import * as selectors from '../selectors/user.js';
 import * as customerSelectors from '../selectors/customer.js';
 import { updateObject } from '../../helpers/utils';
 import { logError } from '../../helpers/api_error';
-import { LOGIN_URL } from '../../components/menus/helpers/menu';
 import { getNoteList } from '../actions/note';
 import {
   createCustomerApi,

@@ -16,7 +16,7 @@ import { CLEAR_ALL_STATE } from '../actions/application';
 import { CUSTOMER } from '../actions/customer';
 import { updateObjectInArray, updateObjectWithApiErrors } from '../../helpers/utils';
 import { getModelKey } from '../../components/app/model/helpers/model';
-import { quoteListToFrontEndFormat } from '../helpers/quote';
+import { quoteListToFrontEndFormat, quoteToFrontEndFormat } from '../helpers/quote';
 
 const initialState = {};
 

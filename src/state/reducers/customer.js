@@ -9,19 +9,13 @@ import {
 } from '../actions/customer';
 import { CHANGE_ROUTE, CLEAR_ALL_STATE } from '../actions/application';
 import { USER_LOGOUT, USER_NOT_VALIDATED } from '../actions/user';
-import {
-  addItemsToArray,
-  removeItemFromArray,
-  updateObjectInArray,
-  updateObjectWithApiErrors,
-} from '../../helpers/utils';
+import { addItemsToArray, removeItemFromArray } from '../../helpers/utils';
 import { FIND_QUOTES } from '../actions/quote';
 import { CUSTOMER_URL } from '../../components/menus/helpers/menu';
 import { customerListToFrontEndFormat, customerToFrontEndFormat } from '../helpers/customer';
 
 const initialState = {
   isLoading: false,
-  customers: [],
   count: 0,
   previous: '',
   next: '',
@@ -32,7 +26,6 @@ const initialState = {
   },
 };
 
-// this seemd to be the bit that is in reducers in loyalty code
 const customer = (state = initialState, action) => {
   switch (action.type) {
     case CLEAR_ALL_STATE:
@@ -146,7 +139,7 @@ const customer = (state = initialState, action) => {
     case `${FIND_QUOTES}_OK`:
       return {
         ...state,
-        customers: quoteToFrontEndFormat(action.payload.customers),
+        customers: customerListToFrontEndFormat(action.payload.customers),
         count: 0,
         previous: '',
         next: '',

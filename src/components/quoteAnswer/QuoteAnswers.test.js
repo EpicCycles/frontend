@@ -9,6 +9,10 @@ describe('QuoteAnswers', () => {
     { id: 3, question: 'Question 3', bike_only: true, charge: 23 },
     { id: 4, question: 'Question 4 deleted', deleted: true, charge: 23 },
   ];
+  const charges = [
+    { id: 21, price: 30 },
+    { id: 22, percentage: 25 },
+  ];
   it('should show a row for every question', () => {
     const quote = { id: 231, bike: 1234, answers: [{ question: 1, answer: 'Y' }] };
     const component = shallow(
@@ -22,7 +26,7 @@ describe('QuoteAnswers', () => {
     expect(component.find('EditModel')).toHaveLength(3);
   });
   it('should remove an answer when save and answer set to unknown', () => {
-    const quote = { id: 231, bike: 1234, answers: [{ id: 12, question: 1, answer: true}] };
+    const quote = { id: 231, bike: 1234, answers: [{ id: 12, question: 1, answer: true }] };
     const component = shallow(
       <QuoteAnswers
         saveQuoteAnswer={jest.fn()}
@@ -44,7 +48,7 @@ describe('QuoteAnswers', () => {
         .find('EditModel')
         .at(0)
         .prop('model'),
-      { answer: undefined ,answerText: 'X' },
+      { answer: undefined, answerText: 'X' },
     );
     component
       .find('EditModel')

@@ -3,6 +3,7 @@ import { getPartType } from '../../partType/helpers/partType';
 import { calculatePrice } from '../../part/helpers/price';
 import { quotePartValidation } from './quotePartValidation';
 import { textToNumber } from '../../../helpers/textToNumber';
+import { quotePartPrice } from './quotePartPrice';
 
 export const quotePartChanges = (
   quotePart,
@@ -18,21 +19,23 @@ export const quotePartChanges = (
     updatedQuotePart.partType &&
     (!updatedQuotePart._partType ||
       updatedQuotePart._partType.id !== textToNumber(String(updatedQuotePart.partType)))
-  )
+  ) {
     updatedQuotePart._partType = getPartType(updatedQuotePart.partType, sections);
+  }
 
   updatedQuotePart = quotePartValidation(updatedQuotePart, brands, parts);
-  if (
-    updatedQuotePart.part_desc !== quotePart.part_desc ||
-    updatedQuotePart.not_required !== quotePart.not_required
-  ) {
+  if (updatedQuotePart.desc !== quotePart.desc) {
     updatedQuotePart = updateObject(
       updatedQuotePart,
       calculatePrice(!!updatedQuotePart._isBike, updatedQuotePart._completePart, supplierProducts),
     );
   }
-  if (updatedQuotePart.not_required && updatedQuotePart.not_required !== quotePart.not_required) {
-    updatedQuotePart.trade_in_price = updatedQuotePart._bikePart.trade_in_price;
+  if (updatedQuotePart.omit) {
+    if (!quotePart.omit) {
+      updatedQuotePart.tradeIn = updatedQuotePart._bikePart.trade_in_price;
+    }
+  } else if (updatedQuotePart.tradeIn) {
+    updatedQuotePart.tradeIn = undefined;
   }
   return quotePartPrice(updatedQuotePart);
 };

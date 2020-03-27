@@ -14,7 +14,9 @@ export const QUOTE_STATUS_CHOICES = [
   { value: QUOTE_ORDERED, name: 'Order Created' },
 ];
 
-export const getQuoteStatus = quote_status => getNameForValue(quote_status, QUOTE_STATUS_CHOICES);
+export const getQuoteStatus = quote_status => {
+  return getNameForValue(quote_status, QUOTE_STATUS_CHOICES);
+};
 
 export const quoteDescription = (customer, bike, customers, frames, bikes, brands) => {
   let quote_desc;

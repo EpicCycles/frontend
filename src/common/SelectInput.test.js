@@ -54,7 +54,8 @@ describe('SelectInput', () => {
       />,
     );
     expect(toJson(component)).toMatchSnapshot();
-    expect(component.find('option')).toHaveLength(3);
+    expect(component.find('option')).toHaveLength(4);
+    expect(component.find('select').prop('value')).toEqual([]);
   });
   test('it sets a value to selected when single value', () => {
     const options = [
@@ -138,7 +139,7 @@ describe('SelectInput', () => {
   test('it shows the only choice as selected when the array has length 1', () => {
     const options = [{ value: 'H', name: 'Home' }];
     const component = shallow(
-      <SelectInput fieldName="myField" onChange={jest.fn()} options={options} isEmptyAllowed />,
+      <SelectInput fieldName="myField" onChange={jest.fn()} options={options} />,
     );
     expect(component.find('select').prop('value')).toEqual('H');
   });

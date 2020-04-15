@@ -3,8 +3,21 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 
 const SelectInput = props => {
+  const {
+    options,
+    isEmptyAllowed,
+    value,
+    disabled,
+    className,
+    fieldName,
+    error,
+    title,
+    label,
+    isMultiple,
+    multipleSize,
+  } = props;
+
   const makeValueStrings = () => {
-    const { value, isMultiple } = props;
     if (Array.isArray(value) && value.length > 0) {
       if (isMultiple) {
         return value.map(inputValue => inputValue.toString());
@@ -23,11 +36,11 @@ const SelectInput = props => {
   };
 
   const buildOptions = () => {
-    const { options, isEmptyAllowed } = props;
-
     let displayOptions = [];
     if (isEmptyAllowed) {
-      displayOptions.push({ value: 0, name: 'None' });
+      displayOptions.push({ value: '', name: 'None' });
+    } else if (!value) {
+      displayOptions.push({ value: '', name: '' });
     }
     options.forEach(option => {
       const displayName = option.name ? option.name : option.value;
@@ -47,7 +60,11 @@ const SelectInput = props => {
         if (option.isDefault) defaultValue.push(option.value.toString());
       });
     } else {
-      if (options.length === 1) defaultValue.push(options[0].value.toString());
+      if (isEmptyAllowed) {
+        defaultValue.push('');
+      } else if (options.length === 1) {
+        defaultValue.push(options[0].value.toString());
+      }
     }
     if (defaultValue.length > 0)
       if (isMultiple) {
@@ -73,7 +90,6 @@ const SelectInput = props => {
     }
   };
 
-  const { disabled, className, fieldName, error, title, label, isMultiple, multipleSize } = props;
   const selectedValue = makeValueStrings() || findDefaultSelections();
   const displayOptions = buildOptions(selectedValue);
   let useMultipleSize = multipleSize;

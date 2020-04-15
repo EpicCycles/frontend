@@ -15,9 +15,9 @@ exports[`SelectInput it renders a multiple select array if one is passed 1`] = `
     value={Array []}
   >
     <option
-      id="myField_0"
-      key="myField_0"
-      value={0}
+      id="myField_"
+      key="myField_"
+      value=""
     >
       None
     </option>
@@ -62,6 +62,11 @@ exports[`SelectInput it renders a multiple select array if one is passed with co
     value={Array []}
   >
     <option
+      id="myField_"
+      key="myField_"
+      value=""
+    />
+    <option
       id="myField_H"
       key="myField_H"
       value="H"
@@ -97,12 +102,12 @@ exports[`SelectInput it renders an empty option if one is allowed 1`] = `
     key="myField"
     name="myField"
     onChange={[Function]}
-    value="H"
+    value=""
   >
     <option
-      id="myField_0"
-      key="myField_0"
-      value={0}
+      id="myField_"
+      key="myField_"
+      value=""
     >
       None
     </option>
@@ -210,6 +215,11 @@ exports[`SelectInput it renders with minimum data 1`] = `
     value="H"
   >
     <option
+      id="myField_"
+      key="myField_"
+      value=""
+    />
+    <option
       id="myField_H"
       key="myField_H"
       value="H"
@@ -283,9 +293,9 @@ exports[`SelectInput it sets a value to selected when single value 1`] = `
     }
   >
     <option
-      id="myField_0"
-      key="myField_0"
-      value={0}
+      id="myField_"
+      key="myField_"
+      value=""
     >
       None
     </option>

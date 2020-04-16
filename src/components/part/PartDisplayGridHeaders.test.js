@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import PartDisplayGridHeaders from './PartDisplayGridHeaders';
 
 test('should display just part headers when supplier products no requested', () => {

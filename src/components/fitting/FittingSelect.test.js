@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import FittingSelect from './FittingSelect';
 import { fittingText } from './helpers/fitting';
 

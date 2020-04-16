@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import PartTypeData from './PartTypeData';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 

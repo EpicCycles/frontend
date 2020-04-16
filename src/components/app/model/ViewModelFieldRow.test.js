@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import ViewModelFieldRow from './ViewModelFieldRow';
 import { ADD_DATE_FIELD, ADDRESS1_FIELD } from './helpers/fields';
 import { NEW_ELEMENT_ID } from '../../../helpers/constants';

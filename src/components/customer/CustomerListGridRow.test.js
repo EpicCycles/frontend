@@ -1,4 +1,3 @@
-import React from 'react';
 import CustomerListGridRow from './CustomerListGridRow';
 import { assertComponentHasExpectedProps, findDataTest } from '../../helpers/jest_helpers/assert';
 import { customerFields } from '../app/model/helpers/fields';

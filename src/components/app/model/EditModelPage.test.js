@@ -1,4 +1,3 @@
-import React from 'react';
 import EditModelPage from './EditModelPage';
 import { customerFields } from './helpers/fields';
 import { findDataTest } from '../../../helpers/jest_helpers/assert';

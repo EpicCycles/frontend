@@ -1,5 +1,4 @@
 import EditModel from './EditModel';
-import React from 'react';
 import { assertComponentHasExpectedProps } from '../../../helpers/jest_helpers/assert';
 import { customerFields } from './helpers/fields';
 import { updateObject } from '../../../helpers/utils';

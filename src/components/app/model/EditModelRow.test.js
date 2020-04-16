@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import EditModelRow from './EditModelRow';
 import { customerAddressFields } from './helpers/fields';
 

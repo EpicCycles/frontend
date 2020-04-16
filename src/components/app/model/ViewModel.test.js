@@ -1,6 +1,5 @@
 import ViewModel from './ViewModel';
 import { customerFields } from './helpers/fields';
-import React from 'react';
 
 describe('ViewModel', () => {
   it('should show a model page when page mode is true', () => {

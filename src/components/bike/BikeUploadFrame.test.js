@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import BikeUploadFrame from './BikeUploadFrame';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 

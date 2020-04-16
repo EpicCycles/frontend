@@ -1,4 +1,3 @@
-import React from 'react';
 import SupplierSelect from './SupplierSelect';
 import { assertComponentHasExpectedProps } from '../../helpers/jest_helpers/assert';
 

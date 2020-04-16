@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import SupplierBlob from './SupplierBlob';
 
 test('supplier blob with just name', () => {

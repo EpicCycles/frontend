@@ -1,4 +1,3 @@
-import React from 'react';
 import QuoteManager from './QuoteManager';
 import { sampleBrands, sampleSections, sampleSuppliers } from '../../helpers/sampleData';
 import { assertComponentHasExpectedProps, findDataTest } from '../../helpers/jest_helpers/assert';

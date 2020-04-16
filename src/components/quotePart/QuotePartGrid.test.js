@@ -1,7 +1,6 @@
 import QuotePartGrid from './QuotePartGrid';
 import { assertComponentHasExpectedProps } from '../../helpers/jest_helpers/assert';
 import { QUOTE_PART_FOR_BIKE, QUOTE_PART_NON_BIKE } from './helpers/quotePartFields';
-import React from 'react';
 
 describe('QuotePartGrid', () => {
   it('should show headers and no parts when non bike quote no parts', () => {

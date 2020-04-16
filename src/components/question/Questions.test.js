@@ -1,5 +1,4 @@
 import Questions from './Questions';
-import React from 'react';
 
 describe('Questions', () => {
   it('should show just headers when no charge elements added', () => {

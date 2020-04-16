@@ -1,5 +1,4 @@
 import SupplierProductUploadFile from './SupplierProductUploadFile';
-import React from 'react';
 import { findDataTest } from '../../helpers/jest_helpers/assert';
 
 describe('SupplierProductUploadFile', () => {

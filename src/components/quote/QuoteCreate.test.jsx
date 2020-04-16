@@ -1,4 +1,3 @@
-import React from 'react';
 import QuoteCreate from './QuoteCreate';
 import { sampleBikes } from '../../helpers/sampleData';
 import { findDataTest } from '../../helpers/jest_helpers/assert';

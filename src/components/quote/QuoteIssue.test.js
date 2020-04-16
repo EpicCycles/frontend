@@ -1,4 +1,3 @@
-import React from 'react';
 import QuoteIssue from './QuoteIssue';
 import { QUOTE_INITIAL, QUOTE_ISSUED } from './helpers/quote';
 

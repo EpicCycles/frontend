@@ -1,4 +1,3 @@
-import React from 'react';
 import BikeSearch from './BikeSearch';
 import { sampleBrands } from '../../helpers/sampleData';
 

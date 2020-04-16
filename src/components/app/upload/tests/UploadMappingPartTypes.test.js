@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import UploadMappingPartTypes from '../UploadMappingPartTypes';
 import { renumberAll } from '../../../framework/helpers/framework';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import EditModelPageRow from './EditModelPageRow';
 import { ADDRESS1_FIELD } from './helpers/fields';
 import { NEW_ELEMENT_ID } from '../../../helpers/constants';

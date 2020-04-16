@@ -1,6 +1,4 @@
-import React from 'react';
 import CustomerSearch from './CustomerSearch';
-import { assertComponentHasExpectedProps, findDataTest } from '../../helpers/jest_helpers/assert';
 
 describe('CustomerSearch', () => {
   const getCustomerList = jest.fn();

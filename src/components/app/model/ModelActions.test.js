@@ -1,5 +1,3 @@
-import React from 'react';
-import { Icon } from 'semantic-ui-react';
 import ModelActions from './ModelActions';
 import {
   assertComponentHasExpectedProps,
@@ -22,7 +20,7 @@ describe('ModelActions', () => {
   it('should show multiple actions when they are passed', () => {
     const actions = [
       { iconName: 'edit', iconTitle: 'edit model', iconAction: jest.fn() },
-      { iconName: 'view', iconTitle: 'view model', iconAction: jest.fn() },
+      { iconName: 'video', iconTitle: 'view model', iconAction: jest.fn() },
       { iconName: 'delete', iconTitle: 'delete model', iconAction: jest.fn() },
     ];
     const component = shallow(<ModelActions actions={actions} componentKey="thing" />);
@@ -36,12 +34,12 @@ describe('ModelActions', () => {
     const thirdFunction = jest.fn();
     const actions = [
       { iconName: 'edit', iconTitle: 'edit model', iconAction: firstFunction },
-      { iconName: 'view', iconTitle: 'view model', iconAction: secondFunction },
+      { iconName: 'video', iconTitle: 'view model', iconAction: secondFunction },
       { iconName: 'delete', iconTitle: 'delete model', iconAction: thirdFunction },
     ];
     const component = shallow(<ModelActions actions={actions} componentKey="thing" />);
     component
-      .find(Icon)
+      .find('Icon')
       .at(0)
       .simulate('click');
     expect(firstFunction.mock.calls).toHaveLength(1);
@@ -56,14 +54,14 @@ describe('ModelActions', () => {
     const thirdFunction = jest.fn();
     const actions = [
       { iconName: 'edit', iconTitle: 'edit model', iconAction: firstFunction },
-      { iconName: 'view', iconTitle: 'view model', iconAction: secondFunction },
+      { iconName: 'video', iconTitle: 'view model', iconAction: secondFunction },
       { iconName: 'delete', iconTitle: 'delete model', iconAction: thirdFunction },
     ];
     const component = shallow(
       <ModelActions actions={actions} componentKey="thing" actionsDisabled />,
     );
     component
-      .find(Icon)
+      .find('Icon')
       .at(0)
       .simulate('click');
     expect(firstFunction.mock.calls).toHaveLength(0);

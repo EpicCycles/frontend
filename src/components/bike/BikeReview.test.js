@@ -1,4 +1,3 @@
-import React from 'react';
 import BikeReview from './BikeReview';
 import { sampleBrands, sampleSections, sampleSuppliers } from '../../helpers/sampleData';
 import { updateObject } from '../../helpers/utils';

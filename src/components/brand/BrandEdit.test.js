@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import BrandEdit from './BrandEdit';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 import { BRAND_NAME_MISSING } from '../app/model/helpers/error';

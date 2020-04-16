@@ -1,5 +1,4 @@
 import EditModelSimple from './EditModelSimple';
-import React from 'react';
 import { customerFields } from './helpers/fields';
 
 describe('EditModelSimple', () => {

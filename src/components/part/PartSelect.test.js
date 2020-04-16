@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import PartSelect from './PartSelect';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 import { assertComponentHasExpectedProps } from '../../helpers/jest_helpers/assert';

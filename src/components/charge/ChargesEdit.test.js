@@ -1,5 +1,4 @@
 import ChargesEdit from './ChargesEdit';
-import React from 'react';
 
 describe('ChargesEdit', () => {
   it('should show just headers when no charge elements added', () => {

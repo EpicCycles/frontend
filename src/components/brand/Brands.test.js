@@ -1,4 +1,3 @@
-import React from 'react';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 import Brands from './Brands';
 import { addToUniqueArray } from '../../helpers/utils';

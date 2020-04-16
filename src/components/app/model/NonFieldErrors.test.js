@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-import React from 'react';
 import NonFieldErrors from './NonFieldErrors';
 import { findDataTest } from '../../../helpers/jest_helpers/assert';
 

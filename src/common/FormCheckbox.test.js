@@ -1,4 +1,3 @@
-import React from 'react';
 import FormCheckbox from './FormCheckbox';
 import { findDataTest } from '../helpers/jest_helpers/assert';
 

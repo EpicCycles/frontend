@@ -1,4 +1,3 @@
-import React from 'react';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';
 import PartDisplayGridRow from './PartDisplayGridRow';
 import { findDataTest } from '../../helpers/jest_helpers/assert';

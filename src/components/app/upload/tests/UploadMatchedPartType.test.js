@@ -1,6 +1,3 @@
-import React from 'react';
-import { Icon } from 'semantic-ui-react';
-import toJson from 'enzyme-to-json';
 import { UploadMatchedPartType } from '../UploadMatchedPartType';
 
 const foundName = 'find me';
@@ -34,10 +31,10 @@ describe('UploadMatchedPartType', () => {
       <UploadMatchedPartType matchIndex={1} matched={rowMappings[5]} undoMapping={undoMapping} />,
     );
     expect(component.find('div.red')).toHaveLength(1);
-    expect(component.find(Icon)).toHaveLength(1);
+    expect(component.find('Icon')).toHaveLength(1);
 
     component
-      .find(Icon)
+      .find('Icon')
       .at(0)
       .simulate('click');
     expect(undoMapping.mock.calls).toHaveLength(1);

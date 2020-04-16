@@ -1,4 +1,3 @@
-import React from 'react';
 import QuoteDetail from './QuoteDetail';
 import { sampleBikes, sampleBrands, sampleFrames } from '../../helpers/sampleData';
 import { QUOTE_ARCHIVED, QUOTE_INITIAL } from './helpers/quote';

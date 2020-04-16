@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { findDataTest } from '../../helpers/jest_helpers/assert';
 import CustomerPhoneGrid from './CustomerPhoneGrid';
 

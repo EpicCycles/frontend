@@ -1,4 +1,3 @@
-import React from 'react';
 import QuoteSummaryParts from './QuoteSummaryParts';
 import { findDataTest } from '../../helpers/jest_helpers/assert';
 import { updateObject } from '../../helpers/utils';

@@ -1,6 +1,4 @@
 import Search from './Search';
-import toJson from 'enzyme-to-json';
-import React from 'react';
 import { FIRST_NAME_FIELD } from '../app/model/helpers/fields';
 
 describe('Search', () => {

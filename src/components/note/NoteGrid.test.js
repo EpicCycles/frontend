@@ -1,6 +1,5 @@
 import { findDataTest } from '../../helpers/jest_helpers/assert';
 import NoteGrid from './NoteGrid';
-import React from 'react';
 
 describe('NoteGrid', () => {
   it('should return no notes message when no notes exist', () => {

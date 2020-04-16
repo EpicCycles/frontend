@@ -1,4 +1,3 @@
-import React from 'react';
 import BikeReviewListSelection from './BikeReviewListSelection';
 import { sampleBrands } from '../../helpers/sampleData';
 import { assertComponentHasExpectedProps, findDataTest } from '../../helpers/jest_helpers/assert';

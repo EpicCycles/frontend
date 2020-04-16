@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import MenuSection from './MenuSection';
 
 test('it displays correctly', () => {

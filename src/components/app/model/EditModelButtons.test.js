@@ -1,4 +1,3 @@
-import React from 'react';
 import EditModelButtons from './EditModelButtons';
 import { findDataTest } from '../../../helpers/jest_helpers/assert';
 

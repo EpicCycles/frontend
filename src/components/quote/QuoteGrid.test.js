@@ -1,6 +1,5 @@
 import QuoteGrid from './QuoteGrid';
 import { quoteFields } from './helpers/quoteFields';
-import React from 'react';
 import { QUOTE_ARCHIVED, QUOTE_ISSUED } from './helpers/quote';
 import { findDataTest } from '../../helpers/jest_helpers/assert';
 

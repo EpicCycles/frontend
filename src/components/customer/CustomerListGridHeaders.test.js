@@ -1,4 +1,3 @@
-import React from 'react';
 import CustomerListGridHeaders from './CustomerListGridHeaders';
 import { findDataTest } from '../../helpers/jest_helpers/assert';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import QuoteSummary from './QuoteSummary';
 import { assertComponentHasExpectedProps } from '../../helpers/jest_helpers/assert';
 import { sampleBikes, sampleBrands, sampleFrames } from '../../helpers/sampleData';

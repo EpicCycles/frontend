@@ -1,4 +1,3 @@
-import React from 'react';
 import ModelTableHeaders from './ModelTableHeaders';
 import { customerFields } from './helpers/fields';
 import { findDataTest } from '../../../helpers/jest_helpers/assert';

@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import PartTypeModal from './PartTypeModal';
 import { PART_TYPE_NAME_MISSING, SECTION_MISSING } from '../app/model/helpers/error';
 

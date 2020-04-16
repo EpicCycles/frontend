@@ -1,5 +1,4 @@
 import QuoteAnswers from './QuoteAnswers';
-import React from 'react';
 import { updateObject } from '../../helpers/utils';
 
 describe('QuoteAnswers', () => {

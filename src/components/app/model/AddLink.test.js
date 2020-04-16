@@ -1,4 +1,3 @@
-import React from 'react';
 import AddLink from './AddLink';
 import { findDataTest } from '../../../helpers/jest_helpers/assert';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import FrameworkMoves from './FrameworkMoves';
 
 test('FrameworkMoves displays and right methods are called', () => {

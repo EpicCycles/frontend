@@ -1,5 +1,4 @@
 import ModelTable from './ModelTable';
-import React from 'react';
 
 describe('ModelTable', () => {
   it('should show just headers when no model elements added', () => {

@@ -1,4 +1,3 @@
-import React from 'react';
 import DisplayBlock from './DisplayBlock';
 import { findDataTest } from '../helpers/jest_helpers/assert';
 

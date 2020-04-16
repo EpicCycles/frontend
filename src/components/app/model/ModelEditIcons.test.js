@@ -1,6 +1,4 @@
-import React from 'react';
 import ModelEditIcons from './ModelEditIcons';
-import IconArray from '../../../common/IconArray';
 
 describe('ModelEditIcons tests', () => {
   const model = {
@@ -22,6 +20,6 @@ describe('ModelEditIcons tests', () => {
         modelReset={modelReset}
       />,
     );
-    expect(input.find(IconArray)).toHaveLength(1);
+    expect(input.find('IconArray')).toHaveLength(1);
   });
 });

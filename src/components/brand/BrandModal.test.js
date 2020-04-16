@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import BrandModal from './BrandModal';
 import { BRAND_NAME_MISSING } from '../app/model/helpers/error';
 import { NEW_ELEMENT_ID } from '../../helpers/constants';

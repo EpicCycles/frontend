@@ -1,4 +1,3 @@
-import React from 'react';
 import QuoteFind from './QuoteFind';
 import { assertComponentHasExpectedProps, findDataTest } from '../../helpers/jest_helpers/assert';
 import { sampleBikes, sampleBrands } from '../../helpers/sampleData';

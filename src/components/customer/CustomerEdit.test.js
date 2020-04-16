@@ -1,4 +1,3 @@
-import React from 'react';
 import CustomerEdit from './CustomerEdit';
 import { findDataTest } from '../../helpers/jest_helpers/assert';
 

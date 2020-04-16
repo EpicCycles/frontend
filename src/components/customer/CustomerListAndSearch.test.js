@@ -1,5 +1,3 @@
-import React from 'react';
-import toJson from 'enzyme-to-json';
 import CustomerListAndSearch from './CustomerListAndSearch';
 
 describe('CustomerListAndSearch.index tests', () => {

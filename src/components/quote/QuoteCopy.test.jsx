@@ -1,20 +1,30 @@
 import QuoteCopy from './QuoteCopy';
-import { sampleBikes } from '../../helpers/sampleData';
+import { sampleBikes, sampleBrands, sampleFrames } from '../../helpers/sampleData';
 import { findDataTest } from '../../helpers/jest_helpers/assert';
+import * as PropTypes from 'prop-types';
 // TODO mock out copy function and change that it is called and that save is called correctly
 describe('QuoteCopy', () => {
   const customers = [{ id: 1, first_name: 'Fred', last_name: 'Smith' }];
+  const defaultProps = {
+    changeRoute: jest.fn(),
+    getCustomerList: jest.fn(),
+    getFrameList: jest.fn(),
+    saveQuote: jest.fn(),
+    searchParams: {},
+    isLoading: false,
+    customers: customers,
+    bikes: sampleBikes,
+    brands: sampleBrands,
+    charges: [],
+    frames: sampleFrames,
+    suppliers: [],
+    parts: [],
+    sections: [],
+    users: [],
+  };
   it('should render with find customer and find bike components', () => {
     const component = shallow(
-      <QuoteCopy
-        getCustomerList={jest.fn()}
-        saveQuote={jest.fn()}
-        getFrameList={jest.fn()}
-        quoteId={2}
-        quotes={[{ id: 2, customer: 23, bike: 53 }]}
-        bikes={sampleBikes}
-        customers={customers}
-      />,
+      <QuoteCopy {...defaultProps} quoteId={2} quotes={[{ id: 2, customer: 23, bike: 53 }]} />,
     );
     expect(findDataTest(component, 'page-header')).toHaveLength(1);
     expect(findDataTest(component, 'select-customer')).toHaveLength(1);
@@ -24,9 +34,7 @@ describe('QuoteCopy', () => {
   it('should render with find customer only when source quote has no bike', () => {
     const component = shallow(
       <QuoteCopy
-        getCustomerList={jest.fn()}
-        saveQuote={jest.fn()}
-        getFrameList={jest.fn()}
+        {...defaultProps}
         quoteId={2}
         quotes={[{ id: 2, customer: 23 }]}
         bikes={sampleBikes}
@@ -42,13 +50,15 @@ describe('QuoteCopy', () => {
     const saveQuote = jest.fn();
     const component = shallow(
       <QuoteCopy
-        getCustomerList={jest.fn()}
+        {...defaultProps}
         saveQuote={saveQuote}
-        getFrameList={jest.fn()}
         bikes={sampleBikes}
         quoteId={2}
         quotes={[{ id: 2, customer: 23 }]}
-        customers={[{ id: 23, first_name: 'Sue' }, { id: 1, first_name: 'Bill' }]}
+        customers={[
+          { id: 23, first_name: 'Sue' },
+          { id: 1, first_name: 'Bill' },
+        ]}
       />,
     );
 
@@ -60,9 +70,8 @@ describe('QuoteCopy', () => {
     const saveQuote = jest.fn();
     const component = shallow(
       <QuoteCopy
-        getCustomerList={jest.fn()}
+        {...defaultProps}
         saveQuote={saveQuote}
-        getFrameList={jest.fn()}
         bikes={sampleBikes}
         quoteId={2}
         quotes={[{ id: 2, customer: 23, bike: 59 }]}

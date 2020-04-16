@@ -4,7 +4,7 @@ import { quotePrice } from './quotePrice';
 import { quotePartPrice } from '../../quotePart/helpers/quotePartPrice';
 
 export const copyToNewQuote = (quote, customer, bike, frames, brands, charges) => {
-  if (customer.id === quote.customer && bike && bike.id === quote.bike) {
+  if (customer.id === quote.customer && (!quote.bike || (bike && bike.id === quote.bike))) {
     return updateObject(quote, { id: undefined, version: quote.version ? quote.version + 1 : 1 });
   }
 

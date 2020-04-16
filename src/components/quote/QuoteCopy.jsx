@@ -20,7 +20,7 @@ const findBikeForQuote = props => {
 };
 
 const QuoteCopy = props => {
-  let [existingCustomer, setExistingCustomers] = useState(findCustomerForQuote(props));
+  let [existingCustomer, setExistingCustomer] = useState(findCustomerForQuote(props));
   let [existingBike, setExistingBike] = useState(findBikeForQuote(props));
   let [selectedCustomer, setSelectedCustomer] = useState(undefined);
   let [selectedBike, setSelectedBike] = useState(undefined);
@@ -64,16 +64,9 @@ const QuoteCopy = props => {
   const copyQuote = () => {
     const fullCustomers = updateObjectInArray(customers, existingCustomer);
     const fullBikes = existingBike ? updateObjectInArray(bikes, existingBike) : bikes;
-    const customerForQuote = fullCustomers.find(c => {
-      if (selectedCustomer) return selectedCustomer === c.id;
-      return c.id === quote.customer;
-    });
-    const bikeForQuote = quote.bike
-      ? fullBikes.find(b => {
-          if (selectedBike) return selectedBike === b.id;
-          return b.id === quote.bike;
-        })
-      : undefined;
+    const customerForQuote = findObjectWithId(fullCustomers, selectedCustomer) || existingCustomer;
+    const bikeForQuote = findObjectWithId(fullBikes, selectedBike) || existingBike;
+
     const copiedQuote = copyToNewQuote(
       quote,
       customerForQuote,
@@ -157,6 +150,7 @@ QuoteCopy.propTypes = {
   changeRoute: PropTypes.func.isRequired,
   getCustomerList: PropTypes.func.isRequired,
   getFrameList: PropTypes.func.isRequired,
+  saveQuote: PropTypes.func.isRequired,
   searchParams: PropTypes.object,
   isLoading: PropTypes.bool,
   customers: PropTypes.array,

@@ -9,6 +9,7 @@ import ModelTableHeaderRow from '../app/model/ModelTableHeaderRow';
 import { bikeFullName } from './helpers/bike';
 import EditModel from '../app/model/EditModel';
 import { bikeFields, bikePartFields } from './helpers/bikeFields';
+import {textToNumber} from "../../helpers/textToNumber";
 
 const BikeReview = props => {
   let [bike, setBike] = useState(undefined);
@@ -60,7 +61,7 @@ const BikeReview = props => {
     const newPartId = bikePart.id ? bikePart.id : bikePart.partType;
     bikePartsUpdated.push({
       id: newPartId,
-      partType: bikePart.partType,
+      partType: textToNumber(bikePart.partType),
       partName: bikePart.partName,
     });
     setBike(updateObject(bikeBeforeChange, { bikeParts: bikePartsUpdated }));

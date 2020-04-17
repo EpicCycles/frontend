@@ -1,5 +1,6 @@
 import api from '../api';
 import { buildSearchCriteria } from './utils/list';
+import { bikeToDatabaseFormat } from './utils/bikeToDatabaseFormat';
 
 const deleteBike = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
@@ -7,7 +8,8 @@ const deleteBike = async payload => {
 };
 const saveBike = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;
-  return await api.instance.patch(`rest-epic/bike/${payload.bike.id}`, payload.bike);
+  const bike = bikeToDatabaseFormat(payload.bike);
+  return await api.instance.patch(`rest-epic/bike/${bike.id}`, bike);
 };
 const getBike = async payload => {
   api.instance.defaults.headers.common.Authorization = `Token ${payload.token}`;

@@ -11,10 +11,11 @@ exports[`SupplierEdit displays correctly for existing supplier 1`] = `
     }
   >
     <h2>
-      Edit Supplier
+      Edit
+       Supplier
     </h2>
-    <EditModelPage
-      className="fit-content"
+    <EditModel
+      actionsRequired={true}
       model={
         Object {
           "brand_names": Array [
@@ -28,6 +29,7 @@ exports[`SupplierEdit displays correctly for existing supplier 1`] = `
           "supplier_name": "supplier name",
         }
       }
+      modelDelete={[Function]}
       modelFields={
         Array [
           Object {
@@ -54,49 +56,14 @@ exports[`SupplierEdit displays correctly for existing supplier 1`] = `
           },
         ]
       }
-      onChange={[Function]}
-      persistedModel={
-        Object {
-          "brand_names": Array [
-            "brands 1",
-            "brand 2",
-            "brand 3",
-          ],
-          "id": 1,
-          "link": "http://supplier.co.uk",
-          "preferred_supplier": false,
-          "supplier_name": "supplier name",
-        }
-      }
+      modelSave={[Function]}
+      pageMode={true}
       showReadOnlyFields={true}
     />
     <div
       key="supplierBrands1"
     >
       Brands: 
-    </div>
-    <div
-      className="align_right"
-    >
-      <ModelEditIcons
-        componentKey={1}
-        model={
-          Object {
-            "brand_names": Array [
-              "brands 1",
-              "brand 2",
-              "brand 3",
-            ],
-            "id": 1,
-            "link": "http://supplier.co.uk",
-            "preferred_supplier": false,
-            "supplier_name": "supplier name",
-          }
-        }
-        modelDelete={[Function]}
-        modelReset={[Function]}
-        modelSave={[Function]}
-      />
     </div>
   </div>
 </Fragment>
@@ -129,10 +96,11 @@ exports[`SupplierEdit displays correctly for existing supplier as a modal dialog
     }
   >
     <h2>
-      Edit Supplier
+      Edit
+       Supplier
     </h2>
-    <EditModelPage
-      className="fit-content"
+    <EditModel
+      actionsRequired={true}
       model={
         Object {
           "brand_names": Array [
@@ -146,6 +114,7 @@ exports[`SupplierEdit displays correctly for existing supplier as a modal dialog
           "supplier_name": "supplier name",
         }
       }
+      modelDelete={[Function]}
       modelFields={
         Array [
           Object {
@@ -172,49 +141,14 @@ exports[`SupplierEdit displays correctly for existing supplier as a modal dialog
           },
         ]
       }
-      onChange={[Function]}
-      persistedModel={
-        Object {
-          "brand_names": Array [
-            "brands 1",
-            "brand 2",
-            "brand 3",
-          ],
-          "id": 1,
-          "link": "http://supplier.co.uk",
-          "preferred_supplier": false,
-          "supplier_name": "supplier name",
-        }
-      }
+      modelSave={[Function]}
+      pageMode={true}
       showReadOnlyFields={true}
     />
     <div
       key="supplierBrands1"
     >
       Brands: 
-    </div>
-    <div
-      className="align_right"
-    >
-      <ModelEditIcons
-        componentKey={1}
-        model={
-          Object {
-            "brand_names": Array [
-              "brands 1",
-              "brand 2",
-              "brand 3",
-            ],
-            "id": 1,
-            "link": "http://supplier.co.uk",
-            "preferred_supplier": false,
-            "supplier_name": "supplier name",
-          }
-        }
-        modelDelete={[Function]}
-        modelReset={[Function]}
-        modelSave={[Function]}
-      />
     </div>
   </div>
 </Fragment>
@@ -231,11 +165,13 @@ exports[`SupplierEdit displays correctly for new supplier 1`] = `
     }
   >
     <h2>
-      Edit Supplier
+      Add
+       Supplier
     </h2>
-    <EditModelPage
-      className="fit-content"
+    <EditModel
+      actionsRequired={true}
       model={Object {}}
+      modelDelete={[Function]}
       modelFields={
         Array [
           Object {
@@ -262,25 +198,14 @@ exports[`SupplierEdit displays correctly for new supplier 1`] = `
           },
         ]
       }
-      onChange={[Function]}
-      persistedModel={Object {}}
+      modelSave={[Function]}
+      pageMode={true}
       showReadOnlyFields={true}
     />
     <div
       key="supplierBrands"
     >
       Brands: 
-    </div>
-    <div
-      className="align_right"
-    >
-      <ModelEditIcons
-        componentKey=""
-        model={Object {}}
-        modelDelete={[Function]}
-        modelReset={[Function]}
-        modelSave={[Function]}
-      />
     </div>
   </div>
 </Fragment>

@@ -26,7 +26,12 @@ const SupplierProductUploadFile = props => {
         <div>
           <Button
             key="supplierProductFileUploadCont"
-            onClick={() => addDataAndProceed(uploadedData, buildInitialRowMappings(uploadedData))}
+            onClick={() =>
+              addDataAndProceed({
+                uploadedData,
+                rowMappings: buildInitialRowMappings(uploadedData),
+              })
+            }
             data-test="proceed"
           >
             Continue ...

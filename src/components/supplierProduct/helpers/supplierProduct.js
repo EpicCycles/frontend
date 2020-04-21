@@ -49,7 +49,7 @@ export const buildSupplierProductForApi = (rowMappings, uploadedData, brands) =>
               fitted_price: textToNumber(dataToUse[4]),
               ticket_price: textToNumber(dataToUse[5]),
               rrp: textToNumber(dataToUse[7]),
-              trade_price: textToNumber(dataToUse[11]),
+              trade_price: textToNumber(dataToUse[10]),
               club_price: textToNumber(dataToUse[6]),
             };
           }

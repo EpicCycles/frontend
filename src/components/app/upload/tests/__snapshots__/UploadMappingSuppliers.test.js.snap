@@ -11,19 +11,43 @@ exports[`UploadMappingSuppliers it renders 1`] = `
   >
     <div
       className="rounded"
+      data-test="unmatchedSupplier"
       key="mapping0"
     >
       id 11
+      <SupplierSelect
+        disabled={false}
+        error=""
+        fieldName="selectedSupplier"
+        isEmptyAllowed={true}
+        onChange={[Function]}
+        suppliers={
+          Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ]
+        }
+      />
       <Icon
         as="i"
-        id="delete-field0"
+        id="delete0"
         name="trash"
         onClick={[Function]}
         title="Discard data"
       />
       <Icon
         as="i"
-        id="create{index}"
+        id="create0"
         name="add circle"
         onClick={[Function]}
         title="Create Supplier to store data"
@@ -31,39 +55,43 @@ exports[`UploadMappingSuppliers it renders 1`] = `
     </div>
     <div
       className="rounded"
+      data-test="unmatchedSupplier"
       key="mapping1"
     >
       id 111
+      <SupplierSelect
+        disabled={false}
+        error=""
+        fieldName="selectedSupplier"
+        isEmptyAllowed={true}
+        onChange={[Function]}
+        suppliers={
+          Array [
+            Object {
+              "id": 1,
+              "supplier_name": "id is 1",
+            },
+            Object {
+              "id": 2,
+              "supplier_name": "find me",
+            },
+            Object {
+              "id": 3,
+              "supplier_name": "id is 3",
+            },
+          ]
+        }
+      />
       <Icon
         as="i"
-        id="delete-field1"
+        id="delete1"
         name="trash"
         onClick={[Function]}
         title="Discard data"
       />
       <Icon
         as="i"
-        id="create{index}"
-        name="add circle"
-        onClick={[Function]}
-        title="Create Supplier to store data"
-      />
-    </div>
-    <div
-      className="rounded"
-      key="mapping2"
-    >
-      id 234
-      <Icon
-        as="i"
-        id="delete-field2"
-        name="trash"
-        onClick={[Function]}
-        title="Discard data"
-      />
-      <Icon
-        as="i"
-        id="create{index}"
+        id="create1"
         name="add circle"
         onClick={[Function]}
         title="Create Supplier to store data"
@@ -71,12 +99,13 @@ exports[`UploadMappingSuppliers it renders 1`] = `
     </div>
     <div
       className="rounded discarded"
+      data-test="ignoredSupplier"
       key="discard0"
     >
-      id 11
+      id 234
       <Icon
         as="i"
-        id="restore-field0"
+        id="restore0"
         name="remove circle"
         onClick={[Function]}
         title="Do not Discard data"

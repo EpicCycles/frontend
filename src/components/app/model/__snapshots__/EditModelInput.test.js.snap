@@ -251,6 +251,7 @@ exports[`EditModelInput should renders a part Type field that has no data 1`] = 
     error=""
     fieldName="data_field120"
     isEmptyAllowed={true}
+    isMultiple={false}
     onChange={[Function]}
     sections={
       Array [
@@ -293,6 +294,7 @@ exports[`EditModelInput should renders a part type field that has data that is f
     error=""
     fieldName="data_field120"
     isEmptyAllowed={true}
+    isMultiple={false}
     onChange={[Function]}
     partTypeSelected={2}
     sections={
@@ -336,6 +338,7 @@ exports[`EditModelInput should renders a part type field that has data that is n
     error=""
     fieldName="data_field120"
     isEmptyAllowed={true}
+    isMultiple={false}
     onChange={[Function]}
     partTypeSelected={202}
     sections={

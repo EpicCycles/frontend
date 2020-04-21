@@ -1,6 +1,6 @@
 import {
   CHECKBOX,
-  NUMBER,
+  NUMBER, PART_TYPE_MULTIPLE,
   SELECT_MULTIPLE,
   SELECT_ONE,
   TEXT,
@@ -56,6 +56,7 @@ export const doesObjectMatchCriteria = (model, fieldsToCheck) => {
       case TEXT:
         return modelValue && modelValue.toLowerCase().includes(searchValue);
       case SELECT_MULTIPLE:
+      case PART_TYPE_MULTIPLE:
         return modelValue && searchValue.includes(modelValue.toString());
       default:
         return modelValue && searchValue === modelValue.toString();

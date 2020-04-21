@@ -1,8 +1,9 @@
 import React from 'react';
 import SupplierProductHeaders from './SupplierProductHeaders';
 import SupplierProductReviewPart from './SupplierProductReviewPart';
-import { getModelKey } from '../app/model/helpers/model';
+import { getModelKey, modelIsAlreadyInArray } from '../app/model/helpers/model';
 import { findObjectWithKey } from '../../helpers/utils';
+import { partFieldsComplete, supplierProductFields } from '../app/model/helpers/fields';
 
 const SupplierProductReviewList = props => {
   const {
@@ -23,6 +24,17 @@ const SupplierProductReviewList = props => {
     raiseStateForSupplierProduct,
   } = props;
 
+  const checkedUpdatedParts = [];
+  updatedParts.forEach(updatedPart => {
+    if (!modelIsAlreadyInArray(parts, updatedPart, partFieldsComplete))
+      checkedUpdatedParts.push(updatedPart);
+  });
+
+  const checkedUpdatedSupplierProducts = [];
+  updatedSupplierProducts.forEach(updatedSupplierProduct => {
+    if (!modelIsAlreadyInArray(supplierProducts, updatedSupplierProduct, supplierProductFields))
+      checkedUpdatedSupplierProducts.push(updatedSupplierProduct);
+  });
   return (
     <div
       key="partReviewGrid"
@@ -39,9 +51,9 @@ const SupplierProductReviewList = props => {
         return (
           <SupplierProductReviewPart
             part={part}
-            updatedPart={findObjectWithKey(updatedParts, partKey)}
+            updatedPart={findObjectWithKey(checkedUpdatedParts, partKey)}
             supplierProducts={supplierProducts}
-            updatedSupplierProducts={updatedSupplierProducts}
+            updatedSupplierProducts={checkedUpdatedSupplierProducts}
             brands={brands}
             suppliers={suppliers}
             sections={sections}

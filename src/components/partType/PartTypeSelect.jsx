@@ -13,16 +13,19 @@ const PartTypeSelect = props => {
     isEmptyAllowed,
     error,
     disabled,
+    isMultiple,
   } = props;
+
   return (
     <SelectInput
       fieldName={fieldName}
       onChange={onChange}
-      value={partTypeSelected ? partTypeSelected.toString() : ''}
+      value={partTypeSelected}
       options={getPartTypeOptions(sections)}
       isEmptyAllowed={isEmptyAllowed}
       error={error}
       disabled={disabled}
+      isMultiple={isMultiple}
     />
   );
 };
@@ -43,6 +46,7 @@ PartTypeSelect.propTypes = {
   isEmptyAllowed: PropTypes.bool,
   error: PropTypes.string,
   disabled: PropTypes.bool,
+  isMultiple: PropTypes.bool,
 };
 
 export default PartTypeSelect;

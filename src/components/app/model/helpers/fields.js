@@ -66,6 +66,7 @@ export const LINK = 'link';
 export const MODEL_NAME = 'model_name';
 export const PART_NAME = 'part_name';
 export const PART_TYPE = 'partType';
+export const PART_TYPE_MULTIPLE = 'partTypeMultiple';
 export const POSTCODE = 'postcode';
 export const PREFERRED = 'preferred';
 export const PREFERRED_SUPPLIER = 'preferred_supplier';

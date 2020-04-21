@@ -7,7 +7,7 @@ import {
   CURRENCY,
   EMAIL,
   NUMBER,
-  PART_TYPE,
+  PART_TYPE, PART_TYPE_MULTIPLE,
   PASSWORD,
   SELECT_MULTIPLE,
   SELECT_ONE,
@@ -178,6 +178,7 @@ const EditModelInput = props => {
       );
       break;
     case PART_TYPE:
+    case PART_TYPE_MULTIPLE:
       editComponent = (
         <PartTypeSelect
           sections={sections}
@@ -187,6 +188,7 @@ const EditModelInput = props => {
           isEmptyAllowed={emptyAllowed}
           error={error}
           disabled={disabled}
+          isMultiple={field.type === PART_TYPE_MULTIPLE}
         />
       );
       break;

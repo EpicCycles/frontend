@@ -28,6 +28,5 @@ exports[`it displays correctly 1`] = `
       },
     ]
   }
-  value=""
 />
 `;

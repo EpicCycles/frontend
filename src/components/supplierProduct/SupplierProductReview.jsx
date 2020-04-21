@@ -30,11 +30,11 @@ const SupplierProductReview = props => {
   } = props;
 
   const raiseStateForPart = updatedPart => {
-    setUpdatedParts(updateObjectInArray(this.state.updatedParts, updatedPart));
+    setUpdatedParts(updateObjectInArray(updatedParts, updatedPart));
   };
   const raiseStateForSupplierProduct = updatedSupplierProduct => {
     setUpdatedSupplierProducts(
-      updateObjectInArray(this.state.updatedSupplierProducts, updatedSupplierProduct),
+      updateObjectInArray(updatedSupplierProducts, updatedSupplierProduct),
     );
   };
   const handleInputChange = (fieldName, input) => {

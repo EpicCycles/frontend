@@ -13,11 +13,11 @@ const EditModel = props => {
   useEffect(() => {
     // Any time the current model changes,
     // Reset any parts of state that are tied to that model.
-    if (checkForChangesAllFields(props.modelFields, props.model, persistedModel)) {
+    if (!checkForChangesAllFields(props.modelFields, props.model, persistedModel)) {
       setModel(updateObject(props.model));
       setPersistedModel(props.model);
     }
-  }, [props.model]);
+  }, [props.model, props.modelFields, persistedModel]);
 
   const handleModelValueChange = (fieldName, input) => {
     let { modelFields } = props;
@@ -45,7 +45,7 @@ const EditModel = props => {
     showReadOnlyFields,
     modelSave,
     modelDelete,
-    sourceDataArrays
+    sourceDataArrays,
   } = props;
 
   if (pageMode)

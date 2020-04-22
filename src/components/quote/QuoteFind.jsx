@@ -8,7 +8,7 @@ import BikeListAndSelect from '../bike/BikeListAndSelect';
 import SearchButton from '../../common/SearchButton';
 import { CHECKBOX, TEXT } from '../app/model/helpers/fields';
 import Search from '../../common/Search';
-import { CUSTOMER_URL } from '../menus/helpers/menu';
+import { CUSTOMER_URL } from '../../helpers/routes';
 
 class QuoteFind extends React.Component {
   state = {
@@ -32,10 +32,7 @@ class QuoteFind extends React.Component {
     const { quoteDesc, bikeSearchCriteria, selectedCustomer, bike } = this.state;
 
     if (quoteDesc || bike || selectedCustomer) return true;
-    if (bikeSearchCriteria && (bikeSearchCriteria.brand || bikeSearchCriteria.frameName))
-      return true;
-
-    return false;
+    return !!(bikeSearchCriteria && (bikeSearchCriteria.brand || bikeSearchCriteria.frameName));
   };
 
   getQuoteList = () => {

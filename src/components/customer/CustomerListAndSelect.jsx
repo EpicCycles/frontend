@@ -14,7 +14,6 @@ const CustomerListAndSelect = props => {
     selectCustomer,
     isLoading,
     customers,
-    count,
     next,
     searchParams,
     selectedCustomer,
@@ -38,7 +37,7 @@ const CustomerListAndSelect = props => {
           className={className}
           data-test="search-block"
         />
-        {count > 0 && (
+        {customerOptions.length > 0 ? (
           <SelectInput
             title={'Select Customer'}
             label={'Select Customer'}
@@ -49,11 +48,12 @@ const CustomerListAndSelect = props => {
             fieldName="selectedCustomer"
             isEmptyAllowed={true}
           />
+        ) : (
+          <div className="row align_left">
+            <div data-test="start-message">No Customer to show, set new criteria and search,</div>
+          </div>
         )}
         <div className="row align_left">
-          {count === 0 && (
-            <div data-test="start-message">No Customer to show, set new criteria and search,</div>
-          )}
           {next && (
             <div data-test="search-message">
               Not all customers matching are shown, refine criteria and search,

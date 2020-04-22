@@ -1,9 +1,9 @@
 import history from '../../../history';
 import { runSaga } from '@redux-saga/core';
 import { USER_LOGOUT } from '../../actions/user';
-import { LOGIN_URL } from '../../../components/menus/helpers/menu';
 import { CLEAR_ALL_STATE } from '../../actions/application';
 import { logoutUser } from '../user';
+import { LOGIN_URL } from '../../../helpers/routes';
 
 jest.mock('../apis/user');
 const { logoutUserApi } = require('../apis/user');
@@ -27,7 +27,7 @@ describe('user.logoutUser saga', () => {
     logoutUserApi.mockImplementation(() => {
       return {};
     });
-    const result = await runSaga(myIO, logoutUser, action);
+    await runSaga(myIO, logoutUser, action);
     expect(logoutUserApi).toHaveBeenCalledWith({ token: 'existingToken' });
     expect(historySpy).toHaveBeenCalledTimes(1);
     expect(historySpy).toHaveBeenCalledWith(LOGIN_URL);
@@ -47,7 +47,7 @@ describe('user.logoutUser saga', () => {
       getState: () => ({ user: { token: 'existingToken' } }),
     };
     logoutUserApi.mockRejectedValue(new Error('the error'));
-    const result = await runSaga(myIO, logoutUser, action);
+    await runSaga(myIO, logoutUser, action);
     expect(logoutUserApi).toHaveBeenCalledWith({ token: 'existingToken' });
     expect(historySpy).toHaveBeenCalledTimes(1);
     expect(historySpy).toHaveBeenCalledWith(LOGIN_URL);
@@ -67,7 +67,7 @@ describe('user.logoutUser saga', () => {
       dispatch: action => dispatched.push(action),
       getState: () => ({ user: {} }),
     };
-    const result = await runSaga(myIO, logoutUser, action);
+    await runSaga(myIO, logoutUser, action);
     expect(logoutUserApi).not.toHaveBeenCalled();
     expect(historySpy).toHaveBeenCalledWith(LOGIN_URL);
     expect(dispatched).toEqual([

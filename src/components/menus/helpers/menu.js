@@ -1,7 +1,13 @@
-export const CUSTOMER_SEARCH_URL = '/customer-search';
-export const CUSTOMER_URL = '/customer';
-export const QUESTION_URL = '/question';
-export const LOGIN_URL = '/login';
+import {
+  BIKE_UPLOAD_URL,
+  CUSTOMER_SEARCH_URL,
+  CUSTOMER_URL,
+  LOGIN_URL,
+  QUESTION_URL,
+  QUOTE_FIND,
+  QUOTE_NEW,
+} from '../../../helpers/routes';
+
 export const menuStructure = [
   {
     sectionPos: 1,
@@ -23,8 +29,8 @@ export const menuStructure = [
         groupHeader: 'Quotes',
         groupPos: 20,
         groupLinks: [
-          { displayText: 'New Quote', linkRoute: '/quote-create', linkNumber: 201 },
-          { displayText: 'Find Quote', linkRoute: '/quote-list', linkNumber: 202 },
+          { displayText: 'New Quote', linkRoute: QUOTE_NEW, linkNumber: 201 },
+          { displayText: 'Find Quote', linkRoute: QUOTE_FIND, linkNumber: 202 },
         ],
       },
     ],
@@ -36,7 +42,7 @@ export const menuStructure = [
         groupHeader: 'Bikes',
         groupPos: 30,
         groupLinks: [
-          { displayText: 'Bike Upload', linkRoute: '/bike-upload', linkNumber: 301 },
+          { displayText: 'Bike Upload', linkRoute: BIKE_UPLOAD_URL, linkNumber: 301 },
           { displayText: 'Bike Review', linkRoute: '/bike-review-list', linkNumber: 302 },
         ],
       },

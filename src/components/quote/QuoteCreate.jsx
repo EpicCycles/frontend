@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Dimmer, Loader } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
-import { findObjectWithId, removeKey, updateObject } from '../../helpers/utils';
+import { findObjectWithId, updateObject } from '../../helpers/utils';
 import * as PropTypes from 'prop-types';
 import CustomerListAndSelect from '../customer/CustomerListAndSelect';
 import BikeListAndSelect from '../bike/BikeListAndSelect';
 import { quoteDescription } from './helpers/quote';
-import { CUSTOMER_URL } from '../menus/helpers/menu';
 import { quotePrice } from './helpers/quotePrice';
+import { CUSTOMER_URL } from '../../helpers/routes';
 
 const QuoteCreate = props => {
   let [bikeSearchCriteria, setBikeSearchCriteria] = useState({});

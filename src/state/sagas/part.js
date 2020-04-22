@@ -27,7 +27,7 @@ import {
 import { logError } from '../../helpers/api_error';
 import { updateObject, updateObjectWithApiErrors } from '../../helpers/utils';
 import { getModelKey } from '../../components/app/model/helpers/model';
-import { LOGIN_URL } from '../../components/menus/helpers/menu';
+import { LOGIN_URL } from '../../helpers/routes';
 
 export function* savePart(action) {
   const partToSave = action.payload.part;

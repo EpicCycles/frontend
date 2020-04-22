@@ -39,7 +39,7 @@ import {
   WARNING_MESSAGE,
 } from '../../helpers/messages';
 import { doWeHaveObjects, updateObject } from '../../helpers/utils';
-import { LOGIN_URL } from '../../components/menus/helpers/menu';
+import { LOGIN_URL } from '../../helpers/routes';
 
 export function* getBike(action) {
   try {

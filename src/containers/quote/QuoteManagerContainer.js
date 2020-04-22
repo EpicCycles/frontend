@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { saveBrands } from '../../state/actions/core';
 import { getFrameList } from '../../state/actions/bike';
-import { createCustomer, deleteCustomer, saveCustomer } from '../../state/actions/customer';
+import { createCustomer, saveCustomer } from '../../state/actions/customer';
 import { createNote, deleteNote, saveNote } from '../../state/actions/note';
 import QuoteManager from '../../components/quote/QuoteManager';
 import {
@@ -52,7 +52,6 @@ const mapDispatchToProps = {
   getFrameList,
   createCustomer,
   saveCustomer,
-  deleteCustomer,
   createNote,
   saveNote,
   deleteNote,

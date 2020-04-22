@@ -5,16 +5,11 @@ import {
   PART_NAME,
   PART_TYPE,
   PART_TYPE_MULTIPLE,
-  SELECT_MULTIPLE,
-  SELECT_ONE,
   STANDARD,
   STOCKED,
   SUPPLIER,
   TEXT,
 } from '../../app/model/helpers/fields';
-import { getPartTypeOptions } from '../../partType/helpers/partType';
-import { buildBrandOptions } from '../../brand/helpers/brand';
-import { buildSupplierOptions } from '../../supplier/helpers/supplier';
 const supplierSearchField = {
   displayName: 'Supplier:',
   header: 'Supplier:',

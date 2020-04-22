@@ -11,8 +11,8 @@ import { CHANGE_ROUTE, CLEAR_ALL_STATE } from '../actions/application';
 import { USER_LOGOUT, USER_NOT_VALIDATED } from '../actions/user';
 import { addItemsToArray, removeItemFromArray } from '../../helpers/utils';
 import { FIND_QUOTES } from '../actions/quote';
-import { CUSTOMER_URL } from '../../components/menus/helpers/menu';
 import { customerListToFrontEndFormat, customerToFrontEndFormat } from '../helpers/customer';
+import { CUSTOMER_URL } from '../../helpers/routes';
 
 const initialState = {
   isLoading: false,

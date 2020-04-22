@@ -26,7 +26,7 @@ import ModelTable from '../app/model/ModelTable';
 import { updateModelArrayOnModel } from '../app/model/helpers/updateModelArrayOnModel';
 import { removeModelFromArrayOnModel } from '../app/model/helpers/removeModelFromArrayOnModel';
 import EditModelButtons from '../app/model/EditModelButtons';
-import {getEditedFields} from "../app/model/helpers/getEditedFields";
+import { getEditedFields } from '../app/model/helpers/getEditedFields';
 
 const emptyFitting = createEmptyModelWithDefaultFields(fittingFields);
 const emptyAddress = createEmptyModelWithDefaultFields(customerAddressFields);
@@ -47,7 +47,7 @@ const CustomerEdit = props => {
     // Any time the notes in props cjhanges check the current note isnt in list
     if (modelIsAlreadyInArray(props.notes, note, customerNoteFields))
       setNote(createEmptyModelWithDefaultFields(customerNoteFields));
-  }, [props.notes]);
+  }, [props.notes, note]);
 
   const resetCustomer = () => {
     setCustomer(

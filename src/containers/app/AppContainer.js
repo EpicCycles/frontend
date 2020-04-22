@@ -6,11 +6,16 @@ import NotFound from '../404';
 import Home from '../home';
 
 import {
+  BIKE_UPLOAD_URL,
   CUSTOMER_SEARCH_URL,
   CUSTOMER_URL,
   LOGIN_URL,
   QUESTION_URL,
-} from '../../components/menus/helpers/menu';
+  QUOTE_COPY,
+  QUOTE_ISSUE,
+  QUOTE_MANAGER,
+  QUOTE_NEW,
+} from '../../helpers/routes';
 
 const LazyLoginContainer = lazy(() => import('../user/LoginContainer'));
 const LazyQuoteCopyContainer = lazy(() => import('../quote/QuoteCopyContainer'));
@@ -54,16 +59,16 @@ const App = () => (
           <Route exact path={CUSTOMER_SEARCH_URL} component={LazyCustomerListContainer} />
           <Route exact path="/framework" component={LazyFrameworkContainer} />
           <Route exact path="/brands" component={LazyBrandsContainer} />
-          <Route exact path="/bike-upload" component={LazyBikeUploadContainer} />
+          <Route exact path={BIKE_UPLOAD_URL} component={LazyBikeUploadContainer} />
           <Route exact path="/bike-review-list" component={LazyBikeReviewListContainer} />
           <Route exact path="/bike-review" component={LazyBikeReviewContainer} />
           <Route exact path="/product-upload" component={LazySupplierProductUploadContainer} />
           <Route exact path="/product-review" component={LazySupplierProductReviewContainer} />
-          <Route exact path="/quote-create" component={LazyQuoteCreateContainer} />
+          <Route exact path={QUOTE_NEW} component={LazyQuoteCreateContainer} />
           <Route exact path="/quote-list" component={LazyQuoteListContainer} />
-          <Route exact path="/quote" component={LazyQuoteManagerContainer} />
-          <Route exact path="/quote-copy" component={LazyQuoteCopyContainer} />
-          <Route exact path="/quote-issue" component={LazyQuoteIssueContainer} />
+          <Route exact path={QUOTE_MANAGER} component={LazyQuoteManagerContainer} />
+          <Route exact path={QUOTE_COPY} component={LazyQuoteCopyContainer} />
+          <Route exact path={QUOTE_ISSUE} component={LazyQuoteIssueContainer} />
           <Route exact path="/charges" component={LazyChargesContainer} />
           <Route exact path={QUESTION_URL} component={LazyQuestionsContainer} />
           {/* Finally, catch all unmatched routes */}

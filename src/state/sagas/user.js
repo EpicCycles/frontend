@@ -27,7 +27,6 @@ import { clearAllState } from '../actions/application';
 import { getCoreData } from '../actions/core';
 import { getFramework } from '../actions/framework';
 import { listParts } from '../actions/part';
-import { LOGIN_URL } from '../../components/menus/helpers/menu';
 import {
   changePasswordApi,
   loginUserApi,
@@ -35,6 +34,7 @@ import {
   changeUserDataApi,
   getUsersApi,
 } from './apis/user';
+import { LOGIN_URL } from '../../helpers/routes';
 
 export function* loginUser(action) {
   try {

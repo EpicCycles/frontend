@@ -37,8 +37,8 @@ import {
 import { errorAsMessage, logError } from '../../helpers/api_error';
 
 import { getCustomer } from '../actions/customer';
-import { LOGIN_URL } from '../../components/menus/helpers/menu';
 import { addMessage } from '../actions/application';
+import { LOGIN_URL, QUOTE_COPY, QUOTE_MANAGER } from '../../helpers/routes';
 
 export function* saveQuoteProcess(action) {
   const quoteToSave = action.payload.quote;
@@ -109,7 +109,7 @@ export function* getQuote(action) {
       const response = yield call(quote.getQuote, completePayload);
       yield put(getQuoteOK(response.data));
       yield put(getCustomer(response.data.customerId));
-      yield call(history.push, '/quote');
+      yield call(history.push, QUOTE_MANAGER);
     } else {
       yield call(history.push, LOGIN_URL);
     }
@@ -128,7 +128,7 @@ export function* getQuoteToCopy(action) {
       const completePayload = updateObject(action.payload, { token });
       const response = yield call(quote.getQuote, completePayload);
       yield put(getQuoteToCopyOK(response.data));
-      yield call(history.push, '/quote-copy');
+      yield call(history.push, QUOTE_COPY);
     } else {
       yield call(history.push, LOGIN_URL);
     }
@@ -171,7 +171,7 @@ export function* createQuote(action) {
       const response = yield call(quote.createQuote, completePayload);
       yield put(createQuoteOK(response.data));
       yield put(getCustomer(response.data.customerId));
-      yield call(history.push, '/quote');
+      yield call(history.push, QUOTE_MANAGER);
     } else {
       yield call(history.push, LOGIN_URL);
     }

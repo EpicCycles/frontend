@@ -1,9 +1,7 @@
 import history from '../../../history';
 import { runSaga } from '@redux-saga/core';
 import { CUSTOMER_LIST } from '../../actions/user';
-import { LOGIN_URL } from '../../../components/menus/helpers/menu';
-import { CLEAR_ALL_STATE } from '../../actions/application';
-import { getCustomerList, getCustomerListPage } from '../customer';
+import { getCustomerListPage } from '../customer';
 
 jest.mock('../apis/customerApi');
 const { getCustomerListApi } = require('../apis/customerApi');
@@ -30,7 +28,7 @@ describe('customer.getCustomerListApi saga', () => {
     getCustomerListApi.mockImplementation(() => {
       return { data: customers };
     });
-    const result = await runSaga(myIO, getCustomerListPage, action);
+    await runSaga(myIO, getCustomerListPage, action);
     expect(getCustomerListApi).toHaveBeenCalledWith({
       page: 1,
       first_name: 'Anna',
@@ -52,7 +50,7 @@ describe('customer.getCustomerListApi saga', () => {
     };
     const historySpy = jest.spyOn(history, 'push');
     getCustomerListApi.mockRejectedValue(new Error('the error'));
-    const result = await runSaga(myIO, getCustomerListPage, action);
+    await runSaga(myIO, getCustomerListPage, action);
     expect(getCustomerListApi).toHaveBeenCalledWith({
       page: 1,
       token: 'existingToken',
@@ -71,8 +69,7 @@ describe('customer.getCustomerListApi saga', () => {
       dispatch: action => dispatched.push(action),
       getState: () => ({ user: {} }),
     };
-    const historySpy = jest.spyOn(history, 'push');
-    const result = await runSaga(myIO, getCustomerListPage, action);
+    await runSaga(myIO, getCustomerListPage, action);
     expect(getCustomerListApi).not.toHaveBeenCalled();
     expect(dispatched).toEqual([
       {

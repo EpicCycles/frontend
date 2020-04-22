@@ -15,6 +15,7 @@ const SelectInput = props => {
     label,
     isMultiple,
     multipleSize,
+    onChange,
   } = props;
 
   const makeValueStrings = () => {
@@ -24,7 +25,7 @@ const SelectInput = props => {
       } else {
         return value[0].toString();
       }
-    } else if (value && value.length > 0) {
+    } else if (value) {
       if (isMultiple) {
         return [value.toString()];
       } else {
@@ -76,7 +77,7 @@ const SelectInput = props => {
   };
 
   const handleChange = event => {
-    if (props.isMultiple) {
+    if (isMultiple) {
       let value = [];
       const options = event.target.options;
       for (let i = 0; i < options.length; i++) {
@@ -84,9 +85,9 @@ const SelectInput = props => {
           value.push(options[i].value);
         }
       }
-      props.onChange(event.target.name, value);
+      onChange(event.target.name, value);
     } else {
-      props.onChange(event.target.name, event.target.value);
+      onChange(event.target.name, event.target.value);
     }
   };
 

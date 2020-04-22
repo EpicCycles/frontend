@@ -2,7 +2,7 @@ import React from 'react';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import { Redirect } from 'react-router';
 import CustomerListAndSearch from './CustomerListAndSearch';
-import { CUSTOMER_URL } from '../menus/helpers/menu';
+import { CUSTOMER_URL } from '../../helpers/routes';
 
 class CustomerList extends React.Component {
   state = {};

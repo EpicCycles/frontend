@@ -1,9 +1,9 @@
 import history from '../../../history';
 import { runSaga } from '@redux-saga/core';
 import { USER_LOGOUT } from '../../actions/user';
-import { LOGIN_URL } from '../../../components/menus/helpers/menu';
 import { CLEAR_ALL_STATE } from '../../actions/application';
 import { changePassword } from '../user';
+import { LOGIN_URL } from '../../../helpers/routes';
 
 jest.mock('../apis/user');
 const { changePasswordApi } = require('../apis/user');
@@ -26,7 +26,7 @@ describe('user.changePassword saga', () => {
     changePasswordApi.mockImplementation(() => {
       return {};
     });
-    const result = await runSaga(myIO, changePassword, action);
+    await runSaga(myIO, changePassword, action);
     expect(changePasswordApi).toHaveBeenCalledWith({
       newPassword: 'myNewPasswrod!',
       token: 'existingToken',
@@ -42,7 +42,7 @@ describe('user.changePassword saga', () => {
     };
     const historySpy = jest.spyOn(history, 'push');
     changePasswordApi.mockRejectedValue(new Error('the error'));
-    const result = await runSaga(myIO, changePassword, action);
+    await runSaga(myIO, changePassword, action);
     expect(changePasswordApi).toHaveBeenCalledWith({
       newPassword: 'myNewPasswrod!',
       token: 'existingToken',
@@ -62,7 +62,7 @@ describe('user.changePassword saga', () => {
       getState: () => ({ user: {} }),
     };
     const historySpy = jest.spyOn(history, 'push');
-    const result = await runSaga(myIO, changePassword, action);
+    await runSaga(myIO, changePassword, action);
     expect(changePasswordApi).not.toHaveBeenCalled();
     expect(historySpy).toHaveBeenCalledWith(LOGIN_URL);
     expect(dispatched).toEqual([

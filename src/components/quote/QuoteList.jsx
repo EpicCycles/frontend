@@ -35,9 +35,7 @@ class QuoteList extends React.Component {
       quotes,
       archiveQuote,
       unarchiveQuote,
-      quoteParts,
       parts,
-      bikeParts,
       sections,
       users,
     } = this.props;

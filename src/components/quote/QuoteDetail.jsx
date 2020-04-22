@@ -13,7 +13,7 @@ import QuotePartGrid from '../quotePart/QuotePartGrid';
 import { QUOTE_INITIAL, QUOTE_ISSUED } from './helpers/quote';
 
 import QuoteActionCell from './QuoteActionCell';
-import { checkForChanges, getModelKey } from '../app/model/helpers/model';
+import { getModelKey } from '../app/model/helpers/model';
 import { QUOTE_PART_FOR_BIKE } from '../quotePart/helpers/quotePartFields';
 import { quoteIssueChecks } from './helpers/quoteIssueChecks';
 import EditModelSimple from '../app/model/EditModelSimple';
@@ -30,6 +30,7 @@ import { quotePrice } from './helpers/quotePrice';
 import { getEditedFields } from '../app/model/helpers/getEditedFields';
 import { removeModelFromArrayOnModel } from '../app/model/helpers/removeModelFromArrayOnModel';
 import { getQuoteParts } from '../quotePart/helpers/getQuoteParts';
+import { QUOTE_ISSUE, QUOTE_MANAGER } from '../../helpers/routes';
 
 const QuoteDetail = props => {
   let [updatedQuote, setUpdatedQuote] = useState(props.quote);
@@ -78,13 +79,13 @@ const QuoteDetail = props => {
     if (quoteToSave.quote_status === QUOTE_INITIAL) {
       saveQuote(quoteToSave);
     } else {
-      saveQuote(updateObject(quoteToSave, { id: undefined, quote_status: QUOTE_INITIAL}));
+      saveQuote(updateObject(quoteToSave, { id: undefined, quote_status: QUOTE_INITIAL }));
     }
   };
   const cancelIssue = () => {
-    props.changeRoute('/quote');
+    props.changeRoute(QUOTE_MANAGER);
   };
-  const editIssuedQuote = quoteKey => {
+  const editIssuedQuote = () => {
     const copiedQuote = updateObject(quote, { id: undefined, quote_status: QUOTE_INITIAL });
     saveQuote(copiedQuote);
   };
@@ -98,7 +99,7 @@ const QuoteDetail = props => {
     if (problems) {
       addMessage(problems.join(' '), 'W');
     } else if (!readyToIssue) {
-      props.changeRoute('/quote-issue');
+      props.changeRoute(QUOTE_ISSUE);
     } else {
       issueQuote(quoteKey);
     }

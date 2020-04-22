@@ -1,6 +1,4 @@
-/* eslint-disable max-len */
 import axios from 'axios';
-import { buildSearchCriteria } from './apis/utils/list';
 
 const instance = axios.create({
   baseURL: '',

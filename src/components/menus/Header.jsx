@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import ErrorDismissibleBlock from '../../common/ErrorDismissibleBlock';
 import HeaderSection from './HeaderSection';
-import { LOGIN_URL, menuStructure } from './helpers/menu';
+import { menuStructure } from './helpers/menu';
 import { Icon } from 'semantic-ui-react';
 import { getLocalStorage, setLocalStorage } from '../../state/helpers/localStorage';
 import { createCookie, deleteCookie, getCookieObject } from '../../state/helpers/cookies';
@@ -20,6 +20,7 @@ import {
   STORAGE_SUPPLIERS,
 } from '../../helpers/constants';
 import { userName } from '../user/helpers/user';
+import { LOGIN_URL } from '../../helpers/routes';
 
 class Header extends React.Component {
   componentDidMount() {

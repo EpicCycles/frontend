@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import api from '../api';
-import { updateObject } from '../../../helpers/utils';
 import { customerToDatabaseFormat } from './utils/customerToDatabaseFormat';
 
 export const getCustomerListApi = async payload => {

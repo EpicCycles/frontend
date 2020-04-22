@@ -5,7 +5,6 @@ import CustomerListGridHeaders from './CustomerListGridHeaders';
 import CustomerListGridRow from './CustomerListGridRow';
 import Pagination from '../../common/pagination';
 import AddLink from '../app/model/AddLink';
-import { isItAnObject } from '../../helpers/utils';
 
 const CustomerListAndSearch = props => {
   const {

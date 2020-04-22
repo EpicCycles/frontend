@@ -36,7 +36,7 @@ import {
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { errorAsMessage, logError } from '../../helpers/api_error';
 import { sortObjectsByAttribute, updateObject, updateObjectInArray } from '../../helpers/utils';
-import { LOGIN_URL } from '../../components/menus/helpers/menu';
+import { LOGIN_URL } from '../../helpers/routes';
 
 export function* getCoreData(action) {
   try {

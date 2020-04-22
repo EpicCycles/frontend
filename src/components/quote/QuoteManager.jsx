@@ -22,6 +22,7 @@ import {
 import QuoteSummary from '../quoteSummary/QuoteSummary';
 import QuoteAnswers from '../quoteAnswer/QuoteAnswers';
 import { quoteOrderChecks } from './helpers/quoteOrderChecks';
+import { QUOTE_COPY, QUOTE_ISSUE } from '../../helpers/routes';
 
 const QuoteManager = props => {
   let [tab, setTab] = useState(undefined);
@@ -32,7 +33,6 @@ const QuoteManager = props => {
     isLoading,
     customers,
     customerId,
-    deleteCustomer,
     deleteNote,
     saveNote,
     createNote,
@@ -51,11 +51,14 @@ const QuoteManager = props => {
     users,
     archiveQuote,
     unarchiveQuote,
-    getQuoteToCopy,
     saveQuote,
     orderQuote,
     addMessage,
   } = props;
+  const getQuoteToCopy = quoteId => {
+    changeQuote(quoteId);
+    changeRoute(QUOTE_COPY);
+  };
   const changeCurrentTab = newTab => {
     if (newTab !== tab) {
       if (newTab === 2 && !quoteId) return;
@@ -68,7 +71,7 @@ const QuoteManager = props => {
   };
   const issueQuote = quoteId => {
     changeQuote(quoteId);
-    changeRoute('/quote-issue');
+    changeRoute(QUOTE_ISSUE);
   };
 
   if (!doWeHaveObjects(quotes)) return <Redirect to="/quote-list" push />;
@@ -83,7 +86,6 @@ const QuoteManager = props => {
       {currentTab === customerTab.tabValue && (
         <CustomerEdit
           customers={customers}
-          deleteCustomer={deleteCustomer}
           isLoading={isLoading}
           customerId={customerId}
           deleteNote={deleteNote}
@@ -232,7 +234,6 @@ QuoteManager.propTypes = {
   saveBrands: PropTypes.func.isRequired,
   getFrameList: PropTypes.func.isRequired,
   saveCustomer: PropTypes.func.isRequired,
-  deleteCustomer: PropTypes.func.isRequired,
   createNote: PropTypes.func.isRequired,
   saveNote: PropTypes.func.isRequired,
   deleteNote: PropTypes.func.isRequired,

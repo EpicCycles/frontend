@@ -23,7 +23,7 @@ const QuoteBikes = props => {
     issueQuote,
     cloneQuote,
   } = props;
- const bikeQuotes = quotes.filter(quote => !!quote.bike);
+  const bikeQuotes = quotes.filter(quote => !!quote.bike);
   const quoteFieldShown = quoteFields({ fieldExclusions: { customer: true, history: true } });
   return (
     <div className="grid-container">
@@ -60,7 +60,6 @@ const QuoteBikes = props => {
 };
 QuoteBikes.propTypes = {
   quotes: PropTypes.array.isRequired,
-  quoteParts: PropTypes.array.isRequired,
   bikes: PropTypes.array,
   frames: PropTypes.array,
   parts: PropTypes.array,

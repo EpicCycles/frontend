@@ -6,8 +6,8 @@ import * as PropTypes from 'prop-types';
 import CustomerListAndSelect from '../customer/CustomerListAndSelect';
 import BikeListAndSelect from '../bike/BikeListAndSelect';
 import QuoteSummary from '../quoteSummary/QuoteSummary';
-import { CUSTOMER_URL } from '../menus/helpers/menu';
 import { copyToNewQuote } from './helpers/copyToNewQuote';
+import { CUSTOMER_URL, QUOTE_FIND } from '../../helpers/routes';
 const findCustomerForQuote = props => {
   const { quoteId, quotes, customers } = props;
   const quote = findObjectWithId(quotes, quoteId);
@@ -20,18 +20,11 @@ const findBikeForQuote = props => {
 };
 
 const QuoteCopy = props => {
-  let [existingCustomer, setExistingCustomer] = useState(findCustomerForQuote(props));
-  let [existingBike, setExistingBike] = useState(findBikeForQuote(props));
-  let [selectedCustomer, setSelectedCustomer] = useState(undefined);
-  let [selectedBike, setSelectedBike] = useState(undefined);
-  let [bikeSearchCriteria, setBikeSearchCriteria] = useState({});
-
   const {
     getCustomerList,
     searchParams,
     isLoading,
     customers,
-    count,
     next,
     brands,
     bikes,
@@ -47,7 +40,16 @@ const QuoteCopy = props => {
   let quote;
   if (quoteId) quote = findObjectWithId(quotes, quoteId);
 
-  if (!quote) return <Redirect to="/quote-list" push />;
+  let [existingCustomer] = useState(findCustomerForQuote(props));
+  let [existingBike] = useState(findBikeForQuote(props));
+  let [selectedCustomer, setSelectedCustomer] = useState(quote ? quote.customer : undefined);
+  let [selectedBike, setSelectedBike] = useState(quote ? quote.bike : undefined);
+  let [bikeSearchCriteria, setBikeSearchCriteria] = useState({});
+
+  const fullCustomers = updateObjectInArray(customers, existingCustomer);
+  const fullBikes = existingBike ? updateObjectInArray(bikes, existingBike) : bikes;
+
+  if (!quote) return <Redirect to={QUOTE_FIND} push />;
   const goToAddCustomer = () => {
     changeRoute(CUSTOMER_URL, true);
   };
@@ -62,8 +64,6 @@ const QuoteCopy = props => {
     props.getFrameList(bikeSearchCriteria);
   };
   const copyQuote = () => {
-    const fullCustomers = updateObjectInArray(customers, existingCustomer);
-    const fullBikes = existingBike ? updateObjectInArray(bikes, existingBike) : bikes;
     const customerForQuote = findObjectWithId(fullCustomers, selectedCustomer) || existingCustomer;
     const bikeForQuote = findObjectWithId(fullBikes, selectedBike) || existingBike;
 
@@ -80,8 +80,6 @@ const QuoteCopy = props => {
   };
 
   const copyAllowed = selectedCustomer && (!quote.bike || (quote.bike && selectedBike));
-  const fullCustomers = updateObjectInArray(customers, existingCustomer);
-  const fullBikes = existingBike ? updateObjectInArray(bikes, existingBike) : bikes;
   return (
     <div className="row">
       <div key="copy-quote" className="grid-container">
@@ -93,7 +91,6 @@ const QuoteCopy = props => {
           searchParams={searchParams}
           isLoading={isLoading}
           customers={fullCustomers}
-          count={count}
           next={next}
           selectedCustomer={selectedCustomer}
           data-test="select-customer"
@@ -158,7 +155,6 @@ QuoteCopy.propTypes = {
   brands: PropTypes.array,
   charges: PropTypes.array,
   frames: PropTypes.array,
-  count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   next: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   suppliers: PropTypes.array,
   quotes: PropTypes.array,

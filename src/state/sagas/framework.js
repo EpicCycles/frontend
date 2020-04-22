@@ -12,7 +12,7 @@ import * as selectors from '../selectors/user';
 import framework from './apis/framework';
 import { logError } from '../../helpers/api_error';
 import { updateObject } from '../../helpers/utils';
-import { LOGIN_URL } from '../../components/menus/helpers/menu';
+import { LOGIN_URL } from '../../helpers/routes';
 
 export function* getFramework(action) {
   try {
